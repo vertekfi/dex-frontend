@@ -6,24 +6,24 @@ import { makeVar } from '@apollo/client';
 export const userAddressVar = makeVar<string | undefined>(undefined);
 
 export function useUserAccount() {
-    const query = useAccount();
-    const [isFirstRender, setFirstRender] = useBoolean(true);
+  const query = useAccount();
+  const [isFirstRender, setFirstRender] = useBoolean(true);
 
-    useEffect(() => {
-        setFirstRender.off();
-    }, []);
+  useEffect(() => {
+    setFirstRender.off();
+  }, []);
 
-    useEffect(() => {
-        if (query.address !== userAddressVar()) {
-            userAddressVar(query.address);
-        }
-    }, [query.address]);
+  useEffect(() => {
+    if (query.address !== userAddressVar()) {
+      userAddressVar(query.address);
+    }
+  }, [query.address]);
 
-    return {
-        ...query,
-        isLoading: query.isConnecting || isFirstRender,
-        isConnecting: query.isConnecting || isFirstRender,
-        userAddress: query.address,
-        isConnected: !!query.address && !isFirstRender,
-    };
+  return {
+    ...query,
+    isLoading: query.isConnecting || isFirstRender,
+    isConnecting: query.isConnecting || isFirstRender,
+    userAddress: query.address,
+    isConnected: !!query.address && !isFirstRender,
+  };
 }

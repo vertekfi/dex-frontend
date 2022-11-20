@@ -8,37 +8,38 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
 export function useStakingWithdraw(staking?: GqlPoolStaking | null) {
-    const networkConfig = useNetworkConfig();
-    const { userAddress } = useUserAccount();
-    const { submit, submitAsync, ...rest } = useSubmitTransaction({
-        config: {
-            addressOrName: staking?.type === 'GAUGE' ? staking?.address : networkConfig.masterChefContractAddress,
-            contractInterface: staking?.type === 'GAUGE' ? LiquidityGaugeV5 : BeethovenxMasterChefAbi,
-            functionName: staking?.type === 'GAUGE' ? 'withdraw(uint256,bool)' : 'withdrawAndHarvest',
-        },
-        transactionType: 'UNSTAKE',
-    });
+  const networkConfig = useNetworkConfig();
+  const { userAddress } = useUserAccount();
+  const { submit, submitAsync, ...rest } = useSubmitTransaction({
+    config: {
+      addressOrName:
+        staking?.type === 'GAUGE' ? staking?.address : networkConfig.masterChefContractAddress,
+      contractInterface: staking?.type === 'GAUGE' ? LiquidityGaugeV5 : BeethovenxMasterChefAbi,
+      functionName: staking?.type === 'GAUGE' ? 'withdraw(uint256,bool)' : 'withdrawAndHarvest',
+    },
+    transactionType: 'UNSTAKE',
+  });
 
-    function withdraw(amount: AmountHumanReadable) {
-        if (staking) {
-            switch (staking.type) {
-                case 'FRESH_BEETS':
-                case 'MASTER_CHEF':
-                    return submit({
-                        args: [staking.farm?.id, parseUnits(amount, 18), userAddress],
-                        toastText: 'Withdraw and claim rewards',
-                    });
-                case 'GAUGE':
-                    return submit({
-                        args: [parseUnits(amount, 18), true],
-                        toastText: 'Withdraw and claim rewards',
-                    });
-            }
-        }
+  function withdraw(amount: AmountHumanReadable) {
+    if (staking) {
+      switch (staking.type) {
+        case 'FRESH_BEETS':
+        case 'MASTER_CHEF':
+          return submit({
+            args: [staking.farm?.id, parseUnits(amount, 18), userAddress],
+            toastText: 'Withdraw and claim rewards',
+          });
+        case 'GAUGE':
+          return submit({
+            args: [parseUnits(amount, 18), true],
+            toastText: 'Withdraw and claim rewards',
+          });
+      }
     }
+  }
 
-    return {
-        withdraw,
-        ...rest,
-    };
+  return {
+    withdraw,
+    ...rest,
+  };
 }

@@ -9,7 +9,7 @@ import { GqlToken } from '~/apollo/generated/graphql-codegen-generated';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
 interface TokenBaseWithChainId extends TokenBase {
-    chainId: number;
+  chainId: number;
 }
 
 const USER_IMPORTED_CACHE_KEY = 'USER_IMPORTED_TOKENS';
@@ -18,100 +18,109 @@ const cached = typeof window !== 'undefined' ? localStorage.getItem(USER_IMPORTE
 const userImportedTokensVar = makeVar<TokenBaseWithChainId[]>(cached ? JSON.parse(cached) : []);
 
 export function useUserImportedTokens() {
-    const networkConfig = useNetworkConfig();
-    const [addressToLoad, setAddressToLoad] = useState<string | null>(null);
-    const [tokenToImport, setTokenToImport] = useState<TokenBase | null>(null);
-    const address = addressToLoad || AddressZero;
+  const networkConfig = useNetworkConfig();
+  const [addressToLoad, setAddressToLoad] = useState<string | null>(null);
+  const [tokenToImport, setTokenToImport] = useState<TokenBase | null>(null);
+  const address = addressToLoad || AddressZero;
 
-    const { data, isError, isLoading } = useMultiCall({
-        abi: ERC20Abi,
-        enabled: !!addressToLoad,
-        calls: [
-            { address, functionName: 'symbol' },
-            { address, functionName: 'decimals' },
-            { address, functionName: 'name' },
-        ],
-    });
+  const { data, isError, isLoading } = useMultiCall({
+    abi: ERC20Abi,
+    enabled: !!addressToLoad,
+    calls: [
+      { address, functionName: 'symbol' },
+      { address, functionName: 'decimals' },
+      { address, functionName: 'name' },
+    ],
+  });
 
-    useEffect(() => {
-        if (addressToLoad && data && tokenToImport?.address !== addressToLoad && !getImportedToken(addressToLoad)) {
-            setTokenToImport({
-                address: addressToLoad,
-                symbol: data[0] as string,
-                decimals: data[1] as number,
-                name: data[2] as string,
-            });
-        }
-    }, [(data || [])[0]]);
-
-    useEffect(() => {
-        setAddressToLoad(null);
-    }, [isError]);
-
-    function getImportedToken(address: string): TokenBase | null {
-        const importedTokens = userImportedTokensVar();
-        address = address.toLowerCase();
-
-        return importedTokens.find((token) => token.address === address) || null;
+  useEffect(() => {
+    if (
+      addressToLoad &&
+      data &&
+      tokenToImport?.address !== addressToLoad &&
+      !getImportedToken(addressToLoad)
+    ) {
+      setTokenToImport({
+        address: addressToLoad,
+        symbol: data[0] as string,
+        decimals: data[1] as number,
+        name: data[2] as string,
+      });
     }
+  }, [(data || [])[0]]);
 
-    function loadToken(address: string) {
-        if (isAddress(address) && !getImportedToken(address)) {
-            setAddressToLoad(address.toLowerCase());
-        }
+  useEffect(() => {
+    setAddressToLoad(null);
+  }, [isError]);
+
+  function getImportedToken(address: string): TokenBase | null {
+    const importedTokens = userImportedTokensVar();
+    address = address.toLowerCase();
+
+    return importedTokens.find((token) => token.address === address) || null;
+  }
+
+  function loadToken(address: string) {
+    if (isAddress(address) && !getImportedToken(address)) {
+      setAddressToLoad(address.toLowerCase());
     }
+  }
 
-    function clearTokenImport() {
-        setAddressToLoad(null);
-        setTokenToImport(null);
+  function clearTokenImport() {
+    setAddressToLoad(null);
+    setTokenToImport(null);
+  }
+
+  function importToken() {
+    if (tokenToImport && !getImportedToken(tokenToImport.address)) {
+      const updated = [
+        ...userImportedTokensVar(),
+        { ...tokenToImport, chainId: parseInt(networkConfig.chainId) },
+      ];
+      userImportedTokensVar(updated);
+      localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify(updated));
+
+      clearTokenImport();
     }
+  }
 
-    function importToken() {
-        if (tokenToImport && !getImportedToken(tokenToImport.address)) {
-            const updated = [
-                ...userImportedTokensVar(),
-                { ...tokenToImport, chainId: parseInt(networkConfig.chainId) },
-            ];
-            userImportedTokensVar(updated);
-            localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify(updated));
+  function removeToken(address: string) {
+    const filtered = userImportedTokensVar().filter(
+      (token) => token.address !== address.toLowerCase(),
+    );
 
-            clearTokenImport();
-        }
-    }
+    userImportedTokensVar(filtered);
+    localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify(filtered));
+  }
 
-    function removeToken(address: string) {
-        const filtered = userImportedTokensVar().filter((token) => token.address !== address.toLowerCase());
+  function removeAllUserImportedTokens() {
+    userImportedTokensVar([]);
+    localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify([]));
+  }
 
-        userImportedTokensVar(filtered);
-        localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify(filtered));
-    }
+  const userImportedTokens: (GqlToken & { imported?: boolean })[] = useReactiveVar(
+    userImportedTokensVar,
+  )
+    .filter((token) => token.chainId === parseInt(networkConfig.chainId))
+    .map((token) => ({
+      ...token,
+      __typename: 'GqlToken',
+      tradable: true,
+      priority: 0,
+      imported: true,
+    }));
 
-    function removeAllUserImportedTokens() {
-        userImportedTokensVar([]);
-        localStorage.setItem(USER_IMPORTED_CACHE_KEY, JSON.stringify([]));
-    }
-
-    const userImportedTokens: (GqlToken & { imported?: boolean })[] = useReactiveVar(userImportedTokensVar)
-        .filter((token) => token.chainId === parseInt(networkConfig.chainId))
-        .map((token) => ({
-            ...token,
-            __typename: 'GqlToken',
-            tradable: true,
-            priority: 0,
-            imported: true,
-        }));
-
-    return {
-        getImportedToken,
-        loadToken,
-        removeToken,
-        removeAllUserImportedTokens,
-        userImportedTokens,
-        isLoading,
-        isError,
-        tokenToImport,
-        addressToLoad,
-        clearTokenImport,
-        importToken,
-    };
+  return {
+    getImportedToken,
+    loadToken,
+    removeToken,
+    removeAllUserImportedTokens,
+    userImportedTokens,
+    isLoading,
+    isError,
+    tokenToImport,
+    addressToLoad,
+    clearTokenImport,
+    importToken,
+  };
 }

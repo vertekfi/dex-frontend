@@ -8,41 +8,41 @@ const cached = typeof window !== 'undefined' ? localStorage.getItem(EARLY_LUDWIG
 const cachedParsed: { [address: string]: string | null } = cached ? JSON.parse(cached) : {};
 
 export function useEarlyLudwigNft() {
-    const { userAddress, isConnected } = useUserAccount();
+  const { userAddress, isConnected } = useUserAccount();
 
-    return useQuery(
-        ['useEarlyLudwigNft', userAddress],
-        async () => {
-            if (!userAddress || cachedParsed[userAddress] === null) {
-                return null;
-            }
+  return useQuery(
+    ['useEarlyLudwigNft', userAddress],
+    async () => {
+      if (!userAddress || cachedParsed[userAddress] === null) {
+        return null;
+      }
 
-            if (cachedParsed[userAddress]) {
-                return cachedParsed[userAddress];
-            }
+      if (cachedParsed[userAddress]) {
+        return cachedParsed[userAddress];
+      }
 
-            const balance = await earlyLudwigNft.balanceOf(userAddress);
+      const balance = await earlyLudwigNft.balanceOf(userAddress);
 
-            if (parseInt(balance) === 0) {
-                cachedParsed[userAddress] = null;
-                localStorage.setItem(EARLY_LUDWIG_NFTS, JSON.stringify(cachedParsed));
+      if (parseInt(balance) === 0) {
+        cachedParsed[userAddress] = null;
+        localStorage.setItem(EARLY_LUDWIG_NFTS, JSON.stringify(cachedParsed));
 
-                return null;
-            }
+        return null;
+      }
 
-            // we just take the first nft
-            const tokenId = await earlyLudwigNft.tokenOfOwnerByIndex(userAddress, 0);
-            const ipfsMetadataUri = await earlyLudwigNft.tokenURI(tokenId);
-            const metadataCid = ipfsMetadataUri.replace('ipfs://', '');
-            const metadataResponse = await axios.get(`https://ipfs.io/ipfs/${metadataCid}`);
-            const ipfsImageUri = metadataResponse.data.image;
-            const imageCid = ipfsImageUri.replace('ipfs://', '');
+      // we just take the first nft
+      const tokenId = await earlyLudwigNft.tokenOfOwnerByIndex(userAddress, 0);
+      const ipfsMetadataUri = await earlyLudwigNft.tokenURI(tokenId);
+      const metadataCid = ipfsMetadataUri.replace('ipfs://', '');
+      const metadataResponse = await axios.get(`https://ipfs.io/ipfs/${metadataCid}`);
+      const ipfsImageUri = metadataResponse.data.image;
+      const imageCid = ipfsImageUri.replace('ipfs://', '');
 
-            cachedParsed[userAddress] = `https://ipfs.io/ipfs/${imageCid}`;
-            localStorage.setItem(EARLY_LUDWIG_NFTS, JSON.stringify(cachedParsed));
+      cachedParsed[userAddress] = `https://ipfs.io/ipfs/${imageCid}`;
+      localStorage.setItem(EARLY_LUDWIG_NFTS, JSON.stringify(cachedParsed));
 
-            return `https://ipfs.io/ipfs/${imageCid}`;
-        },
-        { enabled: isConnected && !!userAddress, staleTime: Infinity },
-    );
+      return `https://ipfs.io/ipfs/${imageCid}`;
+    },
+    { enabled: isConnected && !!userAddress, staleTime: Infinity },
+  );
 }
