@@ -12,32 +12,32 @@ import { usePoolUserBptBalance } from '~/modules/pool/lib/usePoolUserBptBalance'
 import { PoolFbeetsWarning } from '~/modules/pool/detail/components/PoolFbeetsWarning';
 
 export function Pool() {
-    const { pool, isFbeetsPool } = usePool();
-    const { hasBpt } = usePoolUserBptBalance();
+  const { pool, isFbeetsPool } = usePool();
+  const { hasBpt } = usePoolUserBptBalance();
 
-    return (
-        <Box marginBottom="8">
-            <PoolHeader />
-            <VStack width="full" spacing="4">
-                {pool.staking && !isFbeetsPool && <PoolStakeInFarmWarning />}
-                {isFbeetsPool && hasBpt && <PoolFbeetsWarning />}
-                <Flex width="full" justifyContent="flex-end">
-                    <PoolInvestModal />
-                    <PoolWithdrawModal />
-                </Flex>
-                <Grid gap="4" templateColumns={{ base: '1fr', lg: '300px 1fr' }} width="full">
-                    <GridItem>
-                        <PoolStats />
-                    </GridItem>
-                    <GridItem>
-                        <PoolDetailCharts />
-                    </GridItem>
-                </Grid>
-            </VStack>
-            <VStack spacing="8" width="full">
-                <PoolComposition />
-                <PoolTransactions />
-            </VStack>
-        </Box>
-    );
+  return (
+    <Box marginBottom="8">
+      <PoolHeader />
+      <VStack width="full" spacing="4">
+        {pool.staking && !isFbeetsPool && <PoolStakeInFarmWarning />}
+        {isFbeetsPool && hasBpt && <PoolFbeetsWarning />}
+        <Flex width="full" justifyContent="flex-end">
+          <PoolInvestModal />
+          <PoolWithdrawModal />
+        </Flex>
+        <Grid gap="4" templateColumns={{ base: '1fr', lg: '300px 1fr' }} width="full">
+          <GridItem>
+            <PoolStats />
+          </GridItem>
+          <GridItem>
+            <PoolDetailCharts />
+          </GridItem>
+        </Grid>
+      </VStack>
+      <VStack spacing="8" width="full">
+        <PoolComposition />
+        <PoolTransactions />
+      </VStack>
+    </Box>
+  );
 }
