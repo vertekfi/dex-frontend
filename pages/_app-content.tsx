@@ -9,48 +9,48 @@ import { NavbarMobile } from '~/modules/nav/NavbarMobile';
 import { GlobalRenderer } from '~/modules/global/GlobalRenderer';
 
 export function AppContent({ Component, pageProps }: AppProps) {
-    const ref = useRef(null);
-    const { scrollY } = useElementScroll(ref);
-    const theme = useTheme();
+  const ref = useRef(null);
+  const { scrollY } = useElementScroll(ref);
+  const theme = useTheme();
 
-    return (
+  return (
+    <Box
+      id="app-content"
+      height="full"
+      className="bg"
+      overflowX="hidden"
+      ref={ref}
+      css={{
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+          background: theme.colors.gray['400'],
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: theme.colors.beets.base['300'],
+          borderRadius: '24px',
+        },
+      }}
+    >
+      <GlobalRenderer />
+      <Box pt="3" />
+      <Navbar scrollY={scrollY} />
+      <Box pt="1" />
+      <SubNavBar />
+      <Box display="flex" justifyContent="center" mt="8">
         <Box
-            id="app-content"
-            height="full"
-            className="bg"
-            overflowX="hidden"
-            ref={ref}
-            css={{
-                '&::-webkit-scrollbar': {
-                    width: '4px',
-                },
-                '&::-webkit-scrollbar-track': {
-                    width: '6px',
-                    background: theme.colors.gray['400'],
-                },
-                '&::-webkit-scrollbar-thumb': {
-                    background: theme.colors.beets.base['300'],
-                    borderRadius: '24px',
-                },
-            }}
+          width={{ base: 'full', '2xl': theme.breakpoints['2xl'] }}
+          px={{ base: '4', xl: '8' }}
+          pb={{ base: '4', xl: '8' }}
         >
-            <GlobalRenderer />
-            <Box pt="3" />
-            <Navbar scrollY={scrollY} />
-            <Box pt="1" />
-            <SubNavBar />
-            <Box display="flex" justifyContent="center" mt="8">
-                <Box
-                    width={{ base: 'full', '2xl': theme.breakpoints['2xl'] }}
-                    px={{ base: '4', xl: '8' }}
-                    pb={{ base: '4', xl: '8' }}
-                >
-                    <Component {...pageProps} />
-                </Box>
-            </Box>
-
-            <Footer />
-            <NavbarMobile />
+          <Component {...pageProps} />
         </Box>
-    );
+      </Box>
+
+      <Footer />
+      <NavbarMobile />
+    </Box>
+  );
 }
