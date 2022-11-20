@@ -7,33 +7,33 @@ import { useEffect } from 'react';
 import { useUserTokenBalances } from '~/lib/user/useUserTokenBalances';
 
 interface Props {
-    query: Omit<SubmitTransactionQuery, 'submit' | 'submitAsync'>;
+  query: Omit<SubmitTransactionQuery, 'submit' | 'submitAsync'>;
 }
 
 export function TradeSubmittedContent({ query }: Props) {
-    const { reactiveTradeState } = useTrade();
-    const { refetch } = useUserTokenBalances();
-    const { isConfirmed, isFailed, isPending, error, txReceipt, txResponse } = query;
+  const { reactiveTradeState } = useTrade();
+  const { refetch } = useUserTokenBalances();
+  const { isConfirmed, isFailed, isPending, error, txReceipt, txResponse } = query;
 
-    useEffect(() => {
-        if (isConfirmed) {
-            refetch();
-        }
-    }, [isConfirmed]);
+  useEffect(() => {
+    if (isConfirmed) {
+      refetch();
+    }
+  }, [isConfirmed]);
 
-    return (
-        <Box pt="4">
-            {reactiveTradeState.sorResponse && (
-                <Box px="4">
-                    <BatchSwapSorRoute swapInfo={reactiveTradeState.sorResponse} />{' '}
-                </Box>
-            )}
-            <TransactionSubmittedContent
-                query={query}
-                confirmedMessage="Your swap was successfully executed"
-                mt="4"
-                showSpinnerOnPending={true}
-            />
+  return (
+    <Box pt="4">
+      {reactiveTradeState.sorResponse && (
+        <Box px="4">
+          <BatchSwapSorRoute swapInfo={reactiveTradeState.sorResponse} />{' '}
         </Box>
-    );
+      )}
+      <TransactionSubmittedContent
+        query={query}
+        confirmedMessage="Your swap was successfully executed"
+        mt="4"
+        showSpinnerOnPending={true}
+      />
+    </Box>
+  );
 }
