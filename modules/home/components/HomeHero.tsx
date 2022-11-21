@@ -13,16 +13,16 @@ export function HomeHero() {
       mx={{ base: `-${theme.space['4']}`, xl: `-${theme.space['8']}` }}
       overflow="hidden"
       minHeight="400px"
-      backgroundImage={{
-        base:
-          chainId === '10'
-            ? "url('/images/hero-image-optimism-mobile.png')"
-            : "url('/images/hero-image-fantom-mobile.png')",
-        md:
-          chainId === '10'
-            ? "url('/images/hero-image-optimism.jpg')"
-            : "url('/images/hero-image-fantom.jpg')",
-      }}
+      // backgroundImage={{
+      //   base:
+      //     chainId === '10'
+      //       ? "url('/images/hero-image-optimism-mobile.png')"
+      //       : "url('/images/hero-image-fantom-mobile.png')",
+      //   md:
+      //     chainId === '10'
+      //       ? "url('/images/hero-image-optimism.jpg')"
+      //       : "url('/images/hero-image-fantom.jpg')",
+      // }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
