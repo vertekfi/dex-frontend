@@ -1,90 +1,90 @@
 query GetPools(
-    $first: Int
-    $skip: Int
-    $orderBy: GqlPoolOrderBy
-    $orderDirection: GqlPoolOrderDirection
-    $where: GqlPoolFilter
-    $textSearch: String
+  $first: Int
+  $skip: Int
+  $orderBy: GqlPoolOrderBy
+  $orderDirection: GqlPoolOrderDirection
+  $where: GqlPoolFilter
+  $textSearch: String
 ) {
-    poolGetPools(
-        first: $first
-        skip: $skip
-        orderBy: $orderBy
-        orderDirection: $orderDirection
-        where: $where
-        textSearch: $textSearch
-    ) {
-        ...GqlPoolMinimal
-    }
-    count: poolGetPoolsCount(
-        first: $first
-        skip: $skip
-        orderBy: $orderBy
-        orderDirection: $orderDirection
-        where: $where
-        textSearch: $textSearch
-    )
+  poolGetPools(
+    first: $first
+    skip: $skip
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    where: $where
+    textSearch: $textSearch
+  ) {
+    ...GqlPoolMinimal
+  }
+  count: poolGetPoolsCount(
+    first: $first
+    skip: $skip
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    where: $where
+    textSearch: $textSearch
+  )
 }
 
 query GetPoolFilters {
-    filters: poolGetPoolFilters {
-        id
-        title
-    }
+  filters: poolGetPoolFilters {
+    id
+    title
+  }
 }
 
 #not sure why, but can't expand the fragment in the query above, probably has to do with the interface type
 fragment GqlPoolMinimal on GqlPoolMinimal {
+  id
+  address
+  name
+  symbol
+  createTime
+  dynamicData {
+    totalLiquidity
+    totalShares
+    fees24h
+    swapFee
+    volume24h
+    apr {
+      hasRewardApr
+      thirdPartyApr
+      nativeRewardApr
+      swapApr
+      total
+      items {
+        id
+        title
+        apr
+        subItems {
+          id
+          title
+          apr
+        }
+      }
+    }
+  }
+  allTokens {
     id
     address
-    name
+    isNested
+    isPhantomBpt
+    weight
     symbol
-    createTime
-    dynamicData {
-        totalLiquidity
-        totalShares
-        fees24h
-        swapFee
-        volume24h
-        apr {
-            hasRewardApr
-            thirdPartyApr
-            nativeRewardApr
-            swapApr
-            total
-            items {
-                id
-                title
-                apr
-                subItems {
-                    id
-                    title
-                    apr
-                }
-            }
-        }
-    }
-    allTokens {
+  }
+  staking {
+    id
+    type
+    address
+    farm {
+      id
+      beetsPerBlock
+      rewarders {
         id
         address
-        isNested
-        isPhantomBpt
-        weight
-        symbol
+        tokenAddress
+        rewardPerSecond
+      }
     }
-    staking {
-        id
-        type
-        address
-        farm {
-            id
-            beetsPerBlock
-            rewarders {
-                id
-                address
-                tokenAddress
-                rewardPerSecond
-            }
-        }
-    }
+  }
 }
