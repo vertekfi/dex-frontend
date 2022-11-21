@@ -39,7 +39,7 @@ export function HomeHero() {
           >
             Welcome to
             <br />
-            Vector
+            Vertex
           </Text>
           <Text
             color="white"
