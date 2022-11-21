@@ -13,13 +13,13 @@ export function HomeLearn(props: BoxProps) {
           <Box>
             DeFi can be confusing; whether you’re a beginner or a seasoned veteran, we want to
             provide you with information that helps. Check out the resources below to learn more
-            about DeFi, Beethoven X and the technology we provide.
+            about DeFi, Vertex and the technology we provide.
           </Box>
         </GridItem>
       </Grid>
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }} gap="12">
         <GridItem>
-          <BeetsSubHeadline mb="8">Vector Basics</BeetsSubHeadline>
+          <BeetsSubHeadline mb="8">Vertex Basics</BeetsSubHeadline>
           <HomeLearnItem
             title="Weighted Pools"
             description="From multiple assets, customized token weightings and dynamic swap fees, weighted pools are the industry standard when it comes to tailored investment strategies. Discover more about this unique type of liquidity pool and how you can get the most out of it."
