@@ -2,6 +2,7 @@ import { NetworkConfig } from '~/lib/config/network-config-type';
 import { fantomNetworkConfig } from '~/lib/config/fantom';
 import { optimismNetworkConfig } from '~/lib/config/optimism';
 import { bscNetworkConfig } from './bsc';
+import { goerliNetworkConfig } from './goerli';
 
 const AllNetworkConfigs: { [chainId: string]: NetworkConfig } = {
   '250': fantomNetworkConfig,
@@ -29,5 +30,11 @@ export const networkList = [
     chainId: bscNetworkConfig.chainId,
     url: 'https://beets.fi',
     iconUrl: bscNetworkConfig.eth.iconUrl,
+  },
+  {
+    name: goerliNetworkConfig.networkShortName,
+    chainId: goerliNetworkConfig.chainId,
+    url: 'https://beets.fi',
+    iconUrl: goerliNetworkConfig.eth.iconUrl,
   },
 ];

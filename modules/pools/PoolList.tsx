@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Link, Text, Highlight } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, Link, Text } from '@chakra-ui/react';
 import { NetworkStatus } from '@apollo/client';
 import { usePoolList } from './usePoolList';
 import { PoolListItem } from '~/modules/pools/components/PoolListItem';

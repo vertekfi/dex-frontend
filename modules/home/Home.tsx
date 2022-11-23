@@ -22,9 +22,9 @@ export function Home() {
         <GridItem colSpan={2} maxW="100%">
           <HomePools />
         </GridItem>
-        <GridItem>
+        {/* <GridItem>
           <HomeNews />
-        </GridItem>
+        </GridItem> */}
       </Grid>
 
       <Grid
