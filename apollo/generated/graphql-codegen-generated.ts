@@ -148,6 +148,8 @@ export interface GqlPoolApr {
   __typename: 'GqlPoolApr';
   hasRewardApr: Scalars['Boolean'];
   items: Array<GqlBalancePoolAprItem>;
+  max?: Maybe<Scalars['BigDecimal']>;
+  min?: Maybe<Scalars['BigDecimal']>;
   nativeRewardApr: Scalars['BigDecimal'];
   swapApr: Scalars['BigDecimal'];
   thirdPartyApr: Scalars['BigDecimal'];
@@ -172,6 +174,7 @@ export interface GqlPoolBase {
   allTokens: Array<GqlPoolTokenExpanded>;
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -262,6 +265,7 @@ export interface GqlPoolElement extends GqlPoolBase {
   baseToken: Scalars['Bytes'];
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -341,7 +345,7 @@ export interface GqlPoolJoinExit {
   timestamp: Scalars['Int'];
   tx: Scalars['String'];
   type: GqlPoolJoinExitType;
-  valueUSD: Scalars['String'];
+  valueUSD?: Maybe<Scalars['String']>;
 }
 
 export interface GqlPoolJoinExitAmount {
@@ -363,6 +367,7 @@ export interface GqlPoolLinear extends GqlPoolBase {
   bptPriceRate: Scalars['BigDecimal'];
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -442,6 +447,7 @@ export interface GqlPoolLiquidityBootstrapping extends GqlPoolBase {
   allTokens: Array<GqlPoolTokenExpanded>;
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -462,6 +468,7 @@ export interface GqlPoolMetaStable extends GqlPoolBase {
   amp: Scalars['BigInt'];
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -480,6 +487,7 @@ export interface GqlPoolMinimal {
   allTokens: Array<GqlPoolTokenExpanded>;
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -517,6 +525,7 @@ export interface GqlPoolPhantomStable extends GqlPoolBase {
   bptPriceRate: Scalars['BigDecimal'];
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -579,6 +588,7 @@ export interface GqlPoolStable extends GqlPoolBase {
   amp: Scalars['BigInt'];
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -607,7 +617,16 @@ export interface GqlPoolStaking {
   farm?: Maybe<GqlPoolStakingMasterChefFarm>;
   gauge?: Maybe<GqlPoolStakingGauge>;
   id: Scalars['ID'];
+  reliquary?: Maybe<GqlPoolStakingReliquaryFarm>;
   type: GqlPoolStakingType;
+}
+
+export interface GqlPoolStakingFarmRewarder {
+  __typename: 'GqlPoolStakingFarmRewarder';
+  address: Scalars['String'];
+  id: Scalars['ID'];
+  rewardPerSecond: Scalars['String'];
+  tokenAddress: Scalars['String'];
 }
 
 export interface GqlPoolStakingGauge {
@@ -628,18 +647,27 @@ export interface GqlPoolStakingMasterChefFarm {
   __typename: 'GqlPoolStakingMasterChefFarm';
   beetsPerBlock: Scalars['String'];
   id: Scalars['ID'];
-  rewarders?: Maybe<Array<GqlPoolStakingMasterChefFarmRewarder>>;
+  rewarders?: Maybe<Array<GqlPoolStakingFarmRewarder>>;
 }
 
-export interface GqlPoolStakingMasterChefFarmRewarder {
-  __typename: 'GqlPoolStakingMasterChefFarmRewarder';
-  address: Scalars['String'];
+export interface GqlPoolStakingReliquarFarmLevel {
+  __typename: 'GqlPoolStakingReliquarFarmLevel';
+  allocationPoints: Scalars['Int'];
+  apr: Scalars['BigDecimal'];
+  balance: Scalars['BigDecimal'];
   id: Scalars['ID'];
-  rewardPerSecond: Scalars['String'];
-  tokenAddress: Scalars['String'];
+  level: Scalars['Int'];
+  requiredMaturity: Scalars['Int'];
 }
 
-export type GqlPoolStakingType = 'FRESH_BEETS' | 'GAUGE' | 'MASTER_CHEF';
+export interface GqlPoolStakingReliquaryFarm {
+  __typename: 'GqlPoolStakingReliquaryFarm';
+  beetsPerSecond: Scalars['String'];
+  id: Scalars['ID'];
+  levels?: Maybe<Array<GqlPoolStakingReliquarFarmLevel>>;
+}
+
+export type GqlPoolStakingType = 'FRESH_BEETS' | 'GAUGE' | 'MASTER_CHEF' | 'RELIQUARY';
 
 export interface GqlPoolSwap {
   __typename: 'GqlPoolSwap';
@@ -685,6 +713,16 @@ export interface GqlPoolTokenBase {
   priceRate: Scalars['BigDecimal'];
   symbol: Scalars['String'];
   totalBalance: Scalars['BigDecimal'];
+  weight?: Maybe<Scalars['BigDecimal']>;
+}
+
+export interface GqlPoolTokenDisplay {
+  __typename: 'GqlPoolTokenDisplay';
+  address: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  nestedTokens?: Maybe<Array<GqlPoolTokenDisplay>>;
+  symbol: Scalars['String'];
   weight?: Maybe<Scalars['BigDecimal']>;
 }
 
@@ -759,6 +797,7 @@ export interface GqlPoolWeighted extends GqlPoolBase {
   allTokens: Array<GqlPoolTokenExpanded>;
   createTime: Scalars['Int'];
   decimals: Scalars['Int'];
+  displayTokens: Array<GqlPoolTokenDisplay>;
   dynamicData: GqlPoolDynamicData;
   factory?: Maybe<Scalars['Bytes']>;
   id: Scalars['ID'];
@@ -940,6 +979,8 @@ export interface GqlTokenPriceChartDataItem {
   timestamp: Scalars['Int'];
 }
 
+export type GqlTokenType = 'BPT' | 'LINEAR_WRAPPED_TOKEN' | 'PHANTOM_BPT' | 'WHITE_LISTED';
+
 export interface GqlUserFbeetsBalance {
   __typename: 'GqlUserFbeetsBalance';
   id: Scalars['String'];
@@ -1006,6 +1047,7 @@ export interface Mutation {
   poolLoadOnChainDataForPoolsWithActiveUpdates: Scalars['String'];
   poolLoadSnapshotsForAllPools: Scalars['String'];
   poolReloadAllPoolAprs: Scalars['String'];
+  poolReloadAllTokenNestedPoolIds: Scalars['String'];
   poolReloadPoolNestedTokens: Scalars['String'];
   poolReloadStakingForAllPools: Scalars['String'];
   poolSyncAllPoolsFromSubgraph: Array<Scalars['String']>;
@@ -1024,6 +1066,7 @@ export interface Mutation {
   poolUpdateVolumeAndFeeValuesForAllPools: Scalars['String'];
   protocolCacheMetrics: Scalars['String'];
   tokenDeletePrice: Scalars['Boolean'];
+  tokenDeleteTokenType: Scalars['String'];
   tokenInitChartData: Scalars['String'];
   tokenReloadTokenPrices?: Maybe<Scalars['Boolean']>;
   tokenSyncTokenDefinitions: Scalars['String'];
@@ -1050,6 +1093,10 @@ export interface MutationPoolReloadPoolNestedTokensArgs {
   poolId: Scalars['String'];
 }
 
+export interface MutationPoolReloadStakingForAllPoolsArgs {
+  stakingTypes: Array<GqlPoolStakingType>;
+}
+
 export interface MutationPoolSyncLatestSnapshotsForAllPoolsArgs {
   daysToSync?: InputMaybe<Scalars['Int']>;
 }
@@ -1063,8 +1110,17 @@ export interface MutationTokenDeletePriceArgs {
   tokenAddress: Scalars['String'];
 }
 
+export interface MutationTokenDeleteTokenTypeArgs {
+  tokenAddress: Scalars['String'];
+  type: GqlTokenType;
+}
+
 export interface MutationTokenInitChartDataArgs {
   tokenAddress: Scalars['String'];
+}
+
+export interface MutationUserInitStakedBalancesArgs {
+  stakingTypes: Array<GqlPoolStakingType>;
 }
 
 export interface MutationUserInitWalletBalancesForPoolArgs {
@@ -1507,7 +1563,7 @@ export type GetUserDataQuery = {
       id: string;
       beetsPerBlock: string;
       rewarders?: Array<{
-        __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+        __typename: 'GqlPoolStakingFarmRewarder';
         id: string;
         address: string;
         tokenAddress: string;
@@ -2013,7 +2069,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -2180,7 +2236,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -2481,7 +2537,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -2645,7 +2701,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -2947,7 +3003,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -3111,7 +3167,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -3412,7 +3468,7 @@ export type GetPoolQuery = {
             id: string;
             beetsPerBlock: string;
             rewarders?: Array<{
-              __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+              __typename: 'GqlPoolStakingFarmRewarder';
               id: string;
               address: string;
               tokenAddress: string;
@@ -3669,7 +3725,7 @@ export type GetPoolJoinExitsQuery = {
     tx: string;
     type: GqlPoolJoinExitType;
     poolId: string;
-    valueUSD: string;
+    valueUSD?: string | null;
     amounts: Array<{ __typename: 'GqlPoolJoinExitAmount'; address: string; amount: string }>;
   }>;
 };
@@ -3704,7 +3760,7 @@ export type GetPoolUserJoinExitsQuery = {
     tx: string;
     type: GqlPoolJoinExitType;
     poolId: string;
-    valueUSD: string;
+    valueUSD?: string | null;
     amounts: Array<{ __typename: 'GqlPoolJoinExitAmount'; address: string; amount: string }>;
   }>;
 };
@@ -3850,7 +3906,7 @@ export type GetPoolsQuery = {
         id: string;
         beetsPerBlock: string;
         rewarders?: Array<{
-          __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+          __typename: 'GqlPoolStakingFarmRewarder';
           id: string;
           address: string;
           tokenAddress: string;
@@ -3922,7 +3978,7 @@ export type GqlPoolMinimalFragment = {
       id: string;
       beetsPerBlock: string;
       rewarders?: Array<{
-        __typename: 'GqlPoolStakingMasterChefFarmRewarder';
+        __typename: 'GqlPoolStakingFarmRewarder';
         id: string;
         address: string;
         tokenAddress: string;
