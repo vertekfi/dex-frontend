@@ -1171,6 +1171,7 @@ export interface Query {
   userGetFbeetsBalance: GqlUserFbeetsBalance;
   userGetPoolBalances: Array<GqlUserPoolBalance>;
   userGetPoolJoinExits: Array<GqlPoolJoinExit>;
+  userGetPoolSnapshots: Array<GqlUserPoolSnapshot>;
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
@@ -1289,6 +1290,11 @@ export interface QueryUserGetPoolJoinExitsArgs {
   first?: InputMaybe<Scalars['Int']>;
   poolId: Scalars['String'];
   skip?: InputMaybe<Scalars['Int']>;
+}
+
+export interface QueryUserGetPoolSnapshotsArgs {
+  poolId: Scalars['String'];
+  range: GqlUserSnapshotDataRange;
 }
 
 export interface QueryUserGetPortfolioSnapshotsArgs {

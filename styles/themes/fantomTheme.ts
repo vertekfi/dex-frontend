@@ -4,17 +4,19 @@ export const fantomTheme: Partial<ChakraTheme> = {
     styles: {
         global: {
             html: {
-                background:
-                    'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
+                // background:
+                    // 'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
             },
             body: {
                 color: '#C1C1D1',
-                background:
-                    'radial-gradient(ellipse at top, #111111, #020202), radial-gradient(ellipse at bottom, #020202, #020202) !important',
+                // background:
+                    // 'radial-gradient(ellipse at top, #111111, #020202), radial-gradient(ellipse at bottom, #020202, #020202) !important',
             },
             '.bg': {
-                background: `radial-gradient(ellipse at top, rgba(18, 14, 68, 1) 10%, transparent 80%),
-                             radial-gradient(ellipse at bottom, rgba(18, 14, 68, 1) 10%, transparent 80%) !important`,
+                // background: `radial-gradient(ellipse at top, rgba(18, 14, 68, 1) 10%, transparent 80%),
+                //              radial-gradient(ellipse at bottom, rgba(18, 14, 68, 1) 10%, transparent 80%) !important`,
+                background:'vertek.slatepurple.900', 
+            
             },
         },
     },
@@ -83,16 +85,26 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
         vertek: {
             slate: {
-                100: '#DBDBDF',                
+                50:'#E6E6E6', 
+                100:'#DBDBDF',                
                 200:'#C6C6CC', 
+                300:'#B0B0B9', 
+                400:'#9A9AA6', 
+                500:'#7D7D8B', 
                 600:'#434279', 
-                900: '#131315'
+                700:'#474750', 
+                800:'#2D2D33', 
+                900:'#131315', 
             
             }, 
             slatepurple: {
                 600: '#434279', 
                 900: '#161626', 
-            }
+            }, 
+            neonpurple: {
+                500: '#4A4AF6', 
+                900: '#302B84', 
+            }, 
                 
         },
         beets: {

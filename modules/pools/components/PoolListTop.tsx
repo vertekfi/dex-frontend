@@ -16,8 +16,8 @@ export function PoolListTop() {
     <Box display={{ base: 'none', lg: 'block' }}>
       <Flex pb={4}>
         <Flex flex={1}>
-          <PoolListTabs />
-          <Box position="relative">
+          {/* <PoolListTabs /> */}
+          {/* <Box position="relative">
             <IconButton
               aria-label="filter-button"
               icon={<Filter />}
@@ -37,10 +37,10 @@ export function PoolListTop() {
                 right="-4px"
               />
             ) : null}
-          </Box>
+          </Box> */}
         </Flex>
         <Box>
-          <PoolListSearch />
+          {/* <PoolListSearch /> */}
         </Box>
       </Flex>
       <FadeInOutBox isVisible={showFilters}>

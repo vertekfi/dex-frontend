@@ -57,6 +57,8 @@ function PoolList() {
         </Alert>
       )}
       <PaginatedTable
+        style={{  boxShadow: '0px 8px 24px rgba(240, 185, 11, 0.15)' }}
+        borderRadius="16px"
         items={poolsToRender}
         currentPage={state.skip / state.first + 1}
         pageSize={state.first}
