@@ -52,7 +52,7 @@ spacing={14}>
             alignItems="center" 
             bgColor="vertek.neonpurple.900" 
             borderRadius="8px" 
-            mr="4"
+            
             paddingX="12px" paddingY="16px" gap="8px">
                 Earn More
             </Button>

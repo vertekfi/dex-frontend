@@ -101,10 +101,14 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 600: '#434279', 
                 900: '#161626', 
             }, 
+            
             neonpurple: {
                 500: '#4A4AF6', 
                 900: '#302B84', 
             }, 
+            gold: {
+                400: '#ECA833', 
+            }
                 
         },
         beets: {
@@ -263,6 +267,28 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     _hover: {
                         transform: 'scale(1.01)',
                         bgColor: 'beets.highlightAlpha.200',
+                        _disabled: {
+                            transform: 'none',
+                            background: 'gray.400',
+                        },
+                    },
+                    _disabled: {
+                        bgColor: 'gray.400',
+                        opacity: 1,
+                        color: 'whiteAlpha.700',
+                        cursor: 'not-allowed',
+                        _active: { bgColor: 'gray.400' },
+                    },
+                },
+                vertek: {
+                    bgGradient:'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)', 
+                    color: 'white',
+                    _active: { bgGradient: 'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',  },
+                    _focus: { outline: 'none', boxShadow: 'none' },
+                    borderRadius: '8px',
+                    _hover: {
+                        bgGradient: 'linear(90deg, 90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',
+                        transform: 'scale(1.10)',
                         _disabled: {
                             transform: 'none',
                             background: 'gray.400',

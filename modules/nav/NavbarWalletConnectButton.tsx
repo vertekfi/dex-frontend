@@ -25,19 +25,19 @@ export default function NavbarWalletConnectButton() {
               if (!mounted || !account || !chain) {
                 return (
                   <Button
-                    variant="primary"
-                    _hover={{
-                      backgroundColor: 'beets.green',
-                      transform: 'scale(1.1)',
-                    }}
-                    _active={{
-                      backgroundColor: 'beets.green',
-                    }}
+                    variant="vertek"
+                    // _hover={{
+                    //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
+                    //   transform: 'scale(1.1)',
+                    // }}
+                    // _active={{
+                    //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
+                    // }}
                     onClick={openConnectModal}
                     type="button"
                   >
-                    <IconWallet stroke="black" boxSize="20px" />
-                    <Box ml="2">Connect Wallet</Box>
+                    <IconWallet stroke="white" boxSize="20px" />
+                    <Box ml="2" color="white">Connect Wallet</Box>
                   </Button>
                 );
               }
@@ -58,7 +58,7 @@ export default function NavbarWalletConnectButton() {
 
               return (
                 <HStack spacing="0" position="relative">
-                  <HStack
+                  {/* <HStack
                     bgColor="beets.base.500"
                     pr="3"
                     pl="2"
@@ -79,7 +79,8 @@ export default function NavbarWalletConnectButton() {
                         </Tooltip>
                       </Box>
                     )}
-                  </HStack>
+                  </HStack> */}
+                  {/* price goes here */}
                   <Button
                     variant="primary"
                     rounded="md"
@@ -87,7 +88,7 @@ export default function NavbarWalletConnectButton() {
                     onClick={openAccountModal}
                     paddingX="none"
                     padding="3px"
-                    color="gray.100"
+                    color="white"
                     zIndex="100"
                     position="relative"
                     _hover={{
