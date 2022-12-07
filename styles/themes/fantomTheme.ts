@@ -19,47 +19,47 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
     },
     fonts: {
-        heading: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-        body: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+        heading: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+        body: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
     },
     textStyles: {
         h1: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['3.0rem'],
             lineHeight: '100%',
             fontWeight: 'bold',
             letterSpacing: '-0.1rem',
         },
         h2: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['2.7rem'],
             fontWeight: '300',
             lineHeight: '100%',
             letterSpacing: '-0.1rem',
         },
         h3: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.8rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.05rem',
         },
         h4: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.8rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.05rem',
         },
         h5: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.5rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.03rem',
         },
         h6: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.2rem'],
             fontWeight: '300',
             lineHeight: '115%',
@@ -80,6 +80,20 @@ export const fantomTheme: Partial<ChakraTheme> = {
         box: {
             '300': 'rgba(27,20,100,0.25)',
             '500': 'rgba(255,255,255,0.05)',
+        },
+        vertek: {
+            slate: {
+                100: '#DBDBDF',                
+                200:'#C6C6CC', 
+                600:'#434279', 
+                900: '#131315'
+            
+            }, 
+            slatepurple: {
+                600: '#434279', 
+                900: '#161626', 
+            }
+                
         },
         beets: {
             green: '#00F89C',

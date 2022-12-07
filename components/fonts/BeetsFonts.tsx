@@ -5,6 +5,13 @@ export function BeetsFonts() {
         <Global
             styles={`
                 @font-face {
+                    font-family: 'Clash';
+                    src: url('/fonts/ClashDisplay-Regular.woff2') format('woff2'),
+                        url('/fonts/ClashDisplay-Regular.woff') format('woff');
+                    font-weight: 500;
+                    font-style: normal;
+                }
+                @font-face {
                     font-family: 'Gotham';
                     src: url('/fonts/gotham-light-webfont.woff2') format('woff2'),
                         url('/fonts/gotham-light-webfont.woff') format('woff');

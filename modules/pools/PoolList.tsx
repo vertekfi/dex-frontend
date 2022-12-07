@@ -75,9 +75,9 @@ function PoolList() {
               pool={item}
               userBalance={`${usdBalanceForPool(item.id)}`}
               showUserBalance={showMyInvestments}
-              borderBottomColor="beets.base.800"
+              borderBottomColor="vertek.slatepurple.600"
               borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-              bg="box.500"
+              bg="vertek.slatepurple.900"
               tokens={item.allTokens
                 .filter((token) => !token.isNested && !token.isPhantomBpt)
                 .map((token) => ({

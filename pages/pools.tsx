@@ -36,7 +36,7 @@ function Pools() {
       <PoolListProvider>
         <UserTokenBalancesProvider>
           <PageMasthead
-            title="Invest & Farm"
+            title="Earn"
             image={
               <NextImage
                 src={chainId === '10' ? InvestMastheadOpImage : InvestMastheadImage}

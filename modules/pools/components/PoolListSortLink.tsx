@@ -21,7 +21,7 @@ export default function PoolListSortLink({ title, orderDirection, ...rest }: Pro
       userSelect="none"
     >
       <Flex justifyContent="flex-end" alignItems="center">
-        <Text mr={orderDirection ? 0.5 : 0} fontSize="md" fontWeight="semibold">
+        <Text mr={orderDirection ? 0.5 : 0} fontSize="md" fontWeight="semibold" color="vertek.slate.100">
           {title}
         </Text>
         {orderDirection === 'asc' ? <ArrowUp size={20} /> : null}
