@@ -1,11 +1,16 @@
 import { NavbarLink } from '~/modules/nav/NavbarLink';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Button, Icon } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
+import { IconButton, Collapse } from '@chakra-ui/react';
+import { ChevronUpIcon } from '@chakra-ui/icons'; 
+import { useState } from 'react';
 
 export function NavbarMobile() {
   const router = useRouter();
   const networkConfig = useNetworkConfig();
+  const [isOpen, setIsOpen] = useState(false);
+
 
   return (
     <Box
@@ -15,7 +20,9 @@ export function NavbarMobile() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      bgColor="beets.base.800"
+      borderTopColor="vertek.slatepurple.600"
+      borderTopWidth="2px"
+      bgGradient='linear(90deg, vertek.slatepurple.900 0%, vertek.slatepurple.700 100% )'
       shadow="lg"
       display={{ base: 'flex', md: 'none' }}
       zIndex="999"
@@ -24,7 +31,7 @@ export function NavbarMobile() {
         <NavbarLink
           href={'/pools'}
           selected={router.asPath.startsWith('/pool')}
-          text="Invest"
+          text="Earn"
           mr="1"
           px="4"
         />
@@ -36,7 +43,18 @@ export function NavbarMobile() {
         {networkConfig.launchUrl && (
           <NavbarLink href={networkConfig.launchUrl} text="Launch" px="4" />
         )}
+         {networkConfig.launchUrl && (
+          <IconButton
+          color='vertek.slatepurple.900'
+          bgColor="vertek.neonpurple.500"
+          aria-label='Click for more'
+          icon={<ChevronUpIcon />}
+          onClick={() => setIsOpen(!isOpen)}
+          />
+         )}
+         
       </Flex>
+       
     </Box>
   );
 }

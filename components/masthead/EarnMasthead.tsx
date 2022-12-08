@@ -26,12 +26,13 @@ spacing={14}>
     </Box>
 {/* need to remove incentivized, filter, search on mobile */}
     <Flex
-    width={11/12} 
+    width="100%" flexDirection={{ sm:'column', lg:'row' }}
+    alignItems={{ sm:'center', lg: 'left' }}
     borderRadius="12px" 
     bgGradient='linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)'
-    paddingY="24px" 
-    paddingX="20px">
-        <Box w={3/4}
+    paddingY={{ sm:6, lg:6 }} 
+    paddingX={{ sm:5, lg:12}}>
+        <Box w={{sm:11/12, lg:3/4}}
         alignItems="center" 
         justifyContent="space-between" 
             >
@@ -45,8 +46,8 @@ spacing={14}>
             </Text>
         </Box>
         <Box w={1/4} 
-        alignItems="center" 
-        justifyContent="center" 
+    alignItems="left"
+    justifyContent={{ sm:'left', lg:'center'}}
         display="flex">
             <Button  
             alignItems="center" 

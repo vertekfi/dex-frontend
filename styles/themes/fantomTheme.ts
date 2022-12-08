@@ -1,5 +1,6 @@
 import { ChakraTheme } from '@chakra-ui/theme';
 
+
 export const fantomTheme: Partial<ChakraTheme> = {
     styles: {
         global: {
@@ -24,6 +25,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
         heading: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
         body: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
     },
+    
     textStyles: {
         h1: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -95,15 +97,22 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 700:'#474750', 
                 800:'#2D2D33', 
                 900:'#131315', 
+                
             
             }, 
             slatepurple: {
+                500: '#504E90', 
                 600: '#434279', 
+                700: '#363562', 
+                800: '#1C1C34', 
                 900: '#161626', 
             }, 
             
             neonpurple: {
-                500: '#4A4AF6', 
+                500: '#4A4AF6',
+                600: '#4D3FEC', 
+                700: '#4132D0', 
+                800: '#362BA8', 
                 900: '#302B84', 
             }, 
             gold: {

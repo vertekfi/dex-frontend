@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Box, Button, Flex, HStack, Image, Skeleton, Text, Tooltip } from '@chakra-ui/react';
 import NavbarWalletConnectButton from './NavbarWalletConnectButton';
 import { useGetProtocolDataQuery } from '~/apollo/generated/graphql-codegen-generated';
@@ -18,6 +19,8 @@ import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
 import { BeetsLogoNoText } from '~/assets/logo/BeetsLogoNoText'; 
 import  vertek  from '~/assets/logo/vertek.png'; 
+import { useState } from 'react';
+
 
 
 interface Props {
@@ -33,7 +36,7 @@ export function Navbar({ scrollY }: Props) {
   const { data, loading } = useGetProtocolDataQuery({ fetchPolicy: 'cache-first' });
   const protocolData = data?.protocolData;
   const beetsPrice = data?.beetsPrice;
-
+  const [activeLink, setActiveLink] = useState('/pools');
   return (
     <>
       <Box
@@ -53,9 +56,9 @@ export function Navbar({ scrollY }: Props) {
           <motion.div
             style={{ opacity, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           >
-            <Box width="full" height="full" bg="beets.base.800" shadow="lg" />
+            <Box width="full" height="full" bg="vertek.slatepurple.900" shadow="xl" />
           </motion.div>
-          <Flex alignItems="center" mr="6" zIndex="2" cursor="pointer">
+          <Flex alignItems="center" mr="6" zIndex="2" cursor="pointer" bgColor="vertek.slate.gradient">
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
               {chainId === '10' ? (
                 <BeetsBalLogo width="132px" />
@@ -66,15 +69,28 @@ export function Navbar({ scrollY }: Props) {
               )}
             </NextLink>
           </Flex>
-          <Box flex="1" zIndex="2" margin="16px">
+
+          <Box 
+            flex="1" 
+            zIndex="2" 
+            margin="16px"  
+              >
             <Flex alignItems="center" display={{ base: 'none', md: 'flex' }} >
-              <NavbarLink
+              <NavbarLink 
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
                 text="Earn"
                 mr="5"
-              />
-              <NavbarLink href={'/swap'} selected={router.asPath === '/swap'} text="Swap" mr="5" />
+                >
+                
+              </NavbarLink>
+              <NavbarLink 
+                href={'/swap'} 
+                selected={router.asPath === '/swap'} 
+                text="Swap" 
+                mr="5" 
+                
+                />
               {/* {networkConfig.stakeUrl && (
                 <NavbarLink href={networkConfig.stakeUrl} text="Stake" mr={5} />
               )} */}
