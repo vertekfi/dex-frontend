@@ -2,7 +2,7 @@ import { NetworkConfig } from '~/lib/config/network-config-type';
 import { AddressZero } from '@ethersproject/constants';
 
 export const goerliNetworkConfig: NetworkConfig = {
-  appName: 'Vertex',
+  appName: 'Vertek',
   chainId: '5',
   networkName: 'Goerli Testnet',
   networkShortName: 'Goerli',
@@ -24,9 +24,9 @@ export const goerliNetworkConfig: NetworkConfig = {
     platformId: 'ethereum',
   },
   rpcUrl: 'https://eth-goerli.g.alchemy.com/v2/cK2OOgcOIjM2enbLpRfinpxq8hdY9aGU',
-  multicall: '',
+  multicall: '0xFDec6c30306F84eCC4196FA689974721fE863Dfc',
   beets: {
-    address: '',
+    address: '0xb269A278E427478712e2AF0eBa728021157A2114',
   },
   fbeets: {
     address: '',
@@ -38,17 +38,18 @@ export const goerliNetworkConfig: NetworkConfig = {
     batchRelayer: '',
     composableStableFactory: '',
     weightedPoolV2Factory: '',
+    weightedPoolFactory: '0xAB9Fc4857c46489B316CA919Bf4a78d4556A3523',
     linearFactories: {
       erc4626: [],
       reaper: [],
     },
     linearRebalancers: {},
   },
-  beetsPoolOwnerAddress: '',
+  beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
-  defaultTokenIn: '',
-  defaultTokenOut: '',
-  farmTypeName: 'farm',
+  defaultTokenIn: '0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6',
+  defaultTokenOut: '0xb269A278E427478712e2AF0eBa728021157A2114',
+  farmTypeName: 'gauge',
   additionalLinks: [
     {
       title: 'Vote',

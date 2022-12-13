@@ -13,7 +13,7 @@ query GetAppGlobalData {
   #    price
   #    address
   #}
-  beetsGetFbeetsRatio
+  #beetsGetFbeetsRatio
   blocksGetBlocksPerDay
   blocksGetAverageBlockTime
 }
@@ -76,9 +76,9 @@ query GetTokensDynamicData($addresses: [String!]!) {
   }
 }
 
-query GetFbeetsRatio {
-  ratio: beetsGetFbeetsRatio
-}
+# query GetFbeetsRatio {
+#   ratio: beetsGetFbeetsRatio
+# }
 
 query GetProtocolData {
   protocolData: protocolMetrics {
