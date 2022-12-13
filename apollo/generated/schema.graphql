@@ -799,6 +799,17 @@ type GqlProtocolMetrics {
   totalSwapVolume: BigDecimal!
 }
 
+type GqlReliquaryFarmSnapshot {
+  dailyDeposited: String!
+  dailyWithdrawn: String!
+  farmId: String!
+  id: ID!
+  relicCount: String!
+  timestamp: Int!
+  totalBalance: String!
+  userCount: String!
+}
+
 type GqlSorGetBatchSwapForTokensInResponse {
   assets: [String!]!
   swaps: [GqlSorSwap!]!
@@ -1010,6 +1021,7 @@ type Mutation {
   poolInitializeSnapshotsForPool(poolId: String!): String!
   poolLoadOnChainDataForAllPools: String!
   poolLoadOnChainDataForPoolsWithActiveUpdates: String!
+  poolLoadReliquarySnapshotsForAllFarms: String!
   poolLoadSnapshotsForAllPools: String!
   poolReloadAllPoolAprs: String!
   poolReloadAllTokenNestedPoolIds: String!
@@ -1079,6 +1091,10 @@ type Query {
     textSearch: String
     where: GqlPoolFilter
   ): Int!
+  poolGetReliquaryFarmSnapshots(
+    id: String!
+    range: GqlPoolSnapshotDataRange!
+  ): [GqlReliquaryFarmSnapshot!]!
   poolGetSnapshots(id: String!, range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolSwap!]!
   poolGetUserSwapVolume(
