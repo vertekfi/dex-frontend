@@ -40,7 +40,7 @@ export function StakingCardGuts() {
       </Text>
       <Flex direction="column">
         <Text textAlign="right" fontWeight="bold">
-          0.00 VRTX
+          0.00 VRTK
         </Text>
         <Text fontSize="0.7rem" textAlign="right">
           $0.00
