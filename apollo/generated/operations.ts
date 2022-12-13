@@ -408,7 +408,6 @@ export const GetAppGlobalData = gql`
       priority
       tradable
     }
-    beetsGetFbeetsRatio
     blocksGetBlocksPerDay
     blocksGetAverageBlockTime
   }
@@ -475,11 +474,6 @@ export const GetTokensDynamicData = gql`
     }
   }
 `;
-export const GetFbeetsRatio = gql`
-  query GetFbeetsRatio {
-    ratio: beetsGetFbeetsRatio
-  }
-`;
 export const GetProtocolData = gql`
   query GetProtocolData {
     protocolData: protocolMetrics {
@@ -514,25 +508,10 @@ export const GetUserData = gql`
       stakedBalance
       walletBalance
     }
-    fbeetsBalance: userGetFbeetsBalance {
-      totalBalance
-      stakedBalance
-      walletBalance
-    }
     staking: userGetStaking {
       id
       type
       address
-      farm {
-        id
-        beetsPerBlock
-        rewarders {
-          id
-          address
-          tokenAddress
-          rewardPerSecond
-        }
-      }
       gauge {
         id
         gaugeAddress

@@ -6,7 +6,6 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
 
-
 function StakingPage() {
   const { chainId } = useNetworkConfig();
   return (
@@ -14,21 +13,21 @@ function StakingPage() {
       <Head>
         <title>Vertex | Staking</title>
       </Head>
-      
+
       <PageMasthead
-                    title="Vertek Staker"
-                    image={
-                        <NextImage
-                            src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
-                            width="213.71px"
-                            height="68px"
-                        />
-                    }
-                />
-                
+        title="Vertek Staker"
+        image={
+          <NextImage
+            src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
+            width="213.71px"
+            height="68px"
+          />
+        }
+      />
+
       <StakingContainer />
     </>
   );
-};
+}
 
 export default StakingPage;

@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { HomeHero } from '~/modules/home/components/HomeHero';
 import { HomePools } from '~/modules/home/components/HomePools';
-import { HomeNews } from '~/modules/home/components/HomeNews';
+// import { HomeNews } from '~/modules/home/components/HomeNews';
 import { HomeWhyUs } from '~/modules/home/components/HomeWhyUs';
 import { HomeBeetsInfo } from '~/modules/home/components/HomeBeetsInfo';
 import { HomeLearn } from '~/modules/home/components/HomeLearn';

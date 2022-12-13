@@ -62,70 +62,6 @@ type GqlLatestSyncedBlocks {
   userWalletSyncBlock: BigInt!
 }
 
-type GqlLge {
-  address: String!
-  adminAddress: String!
-  adminIsMultisig: Boolean!
-  bannerImageUrl: String!
-  collateralAmount: String!
-  collateralEndWeight: Int!
-  collateralStartWeight: Int!
-  collateralTokenAddress: String!
-  description: String!
-  discordUrl: String!
-  endDate: String!
-  id: ID!
-  mediumUrl: String!
-  name: String!
-  startDate: String!
-  swapFeePercentage: String!
-  telegramUrl: String!
-  tokenAmount: String!
-  tokenContractAddress: String!
-  tokenEndWeight: Int!
-  tokenIconUrl: String!
-  tokenStartWeight: Int!
-  twitterUrl: String!
-  websiteUrl: String!
-}
-
-input GqlLgeCreateInput {
-  address: String!
-  bannerImageUrl: String!
-  collateralAmount: String!
-  collateralEndWeight: Int!
-  collateralStartWeight: Int!
-  collateralTokenAddress: String!
-  description: String!
-  discordUrl: String!
-  endDate: String!
-  id: ID!
-  mediumUrl: String!
-  name: String!
-  startDate: String!
-  swapFeePercentage: String!
-  telegramUrl: String!
-  tokenAmount: String!
-  tokenContractAddress: String!
-  tokenEndWeight: Int!
-  tokenIconUrl: String!
-  tokenStartWeight: Int!
-  twitterUrl: String!
-  websiteUrl: String!
-}
-
-input GqlLgeUpdateInput {
-  description: String!
-  discordUrl: String!
-  id: ID!
-  mediumUrl: String!
-  name: String!
-  telegramUrl: String!
-  tokenIconUrl: String!
-  twitterUrl: String!
-  websiteUrl: String!
-}
-
 type GqlPoolApr {
   hasRewardApr: Boolean!
   items: [GqlBalancePoolAprItem!]!
@@ -338,7 +274,7 @@ enum GqlPoolJoinExitType {
 type GqlPoolLinear implements GqlPoolBase {
   address: Bytes!
   allTokens: [GqlPoolTokenExpanded!]!
-  bptPriceRate: BigDecimal!
+  bptPriceRate: BigDecimal
   createTime: Int!
   decimals: Int!
   displayTokens: [GqlPoolTokenDisplay!]!
@@ -360,7 +296,7 @@ type GqlPoolLinear implements GqlPoolBase {
 
 type GqlPoolLinearNested {
   address: Bytes!
-  bptPriceRate: BigDecimal!
+  bptPriceRate: BigDecimal
   createTime: Int!
   factory: Bytes
   id: ID!
@@ -502,7 +438,7 @@ type GqlPoolPhantomStable implements GqlPoolBase {
   address: Bytes!
   allTokens: [GqlPoolTokenExpanded!]!
   amp: BigInt!
-  bptPriceRate: BigDecimal!
+  bptPriceRate: BigDecimal
   createTime: Int!
   decimals: Int!
   displayTokens: [GqlPoolTokenDisplay!]!
@@ -522,7 +458,7 @@ type GqlPoolPhantomStable implements GqlPoolBase {
 type GqlPoolPhantomStableNested {
   address: Bytes!
   amp: BigInt!
-  bptPriceRate: BigDecimal!
+  bptPriceRate: BigDecimal
   createTime: Int!
   factory: Bytes
   id: ID!
@@ -998,15 +934,9 @@ input GqlUserSwapVolumeFilter {
   tokenOutIn: [String!]
 }
 
-"""
-The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
 scalar JSON
 
 type Mutation {
-  beetsSyncFbeetsRatio: String!
-  cacheAverageBlockTime: String!
-  lgeCreate(lge: GqlLgeCreateInput!, signature: String!): GqlLge!
   poolInitializeSnapshotsForPool(poolId: String!): String!
   poolLoadOnChainDataForAllPools: String!
   poolLoadOnChainDataForPoolsWithActiveUpdates: String!
@@ -1030,6 +960,7 @@ type Mutation {
   poolUpdateLiquidityValuesForAllPools: String!
   poolUpdateVolumeAndFeeValuesForAllPools: String!
   protocolCacheMetrics: String!
+  syncGaugeData: String!
   tokenDeletePrice(timestamp: Int!, tokenAddress: String!): Boolean!
   tokenDeleteTokenType(tokenAddress: String!, type: GqlTokenType!): String!
   tokenInitChartData(tokenAddress: String!): String!
@@ -1047,15 +978,10 @@ type Mutation {
 
 type Query {
   beetsGetBeetsPrice: String!
-  beetsGetFbeetsRatio: String!
-  blocksGetAverageBlockTime: Float!
-  blocksGetBlocksPerDay: Float!
-  blocksGetBlocksPerSecond: Float!
-  blocksGetBlocksPerYear: Float!
-  contentGetNewsItems: [GqlContentNewsItem!]!
+  blocksGetAverageBlockTime: Int!
+  blocksGetBlocksPerDay: Int!
+  contentGetNewsItems: [GqlContentNewsItem]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
-  lge(id: ID!): GqlLge!
-  lges: [GqlLge!]!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetBatchSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolBatchSwap!]!
   poolGetFeaturedPoolGroups: [GqlPoolFeaturedPoolGroup!]!
@@ -1122,7 +1048,6 @@ type Query {
   userGetFbeetsBalance: GqlUserFbeetsBalance!
   userGetPoolBalances: [GqlUserPoolBalance!]!
   userGetPoolJoinExits(first: Int = 10, poolId: String!, skip: Int = 0): [GqlPoolJoinExit!]!
-  userGetPoolSnapshots(poolId: String!, range: GqlUserSnapshotDataRange!): [GqlUserPoolSnapshot!]!
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
   userGetStaking: [GqlPoolStaking!]!
   userGetSwaps(first: Int = 10, poolId: String!, skip: Int = 0): [GqlPoolSwap!]!
