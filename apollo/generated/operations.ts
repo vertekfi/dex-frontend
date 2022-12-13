@@ -82,12 +82,6 @@ export const GqlPoolFeaturedPoolGroup = gql`
     icon
     title
     items {
-      ... on GqlFeaturePoolGroupItemExternalLink {
-        id
-        image
-        buttonText
-        buttonUrl
-      }
       ... on GqlPoolMinimal {
         ...GqlPoolCardData
       }

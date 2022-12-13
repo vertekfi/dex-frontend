@@ -36,12 +36,12 @@ fragment GqlPoolFeaturedPoolGroup on GqlPoolFeaturedPoolGroup {
   icon
   title
   items {
-    ... on GqlFeaturePoolGroupItemExternalLink {
-      id
-      image
-      buttonText
-      buttonUrl
-    }
+    # ... on GqlFeaturePoolGroupItemExternalLink {
+    #   id
+    #   image
+    #   buttonText
+    #   buttonUrl
+    # }
     ... on GqlPoolMinimal {
       ...GqlPoolCardData
     }

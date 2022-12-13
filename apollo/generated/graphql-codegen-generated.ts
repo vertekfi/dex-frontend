@@ -1495,13 +1495,7 @@ export type GetHomeDataQuery = {
     icon: string;
     title: string;
     items: Array<
-      | {
-          __typename: 'GqlFeaturePoolGroupItemExternalLink';
-          id: string;
-          image: string;
-          buttonText: string;
-          buttonUrl: string;
-        }
+      | { __typename: 'GqlFeaturePoolGroupItemExternalLink' }
       | {
           __typename: 'GqlPoolMinimal';
           id: string;
@@ -1565,13 +1559,7 @@ export type GetHomeFeaturedPoolsQuery = {
     icon: string;
     title: string;
     items: Array<
-      | {
-          __typename: 'GqlFeaturePoolGroupItemExternalLink';
-          id: string;
-          image: string;
-          buttonText: string;
-          buttonUrl: string;
-        }
+      | { __typename: 'GqlFeaturePoolGroupItemExternalLink' }
       | {
           __typename: 'GqlPoolMinimal';
           id: string;
@@ -1637,13 +1625,7 @@ export type GqlPoolFeaturedPoolGroupFragment = {
   icon: string;
   title: string;
   items: Array<
-    | {
-        __typename: 'GqlFeaturePoolGroupItemExternalLink';
-        id: string;
-        image: string;
-        buttonText: string;
-        buttonUrl: string;
-      }
+    | { __typename: 'GqlFeaturePoolGroupItemExternalLink' }
     | {
         __typename: 'GqlPoolMinimal';
         id: string;
@@ -4248,12 +4230,6 @@ export const GqlPoolFeaturedPoolGroupFragmentDoc = gql`
     icon
     title
     items {
-      ... on GqlFeaturePoolGroupItemExternalLink {
-        id
-        image
-        buttonText
-        buttonUrl
-      }
       ... on GqlPoolMinimal {
         ...GqlPoolCardData
       }
