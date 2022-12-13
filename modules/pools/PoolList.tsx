@@ -57,6 +57,8 @@ function PoolList() {
         </Alert>
       )}
       <PaginatedTable
+        style={{ boxShadow: '0px 8px 24px rgba(240, 185, 11, 0.15)' }}
+        borderRadius="16px"
         items={poolsToRender}
         currentPage={state.skip / state.first + 1}
         pageSize={state.first}
@@ -75,9 +77,9 @@ function PoolList() {
               pool={item}
               userBalance={`${usdBalanceForPool(item.id)}`}
               showUserBalance={showMyInvestments}
-              borderBottomColor="beets.base.800"
+              borderBottomColor="vertek.slatepurple.600"
               borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-              bg="box.500"
+              bg="vertek.slatepurple.900"
               tokens={item.allTokens
                 .filter((token) => !token.isNested && !token.isPhantomBpt)
                 .map((token) => ({

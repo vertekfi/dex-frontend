@@ -1,27 +1,27 @@
 {
-    "possibleTypes": {
-        "GqlPoolBase": [
-            "GqlPoolElement",
-            "GqlPoolLinear",
-            "GqlPoolLiquidityBootstrapping",
-            "GqlPoolMetaStable",
-            "GqlPoolPhantomStable",
-            "GqlPoolStable",
-            "GqlPoolWeighted"
-        ],
-        "GqlPoolFeaturedPoolGroupItem": ["GqlFeaturePoolGroupItemExternalLink", "GqlPoolMinimal"],
-        "GqlPoolNestedUnion": ["GqlPoolLinearNested", "GqlPoolPhantomStableNested"],
-        "GqlPoolTokenBase": ["GqlPoolToken", "GqlPoolTokenLinear", "GqlPoolTokenPhantomStable"],
-        "GqlPoolTokenPhantomStableNestedUnion": ["GqlPoolToken", "GqlPoolTokenLinear"],
-        "GqlPoolTokenUnion": ["GqlPoolToken", "GqlPoolTokenLinear", "GqlPoolTokenPhantomStable"],
-        "GqlPoolUnion": [
-            "GqlPoolElement",
-            "GqlPoolLinear",
-            "GqlPoolLiquidityBootstrapping",
-            "GqlPoolMetaStable",
-            "GqlPoolPhantomStable",
-            "GqlPoolStable",
-            "GqlPoolWeighted"
-        ]
-    }
+  "possibleTypes": {
+    "GqlPoolBase": [
+      "GqlPoolElement",
+      "GqlPoolLinear",
+      "GqlPoolLiquidityBootstrapping",
+      "GqlPoolMetaStable",
+      "GqlPoolPhantomStable",
+      "GqlPoolStable",
+      "GqlPoolWeighted"
+    ],
+    "GqlPoolFeaturedPoolGroupItem": ["GqlFeaturePoolGroupItemExternalLink", "GqlPoolMinimal"],
+    "GqlPoolNestedUnion": ["GqlPoolLinearNested", "GqlPoolPhantomStableNested"],
+    "GqlPoolTokenBase": ["GqlPoolToken", "GqlPoolTokenLinear", "GqlPoolTokenPhantomStable"],
+    "GqlPoolTokenPhantomStableNestedUnion": ["GqlPoolToken", "GqlPoolTokenLinear"],
+    "GqlPoolTokenUnion": ["GqlPoolToken", "GqlPoolTokenLinear", "GqlPoolTokenPhantomStable"],
+    "GqlPoolUnion": [
+      "GqlPoolElement",
+      "GqlPoolLinear",
+      "GqlPoolLiquidityBootstrapping",
+      "GqlPoolMetaStable",
+      "GqlPoolPhantomStable",
+      "GqlPoolStable",
+      "GqlPoolWeighted"
+    ]
+  }
 }

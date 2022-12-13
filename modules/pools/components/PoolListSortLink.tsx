@@ -10,18 +10,18 @@ interface Props extends ButtonProps {
 export default function PoolListSortLink({ title, orderDirection, ...rest }: Props) {
   return (
     <Button
-      _hover={{ backgroundColor: 'transparent', color: 'beets.highlight' }}
+      _hover={{ backgroundColor: 'transparent', color: 'white', transform: 'scale(1.1)' }}
       _focus={{ outline: 'none' }}
       _active={{ backgroundColor: 'transparent' }}
       padding="0"
       height="fit-content"
       variant="ghost"
-      color={orderDirection ? 'beets.green' : 'beets.base.100'}
+      color={orderDirection ? 'vertek.neonpurple.500' : 'vertek.neonpurple.500'}
       {...rest}
       userSelect="none"
     >
       <Flex justifyContent="flex-end" alignItems="center">
-        <Text mr={orderDirection ? 0.5 : 0} fontSize="md" fontWeight="semibold">
+        <Text mr={orderDirection ? 0.5 : 0} fontSize="md" fontWeight="semibold" color="vertek.slate.100">
           {title}
         </Text>
         {orderDirection === 'asc' ? <ArrowUp size={20} /> : null}

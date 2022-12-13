@@ -7,7 +7,7 @@ import {
 } from '~/apollo/generated/graphql-codegen-generated';
 import { DEFAULT_POOL_LIST_QUERY_VARS, PoolListProvider } from '~/modules/pools/usePoolList';
 import Head from 'next/head';
-import { PageMasthead } from '~/components/masthead/PageMasthead';
+import { EarnMasthead } from '~/components/masthead/EarnMasthead';
 import NextImage from 'next/image';
 import InvestMastheadImage from '~/assets/images/invest-masthead-image.png';
 import InvestMastheadOpImage from '~/assets/images/invest-masthead-image-OP.png';
@@ -35,8 +35,8 @@ function Pools() {
       </Head>
       <PoolListProvider>
         <UserTokenBalancesProvider>
-          <PageMasthead
-            title="Invest & Farm"
+          <EarnMasthead
+            title="Earn"
             image={
               <NextImage
                 src={chainId === '10' ? InvestMastheadOpImage : InvestMastheadImage}

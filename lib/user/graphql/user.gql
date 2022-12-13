@@ -1,43 +1,28 @@
 query GetUserData {
-    balances: userGetPoolBalances {
-        poolId
-        tokenAddress
-        tokenPrice
-        totalBalance
-        stakedBalance
-        walletBalance
-    }
-    fbeetsBalance: userGetFbeetsBalance {
-        totalBalance
-        stakedBalance
-        walletBalance
-    }
-    staking: userGetStaking {
+  balances: userGetPoolBalances {
+    poolId
+    tokenAddress
+    tokenPrice
+    totalBalance
+    stakedBalance
+    walletBalance
+  }
+  staking: userGetStaking {
+    id
+    type
+    address
+    gauge {
+      id
+      gaugeAddress
+      rewards {
         id
-        type
-        address
-        farm {
-            id
-            beetsPerBlock
-            rewarders {
-                id
-                address
-                tokenAddress
-                rewardPerSecond
-            }
-        }
-        gauge {
-            id
-            gaugeAddress
-            rewards {
-                id
-                rewardPerSecond
-                tokenAddress
-            }
-        }
+        rewardPerSecond
+        tokenAddress
+      }
     }
+  }
 }
 
 mutation UserSyncBalance($poolId: String!) {
-    userSyncBalance(poolId: $poolId)
+  userSyncBalance(poolId: $poolId)
 }

@@ -37,12 +37,12 @@ class BeetsDocument extends Document {
             content="https://beethoven-assets.s3.eu-central-1.amazonaws.com/social-image.png"
           />
 
-          <script
+          {/* <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-          />
+          /> */}
 
-          <script
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `
                                 window.dataLayer = window.dataLayer || [];
@@ -51,7 +51,7 @@ class BeetsDocument extends Document {
                                 gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', { page_path: window.location.pathname });
                             `,
             }}
-          />
+          /> */}
         </Head>
         <body>
           <ColorModeScript initialColorMode={chakraTheme.config.initialColorMode} />

@@ -7,7 +7,7 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
 export function useUserPendingRewards() {
   const networkConfig = useNetworkConfig();
-  const { poolBalances, fbeetsBalance, staking, ...userPoolBalancesQuery } = useUserData();
+  const { poolBalances, staking, ...userPoolBalancesQuery } = useUserData();
   const { priceForAmount } = useGetTokens();
   const { data, isLoading, ...rest } = useStakingPendingRewards(staking, 'useUserPendingRewards');
   const pendingRewardsTotalUSD = sumBy(data || [], priceForAmount);

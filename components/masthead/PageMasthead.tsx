@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -10,16 +10,22 @@ export function PageMasthead({ title, image }: Props) {
     return (
         <Flex
             borderBottomWidth={5}
-            borderBottomColor="beets.base.500"
+            borderBottomColor="transparent"
             mb={{ base: '6', lg: '8' }}
-            alignItems="flex-end"
+            
         >
-            <Text fontSize="28px" fontWeight="semibold" as="h1" flex="1" mb="2">
-                {title}
-            </Text>
-            <Box alignItems="flex-end" display={{ base: 'none', md: 'flex' }}>
-                {image}
-            </Box>
+            <VStack alignItems="start">
+                <Text fontSize="36px" color="white" fontWeight="semibold" as="h1" flex="1" mb="0" textAlign="left">
+                    {title}
+                </Text>
+                {/* <Box alignItems="flex-end" display={{ base: 'none', md: 'flex' }}>
+                    {image}
+                </Box> */}
+                <Text fontSize="20px" fontWeight="normal" as="h1" flex="1" mb="2" color="vertek.slate.100">
+                    Join our farms for higher rewards and bonuses that can multiply your earnings 
+                    up to 10 times. 
+                </Text>
+            </VStack>
         </Flex>
     );
 }

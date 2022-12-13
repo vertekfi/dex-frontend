@@ -34,7 +34,7 @@ function HomePage() {
   return (
     <>
       <Head>
-        <title>Vertex</title>
+        <title>Vertek</title>
       </Head>
       <Home />
     </>

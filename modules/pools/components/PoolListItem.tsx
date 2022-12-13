@@ -79,13 +79,13 @@ export function PoolListItem({
               />
             </GridItem>
             <GridItem area="name" mb={{ base: '4', lg: '0' }}>
-              <Text fontSize={{ base: 'xl', lg: 'md' }} fontWeight={{ base: 'bold', lg: 'normal' }}>
+              <Text color="white" fontSize={{ base: 'xl', lg: 'md' }} fontWeight={{ base: 'bold', lg: 'normal' }}>
                 {pool.name}
               </Text>
             </GridItem>
             {showUserBalance && (
               <GridItem
-                area="userBalance"
+                area="userBalance" color="white" fontWeight="bold"
                 textAlign={{ base: 'left', lg: 'right' }}
                 mb={{ base: '4', lg: '0' }}
               >
@@ -100,7 +100,7 @@ export function PoolListItem({
             )}
             <StatGridItem area="tvl">
               <MobileLabel text="TVL" />
-              <Text fontSize={{ base: 'xl', lg: 'md' }}>
+              <Text fontSize={{ base: 'xl', lg: 'md' }} color="white">
                 {numeral(pool.dynamicData.totalLiquidity).format('$0,0')}
               </Text>
             </StatGridItem>
@@ -109,7 +109,7 @@ export function PoolListItem({
               display={showUserBalance ? { base: 'block', lg: 'none', xl: 'block' } : 'block'}
             >
               <MobileLabel text="VOLUME (24H)" />
-              <Text fontSize={{ base: 'xl', lg: 'md' }}>
+              <Text fontSize={{ base: 'xl', lg: 'md' }} color="white">
                 {numeral(pool.dynamicData.volume24h).format('$0,0')}
               </Text>
             </StatGridItem>

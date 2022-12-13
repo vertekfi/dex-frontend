@@ -8,6 +8,7 @@ const AllNetworkConfigs: { [chainId: string]: NetworkConfig } = {
   '250': fantomNetworkConfig,
   '10': optimismNetworkConfig,
   '56': bscNetworkConfig,
+  '5': goerliNetworkConfig,
 };
 
 export const networkConfig = AllNetworkConfigs[process.env.NEXT_PUBLIC_CHAIN_ID || '250'];

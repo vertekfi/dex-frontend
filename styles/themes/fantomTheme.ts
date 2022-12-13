@@ -1,65 +1,69 @@
 import { ChakraTheme } from '@chakra-ui/theme';
 
+
 export const fantomTheme: Partial<ChakraTheme> = {
     styles: {
         global: {
             html: {
-                background:
-                    'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
+                // background:
+                    // 'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
             },
             body: {
                 color: '#C1C1D1',
-                background:
-                    'radial-gradient(ellipse at top, #111111, #020202), radial-gradient(ellipse at bottom, #020202, #020202) !important',
+                // background:
+                    // 'radial-gradient(ellipse at top, #111111, #020202), radial-gradient(ellipse at bottom, #020202, #020202) !important',
             },
             '.bg': {
-                background: `radial-gradient(ellipse at top, rgba(18, 14, 68, 1) 10%, transparent 80%),
-                             radial-gradient(ellipse at bottom, rgba(18, 14, 68, 1) 10%, transparent 80%) !important`,
+                // background: `radial-gradient(ellipse at top, rgba(18, 14, 68, 1) 10%, transparent 80%),
+                //              radial-gradient(ellipse at bottom, rgba(18, 14, 68, 1) 10%, transparent 80%) !important`,
+                background:'vertek.slatepurple.900', 
+            
             },
         },
     },
     fonts: {
-        heading: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-        body: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+        heading: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+        body: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
     },
+    
     textStyles: {
         h1: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['3.0rem'],
             lineHeight: '100%',
             fontWeight: 'bold',
             letterSpacing: '-0.1rem',
         },
         h2: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['2.7rem'],
             fontWeight: '300',
             lineHeight: '100%',
             letterSpacing: '-0.1rem',
         },
         h3: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.8rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.05rem',
         },
         h4: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.8rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.05rem',
         },
         h5: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.5rem'],
             fontWeight: '300',
             lineHeight: '115%',
             letterSpacing: '-0.03rem',
         },
         h6: {
-            fontFamily: `'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+            fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['1.2rem'],
             fontWeight: '300',
             lineHeight: '115%',
@@ -80,6 +84,41 @@ export const fantomTheme: Partial<ChakraTheme> = {
         box: {
             '300': 'rgba(27,20,100,0.25)',
             '500': 'rgba(255,255,255,0.05)',
+        },
+        vertek: {
+            slate: {
+                50:'#E6E6E6', 
+                100:'#DBDBDF',                
+                200:'#C6C6CC', 
+                300:'#B0B0B9', 
+                400:'#9A9AA6', 
+                500:'#7D7D8B', 
+                600:'#434279', 
+                700:'#474750', 
+                800:'#2D2D33', 
+                900:'#131315', 
+                
+            
+            }, 
+            slatepurple: {
+                500: '#504E90', 
+                600: '#434279', 
+                700: '#363562', 
+                800: '#1C1C34', 
+                900: '#161626', 
+            }, 
+            
+            neonpurple: {
+                500: '#4A4AF6',
+                600: '#4D3FEC', 
+                700: '#4132D0', 
+                800: '#362BA8', 
+                900: '#302B84', 
+            }, 
+            gold: {
+                400: '#ECA833', 
+            }
+                
         },
         beets: {
             green: '#00F89C',
@@ -237,6 +276,28 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     _hover: {
                         transform: 'scale(1.01)',
                         bgColor: 'beets.highlightAlpha.200',
+                        _disabled: {
+                            transform: 'none',
+                            background: 'gray.400',
+                        },
+                    },
+                    _disabled: {
+                        bgColor: 'gray.400',
+                        opacity: 1,
+                        color: 'whiteAlpha.700',
+                        cursor: 'not-allowed',
+                        _active: { bgColor: 'gray.400' },
+                    },
+                },
+                vertek: {
+                    bgGradient:'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)', 
+                    color: 'white',
+                    _active: { bgGradient: 'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',  },
+                    _focus: { outline: 'none', boxShadow: 'none' },
+                    borderRadius: '8px',
+                    _hover: {
+                        bgGradient: 'linear(90deg, 90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',
+                        transform: 'scale(1.10)',
                         _disabled: {
                             transform: 'none',
                             background: 'gray.400',

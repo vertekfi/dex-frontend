@@ -1,7 +1,4 @@
-import {
-  useGetFbeetsRatioQuery,
-  useGetUserDataQuery,
-} from '~/apollo/generated/graphql-codegen-generated';
+import { useGetUserDataQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetTokens } from '~/lib/global/useToken';
 import { sum } from 'lodash';
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
@@ -16,7 +13,7 @@ const currentUserAddressVar = makeVar<string | null>(null);
 
 export function _useUserData() {
   const networkConfig = useNetworkConfig();
-  const { data: fbeetsRatioData } = useGetFbeetsRatioQuery();
+
   const { userAddress } = useUserAccount();
   const { data, loading, refetch, ...rest } = useGetUserDataQuery({
     notifyOnNetworkStatusChange: true,
@@ -25,7 +22,6 @@ export function _useUserData() {
   const { priceForAmount } = useGetTokens();
   const currentUserAddress = currentUserAddressVar();
   const userAddressChanged = userAddress !== currentUserAddress;
-  const fbeetsRatio = parseFloat(fbeetsRatioData?.ratio || '0');
 
   useAsyncEffect(async () => {
     if (!refetchingVar()) {
@@ -36,37 +32,25 @@ export function _useUserData() {
     }
   }, [userAddress]);
 
-  const fbeetsBalance = data?.fbeetsBalance || {
-    totalBalance: '0',
-    stakedBalance: '0',
-    walletBalance: '0',
-  };
   const poolBalances = data?.balances || [];
   const staking = data?.staking || [];
 
-  const fbeetsValueUSD = priceForAmount({
-    address: networkConfig.fbeets.address,
-    amount: fbeetsBalance.totalBalance,
-  });
+  const portfolioValueUSD = sum(
+    poolBalances.map((balance) => parseFloat(balance.totalBalance) * balance.tokenPrice),
+  );
 
-  const portfolioValueUSD =
-    fbeetsValueUSD +
-    sum(poolBalances.map((balance) => parseFloat(balance.totalBalance) * balance.tokenPrice));
-
-  const stakedValueUSD =
-    priceForAmount({
-      address: networkConfig.fbeets.address,
-      amount: fbeetsBalance.stakedBalance,
-    }) + sum(poolBalances.map((balance) => parseFloat(balance.stakedBalance) * balance.tokenPrice));
+  const stakedValueUSD = sum(
+    poolBalances.map((balance) => parseFloat(balance.stakedBalance) * balance.tokenPrice),
+  );
 
   function bptBalanceForPool(poolId: string): AmountHumanReadable {
     const bptBalance = poolBalances.find((pool) => pool.poolId === poolId)?.totalBalance || '0';
 
-    if (poolId === networkConfig.fbeets.poolId) {
-      const bptInFbeets = parseFloat(fbeetsBalance.totalBalance) + fbeetsRatio;
+    // if (poolId === networkConfig.fbeets.poolId) {
+    //   const bptInFbeets = parseFloat(fbeetsBalance.totalBalance) + fbeetsRatio;
 
-      return `${bptInFbeets + parseFloat(bptBalance)}`;
-    }
+    //   return `${bptInFbeets + parseFloat(bptBalance)}`;
+    // }
 
     return bptBalance;
   }
@@ -78,7 +62,7 @@ export function _useUserData() {
         ? bptBalance.tokenPrice * parseFloat(bptBalance.totalBalance)
         : 0;
 
-      return fbeetsValueUSD + bptValueUSD;
+      return bptValueUSD;
     }
 
     const balance = poolBalances.find((pool) => pool.poolId === poolId);
@@ -100,15 +84,10 @@ export function _useUserData() {
     ...rest,
     loading: loading || userAddressChanged,
     refetch,
-    fbeetsValueUSD,
     portfolioValueUSD,
     poolBalances,
-    fbeetsBalance,
     staking,
-    userPoolIds: [
-      ...poolBalances.map((balance) => balance.poolId),
-      ...(fbeetsValueUSD > 0 ? [networkConfig.fbeets.poolId] : []),
-    ],
+    userPoolIds: [...poolBalances.map((balance) => balance.poolId)],
     bptBalanceForPool,
     usdBalanceForPool,
     hasBptInWalletForPool,

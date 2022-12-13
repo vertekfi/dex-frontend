@@ -14,9 +14,9 @@ export function PoolListTableHeader() {
         borderTopLeftRadius="md"
         borderTopRightRadius="md"
         alignItems={'center'}
-        bgColor="rgba(255,255,255,0.08)"
+        bgColor="vertek.slate.900"
         borderBottom="2px"
-        borderColor="beets.base.500"
+        borderColor="vertek.slate.600"
         mb={{ base: '4', lg: '0' }}
         templateColumns={
           showMyInvestments
@@ -27,13 +27,13 @@ export function PoolListTableHeader() {
         display={{ base: 'none', lg: 'grid' }}
       >
         <GridItem>
-          <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+          <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
             Pool details
           </Text>
         </GridItem>
         {showMyInvestments && (
           <GridItem textAlign="right">
-            <Flex justifyContent="flex-end" color="beets.base.100">
+            <Flex justifyContent="flex-end" color="vertek.slate.100">
               <Text fontSize="md" fontWeight="semibold">
                 My balance
               </Text>
@@ -43,7 +43,7 @@ export function PoolListTableHeader() {
         )}
         <GridItem textAlign="right">
           {showMyInvestments ? (
-            <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+            <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
               TVL
             </Text>
           ) : (
@@ -59,7 +59,7 @@ export function PoolListTableHeader() {
           display={showMyInvestments ? { base: 'block', lg: 'none', xl: 'block' } : 'block'}
         >
           {showMyInvestments ? (
-            <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+            <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
               Volume (24h)
             </Text>
           ) : (
@@ -72,7 +72,7 @@ export function PoolListTableHeader() {
         </GridItem>
         <GridItem textAlign="right" pr="4">
           {showMyInvestments ? (
-            <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+            <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
               APR
             </Text>
           ) : (
