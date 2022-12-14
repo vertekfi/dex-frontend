@@ -40,7 +40,7 @@ export function useBatchSwap() {
     // +ve means max to send
     // -ve means min to receive
     // For a multihop the intermediate tokens should be 0
-    const limits = tokenAddresses.map((tokenAddress, i) => {
+    const limits = tokenAddresses.map((tokenAddress) => {
       if (swapType === 'EXACT_IN') {
         if (
           isSameAddress(tokenAddress, tokenIn) ||
