@@ -76,6 +76,15 @@ export function Navbar({ scrollY }: Props) {
             margin="16px"  
               >
             <Flex alignItems="center" display={{ base: 'none', md: 'flex' }} >
+            <NavbarLink 
+                href={'/'}
+                selected={router.asPath.endsWith('/')}
+                text="Home"
+                mr="5"
+                >
+                
+              </NavbarLink>
+              
               <NavbarLink 
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
