@@ -22,8 +22,8 @@ export function TokenInputSwapButton({ isLoading, onSwap }: Props) {
       borderColor="gray.500"
       zIndex="2"
       role="group"
-      _hover={{ borderColor: 'beets.green', cursor: 'pointer' }}
-      _active={{ backgroundColor: 'gray.600' }}
+      _hover={{ borderColor: 'vertek.neonpurple.500', cursor: 'pointer' }}
+      _active={{ backgroundColor: 'vertek.neonpurple.500' }}
       _focus={{ outline: 'none' }}
       onClick={onSwap}
     >
@@ -36,12 +36,12 @@ export function TokenInputSwapButton({ isLoading, onSwap }: Props) {
             transition: 'transform linear .15s',
           }}
           _groupHover={{
-            color: 'beets.green',
+            color: 'vertek.neonpurple.500',
             cursor: 'pointer',
             transform: 'rotate(180deg)',
             transition: 'all linear .15s',
           }}
-          _groupFocus={{ color: 'beets.green', cursor: 'pointer' }}
+          _groupFocus={{ color: 'vertek.neonpurple.500', cursor: 'pointer' }}
         >
           {!isLoading && (
             <AnimatedBox
@@ -64,7 +64,7 @@ export function TokenInputSwapButton({ isLoading, onSwap }: Props) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Spinner color="beets.highlight" size="sm" marginBottom="1px" />
+              <Spinner color="vertek.neonpurple.500" size="sm" marginBottom="1px" />
             </AnimatedBox>
           )}
         </Box>

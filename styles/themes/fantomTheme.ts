@@ -243,9 +243,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
         Button: {
             variants: {
                 primary: {
-                    background: 'beets.green',
-                    color: 'gray.500',
-                    _active: { bgColor: 'beets.green' },
+                    background: 'linear-gradient(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)',
+                    color: 'white',
+                    // _active: { bgColor: 'beets.green' },
                     _focus: { outline: 'none', boxShadow: 'none' },
                     rounded: 'xl',
                     _hover: {

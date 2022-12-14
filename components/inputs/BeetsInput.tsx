@@ -14,16 +14,16 @@ type Props = {
 export const BeetsInput = forwardRef(
     ({ label, secondaryLabel, children, headingProps, wrapperProps, ...inputProps }: InputProps & Props, ref) => {
         return (
-            <Box position="relative" width="full" bg="blackAlpha.500" borderRadius="md" {...wrapperProps}>
-                <HStack>
+            <Box position="relative" width="full" bg="vertek.slatepurple.900" borderRadius="md" {...wrapperProps}>
+                <HStack >
                     {label && (
                         <Heading
                             position="absolute"
                             top=".5rem"
                             left=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
-                            size="xs"
+                            color="white"
+                            size="lg"
                             {...headingProps}
                         >
                             {label}
@@ -36,8 +36,8 @@ export const BeetsInput = forwardRef(
                             top=".5rem"
                             right=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
-                            size="xs"
+                            color="white"
+                            size="lg"
                             {...headingProps}
                         >
                             {secondaryLabel}

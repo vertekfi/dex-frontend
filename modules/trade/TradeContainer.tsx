@@ -19,7 +19,7 @@ export function TradeContainer() {
   const hasNoRoute = !loadingSwaps && (!swapInfo || swapInfo.swaps.length === 0);
 
   return (
-    <Box>
+    <Box  >
       <Grid
         templateAreas={{
           base: `"swap"
@@ -34,14 +34,24 @@ export function TradeContainer() {
         <GridItem area="swap">
           <TradeInterfaceContainer />
         </GridItem>
-        <GridItem area="chart-route">
-          <TradePageHeader />
 
-          <Box mt="2">
-            <TradeChart />
-          </Box>
+        {/* start of the chart and routing info  */}
+        <GridItem area="chart-route"  paddingX="2" >
+            <Box bgColor="vertek.slate.900" padding="4" borderRadius="12" >
+                <TradePageHeader />
 
-          <Box display={{ base: 'none', md: 'block' }}>
+                <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12">
+                  <TradeChart />
+                </Box>
+            </Box>
+
+            
+            <Box display={{ base: 'none', md: 'block' }} 
+            bgColor="vertek.slate.900" padding="4" 
+            borderRadius="12"
+            mt="2"
+            >
+            
             {/*
                     // @ts-ignore */}
             <AnimateSharedLayout>
@@ -51,7 +61,7 @@ export function TradeContainer() {
                     <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                       Smart order routing
                     </Text>
-                    <Text mb="4" color="gray.200">
+                    <Text mb="4" color="white">
                       The SOR searches all Beethoven X pools to ensure you receive the best
                       available price.
                     </Text>

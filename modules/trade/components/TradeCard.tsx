@@ -91,7 +91,7 @@ export function TradeCard() {
         topRight={sorResponse ? <TradeCardRefreshButton onClick={() => refetchTrade()} /> : null}
       >
         <VStack spacing="2" padding="4" width="full">
-          <Box position="relative" width="full">
+          <Box position="relative" width="full" bgColor="">
             <TokenInput
               ref={finalRefTokenIn}
               label="Sell"

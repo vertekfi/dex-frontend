@@ -36,6 +36,7 @@ export default function PresetSelector({ onPresetSelected, presets = defaultPres
         <HStack width="full">
             {presets.map((preset) => (
                 <Button
+                    bgColor="vertek.neonpurple.500"
                     key={`preset-${preset.label}`}
                     _focus={{ outline: 'none' }}
                     onClick={handlePresetSelected(preset.value)}

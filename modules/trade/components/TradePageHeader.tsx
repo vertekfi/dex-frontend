@@ -12,7 +12,7 @@ export function TradePageHeader() {
 
   return (
     <>
-      <Flex>
+      <Flex >
         <Text fontSize="2xl" fontWeight="bold" color="white">
           1
           <Text as="span" fontSize="lg" fontWeight="normal" color="gray.100">
