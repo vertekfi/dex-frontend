@@ -16,7 +16,11 @@ export function StakingCard() {
         </div>
         <Flex direction="column">
           <Text fontSize="2xl"> DOGE </Text>
+<<<<<<< HEAD
           <Text fontSize="0.8rem"> Stake VRTK - Earn DOGE </Text>
+=======
+          <Text fontSize="0.8rem"> Stake VTX - Earn DOGE </Text>
+>>>>>>> jump
         </Flex>
       </Flex>
       <StakingCardGuts />

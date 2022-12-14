@@ -9,15 +9,12 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     // 'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
             },
             body: {
-                color: '#C1C1D1',
-                // background:
-                    // 'radial-gradient(ellipse at top, #111111, #020202), radial-gradient(ellipse at bottom, #020202, #020202) !important',
-            },
-            '.bg': {
-                // background: `radial-gradient(ellipse at top, rgba(18, 14, 68, 1) 10%, transparent 80%),
-                //              radial-gradient(ellipse at bottom, rgba(18, 14, 68, 1) 10%, transparent 80%) !important`,
-                background:'vertek.slatepurple.900', 
-            
+                backgroundImage:
+                './images/vertekbg.png',
+                backgroundColor:
+                'vertek.slatepurple.900', 
+                backgroundSize: 
+                '100% 100%', 
             },
         },
     },
@@ -43,10 +40,10 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
         h3: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-            fontSize: ['1.8rem'],
+            fontSize: ['36px'],
             fontWeight: '300',
-            lineHeight: '115%',
-            letterSpacing: '-0.05rem',
+            lineHeight: '40px',
+            letterSpacing: '-0.6%',
         },
         h4: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
