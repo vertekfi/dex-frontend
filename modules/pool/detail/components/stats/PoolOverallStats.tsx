@@ -42,53 +42,61 @@ export default function PoolOverallStats() {
         );
 
     return (
-        <VStack spacing="4" width="full" alignItems="flex-start" px="2">
-            <VStack spacing="0" alignItems="flex-start">
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+        <HStack 
+        display="flex" 
+        flexDirection="row" 
+        width="full" 
+        justifyContent="space-between"
+        alignItems="flex-start"
+        padding="0"
+        
+        px="2">
+            <VStack alignItems="flex-start" >
+                <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     Pool APR
                 </Text>
-                <HStack>
+                <HStack >
                     <div className="apr-stripes">{numeral(data.apr.total).format('0.00%')}</div>
                     <AprTooltip onlySparkles data={data.apr} />
                 </HStack>
             </VStack>
-            <Divider />
-            <VStack spacing="0" alignItems="flex-start">
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+            {/* <Divider /> */}
+            {/* <VStack spacing="0" alignItems="flex-start">
+            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     BPT price
                 </Text>
                 <Text color="white" fontSize="1.75rem">
                     {numberFormatUSDValue(sharePrice)}
                 </Text>
                 <PercentChangeBadge percentChange={sharePricePercentChange} />
-            </VStack>
-            <VStack spacing="0" alignItems="flex-start">
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+            </VStack> */}
+            <VStack alignItems="flex-start" >
+                <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     TVL
                 </Text>
-                <Text color="white" fontSize="1.75rem">
+                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
                     {numeral(data.totalLiquidity).format('$0,0.00a')}
                 </Text>
-                <PercentChangeBadge percentChange={tvlPercentChange} />
+                {/* <PercentChangeBadge percentChange={tvlPercentChange} /> */}
             </VStack>
-            <VStack spacing="0" alignItems="flex-start">
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+            <VStack alignItems="flex-start" >
+            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     24h Volume
                 </Text>
-                <Text color="white" fontSize="1.75rem">
+                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
                     {numeral(data.volume24h).format('$0,0.00a')}
                 </Text>
-                <PercentChangeBadge percentChange={volumePercentChange} />
+                {/* <PercentChangeBadge percentChange={volumePercentChange} /> */}
             </VStack>
-            <VStack spacing="0" alignItems="flex-start">
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+            <VStack alignItems="flex-start" >
+            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     24h Fees
                 </Text>
-                <Text color="white" fontSize="1.75rem">
+                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
                     {numeral(data.fees24h).format('$0,0.00a')}
                 </Text>
             </VStack>
-            {pool.staking?.farm && (
+            {/* {pool.staking?.farm && (
                 <VStack spacing="0" alignItems="flex-start">
                     <InfoButton
                         labelProps={{
@@ -130,7 +138,7 @@ export default function PoolOverallStats() {
                         ))}
                     </Box>
                 </VStack>
-            )}
-        </VStack>
+            )} */}
+        </HStack>
     );
 }

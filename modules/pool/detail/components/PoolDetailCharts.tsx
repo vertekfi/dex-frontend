@@ -19,7 +19,7 @@ export function PoolDetailCharts() {
   const { data } = useGetPoolSnapshotsQuery({ variables: { poolId: pool.id, range } });
 
   return (
-    <Card height="full" minHeight="540px">
+    <Card width="full" minHeight="540px">
       <HStack
         padding={{ base: '2', lg: '4' }}
         pb="0"

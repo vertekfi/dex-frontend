@@ -15,7 +15,7 @@ export default function PoolStats() {
         setActiveTab(tabIndex);
     };
     return (
-        <Card px="2" py="4" height="full">
+        <Card px="2" py="4" width="full">
             <VStack height="full" spacing="4">
                 {hasBpt && (
                     <Tabs width="full" variant="soft-rounded" display="flex" onChange={handleTabChanged} px="2">

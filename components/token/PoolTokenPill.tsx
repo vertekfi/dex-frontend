@@ -17,7 +17,7 @@ export function PoolTokenPill({ token }: Props) {
     const { getToken } = useGetTokens();
 
     return (
-        <BeetsBox p="2">
+        <BeetsBox p="2" bgColor="black" borderRadius="full">
             <Flex alignItems="center">
                 <TokenAvatar address={token.address} size="xs" />
                 <Text ml="2">{getToken(token.address)?.symbol}</Text>

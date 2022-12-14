@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, VStack } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, VStack, HStack } from '@chakra-ui/react';
 import PoolHeader from '~/modules/pool/detail/components/PoolHeader';
 import { PoolComposition } from '~/modules/pool/detail/components/composition/PoolComposition';
 import PoolStats from './components/stats/PoolStats';
@@ -16,26 +16,32 @@ export function Pool() {
   const { hasBpt } = usePoolUserBptBalance();
 
   return (
-    <Box marginBottom="8">
+    <Box marginBottom="8" >
       <PoolHeader />
       <VStack width="full" spacing="4">
         {pool.staking && !isFbeetsPool && <PoolStakeInFarmWarning />}
         {isFbeetsPool && hasBpt && <PoolFbeetsWarning />}
-        <Flex width="full" justifyContent="flex-end">
-          <PoolInvestModal />
-          <PoolWithdrawModal />
-        </Flex>
-        <Grid gap="4" templateColumns={{ base: '1fr', lg: '300px 1fr' }} width="full">
-          <GridItem>
-            <PoolStats />
-          </GridItem>
-          <GridItem>
-            <PoolDetailCharts />
-          </GridItem>
-        </Grid>
+            <Flex width="full" justifyContent="flex-end" marginBottom="4">
+                <PoolInvestModal />
+                <PoolWithdrawModal />
+            </Flex>
+            <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
+                  <GridItem>
+                    
+                        <VStack spacing="0">
+                            <PoolStats />
+                            <PoolDetailCharts />
+                        </VStack>
+                    
+                  </GridItem>
+                  <GridItem>
+                        <PoolComposition />
+                  </GridItem>
+            </Grid>
       </VStack>
+      
       <VStack spacing="8" width="full">
-        <PoolComposition />
+        
         <PoolTransactions />
       </VStack>
     </Box>
