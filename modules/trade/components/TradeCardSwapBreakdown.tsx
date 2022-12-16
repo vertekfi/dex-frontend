@@ -1,5 +1,5 @@
 import { useTrade } from '~/modules/trade/lib/useTrade';
-import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Flex, HStack, Text, Box, VStack } from '@chakra-ui/react';
 import { useTradeData } from '~/modules/trade/lib/useTradeData';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { AnimatePresence } from 'framer-motion';
@@ -37,7 +37,8 @@ export function TradeCardSwapBreakdown({}: Props) {
 
   return (
     <AnimatePresence>
-      <VStack backgroundColor="blackAlpha.400" padding="3" width="full" spacing="1" marginTop="1">
+
+      <VStack backgroundColor="vertek.slatepurple.900" padding="3" width="full" spacing="1" marginTop="1">
         <HStack width="full" justifyContent="space-between">
           <Text color="gray.100" fontSize=".85rem">
             Price impact
@@ -77,13 +78,14 @@ export function TradeCardSwapBreakdown({}: Props) {
           <Text
             fontSize=".85rem"
             color={
-              diff > 0 ? 'beets.green' : diff < -0.075 ? 'red' : diff < -0.02 ? 'orange' : 'white'
+              diff > 0 ? 'beets.greenAlpha.900' : diff < -0.075 ? 'red' : diff < -0.02 ? 'orange' : 'white'
             }
           >
             {coingeckoVariationText}
           </Text>
         </HStack>
       </VStack>
+
     </AnimatePresence>
   );
 }

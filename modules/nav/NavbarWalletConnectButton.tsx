@@ -25,7 +25,7 @@ export default function NavbarWalletConnectButton() {
               if (!mounted || !account || !chain) {
                 return (
                   <Button
-                    variant="vertek"
+                    variant="vertekconnect"
                     // _hover={{
                     //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
                     //   transform: 'scale(1.1)',

@@ -151,7 +151,7 @@ export function TradeCard() {
               />
             ) : (
               <Button
-                variant="primary"
+                variant="vertekconnect2"
                 disabled={isReviewDisabled}
                 onClick={() => {
                   tradeStopPolling();
@@ -159,6 +159,7 @@ export function TradeCard() {
                 }}
                 width="full"
                 size="lg"
+                
               >
                 {isNotEnoughLiquidity
                   ? 'Not enough liquidity'

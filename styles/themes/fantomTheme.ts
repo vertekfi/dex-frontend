@@ -223,7 +223,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
         Link: {
             baseStyle: {
-                color: 'beets.highlight',
+                color: 'vertek.gold.400',
             },
         },
         Tooltip: {
@@ -286,15 +286,15 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         _active: { bgColor: 'gray.400' },
                     },
                 },
-                vertek: {
+                vertekconnect: {
                     bgGradient:'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)', 
                     color: 'white',
-                    _active: { bgGradient: 'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',  },
+                    _active: { bgColor:'#4A4AF6' },  
                     _focus: { outline: 'none', boxShadow: 'none' },
                     borderRadius: '8px',
                     _hover: {
                         bgGradient: 'linear(90deg, 90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',
-                        transform: 'scale(1.10)',
+                        transform: 'scale(1.05)',
                         _disabled: {
                             transform: 'none',
                             background: 'gray.400',
@@ -308,6 +308,47 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         _active: { bgColor: 'gray.400' },
                     },
                 },
+                vertekconnect2: {
+                    backgroundColor:'#4A4AF6', 
+                    borderWidth:'2px',  
+                    borderColor:'vertek.slate.500', 
+                    color: 'white',
+                    _active: { backgroundColor:'#4A4AF6'  },
+                    _focus: { outline: 'none', boxShadow: 'none' },
+                    borderRadius: '8px',
+                    _hover: {
+                        backgroundColor:'vertek.slate.900', 
+                        color:'vertek.neonpurple.500', 
+                        borderWidth:'2px', 
+                        borderColor:'vertek.neonpurple.500', 
+                        transform:'scale(1.05)' 
+                            }, 
+                    _disabled: {
+                        transform: 'none',
+                        background: 'gray.400',
+                        },
+                    },
+                vertekswap: {
+                    bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
+                    borderRadius:'8px', 
+                    fontWeight:'900', 
+                    borderWidth:'2px',  
+                    borderColor:'black', 
+                    color: 'black',
+                    _active: { backgroundColor:'#4A4AF6'  },
+                    _focus: { outline: 'none', boxShadow: 'none' },
+                    _hover: {
+                        backgroundColor:'white', 
+                        color:'white', 
+                        borderWidth:'2px', 
+                        borderColor:'white', 
+                            }, 
+                    _disabled: {
+                        transform: 'none',
+                        background: 'gray.400',
+                        },
+                    },
+                
             },
         },
         Skeleton: {
