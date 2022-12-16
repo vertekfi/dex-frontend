@@ -16,12 +16,19 @@ export function Footer() {
   const { chainId } = useNetworkConfig();
 
   return (
-    <Box width="full" px={{ base: '4', xl: '8' }} bgColor="beets.base.800" pt="24">
-      <Flex>
-        <Box flex="1">
-          <Box mb="12">{chainId === '10' ? <BeetsBalLogo /> : <BeetsLogo />}</Box>
-          <Grid templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap="8">
-            <GridItem>
+    <Box display="flex" justifyContent="center" alignItems="center" 
+    width="full" px={{ base: '4', xl: '4' }} bgColor="" pt="4"         
+    borderTopColor="vertek.slatepurple.600" borderWidth="1px" 
+    >
+      <Flex minWidth="full" justifyContent="center" alignItems="center" >
+        <Box flex="1" bgColor="">
+          <Box justifyContent="center" display="flex" mb="6">{chainId === '10' ? 
+              <BeetsBalLogo /> : <BeetsLogo />}
+          </Box>
+          <Grid templateColumns={{ base: 'repeat(2, 1fr)', lg: '2' }} 
+          gap=""  minWidth="full" alignItems="center" justifyContent="space-between" m="4" display="flex"
+          >
+            <GridItem >
               <FooterLink href="/pools" linkType="internal">
                 Invest
               </FooterLink>
@@ -49,16 +56,16 @@ export function Footer() {
               <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
               <FooterLink href={networkConfig.createPoolUrl}>Compose a pool</FooterLink>
             </GridItem>
-            <GridItem>
+            {/* <GridItem>
               <FooterLink href="https://pro.olympusdao.finance/#/bond">Olympus Bonds</FooterLink>
               <FooterLink href="https://app.multichain.org/#/router">Multichain Bridge</FooterLink>
               <FooterLink href="https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL">
                 AllBridge
               </FooterLink>
-            </GridItem>
+            </GridItem> */}
           </Grid>
 
-          <HStack spacing="6" mt="24">
+          <HStack spacing="6" mt="4">
             <Box>
               <Link
                 href="https://discord.gg/jedS4zGk28"
@@ -97,13 +104,13 @@ export function Footer() {
             </Box>
           </HStack>
         </Box>
-        <Box flex="1" justifyContent="flex-end" display={{ base: 'none', lg: 'flex' }} ml="12">
-          {/* <NextImage
+      {/* <Box flex="1" justifyContent="flex-end" display={{ base: 'none', lg: 'flex' }} ml="12">
+           <NextImage
             src={chainId === '10' ? FooterImageOp : DegenBand}
             width="472px"
             height="394.8px"
-          /> */}
-        </Box>
+          /> 
+  </Box> */}
       </Flex>
     </Box>
   );

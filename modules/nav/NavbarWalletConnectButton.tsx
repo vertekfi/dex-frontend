@@ -1,7 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Box, Button, HStack, Skeleton, Spinner, Text, Tooltip } from '@chakra-ui/react';
 import Image from 'next/image';
-import BeetsSmart from '~/assets/icons/beetx-smarts.svg';
+import BeetsSmart from '~/assets/logo/verteknotext.svg';
 import { useReactiveVar } from '@apollo/client';
 import { txPendingVar } from '~/lib/util/useSubmitTransaction';
 import { IconWallet } from '~/components/icons/IconWallet';
@@ -25,7 +25,7 @@ export default function NavbarWalletConnectButton() {
               if (!mounted || !account || !chain) {
                 return (
                   <Button
-                    variant="vertekconnect"
+                    variant="vertekconnect2"
                     // _hover={{
                     //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
                     //   transform: 'scale(1.1)',
@@ -82,23 +82,18 @@ export default function NavbarWalletConnectButton() {
                   </HStack> */}
                   {/* price goes here */}
                   <Button
-                    variant="primary"
-                    rounded="md"
-                    fontSize="md"
+                    variant="vertekconnect3"
+                    
                     onClick={openAccountModal}
                     paddingX="none"
                     padding="3px"
                     color="white"
                     zIndex="100"
                     position="relative"
-                    _hover={{
-                      backgroundColor: 'none',
-                      transform: 'scale(1.05)',
-                    }}
+                  
                     _active={{
                       backgroundColor: 'none',
                     }}
-                    bg="beets.base.700"
                   >
                     <HStack width="full" height="full" spacing="1">
                       <HStack
@@ -110,7 +105,7 @@ export default function NavbarWalletConnectButton() {
                         width="full"
                       >
                         {txPending ? (
-                          <Spinner color="beets.green" />
+                          <Spinner color="white" />
                         ) : earlyLudwig ? (
                           <ChakraImage src={earlyLudwig} width="24px" height="24px" rounded="xl" />
                         ) : (

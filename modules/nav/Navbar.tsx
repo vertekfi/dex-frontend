@@ -139,7 +139,7 @@ export function Navbar({ scrollY }: Props) {
                   <Image mr="8" width="24px" height="24px" src={networkConfig.eth.iconUrl} />
                 </Button>
               </NetworkSelectorPopover>
-              <BeetsLogoNoText width="85px" />
+              {/* <BeetsLogoNoText width="85px" /> */}
           {loading && !beetsPrice ? (
             <Skeleton height="16px" width="54px" />
           ) : (

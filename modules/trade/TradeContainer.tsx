@@ -57,6 +57,7 @@ export function TradeContainer() {
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
+                  <Box bgColor="vertek.slatepurple.900">
                   <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                       Smart order routing
@@ -66,6 +67,7 @@ export function TradeContainer() {
                       available price.
                     </Text>
                   </motion.div>
+                  </Box>
                 )}
               </AnimatePresence>
               {showRouting && <BatchSwapSorRoute swapInfo={swapInfo} />}

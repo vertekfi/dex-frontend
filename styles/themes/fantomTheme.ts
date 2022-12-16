@@ -333,6 +333,26 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         background: 'gray.400',
                         },
                     },
+                    vertekconnect3: {
+                        backgroundColor:'vertek.slate.900', 
+                        borderWidth:'1px',  
+                        borderColor:'vertek.slate.500', 
+                        color: 'white',
+                        _active: { backgroundColor:'#4A4AF6'  },
+                        _focus: { outline: 'none', boxShadow: 'none' },
+                        borderRadius: '8px',
+                        _hover: {
+                            backgroundColor:'vertek.slate.900', 
+                            color:'vertek.gold.400', 
+                            borderWidth:'2px', 
+                            borderColor:'vertek.neonpurple.500', 
+                            transform:'scale(1.05)' 
+                                }, 
+                        _disabled: {
+                            transform: 'none',
+                            background: 'gray.400',
+                            },
+                        },
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 
