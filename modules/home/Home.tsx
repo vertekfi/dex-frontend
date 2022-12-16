@@ -19,7 +19,7 @@ export function Home() {
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}
         rowGap="12"
-        mt={{ base: '12', lg: '16', xl: '20' }}
+        mt="12"
         borderBottomWidth={2}
         borderBottomColor="gray.100"
         pb="24"

@@ -57,7 +57,7 @@ export default function NavbarWalletConnectButton() {
               }
 
               return (
-                <HStack spacing="0" position="relative">
+                <HStack spacing="4" position="relative">
                   {/* <HStack
                     bgColor="beets.base.500"
                     pr="3"
@@ -83,10 +83,9 @@ export default function NavbarWalletConnectButton() {
                   {/* price goes here */}
                   <Button
                     variant="vertekconnect3"
-                    
+                    marginLeft="4" 
                     onClick={openAccountModal}
-                    paddingX="none"
-                    padding="3px"
+                    paddingX="6"                        
                     color="white"
                     zIndex="100"
                     position="relative"
