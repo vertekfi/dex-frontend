@@ -48,25 +48,9 @@ export function Footer() {
                 </Text>
               </FooterLink>
             </GridItem>
-            <Box justifyContent="center" display="flex" mb="6">{chainId === '10' ? 
+            <Box justifyContent="center" display="flex" flexDirection="column" mb="6">{chainId === '10' ? 
               <BeetsBalLogo /> : <BeetsLogo />}
-          </Box>
-            <GridItem>
-              <FooterLink href="https://snapshot.org/#/beets.eth">Vote</FooterLink>
-              <FooterLink href="https://info.beets.fi">Analytics</FooterLink>
-              <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
-              <FooterLink href={networkConfig.createPoolUrl}>Compose a pool</FooterLink>
-            </GridItem>
-            {/* <GridItem>
-              <FooterLink href="https://pro.olympusdao.finance/#/bond">Olympus Bonds</FooterLink>
-              <FooterLink href="https://app.multichain.org/#/router">Multichain Bridge</FooterLink>
-              <FooterLink href="https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL">
-                AllBridge
-              </FooterLink>
-            </GridItem> */}
-          </Grid>
-
-          <HStack spacing="6" mt="4">
+              <HStack spacing="6" mt="4">
             <Box>
               <Link
                 href="https://discord.gg/jedS4zGk28"
@@ -104,6 +88,23 @@ export function Footer() {
               </Link>
             </Box>
           </HStack>
+          </Box>
+            <GridItem>
+              <FooterLink href="https://snapshot.org/#/beets.eth">Vote</FooterLink>
+              <FooterLink href="https://info.beets.fi">Analytics</FooterLink>
+              <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
+              <FooterLink href={networkConfig.createPoolUrl}>Compose a pool</FooterLink>
+            </GridItem>
+            {/* <GridItem>
+              <FooterLink href="https://pro.olympusdao.finance/#/bond">Olympus Bonds</FooterLink>
+              <FooterLink href="https://app.multichain.org/#/router">Multichain Bridge</FooterLink>
+              <FooterLink href="https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL">
+                AllBridge
+              </FooterLink>
+            </GridItem> */}
+          </Grid>
+
+          
         </Box>
       {/* <Box flex="1" justifyContent="flex-end" display={{ base: 'none', lg: 'flex' }} ml="12">
            <NextImage
