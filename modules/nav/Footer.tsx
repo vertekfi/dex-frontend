@@ -17,16 +17,16 @@ export function Footer() {
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" 
-    width="full" px={{ base: '4', xl: '4' }} bgColor="vertek.slatepurple.900" pt="4"         
-    borderTopColor="vertek.slatepurple.600" borderWidth="1px" 
+    width="full" px={{ base: '4', xl: '4' }} bgColor="vertek.slatepurple.900" pt=""         
+    borderTopColor="vertek.slatepurple.600" borderWidth="1px" fontWeight="bold" 
     >
       <Flex minWidth="full" justifyContent="center" alignItems="center" >
         <Box flex="1" bgColor="">
           
           <Grid templateColumns={{ base: 'repeat(2, 1fr)', lg: '2' }} 
-          gap=""  minWidth="full" alignItems="center" justifyContent="space-between" m="4" display="flex"
+          gap="" pt="2" minWidth="full" alignItems="center" justifyContent="space-between" display="flex"
           >
-            <GridItem >
+            <GridItem textAlign="left" >
               <FooterLink href="/pools" linkType="internal">
                 Invest
               </FooterLink>
@@ -48,7 +48,7 @@ export function Footer() {
                 </Text>
               </FooterLink>
             </GridItem>
-            <Box justifyContent="center" display="flex" flexDirection="column" mb="6">{chainId === '10' ? 
+            <Box justifyContent="center" display="flex" flexDirection="column" mb="">{chainId === '10' ? 
               <BeetsBalLogo /> : <BeetsLogo />}
               <HStack spacing="6" mt="4">
             <Box>
@@ -89,7 +89,7 @@ export function Footer() {
             </Box>
           </HStack>
           </Box>
-            <GridItem>
+            <GridItem marginRight="2" textAlign="end" fontWeight="bold">
               <FooterLink href="https://snapshot.org/#/beets.eth">Vote</FooterLink>
               <FooterLink href="https://info.beets.fi">Analytics</FooterLink>
               <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
