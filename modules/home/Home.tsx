@@ -5,10 +5,15 @@ import { HomePools } from '~/modules/home/components/HomePools';
 import { HomeWhyUs } from '~/modules/home/components/HomeWhyUs';
 import { HomeBeetsInfo } from '~/modules/home/components/HomeBeetsInfo';
 import { HomeLearn } from '~/modules/home/components/HomeLearn';
+import { BeetsLogo } from '~/assets/logo/BeetsLogo';
+
 
 export function Home() {
   return (
-    <Box>
+    <Box >
+      <Box display="flex" justifyContent="flex-end">
+      <BeetsLogo />
+      </Box>
       <HomeHero />
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}

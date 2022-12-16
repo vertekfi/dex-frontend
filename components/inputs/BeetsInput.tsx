@@ -52,17 +52,18 @@ export const BeetsInput = forwardRef(
                     fontSize="lg"
                     fontWeight="semibold"
                     borderColor="transparent"
-                    border="2px"
+                    border="1px"
                     bgColor="transparent"
                     paddingTop="5"
                     _hover={{
-                        borderColor: 'gray.200',
+                        borderColor: 'vertek.slatepurple.500',
                     }}
                     _focus={{
-                        outline: 'none',
+                        outline: 'vertek.slatepurple.500', 
+                        borderWidth: '1px', 
                     }}
                     _placeholder={{
-                        color: 'gray.400',
+                        color: 'vertek.slatepurple.500',
                     }}
                     {...inputProps}
                 />

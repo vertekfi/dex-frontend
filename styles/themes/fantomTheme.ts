@@ -197,15 +197,20 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         borderColor: 'transparent',
                         //color: 'gray.100',
                         _hover: {
-                            borderColor: 'beets.base.200',
+                            borderColor: 'vertek.slatepurple.500',
                             bgColor: 'beets.lightAlpha.500',
+                        },
+                        active: {
+                            borderColor: 'vertek.slatepurple.500',
+                            
                         },
                         _focus: {
-                            bgColor: 'beets.lightAlpha.500',
-                            borderColor: 'beets.base.200',
+                            outline: 'white', 
+                            borderColor: 'vertek.slatepurple.500',
+                            borderWidth: '1px', 
                         },
                         _placeholder: {
-                            color: 'gray.200',
+                            borderColor: 'vertek.slatepurple.500',
                         },
                     },
                 },
@@ -332,8 +337,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 
                     fontWeight:'900', 
-                    borderWidth:'2px',  
-                    borderColor:'black', 
+                    borderWidth:'0px',  
+                    borderColor:'', 
                     color: 'black',
                     _active: { backgroundColor:'#4A4AF6'  },
                     _focus: { outline: 'none', boxShadow: 'none' },
@@ -342,6 +347,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         color:'white', 
                         borderWidth:'2px', 
                         borderColor:'white', 
+                        transform:'scale(1.05)' 
                             }, 
                     _disabled: {
                         transform: 'none',

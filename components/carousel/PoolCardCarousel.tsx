@@ -30,9 +30,9 @@ export function PoolCardCarousel({ items, loading, cardHeight = '216px', ...rest
                 slidesPerView={2}
                 spaceBetween={16}
                 breakpoints={{
-                    720: { slidesPerView: 3 },
-                    992: { slidesPerView: 2 },
-                    1124: { slidesPerView: 3 },
+                    720: { slidesPerView: 2 },
+                    // 992: { slidesPerView: 2 },
+                    1200: { slidesPerView: 3 },
                 }}
                 pagination={{
                     //dynamicBullets: items.length > 8,
