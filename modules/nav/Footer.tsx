@@ -17,14 +17,12 @@ export function Footer() {
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" 
-    width="full" px={{ base: '4', xl: '4' }} bgColor="" pt="4"         
+    width="full" px={{ base: '4', xl: '4' }} bgColor="vertek.slatepurple.900" pt="4"         
     borderTopColor="vertek.slatepurple.600" borderWidth="1px" 
     >
       <Flex minWidth="full" justifyContent="center" alignItems="center" >
         <Box flex="1" bgColor="">
-          <Box justifyContent="center" display="flex" mb="6">{chainId === '10' ? 
-              <BeetsBalLogo /> : <BeetsLogo />}
-          </Box>
+          
           <Grid templateColumns={{ base: 'repeat(2, 1fr)', lg: '2' }} 
           gap=""  minWidth="full" alignItems="center" justifyContent="space-between" m="4" display="flex"
           >
@@ -50,6 +48,9 @@ export function Footer() {
                 </Text>
               </FooterLink>
             </GridItem>
+            <Box justifyContent="center" display="flex" mb="6">{chainId === '10' ? 
+              <BeetsBalLogo /> : <BeetsLogo />}
+          </Box>
             <GridItem>
               <FooterLink href="https://snapshot.org/#/beets.eth">Vote</FooterLink>
               <FooterLink href="https://info.beets.fi">Analytics</FooterLink>
