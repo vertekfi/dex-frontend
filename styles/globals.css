@@ -41,7 +41,7 @@ a {
     );*/
     /*background-size: 1em 1em;
     background-repeat: repeat;*/
-    color: #00f89c;
+    color: #4A4AF6;
     font-size: 16px;
     font-weight: 900;
     /*background-clip: text;*/
@@ -69,7 +69,7 @@ a {
 }
 
 :root {
-    --swiper-theme-color: #00f89c;
+    --swiper-theme-color: #4A4AF6;
     --swiper-pagination-bullet-inactive-color: #fff;
 }
 
