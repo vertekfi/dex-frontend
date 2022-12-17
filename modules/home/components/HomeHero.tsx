@@ -2,7 +2,7 @@ import { Box, Button, Flex, HStack, Text, useTheme } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import InvestMastheadImage from '~/assets/logo/verteklogotext.svg';
 import InvestMastheadOpImage from '~/assets/logo/verteklogotext.svg';
-import vertek from '~/assets/logo/vertek.png'; 
+import verteknotext from '~/assets/logo/verteknotext.svg'; 
 import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { ReactSVG } from 'react-svg';
@@ -14,6 +14,7 @@ export function HomeHero() {
 
   return (
     <Flex
+    
     // bgGradient='linear(90deg, #161626 0%, #363562 50%, #1C1C34 100%, #C0C0C0 100%)' 
     paddingX="4" paddingY="2" borderRadius="12px"
       height={{ base: 'auto', lg: 'xl' }}
@@ -21,6 +22,7 @@ export function HomeHero() {
       overflow="hidden"
       minHeight="400px"
     >
+
       <Flex flex="1" mt="8" pl={{ base: '4', xl: '8' }} mb="12" justifyContent="center" 
       alignItems="center">
         <Flex flexDirection="column" 

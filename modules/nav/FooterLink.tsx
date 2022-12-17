@@ -15,7 +15,7 @@ export function FooterLink({ linkType = 'external', href, ...rest }: Props) {
         <NextLink
           chakraProps={{
             color: 'white',
-            _hover: { color: 'beets.highlight', textDecoration: 'underline' },
+            _hover: { color: 'vertek.neonpurple.500', textDecoration: 'underline'},
           }}
           href={href}
         >
@@ -24,7 +24,9 @@ export function FooterLink({ linkType = 'external', href, ...rest }: Props) {
       ) : (
         <Link
           color="white"
-          _hover={{ color: 'beets.highlight', textDecoration: 'underline' }}
+          _hover={{ color: 'vertek.neonpurple.500', 
+          textDecoration: 'underline', 
+        }}
           alignSelf="flex-start"
           href={href}
           target="_blank"

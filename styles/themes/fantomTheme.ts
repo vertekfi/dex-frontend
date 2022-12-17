@@ -322,6 +322,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     _focus: { outline: 'none', boxShadow: 'none' },
                     borderRadius: '8px',
                     _hover: {
+                        
                         backgroundColor:'vertek.slate.900', 
                         color:'vertek.neonpurple.500', 
                         borderWidth:'2px', 

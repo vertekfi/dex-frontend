@@ -94,11 +94,12 @@ export default function NavbarWalletConnectButton() {
                       backgroundColor: 'none',
                     }}
                   >
-                    <HStack width="full" height="full" spacing="1">
+                    <HStack width="full" height="full" spacing="4">
                       <HStack
+                        
                         justifyContent="center"
                         alignItems="center"
-                        px="2"
+                        px="4" 
                         height="40px"
                         rounded="10px"
                         width="full"
@@ -111,8 +112,8 @@ export default function NavbarWalletConnectButton() {
                           <Image src={BeetsSmart} width="24" alt="your-profile" />
                         )}
                         <Text
-                          display={{ base: 'none', sm: 'inline' }}
-                          fontSize={{ base: 'xs', lg: 'normal' }}
+                          display={{ base: 'none', sm: 'inline' }} 
+                          fontSize={{ base: 'xs', lg: '14px' }}
                         >
                           {account.displayName}
                         </Text>
