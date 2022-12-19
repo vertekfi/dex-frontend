@@ -304,7 +304,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     _hover: {
                         
                         backgroundColor:'vertek.slate.900', 
-                        color:'vertek.neonpurple.500', 
+                        // color:'vertek.neonpurple.500', 
                         borderWidth:'2px', 
                         borderColor:'vertek.neonpurple.500', 
                         transform:'scale(1.05)' 
@@ -325,11 +325,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         _focus: { outline: 'none', boxShadow: 'none' },
                         borderRadius: '8px',
                         _hover: {
-                            
-                            // backgroundColor:'vertek.neonpurple.500', 
-                            // color:'white', 
+                            color:'white',
                             // borderWidth:'2px', 
-                            borderColor:'vertek.slate.300', 
                             transform:'scale(1.05)' 
                                 }, 
                         _disabled: {
@@ -337,7 +334,14 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             background: 'gray.400',
                             },
                         },
-                    
+                        // bgColor="vertek.neonpurple.500"
+                        // borderWidth="2px" borderColor="vertek.slate.500"
+                        // key={`preset-${preset.label}`}
+                        // _focus={{ outline: 'none' }}
+                        // _hover={{ bgColor:'vertek.slate.900', color:'white', 
+                        //             borderWidth:'2px', borderColor:'vertek.neonpurple.500', 
+                        //             transform:'scale(1.05)'}}
+                        // _active={{ bgColor:'vertek.neonpurple.500', color: 'white' }}
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 

@@ -151,7 +151,7 @@ export function TradeCard() {
               />
             ) : (
               <Button
-                variant="vertekconnect2"
+                variant="vertekconnect25"
                 disabled={isReviewDisabled}
                 onClick={() => {
                   tradeStopPolling();
