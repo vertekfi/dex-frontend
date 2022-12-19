@@ -835,18 +835,6 @@ export interface GqlProtocolMetrics {
   totalSwapVolume: Scalars['BigDecimal'];
 }
 
-export interface GqlReliquaryFarmSnapshot {
-  __typename: 'GqlReliquaryFarmSnapshot';
-  dailyDeposited: Scalars['String'];
-  dailyWithdrawn: Scalars['String'];
-  farmId: Scalars['String'];
-  id: Scalars['ID'];
-  relicCount: Scalars['String'];
-  timestamp: Scalars['Int'];
-  totalBalance: Scalars['String'];
-  userCount: Scalars['String'];
-}
-
 export interface GqlSorGetBatchSwapForTokensInResponse {
   __typename: 'GqlSorGetBatchSwapForTokensInResponse';
   assets: Array<Scalars['String']>;
@@ -1057,7 +1045,6 @@ export interface Mutation {
   poolInitializeSnapshotsForPool: Scalars['String'];
   poolLoadOnChainDataForAllPools: Scalars['String'];
   poolLoadOnChainDataForPoolsWithActiveUpdates: Scalars['String'];
-  poolLoadReliquarySnapshotsForAllFarms: Scalars['String'];
   poolLoadSnapshotsForAllPools: Scalars['String'];
   poolReloadAllPoolAprs: Scalars['String'];
   poolReloadAllTokenNestedPoolIds: Scalars['String'];
@@ -1165,7 +1152,6 @@ export interface Query {
   poolGetPoolFilters: Array<GqlPoolFilterDefinition>;
   poolGetPools: Array<GqlPoolMinimal>;
   poolGetPoolsCount: Scalars['Int'];
-  poolGetReliquaryFarmSnapshots: Array<GqlReliquaryFarmSnapshot>;
   poolGetSnapshots: Array<GqlPoolSnapshot>;
   poolGetSwaps: Array<GqlPoolSwap>;
   poolGetUserSwapVolume: Array<GqlPoolUserSwapVolume>;
@@ -1231,11 +1217,6 @@ export interface QueryPoolGetPoolsCountArgs {
   skip?: InputMaybe<Scalars['Int']>;
   textSearch?: InputMaybe<Scalars['String']>;
   where?: InputMaybe<GqlPoolFilter>;
-}
-
-export interface QueryPoolGetReliquaryFarmSnapshotsArgs {
-  id: Scalars['String'];
-  range: GqlPoolSnapshotDataRange;
 }
 
 export interface QueryPoolGetSnapshotsArgs {
