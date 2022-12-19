@@ -31,7 +31,7 @@ export function TradeContainer() {
         pb="20"
         //pt="8"
       >
-        <GridItem area="swap">
+        <GridItem area="swap" >
           <TradeInterfaceContainer />
         </GridItem>
 
