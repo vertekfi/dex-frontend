@@ -63,7 +63,7 @@ export function HomeHero() {
               </Button>
             </NextLink>
             <NextLink href="/swap" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-              <Button width={{ base: '130px', lg: '160px' }} variant="vertekswap">
+              <Button width={{ base: '130px', lg: '160px' }} variant="vertekconnect25">
                 Swap
               </Button>
             </NextLink>

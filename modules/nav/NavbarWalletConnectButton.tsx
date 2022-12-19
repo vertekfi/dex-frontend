@@ -82,7 +82,7 @@ export default function NavbarWalletConnectButton() {
                   </HStack> */}
                   {/* price goes here */}
                   <Button
-                    variant="vertekconnect3"
+                    variant="vertekconnect25"
                     marginLeft="4" 
                     onClick={openAccountModal}
                     paddingX="6"                        

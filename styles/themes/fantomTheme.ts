@@ -334,6 +334,28 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         background: 'gray.400',
                         },
                     },
+                    vertekconnect25: {
+                        backgroundColor:'vertek.slate.900', 
+                        borderWidth:'2px',  
+                        borderColor:'vertek.neonpurple.500', 
+                        color: 'vertek.neonpurple.500',
+                        fontWeight:'900', 
+                        _active: { backgroundColor:'vertek.slate.900'  },
+                        _focus: { outline: 'none', boxShadow: 'none' },
+                        borderRadius: '8px',
+                        _hover: {
+                            
+                            backgroundColor:'vertek.neonpurple.500', 
+                            color:'white', 
+                            borderWidth:'2px', 
+                            borderColor:'vertek.slate.500', 
+                            transform:'scale(1.05)' 
+                                }, 
+                        _disabled: {
+                            transform: 'none',
+                            background: 'gray.400',
+                            },
+                        },
                     vertekconnect3: {
                         backgroundColor:'vertek.slate.900', 
                         borderWidth:'1px',  
