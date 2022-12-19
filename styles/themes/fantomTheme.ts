@@ -291,32 +291,12 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         _active: { bgColor: 'gray.400' },
                     },
                 },
-                vertekconnect: {
-                    bgGradient:'linear(90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)', 
-                    color: 'white',
-                    _active: { bgColor:'#4A4AF6' },  
-                    _focus: { outline: 'none', boxShadow: 'none' },
-                    borderRadius: '8px',
-                    _hover: {
-                        bgGradient: 'linear(90deg, 90.12deg, #4132D0 0.13%, #4A4AF6 50.02%, #4A4AF6 99.92%)',
-                        transform: 'scale(1.05)',
-                        _disabled: {
-                            transform: 'none',
-                            background: 'gray.400',
-                        },
-                    },
-                    _disabled: {
-                        bgColor: 'gray.400',
-                        opacity: 1,
-                        color: 'whiteAlpha.700',
-                        cursor: 'not-allowed',
-                        _active: { bgColor: 'gray.400' },
-                    },
-                },
+                
                 vertekconnect2: {
                     backgroundColor:'#4A4AF6', 
                     borderWidth:'2px',  
-                    borderColor:'vertek.slate.500', 
+                    borderColor:'vertek.slate.300', 
+                    boxShadow:'0px 0px 12px 1px #000',
                     color: 'white',
                     _active: { backgroundColor:'#4A4AF6'  },
                     _focus: { outline: 'none', boxShadow: 'none' },
@@ -336,6 +316,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     },
                     vertekconnect25: {
                         backgroundColor:'vertek.slate.900', 
+                        boxShadow:'0px 0px 12px 1px #000',
                         borderWidth:'2px',  
                         borderColor:'vertek.neonpurple.500', 
                         color: 'vertek.neonpurple.500',
@@ -345,10 +326,10 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         borderRadius: '8px',
                         _hover: {
                             
-                            backgroundColor:'vertek.neonpurple.500', 
-                            color:'white', 
-                            borderWidth:'2px', 
-                            borderColor:'vertek.slate.500', 
+                            // backgroundColor:'vertek.neonpurple.500', 
+                            // color:'white', 
+                            // borderWidth:'2px', 
+                            borderColor:'vertek.slate.300', 
                             transform:'scale(1.05)' 
                                 }, 
                         _disabled: {
@@ -356,26 +337,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             background: 'gray.400',
                             },
                         },
-                    vertekconnect3: {
-                        backgroundColor:'vertek.slate.900', 
-                        borderWidth:'1px',  
-                        borderColor:'vertek.slate.500', 
-                        color: 'white',
-                        _active: { backgroundColor:'#4A4AF6'  },
-                        _focus: { outline: 'none', boxShadow: 'none' },
-                        borderRadius: '8px',
-                        _hover: {
-                            backgroundColor:'vertek.slate.900', 
-                            color:'vertek.gold.400', 
-                            borderWidth:'2px', 
-                            borderColor:'vertek.neonpurple.500', 
-                            transform:'scale(1.05)' 
-                                }, 
-                        _disabled: {
-                            transform: 'none',
-                            background: 'gray.400',
-                            },
-                        },
+                    
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 
