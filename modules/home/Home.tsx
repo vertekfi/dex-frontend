@@ -16,7 +16,7 @@ export function Home() {
       </Box>
       <HomeHero />
       <Grid
-        templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
+        templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(5, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}
         rowGap="12"
         mt="12"
@@ -24,7 +24,7 @@ export function Home() {
         borderBottomColor="gray.100"
         pb="24"
       >
-        <GridItem colSpan={2} maxW="100%">
+        <GridItem colSpan={4} maxW="100%" paddingLeft="1">
           <HomePools />
         </GridItem>
         {/* <GridItem>

@@ -29,14 +29,14 @@ export const fantomTheme: Partial<ChakraTheme> = {
             fontSize: ['3.0rem'],
             lineHeight: '100%',
             fontWeight: 'bold',
-            letterSpacing: '-0.1rem',
+            letterSpacing: '0.1rem',
         },
         h2: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['2.7rem'],
             fontWeight: '300',
             lineHeight: '100%',
-            letterSpacing: '-0.1rem',
+            letterSpacing: '0.1rem',
         },
         h3: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,

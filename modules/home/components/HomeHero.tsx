@@ -31,6 +31,7 @@ export function HomeHero() {
           <HStack alignItems="center" justifyContent="space-between" >
           <Text
             as="h1"
+            // letterSpacing="0.1em"
             textStyle={{ base: 'h2', lg: 'h1' }}
             textTransform="uppercase"
             color="white"
