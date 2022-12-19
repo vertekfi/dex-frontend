@@ -14,7 +14,7 @@ export function BatchSwapTokenMarker({ token, position }: Props) {
             alignSelf="flex-start"
             alignItems="center"
             flexDirection="column"
-            bgColor="beets.base.800"
+            // bgColor="vertek.neonpurple.500"
             borderRadius="xl"
         >
             <Box alignItems="center">

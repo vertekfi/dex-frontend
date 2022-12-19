@@ -33,12 +33,12 @@ export function BatchSwapHop({ hop }: Props) {
             borderRadius="lg"
             px="2"
             py="1"
-            backgroundColor="beets.base.600"
+            backgroundColor="vertek.sor.100"
         >
             <NextLink href={`/pool/${hop.pool.id}`} chakraProps={{ color: 'white' }}>
                 <TokenAvatarSet
                     imageSize={20}
-                    width={80}
+                    width={90}
                     tokenData={[
                         ...(tokenIn ? [tokenIn] : []),
                         ...tokens.filter((token) => token.address !== hop.tokenIn && token.address !== hop.tokenOut),

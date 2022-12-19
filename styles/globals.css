@@ -22,7 +22,15 @@ a {
 #__next > div {
     height: 100%;
 }
-
+.sor {
+    padding-bottom: 12px; 
+    padding-top: 18px; 
+    padding-left: 18px; 
+    padding-right: 18px; 
+    border-radius: 12px; 
+    box-shadow: 0px 0px 4px 1px rgba(255, 255, 255, 0.2); 
+    background-color: #161626;          
+}
 .rc-pagination {
     list-style: none;
     display: flex;

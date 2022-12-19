@@ -57,13 +57,13 @@ export function TradeContainer() {
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
-                  <Box bgColor="vertek.slatepurple.900">
+                  <Box>
                   <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                       Smart order routing
                     </Text>
                     <Text mb="4" color="white">
-                      The SOR searches all Beethoven X pools to ensure you receive the best
+                      The SOR searches all Vertek pools to ensure you receive the best
                       available price.
                     </Text>
                   </motion.div>
@@ -76,7 +76,7 @@ export function TradeContainer() {
                 <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                   Latest swaps
                 </Text>
-                <Text mb="4" color="gray.200">
+                <Text mb="4" color="white">
                   The latest swaps for your selected token pair.
                 </Text>
               </motion.div>

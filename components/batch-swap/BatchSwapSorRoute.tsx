@@ -16,14 +16,15 @@ export function BatchSwapSorRoute({ swapInfo }: Props) {
     const tokenOut = getToken(swapInfo.tokenOut);
 
     return (
-        <Flex justifyContent="space-between">
-            <BatchSwapTokenMarker token={swapInfo.tokenIn} position="start" />
+        <Flex justifyContent="space-between"  className="sor"
+        >
+            <BatchSwapTokenMarker token={swapInfo.tokenIn} position="start"  />
             <Box flex="1">
                 <Flex
                     height="44px"
                     justifyContent="space-between"
                     position="relative"
-                    top="-2px"
+                    top="-1px"
                     mx="2"
                     fontWeight="bold"
                 >

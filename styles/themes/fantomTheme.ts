@@ -114,6 +114,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
             }, 
             gold: {
                 400: '#ECA833', 
+            }, 
+            sor:  {
+                100: '#161626', 
             }
                 
         },

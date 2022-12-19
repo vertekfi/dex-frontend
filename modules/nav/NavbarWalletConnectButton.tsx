@@ -45,8 +45,8 @@ export default function NavbarWalletConnectButton() {
               if (chain.unsupported) {
                 return (
                   <Button
-                    variant="primary"
-                    backgroundColor="red.400"
+                    // variant="vertekconnect25"
+                    backgroundColor="red.500"
                     _hover={{ backgroundColor: 'red.600' }}
                     onClick={openChainModal}
                     type="button"
