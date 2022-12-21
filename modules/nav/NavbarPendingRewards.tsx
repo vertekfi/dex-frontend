@@ -34,8 +34,6 @@ export function NavbarPendingRewards() {
   const { getToken } = useGetTokens();
   const loading = pendingRewardsLoading || userDataLoading;
   const { harvestAll, ...harvestQuery } = useUserHarvestAllPendingRewards();
-  const farmIds = staking.map((stake) => stake?.farm?.id || '');
-  const isMasterChefOrFreshBeets = stakingType === 'MASTER_CHEF' || stakingType === 'FRESH_BEETS';
 
   return (
     <Popover>
@@ -92,10 +90,10 @@ export function NavbarPendingRewards() {
               {numberFormatUSDValue(stakedValueUSD)}
             </Box>
             <Box color="gray.200" pt="2" fontSize="sm">
-              in {staking.length} {isMasterChefOrFreshBeets ? 'farm(s)' : 'gauge(s)'}
+              in {staking.length} gauge(s)
             </Box>
           </BeetsBox>
-          {isMasterChefOrFreshBeets ? (
+          {/* {isMasterChefOrFreshBeets ? (
             <Box mt="4">
               <BeetsSubmitTransactionButton
                 {...harvestQuery}
@@ -108,7 +106,8 @@ export function NavbarPendingRewards() {
             </Box>
           ) : (
             <Box mt="2" />
-          )}
+          )} */}
+          <Box mt="2" />
         </PopoverBody>
       </PopoverContent>
     </Popover>
