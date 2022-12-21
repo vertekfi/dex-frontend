@@ -19,7 +19,7 @@ export function TradeContainer() {
   const hasNoRoute = !loadingSwaps && (!swapInfo || swapInfo.swaps.length === 0);
 
   return (
-    <Box  >
+    <Box>
       <Grid
         templateAreas={{
           base: `"swap"
@@ -36,27 +36,28 @@ export function TradeContainer() {
         </GridItem>
 
         {/* start of the chart and routing info  */}
-        <GridItem area="chart-route"  paddingX="2" >
-            <Box bgColor="vertek.slate.900" padding="4" borderRadius="12" >
-                <TradePageHeader />
+        <GridItem area="chart-route" paddingX="2">
+          <Box bgColor="vertek.slate.900" padding="4" borderRadius="12">
+            <TradePageHeader />
 
-                <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12">
-                  <TradeChart />
-                </Box>
+            <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12">
+              <TradeChart />
             </Box>
+          </Box>
 
-            
-            <Box display={{ base: 'none', md: 'block' }} 
-            bgColor="vertek.slate.900" padding="4" 
+          <Box
+            display={{ base: 'none', md: 'block' }}
+            bgColor="vertek.slate.900"
+            padding="4"
             borderRadius="12"
             mt="2"
-            >
-            
+          >
             {/*
                     // @ts-ignore */}
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
+<<<<<<< HEAD
                   <Box>
                   <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
@@ -67,6 +68,18 @@ export function TradeContainer() {
                       available price.
                     </Text>
                   </motion.div>
+=======
+                  <Box bgColor="vertek.slatepurple.900">
+                    <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                      <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
+                        Smart order routing
+                      </Text>
+                      <Text mb="4" color="white">
+                        The SOR searches all Vertek pools to ensure you receive the best available
+                        price.
+                      </Text>
+                    </motion.div>
+>>>>>>> e1a9fc7 (formatting)
                   </Box>
                 )}
               </AnimatePresence>
