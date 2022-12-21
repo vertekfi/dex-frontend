@@ -1,5 +1,7 @@
-import { Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Box, Menu, MenuButton, MenuItem, MenuList, Icon } from '@chakra-ui/react';
 import { Check } from 'react-feather';
+import { ChevronDownIcon } from '@chakra-ui/icons'
+
 
 interface Props {
     buttonText: string;
@@ -14,15 +16,17 @@ export function TextButtonPopupMenu({ buttonText, items }: Props) {
     return (
         <Menu>
             <MenuButton
+
                 fontSize="lg"
                 userSelect="none"
-                color="beets.green"
+                color="vertek.gold.400"
                 fontWeight="bold"
                 _hover={{ textDecoration: 'underline', cursor: 'pointer' }}
             >
-                <Box>{buttonText}</Box>
+                <Box ml="1" >{buttonText} <ChevronDownIcon /> </Box>
+
             </MenuButton>
-            <MenuList bgColor="beets.base.800" borderColor="gray.400" shadow="lg">
+            <MenuList bgColor="beets.base.800" p="2" borderColor="vertek.neonpurple.500" shadow="lg">
                 {items.map((item, index) => (
                     <MenuItem display="flex" alignItems="center" onClick={item.onClick} key={index}>
                         <Box flex="1">{item.label}</Box>

@@ -14,16 +14,17 @@ type Props = {
 export const BeetsInput = forwardRef(
     ({ label, secondaryLabel, children, headingProps, wrapperProps, ...inputProps }: InputProps & Props, ref) => {
         return (
-            <Box position="relative" width="full" bg="blackAlpha.500" borderRadius="md" {...wrapperProps}>
-                <HStack>
+            <Box position="relative" width="full" bg="vertek.slatepurple.900" boxShadow="0px 0px 8px 4px rgba(0, 0, 0, 0.4)"
+            borderRadius="md" {...wrapperProps}>
+                <HStack >
                     {label && (
                         <Heading
                             position="absolute"
                             top=".5rem"
                             left=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
-                            size="xs"
+                            color="white"
+                            size="lg"
                             {...headingProps}
                         >
                             {label}
@@ -36,8 +37,8 @@ export const BeetsInput = forwardRef(
                             top=".5rem"
                             right=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
-                            size="xs"
+                            color="white"
+                            size="lg"
                             {...headingProps}
                         >
                             {secondaryLabel}
@@ -52,17 +53,18 @@ export const BeetsInput = forwardRef(
                     fontSize="lg"
                     fontWeight="semibold"
                     borderColor="transparent"
-                    border="2px"
+                    border="1px"
                     bgColor="transparent"
                     paddingTop="5"
                     _hover={{
-                        borderColor: 'gray.200',
+                        borderColor: 'vertek.slatepurple.500',
                     }}
                     _focus={{
-                        outline: 'none',
+                        outline: 'vertek.slatepurple.500', 
+                        borderWidth: '1px', 
                     }}
                     _placeholder={{
-                        color: 'gray.400',
+                        color: 'vertek.slatepurple.500',
                     }}
                     {...inputProps}
                 />

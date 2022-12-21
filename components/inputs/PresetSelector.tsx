@@ -36,10 +36,16 @@ export default function PresetSelector({ onPresetSelected, presets = defaultPres
         <HStack width="full">
             {presets.map((preset) => (
                 <Button
+                    bgColor="vertek.neonpurple.500"
+                    borderWidth="2px" borderColor="vertek.slate.500"
                     key={`preset-${preset.label}`}
                     _focus={{ outline: 'none' }}
+                    _hover={{ bgColor:'vertek.slate.900', color:'white', 
+                                borderWidth:'2px', borderColor:'vertek.neonpurple.500', 
+                                transform:'scale(1.05)'}}
+                    _active={{ bgColor:'vertek.neonpurple.500', color: 'white' }}
                     onClick={handlePresetSelected(preset.value)}
-                    size="xs"
+                    size={{ base: 'md', lg: 'sm' }}
                     width="full"
                 >
                     {preset.label}

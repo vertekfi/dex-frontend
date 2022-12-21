@@ -34,7 +34,7 @@ export function PoolListMobileHeader() {
 
   return (
     <Flex display={{ base: 'flex', lg: 'none' }} alignItems="center" mb="4">
-      <Box color="gray.200" mr="1">
+      <Box color="white" mr="1">
         Pools:
       </Box>
       <Box flex="1">
@@ -116,8 +116,7 @@ export function PoolListMobileHeader() {
       <Link
         onClick={onOpen}
         fontSize="lg"
-        color="beets.green"
-        fontWeight="bold"
+        color="vertek.gold.400"        fontWeight="bold"
         position="relative"
       >
         <Box>Filter</Box>

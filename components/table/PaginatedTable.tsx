@@ -43,7 +43,8 @@ export function PaginatedTable({
     return (
         <Box {...rest}>
             {renderTableHeader()}
-            <Box mb={4} borderBottomLeftRadius="md" borderBottomRightRadius="md" overflow="hidden" shadow="lg">
+            <Box mb={4} borderBottomLeftRadius="md" borderBottomRightRadius="md" 
+            overflow="hidden" shadow="lg">
                 {isLoadingRows && (
                     <Flex justifyContent={'center'} py={32} bg="box.500">
                         <Spinner size="xl" />
@@ -66,12 +67,13 @@ export function PaginatedTable({
                     ))}
             </Box>
             {!isInfinite && (
-                <Flex>
-                    <Flex flex={1} alignItems="center" justifyContent="flex-start">
+                <Flex >
+                    <Flex  flex={1} alignItems="center" justifyContent="flex-start">
                         {hidePageSizeChange ? null : (
                             <>
-                                <Box>
-                                    <Select
+                                <Box  >
+                                    <Select 
+                                    style={{ borderRadius:'16px', }}
                                         value={pageSize}
                                         onChange={(event) => {
                                             onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
@@ -87,6 +89,7 @@ export function PaginatedTable({
                         )}
                     </Flex>
                     <Pagination
+                   
                         onChange={onPageChange}
                         defaultCurrent={1}
                         total={count}
@@ -108,6 +111,7 @@ export function PaginatedTable({
                                         icon={<ChevronRight />}
                                         borderTopLeftRadius={0}
                                         borderBottomLeftRadius={0}
+                                        borderBottomRightRadius="16px"
                                     />
                                 );
                             } else if (type === 'jump-prev') {
@@ -119,7 +123,7 @@ export function PaginatedTable({
                             const selected = pageNumber === currentPage;
 
                             return (
-                                <Button borderRadius={0} color={selected ? 'beets.highlight' : undefined}>
+                                <Button borderRadius={0} color={selected ? 'vertek.slatepurple.900' : undefined}>
                                     {element}
                                 </Button>
                             );

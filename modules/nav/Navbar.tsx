@@ -76,6 +76,15 @@ export function Navbar({ scrollY }: Props) {
             margin="16px"  
               >
             <Flex alignItems="center" display={{ base: 'none', md: 'flex' }} >
+            <NavbarLink 
+                href={'/'}
+                selected={router.asPath.endsWith('/')}
+                text="Home"
+                mr="5"
+                >
+                
+              </NavbarLink>
+              
               <NavbarLink 
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
@@ -130,7 +139,7 @@ export function Navbar({ scrollY }: Props) {
                   <Image mr="8" width="24px" height="24px" src={networkConfig.eth.iconUrl} />
                 </Button>
               </NetworkSelectorPopover>
-              <NextImage width="28px" height="28px" src={vertek}/>
+              {/* <BeetsLogoNoText width="85px" /> */}
           {loading && !beetsPrice ? (
             <Skeleton height="16px" width="54px" />
           ) : (

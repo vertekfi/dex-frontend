@@ -8,57 +8,54 @@ interface Props {
 
 export function EarnMasthead({ title, image }: Props) {
 return (
-<SimpleGrid columns={{sm:1, lg:2 }} 
-marginTop={12} marginBottom={12}
-spacing={14}>
-    <Box    
+<SimpleGrid 
+columns={{sm:1, md:5 }} 
+padding="2"
+marginTop={12} 
+marginBottom={12}
+spacing={12}>
+    <GridItem    
         display="flex" 
-        justifyContent="space-between" 
-        flexDirection="column"  >
-        
-        <Text gap="16px" fontSize="36px" color="white" fontWeight="semibold" as="h1" flex="1" textAlign="left">
+        flexDirection="column"  
+        colSpan={{sm:1, md:3 }}
+        >
+        <Text gap="16px" fontSize="36px" color="white" fontWeight="semibold" flex="1" textAlign="left">
             {title}
         </Text>
-        <Text fontSize="20px" fontWeight="normal" as="h1" flex="1" mb="2" color="vertek.slate.100">
+        <Text fontSize="20px" fontWeight="normal" flex="1" mb="2" color="vertek.slate.100">
             Join our farms for higher rewards and bonuses that can multiply your earnings 
             up to 10 times. 
         </Text>
-    </Box>
+    </GridItem>
 {/* need to remove incentivized, filter, search on mobile */}
-    <Flex
-    width="100%" flexDirection={{ sm:'column', lg:'row' }}
-    alignItems={{ sm:'center', lg: 'left' }}
+    <GridItem
+    display="flex"
+    justifyContent="flex-start"
+    alignItems="flex-start"
+    colSpan={{ sm:1, md:2 }}
+    flexDirection="column"
     borderRadius="12px" 
     bgGradient='linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)'
-    paddingY={{ sm:6, lg:6 }} 
-    paddingX={{ sm:5, lg:12}}>
-        <Box w={{sm:11/12, lg:3/4}}
-        alignItems="center" 
-        justifyContent="space-between" 
-            >
-            <Text fontSize="20px" color="white" fontWeight="semibold" as="h1" flex="1" mb="3" textAlign="left">
+    // boxShadow="0px 1px 6px 2px #000"
+    padding="4"
+    >
+            <Text fontSize="20px" color="white" fontWeight="semibold" mb="3" textAlign="left">
                 Earn more VRTK in Core Pools 
             </Text>
-            
-            <Text fontSize="16px" fontWeight="normal" as="h1" flex="1" mb="2" color="vertek.slate.100">
+            <Text fontSize="16px" fontWeight="normal" mb="2" color="vertek.slate.100" textAlign="left">
                     Lock VRTK-WBNB and receive up to 2.5x boosted rewards when farming 
                     Core Pools.
             </Text>
-        </Box>
-        <Box w={1/4} 
-    alignItems="left"
-    justifyContent={{ sm:'left', lg:'center'}}
-        display="flex">
             <Button  
-            alignItems="center" 
-            bgColor="vertek.neonpurple.900" 
-            borderRadius="8px" 
-            
-            paddingX="12px" paddingY="16px" gap="8px">
+            variant="vertekconnect25"
+            width="50%"
+            gap="8px"
+            mt="3"
+            alignSelf="center"
+            >
                 Earn More
             </Button>
-        </Box>
-    </Flex>
+    </GridItem>
 </SimpleGrid>
     );
 }

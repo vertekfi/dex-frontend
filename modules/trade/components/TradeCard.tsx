@@ -83,15 +83,16 @@ export function TradeCard() {
   }
 
   return (
-    <Box width="full" position="relative">
+    <Box width="full" position="relative" 
+    >
       <Card
         animate={controls}
         position="relative"
-        shadow="lg"
+
         topRight={sorResponse ? <TradeCardRefreshButton onClick={() => refetchTrade()} /> : null}
       >
         <VStack spacing="2" padding="4" width="full">
-          <Box position="relative" width="full">
+          <Box position="relative" width="full" bgColor="">
             <TokenInput
               ref={finalRefTokenIn}
               label="Sell"
@@ -151,7 +152,7 @@ export function TradeCard() {
               />
             ) : (
               <Button
-                variant="primary"
+                variant="vertekconnect25"
                 disabled={isReviewDisabled}
                 onClick={() => {
                   tradeStopPolling();
@@ -159,6 +160,7 @@ export function TradeCard() {
                 }}
                 width="full"
                 size="lg"
+                
               >
                 {isNotEnoughLiquidity
                   ? 'Not enough liquidity'

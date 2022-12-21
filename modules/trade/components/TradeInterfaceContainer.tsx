@@ -5,8 +5,11 @@ import { Box } from '@chakra-ui/react';
 
 export function TradeInterfaceContainer() {
   return (
-    <Box display="flex" justifyContent={{ md: 'center', xl: 'initial' }}>
-      <Box w={{ base: 'full', md: '600px', xl: 'full' }} position="relative">
+    <Box display="flex" justifyContent={{ md: 'center', xl: 'initial' }}
+    >
+      <Box w={{ base: 'full', md: '600px', xl: 'full' }} position="relative"
+
+      >
         {/*<AnimatePresence>
                     <AnimatedBox
                         w="full"

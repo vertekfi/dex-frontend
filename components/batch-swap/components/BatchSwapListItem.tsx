@@ -28,7 +28,7 @@ export function BatchSwapListItem({ tokenIn, tokenOut, tokenInPrice, tokenOutPri
     const percentChange = tokenInPrice !== 0 ? (tokenOutPrice / tokenInPrice - exchangeRate) / exchangeRate : 0;
 
     return (
-        <Card px="2" pt="2" mb="1">
+        <Card mb="1" className="sor" bgColor="vertek.slatepurple.900" >
             <Flex alignItems="center">
                 <Flex flex="1" fontSize="sm" alignItems="flex-end">
                     <Text fontSize="md" fontWeight="bold">
@@ -72,7 +72,7 @@ export function BatchSwapListItem({ tokenIn, tokenOut, tokenInPrice, tokenOutPri
                             address={batchSwap.tokenIn}
                             amount={batchSwap.tokenAmountIn}
                             padding="19.5px 0px"
-                            bgColor="beets.base.700"
+                            bgColor="vertek.slatepurple.900"
                         />
                         <Flex flex="1" height="64px" alignItems="center" position="relative" top="2px">
                             <BatchSwapRouteDashedLineArrowSpacer />
@@ -89,7 +89,7 @@ export function BatchSwapListItem({ tokenIn, tokenOut, tokenInPrice, tokenOutPri
                             address={batchSwap.tokenOut}
                             amount={batchSwap.tokenAmountOut}
                             padding="19.5px 0px"
-                            bgColor="beets.base.700"
+                            bgColor="vertek.slatepurple.900"
                         />
                     </Flex>
                 </Flex>
