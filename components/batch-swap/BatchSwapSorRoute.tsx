@@ -15,37 +15,6 @@ export function BatchSwapSorRoute({ swapInfo }: Props) {
   const tokenIn = getToken(swapInfo.tokenIn);
   const tokenOut = getToken(swapInfo.tokenOut);
 
-<<<<<<< HEAD
-    return (
-        <Flex justifyContent="space-between"  className="sor"
-        >
-            <BatchSwapTokenMarker token={swapInfo.tokenIn} position="start"  />
-            <Box flex="1">
-                <Flex
-                    height="44px"
-                    justifyContent="space-between"
-                    position="relative"
-                    top="-1px"
-                    mx="2"
-                    fontWeight="bold"
-                >
-                    <Box>
-                        {tokenFormatAmount(swapInfo.tokenInAmount)} {tokenIn?.symbol}
-                    </Box>
-                    <Box>
-                        {tokenFormatAmount(swapInfo.tokenOutAmount)} {tokenOut?.symbol}
-                    </Box>
-                </Flex>
-                {swapInfo.routes.map((route, index) => (
-                    <AnimatePresence key={index}>
-                        <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <BatchSwapRoute route={route} />
-                        </motion.div>
-                    </AnimatePresence>
-                ))}
-            </Box>
-            <BatchSwapTokenMarker token={swapInfo.tokenOut} position="end" />
-=======
   return (
     <Flex justifyContent="space-between">
       <BatchSwapTokenMarker token={swapInfo.tokenIn} position="start" />
@@ -64,7 +33,6 @@ export function BatchSwapSorRoute({ swapInfo }: Props) {
           <Box>
             {tokenFormatAmount(swapInfo.tokenOutAmount)} {tokenOut?.symbol}
           </Box>
->>>>>>> e1a9fc7 (formatting)
         </Flex>
         {swapInfo.routes.map((route, index) => (
           <AnimatePresence key={index}>

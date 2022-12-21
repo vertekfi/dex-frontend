@@ -25,31 +25,6 @@ export function BatchSwapHop({ hop }: Props) {
   const tokenIn = tokens.find((token) => token.address === hop.tokenIn);
   const tokenOut = tokens.find((token) => token.address === hop.tokenOut);
 
-<<<<<<< HEAD
-    return (
-        <Box
-            height="28px"
-            display="flex"
-            alignItems="center"
-            borderRadius="lg"
-            px="2"
-            py="1"
-            backgroundColor="vertek.sor.100"
-        >
-            <NextLink href={`/pool/${hop.pool.id}`} chakraProps={{ color: 'white' }}>
-                <TokenAvatarSet
-                    imageSize={20}
-                    width={90}
-                    tokenData={[
-                        ...(tokenIn ? [tokenIn] : []),
-                        ...tokens.filter((token) => token.address !== hop.tokenIn && token.address !== hop.tokenOut),
-                        ...(tokenOut ? [tokenOut] : []),
-                    ]}
-                />
-            </NextLink>
-        </Box>
-    );
-=======
   return (
     <Box
       height="28px"
@@ -75,5 +50,4 @@ export function BatchSwapHop({ hop }: Props) {
       </NextLink>
     </Box>
   );
->>>>>>> e1a9fc7 (formatting)
 }
