@@ -818,7 +818,7 @@ export const GetPoolBptPriceChartData = gql`
   }
 `;
 export const GetPoolUserJoinExits = gql`
-  query GetPoolUserJoinExits($first: Int, $skip: Int, $poolId: String!) {
+  query GetPoolUserJoinExits($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     joinExits: userGetPoolJoinExits(poolId: $poolId, first: $first, skip: $skip) {
       id
       timestamp
@@ -834,7 +834,7 @@ export const GetPoolUserJoinExits = gql`
   }
 `;
 export const GetUserSwaps = gql`
-  query GetUserSwaps($first: Int, $skip: Int, $poolId: String!) {
+  query GetUserSwaps($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     swaps: userGetSwaps(first: $first, skip: $skip, poolId: $poolId) {
       id
       poolId

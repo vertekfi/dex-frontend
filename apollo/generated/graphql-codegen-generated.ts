@@ -1204,9 +1204,9 @@ export interface QueryTokenGetTokensDynamicDataArgs {
 }
 
 export interface QueryUserGetPoolJoinExitsArgs {
-  first?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
   poolId: Scalars['String'];
-  skip?: InputMaybe<Scalars['Int']>;
+  skip: Scalars['Int'];
 }
 
 export interface QueryUserGetPortfolioSnapshotsArgs {
@@ -1214,9 +1214,9 @@ export interface QueryUserGetPortfolioSnapshotsArgs {
 }
 
 export interface QueryUserGetSwapsArgs {
-  first?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
   poolId: Scalars['String'];
-  skip?: InputMaybe<Scalars['Int']>;
+  skip: Scalars['Int'];
 }
 
 export type GetPoolBatchSwapsQueryVariables = Exact<{
@@ -5754,7 +5754,7 @@ export type GetPoolBptPriceChartDataQueryResult = Apollo.QueryResult<
   GetPoolBptPriceChartDataQueryVariables
 >;
 export const GetPoolUserJoinExitsDocument = gql`
-  query GetPoolUserJoinExits($first: Int, $skip: Int, $poolId: String!) {
+  query GetPoolUserJoinExits($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     joinExits: userGetPoolJoinExits(poolId: $poolId, first: $first, skip: $skip) {
       id
       timestamp
@@ -5821,7 +5821,7 @@ export type GetPoolUserJoinExitsQueryResult = Apollo.QueryResult<
   GetPoolUserJoinExitsQueryVariables
 >;
 export const GetUserSwapsDocument = gql`
-  query GetUserSwaps($first: Int, $skip: Int, $poolId: String!) {
+  query GetUserSwaps($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     swaps: userGetSwaps(first: $first, skip: $skip, poolId: $poolId) {
       id
       poolId
