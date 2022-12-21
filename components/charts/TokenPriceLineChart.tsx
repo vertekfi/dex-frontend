@@ -79,14 +79,14 @@ export function TokenPriceLineChart({ label, prices, priceValueFormatter }: Prop
                     showSymbol: false,
                     data: prices.map((item) => [item.timestamp * 1000, item.price]),
                     itemStyle: {
-                        color: colors.beets.highlight,
-                        borderColor: colors.beets.highlight,
+                        color: '#4A4AF6', 
+                        borderColor: '#4A4AF6',
                     },
                     areaStyle: {
-                        opacity: 0.2,
+                        opacity: 0.5,
                         color: new graphic.LinearGradient(0, 0, 0, 1, [
-                            { offset: 0, color: 'rgba(0, 255, 255,0.5)' },
-                            { offset: 1, color: 'rgba(0, 255, 255, 0)' },
+                            { offset: 0, color: 'rgba(80, 78, 144, 1)' },
+                            { offset: 1, color: 'rgba(28, 28, 52, 1)' },
                         ]),
                     },
                     tooltip: {
@@ -99,7 +99,7 @@ export function TokenPriceLineChart({ label, prices, priceValueFormatter }: Prop
     );
 
     return (
-        <Box width="full" height="full">
+        <Box width="full" height="full" >
             <ReactECharts option={option} style={{ height: '100%' }} />
         </Box>
     );

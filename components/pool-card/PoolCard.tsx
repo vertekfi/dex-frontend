@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, LinkBox, VStack, LinkOverlay, SimpleGrid, Text, GridItem } from '@chakra-ui/react';
 import AprTooltip from '~/components/apr-tooltip/AprTooltip';
 import TokenAvatarSet from '~/components/token/TokenAvatarSet';
 import { GqlPoolCardDataFragment } from '~/apollo/generated/graphql-codegen-generated';
@@ -11,35 +11,80 @@ interface Props extends BoxProps {
 
 export function PoolCard({ pool, ...rest }: Props) {
   const dailyApr = parseFloat(pool.dynamicData.apr.total) / 365;
-
+  const gradient = 'linear-gradient(to right, #4A4AF6, #9B51E0)';
   return (
-    <LinkBox as="article" flex="1" {...rest}>
-      <Flex bgColor="whiteAlpha.100" height="216px" borderRadius="md" p="4" flexDirection="column">
-        <Box fontSize="lg" pb="6" flex="1">
-          <NextLinkOverlay href={`pool/${pool.id}`}>
-            <Text noOfLines={2}>{pool.name}</Text>
-          </NextLinkOverlay>
-        </Box>
-        <TokenAvatarSet
-          tokenData={pool.allTokens
-            .filter((token) => !token.isNested && !token.isPhantomBpt)
-            .map((token) => ({
-              address: token.address,
-              ...(token.weight && { weight: token.weight }),
-            }))}
-          width={140}
-          imageSize={32}
-          renderPopover={false}
-        />
-        <Box flex="1" pt="6">
-          <AprTooltip
-            textProps={{ fontSize: '2xl', fontWeight: 'normal', mr: '0', lineHeight: '26px' }}
-            data={pool.dynamicData.apr}
-            placement="left"
-          />
-          <Text color="gray.200">{numeral(dailyApr).format('0.00[0]%')} Daily</Text>
-        </Box>
-      </Flex>
-    </LinkBox>
+<LinkBox as="article" flex="1" {...rest} padding="1 ">
+
+{/* staking card is box.500 then gray.500 */}
+  <SimpleGrid
+  position="relative"
+  width="full" 
+  mb="1" 
+  columns={1}
+  padding="1"
+  marginTop="2"
+  boxShadow=" 0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
+  // boxShadow=" 0px 0px 5px 0.5px #4A4AF6, 0px 5px 10px 2px #000"
+  // bgGradient='linear(90deg, #161626 0%, #363562 50%, #1C1C34 100%)' 
+  bgGradient='linear(200deg, rgba(255,255,255,0.01), #161626)'
+  // bg="box.500" 
+  // bg="vertek.slate.900"
+  borderRadius="16px">
+    <GridItem  
+      padding="" 
+      borderRadius="16px" 
+      // bg="box.500" 
+      // bg="gray.500"
+      // bgGradient='linear(90deg, #161626 0%, #363562 50%, #1C1C34 100%)' 
+      >
+          <GridItem  
+          padding="2"
+          paddingTop="4"
+          position="relative" 
+          mb="1"
+          flexDirection="column" >
+              <Flex justify="center" >
+                  <TokenAvatarSet
+                        tokenData={pool.allTokens
+                        .filter((token) => !token.isNested && !token.isPhantomBpt)
+                        .map((token) => ({
+                          address: token.address,
+                          ...(token.weight && { weight: token.weight }),
+                        }))}
+                        width={300}
+                        imageSize={48}
+                        renderPopover={false} />
+                </Flex>
+          </GridItem>
+
+          <GridItem
+          // bg="gray.500"
+          // borderRadius="16px"
+          padding="2"
+          marginTop="3"
+          display="flex" justifyContent="center" >
+              <NextLinkOverlay href={`pool/${pool.id}`}>
+                    <Text  fontSize="1.1rem" textAlign="center" fontWeight="bold" paddingX="" noOfLines={1}>
+                      {pool.name}
+                    </Text>
+              </NextLinkOverlay>
+          </GridItem>
+    
+          <GridItem 
+          display="flex" 
+          mt="6" 
+          pt="4" 
+          mb="8" 
+          justifyContent="center" 
+          alignItems="center" 
+          flexDirection="column"  >
+                <AprTooltip
+                  textProps={{ fontSize: '24px', fontWeight: 'normal', mr: '0', lineHeight: '32px' }}
+                  data={pool.dynamicData.apr}/>
+                <Text color="slate.300" textAlign="center" fontSize="18px" lineHeight="24px" >{numeral(dailyApr).format('0.00[0]%')} Daily</Text>
+          </GridItem>
+        </GridItem>
+  </SimpleGrid>
+</LinkBox>
   );
 }

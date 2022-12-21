@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import { Box, Button, Flex, HStack, Image, Skeleton, Text, Tooltip } from '@chakra-ui/react';
 import NavbarWalletConnectButton from './NavbarWalletConnectButton';
 import { useGetProtocolDataQuery } from '~/apollo/generated/graphql-codegen-generated';
@@ -17,11 +17,9 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { networkConfig } from '~/lib/config/network-config';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
-import { BeetsLogoNoText } from '~/assets/logo/BeetsLogoNoText'; 
-import  vertek  from '~/assets/logo/vertek.png'; 
+import { BeetsLogoNoText } from '~/assets/logo/BeetsLogoNoText';
+import vertek from '~/assets/logo/vertek.png';
 import { useState } from 'react';
-
-
 
 interface Props {
   scrollY: MotionValue<number>;
@@ -58,7 +56,13 @@ export function Navbar({ scrollY }: Props) {
           >
             <Box width="full" height="full" bg="vertek.slatepurple.900" shadow="xl" />
           </motion.div>
-          <Flex alignItems="center" mr="6" zIndex="2" cursor="pointer" bgColor="vertek.slate.gradient">
+          <Flex
+            alignItems="center"
+            mr="6"
+            zIndex="2"
+            cursor="pointer"
+            bgColor="vertek.slate.gradient"
+          >
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
               {chainId === '10' ? (
                 <BeetsBalLogo width="132px" />
@@ -70,27 +74,22 @@ export function Navbar({ scrollY }: Props) {
             </NextLink>
           </Flex>
 
-          <Box 
-            flex="1" 
-            zIndex="2" 
-            margin="16px"  
-              >
-            <Flex alignItems="center" display={{ base: 'none', md: 'flex' }} >
-              <NavbarLink 
+          <Box flex="1" zIndex="2" margin="16px">
+            <Flex alignItems="center" display={{ base: 'none', md: 'flex' }}>
+              <NavbarLink
+                href={'/'}
+                selected={router.asPath.endsWith('/')}
+                text="Home"
+                mr="5"
+              ></NavbarLink>
+
+              <NavbarLink
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
                 text="Earn"
                 mr="5"
-                >
-                
-              </NavbarLink>
-              <NavbarLink 
-                href={'/swap'} 
-                selected={router.asPath === '/swap'} 
-                text="Swap" 
-                mr="5" 
-                
-                />
+              ></NavbarLink>
+              <NavbarLink href={'/swap'} selected={router.asPath === '/swap'} text="Swap" mr="5" />
               {/* {networkConfig.stakeUrl && (
                 <NavbarLink href={networkConfig.stakeUrl} text="Stake" mr={5} />
               )} */}
@@ -103,18 +102,24 @@ export function Navbar({ scrollY }: Props) {
               <NavbarLink
                 href={'/voting'}
                 selected={router.asPath === '/voting'}
-                text="Portfolio"
+                text="Vote"
                 mr="5"
               />
-              {networkConfig.launchUrl && (
+              <NavbarLink
+                href={'/claim'}
+                selected={router.asPath === '/claim'}
+                text="Claim"
+                mr="5"
+              />
+              {/* {networkConfig.launchUrl && (
                 <NavbarLink href={networkConfig.launchUrl} text="Claim" mr={5} />
-              )}
+              )} */}
 
               {/*<NavbarAdditionalLinksMenu />*/}
             </Flex>
           </Box>
           <FadeInOutBox mr="5" isVisible={isConnected}>
-            <HStack spacing="3"> 
+            <HStack spacing="3">
               <NetworkSelectorPopover>
                 <Button
                   bgColor="transparent"
@@ -130,15 +135,15 @@ export function Navbar({ scrollY }: Props) {
                   <Image mr="8" width="24px" height="24px" src={networkConfig.eth.iconUrl} />
                 </Button>
               </NetworkSelectorPopover>
-              <NextImage width="28px" height="28px" src={vertek}/>
-          {loading && !beetsPrice ? (
-            <Skeleton height="16px" width="54px" />
-          ) : (
-            <Text fontWeight="semibold" color="white" fontSize={{ base: 'sm', lg: 'md' }}>
-              {numeral(beetsPrice).format('$0.00[00]')}
-            </Text>
-          )}
-               {/* <NavbarPendingRewards /> */}
+              {/* <BeetsLogoNoText width="85px" /> */}
+              {loading && !beetsPrice ? (
+                <Skeleton height="16px" width="54px" />
+              ) : (
+                <Text fontWeight="semibold" color="white" fontSize={{ base: 'sm', lg: 'md' }}>
+                  {numeral(beetsPrice).format('$0.00[00]')}
+                </Text>
+              )}
+              {/* <NavbarPendingRewards /> */}
               {/* <NavbarAlerts />
               <NavbarPortfolioDrawer /> */}
             </HStack>

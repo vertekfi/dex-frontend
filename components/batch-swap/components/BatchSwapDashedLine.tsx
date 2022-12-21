@@ -64,7 +64,8 @@ export function BatchSwapRouteDashedLineArrowSpacer() {
             <Circle
                 size="22px"
                 zIndex="1"
-                backgroundColor="beets.base.700"
+                backgroundColor="vertek.sor.100"
+                boxShadow="0px 0px 4px 1px #fff"
                 alignItems="center"
                 justifyContent="center"
                 display="flex"

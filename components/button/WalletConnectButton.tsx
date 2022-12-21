@@ -2,6 +2,8 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Box, Button } from '@chakra-ui/react';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { ButtonProps } from '@chakra-ui/button';
+import { IconWallet } from '~/components/icons/IconWallet';
+
 
 export function WalletConnectButton(props: Omit<ButtonProps, 'children' | 'onClick'>) {
     const { isConnected } = useUserAccount();
@@ -18,8 +20,12 @@ export function WalletConnectButton(props: Omit<ButtonProps, 'children' | 'onCli
                         {(() => {
                             if (!mounted || !account || !chain) {
                                 return (
-                                    <Button variant="primary" onClick={openConnectModal} {...props}>
-                                        Connect Wallet
+                                    <Button variant="vertekconnect2" 
+                                    onClick={openConnectModal} {...props}>
+                                        <Box ml="2" color="white"  >
+                                            Connect Wallet
+                                        </Box>
+                                        <IconWallet ml="2" stroke="white" boxSize="24px"  />
                                     </Button>
                                 );
                             }

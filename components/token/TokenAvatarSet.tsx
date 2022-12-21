@@ -105,7 +105,7 @@ function TokenAvatarSet({
         {tokens?.map((token, index) => (
           <Flex alignItems="center" p="1" key={index}>
             <TokenAvatar address={token.address} size="xs" />
-            <Text ml="2">{getToken(token.address)?.symbol}</Text>
+            <Text ml="2" >{getToken(token.address)?.symbol}</Text>
             {token.weight ? <Text ml="2">{numeral(token.weight).format('%')}</Text> : null}
           </Flex>
         ))}

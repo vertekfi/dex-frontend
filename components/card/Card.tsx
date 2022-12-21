@@ -75,7 +75,7 @@ export default function Card({
             initial={initial}
             exit={exit}
             rounded="lg"
-            backgroundColor="box.500"
+            backgroundColor="vertek.slate.900"
             border="1px"
             borderColor="blackAlpha.400"
             display="flex"

@@ -1,7 +1,12 @@
 import { Box, Button, Flex, HStack, Text, useTheme } from '@chakra-ui/react';
-
+import NextImage from 'next/image';
+import InvestMastheadImage from '~/assets/logo/verteklogotext.svg';
+import InvestMastheadOpImage from '~/assets/logo/verteklogotext.svg';
+import verteknotext from '~/assets/logo/verteknotext.svg'; 
 import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
+import { ReactSVG } from 'react-svg';
+import { BeetsLogo } from '~/assets/logo/BeetsLogo';
 
 export function HomeHero() {
   const theme = useTheme();
@@ -9,38 +14,36 @@ export function HomeHero() {
 
   return (
     <Flex
+    
+    // bgGradient='linear(90deg, #161626 0%, #363562 50%, #1C1C34 100%, #C0C0C0 100%)' 
+    paddingX="4" paddingY="2" borderRadius="12px"
       height={{ base: 'auto', lg: 'xl' }}
-      mx={{ base: `-${theme.space['4']}`, xl: `-${theme.space['8']}` }}
+      // mx={{ base: `-${theme.space['4']}`, xl: `-${theme.space['8']}` }}
       overflow="hidden"
       minHeight="400px"
-      // backgroundImage={{
-      //   base:
-      //     chainId === '10'
-      //       ? "url('/images/hero-image-optimism-mobile.png')"
-      //       : "url('/images/hero-image-fantom-mobile.png')",
-      //   md:
-      //     chainId === '10'
-      //       ? "url('/images/hero-image-optimism.jpg')"
-      //       : "url('/images/hero-image-fantom.jpg')",
-      // }}
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-      boxShadow="0px 0px 24px 0px rgba(0,0,0,0.25);"
     >
-      <Flex flex="1" mt="20" pl={{ base: '4', xl: '8' }} mb="12" alignItems="center">
-        <Flex flexDirection="column" width={{ base: 'auto', lg: '580px' }}>
+
+      <Flex flex="1" mt="8" pl={{ base: '4', xl: '8' }} mb="12" justifyContent="center" 
+      alignItems="center">
+        <Flex flexDirection="column" 
+         width={{ base: 'auto',  }} >
+          
+          <HStack alignItems="center" justifyContent="space-between" >
           <Text
             as="h1"
+            // letterSpacing="0.1em"
             textStyle={{ base: 'h2', lg: 'h1' }}
             textTransform="uppercase"
             color="white"
-            fontWeight="semibold"
-          >
+            fontWeight="semibold" >
             Welcome to
             <br />
-            Vertex
+            Vertek
           </Text>
+          
+          </HStack>
+          
+          <HStack>
           <Text
             color="white"
             as="h5"
@@ -51,15 +54,16 @@ export function HomeHero() {
           >
             The future of DeFi re-imagineered. Your next generation Decentralised Exchange.
           </Text>
+          </HStack>
 
           <HStack spacing="4" mb={{ base: '6', lg: '10' }}>
             <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-              <Button variant="primary" width={{ base: '130px', lg: '160px' }}>
+              <Button variant="vertekconnect2" width={{ base: '130px', lg: '160px' }}>
                 Invest
               </Button>
             </NextLink>
             <NextLink href="/swap" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-              <Button width={{ base: '130px', lg: '160px' }} variant="secondary">
+              <Button width={{ base: '130px', lg: '160px' }} variant="vertekconnect25">
                 Swap
               </Button>
             </NextLink>
@@ -69,7 +73,16 @@ export function HomeHero() {
                     </Link>*/}
         </Flex>
       </Flex>
-      <Box flex="1" display={{ base: 'none', md: 'block' }} />
+      {/* <ReactSVG
+                src={chainId === '10' ? InvestMastheadOpImage : InvestMastheadImage}
+
+                width="400.62px"
+                 height="68px"
+                  /> */}
+      {/* <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+          <BeetsLogo width="500px" />
+      </Box>
+      <Box flex="0" display={{ base: 'none', md: 'block' }} /> */}
     </Flex>
   );
 }

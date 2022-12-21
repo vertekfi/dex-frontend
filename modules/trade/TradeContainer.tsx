@@ -34,28 +34,40 @@ export function TradeContainer() {
         <GridItem area="swap">
           <TradeInterfaceContainer />
         </GridItem>
-        <GridItem area="chart-route">
-          <TradePageHeader />
 
-          <Box mt="2">
-            <TradeChart />
+        {/* start of the chart and routing info  */}
+        <GridItem area="chart-route" paddingX="2">
+          <Box bgColor="vertek.slate.900" padding="4" borderRadius="12">
+            <TradePageHeader />
+
+            <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12">
+              <TradeChart />
+            </Box>
           </Box>
 
-          <Box display={{ base: 'none', md: 'block' }}>
+          <Box
+            display={{ base: 'none', md: 'block' }}
+            bgColor="vertek.slate.900"
+            padding="4"
+            borderRadius="12"
+            mt="2"
+          >
             {/*
                     // @ts-ignore */}
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
-                  <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
-                      Smart order routing
-                    </Text>
-                    <Text mb="4" color="gray.200">
-                      The SOR searches all Beethoven X pools to ensure you receive the best
-                      available price.
-                    </Text>
-                  </motion.div>
+                  <Box bgColor="vertek.slatepurple.900">
+                    <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                      <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
+                        Smart order routing
+                      </Text>
+                      <Text mb="4" color="white">
+                        The SOR searches all Vertek pools to ensure you receive the best available
+                        price.
+                      </Text>
+                    </motion.div>
+                  </Box>
                 )}
               </AnimatePresence>
               {showRouting && <BatchSwapSorRoute swapInfo={swapInfo} />}
@@ -64,7 +76,7 @@ export function TradeContainer() {
                 <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                   Latest swaps
                 </Text>
-                <Text mb="4" color="gray.200">
+                <Text mb="4" color="white">
                   The latest swaps for your selected token pair.
                 </Text>
               </motion.div>

@@ -22,7 +22,15 @@ a {
 #__next > div {
     height: 100%;
 }
-
+.sor {
+    padding-bottom: 12px; 
+    padding-top: 18px; 
+    padding-left: 18px; 
+    padding-right: 18px; 
+    border-radius: 12px; 
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.4); 
+    background-color: #161626;          
+}
 .rc-pagination {
     list-style: none;
     display: flex;
@@ -41,7 +49,7 @@ a {
     );*/
     /*background-size: 1em 1em;
     background-repeat: repeat;*/
-    color: #00f89c;
+    color: #4A4AF6;
     font-size: 16px;
     font-weight: 900;
     /*background-clip: text;*/
@@ -69,7 +77,7 @@ a {
 }
 
 :root {
-    --swiper-theme-color: #00f89c;
+    --swiper-theme-color: #ECA833;
     --swiper-pagination-bullet-inactive-color: #fff;
 }
 

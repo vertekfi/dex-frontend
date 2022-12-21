@@ -769,18 +769,6 @@ export interface GqlProtocolMetrics {
   totalSwapVolume: Scalars['BigDecimal'];
 }
 
-export interface GqlReliquaryFarmSnapshot {
-  __typename: 'GqlReliquaryFarmSnapshot';
-  dailyDeposited: Scalars['String'];
-  dailyWithdrawn: Scalars['String'];
-  farmId: Scalars['String'];
-  id: Scalars['ID'];
-  relicCount: Scalars['String'];
-  timestamp: Scalars['Int'];
-  totalBalance: Scalars['String'];
-  userCount: Scalars['String'];
-}
-
 export interface GqlSorGetBatchSwapForTokensInResponse {
   __typename: 'GqlSorGetBatchSwapForTokensInResponse';
   assets: Array<Scalars['String']>;
@@ -988,7 +976,6 @@ export interface Mutation {
   poolInitializeSnapshotsForPool: Scalars['String'];
   poolLoadOnChainDataForAllPools: Scalars['String'];
   poolLoadOnChainDataForPoolsWithActiveUpdates: Scalars['String'];
-  poolLoadReliquarySnapshotsForAllFarms: Scalars['String'];
   poolLoadSnapshotsForAllPools: Scalars['String'];
   poolReloadAllPoolAprs: Scalars['String'];
   poolReloadAllTokenNestedPoolIds: Scalars['String'];
@@ -1087,7 +1074,6 @@ export interface Query {
   poolGetPoolFilters: Array<GqlPoolFilterDefinition>;
   poolGetPools: Array<GqlPoolMinimal>;
   poolGetPoolsCount: Scalars['Int'];
-  poolGetReliquaryFarmSnapshots: Array<GqlReliquaryFarmSnapshot>;
   poolGetSnapshots: Array<GqlPoolSnapshot>;
   poolGetSwaps: Array<GqlPoolSwap>;
   poolGetUserSwapVolume: Array<GqlPoolUserSwapVolume>;
@@ -1148,11 +1134,6 @@ export interface QueryPoolGetPoolsCountArgs {
   skip?: InputMaybe<Scalars['Int']>;
   textSearch?: InputMaybe<Scalars['String']>;
   where?: InputMaybe<GqlPoolFilter>;
-}
-
-export interface QueryPoolGetReliquaryFarmSnapshotsArgs {
-  id: Scalars['String'];
-  range: GqlPoolSnapshotDataRange;
 }
 
 export interface QueryPoolGetSnapshotsArgs {
@@ -1223,9 +1204,9 @@ export interface QueryTokenGetTokensDynamicDataArgs {
 }
 
 export interface QueryUserGetPoolJoinExitsArgs {
-  first?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
   poolId: Scalars['String'];
-  skip?: InputMaybe<Scalars['Int']>;
+  skip: Scalars['Int'];
 }
 
 export interface QueryUserGetPortfolioSnapshotsArgs {
@@ -1233,9 +1214,9 @@ export interface QueryUserGetPortfolioSnapshotsArgs {
 }
 
 export interface QueryUserGetSwapsArgs {
-  first?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
   poolId: Scalars['String'];
-  skip?: InputMaybe<Scalars['Int']>;
+  skip: Scalars['Int'];
 }
 
 export type GetPoolBatchSwapsQueryVariables = Exact<{
@@ -5773,7 +5754,7 @@ export type GetPoolBptPriceChartDataQueryResult = Apollo.QueryResult<
   GetPoolBptPriceChartDataQueryVariables
 >;
 export const GetPoolUserJoinExitsDocument = gql`
-  query GetPoolUserJoinExits($first: Int, $skip: Int, $poolId: String!) {
+  query GetPoolUserJoinExits($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     joinExits: userGetPoolJoinExits(poolId: $poolId, first: $first, skip: $skip) {
       id
       timestamp
@@ -5840,7 +5821,7 @@ export type GetPoolUserJoinExitsQueryResult = Apollo.QueryResult<
   GetPoolUserJoinExitsQueryVariables
 >;
 export const GetUserSwapsDocument = gql`
-  query GetUserSwaps($first: Int, $skip: Int, $poolId: String!) {
+  query GetUserSwaps($first: Int = 10, $skip: Int = 0, $poolId: String!) {
     swaps: userGetSwaps(first: $first, skip: $skip, poolId: $poolId) {
       id
       poolId

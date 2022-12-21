@@ -115,11 +115,12 @@ export const TokenInput = forwardRef(
                     </Box>
                     {isConnected && (
                         <HStack
+
                             position="absolute"
                             bottom=".75rem"
                             left=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
+                            color="white"
                             fontSize=".85rem"
                             spacing="1"
                         >
@@ -127,7 +128,7 @@ export const TokenInput = forwardRef(
                             {isLoading ? (
                                 <Skeleton width="52px" height="16px" />
                             ) : (
-                                <Text>{tokenFormatAmountPrecise(userBalance, 4)}</Text>
+                                <Text color="white">{tokenFormatAmountPrecise(userBalance, 4)}</Text>
                             )}
                         </HStack>
                     )}
@@ -138,7 +139,7 @@ export const TokenInput = forwardRef(
                             bottom=".75rem"
                             right=".75rem"
                             fontWeight="normal"
-                            color="gray.200"
+                            color="white"
                             size="xs"
                             fontSize=".85rem"
                         >

@@ -735,17 +735,6 @@ type GqlProtocolMetrics {
   totalSwapVolume: BigDecimal!
 }
 
-type GqlReliquaryFarmSnapshot {
-  dailyDeposited: String!
-  dailyWithdrawn: String!
-  farmId: String!
-  id: ID!
-  relicCount: String!
-  timestamp: Int!
-  totalBalance: String!
-  userCount: String!
-}
-
 type GqlSorGetBatchSwapForTokensInResponse {
   assets: [String!]!
   swaps: [GqlSorSwap!]!
@@ -951,7 +940,6 @@ type Mutation {
   poolInitializeSnapshotsForPool(poolId: String!): String!
   poolLoadOnChainDataForAllPools: String!
   poolLoadOnChainDataForPoolsWithActiveUpdates: String!
-  poolLoadReliquarySnapshotsForAllFarms: String!
   poolLoadSnapshotsForAllPools: String!
   poolReloadAllPoolAprs: String!
   poolReloadAllTokenNestedPoolIds: String!
@@ -1017,10 +1005,6 @@ type Query {
     textSearch: String
     where: GqlPoolFilter
   ): Int!
-  poolGetReliquaryFarmSnapshots(
-    id: String!
-    range: GqlPoolSnapshotDataRange!
-  ): [GqlReliquaryFarmSnapshot!]!
   poolGetSnapshots(id: String!, range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolSwap!]!
   poolGetUserSwapVolume(
@@ -1063,8 +1047,8 @@ type Query {
   tokenGetTokensDynamicData(addresses: [String!]!): [GqlTokenDynamicData!]!
   userGetFbeetsBalance: GqlUserFbeetsBalance!
   userGetPoolBalances: [GqlUserPoolBalance!]!
-  userGetPoolJoinExits(first: Int = 10, poolId: String!, skip: Int = 0): [GqlPoolJoinExit!]!
+  userGetPoolJoinExits(first: Int!, poolId: String!, skip: Int!): [GqlPoolJoinExit!]!
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
   userGetStaking: [GqlPoolStaking!]!
-  userGetSwaps(first: Int = 10, poolId: String!, skip: Int = 0): [GqlPoolSwap!]!
+  userGetSwaps(first: Int!, poolId: String!, skip: Int!): [GqlPoolSwap!]!
 }
