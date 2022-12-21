@@ -31,7 +31,7 @@ export function TradeContainer() {
         pb="20"
         //pt="8"
       >
-        <GridItem area="swap" >
+        <GridItem area="swap">
           <TradeInterfaceContainer />
         </GridItem>
 
@@ -57,18 +57,6 @@ export function TradeContainer() {
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
-<<<<<<< HEAD
-                  <Box>
-                  <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
-                      Smart order routing
-                    </Text>
-                    <Text mb="4" color="white">
-                      The SOR searches all Vertek pools to ensure you receive the best
-                      available price.
-                    </Text>
-                  </motion.div>
-=======
                   <Box bgColor="vertek.slatepurple.900">
                     <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
@@ -79,7 +67,6 @@ export function TradeContainer() {
                         price.
                       </Text>
                     </motion.div>
->>>>>>> e1a9fc7 (formatting)
                   </Box>
                 )}
               </AnimatePresence>
