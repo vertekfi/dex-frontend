@@ -20,9 +20,7 @@ export function HomeNews(props: BoxProps) {
           rowGap="4"
         >
           {newsItems.map((newsItem) => (
-            <GridItem key={newsItem.id}>
-              <HomeNewsCard item={newsItem} />
-            </GridItem>
+            <GridItem key={newsItem?.id}>{newsItem && <HomeNewsCard item={newsItem} />}</GridItem>
           ))}
         </Grid>
       </Box>

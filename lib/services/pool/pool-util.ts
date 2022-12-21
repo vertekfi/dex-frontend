@@ -1,8 +1,8 @@
 import {
-    GqlPoolLinearNested,
-    GqlPoolPhantomStableNested,
-    GqlPoolTokenUnion,
-    GqlPoolUnion,
+  GqlPoolLinearNested,
+  GqlPoolPhantomStableNested,
+  GqlPoolTokenUnion,
+  GqlPoolUnion,
 } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolService } from '~/lib/services/pool/pool-types';
 import { PoolStableService } from '~/lib/services/pool/pool-stable.service';
@@ -17,106 +17,128 @@ import { isSameAddress } from '@balancer-labs/sdk';
 import { PoolComposableStableService } from '~/lib/services/pool/pool-composable-stable.service';
 import { PoolWeightedV2Service } from '~/lib/services/pool/pool-weighted-v2.service';
 
-export function poolGetTokensWithoutPhantomBpt(pool: GqlPoolUnion | GqlPoolPhantomStableNested | GqlPoolLinearNested) {
-    return pool.tokens.filter((token) => token.address !== pool.address);
+export function poolGetTokensWithoutPhantomBpt(
+  pool: GqlPoolUnion | GqlPoolPhantomStableNested | GqlPoolLinearNested,
+) {
+  return pool.tokens.filter((token) => token.address !== pool.address);
 }
 
 export function poolIsWeightedLikePool(pool: GqlPoolUnion) {
-    return pool.__typename === 'GqlPoolWeighted' || pool.__typename === 'GqlPoolLiquidityBootstrapping';
+  return (
+    pool.__typename === 'GqlPoolWeighted' || pool.__typename === 'GqlPoolLiquidityBootstrapping'
+  );
 }
 
 export function poolIsTokenPhantomBpt(poolToken: GqlPoolTokenUnion) {
-    return poolToken.__typename === 'GqlPoolTokenLinear' || poolToken.__typename === 'GqlPoolTokenPhantomStable';
+  return (
+    poolToken.__typename === 'GqlPoolTokenLinear' ||
+    poolToken.__typename === 'GqlPoolTokenPhantomStable'
+  );
 }
 
 export function poolRequiresBatchRelayerOnJoin(pool: GqlPoolUnion) {
-    return (
-        (pool.__typename === 'GqlPoolWeighted' &&
-            (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')) ||
-        pool.factory === networkConfig.balancer.composableStableFactory
-    );
+  return (
+    (pool.__typename === 'GqlPoolWeighted' &&
+      (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' ||
+        pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')) ||
+    pool.factory === networkConfig.balancer.composableStableFactory
+  );
 }
 
 export function poolRequiresBatchRelayerOnExit(pool: GqlPoolUnion) {
-    return (
-        (pool.__typename === 'GqlPoolWeighted' &&
-            (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')) ||
-        pool.factory === networkConfig.balancer.composableStableFactory
-    );
+  return (
+    (pool.__typename === 'GqlPoolWeighted' &&
+      (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' ||
+        pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')) ||
+    pool.factory === networkConfig.balancer.composableStableFactory
+  );
 }
 
 export function poolIsComposablePool(pool: GqlPoolUnion) {
-    if (
-        pool.__typename === 'GqlPoolWeighted' &&
-        isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory) &&
-        (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')
-    ) {
-        return true;
-    }
+  if (
+    pool.__typename === 'GqlPoolWeighted' &&
+    isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory || '') &&
+    (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')
+  ) {
+    return true;
+  }
 
-    if (
-        pool.__typename === 'GqlPoolPhantomStable' &&
-        isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
-    ) {
-        return true;
-    }
+  if (
+    pool.__typename === 'GqlPoolPhantomStable' &&
+    isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
+  ) {
+    return true;
+  }
 
-    return false;
+  return false;
 }
 
 export function poolGetServiceForPool(pool: GqlPoolUnion): PoolService {
-    switch (pool.__typename) {
-        case 'GqlPoolWeighted': {
-            if (
-                isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory) &&
-                (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')
-            ) {
-                return new PoolWeightedV2Service(pool, batchRelayerService, networkConfig.wethAddress, networkProvider);
-            } else if (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT') {
-                return new PoolWeightedBoostedService(
-                    pool,
-                    batchRelayerService,
-                    networkConfig.wethAddress,
-                    networkProvider,
-                );
-            }
+  switch (pool.__typename) {
+    case 'GqlPoolWeighted': {
+      if (
+        isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory || '') &&
+        (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')
+      ) {
+        return new PoolWeightedV2Service(
+          pool,
+          batchRelayerService,
+          networkConfig.wethAddress,
+          networkProvider,
+        );
+      } else if (
+        pool.nestingType === 'HAS_SOME_PHANTOM_BPT' ||
+        pool.nestingType === 'HAS_ONLY_PHANTOM_BPT'
+      ) {
+        return new PoolWeightedBoostedService(
+          pool,
+          batchRelayerService,
+          networkConfig.wethAddress,
+          networkProvider,
+        );
+      }
 
-            return new PoolWeightedService(pool, batchRelayerService, networkConfig.wethAddress);
-        }
-        case 'GqlPoolStable':
-            return new PoolStableService(pool, batchRelayerService, networkConfig.wethAddress);
-        case 'GqlPoolPhantomStable': {
-            if (isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)) {
-                return new PoolComposableStableService(
-                    pool,
-                    batchRelayerService,
-                    networkConfig.wethAddress,
-                    networkProvider,
-                );
-            }
-
-            return new PoolPhantomStableService(pool, batchRelayerService, networkConfig.wethAddress, networkProvider);
-        }
-        case 'GqlPoolMetaStable':
-            return new PoolMetaStableService(pool, batchRelayerService, networkConfig.wethAddress);
+      return new PoolWeightedService(pool, batchRelayerService, networkConfig.wethAddress);
     }
+    case 'GqlPoolStable':
+      return new PoolStableService(pool, batchRelayerService, networkConfig.wethAddress);
+    case 'GqlPoolPhantomStable': {
+      if (isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)) {
+        return new PoolComposableStableService(
+          pool,
+          batchRelayerService,
+          networkConfig.wethAddress,
+          networkProvider,
+        );
+      }
 
-    throw new Error('unsupported pool type');
+      return new PoolPhantomStableService(
+        pool,
+        batchRelayerService,
+        networkConfig.wethAddress,
+        networkProvider,
+      );
+    }
+    case 'GqlPoolMetaStable':
+      return new PoolMetaStableService(pool, batchRelayerService, networkConfig.wethAddress);
+  }
+
+  throw new Error('unsupported pool type');
 }
 
 export function poolGetTypeName(pool: GqlPoolUnion) {
-    switch (pool.__typename) {
-        case 'GqlPoolWeighted':
-            return 'Weighted pool';
-        case 'GqlPoolStable':
-            return 'Stable pool';
-        case 'GqlPoolPhantomStable':
-            return 'Stable phantom pool';
-        case 'GqlPoolLiquidityBootstrapping':
-            return 'Liquidity bootstrapping pool';
-        case 'GqlPoolMetaStable':
-            return 'MetaStable pool';
-        default:
-            return 'unknown';
-    }
+  switch (pool.__typename) {
+    case 'GqlPoolWeighted':
+      return 'Weighted pool';
+    case 'GqlPoolStable':
+      return 'Stable pool';
+    case 'GqlPoolPhantomStable':
+      return 'Stable phantom pool';
+    case 'GqlPoolLiquidityBootstrapping':
+      return 'Liquidity bootstrapping pool';
+    case 'GqlPoolMetaStable':
+      return 'MetaStable pool';
+    default:
+      return 'unknown';
+  }
 }
