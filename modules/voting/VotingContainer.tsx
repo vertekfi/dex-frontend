@@ -1,12 +1,7 @@
-import { SimpleGrid } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, Link, Text } from '@chakra-ui/react';
+import { PoolListItem } from '~/modules/pools/components/PoolListItem';
+import { PaginatedTable } from '~/components/table/PaginatedTable';
 
 export function VotingContainer() {
-  return (
-    <SimpleGrid
-      columns={{ sm: 1, md: 2, xl: 3 }}
-      paddingX={8}
-      paddingY={4}
-      spacing={35}
-    ></SimpleGrid>
-  );
+  return <Box></Box>;
 }

@@ -2,15 +2,11 @@ import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { useUserBalances } from '~/lib/user/useUserBalances';
 import { parseUnits } from 'ethers/lib/utils';
 import { tokenGetAmountForAddress } from '~/lib/services/token/token-util';
-import { oldBnumScaleAmount } from '~/lib/services/pool/lib/old-big-number';
 import { useProvider } from 'wagmi';
 import { useQuery } from 'react-query';
-import { masterChefService } from '~/lib/services/staking/master-chef.service';
-import { freshBeetsService } from '~/lib/services/staking/fresh-beets.service';
 import { formatFixed } from '@ethersproject/bignumber';
 import { gaugeStakingService } from '~/lib/services/staking/gauge-staking.service';
 import { useUserAccount } from '~/lib/user/useUserAccount';
-import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { createContext, ReactNode, useContext } from 'react';
 import { BigNumber } from 'ethers';
@@ -51,7 +47,6 @@ export function _usePoolUserBptBalance() {
 }
 
 function usePoolUserBptWalletBalance() {
-  const networkConfig = useNetworkConfig();
   const { pool } = usePool();
   const { userBalances, ...userBalancesQuery } = useUserBalances([pool.address], [pool]);
 
