@@ -29,6 +29,8 @@ function PoolList() {
   const { userPoolIds, usdBalanceForPool, hasBptInWalletForPool } = useUserData();
   const userPoolIdsStr = userPoolIds.join();
 
+  console.log(pools);
+
   useEffect(() => {
     if (showMyInvestments) {
       setPoolIds(userPoolIds).catch();
@@ -83,9 +85,6 @@ function PoolList() {
               // bgGradient='linear(200deg, rgba(255,255,255,0.1), #161626)'
               // boxShadow=" 0px 3px 10px 0.5px #ECA833, 0px 2px 10px 0.5px #000"
               padding="6px"
-
-
-              
               tokens={item.allTokens
                 .filter((token) => !token.isNested && !token.isPhantomBpt)
                 .map((token) => ({

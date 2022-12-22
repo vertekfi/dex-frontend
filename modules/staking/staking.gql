@@ -1,0 +1,15 @@
+query GetRewardPools {
+  getRewardPools {
+    address
+    startBlock
+    endBlock
+    blocksRemaining
+    rewardToken {
+      logoURI
+    }
+    aprs {
+      apr
+      daily
+    }
+  }
+}

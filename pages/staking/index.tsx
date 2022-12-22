@@ -5,6 +5,7 @@ import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
+import { RewardPoolProvider } from '~/modules/staking/useRewardPoolStaking';
 
 function StakingPage() {
   const { chainId } = useNetworkConfig();
@@ -14,18 +15,19 @@ function StakingPage() {
         <title>Vertex | Staking</title>
       </Head>
 
-      <PageMasthead
-        title="Vertek Staker"
-        image={
-          <NextImage
-            src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
-            width="213.71px"
-            height="68px"
-          />
-        }
-      />
-
-      <StakingContainer />
+      <RewardPoolProvider>
+        <PageMasthead
+          title="Vertek Staker"
+          image={
+            <NextImage
+              src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
+              width="213.71px"
+              height="68px"
+            />
+          }
+        />
+        <StakingContainer />
+      </RewardPoolProvider>
     </>
   );
 }

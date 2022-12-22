@@ -981,6 +981,7 @@ type Query {
   blocksGetAverageBlockTime: Int!
   blocksGetBlocksPerDay: Int!
   contentGetNewsItems: [GqlContentNewsItem]!
+  getRewardPools: [RewardPool]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetBatchSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolBatchSwap!]!
@@ -1051,4 +1052,41 @@ type Query {
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
   userGetStaking: [GqlPoolStaking!]!
   userGetSwaps(first: Int!, poolId: String!, skip: Int!): [GqlPoolSwap!]!
+}
+
+type RewardPool {
+  address: String!
+  amountStaked: String!
+  amountStakedValue: String!
+  aprs: RewardPoolAprs!
+  blocksRemaining: String!
+  endBlock: Int!
+  isPartnerPool: Boolean!
+  rewardToken: RewardPoolRewardToken!
+  startBlock: Int!
+  userInfo: RewardPoolUserInfo
+}
+
+type RewardPoolAprs {
+  apr: String!
+  daily: String!
+}
+
+type RewardPoolRewardToken {
+  address: String!
+  logoURI: String!
+  name: String!
+  rewardPerBlock: String!
+  symbol: String!
+}
+
+type RewardPoolUserInfo {
+  amountDeposited: String!
+  amountDepositedFull: String!
+  depositValue: String!
+  hasPendingRewards: Boolean!
+  pendingRewardValue: String!
+  pendingRewards: String!
+  percentageOwned: String!
+  poolAddress: String!
 }

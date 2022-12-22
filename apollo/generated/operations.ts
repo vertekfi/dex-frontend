@@ -915,6 +915,23 @@ export const GetPoolFilters = gql`
     }
   }
 `;
+export const GetRewardPools = gql`
+  query GetRewardPools {
+    getRewardPools {
+      address
+      startBlock
+      endBlock
+      blocksRemaining
+      rewardToken {
+        logoURI
+      }
+      aprs {
+        apr
+        daily
+      }
+    }
+  }
+`;
 export const GetTokenRelativePriceChartData = gql`
   query GetTokenRelativePriceChartData(
     $tokenIn: String!
