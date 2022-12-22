@@ -32,7 +32,7 @@ export function HomeLearn(props: BoxProps) {
           />
           <HomeLearnItem
             title="Gauge Voting"
-            description="30% of all the Beethoven X emissions are distributed to liquidity pools based on a bi-weekly gauge vote. Learn all about how to get involved, the mechanics of the gauge vote, bribes, snapshots and more."
+            description="30% of all the Vertek emissions are distributed to liquidity pools based on a bi-weekly gauge vote. Learn all about how to get involved, the mechanics of the gauge vote, bribes, snapshots and more."
             url="https://beethovenxio.medium.com/beethoven-x-gauge-vote-maximising-your-melody-fbeb10e5711b"
           />
           <HomeLearnItem
@@ -75,7 +75,7 @@ export function HomeLearn(props: BoxProps) {
           />
           <HomeLearnItem
             title="Balancer (balancer.fi)"
-            description="Beethoven X is an official friendly fork built on top of Balancer. Take a deep dive into the foundations that made it all possible and learn all there is to know about the wonders of Balancer technology."
+            description="Vertek is an official friendly fork built on top of Balancer. Take a deep dive into the foundations that made it all possible and learn all there is to know about the wonders of Balancer technology."
             url="https://docs.balancer.fi/"
           />
 

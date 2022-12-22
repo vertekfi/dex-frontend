@@ -82,7 +82,7 @@ export const TokenInput = forwardRef(
                         {requiresApproval && (
                             <Box position="absolute" color="orange" top=".5rem" right=".75rem" mt="1">
                                 <Tooltip
-                                    label={`Before swapping, you'll need to give the Beethoven X vault contract permission to move ${token?.symbol} on your behalf.`}
+                                    label={`Before swapping, you'll need to give the Vertek vault contract permission to move ${token?.symbol} on your behalf.`}
                                     hasArrow
                                 >
                                     <Lock size={16} />
@@ -97,7 +97,7 @@ export const TokenInput = forwardRef(
                                 paddingY="1"
                                 onClick={toggleTokenSelect}
                                 backgroundColor="transparent"
-                                _hover={{ backgroundColor: 'beets.green', color: 'gray.500' }}
+                                _hover={{ backgroundColor: 'vertek.neonpurple.500', color: 'white' }}
                                 paddingX="1"
                                 _focus={{ boxShadow: 'none' }}
                             >

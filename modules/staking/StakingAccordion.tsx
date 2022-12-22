@@ -20,10 +20,10 @@ export function StakingAccordion() {
             <AccordionIcon />
           </AccordionButton>
 
-          <AccordionPanel pb={10} bg="beets.base.900" borderRadius="20px">
+          <AccordionPanel pb={10} bg="vertek.slatepurple.900" borderRadius="20px">
             <SimpleGrid
               style={{ minWidth: '100%' }}
-              bg="beets.base.900"
+              bg=""
               borderRadius="20px"
               columns={2}
               spacing={7}
