@@ -4,7 +4,14 @@ query GetRewardPools {
     startBlock
     endBlock
     blocksRemaining
+    amountStaked
+    amountStakedValue
+    isPartnerPool
     rewardToken {
+      address
+      name
+      symbol
+      rewardPerBlock
       logoURI
     }
     aprs {

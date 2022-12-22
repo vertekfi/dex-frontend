@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import { useGetRewardPoolsQuery } from '~/apollo/generated/graphql-codegen-generated';
 
 export interface RewardPoolContextType {}

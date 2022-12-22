@@ -3917,7 +3917,17 @@ export type GetRewardPoolsQuery = {
     startBlock: number;
     endBlock: number;
     blocksRemaining: string;
-    rewardToken: { __typename: 'RewardPoolRewardToken'; logoURI: string };
+    amountStaked: string;
+    amountStakedValue: string;
+    isPartnerPool: boolean;
+    rewardToken: {
+      __typename: 'RewardPoolRewardToken';
+      address: string;
+      name: string;
+      symbol: string;
+      rewardPerBlock: string;
+      logoURI: string;
+    };
     aprs: { __typename: 'RewardPoolAprs'; apr: string; daily: string };
   } | null>;
 };
@@ -6179,7 +6189,14 @@ export const GetRewardPoolsDocument = gql`
       startBlock
       endBlock
       blocksRemaining
+      amountStaked
+      amountStakedValue
+      isPartnerPool
       rewardToken {
+        address
+        name
+        symbol
+        rewardPerBlock
         logoURI
       }
       aprs {

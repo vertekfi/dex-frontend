@@ -922,7 +922,14 @@ export const GetRewardPools = gql`
       startBlock
       endBlock
       blocksRemaining
+      amountStaked
+      amountStakedValue
+      isPartnerPool
       rewardToken {
+        address
+        name
+        symbol
+        rewardPerBlock
         logoURI
       }
       aprs {
