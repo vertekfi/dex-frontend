@@ -7,7 +7,7 @@ class BeetsDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="title" content="Beethoven X" />
+          <meta name="title" content="Vertek" />
           <meta
             name="description"
             content="The future of DeFi re-imagineered. Your next generation Decentralised Exchange."
@@ -15,7 +15,7 @@ class BeetsDocument extends Document {
 
           <meta property="og:type" content="website" />
           <meta property="og:url" content={`${process.env.VERCEL_URL}`} />
-          <meta property="og:title" content="Beethoven X" />
+          <meta property="og:title" content="Vertek" />
           <meta
             property="og:description"
             content="The future of DeFi re-imagineered. Your next generation Decentralised Exchange."
@@ -27,7 +27,7 @@ class BeetsDocument extends Document {
 
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content={`${process.env.VERCEL_URL}`} />
-          <meta property="twitter:title" content="Beethoven X" />
+          <meta property="twitter:title" content="Vertek" />
           <meta
             property="twitter:description"
             content="The future of DeFi re-imagineered. Your next generation Decentralised Exchange."

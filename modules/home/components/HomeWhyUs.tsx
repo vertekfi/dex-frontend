@@ -13,7 +13,7 @@ export function HomeWhyUs(props: BoxProps) {
     <Box {...props}>
       <BeetsHeadline mb="8">Built for the Future - Accessible, Innovative</BeetsHeadline>
       <Box mr={{ base: '0', lg: '20' }}>
-        Designed to evolve and adapt, Vector provides all the tools necessary for anyone to
+        Designed to evolve and adapt, Vertek provides all the tools necessary for anyone to
         participate in the future of finance.
       </Box>
       <Box my="6" display="flex" justifyContent="center">
@@ -41,7 +41,7 @@ export function HomeWhyUs(props: BoxProps) {
         <GridItem>
           <BeetsSubHeadline mb={{ base: '2', md: '6' }}>For Protocols</BeetsSubHeadline>
           <Box>
-            Beethoven X leverages constant innovation to bring to its users novel primitives that
+            Vertek leverages constant innovation to bring to its users novel primitives that
             are tailored to meet the demands of an ever-changing marketplace.
           </Box>
         </GridItem>

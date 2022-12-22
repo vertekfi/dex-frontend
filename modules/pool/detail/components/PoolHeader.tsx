@@ -31,7 +31,7 @@ function PoolHeader() {
   const swapFeeType = hasZeroOwner ? 'Fixed' : 'Dynamic';
   const tooltipText1 = `Liquidity providers earn ${swapFeeType.toLowerCase()} swap fees on every trade utilizing the liquidity in this pool.`;
   const tooltipText2 = `Dynamic swap fees are controlled by the ${
-    hasBeetsOwner ? 'Beethoven X Liquidity Committee Multisig' : 'pool owner'
+    hasBeetsOwner ? 'Vertek Liquidity Committee Multisig' : 'pool owner'
   }.`;
 
   return (
