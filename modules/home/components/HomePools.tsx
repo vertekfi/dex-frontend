@@ -83,49 +83,13 @@ export function HomePools(props: BoxProps) {
 
       {featuredPoolGroups.map((group) => (
         <Box mb="4" key={group.id}  >
-          {/* <Flex mb="4" alignItems="center">
-            <Image src={group.icon} alt={`${group.id}-icon`} width="24px" height="24px" />
-            <BeetsSubHeadline ml="2">{group.title}</BeetsSubHeadline>
-          </Flex> */}
-
           <PoolCardCarousel
             items={group.items.map((item) => {
               switch (item.__typename) {
                 case 'GqlPoolMinimal':
-                  return <PoolCard pool={item} key={item.id} />;
+                  return <PoolCard pool={item} key={item.id} 
+                  />;
                 case 'GqlFeaturePoolGroupItemExternalLink':
-                // return (
-                //   <Flex
-                //     alignItems="flex-end"
-                //     justifyContent="center"
-                //     height="216px"
-                //     key={item.id}
-                //     overflowY="hidden"
-                //   >
-                //     <Image
-                //       src={item.image}
-                //       width="full"
-                //       position="absolute"
-                //       top="0"
-                //       left="0"
-                //       bottom="0"
-                //       right="0"
-                //       height="216px"
-                //       alt={`${item.id}-image`}
-                //       objectFit={{ base: 'cover', sm: 'contain' }}
-                //     />
-                //     <Button
-                //       variant="primary"
-                //       as="a"
-                //       href={item.buttonUrl}
-                //       target="_blank"
-                //       size="md"
-                //       _hover={{ transform: 'none', bgColor: 'beets.highlight' }}
-                //     >
-                //       {item.buttonText}
-                //     </Button>
-                //   </Flex>
-                // );
               }
             })}
           />
