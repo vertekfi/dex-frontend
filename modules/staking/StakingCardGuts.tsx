@@ -4,11 +4,11 @@ export function StakingCardGuts() {
   return (
     <SimpleGrid
       style={{ minWidth: '100%' }}
-      bg="gray.500"
+      bg="vertek.slatepurple.900"
       borderTopRadius="20px"
       columns={2}
       spacing={10}
-      padding="4"
+      padding="20px"
       marginTop="4"
     >
       <Text textAlign="left" fontWeight="bold">
@@ -47,12 +47,11 @@ export function StakingCardGuts() {
         </Text>
       </Flex>
 
-      <Button variant="primary" disabled={false} width="full" size="lg">
+      <Button variant="vertekconnect25" disabled={false} width="full" size="lg">
         Stake
       </Button>
       <Button
-        variant="primary"
-        bg="beets.highlightAlpha.900"
+        variant="vertekconnect2"
         disabled={false}
         width="full"
         size="lg"
