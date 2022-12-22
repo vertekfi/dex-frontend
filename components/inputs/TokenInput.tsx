@@ -97,7 +97,7 @@ export const TokenInput = forwardRef(
                                 paddingY="1"
                                 onClick={toggleTokenSelect}
                                 backgroundColor="transparent"
-                                _hover={{ backgroundColor: 'beets.green', color: 'gray.500' }}
+                                _hover={{ backgroundColor: 'vertek.neonpurple.500', color: 'white' }}
                                 paddingX="1"
                                 _focus={{ boxShadow: 'none' }}
                             >
