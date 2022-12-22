@@ -24,7 +24,7 @@ export const goerliNetworkConfig: NetworkConfig = {
     platformId: 'ethereum',
   },
   rpcUrl: 'https://eth-goerli.g.alchemy.com/v2/cK2OOgcOIjM2enbLpRfinpxq8hdY9aGU',
-  multicall: '0xFDec6c30306F84eCC4196FA689974721fE863Dfc',
+  multicall: '0x1050Bcfb2ec4CAe624BD1Eec5dadc2a3b4f4559a', // V1 type
   beets: {
     address: '0xb269A278E427478712e2AF0eBa728021157A2114',
   },
