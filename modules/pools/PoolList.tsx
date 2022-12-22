@@ -57,7 +57,7 @@ function PoolList() {
         </Alert>
       )}
       <PaginatedTable
-        style={{ boxShadow: '0px 8px 24px rgba(240, 185, 11, 0.15)' }}
+        padding={1}
         borderRadius="16px"
         items={poolsToRender}
         currentPage={state.skip / state.first + 1}
@@ -80,6 +80,12 @@ function PoolList() {
               borderBottomColor="vertek.slatepurple.600"
               borderBottomWidth={index === pools.length - 1 ? 0 : 1}
               bg="vertek.slatepurple.900"
+              // bgGradient='linear(200deg, rgba(255,255,255,0.1), #161626)'
+              // boxShadow=" 0px 3px 10px 0.5px #ECA833, 0px 2px 10px 0.5px #000"
+              padding="6px"
+
+
+              
               tokens={item.allTokens
                 .filter((token) => !token.isNested && !token.isPhantomBpt)
                 .map((token) => ({
