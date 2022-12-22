@@ -24,8 +24,9 @@ export function Home() {
         borderBottomColor="gray.100"
         pb="24"
       >
+
         <GridItem colSpan={4} maxW="100%" paddingLeft="1">
-          <HomePools />
+          <HomePools  />
         </GridItem>
         {/* <GridItem>
           <HomeNews />

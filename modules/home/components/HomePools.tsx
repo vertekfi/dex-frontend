@@ -82,11 +82,12 @@ export function HomePools(props: BoxProps) {
       <BeetsHeadline mb="10">Featured pools</BeetsHeadline>
 
       {featuredPoolGroups.map((group) => (
-        <Box mb="4" key={group.id}>
+        <Box mb="4" key={group.id}  >
           {/* <Flex mb="4" alignItems="center">
             <Image src={group.icon} alt={`${group.id}-icon`} width="24px" height="24px" />
             <BeetsSubHeadline ml="2">{group.title}</BeetsSubHeadline>
           </Flex> */}
+
           <PoolCardCarousel
             items={group.items.map((item) => {
               switch (item.__typename) {
@@ -128,6 +129,7 @@ export function HomePools(props: BoxProps) {
               }
             })}
           />
+
         </Box>
       ))}
     </Box>
