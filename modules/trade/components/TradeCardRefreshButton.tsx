@@ -22,7 +22,7 @@ export function TradeCardRefreshButton({ isLoading, onClick }: Props) {
       borderColor="gray.500"
       zIndex="2"
       role="group"
-      _hover={{ borderColor: 'beets.green', cursor: 'pointer' }}
+      _hover={{ borderColor: 'vertek.neonpurple.500', cursor: 'pointer' }}
       _active={{ backgroundColor: 'gray.600' }}
       _focus={{ outline: 'none' }}
       onClick={onClick}
@@ -36,12 +36,12 @@ export function TradeCardRefreshButton({ isLoading, onClick }: Props) {
             transition: 'transform linear .15s',
           }}
           _groupHover={{
-            color: 'beets.green',
+            color: 'vertek.neonpurple.500',
             cursor: 'pointer',
             transform: 'rotate(180deg)',
             transition: 'all linear .15s',
           }}
-          _groupFocus={{ color: 'beets.green', cursor: 'pointer' }}
+          _groupFocus={{ color: 'vertek.neonpurple.500', cursor: 'pointer' }}
         >
           {!isLoading && (
             <AnimatedBox

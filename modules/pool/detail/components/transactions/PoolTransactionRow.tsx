@@ -44,13 +44,13 @@ function PoolTransactionAction(props: PoolTransaction) {
 
     const getColor = () => {
         if (props.type === PoolTransactionType.Join) {
-            return 'beets.green';
+            return 'vertek.neonpurple.500';
         }
         if (props.type === PoolTransactionType.Exit) {
             return 'beets.red';
         }
         if (props.type === PoolTransactionType.Swap) {
-            return 'beets.green';
+            return 'vertek.neonpurple.500';
         }
     };
     return (

@@ -24,8 +24,8 @@ export function BeetsBatchRelayerApprovalButton({ ...rest }: Props) {
             {...rest}
             variant="outline"
             size="xs"
-            color="beets.green"
-            borderColor="beets.green"
+            color="vertek.neonpurple.500"
+            borderColor="vertek.neonpurple.500"
             _focus={{ boxShadow: 'none' }}
             submittingText="Confirm..."
             pendingText="Waiting..."
