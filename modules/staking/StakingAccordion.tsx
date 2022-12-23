@@ -7,8 +7,11 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 
-export function StakingAccordion() {
+export function StakingAccordion(props: { pool: RewardPool }) {
+  const pool = props.pool;
+
   return (
     <GridItem colSpan={2}>
       <Accordion allowToggle padding={4}>
@@ -35,10 +38,10 @@ export function StakingAccordion() {
               </Text>
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
-                  $350,000
+                  ${pool.amountStakedValue}
                 </Text>
                 <Text fontSize="0.7rem" textAlign="right">
-                  3500 tokens
+                  {pool.amountStaked} VRTK
                 </Text>
               </Flex>
               <Text textAlign="left" fontWeight="bold">
@@ -46,7 +49,7 @@ export function StakingAccordion() {
               </Text>
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
-                  1%
+                  {pool.userInfo?.percentageOwned}%
                 </Text>
               </Flex>
               <Text textAlign="left" fontWeight="bold">
@@ -54,10 +57,10 @@ export function StakingAccordion() {
               </Text>
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
-                  25 blocks
+                  {pool.blocksRemaining} blocks
                 </Text>
                 <Text fontSize="0.7rem" textAlign="right">
-                  ~10days
+                  ~{pool.daysRemaining} days
                 </Text>
               </Flex>
 

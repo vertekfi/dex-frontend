@@ -916,12 +916,13 @@ export const GetPoolFilters = gql`
   }
 `;
 export const GetRewardPools = gql`
-  query GetRewardPools {
-    getRewardPools {
+  query GetRewardPools($user: String) {
+    getRewardPools(user: $user) {
       address
       startBlock
       endBlock
       blocksRemaining
+      daysRemaining
       amountStaked
       amountStakedValue
       isPartnerPool
@@ -935,6 +936,16 @@ export const GetRewardPools = gql`
       aprs {
         apr
         daily
+      }
+      userInfo {
+        poolAddress
+        amountDeposited
+        amountDepositedFull
+        depositValue
+        hasPendingRewards
+        pendingRewards
+        pendingRewardValue
+        percentageOwned
       }
     }
   }

@@ -1,6 +1,9 @@
 import { Flex, SimpleGrid, Text, Button } from '@chakra-ui/react';
+import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 
-export function StakingCardGuts() {
+export function StakingCardGuts(props: { pool: RewardPool }) {
+  const pool = props.pool;
+
   return (
     <SimpleGrid
       style={{ minWidth: '100%' }}
@@ -16,10 +19,10 @@ export function StakingCardGuts() {
       </Text>
       <Flex direction="column">
         <Text textAlign="right" fontWeight="bold">
-          10%
+          {pool.aprs.apr}%
         </Text>
         <Text fontSize="0.7rem" textAlign="right">
-          0.01% Daily
+          {pool.aprs.daily}% Daily
         </Text>
       </Flex>
 
@@ -28,10 +31,10 @@ export function StakingCardGuts() {
       </Text>
       <Flex direction="column">
         <Text textAlign="right" fontWeight="bold">
-          0.0 DOGE
+          {pool.userInfo?.pendingRewards} {pool.rewardToken.symbol}
         </Text>
         <Text fontSize="0.7rem" textAlign="right">
-          $0.00
+          ${pool.userInfo?.pendingRewardValue}
         </Text>
       </Flex>
 
@@ -40,22 +43,17 @@ export function StakingCardGuts() {
       </Text>
       <Flex direction="column">
         <Text textAlign="right" fontWeight="bold">
-          0.00 VRTK
+          {pool.userInfo?.amountDeposited} VRTK
         </Text>
         <Text fontSize="0.7rem" textAlign="right">
-          $0.00
+          ${pool.userInfo?.depositValue}
         </Text>
       </Flex>
 
       <Button variant="vertekconnect25" disabled={false} width="full" size="lg">
         Stake
       </Button>
-      <Button
-        variant="vertekconnect2"
-        disabled={false}
-        width="full"
-        size="lg"
-      >
+      <Button variant="vertekconnect2" disabled={false} width="full" size="lg">
         Claim
       </Button>
     </SimpleGrid>

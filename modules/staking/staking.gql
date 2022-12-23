@@ -1,9 +1,10 @@
-query GetRewardPools {
-  getRewardPools {
+query GetRewardPools($user: String) {
+  getRewardPools(user: $user) {
     address
     startBlock
     endBlock
     blocksRemaining
+    daysRemaining
     amountStaked
     amountStakedValue
     isPartnerPool
@@ -14,9 +15,21 @@ query GetRewardPools {
       rewardPerBlock
       logoURI
     }
+
     aprs {
       apr
       daily
+    }
+
+    userInfo {
+      poolAddress
+      amountDeposited
+      amountDepositedFull
+      depositValue
+      hasPendingRewards
+      pendingRewards
+      pendingRewardValue
+      percentageOwned
     }
   }
 }

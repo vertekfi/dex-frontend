@@ -973,6 +973,7 @@ export interface GqlUserSwapVolumeFilter {
 
 export interface Mutation {
   __typename: 'Mutation';
+  doStakes: Scalars['Boolean'];
   poolInitializeSnapshotsForPool: Scalars['String'];
   poolLoadOnChainDataForAllPools: Scalars['String'];
   poolLoadOnChainDataForPoolsWithActiveUpdates: Scalars['String'];
@@ -1097,6 +1098,10 @@ export interface Query {
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
+}
+
+export interface QueryGetRewardPoolsArgs {
+  user?: InputMaybe<Scalars['String']>;
 }
 
 export interface QueryPoolGetAllPoolsSnapshotsArgs {
@@ -1227,6 +1232,7 @@ export interface RewardPool {
   amountStakedValue: Scalars['String'];
   aprs: RewardPoolAprs;
   blocksRemaining: Scalars['String'];
+  daysRemaining: Scalars['String'];
   endBlock: Scalars['Int'];
   isPartnerPool: Scalars['Boolean'];
   rewardToken: RewardPoolRewardToken;
@@ -1245,6 +1251,7 @@ export interface RewardPoolRewardToken {
   address: Scalars['String'];
   logoURI: Scalars['String'];
   name: Scalars['String'];
+  price?: Maybe<Scalars['Int']>;
   rewardPerBlock: Scalars['String'];
   symbol: Scalars['String'];
 }
@@ -3907,7 +3914,9 @@ export type GqlPoolMinimalFragment = {
   } | null;
 };
 
-export type GetRewardPoolsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetRewardPoolsQueryVariables = Exact<{
+  user?: InputMaybe<Scalars['String']>;
+}>;
 
 export type GetRewardPoolsQuery = {
   __typename: 'Query';
@@ -3917,6 +3926,7 @@ export type GetRewardPoolsQuery = {
     startBlock: number;
     endBlock: number;
     blocksRemaining: string;
+    daysRemaining: string;
     amountStaked: string;
     amountStakedValue: string;
     isPartnerPool: boolean;
@@ -3929,6 +3939,17 @@ export type GetRewardPoolsQuery = {
       logoURI: string;
     };
     aprs: { __typename: 'RewardPoolAprs'; apr: string; daily: string };
+    userInfo?: {
+      __typename: 'RewardPoolUserInfo';
+      poolAddress: string;
+      amountDeposited: string;
+      amountDepositedFull: string;
+      depositValue: string;
+      hasPendingRewards: boolean;
+      pendingRewards: string;
+      pendingRewardValue: string;
+      percentageOwned: string;
+    } | null;
   } | null>;
 };
 
@@ -6183,12 +6204,13 @@ export type GetPoolFiltersQueryResult = Apollo.QueryResult<
   GetPoolFiltersQueryVariables
 >;
 export const GetRewardPoolsDocument = gql`
-  query GetRewardPools {
-    getRewardPools {
+  query GetRewardPools($user: String) {
+    getRewardPools(user: $user) {
       address
       startBlock
       endBlock
       blocksRemaining
+      daysRemaining
       amountStaked
       amountStakedValue
       isPartnerPool
@@ -6202,6 +6224,16 @@ export const GetRewardPoolsDocument = gql`
       aprs {
         apr
         daily
+      }
+      userInfo {
+        poolAddress
+        amountDeposited
+        amountDepositedFull
+        depositValue
+        hasPendingRewards
+        pendingRewards
+        pendingRewardValue
+        percentageOwned
       }
     }
   }
@@ -6219,6 +6251,7 @@ export const GetRewardPoolsDocument = gql`
  * @example
  * const { data, loading, error } = useGetRewardPoolsQuery({
  *   variables: {
+ *      user: // value for 'user'
  *   },
  * });
  */

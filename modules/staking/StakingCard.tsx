@@ -34,8 +34,8 @@ export function StakingCard(props: { pool: RewardPool | null }) {
               <Text fontSize="1rem"> Stake VRTK - Earn {pool.rewardToken.symbol} </Text>
             </Flex>
           </Flex>
-          <StakingCardGuts />
-          <StakingAccordion />
+          <StakingCardGuts pool={pool} />
+          <StakingAccordion pool={pool} />
         </GridItem>
       )}
     </>

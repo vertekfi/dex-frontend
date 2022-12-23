@@ -1,12 +1,17 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { useGetRewardPoolsQuery } from '~/apollo/generated/graphql-codegen-generated';
+import { useUserAccount } from '~/lib/user/useUserAccount';
 
 export interface RewardPoolContextType {}
 
 function _useRewardPools() {
+  const { userAddress } = useUserAccount();
   const { data, loading, error, networkStatus, refetch } = useGetRewardPoolsQuery({
     pollInterval: 30000,
     notifyOnNetworkStatusChange: true,
+    variables: {
+      user: userAddress,
+    },
   });
 
   return {

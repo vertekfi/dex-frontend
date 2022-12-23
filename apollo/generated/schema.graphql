@@ -937,6 +937,7 @@ input GqlUserSwapVolumeFilter {
 scalar JSON
 
 type Mutation {
+  doStakes: Boolean!
   poolInitializeSnapshotsForPool(poolId: String!): String!
   poolLoadOnChainDataForAllPools: String!
   poolLoadOnChainDataForPoolsWithActiveUpdates: String!
@@ -981,7 +982,7 @@ type Query {
   blocksGetAverageBlockTime: Int!
   blocksGetBlocksPerDay: Int!
   contentGetNewsItems: [GqlContentNewsItem]!
-  getRewardPools: [RewardPool]!
+  getRewardPools(user: String): [RewardPool]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetBatchSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolBatchSwap!]!
@@ -1060,6 +1061,7 @@ type RewardPool {
   amountStakedValue: String!
   aprs: RewardPoolAprs!
   blocksRemaining: String!
+  daysRemaining: String!
   endBlock: Int!
   isPartnerPool: Boolean!
   rewardToken: RewardPoolRewardToken!
@@ -1076,6 +1078,7 @@ type RewardPoolRewardToken {
   address: String!
   logoURI: String!
   name: String!
+  price: Int
   rewardPerBlock: String!
   symbol: String!
 }

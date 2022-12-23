@@ -4,7 +4,7 @@ import { useRewardPools } from './useRewardPoolStaking';
 
 export function StakingContainer() {
   const { pools } = useRewardPools();
-  // console.log(pools);
+  console.log(pools);
 
   return (
     <SimpleGrid columns={{ sm: 1, md: 2, xl: 3 }} paddingX={8} paddingY={4} spacing={35}>
