@@ -59,7 +59,7 @@ export function LinearPoolListItem({ pool, tokens, onClick, ...rest }: Props) {
                     </Text>
                 </GridItem>
                 {inRange && !nearRange && (
-                    <GridItem textAlign="center" color="beets.green">
+                    <GridItem textAlign="center" color="vertek.neonpurple.500">
                         in range
                     </GridItem>
                 )}
@@ -81,7 +81,7 @@ export function LinearPoolListItem({ pool, tokens, onClick, ...rest }: Props) {
                 <StatGridItem>{numeral(apr).format('0.00%')}</StatGridItem>
                 <StatGridItem>{numeral(pool.dynamicData.totalLiquidity).format('$0.00a')}</StatGridItem>{' '}
                 <GridItem textAlign="right">
-                    <Button onClick={onClick} variant="outline" size="xs" color="beets.green">
+                    <Button onClick={onClick} variant="outline" size="xs" color="vertek.neonpurple.500">
                         Actions
                     </Button>
                 </GridItem>

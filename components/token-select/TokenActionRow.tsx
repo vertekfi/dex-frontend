@@ -14,11 +14,11 @@ export function TokenActionRow({ symbol, address, onClick, action }: TokenRowPro
         <Box width="full" height="56px" px="4">
             <HStack width="full" paddingY="4" justifyContent="space-between">
                 <HStack>
-                    <TokenAvatar address={address} size="xs" />
+                    <TokenAvatar address={address} size="sm" />
                     <Text fontSize="lg">{symbol}</Text>
                 </HStack>
                 <Box>
-                    <Button size="sm" colorScheme="orange" onClick={onClick}>
+                    <Button size="md" colorScheme="blue" onClick={onClick}>
                         {action === 'import' ? 'Import' : 'Remove'}
                     </Button>
                 </Box>

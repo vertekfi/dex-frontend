@@ -31,7 +31,7 @@ export function TransactionStatusToast({ type, status, text, onClose, txHash }: 
             ) : (
                 <Box
                     height="4px"
-                    bg={status === 'CONFIRMED' ? 'beets.green' : 'beets.red'}
+                    bg={status === 'CONFIRMED' ? 'vertek.neonpurple.500' : 'beets.red'}
                     borderTopLeftRadius="sm"
                     borderTopRightRadius="sm"
                     opacity="0.9"

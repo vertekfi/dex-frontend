@@ -12,7 +12,7 @@ export function SlippageTextLinkMenu() {
 
     return (
         <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
-            <MenuButton as={Link} color="beets.green" userSelect="none">
+            <MenuButton as={Link} color="vertek.neonpurple.500" userSelect="none">
                 {numeral(slippage).format('0.0[000]%')}
             </MenuButton>
             <MenuList>
@@ -39,7 +39,7 @@ export function SlippageTextLinkMenu() {
                         aria-label="save-custom"
                         icon={<Check />}
                         isDisabled={!customIsValid}
-                        color="beets.green"
+                        color="vertek.neonpurple.500"
                         onClick={() => {
                             setSlippage(`${parseFloat(custom) / 100}`);
                             onClose();

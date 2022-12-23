@@ -125,7 +125,7 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
                             lineHeight: '1rem',
                             fontWeight: 'semibold',
                             fontSize: 'sm',
-                            color: 'beets.green',
+                            color: 'vertek.neonpurple.500',
                         }}
                         label="My pending rewards"
                         infoText={`Your accumulated liquidity rewards for this pool. You can claim your rewards at any time.`}

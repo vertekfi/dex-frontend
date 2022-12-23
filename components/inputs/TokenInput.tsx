@@ -102,7 +102,7 @@ export const TokenInput = forwardRef(
                                 _focus={{ boxShadow: 'none' }}
                             >
                                 <HStack spacing="none">
-                                    <TokenAvatar size="xs" address={address || ''} />
+                                    <TokenAvatar size="xs" address={address || '0xB98d4C97425d9908E8a53bEec2cF6A5CCA9bFDD5'} />
                                     <Text fontSize="lg" paddingLeft="2">
                                         {token?.symbol}
                                     </Text>
