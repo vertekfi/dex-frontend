@@ -1,6 +1,6 @@
 import { SimpleGrid } from '@chakra-ui/react';
 import { StakingCard } from './StakingCard';
-import { useRewardPools } from './useRewardPoolStaking';
+import { useRewardPools } from './lib/useRewardPoolStaking';
 
 export function StakingContainer() {
   const { pools } = useRewardPools();

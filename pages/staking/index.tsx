@@ -5,7 +5,7 @@ import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
-import { RewardPoolProvider } from '~/modules/staking/useRewardPoolStaking';
+import { RewardPoolProvider } from '~/modules/staking/lib/useRewardPoolStaking';
 
 function StakingPage() {
   const { chainId } = useNetworkConfig();

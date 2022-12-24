@@ -971,6 +971,11 @@ export interface GqlUserSwapVolumeFilter {
   tokenOutIn?: InputMaybe<Array<Scalars['String']>>;
 }
 
+export interface LiquidityGauge {
+  __typename: 'LiquidityGauge';
+  address: Scalars['String'];
+}
+
 export interface Mutation {
   __typename: 'Mutation';
   doStakes: Scalars['Boolean'];
@@ -1065,6 +1070,7 @@ export interface Query {
   blocksGetAverageBlockTime: Scalars['Int'];
   blocksGetBlocksPerDay: Scalars['Int'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
+  getLiquidityGauges?: Maybe<Array<Maybe<LiquidityGauge>>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
   poolGetAllPoolsSnapshots: Array<GqlPoolSnapshot>;
@@ -4235,6 +4241,13 @@ export type GqlTokenDynamicDataFragment = {
   updatedAt: string;
 };
 
+export type GetLiquidityGaugesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetLiquidityGaugesQuery = {
+  __typename: 'Query';
+  getLiquidityGauges?: Array<{ __typename: 'LiquidityGauge'; address: string } | null> | null;
+};
+
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
   fragment GqlPoolBatchSwapSwap on GqlPoolBatchSwapSwap {
     id
@@ -6485,4 +6498,56 @@ export type GetTradeSelectedTokenDataLazyQueryHookResult = ReturnType<
 export type GetTradeSelectedTokenDataQueryResult = Apollo.QueryResult<
   GetTradeSelectedTokenDataQuery,
   GetTradeSelectedTokenDataQueryVariables
+>;
+export const GetLiquidityGaugesDocument = gql`
+  query GetLiquidityGauges {
+    getLiquidityGauges {
+      address
+    }
+  }
+`;
+
+/**
+ * __useGetLiquidityGaugesQuery__
+ *
+ * To run a query within a React component, call `useGetLiquidityGaugesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLiquidityGaugesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLiquidityGaugesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLiquidityGaugesQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetLiquidityGaugesQuery, GetLiquidityGaugesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetLiquidityGaugesQuery, GetLiquidityGaugesQueryVariables>(
+    GetLiquidityGaugesDocument,
+    options,
+  );
+}
+export function useGetLiquidityGaugesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLiquidityGaugesQuery,
+    GetLiquidityGaugesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetLiquidityGaugesQuery, GetLiquidityGaugesQueryVariables>(
+    GetLiquidityGaugesDocument,
+    options,
+  );
+}
+export type GetLiquidityGaugesQueryHookResult = ReturnType<typeof useGetLiquidityGaugesQuery>;
+export type GetLiquidityGaugesLazyQueryHookResult = ReturnType<
+  typeof useGetLiquidityGaugesLazyQuery
+>;
+export type GetLiquidityGaugesQueryResult = Apollo.QueryResult<
+  GetLiquidityGaugesQuery,
+  GetLiquidityGaugesQueryVariables
 >;

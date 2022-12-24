@@ -1010,3 +1010,10 @@ export const GetTradeSelectedTokenData = gql`
   }
   ${GqlTokenDynamicData}
 `;
+export const GetLiquidityGauges = gql`
+  query GetLiquidityGauges {
+    getLiquidityGauges {
+      address
+    }
+  }
+`;

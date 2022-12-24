@@ -936,6 +936,10 @@ input GqlUserSwapVolumeFilter {
 
 scalar JSON
 
+type LiquidityGauge {
+  address: String!
+}
+
 type Mutation {
   doStakes: Boolean!
   poolInitializeSnapshotsForPool(poolId: String!): String!
@@ -982,6 +986,7 @@ type Query {
   blocksGetAverageBlockTime: Int!
   blocksGetBlocksPerDay: Int!
   contentGetNewsItems: [GqlContentNewsItem]!
+  getLiquidityGauges: [LiquidityGauge]
   getRewardPools(user: String): [RewardPool]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
