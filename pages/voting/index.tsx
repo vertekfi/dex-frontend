@@ -6,7 +6,7 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
 import { GaugeListProvider } from '~/modules/voting/lib/useGetGauges';
-import { GaugeActionCard } from '~/modules/voting/components/gauge-action-card';
+import { GaugeActionCard } from '~/modules/voting/components/GaugeActionCard';
 
 function VotingPage() {
   const { chainId } = useNetworkConfig();
