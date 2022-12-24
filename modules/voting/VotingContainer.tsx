@@ -1,6 +1,5 @@
-import { Alert, AlertIcon, Box, Button, Link, Text } from '@chakra-ui/react';
-import { PoolListItem } from '~/modules/pools/components/PoolListItem';
-import { PaginatedTable } from '~/components/table/PaginatedTable';
+import { Card, CardBody } from '@chakra-ui/card';
+import { Box, Button, Flex, HStack, Text, useTheme } from '@chakra-ui/react';
 
 export function VotingContainer() {
   return <Box></Box>;

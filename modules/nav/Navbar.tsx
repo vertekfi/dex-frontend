@@ -32,9 +32,8 @@ export function Navbar({ scrollY }: Props) {
   const { isConnected } = useUserAccount();
   const networkConfig = useNetworkConfig();
   const { data, loading } = useGetProtocolDataQuery({ fetchPolicy: 'cache-first' });
-  const protocolData = data?.protocolData;
   const beetsPrice = data?.beetsPrice;
-  const [activeLink, setActiveLink] = useState('/pools');
+
   return (
     <>
       <Box
