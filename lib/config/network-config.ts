@@ -8,7 +8,7 @@ const AllNetworkConfigs: { [chainId: string]: NetworkConfig } = {
 };
 
 export const networkConfig = AllNetworkConfigs[process.env.NEXT_PUBLIC_CHAIN_ID || '250'];
-//
+
 export const networkList = [
   {
     name: bscNetworkConfig.networkShortName,
