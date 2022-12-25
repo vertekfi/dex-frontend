@@ -19,7 +19,7 @@ export const networkList = [
   {
     name: goerliNetworkConfig.networkShortName,
     chainId: goerliNetworkConfig.chainId,
-    url: 'https://beets.fi',
+    url: 'https://dex-frontend-v2.vercel.app/',
     iconUrl: goerliNetworkConfig.eth.iconUrl,
   },
 ];
