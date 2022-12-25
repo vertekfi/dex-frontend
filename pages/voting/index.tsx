@@ -5,8 +5,9 @@ import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
-import { GaugeListProvider } from '~/modules/voting/lib/useGetGauges';
+import { GaugeListProvider } from '~/modules/voting/lib/useGauges';
 import { GaugeActionCard } from '~/modules/voting/components/GaugeActionCard';
+import { VotingContainer } from '~/modules/voting/VotingContainer';
 
 function VotingPage() {
   const { chainId } = useNetworkConfig();
@@ -34,6 +35,8 @@ function VotingPage() {
           <GaugeActionCard heading=" Locked until" />
           <GaugeActionCard heading=" My veVRTK" />
         </Flex>
+
+        <VotingContainer></VotingContainer>
       </GaugeListProvider>
     </>
   );

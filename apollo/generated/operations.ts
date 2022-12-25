@@ -1013,7 +1013,7 @@ export const GetTradeSelectedTokenData = gql`
 export const GetLiquidityGauges = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
-      address
+      id
     }
   }
 `;

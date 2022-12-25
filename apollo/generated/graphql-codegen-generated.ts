@@ -23,6 +23,36 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugeShare {
+  __typename: 'GaugeShare';
+  /**  User's balance of gauge deposit tokens  */
+  balance: Scalars['BigDecimal'];
+  /**  Equal to: <userAddress>-<gaugeAddress>  */
+  id: Scalars['ID'];
+  /**  Reference to User entity  */
+  user: User;
+}
+
+export interface GaugeType {
+  __typename: 'GaugeType';
+  /**  Type ID  */
+  id: Scalars['ID'];
+  /**  Name of the type - empty string if call reverts  */
+  name: Scalars['String'];
+}
+
+export interface GaugeVote {
+  __typename: 'GaugeVote';
+  /**  Equal to: <userAddress>-<gaugeAddress>  */
+  id: Scalars['ID'];
+  /**  Timestamp at which user voted [seconds]  */
+  timestamp?: Maybe<Scalars['BigInt']>;
+  /**  Reference to User entity  */
+  user: User;
+  /**  Weight of veBAL power user has used to vote  */
+  weight?: Maybe<Scalars['BigDecimal']>;
+}
+
 export interface GqlBalancePoolAprItem {
   __typename: 'GqlBalancePoolAprItem';
   apr: Scalars['BigDecimal'];
@@ -973,7 +1003,22 @@ export interface GqlUserSwapVolumeFilter {
 
 export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
-  address: Scalars['String'];
+  /**  LiquidityGauge contract address  */
+  id: Scalars['ID'];
+  /**  Whether Balancer DAO killed the gauge  */
+  isKilled: Scalars['Boolean'];
+  /**  Address of the pool (lp_token of the gauge)  */
+  poolAddress: Scalars['Bytes'];
+  /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
+  poolId?: Maybe<Scalars['Bytes']>;
+  /**  List of user shares  */
+  shares?: Maybe<Array<GaugeShare>>;
+  /**  ERC20 token symbol  */
+  symbol: Scalars['String'];
+  /**  List of reward tokens depositted in the gauge  */
+  tokens?: Maybe<Array<RewardToken>>;
+  /**  Total of BPTs users have staked in the LiquidityGauge  */
+  totalSupply: Scalars['BigDecimal'];
 }
 
 export interface Mutation {
@@ -1070,7 +1115,7 @@ export interface Query {
   blocksGetAverageBlockTime: Scalars['Int'];
   blocksGetBlocksPerDay: Scalars['Int'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
-  getLiquidityGauges?: Maybe<Array<Maybe<LiquidityGauge>>>;
+  getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
   poolGetAllPoolsSnapshots: Array<GqlPoolSnapshot>;
@@ -1272,6 +1317,59 @@ export interface RewardPoolUserInfo {
   pendingRewards: Scalars['String'];
   percentageOwned: Scalars['String'];
   poolAddress: Scalars['String'];
+}
+
+export interface RewardToken {
+  __typename: 'RewardToken';
+  /**  ERC20 token decimals - zero if call to decimals() reverts  */
+  decimals: Scalars['Int'];
+  /**  Equal to: <tokenAddress>-<gaugeAddress>  */
+  id: Scalars['ID'];
+  /**  Timestamp at which finishes the period of rewards  */
+  periodFinish?: Maybe<Scalars['BigInt']>;
+  /**  Rate of reward tokens streamed per second  */
+  rate?: Maybe<Scalars['BigDecimal']>;
+  /**  ERC20 token symbol - empty string if call to symbol() reverts  */
+  symbol: Scalars['String'];
+  /**  Amount of reward tokens that has been deposited into the gauge  */
+  totalDeposited: Scalars['BigDecimal'];
+}
+
+export interface User {
+  __typename: 'User';
+  /**  List of gauge the user has shares  */
+  gaugeShares?: Maybe<Array<GaugeShare>>;
+  /**  List of votes on gauges  */
+  gaugeVotes?: Maybe<Array<GaugeVote>>;
+  /**  User address  */
+  id: Scalars['ID'];
+  /**  List of locks the user created  */
+  votingLocks?: Maybe<Array<VotingEscrowLock>>;
+}
+
+export interface VotingEscrow {
+  __typename: 'VotingEscrow';
+  /**  VotingEscrow contract address  */
+  id: Scalars['ID'];
+  /**  List of veBAL locks created  */
+  locks?: Maybe<Array<VotingEscrowLock>>;
+  /**  Amount of B-80BAL-20WETH BPT locked  */
+  stakedSupply: Scalars['BigDecimal'];
+}
+
+export interface VotingEscrowLock {
+  __typename: 'VotingEscrowLock';
+  /**  Equal to: <userAdress>-<votingEscrow>  */
+  id: Scalars['ID'];
+  /**  Amount of B-80BAL-20WETH BPT the user has locked  */
+  lockedBalance: Scalars['BigDecimal'];
+  /**  Timestamp at which B-80BAL-20WETH BPT can be unlocked by user [seconds]  */
+  unlockTime?: Maybe<Scalars['BigInt']>;
+  updatedAt: Scalars['Int'];
+  /**  Reference to User entity  */
+  user: User;
+  /**  Reference to VotingEscrow entity  */
+  votingEscrowID: VotingEscrow;
 }
 
 export type GetPoolBatchSwapsQueryVariables = Exact<{
@@ -4245,7 +4343,7 @@ export type GetLiquidityGaugesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetLiquidityGaugesQuery = {
   __typename: 'Query';
-  getLiquidityGauges?: Array<{ __typename: 'LiquidityGauge'; address: string } | null> | null;
+  getLiquidityGauges: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
 };
 
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
@@ -6502,7 +6600,7 @@ export type GetTradeSelectedTokenDataQueryResult = Apollo.QueryResult<
 export const GetLiquidityGaugesDocument = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
-      address
+      id
     }
   }
 `;

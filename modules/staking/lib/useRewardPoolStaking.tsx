@@ -23,7 +23,7 @@ function _useRewardPools() {
   };
 }
 
-export const RewardPoolContext = createContext<RewardPoolContextType | null>(null);
+export const RewardPoolContext = createContext<ReturnType<typeof _useRewardPools> | null>(null);
 
 export function RewardPoolProvider(props: { children: ReactNode }) {
   const value = _useRewardPools();
