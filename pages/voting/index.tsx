@@ -12,33 +12,24 @@ import { VotingContainer } from '~/modules/voting/VotingContainer';
 function VotingPage() {
   const { chainId } = useNetworkConfig();
   return (
-    <>
-      <Head>
-        <title>Vertex | Voting</title>
-      </Head>
-
-      <PageMasthead
-        title="Vertek Voting"
-        image={
-          <NextImage
-            src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
-            width="213.71px"
-            height="68px"
+  <>
+    <Head>
+      <title>Vertex | Voting</title>
+    </Head>
+    <GaugeListProvider>
+    
+        <PageMasthead
+          title="Vertek Voting"
+          image={
+            <NextImage
+              src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
+              width="213.71px"
+              height="68px" /> }
           />
-        }
-      />
-
-      <GaugeListProvider>
-        <Flex flexDirection="row" justifyContent="space-between">
-          <GaugeActionCard heading="My 80VRTK-20BNB" />
-          <GaugeActionCard heading="My locked 80VRTK-20BNB" />
-          <GaugeActionCard heading=" Locked until" />
-          <GaugeActionCard heading=" My veVRTK" />
-        </Flex>
-
-        <VotingContainer></VotingContainer>
-      </GaugeListProvider>
-    </>
+        
+        <VotingContainer />
+    </GaugeListProvider>
+  </>
   );
 }
 
