@@ -23,6 +23,12 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugePoolInfo {
+  __typename: 'GaugePoolInfo';
+  address: Scalars['String'];
+  poolId: Scalars['String'];
+}
+
 export interface GaugeShare {
   __typename: 'GaugeShare';
   /**  User's balance of gauge deposit tokens  */
@@ -1003,14 +1009,16 @@ export interface GqlUserSwapVolumeFilter {
 
 export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
+  /**  Address of the pool (lp_token of the gauge)  */
+  address: Scalars['String'];
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
   isKilled: Scalars['Boolean'];
-  /**  Address of the pool (lp_token of the gauge)  */
-  poolAddress: Scalars['Bytes'];
+  /**  Reference to Pool entity  */
+  pool?: Maybe<GaugePoolInfo>;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
-  poolId?: Maybe<Scalars['Bytes']>;
+  poolId?: Maybe<Scalars['String']>;
   /**  List of user shares  */
   shares?: Maybe<Array<GaugeShare>>;
   /**  ERC20 token symbol  */
@@ -1047,7 +1055,7 @@ export interface Mutation {
   poolUpdateLiquidityValuesForAllPools: Scalars['String'];
   poolUpdateVolumeAndFeeValuesForAllPools: Scalars['String'];
   protocolCacheMetrics: Scalars['String'];
-  syncGaugeData: Scalars['String'];
+  syncGaugeData: Scalars['Boolean'];
   tokenDeletePrice: Scalars['Boolean'];
   tokenDeleteTokenType: Scalars['String'];
   tokenInitChartData: Scalars['String'];
@@ -1117,6 +1125,7 @@ export interface Query {
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getRewardPools: Array<Maybe<RewardPool>>;
+  getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
   poolGetAllPoolsSnapshots: Array<GqlPoolSnapshot>;
   poolGetBatchSwaps: Array<GqlPoolBatchSwap>;
@@ -1153,6 +1162,11 @@ export interface Query {
 
 export interface QueryGetRewardPoolsArgs {
   user?: InputMaybe<Scalars['String']>;
+}
+
+export interface QueryGetUserGaugeStakesArgs {
+  poolIds: Array<Scalars['String']>;
+  user: Scalars['String'];
 }
 
 export interface QueryPoolGetAllPoolsSnapshotsArgs {
