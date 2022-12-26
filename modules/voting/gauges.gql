@@ -4,7 +4,7 @@ query GetLiquidityGauges {
   }
 }
 
-query UserGetUserStakesQuery($user: String!, $poolIds: [String!]!) {
+query GetUserStakes($user: String!, $poolIds: [String!]!) {
   getUserGaugeStakes(user: $user, poolIds: $poolIds) {
     id
   }

@@ -4360,12 +4360,12 @@ export type GetLiquidityGaugesQuery = {
   getLiquidityGauges: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
 };
 
-export type UserGetUserStakesQueryQueryVariables = Exact<{
+export type GetUserStakesQueryVariables = Exact<{
   user: Scalars['String'];
   poolIds: Array<Scalars['String']> | Scalars['String'];
 }>;
 
-export type UserGetUserStakesQueryQuery = {
+export type GetUserStakesQuery = {
   __typename: 'Query';
   getUserGaugeStakes: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
 };
@@ -6673,8 +6673,8 @@ export type GetLiquidityGaugesQueryResult = Apollo.QueryResult<
   GetLiquidityGaugesQuery,
   GetLiquidityGaugesQueryVariables
 >;
-export const UserGetUserStakesQueryDocument = gql`
-  query UserGetUserStakesQuery($user: String!, $poolIds: [String!]!) {
+export const GetUserStakesDocument = gql`
+  query GetUserStakes($user: String!, $poolIds: [String!]!) {
     getUserGaugeStakes(user: $user, poolIds: $poolIds) {
       id
     }
@@ -6682,53 +6682,43 @@ export const UserGetUserStakesQueryDocument = gql`
 `;
 
 /**
- * __useUserGetUserStakesQueryQuery__
+ * __useGetUserStakesQuery__
  *
- * To run a query within a React component, call `useUserGetUserStakesQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserGetUserStakesQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserStakesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserStakesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useUserGetUserStakesQueryQuery({
+ * const { data, loading, error } = useGetUserStakesQuery({
  *   variables: {
  *      user: // value for 'user'
  *      poolIds: // value for 'poolIds'
  *   },
  * });
  */
-export function useUserGetUserStakesQueryQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    UserGetUserStakesQueryQuery,
-    UserGetUserStakesQueryQueryVariables
-  >,
+export function useGetUserStakesQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserStakesQuery, GetUserStakesQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<UserGetUserStakesQueryQuery, UserGetUserStakesQueryQueryVariables>(
-    UserGetUserStakesQueryDocument,
+  return Apollo.useQuery<GetUserStakesQuery, GetUserStakesQueryVariables>(
+    GetUserStakesDocument,
     options,
   );
 }
-export function useUserGetUserStakesQueryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    UserGetUserStakesQueryQuery,
-    UserGetUserStakesQueryQueryVariables
-  >,
+export function useGetUserStakesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserStakesQuery, GetUserStakesQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UserGetUserStakesQueryQuery, UserGetUserStakesQueryQueryVariables>(
-    UserGetUserStakesQueryDocument,
+  return Apollo.useLazyQuery<GetUserStakesQuery, GetUserStakesQueryVariables>(
+    GetUserStakesDocument,
     options,
   );
 }
-export type UserGetUserStakesQueryQueryHookResult = ReturnType<
-  typeof useUserGetUserStakesQueryQuery
->;
-export type UserGetUserStakesQueryLazyQueryHookResult = ReturnType<
-  typeof useUserGetUserStakesQueryLazyQuery
->;
-export type UserGetUserStakesQueryQueryResult = Apollo.QueryResult<
-  UserGetUserStakesQueryQuery,
-  UserGetUserStakesQueryQueryVariables
+export type GetUserStakesQueryHookResult = ReturnType<typeof useGetUserStakesQuery>;
+export type GetUserStakesLazyQueryHookResult = ReturnType<typeof useGetUserStakesLazyQuery>;
+export type GetUserStakesQueryResult = Apollo.QueryResult<
+  GetUserStakesQuery,
+  GetUserStakesQueryVariables
 >;

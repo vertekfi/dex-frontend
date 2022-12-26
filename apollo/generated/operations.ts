@@ -1017,8 +1017,8 @@ export const GetLiquidityGauges = gql`
     }
   }
 `;
-export const UserGetUserStakesQuery = gql`
-  query UserGetUserStakesQuery($user: String!, $poolIds: [String!]!) {
+export const GetUserStakes = gql`
+  query GetUserStakes($user: String!, $poolIds: [String!]!) {
     getUserGaugeStakes(user: $user, poolIds: $poolIds) {
       id
     }
