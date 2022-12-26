@@ -7,17 +7,17 @@ export function VotingContainer() {
   const { gauges } = useGauges();
 
   return (
-  <div>
-      
-      <Flex flexDirection="row" justifyContent="space-between">
+  <>
+    <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} paddingX={8} paddingY={4} spacing={35}>
               <GaugeActionCard heading="My 80VRTK-20BNB" />
               <GaugeActionCard heading="My locked 80VRTK-20BNB" />
-              <GaugeActionCard heading=" Locked until" />
+              <GaugeActionCard heading=" Locked until..." />
               <GaugeActionCard heading=" My veVRTK" />
-      </Flex>
-      <GaugeList />
 
-  </div>
+    </SimpleGrid>
+    <GaugeList />
+
+</>
 
   ); 
 } 
