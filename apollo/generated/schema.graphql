@@ -8,6 +8,11 @@ scalar Bytes
 
 scalar Date
 
+type GaugePoolInfo {
+  address: String!
+  poolId: String!
+}
+
 type GaugeShare {
   """
    User's balance of gauge deposit tokens
@@ -989,6 +994,11 @@ scalar JSON
 
 type LiquidityGauge {
   """
+   Address of the pool (lp_token of the gauge)
+  """
+  address: String!
+
+  """
    LiquidityGauge contract address
   """
   id: ID!
@@ -999,14 +1009,14 @@ type LiquidityGauge {
   isKilled: Boolean!
 
   """
-   Address of the pool (lp_token of the gauge)
+   Reference to Pool entity
   """
-  poolAddress: Bytes!
+  pool: GaugePoolInfo
 
   """
    Pool ID if lp_token is a Balancer pool; null otherwise
   """
-  poolId: Bytes
+  poolId: String
 
   """
    List of user shares
@@ -1054,7 +1064,7 @@ type Mutation {
   poolUpdateLiquidityValuesForAllPools: String!
   poolUpdateVolumeAndFeeValuesForAllPools: String!
   protocolCacheMetrics: String!
-  syncGaugeData: String!
+  syncGaugeData: Boolean!
   tokenDeletePrice(timestamp: Int!, tokenAddress: String!): Boolean!
   tokenDeleteTokenType(tokenAddress: String!, type: GqlTokenType!): String!
   tokenInitChartData(tokenAddress: String!): String!
@@ -1077,6 +1087,7 @@ type Query {
   contentGetNewsItems: [GqlContentNewsItem]!
   getLiquidityGauges: [LiquidityGauge]!
   getRewardPools(user: String): [RewardPool]!
+  getUserGaugeStakes(poolIds: [String!]!, user: String!): [LiquidityGauge]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
   poolGetBatchSwaps(first: Int, skip: Int, where: GqlPoolSwapFilter): [GqlPoolBatchSwap!]!

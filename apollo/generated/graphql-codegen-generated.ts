@@ -23,6 +23,12 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugePoolInfo {
+  __typename: 'GaugePoolInfo';
+  address: Scalars['String'];
+  poolId: Scalars['String'];
+}
+
 export interface GaugeShare {
   __typename: 'GaugeShare';
   /**  User's balance of gauge deposit tokens  */
@@ -1003,14 +1009,16 @@ export interface GqlUserSwapVolumeFilter {
 
 export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
+  /**  Address of the pool (lp_token of the gauge)  */
+  address: Scalars['String'];
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
   isKilled: Scalars['Boolean'];
-  /**  Address of the pool (lp_token of the gauge)  */
-  poolAddress: Scalars['Bytes'];
+  /**  Reference to Pool entity  */
+  pool?: Maybe<GaugePoolInfo>;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
-  poolId?: Maybe<Scalars['Bytes']>;
+  poolId?: Maybe<Scalars['String']>;
   /**  List of user shares  */
   shares?: Maybe<Array<GaugeShare>>;
   /**  ERC20 token symbol  */
@@ -1047,7 +1055,7 @@ export interface Mutation {
   poolUpdateLiquidityValuesForAllPools: Scalars['String'];
   poolUpdateVolumeAndFeeValuesForAllPools: Scalars['String'];
   protocolCacheMetrics: Scalars['String'];
-  syncGaugeData: Scalars['String'];
+  syncGaugeData: Scalars['Boolean'];
   tokenDeletePrice: Scalars['Boolean'];
   tokenDeleteTokenType: Scalars['String'];
   tokenInitChartData: Scalars['String'];
@@ -1117,6 +1125,7 @@ export interface Query {
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getRewardPools: Array<Maybe<RewardPool>>;
+  getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
   poolGetAllPoolsSnapshots: Array<GqlPoolSnapshot>;
   poolGetBatchSwaps: Array<GqlPoolBatchSwap>;
@@ -1153,6 +1162,11 @@ export interface Query {
 
 export interface QueryGetRewardPoolsArgs {
   user?: InputMaybe<Scalars['String']>;
+}
+
+export interface QueryGetUserGaugeStakesArgs {
+  poolIds: Array<Scalars['String']>;
+  user: Scalars['String'];
 }
 
 export interface QueryPoolGetAllPoolsSnapshotsArgs {
@@ -4346,6 +4360,16 @@ export type GetLiquidityGaugesQuery = {
   getLiquidityGauges: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
 };
 
+export type UserGetUserStakesQueryQueryVariables = Exact<{
+  user: Scalars['String'];
+  poolIds: Array<Scalars['String']> | Scalars['String'];
+}>;
+
+export type UserGetUserStakesQueryQuery = {
+  __typename: 'Query';
+  getUserGaugeStakes: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
+};
+
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
   fragment GqlPoolBatchSwapSwap on GqlPoolBatchSwapSwap {
     id
@@ -6648,4 +6672,63 @@ export type GetLiquidityGaugesLazyQueryHookResult = ReturnType<
 export type GetLiquidityGaugesQueryResult = Apollo.QueryResult<
   GetLiquidityGaugesQuery,
   GetLiquidityGaugesQueryVariables
+>;
+export const UserGetUserStakesQueryDocument = gql`
+  query UserGetUserStakesQuery($user: String!, $poolIds: [String!]!) {
+    getUserGaugeStakes(user: $user, poolIds: $poolIds) {
+      id
+    }
+  }
+`;
+
+/**
+ * __useUserGetUserStakesQueryQuery__
+ *
+ * To run a query within a React component, call `useUserGetUserStakesQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserGetUserStakesQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserGetUserStakesQueryQuery({
+ *   variables: {
+ *      user: // value for 'user'
+ *      poolIds: // value for 'poolIds'
+ *   },
+ * });
+ */
+export function useUserGetUserStakesQueryQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    UserGetUserStakesQueryQuery,
+    UserGetUserStakesQueryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<UserGetUserStakesQueryQuery, UserGetUserStakesQueryQueryVariables>(
+    UserGetUserStakesQueryDocument,
+    options,
+  );
+}
+export function useUserGetUserStakesQueryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    UserGetUserStakesQueryQuery,
+    UserGetUserStakesQueryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<UserGetUserStakesQueryQuery, UserGetUserStakesQueryQueryVariables>(
+    UserGetUserStakesQueryDocument,
+    options,
+  );
+}
+export type UserGetUserStakesQueryQueryHookResult = ReturnType<
+  typeof useUserGetUserStakesQueryQuery
+>;
+export type UserGetUserStakesQueryLazyQueryHookResult = ReturnType<
+  typeof useUserGetUserStakesQueryLazyQuery
+>;
+export type UserGetUserStakesQueryQueryResult = Apollo.QueryResult<
+  UserGetUserStakesQueryQuery,
+  UserGetUserStakesQueryQueryVariables
 >;
