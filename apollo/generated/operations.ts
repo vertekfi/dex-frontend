@@ -1017,3 +1017,10 @@ export const GetLiquidityGauges = gql`
     }
   }
 `;
+export const UserGetUserStakesQuery = gql`
+  query UserGetUserStakesQuery($user: String!, $poolIds: [String!]!) {
+    getUserGaugeStakes(user: $user, poolIds: $poolIds) {
+      id
+    }
+  }
+`;
