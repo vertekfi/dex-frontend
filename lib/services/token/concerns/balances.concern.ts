@@ -49,7 +49,6 @@ export class BalancesConcern {
       }
       const balances: BigNumber[] = (
         await multicall<BigNumberish>(
-          this.chainId,
           this.provider,
           ERC20Abi,
           tokens.map((token) => [token.address, 'balanceOf', [account]]),

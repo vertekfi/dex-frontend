@@ -1,7 +1,7 @@
 import { providers } from 'ethers';
 import { ChainProviderFn } from 'wagmi';
 import { JsonRpcProviderConfig } from '@wagmi/core/dist/declarations/src/providers/jsonRpc';
-import { StaticJsonRpcBatchProvider } from '~/lib/services/rpc-provider/static-json-rpc-batch-provier';
+import { StaticJsonRpcBatchProvider } from '~/lib/services/rpc-provider/static-json-rpc-batch-provider';
 
 const providerCache: { [chainId: string]: StaticJsonRpcBatchProvider } = {};
 

@@ -10,6 +10,7 @@ export function useStakingClaimRewards(staking: GqlPoolStaking | null) {
   const { userAddress } = useUserAccount();
   const { submit, submitAsync, ...rest } = useSubmitTransaction({
     config: {
+      // TODO: none of this is needed since we arent doing "child chain" things
       addressOrName:
         staking?.type === 'GAUGE'
           ? networkConfig.gauge.rewardHelperAddress
@@ -24,12 +25,12 @@ export function useStakingClaimRewards(staking: GqlPoolStaking | null) {
   function claim() {
     if (staking) {
       switch (staking.type) {
-        case 'MASTER_CHEF':
-        case 'FRESH_BEETS':
-          return submit({
-            args: [staking.farm?.id, userAddress],
-            toastText: 'Claim pending rewards',
-          });
+        // case 'MASTER_CHEF':
+        // case 'FRESH_BEETS':
+        //   return submit({
+        //     args: [staking.farm?.id, userAddress],
+        //     toastText: 'Claim pending rewards',
+        //   });
         case 'GAUGE':
           return submit({
             args: [staking.gauge?.gaugeAddress, userAddress],

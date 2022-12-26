@@ -1,14 +1,15 @@
 import { AmountHumanReadable, TokenBase } from '~/lib/services/token/token-types';
 import { BaseProvider } from '@ethersproject/providers';
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
-import ChildChainGaugeRewardHelper from '~/lib/abi/ChildChainGaugeRewardHelper.json';
+// import ChildChainGaugeRewardHelper from '~/lib/abi/ChildChainGaugeRewardHelper.json';
+import LiquidityGaugeAbi from '~/lib/abi/LiquidityGaugeV5.json';
 import { BigNumber, Contract } from 'ethers';
 import { formatFixed } from '@ethersproject/bignumber';
 import ERC20Abi from '~/lib/abi/ERC20.json';
 import { Multicaller } from '~/lib/services/util/multicaller.service';
+import { networkProvider } from '~/lib/global/network';
 import { GqlPoolStakingGauge } from '~/apollo/generated/graphql-codegen-generated';
-import { networkConfig } from '~/lib/config/network-config';
-import { StakingPendingRewardAmount } from '~/lib/services/staking/staking-types';
+import { StakingPendingRewardAmount } from './staking-types';
 
 const MAX_REWARD_TOKENS = 8;
 
@@ -21,11 +22,10 @@ interface GetUserStakedBalanceInput {
 
 export class GaugeStakingService {
   constructor(
-    private readonly chainId: string,
-    private readonly gaugeRewardHelperAddress: string,
+    private readonly provider: BaseProvider, // private readonly chainId: string, // private readonly gaugeRewardHelperAddress: string,
   ) {}
 
-  public async getUserStakedBalance({
+  async getUserStakedBalance({
     userAddress,
     provider,
     gaugeAddress,
@@ -37,7 +37,7 @@ export class GaugeStakingService {
     return formatFixed(balance, decimals);
   }
 
-  public async getGaugeTokenBalance({
+  async getGaugeTokenBalance({
     tokenAddress,
     gaugeAddress,
     provider,
@@ -54,7 +54,19 @@ export class GaugeStakingService {
     return formatFixed(response, decimals);
   }
 
-  public async getPendingRewards({
+  async stake(amount: BigNumber) {}
+
+  async unstake(amount: BigNumber) {}
+
+  private getMulticaller(): Multicaller {
+    return new Multicaller(this.provider, LiquidityGaugeAbi);
+  }
+
+  static getMulticaller(provider: BaseProvider): Multicaller {
+    return new Multicaller(provider, LiquidityGaugeAbi);
+  }
+
+  async getPendingRewards({
     userAddress,
     gauges,
     tokens,
@@ -65,50 +77,49 @@ export class GaugeStakingService {
     tokens: TokenBase[];
     provider: BaseProvider;
   }): Promise<StakingPendingRewardAmount[]> {
-    const multicaller = new Multicaller(this.chainId, provider, ChildChainGaugeRewardHelper);
+    // const multicaller = new Multicaller(this.provider, ChildChainGaugeRewardHelper);
 
-    for (const gauge of gauges) {
-      for (const reward of gauge.rewards) {
-        multicaller.call(
-          `${gauge.id}.${reward.tokenAddress}`,
-          this.gaugeRewardHelperAddress,
-          'pendingRewards',
-          [gauge.gaugeAddress, userAddress, reward.tokenAddress],
-        );
-      }
-    }
+    // for (const gauge of gauges) {
+    //   for (const reward of gauge.rewards) {
+    //     multicaller.call(
+    //       `${gauge.id}.${reward.tokenAddress}`,
+    //       this.gaugeRewardHelperAddress,
+    //       'pendingRewards',
+    //       [gauge.gaugeAddress, userAddress, reward.tokenAddress],
+    //     );
+    //   }
+    // }
 
-    if (multicaller.numCalls === 0) {
-      return [];
-    }
+    // if (multicaller.numCalls === 0) {
+    //   return [];
+    // }
 
-    const result: {
-      [gaugeId: string]: {
-        [tokenAddress: string]: BigNumber;
-      };
-    } = await multicaller.execute({});
+    // const result: {
+    //   [gaugeId: string]: {
+    //     [tokenAddress: string]: BigNumber;
+    //   };
+    // } = await multicaller.execute({});
 
-    const pendingRewardAmounts: StakingPendingRewardAmount[] = [];
+    // const pendingRewardAmounts: StakingPendingRewardAmount[] = [];
 
-    for (const gauge of gauges) {
-      for (const reward of gauge.rewards) {
-        if (result[gauge.id][reward.tokenAddress]) {
-          const token = tokens.find((token) => token.address === reward.tokenAddress.toLowerCase());
+    // for (const gauge of gauges) {
+    //   for (const reward of gauge.rewards) {
+    //     if (result[gauge.id][reward.tokenAddress]) {
+    //       const token = tokens.find((token) => token.address === reward.tokenAddress.toLowerCase());
 
-          pendingRewardAmounts.push({
-            address: reward.tokenAddress,
-            amount: formatFixed(result[gauge.id][reward.tokenAddress], token?.decimals || 18),
-            id: gauge.id,
-          });
-        }
-      }
-    }
+    //       pendingRewardAmounts.push({
+    //         address: reward.tokenAddress,
+    //         amount: formatFixed(result[gauge.id][reward.tokenAddress], token?.decimals || 18),
+    //         id: gauge.id,
+    //       });
+    //     }
+    //   }
+    // }
 
-    return pendingRewardAmounts;
+    // return pendingRewardAmounts;
+
+    return [];
   }
 }
 
-export const gaugeStakingService = new GaugeStakingService(
-  networkConfig.chainId,
-  networkConfig.gauge.rewardHelperAddress,
-);
+export const gaugeStakingService = new GaugeStakingService(networkProvider);

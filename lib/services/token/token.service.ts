@@ -98,5 +98,5 @@ export const tokenService = new TokenService(
     networkConfig.eth.address,
     networkConfig.eth.decimals,
   ),
-  new AllowancesConcern(networkProvider, networkConfig.chainId),
+  new AllowancesConcern(networkProvider),
 );

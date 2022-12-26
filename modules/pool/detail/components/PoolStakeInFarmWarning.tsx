@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Link, useDisclosure } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, useDisclosure } from '@chakra-ui/react';
 import { PoolStakeModal } from '~/modules/pool/stake/PoolStakeModal';
 import { usePoolUserBptBalance } from '~/modules/pool/lib/usePoolUserBptBalance';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';

@@ -47,7 +47,7 @@ export const bscNetworkConfig: NetworkConfig = {
   masterChefContractAddress: '',
   defaultTokenIn: '',
   defaultTokenOut: '',
-  farmTypeName: 'farm',
+  farmTypeName: 'gauge',
   additionalLinks: [
     {
       title: 'Vote',
