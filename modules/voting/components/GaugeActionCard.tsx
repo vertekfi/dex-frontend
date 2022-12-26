@@ -1,7 +1,5 @@
 import { Box, Flex, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import placeholder from '../../../assets/images/fantom-logo.png'; 
-
 
 
 export interface GaugeActionCardProps {
