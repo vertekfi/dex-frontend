@@ -1,6 +1,12 @@
 query GetLiquidityGauges {
   getLiquidityGauges {
     id
+    symbol
+    poolId
+    totalSupply
+    factory {
+      id
+    }
   }
 }
 

@@ -46,6 +46,8 @@ export const fantomNetworkConfig: NetworkConfig = {
     votingEscrow: {
       veAddress: '',
       gaugeController: '',
+      veBALHelpers: '',
+      tokenAdmin: '',
     },
   },
   beetsPoolOwnerAddress: '0xcd983793adb846dce4830c22f30c7ef0c864a776',

@@ -42,6 +42,8 @@ export const goerliNetworkConfig: NetworkConfig = {
     votingEscrow: {
       veAddress: '0x1f54bAceCb21586C0337694fAe77D2E518da21b7',
       gaugeController: '0x2ee2f54e95ce6f24dAdbDfa8221a6F763E8eEB96',
+      veBALHelpers: '0xe030325aDa7e0365EBD0efb4adf3ef55F5Fd3BAE',
+      tokenAdmin: '0x9Ad2B6bc51B1bFe3E21918447f3B189324AD62bc',
     },
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',

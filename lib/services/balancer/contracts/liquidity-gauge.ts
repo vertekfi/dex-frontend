@@ -2,17 +2,16 @@ import { BaseProvider } from '@ethersproject/providers';
 import { BigNumber, Contract } from 'ethers';
 import { formatUnits, getAddress } from 'ethers/lib/utils';
 import { mapValues } from 'lodash';
-import { useContractWrite, useSigner, useWaitForTransaction } from 'wagmi';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
 import { ZERO_ADDRESS } from '~/lib/util/web3';
-import { Multicaller } from '../util/multicaller.service';
-import { web3Service } from '../web3/web3.service';
+import { Multicaller } from '../../util/multicaller.service';
+import { web3Service } from '../../web3/web3.service';
 
 const MAX_REWARD_TOKENS = 8;
 
-export class LiquidityGauge {
+export class LiquidityGaugeClass {
   instance: Contract;
 
   constructor(public readonly address: string, private readonly abi = LiquidityGaugeV5Abi) {
@@ -57,7 +56,7 @@ export class LiquidityGauge {
   static async getRewardTokensForGauges(
     gaugeAddresses: string[],
   ): Promise<Record<string, string[]>> {
-    const multicaller = LiquidityGauge.getMulticaller();
+    const multicaller = LiquidityGaugeClass.getMulticaller();
     gaugeAddresses.forEach((gaugeAddress) => {
       for (let i = 0; i < MAX_REWARD_TOKENS; i++) {
         multicaller.call(
@@ -77,7 +76,7 @@ export class LiquidityGauge {
   }
 
   static async getRewardTokenDataForGauges(gaugeRewardTokenMap: Record<string, string[]>) {
-    const multicaller = LiquidityGauge.getMulticaller();
+    const multicaller = LiquidityGaugeClass.getMulticaller();
     for (const gaugeAddress of Object.keys(gaugeRewardTokenMap)) {
       const _gaugeAddress = getAddress(gaugeAddress);
       for (const rewardToken of gaugeRewardTokenMap[gaugeAddress]) {

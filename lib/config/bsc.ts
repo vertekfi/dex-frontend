@@ -40,6 +40,8 @@ export const bscNetworkConfig: NetworkConfig = {
     votingEscrow: {
       veAddress: '',
       gaugeController: '',
+      veBALHelpers: '',
+      tokenAdmin: '',
     },
   },
   beetsPoolOwnerAddress: '',

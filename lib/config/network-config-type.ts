@@ -47,6 +47,8 @@ export interface NetworkConfig {
     votingEscrow: {
       veAddress: string;
       gaugeController: string;
+      veBALHelpers: string;
+      tokenAdmin: string;
     };
   };
   beetsPoolOwnerAddress: string;
