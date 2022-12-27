@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { GqlPoolStaking, GqlPoolStakingGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { useProvider } from 'wagmi';
 import { useGetTokens } from '~/lib/global/useToken';
-import { StakingPendingRewardAmount } from '~/lib/services/staking/staking-types';
+import { StakingPendingRewardAmount } from '~/lib/services/staking/types';
 import { gaugeStakingService } from '~/lib/services/staking/gauge-staking.service';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { useRef } from 'react';

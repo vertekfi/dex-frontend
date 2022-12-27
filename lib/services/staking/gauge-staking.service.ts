@@ -5,9 +5,8 @@ import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { BigNumber, Contract } from 'ethers';
 import { formatFixed } from '@ethersproject/bignumber';
 import ERC20Abi from '~/lib/abi/ERC20.json';
-import { networkProvider } from '~/lib/global/network';
 import { GqlPoolStakingGauge } from '~/apollo/generated/graphql-codegen-generated';
-import { StakingPendingRewardAmount } from './staking-types';
+import { StakingPendingRewardAmount } from './types';
 
 interface GetUserStakedBalanceInput {
   userAddress: string;
@@ -17,7 +16,7 @@ interface GetUserStakedBalanceInput {
 }
 
 export class GaugeStakingService {
-  constructor(private readonly provider: BaseProvider) {}
+  constructor() {}
 
   async getUserStakedBalance({
     userAddress,
@@ -104,4 +103,4 @@ export class GaugeStakingService {
   }
 }
 
-export const gaugeStakingService = new GaugeStakingService(networkProvider);
+export const gaugeStakingService = new GaugeStakingService();

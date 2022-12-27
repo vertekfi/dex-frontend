@@ -5,31 +5,32 @@ import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
-import { GaugeListProvider } from '~/modules/voting/lib/useGauges';
+import { GaugeListProvider } from '~/modules/voting/lib/useVotingGauges';
 import { GaugeActionCard } from '~/modules/voting/components/GaugeActionCard';
 import { VotingContainer } from '~/modules/voting/VotingContainer';
 
 function VotingPage() {
   const { chainId } = useNetworkConfig();
   return (
-  <>
-    <Head>
-      <title>Vertex | Voting</title>
-    </Head>
-    <GaugeListProvider>
-    
+    <>
+      <Head>
+        <title>Vertex | Voting</title>
+      </Head>
+      <GaugeListProvider>
         <PageMasthead
           title="Vertek Voting"
           image={
             <NextImage
               src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
               width="213.71px"
-              height="68px" /> }
-          />
-        
+              height="68px"
+            />
+          }
+        />
+
         <VotingContainer />
-    </GaugeListProvider>
-  </>
+      </GaugeListProvider>
+    </>
   );
 }
 

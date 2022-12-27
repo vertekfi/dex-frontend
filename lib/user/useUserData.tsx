@@ -16,7 +16,6 @@ export function _useUserData() {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-first',
   });
-  const { priceForAmount } = useGetTokens();
   const currentUserAddress = currentUserAddressVar();
   const userAddressChanged = userAddress !== currentUserAddress;
 

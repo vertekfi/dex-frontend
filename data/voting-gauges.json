@@ -1,0 +1,80 @@
+[
+  {
+    "address": "0x1026a659b6904cd93bB68bCc5DeAe953ED292b76",
+    "network": 5,
+    "pool": {
+      "id": "0xf9cd9e48787fc32148991fc68806ef4612ebc129000200000000000000000000",
+      "address": "0xf9cD9E48787FC32148991fC68806Ef4612Ebc129",
+      "poolType": "Weighted",
+      "symbol": "WBNB-BUSD",
+      "tokens": [
+        {
+          "address": "0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6",
+          "weight": "0.5",
+          "symbol": "WBNB"
+        },
+        {
+          "address": "0x7faA8158FaA037CC7516eF1f6864af44d75654AE",
+          "weight": "0.5",
+          "symbol": "BUSD"
+        }
+      ]
+    },
+    "tokenLogoURIs": {
+      "0x7faA8158FaA037CC7516eF1f6864af44d75654AE": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766",
+      "0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6": "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850"
+    }
+  },
+  {
+    "address": "0x36b9Bfb55e3C610272eb254432040BEaB591BA6e",
+    "network": 5,
+    "pool": {
+      "id": "0x0d3a4645f00380bf3b149c5f4317f9a35e027349000200000000000000000002",
+      "address": "0x0d3a4645f00380bf3b149c5f4317f9a35e027349",
+      "poolType": "Weighted",
+      "symbol": "AMES-BUSD",
+      "tokens": [
+        {
+          "address": "0xd71114b3AD1Ec657B4194E0B3b7C9fC71C7bdbEF",
+          "weight": "0.5",
+          "symbol": "AMES"
+        },
+        {
+          "address": "0x7faA8158FaA037CC7516eF1f6864af44d75654AE",
+          "weight": "0.5",
+          "symbol": "BUSD"
+        }
+      ]
+    },
+    "tokenLogoURIs": {
+      "0x7faA8158FaA037CC7516eF1f6864af44d75654AE": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766",
+      "0xd71114b3AD1Ec657B4194E0B3b7C9fC71C7bdbEF": "https://assets.coingecko.com/coins/images/23973/small/ames.png?1645871205"
+    }
+  },
+  {
+    "address": "0x08D85c0709626d6f771b3eF27f314f25BE8eF84d",
+    "network": 5,
+    "pool": {
+      "id": "0x9d2007a0d00df0baeae8307a19cfac3ce35a66d1000200000000000000000001",
+      "address": "0x9d2007A0d00Df0BAeAE8307a19CfAc3Ce35A66D1",
+      "poolType": "Weighted",
+      "symbol": "AHARE-BUSD",
+      "tokens": [
+        {
+          "address": "0x626355410729525eec3fd5628D840d683F24456d",
+          "weight": "0.5",
+          "symbol": "ASHARE"
+        },
+        {
+          "address": "0x7faA8158FaA037CC7516eF1f6864af44d75654AE",
+          "weight": "0.5",
+          "symbol": "BUSD"
+        }
+      ]
+    },
+    "tokenLogoURIs": {
+      "0x7faA8158FaA037CC7516eF1f6864af44d75654AE": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766",
+      "0x626355410729525eec3fd5628D840d683F24456d": "https://assets.coingecko.com/coins/images/23974/small/ashare.png?1645871503"
+    }
+  }
+]
