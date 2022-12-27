@@ -2,16 +2,12 @@ import { AmountHumanReadable, TokenBase } from '~/lib/services/token/token-types
 import { BaseProvider } from '@ethersproject/providers';
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 // import ChildChainGaugeRewardHelper from '~/lib/abi/ChildChainGaugeRewardHelper.json';
-import LiquidityGaugeAbi from '~/lib/abi/LiquidityGaugeV5.json';
 import { BigNumber, Contract } from 'ethers';
 import { formatFixed } from '@ethersproject/bignumber';
 import ERC20Abi from '~/lib/abi/ERC20.json';
-import { Multicaller } from '~/lib/services/util/multicaller.service';
 import { networkProvider } from '~/lib/global/network';
 import { GqlPoolStakingGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { StakingPendingRewardAmount } from './staking-types';
-
-const MAX_REWARD_TOKENS = 8;
 
 interface GetUserStakedBalanceInput {
   userAddress: string;
@@ -21,9 +17,7 @@ interface GetUserStakedBalanceInput {
 }
 
 export class GaugeStakingService {
-  constructor(
-    private readonly provider: BaseProvider, // private readonly chainId: string, // private readonly gaugeRewardHelperAddress: string,
-  ) {}
+  constructor(private readonly provider: BaseProvider) {}
 
   async getUserStakedBalance({
     userAddress,
@@ -52,18 +46,6 @@ export class GaugeStakingService {
     const response: BigNumber = await tokenContract.balanceOf(gaugeAddress);
 
     return formatFixed(response, decimals);
-  }
-
-  async stake(amount: BigNumber) {}
-
-  async unstake(amount: BigNumber) {}
-
-  private getMulticaller(): Multicaller {
-    return new Multicaller(this.provider, LiquidityGaugeAbi);
-  }
-
-  static getMulticaller(provider: BaseProvider): Multicaller {
-    return new Multicaller(provider, LiquidityGaugeAbi);
   }
 
   async getPendingRewards({
