@@ -6,7 +6,7 @@ export interface GaugeActionCardProps {
   heading: string;
 }
 
-export function GaugeActionCard(props: GaugeActionCardProps) {
+export function GaugeActionCard1(props: GaugeActionCardProps) {
   return (
     <GridItem
           bg="vertek.slatepurple.900"
@@ -21,15 +21,14 @@ export function GaugeActionCard(props: GaugeActionCardProps) {
             </Text>
 
             <Flex direction="row" justify="space-between" mt="6" alignItems="center" >
-                    <Text fontSize="1.5rem" paddingX="0">  
-                        $0.00 
-                    </Text>
-                    <Text>
-                      Button
-                    </Text>
+              <Text fontSize="1.5rem" paddingX="0">  
+                  Date
+              </Text>
+              
             </Flex>
+            
             <Text fontSize="1rem" paddingX="0" marginTop="2">  
-                0
+                Days
             </Text>
 
              
