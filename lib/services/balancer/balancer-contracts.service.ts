@@ -11,16 +11,16 @@ import WeightedPoolAbi from '../../abi/WeightedPoolFactory.json';
 //import StablePhantomPool from '@/lib/abi/StablePhantomPool.json';
 import ERC20_ABI from '../../abi/ERC20.json';
 //import BatchRelayer from './contracts/batch-relayer';
-import veBAL from './contracts/veBAL';
+import { VeBAL } from './contracts/veBAL';
 
 export default class BalancerContractsService {
   vault: Vault;
-  veBAL: veBAL;
+  veBAL: VeBAL;
 
   constructor() {
     // Init contracts
     this.vault = new Vault();
-    this.veBAL = new veBAL();
+    this.veBAL = new VeBAL();
   }
 
   // Combine all the ABIs and remove duplicates

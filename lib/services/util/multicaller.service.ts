@@ -19,7 +19,7 @@ export class Multicaller {
     this.paths.push(path);
   }
 
-  async execute<T>(from?: any): Promise<any> {
+  async execute<T>(from?: any): Promise<T> {
     const obj = from || {};
     const result = await multicall(this.provider, this.abi, this.calls, this.options);
     result.forEach((r, i) => set(obj, this.paths[i], r));

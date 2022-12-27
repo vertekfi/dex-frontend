@@ -24,7 +24,7 @@ export class MetadataConcern {
       });
 
       //TODO: figure out what this looks like
-      const response = await multi.execute(metaDict);
+      const response: any = await multi.execute(metaDict);
 
       return Object.values(response);
     } catch (error) {

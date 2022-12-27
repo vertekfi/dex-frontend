@@ -1,6 +1,11 @@
 import { useQuery } from 'react-query';
-import { multicall } from '~/lib/services/util/multicaller.service';
+import { multicall, Multicaller } from '~/lib/services/util/multicaller.service';
 import { networkProvider } from '~/lib/global/network';
+import { mapValues } from 'lodash';
+import { BigNumber } from 'ethers';
+import { formatUnits } from '@ethersproject/units';
+
+export type MulticallMappedBigNumberResult = Record<string, BigNumber>;
 
 interface UseMultiCallInput {
   abi: any[];
@@ -44,4 +49,9 @@ export function useMultiCall<T>({
     },
     { enabled, refetchInterval: cacheTimeMs },
   );
+}
+
+export async function mapBigNumberResult(multicaller: Multicaller, decimlas = 18) {
+  const result = await multicaller.execute<MulticallMappedBigNumberResult>();
+  return mapValues(result, (bn) => formatUnits(bn, decimlas));
 }

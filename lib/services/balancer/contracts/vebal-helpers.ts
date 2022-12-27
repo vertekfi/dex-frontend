@@ -1,9 +1,9 @@
-import { formatUnits, getAddress } from 'ethers/lib/utils';
-import { mapValues } from 'lodash';
+import { getAddress } from 'ethers/lib/utils';
 
 import VEBalHelpersABI from '../../../abi/VEBalHelpers.json';
 import { Multicaller } from '../../util/multicaller.service';
 import { networkProvider } from '~/lib/global/network';
+import { mapBigNumberResult } from '~/lib/util/useMultiCall';
 
 export class VEBalHelpers {
   constructor(
@@ -19,8 +19,7 @@ export class VEBalHelpers {
         getAddress(gaugeAddress),
       ]);
     }
-    const result = await multicaller.execute();
-    const weights = mapValues(result, (weight) => formatUnits(weight, 18));
+    const weights = await mapBigNumberResult(multicaller);
     return weights;
   }
 

@@ -1,10 +1,10 @@
-import { BaseProvider } from '@ethersproject/providers';
 import { BigNumber, Contract } from 'ethers';
 import { formatUnits, getAddress } from 'ethers/lib/utils';
 import { mapValues } from 'lodash';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
+import { mapBigNumberResult } from '~/lib/util/useMultiCall';
 import { ZERO_ADDRESS } from '~/lib/util/web3';
 import { Multicaller } from '../../util/multicaller.service';
 import { web3Service } from '../../web3/web3.service';
@@ -68,7 +68,7 @@ export class LiquidityGaugeClass {
       }
     });
 
-    const tokensForGauges = await multicaller.execute();
+    const tokensForGauges = await multicaller.execute<Record<string, string[]>>();
 
     return mapValues(tokensForGauges, (rewardTokens) =>
       rewardTokens.filter((token: string) => token !== ZERO_ADDRESS),
@@ -95,8 +95,7 @@ export class LiquidityGaugeClass {
     for (const gaugeAddress of gaugeAddresses) {
       multicaller.call(gaugeAddress, this.address, 'working_supply');
     }
-    const result = await multicaller.execute();
-    const supplies = mapValues(result, (weight) => formatUnits(weight, 18));
+    const supplies = await mapBigNumberResult(multicaller);
     return supplies;
   }
 

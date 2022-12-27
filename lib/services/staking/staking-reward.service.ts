@@ -2,6 +2,7 @@ import { getUnixTime } from 'date-fns';
 import { formatUnits, getAddress } from 'ethers/lib/utils';
 import { isNil, mapValues } from 'lodash';
 import { networkConfig } from '~/lib/config/network-config';
+import { mapBigNumberResult } from '~/lib/util/useMultiCall';
 import { GaugeController } from '../balancer/contracts/gauge-controller';
 import { LiquidityGaugeClass } from '../balancer/contracts/liquidity-gauge';
 import { BalancerTokenAdmin } from '../balancer/contracts/token-admin';
@@ -26,8 +27,7 @@ export class StakingRewardService {
     for (const gaugeAddress of gaugeAddresses) {
       multicaller.call(getAddress(gaugeAddress), getAddress(gaugeAddress), 'working_supply');
     }
-    const result = await multicaller.execute();
-    const supplies = mapValues(result, (weight) => formatUnits(weight, 18));
+    const supplies = await mapBigNumberResult(multicaller);
     return supplies;
   }
 
@@ -38,8 +38,7 @@ export class StakingRewardService {
     for (const gaugeAddress of gaugeAddresses) {
       multicaller.call(getAddress(gaugeAddress), getAddress(gaugeAddress), 'totalSupply');
     }
-    const result = await multicaller.execute();
-    const supplies = mapValues(result, (totalSupply) => formatUnits(totalSupply, 18));
+    const supplies = await mapBigNumberResult(multicaller);
     return supplies;
   }
 

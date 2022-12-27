@@ -68,7 +68,7 @@ export function _useGauges() {
 
   // Set users voting info
   useEffect(() => {
-    const totalVotes = 1e4;
+    const totalVotes = 1e4; // 10,000
 
     if (votingGauges.length) {
       // Set the users remaining votes

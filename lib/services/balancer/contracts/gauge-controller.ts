@@ -1,9 +1,9 @@
 import { getUnixTime } from 'date-fns';
-import { getAddress, formatUnits } from 'ethers/lib/utils';
-import { mapValues } from 'lodash';
+import { getAddress } from 'ethers/lib/utils';
 import { networkProvider } from '~/lib/global/network';
 import { Multicaller } from '../../util/multicaller.service';
 import GaugeControllerAbi from '../../../abi/GaugeController.json';
+import { mapBigNumberResult } from '~/lib/util/useMultiCall';
 
 export class GaugeController {
   constructor(
@@ -22,8 +22,7 @@ export class GaugeController {
         [getAddress(gaugeAddress), timestamp || getUnixTime(new Date())],
       );
     }
-    const result = await multicaller.execute();
-    const weights = mapValues(result, (weight) => formatUnits(weight, 18));
+    const weights = await mapBigNumberResult(multicaller);
     return weights;
   }
 

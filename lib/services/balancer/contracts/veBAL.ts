@@ -8,8 +8,6 @@ import { Multicaller } from '../../util/multicaller.service';
 import { toJsTimestamp, toUtcTime } from '../../util/time';
 import veBalAbi from '../../../abi/veBalAbi.json';
 
-import Service from '../balancer-contracts.service';
-
 export type VeBalLockInfo = {
   lockedEndDate: number;
   lockedAmount: string;
@@ -25,7 +23,7 @@ type VeBalLockInfoResult = {
   totalSupply: BigNumber;
 };
 
-export default class VeBAL {
+export class VeBAL {
   public get address(): string {
     return networkConfig.balancer.votingEscrow.veAddress;
   }
