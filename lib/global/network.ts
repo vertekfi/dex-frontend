@@ -53,3 +53,11 @@ export const wagmiClient = createClient({
   connectors,
   provider: response.provider,
 });
+
+export function isTestnet() {
+  return getChainId() === 5;
+}
+
+export function getChainId(): number {
+  return parseInt(networkConfig.chainId);
+}

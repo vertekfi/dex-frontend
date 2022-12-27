@@ -1,25 +1,18 @@
 import * as React from 'react';
-import { Box, Button, Flex, HStack, Image, Skeleton, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Image, Skeleton, Text } from '@chakra-ui/react';
 import NavbarWalletConnectButton from './NavbarWalletConnectButton';
 import { useGetProtocolDataQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { NavbarLink } from '~/modules/nav/NavbarLink';
 import numeral from 'numeral';
-import NextImage from 'next/image';
-import TokenAvatar from '~/components/token/TokenAvatar';
 import { useRouter } from 'next/router';
 import { motion, MotionValue, useTransform } from 'framer-motion';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
-import { NavbarPendingRewards } from '~/modules/nav/NavbarPendingRewards';
 import { BeetsBalLogo } from '~/assets/logo/BeetsBalLogo';
 import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
-import { networkConfig } from '~/lib/config/network-config';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
-import { BeetsLogoNoText } from '~/assets/logo/BeetsLogoNoText';
-import vertek from '~/assets/logo/vertek.png';
-import { useState } from 'react';
 
 interface Props {
   scrollY: MotionValue<number>;

@@ -27,11 +27,6 @@ export const bscNetworkConfig: NetworkConfig = {
   beets: {
     address: '',
   },
-  fbeets: {
-    address: '',
-    farmId: '',
-    poolId: '',
-  },
   balancer: {
     vault: '',
     batchRelayer: '',
@@ -42,6 +37,10 @@ export const bscNetworkConfig: NetworkConfig = {
       reaper: [],
     },
     linearRebalancers: {},
+    votingEscrow: {
+      veAddress: '',
+      gaugeController: '',
+    },
   },
   beetsPoolOwnerAddress: '',
   masterChefContractAddress: '',
@@ -109,7 +108,6 @@ export const bscNetworkConfig: NetworkConfig = {
   gauge: {
     rewardHelperAddress: AddressZero,
   },
-  createPoolUrl: 'https://v1.beets.fi/#/pool-create',
-  launchUrl: 'https://v1.beets.fi/#/launch',
-  stakeUrl: 'https://v1.beets.fi/#/stake',
+  createPoolUrl: '/#/pool-create',
+  stakeUrl: '/#/stake',
 };

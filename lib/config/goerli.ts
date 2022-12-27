@@ -28,11 +28,6 @@ export const goerliNetworkConfig: NetworkConfig = {
   beets: {
     address: '0xb269A278E427478712e2AF0eBa728021157A2114',
   },
-  fbeets: {
-    address: '',
-    farmId: '',
-    poolId: '',
-  },
   balancer: {
     vault: '0x84259CbD70aA17EB282Cb40666d2687Cd8E100AA',
     batchRelayer: '',
@@ -44,6 +39,10 @@ export const goerliNetworkConfig: NetworkConfig = {
       reaper: [],
     },
     linearRebalancers: {},
+    votingEscrow: {
+      veAddress: '0x1f54bAceCb21586C0337694fAe77D2E518da21b7',
+      gaugeController: '0x2ee2f54e95ce6f24dAdbDfa8221a6F763E8eEB96',
+    },
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
@@ -111,7 +110,6 @@ export const goerliNetworkConfig: NetworkConfig = {
   gauge: {
     rewardHelperAddress: AddressZero,
   },
-  createPoolUrl: 'https://v1.beets.fi/#/pool-create',
-  launchUrl: 'https://v1.beets.fi/#/launch',
-  stakeUrl: 'https://v1.beets.fi/#/stake',
+  createPoolUrl: 'https://dex-frontend-v2.vercel.app/#/pool-create',
+  stakeUrl: 'https://dex-frontend-v2.vercel.app/#/voting',
 };

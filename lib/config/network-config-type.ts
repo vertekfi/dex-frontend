@@ -32,11 +32,6 @@ export interface NetworkConfig {
   beets: {
     address: string;
   };
-  fbeets: {
-    address: string;
-    farmId: string;
-    poolId: string;
-  };
   balancer: {
     vault: string;
     batchRelayer: string;
@@ -49,6 +44,10 @@ export interface NetworkConfig {
     };
     linearRebalancers: { [poolAddress: string]: string };
     reaperManualRebalancer?: string;
+    votingEscrow: {
+      veAddress: string;
+      gaugeController: string;
+    };
   };
   beetsPoolOwnerAddress: string;
   masterChefContractAddress: string;

@@ -5,15 +5,12 @@ import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { makeVar } from '@apollo/client';
 import { useAsyncEffect } from '~/lib/util/custom-hooks';
-import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { createContext, ReactNode, useContext } from 'react';
 
 const refetchingVar = makeVar(false);
 const currentUserAddressVar = makeVar<string | null>(null);
 
 export function _useUserData() {
-  const networkConfig = useNetworkConfig();
-
   const { userAddress } = useUserAccount();
   const { data, loading, refetch, ...rest } = useGetUserDataQuery({
     notifyOnNetworkStatusChange: true,
@@ -45,28 +42,11 @@ export function _useUserData() {
 
   function bptBalanceForPool(poolId: string): AmountHumanReadable {
     const bptBalance = poolBalances.find((pool) => pool.poolId === poolId)?.totalBalance || '0';
-
-    // if (poolId === networkConfig.fbeets.poolId) {
-    //   const bptInFbeets = parseFloat(fbeetsBalance.totalBalance) + fbeetsRatio;
-
-    //   return `${bptInFbeets + parseFloat(bptBalance)}`;
-    // }
-
     return bptBalance;
   }
 
   function usdBalanceForPool(poolId: string): number {
-    if (poolId === networkConfig.fbeets.poolId) {
-      const bptBalance = poolBalances.find((pool) => pool.poolId === poolId);
-      const bptValueUSD = bptBalance
-        ? bptBalance.tokenPrice * parseFloat(bptBalance.totalBalance)
-        : 0;
-
-      return bptValueUSD;
-    }
-
     const balance = poolBalances.find((pool) => pool.poolId === poolId);
-
     if (!balance) {
       return 0;
     }
