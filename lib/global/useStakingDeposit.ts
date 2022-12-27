@@ -13,7 +13,7 @@ export function useStakingDeposit(staking: GqlPoolStaking | null) {
     config: {
       addressOrName: staking?.address || '',
       contractInterface: staking?.type === 'GAUGE' ? LiquidityGaugeV5 : BeethovenxMasterChefAbi,
-      functionName: staking?.type === 'GAUGE' ? 'deposit(uint256)' : 'deposit',
+      functionName: 'deposit(uint256)',
     },
     transactionType: 'STAKE',
   });
