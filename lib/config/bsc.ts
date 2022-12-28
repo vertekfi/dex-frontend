@@ -29,6 +29,7 @@ export const bscNetworkConfig: NetworkConfig = {
   },
   balancer: {
     vault: '',
+    feeDistributor: '',
     batchRelayer: '',
     composableStableFactory: '',
     weightedPoolV2Factory: '',

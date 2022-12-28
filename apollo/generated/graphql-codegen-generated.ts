@@ -28,6 +28,15 @@ export interface GaugeFactory {
   id: Scalars['String'];
 }
 
+export interface GaugePool {
+  __typename: 'GaugePool';
+  address: Scalars['String'];
+  id: Scalars['String'];
+  poolType: Scalars['String'];
+  tokens: Array<GqlPoolTokenBase>;
+  tokensList: Array<Scalars['String']>;
+}
+
 export interface GaugePoolInfo {
   __typename: 'GaugePoolInfo';
   address: Scalars['String'];
@@ -1130,6 +1139,7 @@ export interface Query {
   blocksGetBlocksPerDay: Scalars['Int'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
+  getPoolsForGauges: Array<Maybe<GaugePool>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
@@ -1164,6 +1174,10 @@ export interface Query {
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
+}
+
+export interface QueryGetPoolsForGaugesArgs {
+  gaugeIds: Array<Scalars['String']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -1502,6 +1516,26 @@ export type GqlPoolBatchSwapSwapFragment = {
       weight?: string | null;
     }>;
   };
+};
+
+export type GetPoolsForGaugesQueryVariables = Exact<{
+  gaugeIds: Array<Scalars['String']> | Scalars['String'];
+}>;
+
+export type GetPoolsForGaugesQuery = {
+  __typename: 'Query';
+  getPoolsForGauges: Array<{
+    __typename: 'GaugePool';
+    id: string;
+    address: string;
+    poolType: string;
+    tokensList: Array<string>;
+    tokens: Array<
+      | { __typename: 'GqlPoolToken'; address: string; weight?: string | null }
+      | { __typename: 'GqlPoolTokenLinear'; address: string; weight?: string | null }
+      | { __typename: 'GqlPoolTokenPhantomStable'; address: string; weight?: string | null }
+    >;
+  } | null>;
 };
 
 export type GetAppGlobalDataQueryVariables = Exact<{ [key: string]: never }>;
@@ -4819,6 +4853,64 @@ export type GetPoolBatchSwapsLazyQueryHookResult = ReturnType<typeof useGetPoolB
 export type GetPoolBatchSwapsQueryResult = Apollo.QueryResult<
   GetPoolBatchSwapsQuery,
   GetPoolBatchSwapsQueryVariables
+>;
+export const GetPoolsForGaugesDocument = gql`
+  query GetPoolsForGauges($gaugeIds: [String!]!) {
+    getPoolsForGauges(gaugeIds: $gaugeIds) {
+      id
+      address
+      poolType
+      tokensList
+      tokens {
+        address
+        weight
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetPoolsForGaugesQuery__
+ *
+ * To run a query within a React component, call `useGetPoolsForGaugesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPoolsForGaugesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPoolsForGaugesQuery({
+ *   variables: {
+ *      gaugeIds: // value for 'gaugeIds'
+ *   },
+ * });
+ */
+export function useGetPoolsForGaugesQuery(
+  baseOptions: Apollo.QueryHookOptions<GetPoolsForGaugesQuery, GetPoolsForGaugesQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPoolsForGaugesQuery, GetPoolsForGaugesQueryVariables>(
+    GetPoolsForGaugesDocument,
+    options,
+  );
+}
+export function useGetPoolsForGaugesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPoolsForGaugesQuery,
+    GetPoolsForGaugesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPoolsForGaugesQuery, GetPoolsForGaugesQueryVariables>(
+    GetPoolsForGaugesDocument,
+    options,
+  );
+}
+export type GetPoolsForGaugesQueryHookResult = ReturnType<typeof useGetPoolsForGaugesQuery>;
+export type GetPoolsForGaugesLazyQueryHookResult = ReturnType<typeof useGetPoolsForGaugesLazyQuery>;
+export type GetPoolsForGaugesQueryResult = Apollo.QueryResult<
+  GetPoolsForGaugesQuery,
+  GetPoolsForGaugesQueryVariables
 >;
 export const GetAppGlobalDataDocument = gql`
   query GetAppGlobalData {

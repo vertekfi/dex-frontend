@@ -1,0 +1,12 @@
+query GetPoolsForGauges($gaugeIds: [String!]!) {
+  getPoolsForGauges(gaugeIds: $gaugeIds) {
+    id
+    address
+    poolType
+    tokensList
+    tokens {
+      address
+      weight
+    }
+  }
+}

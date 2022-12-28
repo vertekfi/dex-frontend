@@ -1,8 +1,8 @@
 import { GaugeList } from './components/GaugeList';
-import { useVotingGauges } from './lib/useVotingGauges';
+import { useVotingGauges } from '../../lib/global/gauges/useVotingGauges';
 import { SimpleGrid, useBoolean } from '@chakra-ui/react';
 import { GaugeActionCard } from './components/GaugeActionCard';
-import { GaugeListHeader } from './components/GaugeListHeader'; 
+import { GaugeListHeader } from './components/GaugeListHeader';
 import { GaugeActionCard1 } from './components/GaugeActionCard1';
 import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useExpiredGaugesQuery } from './lib/useExpiredGaugesQuery';

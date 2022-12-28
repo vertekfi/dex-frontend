@@ -5,7 +5,7 @@ import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
-import { GaugeListProvider } from '~/modules/voting/lib/useVotingGauges';
+import { GaugeListProvider } from '~/lib/global/gauges/useVotingGauges';
 import { GaugeActionCard } from '~/modules/voting/components/GaugeActionCard';
 import { VotingContainer } from '~/modules/voting/VotingContainer';
 

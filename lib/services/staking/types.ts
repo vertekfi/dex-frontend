@@ -51,3 +51,23 @@ export type VotingGauge = {
 };
 
 export type VotingGaugeWithVotes = VotingGauge & VotesData;
+
+export interface SubgraphGauge {
+  id: string;
+  symbol: string;
+  poolId: string;
+  totalSupply: string;
+  factory: {
+    id: string;
+  };
+}
+
+export interface OnchainGaugeData {
+  rewardTokens: string[];
+  claimableTokens: string;
+  claimableRewards: Record<string, string>;
+}
+
+export type OnchainGaugeDataMap = Record<string, OnchainGaugeData>;
+
+export type Gauge = SubgraphGauge & OnchainGaugeData;

@@ -30,6 +30,7 @@ export const goerliNetworkConfig: NetworkConfig = {
   },
   balancer: {
     vault: '0x84259CbD70aA17EB282Cb40666d2687Cd8E100AA',
+    feeDistributor: '0x04b09CB03E23627a1A89B7991126b85288A976F9',
     batchRelayer: '',
     composableStableFactory: '',
     weightedPoolV2Factory: '',
