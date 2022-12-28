@@ -14,7 +14,7 @@ export function useNetworkInfo() {
   });
 
   useEffect(() => {
-    return unwatchNetwork();
+    return () => unwatchNetwork();
   }, []);
 
   return {

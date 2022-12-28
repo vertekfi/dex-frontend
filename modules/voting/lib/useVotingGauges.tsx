@@ -1,5 +1,5 @@
 import { intervalToDuration, nextThursday } from 'date-fns';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import { useGetLiquidityGaugesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { GOERLI_VOTING_GAUGES, MAINNET_VOTING_GAUGES } from '~/constants/voting-gauges';
 import { useNetworkInfo } from '~/lib/global/useNetworkInfo';
@@ -54,6 +54,7 @@ export function _useGauges() {
 
   // Set gauge voting info
   useEffect(() => {
+    // inefficient. Use the useCallback thingie or something
     const setGauges = async () => {
       const gauges = isTestnet ? GOERLI_VOTING_GAUGES : MAINNET_VOTING_GAUGES;
       const decoratedGauges = await gaugeControllerDecorator.decorateWithVotes(gauges, userAddress);

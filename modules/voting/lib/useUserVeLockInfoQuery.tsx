@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { VeBAL, VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
-export default function useUserLockInfoQuery() {
+export function useUserVeLockInfoQuery() {
   const [userLockInfo, setUserLockInfo] = useState<VeBalLockInfo>();
 
   const { userAddress, isConnected } = useUserAccount();
