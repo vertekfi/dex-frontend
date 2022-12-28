@@ -7,11 +7,14 @@ import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useExpiredGaugesQuery } from './lib/useExpiredGaugesQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
+import { fNum2, FNumFormats } from '~/lib/util/useNumber';
+import { bnum, scale } from '~/lib/util/big-number.utils';
 
 export function VotingContainer() {
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>(null);
+  const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
 
   const {
     isLoading: loadingGauges,
@@ -24,6 +27,16 @@ export function VotingContainer() {
   const { userLockInfo } = useUserVeLockInfoQuery();
   const { expiredGauges } = useExpiredGaugesQuery(votingGauges?.map((g) => g.address));
 
+  // set available voting power
+  useEffect(() => {
+    if (unallocatedVotes) {
+      setUnallocatedVotesFormatted(
+        fNum2(scale(bnum(unallocatedVotes), -4).toString(), FNumFormats.percent),
+      );
+    }
+  }, [unallocatedVotes]);
+
+  // set user lock info
   useEffect(() => {
     if (userLockInfo) {
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
@@ -35,6 +48,10 @@ export function VotingContainer() {
       }
     }
   }, [userLockInfo]);
+
+  function setActiveGaugeVote(votingGauge: VotingGaugeWithVotes) {
+    setActiveVotingGauge(votingGauge);
+  }
 
   function handleModalClose() {
     setActiveVotingGauge(null);
@@ -53,7 +70,7 @@ export function VotingContainer() {
         <GaugeActionCard1 heading="Locked until..." />
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
-      <GaugeList />
+      <GaugeList gaugeInfo={null} />
     </>
   );
 }

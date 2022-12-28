@@ -103,6 +103,6 @@ export function numF(
   return formattedNumber + postfixSymbol;
 }
 
-function fNum2(number: number | string, options: FNumOptions | undefined = {}): string {
+export function fNum2(number: number | string, options: FNumOptions | undefined = {}): string {
   return numF(number, options, FiatCurrency.usd);
 }
