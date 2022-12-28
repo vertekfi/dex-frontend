@@ -2,6 +2,7 @@ import { GaugeList } from './components/GaugeList';
 import { useVotingGauges } from './lib/useVotingGauges';
 import { SimpleGrid, useBoolean } from '@chakra-ui/react';
 import { GaugeActionCard } from './components/GaugeActionCard';
+import { GaugeListHeader } from './components/GaugeListHeader'; 
 import { GaugeActionCard1 } from './components/GaugeActionCard1';
 import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useExpiredGaugesQuery } from './lib/useExpiredGaugesQuery';
@@ -70,6 +71,7 @@ export function VotingContainer() {
         <GaugeActionCard1 heading="Locked until..." />
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
+      <GaugeListHeader />
       <GaugeList gaugeInfo={null} />
     </>
   );
