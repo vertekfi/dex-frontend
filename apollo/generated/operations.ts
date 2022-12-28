@@ -1014,6 +1014,12 @@ export const GetLiquidityGauges = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
       id
+      symbol
+      poolId
+      totalSupply
+      factory {
+        id
+      }
     }
   }
 `;

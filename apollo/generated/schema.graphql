@@ -8,6 +8,10 @@ scalar Bytes
 
 scalar Date
 
+type GaugeFactory {
+  id: String!
+}
+
 type GaugePoolInfo {
   address: String!
   poolId: String!
@@ -997,6 +1001,7 @@ type LiquidityGauge {
    Address of the pool (lp_token of the gauge)
   """
   address: String!
+  factory: GaugeFactory
 
   """
    LiquidityGauge contract address

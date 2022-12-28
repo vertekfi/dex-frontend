@@ -23,6 +23,11 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugeFactory {
+  __typename: 'GaugeFactory';
+  id: Scalars['String'];
+}
+
 export interface GaugePoolInfo {
   __typename: 'GaugePoolInfo';
   address: Scalars['String'];
@@ -1011,6 +1016,7 @@ export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
   /**  Address of the pool (lp_token of the gauge)  */
   address: Scalars['String'];
+  factory?: Maybe<GaugeFactory>;
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
@@ -4357,7 +4363,14 @@ export type GetLiquidityGaugesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetLiquidityGaugesQuery = {
   __typename: 'Query';
-  getLiquidityGauges: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
+  getLiquidityGauges: Array<{
+    __typename: 'LiquidityGauge';
+    id: string;
+    symbol: string;
+    poolId?: string | null;
+    totalSupply: string;
+    factory?: { __typename: 'GaugeFactory'; id: string } | null;
+  } | null>;
 };
 
 export type GetUserStakesQueryVariables = Exact<{
@@ -6625,6 +6638,12 @@ export const GetLiquidityGaugesDocument = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
       id
+      symbol
+      poolId
+      totalSupply
+      factory {
+        id
+      }
     }
   }
 `;
