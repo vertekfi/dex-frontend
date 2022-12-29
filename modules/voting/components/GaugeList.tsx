@@ -95,12 +95,20 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Box mt={3} flexDirection="column" display="flex">
+        <Box mt={3} mb="6rem" 
+        borderRadius="16px"
+       
+        flexDirection="column" 
+        display="flex">
           <GaugeListTableHeader />
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
+          <GaugeListItem />
+          <GaugeListItem />
+
+          
 
           
         </Box>

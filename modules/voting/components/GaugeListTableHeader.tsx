@@ -7,48 +7,55 @@ export function GaugeListTableHeader(){
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Box mt={3} flexDirection="column" display="flex">
+        <Box mt={3} flexDirection="column" display="flex" >
+        
         <Grid
-        pl="4"
-        py="3"
-        borderTopLeftRadius="md"
-        borderTopRightRadius="md"
-        alignItems={'center'}
-        bgColor="vertek.slate.900"
-        borderBottom="2px"
-        borderColor="vertek.slate.600"
-        mb={{ base: '4', lg: '0' }}
-        templateColumns={
-          { base: '150px 1fr 150px 200px 200px', lg: '150px 1fr 150px 150px 150px' }
-        }
-        gap="0"
-        display={{ base: 'none', lg: 'grid' }}
-      >
+            py="1.5rem"
+            px="1rem"
+            textAlign="center"
+            fontWeight="bold"
+            borderTopLeftRadius="md"
+            borderTopRightRadius="md"
+            alignItems="center"
+            justifyContent="center"
+            bgColor="vertek.slate.900"
+            borderBottom="2px"
+            borderColor="vertek.slate.600"
+            mb={{ base: '4', lg: '0' }}
+            templateColumns={
+              { base: '150px 1fr 150px 200px 200px', lg: '150px 1fr 200px 200px 200px' }
+            }
+            gap="0"
+            display={{ base: 'none', lg: 'grid' }}
+        >
         
         <GridItem  textAlign="left">
-          <Text>
+          <Text fontSize="md">
             Icons
          </Text>
         </GridItem>
+
         <GridItem  textAlign="left">
           <PoolListSortLink
             title="Composition"
+            fontSize="1.5rem"
           />
         </GridItem>
+
         <GridItem
-          textAlign="right"
-          display="block"
+          textAlign="center"
         >
           <PoolListSortLink
             title="Next Period Votes"
           />
         </GridItem>
-        <GridItem textAlign="right" pr="4">
+
+        <GridItem textAlign="center" justifyContent="center" alignItems="center">
           <PoolListSortLink
             title="My Votes"
           />
         </GridItem>
-        <GridItem textAlign="right" pr="4">
+        <GridItem  textAlign="center">
           <PoolListSortLink
             title="Vote"
           />
