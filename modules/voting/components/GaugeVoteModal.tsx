@@ -8,14 +8,16 @@ import { TokenAvatarSetInList, TokenAvatarSetInListTokenData } from '~/component
 import { memo } from 'react';
 
 type Props = {
-    gauge: VotingGaugeWithVotes;
-    unallocatedVoteWeight: number;
-    logoURIs: string[];
-    poolURL: string;
-    veBalLockInfo?: VeBalLockInfo;
+    // gauge: VotingGaugeWithVotes;
+    // unallocatedVoteWeight: number;
+    // logoURIs: string[];
+    // poolURL: string;
+    // veBalLockInfo?: VeBalLockInfo;
+    isOpen: boolean; 
+    onClose: () => void; 
   };
 
-export function GaugeVoteModal (){
+export function GaugeVoteModal(props: Props) {
 const MINIMUM_LOCK_TIME = 86_400_000 * 7;
 // const props = defineProps<Props>();
 
@@ -31,7 +33,10 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
   return (
     <>
-    <Button onClick={onOpen}>Voting Modal</Button>
+    <Button variant="vertekconnect2" width={{ base: '110px', lg: '130px' }}
+    onClick={onOpen}>
+        Vote
+    </Button>
     
     <Modal
     isOpen={isOpen}

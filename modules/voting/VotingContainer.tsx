@@ -74,8 +74,6 @@ export function VotingContainer() {
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
       <VotingPageSub />
-      <GaugeVoteModal />
-
       <GaugeList gaugeInfo={null} />
     </>
   );

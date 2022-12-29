@@ -11,10 +11,14 @@ import { TokenAvatarSetInList, TokenAvatarSetInListTokenData } from '~/component
 import { memo } from 'react';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { PoolListProvider } from '~/modules/pools/usePoolList';
-
+import { GaugeVoteModal } from './GaugeVoteModal';
+import { useState } from 'react';
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 export function GaugeListItem(){
+    const [isOpen, setIsOpen] = useState(false);
+    const onClose = () => setIsOpen(false);
+    const onOpen = () => setIsOpen(true);
     return (
 
 <PoolListProvider>
@@ -64,11 +68,7 @@ export function GaugeListItem(){
         alignItems="center" 
         justifyContent="center" 
         textAlign="center">
-            <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-                <Button variant="vertekconnect2" width={{ base: '110px', lg: '130px' }}>
-                    Vote
-                </Button>
-            </NextLink>
+                <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
         </GridItem>
         
     </Grid>
