@@ -3,10 +3,10 @@ import { Box, Text } from '@chakra-ui/react';
 import { VotingGauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { poolURLFor } from '~/modules/pool/lib/pool-utils';
 
-export function GaugeListHeader() {
+export function VotingPageSub() {
 
   return (
-    <Box mt={3} flexDirection="column" display="flex">
+    <Box mt={3} mb='4rem' flexDirection="column" display="flex">
       <Box mt={3} flexDirection="row" display="flex" justifyContent="space-between">
         <Box flexDirection="column" width="60%">
           <Text fontWeight="bold" fontSize="1.8rem">
