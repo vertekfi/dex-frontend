@@ -1030,6 +1030,7 @@ export const GetLiquidityGauges = gql`
           weight
         }
       }
+      isKilled
     }
   }
 `;

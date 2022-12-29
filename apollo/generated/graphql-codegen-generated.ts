@@ -4372,6 +4372,7 @@ export type GetLiquidityGaugesQuery = {
     symbol: string;
     poolId: string;
     totalSupply: string;
+    isKilled: boolean;
     factory?: { __typename: 'GaugeFactory'; id: string } | null;
     pool: {
       __typename: 'GaugePool';
@@ -6665,6 +6666,7 @@ export const GetLiquidityGaugesDocument = gql`
           weight
         }
       }
+      isKilled
     }
   }
 `;

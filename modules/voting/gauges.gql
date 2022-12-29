@@ -17,6 +17,7 @@ query GetLiquidityGauges {
         weight
       }
     }
+    isKilled
   }
 }
 
