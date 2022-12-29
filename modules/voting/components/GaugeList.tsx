@@ -1,6 +1,5 @@
 import { isSameAddress } from '@balancer-labs/sdk';
 import { Box, Text, Flex, Grid, GridItem } from '@chakra-ui/react';
-import { PaginatedTable } from '~/components/table/PaginatedTable';
 import PoolListSortLink from '~/modules/pools/components/PoolListSortLink';
 import { VotingGauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { poolURLFor } from '~/modules/pool/lib/pool-utils';
@@ -11,7 +10,7 @@ import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { usePoolList } from '~/modules/pools/usePoolList';
 import { GaugeListTableHeader } from './GaugeListTableHeader';
-import { PoolListTableHeader } from '~/modules/pools/components/PoolListTableHeader';
+import { GaugeListItem } from './GaugeListItem';
 
 interface GaugeListProps {
   votingGauges: VotingGauge[];
@@ -98,7 +97,12 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
       <UserTokenBalancesProvider>
         <Box mt={3} flexDirection="column" display="flex">
           <GaugeListTableHeader />
+          <GaugeListItem />
+          <GaugeListItem />
+          <GaugeListItem />
+          <GaugeListItem />
 
+          
         </Box>
       </UserTokenBalancesProvider>
     </PoolListProvider>
