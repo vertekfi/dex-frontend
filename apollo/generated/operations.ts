@@ -390,20 +390,6 @@ export const GetPoolBatchSwaps = gql`
   }
   ${GqlPoolBatchSwap}
 `;
-export const GetPoolsForGauges = gql`
-  query GetPoolsForGauges($gaugeIds: [String!]!) {
-    getPoolsForGauges(gaugeIds: $gaugeIds) {
-      id
-      address
-      poolType
-      tokensList
-      tokens {
-        address
-        weight
-      }
-    }
-  }
-`;
 export const GetAppGlobalData = gql`
   query GetAppGlobalData {
     tokenGetTokens {
@@ -1033,6 +1019,16 @@ export const GetLiquidityGauges = gql`
       totalSupply
       factory {
         id
+      }
+      pool {
+        id
+        address
+        poolType
+        tokensList
+        tokens {
+          address
+          weight
+        }
       }
     }
   }

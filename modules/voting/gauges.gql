@@ -7,6 +7,16 @@ query GetLiquidityGauges {
     factory {
       id
     }
+    pool {
+      id
+      address
+      poolType
+      tokensList
+      tokens {
+        address
+        weight
+      }
+    }
   }
 }
 

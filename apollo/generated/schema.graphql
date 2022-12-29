@@ -20,11 +20,6 @@ type GaugePool {
   tokensList: [String!]!
 }
 
-type GaugePoolInfo {
-  address: String!
-  poolId: String!
-}
-
 type GaugeShare {
   """
   User's balance of gauge deposit tokens
@@ -1024,7 +1019,7 @@ type LiquidityGauge {
   """
   Reference to Pool entity
   """
-  pool: GaugePoolInfo
+  pool: GaugePool
 
   """
   Pool ID if lp_token is a Balancer pool; null otherwise
