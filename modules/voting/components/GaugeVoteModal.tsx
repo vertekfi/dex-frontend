@@ -38,7 +38,7 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
     onClose={onClose}
     size="xl" 
     >
-    <ModalOverlay bg="vertek.slatepurple.900" />
+    {/* <ModalOverlay bg="vertek.slatepurple.900" /> */}
     
     <BeetsModalContent bg="black" paddingY="2rem" borderRadius="12px" >
         <BeetsModalHeader>
