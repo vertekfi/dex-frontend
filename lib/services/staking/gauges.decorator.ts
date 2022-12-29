@@ -1,10 +1,11 @@
 import { AddressZero } from '@ethersproject/constants';
+import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
 import { Multicaller } from '../util/multicaller.service';
 
-import { Gauge, OnchainGaugeData, OnchainGaugeDataMap, SubgraphGauge } from './types';
+import { OnchainGaugeData, OnchainGaugeDataMap } from './types';
 
 const MAX_REWARD_TOKENS = 8;
 
@@ -18,7 +19,7 @@ export class GaugesDecorator {
   /**
    * @summary Combine subgraph gauge schema with onchain data using multicalls.
    */
-  async decorate(subgraphGauges: SubgraphGauge[], userAddress: string): Promise<Gauge[]> {
+  async decorate(subgraphGauges: LiquidityGauge[], userAddress: string): Promise<LiquidityGauge[]> {
     this.multicaller = this.resetMulticaller();
     this.callRewardTokens(subgraphGauges);
     this.callClaimableTokens(subgraphGauges, userAddress);
@@ -53,7 +54,7 @@ export class GaugesDecorator {
    * @summary Add multicaller calls that fetch list of reward token addresses for each gauge
    * in given array of gauges.
    */
-  private callRewardTokens(subgraphGauges: SubgraphGauge[]) {
+  private callRewardTokens(subgraphGauges: LiquidityGauge[]) {
     subgraphGauges.forEach((gauge) => {
       for (let i = 0; i < MAX_REWARD_TOKENS; i++) {
         this.multicaller.call(`${gauge.id}.rewardTokens[${i}]`, gauge.id, 'reward_tokens', [i]);
@@ -76,7 +77,7 @@ export class GaugesDecorator {
    * @summary Add multicaller calls that fetch the user's claimable BAL
    * for each gauge in given array of gauges.
    */
-  private callClaimableTokens(subgraphGauges: SubgraphGauge[], userAddress: string) {
+  private callClaimableTokens(subgraphGauges: LiquidityGauge[], userAddress: string) {
     subgraphGauges.forEach((gauge) => {
       this.multicaller.call(`${gauge.id}.claimableTokens`, gauge.id, 'claimable_tokens', [
         userAddress,
@@ -89,7 +90,7 @@ export class GaugesDecorator {
    * e.g. non BAL rewards on gauge.
    */
   private callClaimableRewards(
-    subgraphGauges: SubgraphGauge[],
+    subgraphGauges: LiquidityGauge[],
     userAddress: string,
     gaugesDataMap: OnchainGaugeDataMap,
   ) {

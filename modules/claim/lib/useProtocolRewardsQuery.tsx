@@ -6,6 +6,8 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 
 export function useProtocolRewardsQuery() {
   const [protocolRewards, setProtocolRewards] = useState<BalanceMap>();
+  const [isLoading, setIsloading] = useState(false);
+
   const { isConnected, userAddress } = useUserAccount();
 
   const feeDistributorV2 = new FeeDistributor(networkConfig.balancer.feeDistributor);
@@ -16,10 +18,13 @@ export function useProtocolRewardsQuery() {
     const getData = async () => {
       if (userAddress) {
         try {
+          setIsloading(true);
           const data = await feeDistributorV2.getClaimableBalances(userAddress);
           setProtocolRewards(data);
+          setIsloading(false);
         } catch (error) {
           console.error('Failed to fetch claimable protocol balances', error);
+          setIsloading(false);
           return setProtocolRewards({});
         }
       }
@@ -32,5 +37,6 @@ export function useProtocolRewardsQuery() {
 
   return {
     protocolRewards,
+    isLoading,
   };
 }

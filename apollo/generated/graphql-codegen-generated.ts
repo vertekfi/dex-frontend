@@ -33,7 +33,7 @@ export interface GaugePool {
   address: Scalars['String'];
   id: Scalars['String'];
   poolType: Scalars['String'];
-  tokens: Array<GqlPoolTokenBase>;
+  tokens: Array<GqlPoolToken>;
   tokensList: Array<Scalars['String']>;
 }
 
@@ -1025,9 +1025,9 @@ export interface LiquidityGauge {
   /**  Whether Balancer DAO killed the gauge  */
   isKilled: Scalars['Boolean'];
   /**  Reference to Pool entity  */
-  pool?: Maybe<GaugePool>;
+  pool: GaugePool;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
-  poolId?: Maybe<Scalars['String']>;
+  poolId: Scalars['String'];
   /**  List of user shares  */
   shares?: Maybe<Array<GaugeShare>>;
   /**  ERC20 token symbol  */
@@ -1133,7 +1133,6 @@ export interface Query {
   blocksGetBlocksPerDay: Scalars['Int'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
-  getPoolsForGauges: Array<Maybe<GaugePool>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
@@ -1168,10 +1167,6 @@ export interface Query {
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
-}
-
-export interface QueryGetPoolsForGaugesArgs {
-  gaugeIds: Array<Scalars['String']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -4375,21 +4370,17 @@ export type GetLiquidityGaugesQuery = {
     __typename: 'LiquidityGauge';
     id: string;
     symbol: string;
-    poolId?: string | null;
+    poolId: string;
     totalSupply: string;
     factory?: { __typename: 'GaugeFactory'; id: string } | null;
-    pool?: {
+    pool: {
       __typename: 'GaugePool';
       id: string;
       address: string;
       poolType: string;
       tokensList: Array<string>;
-      tokens: Array<
-        | { __typename: 'GqlPoolToken'; address: string; weight?: string | null }
-        | { __typename: 'GqlPoolTokenLinear'; address: string; weight?: string | null }
-        | { __typename: 'GqlPoolTokenPhantomStable'; address: string; weight?: string | null }
-      >;
-    } | null;
+      tokens: Array<{ __typename: 'GqlPoolToken'; address: string; weight?: string | null }>;
+    };
   } | null>;
 };
 
