@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { bnum, scale } from '~/lib/util/big-number.utils';
+import { GaugeVoteModal } from './components/GaugeVoteModal';
 
 export function VotingContainer() {
   const [hasLock, setHasLock] = useState<boolean>(false);
@@ -65,13 +66,16 @@ export function VotingContainer() {
 
   return (
     <>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} paddingX={8} paddingY={4} spacing={35}>
+      <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} paddingX={8} 
+      paddingY={4} spacing={35}>
         <GaugeActionCard heading="My 80VRTK-20BNB" />
         <GaugeActionCard heading="My locked 80VRTK-20BNB" />
         <GaugeActionCard1 heading="Locked until..." />
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
       <VotingPageSub />
+      <GaugeVoteModal />
+
       <GaugeList gaugeInfo={null} />
     </>
   );
