@@ -26,13 +26,13 @@ export class GaugesDecorator {
 
     let gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>();
 
-    this.callClaimableRewards(subgraphGauges, userAddress, gaugesDataMap);
+    this.callClaimableRewards(subgraphGauges, userAddress);
 
     gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>(gaugesDataMap);
 
     const data = subgraphGauges.map((subgraphGauge) => ({
       ...subgraphGauge,
-      ...this.format(gaugesDataMap[subgraphGauge.id]),
+      // ...this.format(gaugesDataMap[subgraphGauge.id]),
     }));
 
     return data;
@@ -44,7 +44,7 @@ export class GaugesDecorator {
   private format(gaugeData: OnchainGaugeData): OnchainGaugeData {
     return {
       ...gaugeData,
-      rewardTokens: this.formatRewardTokens(gaugeData.rewardTokens),
+      rewardTokens: gaugeData.rewardTokens,
       claimableTokens: gaugeData.claimableTokens?.toString() || '0',
       claimableRewards: this.formatClaimableRewards(gaugeData.claimableRewards),
     };
@@ -89,16 +89,10 @@ export class GaugesDecorator {
    * @summary Add multicaller calls that fetch the claimable amounts for reward tokens,
    * e.g. non BAL rewards on gauge.
    */
-  private callClaimableRewards(
-    subgraphGauges: LiquidityGauge[],
-    userAddress: string,
-    gaugesDataMap: OnchainGaugeDataMap,
-  ) {
+  private callClaimableRewards(subgraphGauges: LiquidityGauge[], userAddress: string) {
     const methodName = 'claimable_reward';
     subgraphGauges.forEach((gauge) => {
-      gaugesDataMap[gauge.id].rewardTokens.forEach((rewardToken) => {
-        if (rewardToken === AddressZero) return;
-
+      gauge.rewardTokens.forEach((rewardToken) => {
         this.multicaller.call(`${gauge.id}.claimableRewards.${rewardToken}`, gauge.id, methodName, [
           userAddress,
           rewardToken,
