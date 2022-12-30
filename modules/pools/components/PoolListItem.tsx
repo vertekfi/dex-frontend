@@ -63,9 +63,9 @@ export function PoolListItem({
                   }
                 : {
                     base: `"name name"
-                                             "apr tvl"
-                                             "fees volume"
-                                             "icons icons"`,
+                            "apr tvl"
+                            "fees volume"
+                            "icons icons"`,
                     lg: `"icons name tvl volume apr"`,
                   }
             }

@@ -71,7 +71,7 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">Other Token Earnings</Text>
         </Box>
         <Box>
-        <ClaimTable rows={rows}/>
+          <ClaimTable rows={rows}/>
         </Box>
       </GridItem>
     </SimpleGrid>
