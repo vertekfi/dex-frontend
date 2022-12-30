@@ -8,17 +8,24 @@ import { useEffect, useState } from 'react';
 import { BalanceMap } from '~/lib/services/token/token-types';
 import { Gauge } from '~/lib/services/staking/types';
 import { GaugePool, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
-
+import { ClaimTable } from './ClaimTable';
 export type GaugeTable = {
   gauge: Gauge;
   pool: GaugePool;
 };
+const boxProps = {
+  display: 'flex',
+  mb: '1',
+  paddingX: '1'
+};
+
+
 
 export function ClaimContainer() {
   const [vrtkRewardData, setVrtkRewardData] = useState<BalanceMap>({});
   const [gaugesWithRewards, setGaugesWithRewards] = useState<any[]>([]);
   const [gaugeTables, setGaugeTables] = useState<GaugeTable[]>([]);
-
+  const rows = [{}, {}, {}, {}, {}];
   const { isConnected } = useUserAccount();
   const { gauges, isLoading: isClaimsLoading } = useClaimsData();
 
@@ -38,14 +45,15 @@ export function ClaimContainer() {
       </GridItem>
 
       <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" display="flex" mb="0" paddingX="1">
+        <Box flexDirection="row" {...boxProps}>
           <Box marginRight="2" display="flex" justifyContent="">
             <NextImage width="24px" height="24px" src={VertekIcon} />
           </Box>
-          <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
+          <Text fontSize="1.20rem">
+            Vertek (VRTK) Earnings</Text>
         </Box>
         <Box>
-          <ClaimPoolsTable />
+          <ClaimTable rows={rows}/>
         </Box>
       </GridItem>
 
@@ -54,7 +62,7 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
         </Box>
         <Box>
-          <ClaimPoolsTable />
+        <ClaimTable rows={rows}/>
         </Box>
       </GridItem>
 
@@ -63,7 +71,7 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">Other Token Earnings</Text>
         </Box>
         <Box>
-          <ClaimPoolsTable />
+        <ClaimTable rows={rows}/>
         </Box>
       </GridItem>
     </SimpleGrid>

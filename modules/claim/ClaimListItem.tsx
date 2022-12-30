@@ -40,10 +40,20 @@ return (
             pl="4" pr="4"
             py="2"
             templateColumns={{
-                base: '1fr 1fr',
+                base: 'repeat(1fr 1fr)',
                 lg: '3fr 1fr 1fr 1fr' }}
-            gap="0" alignItems="center" >
-            <GridItem>
+            gap="0" alignItems="center" 
+            templateAreas={
+                {
+                    base: `"icons icons"
+                            "shares value"
+                            "claim claim"`,
+                    lg: `"icons shares value claim"`
+                  }
+            }
+            
+            >
+            <GridItem area="icons">
                 <Box>
                 <NextImage  width="36px" height="36px"  src={VertekIcon} />
                 <NextImage  width="100px" height="36px"  src={VertekText} />
@@ -58,7 +68,7 @@ return (
               /> */}
             </GridItem>
 
-            <GridItem>
+            <GridItem area="shares">
             {/* <StatGridItem 
                 area="volume"
                 display={showUserBalance ? { base: 'block', lg: 'none', xl: 'block' } : 'block'}
@@ -70,7 +80,7 @@ return (
             </GridItem>
 
             {/* {showUserBalance && ( */}
-            <GridItem>
+            <GridItem area="value">
                 <Text
                     textAlign="end"
                     fontSize={{ base: '3xl', lg: 'md' }}
@@ -79,7 +89,7 @@ return (
                   {/* {numberFormatUSDValue(userBalance || '0')} */}
                 </Text>
               </GridItem>
-              <GridItem>
+              <GridItem area="claim">
                 <Box display="flex" justifyContent="flex-end">
                 <Button  variant="vertekconnect2" width={{ base: '100px', lg: '100px' }}>
                 Claim

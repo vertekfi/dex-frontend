@@ -55,10 +55,10 @@ export function PoolListItem({
               showUserBalance
                 ? {
                     base: `"name name"
-                                             "userBalance userBalance"
-                                             "apr tvl"
-                                             "fees volume"
-                                             "icons icons"`,
+                            "userBalance userBalance"
+                            "apr tvl"
+                            "fees volume"
+                            "icons icons"`,
                     lg: `"icons name userBalance tvl volume apr"`,
                   }
                 : {
