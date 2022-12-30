@@ -1,5 +1,5 @@
 import { GqlPoolMinimalFragment } from '~/apollo/generated/graphql-codegen-generated';
-import { Box, Grid, GridItem, GridItemProps, Text } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Button, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import numeral from 'numeral';
 import { BoxProps } from '@chakra-ui/layout';
@@ -41,7 +41,7 @@ return (
             py="2"
             templateColumns={{
                 base: '1fr 1fr',
-                lg: '4fr 1fr 1fr' }}
+                lg: '3fr 1fr 1fr 1fr' }}
             gap="0" alignItems="center" >
             <GridItem>
                 <Box>
@@ -78,6 +78,13 @@ return (
                 $150k in pure solid gold
                   {/* {numberFormatUSDValue(userBalance || '0')} */}
                 </Text>
+              </GridItem>
+              <GridItem>
+                <Box display="flex" justifyContent="flex-end">
+                <Button  variant="vertekconnect2" width={{ base: '100px', lg: '100px' }}>
+                Claim
+              </Button>
+              </Box>
               </GridItem>
             {/* 
             )} 

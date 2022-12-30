@@ -17,7 +17,7 @@ return (
       <Grid paddingX="4" py="2"
       templateColumns={{
         base: '1fr 1fr',
-        lg: '4fr 1fr 1fr' }}
+        lg: '3fr 1fr 1fr 1fr' }}
       gap="0" >
             <GridItem>
               Pools
@@ -27,6 +27,9 @@ return (
             </GridItem>
             <GridItem justifyContent="end" display="flex" >
               Value
+            </GridItem>
+            <GridItem justifyContent="end" display="flex" >
+              Claim
             </GridItem>
       </Grid>
 
