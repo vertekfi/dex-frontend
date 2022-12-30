@@ -49,7 +49,7 @@ return (
         py="2"
         templateColumns={{
             base: 'repeat(1fr 1fr)',
-            lg: '3fr 1fr 1fr 1fr' }}
+            lg: '1fr 3fr 1fr 1fr 1fr' }}
         gap="4" alignItems="center" 
         templateAreas={{
             base: `
@@ -57,13 +57,12 @@ return (
               "icons icons"
               "shares value"
               "claim claim" `,
-              lg: `"icons shares value claim"`
+              lg: `"icons name shares value claim"`
               }} 
         >
           <GridItem area="icons" mb={{ base: '6', lg: '0' }}>
             <Box display="flex" 
             justifyContent={{ base:'flex-start', lg:'flex-start'}}>
-                <NextImage  width="100px" height="36px"  src={VertekText} />
                 <NextImage  width="100px" height="36px"  src={VertekText} />
                 <NextImage  width="100px" height="36px"  src={VertekText} />
                 <NextImage  width="100px" height="36px"  src={VertekText} />
@@ -76,12 +75,12 @@ return (
             //renderPopover={false}
           /> */}
           </GridItem>
-          <GridItem area="name" display={{ base:'flex', lg:'none'}} mb={{ base: '1', lg: '0' }}>
-            <Text color="white" fontSize={{ base: 'xl', lg: 'md' }} fontWeight={{ base: 'bold', lg: 'normal' }}>
+          <GridItem area="name"  textAlign="left" mb={{ base: '1', lg: '0' }}>
+            <Text  color="white" fontSize={{ base: 'xl', lg: 'md' }} fontWeight={{ base: 'bold', lg: 'bold' }}>
               That Main Pool Thing 
             </Text>
           </GridItem>
-          <StatGridItemLeft area="shares">
+          <GridItem area="shares" textAlign="left">
           {/* <StatGridItem 
               area="volume"
               display={showUserBalance ? { base: 'block', lg: 'none', xl: 'block' } : 'block'}
@@ -95,7 +94,7 @@ return (
                       150 shares
                   </Text>
                   {/* </StatGridItem> */}
-          </StatGridItemLeft>
+          </GridItem>
 
         {/* {showUserBalance && ( */}
           <StatGridItemRight area="value">
@@ -138,16 +137,6 @@ function MobileLabelLeft({ text }: { text: string }) {
   );
 }
 
-function StatGridItemLeft(props: GridItemProps) {
-  return (
-    <GridItem
-      area="value"
-      textAlign={{ base: 'right', lg: 'right' }}
-      mb={{ base: '4', lg: '0' }}
-      {...props}
-    />
-  );
-}
 function StatGridItemRight(props: GridItemProps) {
   return (
     <GridItem

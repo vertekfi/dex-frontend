@@ -22,12 +22,14 @@ return (
         borderTopRadius="16px"
         templateColumns={{
           base: 'repeat(1fr 1fr)',
-          lg: '3fr 1fr 1fr 1fr'
-        }}
+          lg: '1fr 3fr 1fr 1fr 1fr' }}
         gap="0"
         bg="vertek.slate.900" >
               <GridItem>
                   <Text fontWeight="bold">Pools</Text>
+              </GridItem>
+              <GridItem>
+                  <Text fontWeight="bold"></Text>
               </GridItem>
               <GridItem>
                   <Text fontWeight="bold">Amount</Text>
@@ -39,7 +41,7 @@ return (
                   <Text fontWeight="bold">Claim</Text>
               </GridItem>
       </Grid>
-      
+
       {props.rows.map((row) => (
       <ClaimListItem />
       ))}
