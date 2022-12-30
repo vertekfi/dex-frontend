@@ -1020,6 +1020,11 @@ export const GetLiquidityGauges = gql`
       factory {
         id
       }
+      rewardTokens {
+        id
+        decimals
+        symbol
+      }
       pool {
         id
         address

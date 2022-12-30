@@ -7,6 +7,11 @@ query GetLiquidityGauges {
     factory {
       id
     }
+    rewardTokens {
+      id
+      decimals
+      symbol
+    }
     pool {
       id
       address

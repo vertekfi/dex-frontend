@@ -1028,12 +1028,12 @@ export interface LiquidityGauge {
   pool: GaugePool;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
   poolId: Scalars['String'];
+  /**  List of reward tokens depositted in the gauge  */
+  rewardTokens: Array<Maybe<RewardToken>>;
   /**  List of user shares  */
   shares?: Maybe<Array<GaugeShare>>;
   /**  ERC20 token symbol  */
   symbol: Scalars['String'];
-  /**  List of reward tokens depositted in the gauge  */
-  tokens?: Maybe<Array<RewardToken>>;
   /**  Total of BPTs users have staked in the LiquidityGauge  */
   totalSupply: Scalars['BigDecimal'];
 }
@@ -4374,6 +4374,12 @@ export type GetLiquidityGaugesQuery = {
     totalSupply: string;
     isKilled: boolean;
     factory?: { __typename: 'GaugeFactory'; id: string } | null;
+    rewardTokens: Array<{
+      __typename: 'RewardToken';
+      id: string;
+      decimals: number;
+      symbol: string;
+    } | null>;
     pool: {
       __typename: 'GaugePool';
       id: string;
@@ -6655,6 +6661,11 @@ export const GetLiquidityGaugesDocument = gql`
       totalSupply
       factory {
         id
+      }
+      rewardTokens {
+        id
+        decimals
+        symbol
       }
       pool {
         id

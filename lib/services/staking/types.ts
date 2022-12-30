@@ -65,7 +65,11 @@ export type VotingGaugeWithVotes = VotingGauge & VotesData;
 export type SubgraphGauge = LiquidityGauge;
 
 export interface OnchainGaugeData {
-  rewardTokens: string[];
+  rewardTokens?: {
+    id: string;
+    symbol: string;
+    decimals: number;
+  }[];
   claimableTokens: string;
   claimableRewards: Record<string, string>;
 }

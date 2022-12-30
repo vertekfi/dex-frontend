@@ -12,7 +12,7 @@ export function useClaimsData() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { isConnected, userAddress } = useUserAccount();
-  const { protocolRewards, isLoading: isProtocolRewardsLoading } = useProtocolRewardsQuery();
+  //const { protocolRewards, isLoading: isProtocolRewardsLoading } = useProtocolRewardsQuery();
 
   // Fetch subgraph liquidity gauges
   const { gauges, isLoading: isLoadingGauges, refetchGauges } = useGetGaugesQuery();
@@ -46,18 +46,18 @@ export function useClaimsData() {
     }
   }, [gaugePoolIds]);
 
-  useEffect(() => {
-    if (isLoadingGauges || isProtocolRewardsLoading) {
-      setIsLoading(true);
-    }
+  // useEffect(() => {
+  //   if (isLoadingGauges || isProtocolRewardsLoading) {
+  //     setIsLoading(true);
+  //   }
 
-    if (!isLoadingGauges && !isProtocolRewardsLoading) {
-      setIsLoading(false);
-    }
-  }, [isProtocolRewardsLoading, isLoadingGauges]);
+  //   if (!isLoadingGauges && !isProtocolRewardsLoading) {
+  //     setIsLoading(false);
+  //   }
+  // }, [isProtocolRewardsLoading, isLoadingGauges]);
   return {
     gauges,
-    protocolRewards,
+    // protocolRewards,
     isLoading,
   };
 }

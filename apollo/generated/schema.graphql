@@ -1027,6 +1027,11 @@ type LiquidityGauge {
   poolId: String!
 
   """
+   List of reward tokens depositted in the gauge
+  """
+  rewardTokens: [RewardToken]!
+
+  """
    List of user shares
   """
   shares: [GaugeShare!]
@@ -1035,11 +1040,6 @@ type LiquidityGauge {
    ERC20 token symbol
   """
   symbol: String!
-
-  """
-   List of reward tokens depositted in the gauge
-  """
-  tokens: [RewardToken!]
 
   """
    Total of BPTs users have staked in the LiquidityGauge
