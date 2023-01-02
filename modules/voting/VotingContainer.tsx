@@ -63,7 +63,7 @@ export function VotingContainer() {
 
   return (
     <>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={8} paddingY={4} spacing={35}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={4} paddingY={2} spacing={4}>
         <GaugeActionCard heading="My 80VRTK-20BNB" />
         <GaugeActionCard heading="My locked 80VRTK-20BNB" />
         <GaugeActionCard1 heading="Locked until..." />
