@@ -12,6 +12,7 @@ import { useGetPoolsLazyQuery } from '~/apollo/generated/graphql-codegen-generat
 import { orderBy } from 'lodash';
 import { useEffect } from 'react';
 import { PoolCard } from '~/components/pool-card/PoolCard';
+import { HomePoolsNew } from './components/HomePoolsNew';
 export function Home() {
 
   const {
@@ -50,7 +51,7 @@ export function Home() {
       <BeetsLogo />
       </Box>
       <HomeHero />
-      <Grid
+      {/* <Grid
           templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(4, 1fr)" }}
           columnGap={{ base: "0", lg: "8" }}
           rowGap="12"
@@ -72,7 +73,8 @@ export function Home() {
           <GridItem>
             <HomeNews />
           </GridItem>
-      </Grid>
+      </Grid> */}
+      <HomePoolsNew /> 
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}
