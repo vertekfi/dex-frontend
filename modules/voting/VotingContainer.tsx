@@ -16,7 +16,6 @@ export function VotingContainer() {
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>(null);
   const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
-
   const {
     isLoading: loadingGauges,
     votingGauges,
@@ -64,7 +63,7 @@ export function VotingContainer() {
 
   return (
     <>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} paddingX={8} paddingY={4} spacing={35}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={8} paddingY={4} spacing={35}>
         <GaugeActionCard heading="My 80VRTK-20BNB" />
         <GaugeActionCard heading="My locked 80VRTK-20BNB" />
         <GaugeActionCard1 heading="Locked until..." />

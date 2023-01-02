@@ -1,4 +1,4 @@
-import { Box, Flex, GridItem, Text } from '@chakra-ui/react';
+import { Box, Grid, Button, Flex, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export interface GaugeActionCardProps {
@@ -14,23 +14,34 @@ export function GaugeActionCard(props: GaugeActionCardProps) {
       maxW="550px"
       color="white"
     >
-      <Flex direction="column" justify="left" padding="8">
-        <Text fontSize="1.2rem" paddingX="0" fontWeight="bold">
-          {props.heading}
-        </Text>
-
-        <Flex direction="row" justify="space-between" mt="6" alignItems="center">
-          <Text fontSize="1.5rem" paddingX="0">
-            $0.00
+      <Grid paddingX="2" paddingY="2" 
+      >
+        <GridItem mt="2">
+          <Text fontSize="1.2rem" textAlign="center" fontWeight="bold">
+            {props.heading}
           </Text>
-          <Text>Button</Text>
-        </Flex>
-        <Text fontSize="1rem" paddingX="0" marginTop="2">
-          0
-        </Text>
-      </Flex>
-
-      {/* Need one card for the pool values and another for the date stuff */}
+        </GridItem>
+        
+        <GridItem mt="3">
+          <Text fontSize="1.2rem" alignItems="center" justifyContent="center" textAlign="center">
+            $0.00 
+          </Text>
+          </GridItem>
+        
+        <GridItem mt="-1">
+          <Text fontSize="1rem" textAlign="center" alignItems="center" justifyContent="center" >
+            0 votes
+          </Text>
+        </GridItem>
+        
+        <GridItem mt={{ base:'3', lg:'6'}} >
+          <Box display="flex" justifyContent="center" >
+              <Button  variant="vertekconnect2" width="80%">
+                          Button
+              </Button>
+          </Box>
+        </GridItem>
+      </Grid>
     </GridItem>
   );
 }
