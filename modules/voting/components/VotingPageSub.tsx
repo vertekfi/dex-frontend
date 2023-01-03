@@ -32,13 +32,15 @@ export function VotingPageSub() {
     </Text>
    </GridItem>
 
+
    <GridItem marginRight={{base: "0", lg:"24" }}>
      <VStack spacing={4} alignItems={{ base:"center", lg:"stretch" }}>
         <Box
-          bgColor="vertek.slatepurple.900"
+          bgGradient='linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)'
+          // bgColor="vertek.slatepurple.900"
           h="full"
           w={{ base:"75%", lg:"full"}}
-          p={4}
+          p="12px"          
           borderRadius={{ base:"20px", lg:"12px" }}
           alignItems="center"
           justifyContent="center"
@@ -52,10 +54,10 @@ export function VotingPageSub() {
             </Text>
         </Box>
         <Box
-          bgColor="vertek.slatepurple.900"
+          bgGradient='linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)'
           h="full"
           w={{ base:"75%", lg:"full"}}
-          p={{ base:"4",  lg:"4"}}
+          p="12px"
           borderRadius={{ base:"20px", lg:"12px" }}
           alignItems="center"
           justifyContent="center"
