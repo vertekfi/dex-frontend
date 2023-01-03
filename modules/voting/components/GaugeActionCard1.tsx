@@ -1,4 +1,4 @@
-import { Box, Flex, GridItem, Text } from '@chakra-ui/react';
+import { Box, Flex, GridItem, Grid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export interface GaugeActionCardProps {
@@ -8,29 +8,47 @@ export interface GaugeActionCardProps {
 export function GaugeActionCard1(props: GaugeActionCardProps) {
   return (
     <GridItem
-      bg="vertek.slatepurple.900"
-      boxShadow=" 0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
-      borderRadius="25px"
-      maxW="550px"
-      color="white"
+    bg="vertek.slatepurple.900"
+    boxShadow="0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
+    borderRadius="25px"
+    maxW="550px"
+    color="white"
+  >
+    <Grid
+      h="100%"
+      paddingX="2"
+      paddingY="2"
     >
-      <Flex direction="column" justify="left" padding="8">
-        <Text fontSize="1.2rem" paddingX="0" fontWeight="bold">
+      <GridItem mt="2">
+        <Text
+          fontSize="1.2rem"
+          fontWeight="bold"
+          textAlign="center"
+        >
           {props.heading}
         </Text>
-
-        <Flex direction="row" justify="space-between" mt="6" alignItems="center">
-          <Text fontSize="1.5rem" paddingX="0">
-            Date
-          </Text>
-        </Flex>
-
-        <Text fontSize="1rem" paddingX="0" marginTop="2">
+      </GridItem>
+      <GridItem mt="3">
+        <Text
+          alignItems="center"
+          fontSize="1.5rem"
+          justifyContent="center"
+          textAlign="center"
+        >
+          Date
+        </Text>
+      </GridItem>
+      <GridItem mt="-1">
+        <Text
+          alignItems="center"
+          fontSize="1rem"
+          justifyContent="center"
+          textAlign="center"
+        >
           Days
         </Text>
-      </Flex>
-
-      {/* Need one card for the pool values and another for the date stuff */}
-    </GridItem>
+      </GridItem>
+    </Grid>
+  </GridItem>
   );
 }
