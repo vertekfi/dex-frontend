@@ -32,7 +32,7 @@ export function GaugeListItem(){
     borderRadius={{ base:"12px", lg:"none"}}
     templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
     gap="2"
-    mb={{ base:'4', lg:'none'}}
+    mb={{ base:'4', lg:'0'}}
     templateAreas={{ 
     base: `
         "icons pills"

@@ -57,6 +57,7 @@ function TokenAvatarSet({
   const tokenContent = (
     <Flex
       {...rest}
+      
       position={'relative'}
       //width={(imageSize - 10) * addressesInputLength}
       height={`${imageSize}px`}
@@ -77,7 +78,7 @@ function TokenAvatarSet({
                 src={token?.logoURI || undefined}
                 //zIndex={10 - i}
                 left={`${leftOffsetFor(numTokens - i - 1)}px`}
-                bg={'#181729'}
+                bg="rgba(255, 255, 255, 0.1)"
                 position="absolute"
                 icon={
                   token?.logoURI ? (

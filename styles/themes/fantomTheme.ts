@@ -84,6 +84,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
         vertek: {
             slate: {
+                30: 'rgba( 27, 20, 100, 0.1 )', 
+                40: 'rgba(255, 255, 255, 0.1)', 
+                49:'rgba(230, 230, 230, 1)', 
                 50:'#E6E6E6', 
                 100:'#DBDBDF',                
                 200:'#C6C6CC', 

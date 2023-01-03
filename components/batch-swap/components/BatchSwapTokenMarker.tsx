@@ -20,7 +20,7 @@ export function BatchSwapTokenMarker({ token, position }: Props) {
             <Box alignItems="center">
                 <TokenAvatar address={token} w="20px" h="20px" />
             </Box>
-            <Circle size="8px" marginTop="3px" backgroundColor={position === 'start' ? 'vertek.neonpurple.500' : 'beets.red'} />
+            <Circle size="8px" marginTop="3px" backgroundColor={position === 'start' ? 'beets.green' : 'beets.red'} />
         </Flex>
     );
 }

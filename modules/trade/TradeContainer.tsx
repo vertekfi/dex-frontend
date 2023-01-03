@@ -23,7 +23,7 @@ export function TradeContainer() {
       <Grid
         templateAreas={{
           base: `"swap"
-                       "chart-route"`,
+                "chart-route"`,
           xl: `"swap chart-route"`,
         }}
         templateColumns={{ base: '1fr', xl: '412px 1fr' }}
@@ -57,7 +57,7 @@ export function TradeContainer() {
             <AnimateSharedLayout>
               <AnimatePresence>
                 {showRouting && (
-                  <Box bgColor="vertek.slatepurple.900">
+                  <Box bgColor="">
                     <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <Text fontSize="xl" fontWeight="bold" lineHeight="1.2rem" mt="8">
                         Smart order routing

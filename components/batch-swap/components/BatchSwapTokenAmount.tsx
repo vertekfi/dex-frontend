@@ -11,7 +11,9 @@ interface Props extends FlexProps {
 export function BatchSwapTokenAmount({
   address,
   amount,
-  bgColor = 'beets.base.600',
+  bgColor = 'vertek.slate.30',
+  
+  
   ...rest
 }: Props) {
   return (
@@ -19,12 +21,20 @@ export function BatchSwapTokenAmount({
       flex="0.1 1 0%"
       padding="19.5px 14px"
       fontSize="xs"
-      alignItems="center"
-      justifyContent="flex-start"
+      justifyContent="center"
       zIndex="1"
       {...rest}
     >
-      <Flex borderRadius="lg" px="2" py="1" backgroundColor={bgColor} alignItems="center">
+      <Flex
+        borderRadius="lg"
+        px="2"
+        py="1"
+        backgroundColor={bgColor}
+        alignItems="center"
+        boxShadow="0 0 2px 0.1px rgba( 255, 255, 255, 1.0 )"
+
+        style={{ backdropFilter: 'blur(3px)' }}
+        >
         <TokenAvatar address={address} width="20px" height="20px" />
         <Box ml="1.5">{tokenFormatAmount(amount)}</Box>
       </Flex>
