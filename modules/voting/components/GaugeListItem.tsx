@@ -24,46 +24,60 @@ export function GaugeListItem(){
 <PoolListProvider>
 <UserTokenBalancesProvider>
 <Grid
-    
     bg="vertek.slatepurple.900"
     borderBottomColor="vertek.slatepurple.600"
     borderBottomWidth="1px"
     paddingY="1.5rem"
     paddingX="1rem"
-    templateColumns={{ base: '150px 1fr 150px 200px 200px', lg: '150px 1fr 200px 200px 200px' }}
-    gap="0"
+    borderRadius={{ base:"12px", lg:"none"}}
+    templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
+    gap="2"
+    mb={{ base:'4', lg:'none'}}
+    templateAreas={{ 
+    base: `
+        "icons pills"
+        "nextvote myvote"
+        "votebutton votebutton" `,
+    lg: `
+        "icons pills nextvote myvote votebutton" ` }}
     >
         <GridItem  
+        area="icons"
         display="flex"
         alignItems="center" 
         justifyContent="left" 
         textAlign="left">
             Icon Set 
         </GridItem>
+
         <GridItem  
+        area="pills"
         display="flex" 
         alignItems="center" 
-        justifyContent="left" 
-        textAlign="left">
+        justifyContent={{base:'flex-end', lg:'flex-start'}} >
             Token Pills 
-        
-        
         </GridItem>
+
         <GridItem  
+        area="nextvote"
         display="flex" 
-        alignItems="center" 
-        justifyContent="center" 
-        textAlign="center">
+        alignItems={{ base: 'left', lg:'center' }}
+        justifyContent={{ base: 'left', lg:'center' }} 
+        >
             0% 
         </GridItem>
+
         <GridItem  
+        area="myvote"
         display="flex" 
-        alignItems="center" 
-        justifyContent="center" 
-        textAlign="center">
+        alignItems="center"
+        justifyContent={{base:'flex-end', lg:'flex-start'}}
+        >
             69%
         </GridItem>
+        
         <GridItem  
+        area="votebutton"
         display="flex" 
         alignItems="center" 
         justifyContent="center" 

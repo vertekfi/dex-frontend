@@ -101,16 +101,14 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
         flexDirection="column" 
         display="flex">
           <GaugeListTableHeader />
+          <Box>
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
           <GaugeListItem />
-
-          
-
-          
+          </Box>
         </Box>
       </UserTokenBalancesProvider>
     </PoolListProvider>
