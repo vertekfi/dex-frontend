@@ -23,7 +23,7 @@ export function PoolCard({ pool, ...rest }: Props) {
     height="327px"
     padding="1"
     marginTop="1"
-    boxShadow=" 0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
     > 
     <Flex justify="center" padding="2" paddingTop="4" my="4">
                       <TokenAvatarSet

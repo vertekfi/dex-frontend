@@ -9,7 +9,7 @@ export function GaugeActionCard1(props: GaugeActionCardProps) {
   return (
     <GridItem
     bg="vertek.slatepurple.900"
-    boxShadow="0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
     borderRadius="25px"
     maxW="550px"
     color="white"

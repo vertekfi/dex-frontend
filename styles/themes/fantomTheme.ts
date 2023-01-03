@@ -120,6 +120,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
             }, 
             sor:  {
                 100: '#161626', 
+            }, 
+            electricblue: {
+                100: '#5BC0F8', 
             }
                 
         },

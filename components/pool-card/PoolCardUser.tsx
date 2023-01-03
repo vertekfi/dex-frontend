@@ -22,7 +22,7 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
         bgColor="vertek.slatepurple.900"
         borderRadius="16px"
         p="1"
-        boxShadow=" 0px 0px 5px 0.5px #ECA833, 0px 5px 10px 2px #000"
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
         flexDirection="column"
         height="327px"
       >
