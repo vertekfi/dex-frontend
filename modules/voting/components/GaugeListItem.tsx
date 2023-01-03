@@ -71,7 +71,7 @@ export function GaugeListItem(){
         area="myvote"
         display="flex" 
         alignItems="center"
-        justifyContent={{base:'flex-end', lg:'flex-start'}}
+        justifyContent={{base:'flex-end', lg:'center'}}
         >
             69%
         </GridItem>

@@ -9,6 +9,7 @@ import { BatchSwapSorRoute } from '~/components/batch-swap/BatchSwapSorRoute';
 import { BatchSwapList } from '~/components/batch-swap/BatchSwapList';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
+
 export function TradeContainer() {
   const { priceFor } = useGetTokens();
   const { tokenInData, tokenOutData, tokenInDynamicData, tokenOutDynamicData, tokenOut, tokenIn } =
@@ -17,7 +18,7 @@ export function TradeContainer() {
   const showRouting =
     !isNativeAssetUnwrap && !isNativeAssetWrap && swapInfo && swapInfo.swaps.length > 0;
   const hasNoRoute = !loadingSwaps && (!swapInfo || swapInfo.swaps.length === 0);
-
+  
   return (
     <Box>
       <Grid
