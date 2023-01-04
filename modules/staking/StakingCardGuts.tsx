@@ -41,7 +41,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
           <Text fontSize="0.7rem" textAlign="right">
             ${pool.userInfo?.pendingRewardValue}
           </Text>
-          <Button variant="vertekconnect2" disabled={false} width="full">
+          <Button variant="verteklight" disabled={false} width="full">
             Claim
           </Button>
         </Flex>
@@ -59,7 +59,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         </Flex>
 
         <Button
-          variant="vertekconnect25"
+          variant="verteklight"
           disabled={false}
           width="full"
           size="lg"
@@ -67,7 +67,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         >
           Stake
         </Button>
-        <Button variant="vertekconnect2" disabled={false} width="full" size="lg">
+        <Button variant="vertekdark" disabled={false} width="full" size="lg">
           Unstake
         </Button>
       </SimpleGrid>
