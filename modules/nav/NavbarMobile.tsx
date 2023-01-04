@@ -62,7 +62,7 @@ export function NavbarMobile() {
                 <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim" mr="1" px="4" />
               </ModalBody>
               <ModalFooter>
-                <Button variant="vertekconnect25" mr={3} onClick={() => setIsOpen(false)}>
+                <Button variant="vertekdark" mr={3} onClick={() => setIsOpen(false)}>
                   Close
                 </Button>
               </ModalFooter>

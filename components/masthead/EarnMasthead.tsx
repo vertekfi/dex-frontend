@@ -47,7 +47,7 @@ spacing={12}>
                     Core Pools.
             </Text>
             <Button  
-            variant="vertekconnect25"
+            variant="vertekdark"
             width="50%"
             gap="8px"
             mt="3"

@@ -50,7 +50,7 @@ export function GaugeActionCard(props: GaugeActionCardProps) {
       <GridItem mt={{ base: '3', lg: '6' }}>
         <Box display="flex" justifyContent="center">
           <Button
-            variant="vertekconnect2"
+            variant="verteklight"
             width="80%"
           >
             Button

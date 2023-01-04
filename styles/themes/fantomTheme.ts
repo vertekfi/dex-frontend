@@ -302,7 +302,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 },
                 
 
-                vertekconnect2: {
+                verteklight: {
                     backgroundColor:'#4A4AF6', 
                     borderWidth:'2px',  
                     borderColor:'vertek.slate.300', 
@@ -324,7 +324,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         background: 'gray.400',
                         },
                     },
-                    vertekconnect25: {
+                    vertekdark: {
                         backgroundColor:'vertek.slate.900', 
                         boxShadow:'0px 0px 12px 1px #000',
                         borderWidth:'2px',  

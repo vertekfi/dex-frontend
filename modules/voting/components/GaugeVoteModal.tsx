@@ -33,7 +33,7 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
   return (
     <>
-    <Button variant="vertekconnect25" width={{ base: '90%', lg: '130px' }}
+    <Button variant="vertekdark" width={{ base: '90%', lg: '130px' }}
     onClick={onOpen}>
         Vote
     </Button>
@@ -100,10 +100,10 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
         </BeetsModalBody>
        
        <HStack alignItems="center" justifyContent="center" width="100%" >
-        <Button width="40%" variant="vertekconnect2" onClick={onClose}>
+        <Button width="40%" variant="verteklight" onClick={onClose}>
             Cancel
         </Button>
-        <Button width="40%" variant="vertekconnect25">
+        <Button width="40%" variant="vertekdark">
             Save
         </Button>
         </HStack>

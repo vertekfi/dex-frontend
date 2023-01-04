@@ -16,14 +16,14 @@ export function PoolStakeInFarmWarning() {
   return (
     <>
       <FadeInOutBox isVisible={hasBptInWallet} containerWidth="100%">
-        <Alert status="warning" borderRadius="md" mb="4" width="full">
+        <Alert status="warning" borderRadius="lg" mb="5" width="full">
           <AlertIcon />
           <Box flex="1" mr="8">
             You have ~{numberFormatUSDValue(valueInWallet)} worth of BPT in your wallet. This pool
             offers additional rewards that will accumulate over time when your BPT are staked.{' '}
             {/*<Link color="beets.highlight">More details</Link>*/}
           </Box>
-          <Button variant="outline" onClick={onOpen}>
+          <Button variant="verteklight" onClick={onOpen}>
             Stake now
           </Button>
         </Alert>

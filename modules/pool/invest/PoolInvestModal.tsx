@@ -46,7 +46,7 @@ export function PoolInvestModal() {
 
     return (
         <>
-            <Button variant="primary" onClick={onOpen} width={{ base: 'full', md: '140px' }} mr="2">
+            <Button variant="verteklight" onClick={onOpen} width={{ base: 'full', md: '140px' }} mr="2">
                 Invest
             </Button>
             <Modal

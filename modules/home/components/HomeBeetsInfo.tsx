@@ -24,7 +24,7 @@ export function HomeBeetsInfo(props: BoxProps) {
         and have your say in decisions that shape the future of Vertek.
       </Box>
       <Button
-        variant="vertekconnect25"
+        variant="vertekdark"
         as="a"
         href="https://docs.beets.fi/beets/tokenomics"
         target="_blank"

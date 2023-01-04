@@ -50,10 +50,10 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         </Text>
       </Flex>
 
-      <Button variant="vertekconnect25" disabled={false} width="full" size="lg">
+      <Button variant="vertekdark" disabled={false} width="full" size="lg">
         Stake
       </Button>
-      <Button variant="vertekconnect2" disabled={false} width="full" size="lg">
+      <Button variant="verteklight" disabled={false} width="full" size="lg">
         Claim
       </Button>
     </SimpleGrid>

@@ -20,7 +20,7 @@ export function WalletConnectButton(props: Omit<ButtonProps, 'children' | 'onCli
                         {(() => {
                             if (!mounted || !account || !chain) {
                                 return (
-                                    <Button variant="vertekconnect2" 
+                                    <Button variant="verteklight" 
                                     onClick={openConnectModal} {...props}>
                                         <Box ml="2" color="white"  >
                                             Connect Wallet

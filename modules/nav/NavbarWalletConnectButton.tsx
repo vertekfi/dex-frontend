@@ -25,7 +25,7 @@ export default function NavbarWalletConnectButton() {
               if (!mounted || !account || !chain) {
                 return (
                   <Button
-                    variant="vertekconnect2"
+                    variant="verteklight"
                     // _hover={{
                     //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
                     //   transform: 'scale(1.1)',
@@ -45,7 +45,7 @@ export default function NavbarWalletConnectButton() {
               if (chain.unsupported) {
                 return (
                   <Button
-                    // variant="vertekconnect25"
+                    // variant="vertekdark"
                     backgroundColor="red.500"
                     _hover={{ backgroundColor: 'red.600' }}
                     onClick={openChainModal}
@@ -82,7 +82,7 @@ export default function NavbarWalletConnectButton() {
                   </HStack> */}
                   {/* price goes here */}
                   <Button
-                    variant="vertekconnect25"
+                    variant="vertekdark"
                     marginLeft="4" 
                     onClick={openAccountModal}
                     paddingX="6"                        

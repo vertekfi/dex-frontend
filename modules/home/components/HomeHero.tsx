@@ -58,12 +58,12 @@ export function HomeHero() {
 
           <HStack spacing="4" mb={{ base: '6', lg: '10' }}>
             <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-              <Button variant="vertekconnect2" width={{ base: '130px', lg: '160px' }}>
+              <Button variant="verteklight" width={{ base: '130px', lg: '160px' }}>
                 Invest
               </Button>
             </NextLink>
             <NextLink href="/swap" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-              <Button width={{ base: '130px', lg: '160px' }} variant="vertekconnect25">
+              <Button width={{ base: '130px', lg: '160px' }} variant="vertekdark">
                 Swap
               </Button>
             </NextLink>

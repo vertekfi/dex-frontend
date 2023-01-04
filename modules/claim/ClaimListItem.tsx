@@ -111,7 +111,7 @@ return (
             */}
             <ClaimGrid area="claim">
               <Box display="flex" justifyContent={{ base:'center', lg:'flex-end'}}>
-                  <Button  variant="vertekconnect2" width={{ base: '75%', lg: '150px' }}>
+                  <Button  variant="verteklight" width={{ base: '75%', lg: '150px' }}>
                       Claim
                 </Button>
               </Box>
