@@ -41,9 +41,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
         h3: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
             fontSize: ['36px'],
-            fontWeight: '300',
+            fontWeight: '700',
             lineHeight: '40px',
-            letterSpacing: '-0.6%',
+            letterSpacing: '0rem',
         },
         h4: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -301,6 +301,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     },
                 },
                 
+
                 vertekconnect2: {
                     backgroundColor:'#4A4AF6', 
                     borderWidth:'2px',  

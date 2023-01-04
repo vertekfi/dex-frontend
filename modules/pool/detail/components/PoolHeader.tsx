@@ -19,6 +19,7 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { AddressZero } from '@ethersproject/constants';
 import { usePool } from '~/modules/pool/lib/usePool';
 
+
 function PoolHeader() {
   const networkConfig = useNetworkConfig();
   const { pool } = usePool();
@@ -46,7 +47,7 @@ function PoolHeader() {
           </Text>
         </WrapItem>
         {pool.tokens.map((token, index) => (
-          <WrapItem key={index}>
+          <WrapItem key={index} >
             <PoolTokenPill token={token} />
           </WrapItem>
         ))}
@@ -56,7 +57,7 @@ function PoolHeader() {
           <HStack
             paddingX="3"
             paddingY="2"
-            bg="whiteAlpha.200"
+            bg="vertek.slatepurple.800"
             spacing="2"
             fontSize="md"
             rounded="full"
@@ -79,8 +80,8 @@ function PoolHeader() {
             </HStack>
           </HStack>
         </PopoverTrigger>
-        <PopoverContent w="200px" bgColor="beets.base.800" shadow="2xl">
-          <Box p="2" fontSize="sm" bgColor="whiteAlpha.200">
+        <PopoverContent w="200px" bgColor="vertek.neonpurple.500" shadow="2xl">
+          <Box p="4" borderRadius="18px" fontSize="sm" bgColor="whiteAlpha.200">
             {tooltipText1} {!hasZeroOwner && tooltipText2}
           </Box>
         </PopoverContent>

@@ -17,9 +17,12 @@ export function PoolTokenPill({ token }: Props) {
     const { getToken } = useGetTokens();
 
     return (
-        <BeetsBox p="2" bgColor="black" borderRadius="full">
+        <BeetsBox px="4" py="2" bgColor="vertek.slatepurple.800"
+        borderRadius="16px">
             <Flex alignItems="center">
-                <TokenAvatar address={token.address} size="xs" />
+                <TokenAvatar address={token.address} size="xs" 
+                boxShadow="0px 0px 6px 0.5px rgba(255, 255, 255)" 
+/>
                 <Text ml="2">{getToken(token.address)?.symbol}</Text>
                 {token.weight ? <Text ml="2">{numeral(token.weight).format('%')}</Text> : null}
             </Flex>
