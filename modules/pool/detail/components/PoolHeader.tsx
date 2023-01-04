@@ -36,7 +36,7 @@ function PoolHeader() {
   }.`;
 
   return (
-    <VStack width="full" alignItems="flex-start" mb="8">
+    <VStack width="full" alignItems="flex-start" mb="12">
       <Text textStyle="h3" as="h3" fontWeight="bold" mr="4" display={{ base: 'block', lg: 'none' }}>
         {pool.name}
       </Text>
@@ -55,10 +55,10 @@ function PoolHeader() {
       <Popover trigger="hover" placement="right">
         <PopoverTrigger>
           <HStack
-            paddingX="3"
-            paddingY="2"
+            paddingX="2"
+            paddingY="1"
             bg="vertek.slatepurple.800"
-            spacing="2"
+            spacing="4"
             fontSize="md"
             rounded="full"
             color="beets.base.50"

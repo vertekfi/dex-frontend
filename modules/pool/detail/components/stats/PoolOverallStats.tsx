@@ -42,15 +42,17 @@ export default function PoolOverallStats() {
         );
 
     return (
+        
         <HStack 
         display="flex" 
         flexDirection="row" 
-        width="full" 
+        width="full" height="full"
         justifyContent="space-between"
         alignItems="flex-start"
-        padding="0"
-        
-        px="2">
+        padding="8px"
+        borderRadius="12px"
+        bg="vertek.slatepurple.900"
+        >
             <VStack alignItems="flex-start" >
                 <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
                     Pool APR

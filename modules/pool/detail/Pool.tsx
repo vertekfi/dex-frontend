@@ -15,21 +15,24 @@ export function Pool() {
   return (
     <Box marginBottom="8">
       <PoolHeader />
-      <VStack width="full" spacing="4">
+      <VStack width="full" spacing="8">
         {pool.staking && <PoolStakeInFarmWarning />}
-        <Flex width="full" justifyContent="flex-end" marginBottom="4">
+        <Flex width="full" justifyContent="flex-start" marginBottom="2">
           <PoolInvestModal />
           <PoolWithdrawModal />
         </Flex>
         <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
           <GridItem>
-            <VStack spacing="0">
+            <VStack spacing="4">
               <PoolStats />
               <PoolDetailCharts />
             </VStack>
           </GridItem>
           <GridItem>
-            <PoolComposition />
+            
+            <PoolComposition 
+            // symbol name weight balance value 
+            />
           </GridItem>
         </Grid>
       </VStack>

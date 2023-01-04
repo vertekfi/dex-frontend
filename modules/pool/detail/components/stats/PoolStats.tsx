@@ -15,7 +15,7 @@ export default function PoolStats() {
     setActiveTab(tabIndex);
   };
   return (
-    <Card px="2" py="4" width="full">
+    <Card px="0" py="0" mb="2" width="full" boxShadow="0 0 5px #5BC0F8, 0 0 12px #4A4AF6">
       <VStack height="full" spacing="4">
         {hasBpt && (
           <Tabs
@@ -30,7 +30,7 @@ export default function PoolStats() {
                 <BeetsTab paddingX="4" paddingY="2" fontSize="xs">
                   My Stats
                 </BeetsTab>
-                <BeetsTab paddingX="4" paddingY="2" fontSize="xs">
+                <BeetsTab paddingX="2" paddingY="2" fontSize="xs">
                   Pool Stats
                 </BeetsTab>
               </HStack>

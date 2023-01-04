@@ -19,7 +19,9 @@ export function PoolDetailCharts() {
   const { data } = useGetPoolSnapshotsQuery({ variables: { poolId: pool.id, range } });
 
   return (
-    <Card width="full" minHeight="540px">
+    <Card width="full" minHeight="540px" padding="8px" borderRadius="12px" 
+    
+    >
       <HStack
         padding={{ base: '2', lg: '4' }}
         pb="0"
@@ -31,7 +33,7 @@ export function PoolDetailCharts() {
           width="160px"
           variant="filled"
         >
-          <option value="BPT_PRICE">BPT price</option>
+          <option value="BPT_PRICE">VRTK price</option>
           <option value="FEES">Fees</option>
           <option value="TVL">TVL</option>
           <option value="VOLUME_TVL">Volume / TVL</option>
