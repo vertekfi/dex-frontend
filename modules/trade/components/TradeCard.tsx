@@ -83,12 +83,10 @@ export function TradeCard() {
   }
 
   return (
-    <Box width="full" position="relative" 
-    >
+    <Box width="full" position="relative">
       <Card
         animate={controls}
         position="relative"
-
         topRight={sorResponse ? <TradeCardRefreshButton onClick={() => refetchTrade()} /> : null}
       >
         <VStack spacing="2" padding="4" width="full">
@@ -160,7 +158,6 @@ export function TradeCard() {
                 }}
                 width="full"
                 size="lg"
-                
               >
                 {isNotEnoughLiquidity
                   ? 'Not enough liquidity'

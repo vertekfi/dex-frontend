@@ -88,6 +88,7 @@ export function useTrade() {
         },
       },
     });
+
     const swaps = data?.swaps || null;
     tradeStateVar({ ...state, swapAmount: amount || '0', sorResponse: swaps });
 

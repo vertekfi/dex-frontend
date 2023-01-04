@@ -28,6 +28,7 @@ export function _useGetTokens() {
     ...token,
     address: token.address.toLowerCase(),
   }));
+
   const prices = keyBy(pricesResponse?.tokenPrices || [], 'address');
 
   function getToken(address: string): GqlToken | null {

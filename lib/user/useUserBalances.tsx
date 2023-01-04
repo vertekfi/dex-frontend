@@ -30,6 +30,7 @@ export function useUserBalances(addresses: string[], additionalTokens?: TokenBas
       return true;
     }
 
+    amount.address = amount.address.toLowerCase();
     const token = tokens.find((token) => token.address === amount.address);
 
     if (!token) {
