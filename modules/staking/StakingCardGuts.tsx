@@ -1,61 +1,76 @@
-import { Flex, SimpleGrid, Text, Button } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Text, Button, useDisclosure } from '@chakra-ui/react';
 import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
+import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
+import { useRewardPools } from './lib/useRewardPoolStaking';
 
 export function StakingCardGuts(props: { pool: RewardPool }) {
   const pool = props.pool;
+  const { refetchPools } = useRewardPools();
+  const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
 
   return (
-    <SimpleGrid
-      style={{ minWidth: '100%' }}
-      bg="vertek.slatepurple.900"
-      borderTopRadius="20px"
-      columns={2}
-      spacing={10}
-      padding="20px"
-      marginTop="4"
-    >
-      <Text textAlign="left" fontWeight="bold">
-        APR
-      </Text>
-      <Flex direction="column">
-        <Text textAlign="right" fontWeight="bold">
-          {pool.aprs.apr}%
+    <>
+      <SimpleGrid
+        style={{ minWidth: '100%' }}
+        bg="vertek.slatepurple.900"
+        borderTopRadius="20px"
+        columns={2}
+        spacing={10}
+        padding="20px"
+        marginTop="4"
+      >
+        <Text textAlign="left" fontWeight="bold">
+          APR
         </Text>
-        <Text fontSize="0.7rem" textAlign="right">
-          {pool.aprs.daily}% Daily
-        </Text>
-      </Flex>
+        <Flex direction="column">
+          <Text textAlign="right" fontWeight="bold">
+            {pool.aprs.apr}%
+          </Text>
+          <Text fontSize="0.7rem" textAlign="right">
+            {pool.aprs.daily}% Daily
+          </Text>
+        </Flex>
 
-      <Text textAlign="left" fontWeight="bold">
-        Earning
-      </Text>
-      <Flex direction="column">
-        <Text textAlign="right" fontWeight="bold">
-          {pool.userInfo?.pendingRewards} {pool.rewardToken.symbol}
+        <Text textAlign="left" fontWeight="bold">
+          Earning
         </Text>
-        <Text fontSize="0.7rem" textAlign="right">
-          ${pool.userInfo?.pendingRewardValue}
-        </Text>
-      </Flex>
+        <Flex direction="column">
+          <Text textAlign="right" fontWeight="bold">
+            {pool.userInfo?.pendingRewards} {pool.rewardToken.symbol}
+          </Text>
+          <Text fontSize="0.7rem" textAlign="right">
+            ${pool.userInfo?.pendingRewardValue}
+          </Text>
+          <Button variant="vertekconnect2" disabled={false} width="full">
+            Claim
+          </Button>
+        </Flex>
 
-      <Text textAlign="left" fontWeight="bold">
-        My Balance
-      </Text>
-      <Flex direction="column">
-        <Text textAlign="right" fontWeight="bold">
-          {pool.userInfo?.amountDeposited} VRTK
+        <Text textAlign="left" fontWeight="bold">
+          My Balance
         </Text>
-        <Text fontSize="0.7rem" textAlign="right">
-          ${pool.userInfo?.depositValue}
-        </Text>
-      </Flex>
+        <Flex direction="column">
+          <Text textAlign="right" fontWeight="bold">
+            {pool.userInfo?.amountDeposited} VRTK
+          </Text>
+          <Text fontSize="0.7rem" textAlign="right">
+            ${pool.userInfo?.depositValue}
+          </Text>
+        </Flex>
 
-      <Button variant="vertekdark" disabled={false} width="full" size="lg">
-        Stake
-      </Button>
-      <Button variant="verteklight" disabled={false} width="full" size="lg">
-        Claim
-      </Button>
-    </SimpleGrid>
+        <Button
+          variant="vertekconnect25"
+          disabled={false}
+          width="full"
+          size="lg"
+          onClick={onDepositOpen}
+        >
+          Stake
+        </Button>
+        <Button variant="vertekconnect25" disabled={false} width="full" size="lg">
+          Unstake
+        </Button>
+      </SimpleGrid>
+    </>
   );
 }

@@ -55,11 +55,14 @@ export function useAllowances(
   function hasApprovalForAmount(address: string, amount: AmountHumanReadable) {
     if (amount === '') return true;
 
+    address = address.toLowerCase();
     const allowance =
-      allowances.find((allowance) => allowance.address === address.toLowerCase())?.amount || '0';
+      allowances.find((allowance) => allowance.address.toLowerCase() === address)?.amount || '0';
+
     if (parseFloat(allowance) === 0) return false;
 
-    const decimals = tokens.find((token) => token.address === address)?.decimals || 18;
+    const decimals =
+      tokens.find((token) => token.address.toLowerCase() === address)?.decimals || 18;
     return parseUnits(allowance, decimals).gte(parseUnits(amount, decimals));
   }
 

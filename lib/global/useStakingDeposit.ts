@@ -1,5 +1,4 @@
 import { useSubmitTransaction } from '~/lib/util/useSubmitTransaction';
-import BeethovenxMasterChefAbi from '~/lib/abi/BeethovenxMasterChef.json';
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { parseUnits } from 'ethers/lib/utils';
 import { GqlPoolStaking } from '~/apollo/generated/graphql-codegen-generated';
@@ -12,7 +11,7 @@ export function useStakingDeposit(staking: GqlPoolStaking | null) {
   const { submit, submitAsync, ...rest } = useSubmitTransaction({
     config: {
       addressOrName: staking?.address || '',
-      contractInterface: staking?.type === 'GAUGE' ? LiquidityGaugeV5 : BeethovenxMasterChefAbi,
+      contractInterface: LiquidityGaugeV5,
       functionName: 'deposit(uint256)',
     },
     transactionType: 'STAKE',

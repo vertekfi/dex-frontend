@@ -6,7 +6,13 @@ export interface RewardPoolContextType {}
 
 function _useRewardPools() {
   const { userAddress } = useUserAccount();
-  const { data, loading, error, networkStatus, refetch } = useGetRewardPoolsQuery({
+  const {
+    data,
+    loading,
+    error,
+    networkStatus,
+    refetch: refetchPools,
+  } = useGetRewardPoolsQuery({
     pollInterval: 30000,
     notifyOnNetworkStatusChange: true,
     variables: {
@@ -19,7 +25,7 @@ function _useRewardPools() {
     loading,
     error,
     networkStatus,
-    refetch,
+    refetchPools,
   };
 }
 
