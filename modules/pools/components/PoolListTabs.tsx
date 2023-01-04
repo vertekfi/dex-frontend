@@ -1,4 +1,4 @@
-import { Box, HStack, TabList, Tabs } from '@chakra-ui/react';
+import { HStack, TabList, Tabs } from '@chakra-ui/react';
 import { usePoolList } from '~/modules/pools/usePoolList';
 import BeetsTab from '~/components/tabs/BeetsTab';
 import { useUserAccount } from '~/lib/user/useUserAccount';

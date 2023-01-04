@@ -68,11 +68,6 @@ export async function getStaticProps({ params }: { params: { poolId: string } })
     variables: { id: params.poolId },
   });
 
-  //pre-load the fbeets ratio for fidelio duetto
-  /*if (params.poolId === networkConfig.fbeets.poolId) {
-        await client.query({ query: GetFbeetsRatio });
-    }*/
-
   return loadApolloState({
     client,
     props: { pool: data.pool },
