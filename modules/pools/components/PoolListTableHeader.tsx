@@ -6,13 +6,12 @@ import { InfoButton } from '~/components/info-button/InfoButton';
 export function PoolListTableHeader() {
   const { state, changeSort, showMyInvestments } = usePoolList();
 
+  
   return (
     <>
       <Grid
-        pl="4"
-        py="3"
-        borderTopLeftRadius="md"
-        borderTopRightRadius="md"
+        padding="12px"
+        borderTopRadius="16px"
         alignItems={'center'}
         bgColor="vertek.slate.900"
         borderBottom="2px"

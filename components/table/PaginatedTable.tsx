@@ -41,14 +41,14 @@ export function PaginatedTable({
   const isLoadingRows = loading && items.length === 0;
 
   return (
-    <Box {...rest}>
+    <Box {...rest} >
       {renderTableHeader()}
       <Box
         mb={4}
-        borderBottomLeftRadius="md"
-        borderBottomRightRadius="md"
+        borderBottomLeftRadius="16px"
+        borderBottomRightRadius="16px"
         overflow="hidden"
-        shadow="lg"
+
       >
         {isLoadingRows && (
           <Flex justifyContent={'center'} py={32} bg="box.500">
@@ -72,7 +72,7 @@ export function PaginatedTable({
           ))}
       </Box>
       {!isInfinite && (
-        <Flex>
+        <Flex >
           <Flex flex={1} alignItems="center" justifyContent="flex-start">
             {hidePageSizeChange ? null : (
               <>
@@ -115,7 +115,7 @@ export function PaginatedTable({
                     icon={<ChevronRight />}
                     borderTopLeftRadius={0}
                     borderBottomLeftRadius={0}
-                    borderBottomRightRadius="16px"
+                    borderBottomRightRadius={{base:'auto', lg:'16px'}}
                   />
                 );
               } else if (type === 'jump-prev') {
