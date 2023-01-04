@@ -40,6 +40,7 @@ export function useRewardPoolDeposit(pool: RewardPool) {
   // });
 
   function depositToPool(amount: string) {
+    console.log(amount);
     return submit({
       args: [parseUnits(amount, 18)],
       toastText: `Deposit VRTK into staking pool`,

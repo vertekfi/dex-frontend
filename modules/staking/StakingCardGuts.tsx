@@ -67,10 +67,17 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         >
           Stake
         </Button>
-        <Button variant="vertekconnect25" disabled={false} width="full" size="lg">
+        <Button variant="vertekconnect2" disabled={false} width="full" size="lg">
           Unstake
         </Button>
       </SimpleGrid>
+
+      <RewardPoolDepositModal
+        isOpen={isDepositOpen}
+        onOpen={onDepositOpen}
+        onClose={onDepositClose}
+        pool={pool}
+      />
     </>
   );
 }
