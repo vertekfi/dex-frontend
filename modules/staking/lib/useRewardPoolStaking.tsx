@@ -13,6 +13,7 @@ function _useRewardPools() {
     networkStatus,
     refetch: refetchPools,
   } = useGetRewardPoolsQuery({
+    fetchPolicy: 'no-cache',
     pollInterval: 30000,
     notifyOnNetworkStatusChange: true,
     variables: {

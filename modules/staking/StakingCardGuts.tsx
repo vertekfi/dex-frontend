@@ -1,12 +1,13 @@
 import { Flex, SimpleGrid, Text, Button, useDisclosure } from '@chakra-ui/react';
 import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
-import { useRewardPools } from './lib/useRewardPoolStaking';
+import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
 
 export function StakingCardGuts(props: { pool: RewardPool }) {
   const pool = props.pool;
-  const { refetchPools } = useRewardPools();
+
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
+  const withdrawDisclosure = useDisclosure();
 
   return (
     <>
@@ -76,6 +77,13 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         isOpen={isDepositOpen}
         onOpen={onDepositOpen}
         onClose={onDepositClose}
+        pool={pool}
+      />
+
+      <RewardPoolWithdrawModal
+        isOpen={withdrawDisclosure.isOpen}
+        onOpen={withdrawDisclosure.onOpen}
+        onClose={withdrawDisclosure.onClose}
         pool={pool}
       />
     </>

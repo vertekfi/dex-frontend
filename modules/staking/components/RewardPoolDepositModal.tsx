@@ -100,10 +100,6 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
   }, [loading, isOpen]);
 
   useEffect(() => {
-    // console.log(inputAmount);
-  }, [inputAmount]);
-
-  useEffect(() => {
     if (isOpen && userVrtkBalance) {
       setPercent(100);
     }
@@ -141,7 +137,7 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
           <BeetsTransactionStepsSubmit
             isLoading={loading || steps === null}
             loadingButtonText="Loading balances..."
-            completeButtonText="Return to pool"
+            completeButtonText="Deposit complete"
             onCompleteButtonClick={() => {
               onClose();
             }}
