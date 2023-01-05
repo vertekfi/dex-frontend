@@ -16,6 +16,7 @@ export function VotingContainer() {
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>(null);
   const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
+
   const {
     isLoading: loadingGauges,
     votingGauges,
@@ -24,11 +25,19 @@ export function VotingContainer() {
     votingPeriodLastHour,
     refetch: refetchVotingGauges,
   } = useVotingGauges();
+
   const { userLockInfo } = useUserVeLockInfoQuery();
+
+  useEffect(() => {
+    if (votingGauges) {
+      // console.log(votingGauges);
+    }
+  }, [votingGauges]);
 
   // set available voting power
   useEffect(() => {
     if (unallocatedVotes) {
+      console.log(unallocatedVotes);
       setUnallocatedVotesFormatted(
         fNum2(scale(bnum(unallocatedVotes), -4).toString(), FNumFormats.percent),
       );
@@ -38,6 +47,7 @@ export function VotingContainer() {
   // set user lock info
   useEffect(() => {
     if (userLockInfo) {
+      console.log(userLockInfo);
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
       }
@@ -63,11 +73,7 @@ export function VotingContainer() {
 
   return (
     <>
-      <SimpleGrid 
-      columns={{ sm: 1, md: 2, lg: 4 }} 
-      paddingX={4} 
-      paddingY={2} 
-      spacing={4}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={4} paddingY={2} spacing={4}>
         <GaugeActionCard heading="My 80VRTK-20BNB" />
         <GaugeActionCard heading="My locked 80VRTK-20BNB" />
         <GaugeActionCard1 heading="Locked until..." />

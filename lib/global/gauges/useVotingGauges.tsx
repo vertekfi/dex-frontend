@@ -32,6 +32,7 @@ export function _useGauges() {
 
   // Update voting period timer
   useEffect(() => {
+    console.log('interval');
     if (!nowInterval) return;
 
     const periodEnd = getVotePeriodEndTime();
@@ -62,7 +63,6 @@ export function _useGauges() {
     };
 
     if (userAddress && !isLoading && gauges?.getLiquidityGauges) {
-      console.log(gauges);
       // decorate for UI and use state version in other effects
       setGauges();
     }

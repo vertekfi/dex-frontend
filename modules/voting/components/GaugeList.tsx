@@ -8,7 +8,6 @@ import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { scale } from '~/lib/util/big-number.utils';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { useUserAccount } from '~/lib/user/useUserAccount';
-import { usePoolList } from '~/modules/pools/usePoolList';
 import { GaugeListTableHeader } from './GaugeListTableHeader';
 import { GaugeListItem } from './GaugeListItem';
 
@@ -23,6 +22,7 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
     return null;
   }
   const { isConnected } = useUserAccount();
+
   const tableHeaders = ['Icons', 'Composition', 'Next period votes', 'My votes', 'Vote'];
   const columns = [
     {
@@ -32,14 +32,14 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
       Header: 'iconColumnHeader',
       Cell: 'iconColumnCell',
       width: 125,
-      noGrow: true
+      noGrow: true,
     },
     {
       name: 'Composition',
       id: 'poolComposition',
       accessor: 'id',
       Cell: 'poolCompositionCell',
-      width: 350
+      width: 350,
     },
     {
       name: 'Next period votes',
@@ -47,9 +47,9 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
       align: 'right',
       id: 'nextPeriodVotes',
       Cell: 'nextPeriodVotesCell',
-      sortKey: (gauge: { votesNextPeriod: string }) => Number(gauge.votesNextPeriod) as number,   
+      sortKey: (gauge: { votesNextPeriod: string }) => Number(gauge.votesNextPeriod) as number,
       width: 150,
-      cellClassName: 'font-numeric'
+      cellClassName: 'font-numeric',
     },
     {
       name: 'My votes',
@@ -57,15 +57,15 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
         const normalizedVotes = scale(gauge.userVotes.toString(), -4);
         return fNum2(normalizedVotes.toString(), {
           style: 'percent',
-          maximumFractionDigits: 2
+          maximumFractionDigits: 2,
         });
       },
       align: 'right',
       id: 'myVotes',
-      sortKey: (gauge: any) => Number(gauge.userVotes), 
+      sortKey: (gauge: any) => Number(gauge.userVotes),
       width: 150,
       cellClassName: 'font-numeric',
-      hidden: !isConnected ? true : false
+      hidden: !isConnected ? true : false,
     },
     {
       name: 'Vote',
@@ -74,18 +74,22 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
       align: 'right',
       Cell: 'voteColumnCell',
       width: 100,
-      hidden: !isConnected ? true : false
-    }
+      hidden: !isConnected ? true : false,
+    },
   ];
+
   function redirectToPool(gauge: VotingGaugeWithVotes) {
     window.location.href = poolURLFor(gauge.pool.id, gauge.network);
   }
+
   function getIsGaugeExpired(gaugeAddress: string): boolean {
     return !!props?.gaugeInfo?.expiredGauges.some((item) => isSameAddress(gaugeAddress, item));
   }
+
   function getHasUserVotes(userVotes: string): boolean {
     return !!Number(userVotes);
   }
+
   function getTableRowClass(gauge: VotingGaugeWithVotes): string {
     return getHasUserVotes(gauge.userVotes) && getIsGaugeExpired(gauge.address)
       ? 'expired-gauge-row'
@@ -95,19 +99,15 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Box mt={3} mb="6rem" 
-        borderRadius="16px"
-       
-        flexDirection="column" 
-        display="flex">
+        <Box mt={3} mb="6rem" borderRadius="16px" flexDirection="column" display="flex">
           <GaugeListTableHeader />
           <Box>
-          <GaugeListItem />
-          <GaugeListItem />
-          <GaugeListItem />
-          <GaugeListItem />
-          <GaugeListItem />
-          <GaugeListItem />
+            <GaugeListItem />
+            <GaugeListItem />
+            <GaugeListItem />
+            <GaugeListItem />
+            <GaugeListItem />
+            <GaugeListItem />
           </Box>
         </Box>
       </UserTokenBalancesProvider>
