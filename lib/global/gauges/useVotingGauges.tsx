@@ -8,7 +8,6 @@ import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
 export function _useGauges() {
-  const [now, setNow] = useState<number>(Date.now());
   const [votingPeriodEnd, setVotingPeriodEnd] = useState<number[]>();
   const [votingPeriodLastHour, setVotingPeriodLastHour] = useState<boolean>();
   const [unallocatedVotes, setUnallocatedVotes] = useState<number>();
@@ -26,29 +25,24 @@ export function _useGauges() {
     notifyOnNetworkStatusChange: true,
   });
 
-  const nowInterval = setInterval(() => {
-    setNow(Date.now());
-  }, 1000);
-
   // Update voting period timer
   useEffect(() => {
-    console.log('interval');
-    if (!nowInterval) return;
+    const nowInterval = setInterval(() => {
+      const periodEnd = getVotePeriodEndTime();
+      const interval: Interval = { start: Date.now(), end: periodEnd };
+      const timeUntilEnd: Duration = intervalToDuration(interval);
+      const formattedTime = [
+        (timeUntilEnd.days || 0) % 7,
+        timeUntilEnd.hours || 0,
+        timeUntilEnd.minutes || 0,
+        timeUntilEnd.seconds || 0,
+      ];
 
-    const periodEnd = getVotePeriodEndTime();
-    const interval: Interval = { start: now, end: periodEnd };
-    const timeUntilEnd: Duration = intervalToDuration(interval);
-    const formattedTime = [
-      (timeUntilEnd.days || 0) % 7,
-      timeUntilEnd.hours || 0,
-      timeUntilEnd.minutes || 0,
-      timeUntilEnd.seconds || 0,
-    ];
+      const isLastHour = (timeUntilEnd.days || 0) < 1 && (timeUntilEnd.hours || 0) < 1;
 
-    const isLastHour = (timeUntilEnd.days || 0) < 1 && (timeUntilEnd.hours || 0) < 1;
-
-    setVotingPeriodEnd(formattedTime);
-    setVotingPeriodLastHour(isLastHour);
+      setVotingPeriodEnd(formattedTime);
+      setVotingPeriodLastHour(isLastHour);
+    }, 1000);
 
     return () => clearInterval(nowInterval);
   }, []);

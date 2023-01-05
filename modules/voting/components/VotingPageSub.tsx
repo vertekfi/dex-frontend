@@ -1,11 +1,13 @@
-import { isSameAddress } from '@balancer-labs/sdk';
-import { Box, Text, Grid, GridItem, VStack, BoxProps } from '@chakra-ui/react';
+import { Box, Text, Grid, GridItem, VStack } from '@chakra-ui/react';
+import { scale } from '@georgeroman/balancer-v2-pools/dist/src/utils/big-number';
 import { useEffect, useState } from 'react';
 import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
-import { VotingGauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { poolURLFor } from '~/modules/pool/lib/pool-utils';
+import { bnum } from '~/lib/util/big-number.utils';
+import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 
 export function VotingPageSub() {
+  const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
+
   const {
     isLoading: loadingGauges,
     votingGauges,
@@ -14,6 +16,16 @@ export function VotingPageSub() {
     votingPeriodLastHour,
     refetch: refetchVotingGauges,
   } = useVotingGauges();
+
+  useEffect(() => {
+    if (unallocatedVotes) {
+      setUnallocatedVotesFormatted(
+        fNum2(scale(bnum(unallocatedVotes), -4).toString(), FNumFormats.percent),
+      );
+    } else {
+      setUnallocatedVotesFormatted('0%');
+    }
+  }, [unallocatedVotes]);
 
   return (
     // <Box mt={3} mb='4rem' flexDirection="column" display="flex">
@@ -56,7 +68,7 @@ export function VotingPageSub() {
               My unallocated votes
             </Text>
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
-              1
+              {unallocatedVotesFormatted}
             </Text>
           </Box>
           <Box
