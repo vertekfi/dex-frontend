@@ -2,7 +2,6 @@ import { Box, Button, useDisclosure, VStack } from '@chakra-ui/react';
 import { useAnimation } from 'framer-motion';
 import { TokenInput } from '~/components/inputs/TokenInput';
 import Card from '~/components/card/Card';
-
 import { TokenInputSwapButton } from '~/modules/trade/components/TokenInputSwapButton';
 import { TradeCardSwapBreakdown } from '~/modules/trade/components/TradeCardSwapBreakdown';
 import { useTradeCard } from '~/modules/trade/lib/useTradeCard';

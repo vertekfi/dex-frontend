@@ -7,7 +7,7 @@ import SwapMastheadImage from '~/assets/images/swap-masthead-image.png';
 import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
-
+import { Text, Box } from '@chakra-ui/react';
 function Swap() {
     const { chainId } = useNetworkConfig();
 
@@ -35,8 +35,12 @@ function Swap() {
                             width="213.71px"
                             height="68px"
                         />
+                       
                     }
                 />
+                {/* <Box width={{ base:'100%', lg:'60%' }}>
+                <Text fontSize="1.2rem" mt="-4" mb="6"> Utilize Vertek's decentralized exchange to swap tokens with lightning speed and maximal efficiency </Text>
+                </Box> */}
                 <TradeContainer />
             </UserTokenBalancesProvider>
         </>
