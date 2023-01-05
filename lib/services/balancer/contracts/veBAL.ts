@@ -5,7 +5,7 @@ import { parseUnits } from '@ethersproject/units';
 import { networkConfig } from '~/lib/config/network-config';
 import { networkProvider } from '~/lib/global/network';
 import { Multicaller } from '../../util/multicaller.service';
-import { toJsTimestamp, toUtcTime } from '../../util/time';
+import { toJsTimestamp, toUtcTime } from '../../../util/time';
 import veBalAbi from '../../../abi/veBalAbi.json';
 
 export type VeBalLockInfo = {
@@ -30,7 +30,11 @@ export class VeBAL {
 
   constructor() {}
 
-  async getLockInfo(account: string): Promise<VeBalLockInfo> {
+  async getLockInfo(account?: string): Promise<VeBalLockInfo | null> {
+    if (!account) {
+      return null;
+    }
+
     const veBalMulticaller = new Multicaller(networkProvider, veBalAbi);
 
     veBalMulticaller.call('locked', this.address, 'locked', [account]);

@@ -50,6 +50,7 @@ export interface NetworkConfig {
       gaugeController: string;
       veBALHelpers: string;
       tokenAdmin: string;
+      lockablePoolId: string;
     };
   };
   beetsPoolOwnerAddress: string;

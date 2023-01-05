@@ -43,6 +43,7 @@ export const bscNetworkConfig: NetworkConfig = {
       gaugeController: '',
       veBALHelpers: '',
       tokenAdmin: '',
+      lockablePoolId: '',
     },
   },
   beetsPoolOwnerAddress: '',

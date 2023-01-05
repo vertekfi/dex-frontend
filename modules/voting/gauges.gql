@@ -1,6 +1,7 @@
 query GetLiquidityGauges {
   getLiquidityGauges {
     id
+    address
     symbol
     poolId
     totalSupply
@@ -14,6 +15,7 @@ query GetLiquidityGauges {
     }
     pool {
       id
+      name
       address
       poolType
       tokensList

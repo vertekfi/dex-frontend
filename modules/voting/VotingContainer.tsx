@@ -34,16 +34,6 @@ export function VotingContainer() {
     }
   }, [votingGauges]);
 
-  // set available voting power
-  useEffect(() => {
-    if (unallocatedVotes) {
-      console.log(unallocatedVotes);
-      setUnallocatedVotesFormatted(
-        fNum2(scale(bnum(unallocatedVotes), -4).toString(), FNumFormats.percent),
-      );
-    }
-  }, [unallocatedVotes]);
-
   // set user lock info
   useEffect(() => {
     if (userLockInfo) {
@@ -80,7 +70,7 @@ export function VotingContainer() {
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
       <VotingPageSub />
-      <GaugeList gaugeInfo={null} />
+      <GaugeList votingGauges={votingGauges} />
     </>
   );
 }

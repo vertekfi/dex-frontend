@@ -79,13 +79,19 @@ export function PoolListItem({
               />
             </GridItem>
             <GridItem area="name" mb={{ base: '4', lg: '0' }}>
-              <Text color="white" fontSize={{ base: 'xl', lg: 'md' }} fontWeight={{ base: 'bold', lg: 'normal' }}>
+              <Text
+                color="white"
+                fontSize={{ base: 'xl', lg: 'md' }}
+                fontWeight={{ base: 'bold', lg: 'normal' }}
+              >
                 {pool.name}
               </Text>
             </GridItem>
             {showUserBalance && (
               <GridItem
-                area="userBalance" color="white" fontWeight="bold"
+                area="userBalance"
+                color="white"
+                fontWeight="bold"
                 textAlign={{ base: 'left', lg: 'right' }}
                 mb={{ base: '4', lg: '0' }}
               >

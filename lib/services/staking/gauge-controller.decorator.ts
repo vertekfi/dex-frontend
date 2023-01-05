@@ -1,7 +1,7 @@
 import { networkConfig } from '~/lib/config/network-config';
 import { getChainId, networkProvider } from '~/lib/global/network';
 import { Multicaller } from '../util/multicaller.service';
-import { oneWeekInMs, toUnixTimestamp } from '../util/time';
+import { oneWeekInMs, toUnixTimestamp } from '../../util/time';
 import {
   RawVotesData,
   RawVotesDataMap,

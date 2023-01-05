@@ -6,6 +6,14 @@ export const oneHourInMs = 60 * oneMinInMs;
 export const oneDayInMs = 24 * oneHourInMs;
 export const oneWeekInMs = 7 * oneDayInMs;
 
+export const twentyFourHoursInMs = 24 * oneHourInMs;
+export const twentyFourHoursInSecs = twentyFourHoursInMs / oneSecondInMs;
+
+export const timeNowInMs = Math.floor(Date.now() / oneSecondInMs);
+
+export const oneYearInSecs = twentyFourHoursInSecs * 365;
+export const oneWeekInSecs = twentyFourHoursInSecs * 7;
+
 export function toUnixTimestamp(jsTimestamp: number): number {
   return Math.round(jsTimestamp / oneSecondInMs);
 }

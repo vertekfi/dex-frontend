@@ -12,18 +12,15 @@ import { GaugeListTableHeader } from './GaugeListTableHeader';
 import { GaugeListItem } from './GaugeListItem';
 
 interface GaugeListProps {
-  votingGauges: VotingGauge[];
-  expiredGauges: string[];
-  isLoading: boolean;
-  onVoteClicked: (votingGauge: VotingGaugeWithVotes) => void;
+  votingGauges: VotingGaugeWithVotes[];
+  // expiredGauges: string[];
+  //  isLoading: boolean;
+  // onVoteClicked: (votingGauge: VotingGaugeWithVotes) => void;
 }
-export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
-  if (!props) {
-    return null;
-  }
+export function GaugeList(props: GaugeListProps | null) {
   const { isConnected } = useUserAccount();
 
-  const tableHeaders = ['Icons', 'Composition', 'Next period votes', 'My votes', 'Vote'];
+  const tableHeaders = ['Icons', 'Pool', 'Next period votes', 'My votes', 'Vote'];
   const columns = [
     {
       name: 'Icons',
@@ -35,10 +32,10 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
       noGrow: true,
     },
     {
-      name: 'Composition',
-      id: 'poolComposition',
+      name: 'Pool',
+      id: 'poolName',
       accessor: 'id',
-      Cell: 'poolCompositionCell',
+      Cell: 'poolNameCell',
       width: 350,
     },
     {
@@ -82,19 +79,19 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
     window.location.href = poolURLFor(gauge.pool.id, gauge.network);
   }
 
-  function getIsGaugeExpired(gaugeAddress: string): boolean {
-    return !!props?.gaugeInfo?.expiredGauges.some((item) => isSameAddress(gaugeAddress, item));
-  }
+  // function getIsGaugeExpired(gaugeAddress: string): boolean {
+  //   return !!props?.gaugeInfo?.expiredGauges.some((item) => isSameAddress(gaugeAddress, item));
+  // }
 
   function getHasUserVotes(userVotes: string): boolean {
     return !!Number(userVotes);
   }
 
-  function getTableRowClass(gauge: VotingGaugeWithVotes): string {
-    return getHasUserVotes(gauge.userVotes) && getIsGaugeExpired(gauge.address)
-      ? 'expired-gauge-row'
-      : '';
-  }
+  // function getTableRowClass(gauge: VotingGaugeWithVotes): string {
+  //   return getHasUserVotes(gauge.userVotes) && getIsGaugeExpired(gauge.address)
+  //     ? 'expired-gauge-row'
+  //     : '';
+  // }
 
   return (
     <PoolListProvider>
@@ -102,12 +99,9 @@ export function GaugeList(props: { gaugeInfo: GaugeListProps | null } | null) {
         <Box mt={3} mb="6rem" borderRadius="16px" flexDirection="column" display="flex">
           <GaugeListTableHeader />
           <Box>
-            <GaugeListItem />
-            <GaugeListItem />
-            <GaugeListItem />
-            <GaugeListItem />
-            <GaugeListItem />
-            <GaugeListItem />
+            {props?.votingGauges.map((gauge) => {
+              return <GaugeListItem gauge={gauge} />;
+            })}
           </Box>
         </Box>
       </UserTokenBalancesProvider>

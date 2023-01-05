@@ -42,9 +42,10 @@ export const goerliNetworkConfig: NetworkConfig = {
     linearRebalancers: {},
     votingEscrow: {
       veAddress: '0x0701037C5Af32ec230dB00af18075C5a91a4D259',
-      gaugeController: '0xdb3c6c83828D903D99aCD198e9e638a365cd52e6',
-      veBALHelpers: '0xe030325aDa7e0365EBD0efb4adf3ef55F5Fd3BAE',
+      gaugeController: '0xEcc318f292B896651613A029a966Ff19E35A2fa1',
+      veBALHelpers: '0x3B0b5C741A11cE8e42411af455490BED08Abd91A',
       tokenAdmin: '0xaF3F9EB221f3DB6cEEdC6cC24818A18869Feb268',
+      lockablePoolId: '0x3e9f7b85e8ee2107aeca28677b6b416fa60b6200000200000000000000000002',
     },
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',

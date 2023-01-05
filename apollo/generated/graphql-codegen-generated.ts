@@ -32,6 +32,7 @@ export interface GaugePool {
   __typename: 'GaugePool';
   address: Scalars['String'];
   id: Scalars['String'];
+  name: Scalars['String'];
   poolType: Scalars['String'];
   tokens: Array<GqlPoolToken>;
   tokensList: Array<Scalars['String']>;
@@ -4369,6 +4370,7 @@ export type GetLiquidityGaugesQuery = {
   getLiquidityGauges: Array<{
     __typename: 'LiquidityGauge';
     id: string;
+    address: string;
     symbol: string;
     poolId: string;
     totalSupply: string;
@@ -4383,6 +4385,7 @@ export type GetLiquidityGaugesQuery = {
     pool: {
       __typename: 'GaugePool';
       id: string;
+      name: string;
       address: string;
       poolType: string;
       tokensList: Array<string>;
@@ -6656,6 +6659,7 @@ export const GetLiquidityGaugesDocument = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
       id
+      address
       symbol
       poolId
       totalSupply
@@ -6669,6 +6673,7 @@ export const GetLiquidityGaugesDocument = gql`
       }
       pool {
         id
+        name
         address
         poolType
         tokensList

@@ -7,86 +7,97 @@ import AprTooltip from '~/components/apr-tooltip/AprTooltip';
 import { BoxProps } from '@chakra-ui/layout';
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { TokenAvatarSetInList, TokenAvatarSetInListTokenData } from '~/components/token/TokenAvatarSetInList';
+import {
+  TokenAvatarSetInList,
+  TokenAvatarSetInListTokenData,
+} from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { PoolListProvider } from '~/modules/pools/usePoolList';
 import { GaugeVoteModal } from './GaugeVoteModal';
 import { useState } from 'react';
+import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
-export function GaugeListItem(){
-    const [isOpen, setIsOpen] = useState(false);
-    const onClose = () => setIsOpen(false);
-    const onOpen = () => setIsOpen(true);
-    return (
+export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => setIsOpen(true);
 
-<PoolListProvider>
-<UserTokenBalancesProvider>
-<Grid
-    bg="vertek.slatepurple.900"
-    borderBottomColor="vertek.slatepurple.600"
-    borderBottomWidth="1px"
-    paddingY="1.5rem"
-    paddingX="1rem"
-    borderRadius={{ base:"12px", lg:"none"}}
-    templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
-    gap="2"
-    mb={{ base:'4', lg:'0'}}
-    templateAreas={{ 
-    base: `
-        "icons pills"
-        "nextvote myvote"
-        "votebutton votebutton" `,
-    lg: `
-        "icons pills nextvote myvote votebutton" ` }}
-    >
-        <GridItem  
-        area="icons"
-        display="flex"
-        alignItems="center" 
-        justifyContent="left" 
-        textAlign="left">
-            Icon Set 
-        </GridItem>
-
-        <GridItem  
-        area="pills"
-        display="flex" 
-        alignItems="center" 
-        justifyContent={{base:'flex-end', lg:'flex-start'}} >
-            Token Pills 
-        </GridItem>
-
-        <GridItem  
-        area="nextvote"
-        display="flex" 
-        alignItems={{ base: 'left', lg:'center' }}
-        justifyContent={{ base: 'left', lg:'center' }} 
+  return (
+    <PoolListProvider>
+      <UserTokenBalancesProvider>
+        <Grid
+          bg="vertek.slatepurple.900"
+          borderBottomColor="vertek.slatepurple.600"
+          borderBottomWidth="1px"
+          paddingY="1.5rem"
+          paddingX="1rem"
+          borderRadius={{ base: '12px', lg: 'none' }}
+          templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
+          gap="2"
+          mb={{ base: '4', lg: '0' }}
+          templateAreas={{
+            base: `
+            "icons pills"
+            "nextvote myvote"
+            "votebutton votebutton" `,
+            lg: `"icons pills nextvote myvote votebutton"`,
+          }}
         >
-            0% 
-        </GridItem>
+          <GridItem
+            area="icons"
+            display="flex"
+            alignItems="center"
+            justifyContent="left"
+            textAlign="left"
+          >
+            <MemoizedTokenAvatarSetInList
+              imageSize={25}
+              width={92}
+              tokens={props.gauge.pool.tokens}
+              //renderPopover={false}
+            />
+          </GridItem>
 
-        <GridItem  
-        area="myvote"
-        display="flex" 
-        alignItems="center"
-        justifyContent={{base:'flex-end', lg:'center'}}
-        >
+          <GridItem
+            area="pills"
+            display="flex"
+            alignItems="center"
+            justifyContent={{ base: 'flex-end', lg: 'flex-start' }}
+          >
+            {props.gauge.pool.name}
+          </GridItem>
+
+          <GridItem
+            area="nextvote"
+            display="flex"
+            alignItems={{ base: 'left', lg: 'center' }}
+            justifyContent={{ base: 'left', lg: 'center' }}
+          >
+            0%
+          </GridItem>
+
+          <GridItem
+            area="myvote"
+            display="flex"
+            alignItems="center"
+            justifyContent={{ base: 'flex-end', lg: 'center' }}
+          >
             69%
-        </GridItem>
-        
-        <GridItem  
-        area="votebutton"
-        display="flex" 
-        alignItems="center" 
-        justifyContent="center" 
-        textAlign="center">
-                <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
-        </GridItem>
-        
-    </Grid>
-</UserTokenBalancesProvider>
-</PoolListProvider>
-);
-    }
+          </GridItem>
+
+          <GridItem
+            area="votebutton"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+          >
+            <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
+          </GridItem>
+        </Grid>
+      </UserTokenBalancesProvider>
+    </PoolListProvider>
+  );
+}

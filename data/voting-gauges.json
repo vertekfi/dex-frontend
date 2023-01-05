@@ -7,6 +7,7 @@
       "address": "0x7b68cAE3d442B543Aa9Cbd9B22d064aF2E7A578b",
       "poolType": "Weighted",
       "symbol": "AMES-BUSD",
+      "name": "Pegging Enthusiast",
       "tokens": [
         {
           "address": "0xd71114b3AD1Ec657B4194E0B3b7C9fC71C7bdbEF",

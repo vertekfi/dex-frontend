@@ -1014,6 +1014,7 @@ export const GetLiquidityGauges = gql`
   query GetLiquidityGauges {
     getLiquidityGauges {
       id
+      address
       symbol
       poolId
       totalSupply
@@ -1027,6 +1028,7 @@ export const GetLiquidityGauges = gql`
       }
       pool {
         id
+        name
         address
         poolType
         tokensList

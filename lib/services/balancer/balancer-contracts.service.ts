@@ -14,8 +14,8 @@ import ERC20_ABI from '../../abi/ERC20.json';
 import { VeBAL } from './contracts/veBAL';
 
 export default class BalancerContractsService {
-  vault: Vault;
-  veBAL: VeBAL;
+  public readonly vault: Vault;
+  public readonly veBAL: VeBAL;
 
   constructor() {
     // Init contracts

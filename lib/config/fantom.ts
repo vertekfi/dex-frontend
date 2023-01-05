@@ -49,6 +49,7 @@ export const fantomNetworkConfig: NetworkConfig = {
       gaugeController: '',
       veBALHelpers: '',
       tokenAdmin: '',
+      lockablePoolId: '',
     },
   },
   beetsPoolOwnerAddress: '0xcd983793adb846dce4830c22f30c7ef0c864a776',

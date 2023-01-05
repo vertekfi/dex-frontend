@@ -4,8 +4,11 @@ import { useEffect, useState } from 'react';
 import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
 import { bnum } from '~/lib/util/big-number.utils';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
+import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 
 export function VotingPageSub() {
+  const [hasLock, setHasLock] = useState<boolean>(false);
+  const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
 
   const {
@@ -17,6 +20,8 @@ export function VotingPageSub() {
     refetch: refetchVotingGauges,
   } = useVotingGauges();
 
+  const { userLockInfo } = useUserVeLockInfoQuery();
+
   useEffect(() => {
     if (unallocatedVotes) {
       setUnallocatedVotesFormatted(
@@ -26,6 +31,20 @@ export function VotingPageSub() {
       setUnallocatedVotesFormatted('0%');
     }
   }, [unallocatedVotes]);
+
+  // set user lock info
+  useEffect(() => {
+    if (userLockInfo) {
+      console.log(userLockInfo);
+      if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
+        setHasLock(true);
+      }
+
+      if (userLockInfo.hasExistingLock && userLockInfo.isExpired) {
+        setExpiredHasLock(true);
+      }
+    }
+  }, [userLockInfo]);
 
   return (
     // <Box mt={3} mb='4rem' flexDirection="column" display="flex">

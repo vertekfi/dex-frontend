@@ -43,6 +43,7 @@ export type VotingGauge = {
   pool: {
     id: string;
     address: string;
+    name: string;
     poolType: string;
     symbol: string | undefined;
     tokens: Pick<GqlPoolToken, 'address' | 'weight' | 'symbol'>[];
