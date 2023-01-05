@@ -35,7 +35,6 @@ export function VotingPageSub() {
   // set user lock info
   useEffect(() => {
     if (userLockInfo) {
-      console.log(userLockInfo);
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
       }

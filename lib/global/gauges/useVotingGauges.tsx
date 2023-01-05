@@ -51,8 +51,6 @@ export function _useGauges() {
   useEffect(() => {
     // inefficient. Use the useCallback thingie or something
     const setGauges = async () => {
-      const toDecorate = isTestnet ? GOERLI_VOTING_GAUGES : MAINNET_VOTING_GAUGES;
-      console.log(gauges?.getLiquidityGauges);
       const decoratedGauges = await gaugeControllerDecorator.decorateWithVotes(
         (gauges?.getLiquidityGauges || []) as unknown as VotingGauge[],
         userAddress,

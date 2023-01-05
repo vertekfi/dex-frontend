@@ -675,6 +675,7 @@ export interface GqlPoolToken extends GqlPoolTokenBase {
   decimals: Scalars['Int'];
   id: Scalars['ID'];
   index: Scalars['Int'];
+  logoURI?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   priceRate: Scalars['BigDecimal'];
   symbol: Scalars['String'];
@@ -4389,7 +4390,12 @@ export type GetLiquidityGaugesQuery = {
       address: string;
       poolType: string;
       tokensList: Array<string>;
-      tokens: Array<{ __typename: 'GqlPoolToken'; address: string; weight?: string | null }>;
+      tokens: Array<{
+        __typename: 'GqlPoolToken';
+        address: string;
+        weight?: string | null;
+        logoURI?: string | null;
+      }>;
     };
   } | null>;
 };
@@ -6680,6 +6686,7 @@ export const GetLiquidityGaugesDocument = gql`
         tokens {
           address
           weight
+          logoURI
         }
       }
       isKilled

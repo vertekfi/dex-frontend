@@ -1035,6 +1035,7 @@ export const GetLiquidityGauges = gql`
         tokens {
           address
           weight
+          logoURI
         }
       }
       isKilled

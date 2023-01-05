@@ -17,12 +17,24 @@ import { PoolListProvider } from '~/modules/pools/usePoolList';
 import { GaugeVoteModal } from './GaugeVoteModal';
 import { useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
+import { bnum } from '@balancer-labs/sor';
+import { scale } from '@georgeroman/balancer-v2-pools/dist/src/utils/big-number';
+import { fNum2 } from '~/lib/util/useNumber';
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
+
+  function formatVotesAsPercent(votes: string): string {
+    const normalizedVotes = scale(bnum(votes), -18);
+    return fNum2(normalizedVotes.toString(), {
+      style: 'percent',
+      maximumFractionDigits: 2,
+      fixedFormat: true,
+    });
+  }
 
   return (
     <PoolListProvider>
@@ -75,7 +87,7 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
             alignItems={{ base: 'left', lg: 'center' }}
             justifyContent={{ base: 'left', lg: 'center' }}
           >
-            0%
+            {formatVotesAsPercent(props.gauge.votesNextPeriod)}
           </GridItem>
 
           <GridItem
@@ -84,7 +96,7 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
             alignItems="center"
             justifyContent={{ base: 'flex-end', lg: 'center' }}
           >
-            69%
+            {formatVotesAsPercent(props.gauge.userVotes)}
           </GridItem>
 
           <GridItem
