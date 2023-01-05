@@ -95,7 +95,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
                   You sell
                   <HStack spacing="1">
                     <Text fontWeight="bold">{tokenIn?.symbol}</Text>
-                    <Link href={etherscanGetTokenUrl(swapInfo.tokenIn)} color="vertek.gold.400" target="_blank" ml="1.5">
+                    <Link href={etherscanGetTokenUrl(swapInfo.tokenIn)} color="vertek.neonpurple.500" target="_blank" ml="1.5">
                       <ExternalLink size={14} />
                     </Link>
                   </HStack>
@@ -119,7 +119,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
                   to receive
                   <HStack spacing="1">
                     <Text fontWeight="bold">{tokenOut?.symbol}</Text>
-                    <Link href={etherscanGetTokenUrl(swapInfo.tokenOut)} color="vertek.gold.400" target="_blank" ml="1.5">
+                    <Link href={etherscanGetTokenUrl(swapInfo.tokenOut)} color="vertek.neonpurple.500" target="_blank" ml="1.5">
                       <ExternalLink size={14} />
                     </Link>
                   </HStack>

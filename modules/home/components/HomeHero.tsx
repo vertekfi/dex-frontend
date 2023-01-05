@@ -61,8 +61,6 @@ export function HomeHero() {
           alignItems="center" 
           justifyContent={{ base:'flex-end', lg:'flex-start'}}
           // flex-end on base for accessibility
-          
-          
           >
             <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
               <Button variant="verteklight" width={{ base: '130px', lg: '160px' }}>

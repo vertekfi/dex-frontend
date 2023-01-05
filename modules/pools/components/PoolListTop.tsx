@@ -43,17 +43,17 @@ export function PoolListTop() {
           {/* <PoolListSearch /> */}
         </Box>
       </Flex>
-      <FadeInOutBox isVisible={showFilters}>
+      <FadeInOutBox isVisible={showFilters} bg="black">
         <Grid
           templateColumns={{ base: 'repeat(1, 1fr)', md: '1fr 1fr 0px', lg: '1fr 1fr 1fr' }}
           gap="0"
           pb="4"
           pt="2"
         >
-          <GridItem mr={{ base: '0', md: '2' }} mb={{ base: '4', md: '0' }}>
+          <GridItem bgColor="vertek.slatepurple.900"  mr={{ base: '0', md: '2' }} mb={{ base: '4', md: '0' }}>
             <PoolListTokenMultiSelect />
           </GridItem>
-          <GridItem ml={{ base: '0', md: '2' }}>
+          <GridItem ml={{ base: '0', md: '2' }} bgColor="vertek.slatepurple.900">
             <PoolListFilterMultiSelect />
           </GridItem>
           <GridItem display={{ base: 'none', md: 'block' }}>

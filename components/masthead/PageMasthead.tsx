@@ -25,8 +25,8 @@ export function PageMasthead({ title, image }: Props) {
                     {image}
                 </Box> */}
         <Text fontSize="20px" fontWeight="normal" as="h1" flex="1" mb="2" color="vertek.slate.100">
-          Join our pools for higher rewards and bonuses that can multiply your earnings up to 2.5
-          times.
+          {/* Join our pools for higher rewards and bonuses that can multiply your earnings up to 2.5
+          times. */}
         </Text>
       </VStack>
     </Flex>

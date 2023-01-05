@@ -116,7 +116,8 @@ export function PoolListMobileHeader() {
       <Link
         onClick={onOpen}
         fontSize="lg"
-        color="vertek.gold.400"        fontWeight="bold"
+        color="vertek.neonpurple.500"        
+        fontWeight="bold"
         position="relative"
       >
         <Box>Filter</Box>
@@ -131,12 +132,18 @@ export function PoolListMobileHeader() {
           />
         ) : null}
       </Link>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      
+      <Modal 
+      isOpen={isOpen} 
+      onClose={onClose} 
+      isCentered
+      
+      >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Filters</ModalHeader>
+        <ModalContent >
+          <ModalHeader bgColor="vertek.slate.900">Filters</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody bgColor="vertek.slatepurple.900">
             <Box mb="6">
               <Box mb="1">Tokens:</Box>
               <PoolListTokenMultiSelect />
@@ -152,6 +159,7 @@ export function PoolListMobileHeader() {
           </ModalBody>
         </ModalContent>
       </Modal>
+
     </Flex>
   );
 }

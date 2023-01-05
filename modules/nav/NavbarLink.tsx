@@ -18,10 +18,10 @@ export function NavbarLink({ href, selected, text, isActive, ...rest }: any) {
           margin="16px"
           fontWeight={selected ? '700' : '500'}
           textDecoration={selected ? 'underline' : 'none'}
-          textDecorationColor="vertek.gold.400"
+          textDecorationColor="vertek.neonpurple.500"
           color={selected ? 'white' : 'white'}
           cursor="pointer"
-          _hover={{ color: 'vertek.gold.400', fontWeight: '600' }}
+          _hover={{ color: 'vertek.neonpurple.500', fontWeight: '600' }}
           
         >
           {text}

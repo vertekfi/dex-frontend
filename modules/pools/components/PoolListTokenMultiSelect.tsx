@@ -29,7 +29,7 @@ export function PoolListTokenMultiSelect() {
   );
 
   return (
-    <Box>
+    <Box >
       <MultiSelect
         options={filteredTokensByUserBalance.map((token) => ({
           value: token.address,

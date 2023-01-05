@@ -185,6 +185,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
             variants: {
                 filled: {
                     field: {
+
                         color: 'white',
                         bgColor: 'beets.lightAlpha.500',
                         borderColor: 'transparent',
@@ -421,7 +422,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
         // BoxShadow: {
         //     variants: {
         //         purpleblue: {
-        //             boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+        //             boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6'
         //         }
         //     }
         // },

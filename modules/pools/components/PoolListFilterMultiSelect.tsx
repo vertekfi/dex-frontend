@@ -6,6 +6,7 @@ export function PoolListFilterMultiSelect() {
   const { filters, refetch, state } = usePoolList();
   const selected = state.where?.filterIn || [];
 
+  
   return (
     <Box>
       <MultiSelect
