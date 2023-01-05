@@ -38,10 +38,10 @@ export function TradeContainer() {
 
         {/* start of the chart and routing info  */}
         <GridItem area="chart-route" paddingX="2">
-          <Box bgColor="vertek.slate.900" padding="4" borderRadius="12">
+          <Box bgColor="vertek.slate.900" padding="4" borderRadius="16px"  boxShadow='0 0 2px #5BC0F8, 0 0 4px #4A4AF6'>
             <TradePageHeader />
 
-            <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12">
+            <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12px" >
               <TradeChart />
             </Box>
           </Box>
@@ -50,12 +50,13 @@ export function TradeContainer() {
             display={{ base: 'none', md: 'block' }}
             bgColor="vertek.slate.900"
             padding="4"
-            borderRadius="12"
+            borderRadius="16px"
             mt="2"
+            boxShadow='0 0 2px #5BC0F8, 0 0 4px #4A4AF6'
           >
             {/*
                     // @ts-ignore */}
-            <AnimateSharedLayout>
+            <AnimateSharedLayout >
               <AnimatePresence>
                 {showRouting && (
                   <Box bgColor="">

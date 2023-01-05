@@ -13,7 +13,7 @@ export function TradeChart() {
   const thirtyDaySelected = range === 'THIRTY_DAY';
 
   return (
-    <Box>
+    <Box >
       {!loading && data && data.prices.length === 0 ? (
         <BeetsBox
           height="150px"
