@@ -3,7 +3,7 @@ import { VeBAL, VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
 export function useUserVeLockInfoQuery() {
-  const [userLockInfo, setUserLockInfo] = useState<VeBalLockInfo>();
+  const [userLockInfo, setUserLockInfo] = useState<VeBalLockInfo | null>();
 
   const { userAddress, isConnected } = useUserAccount();
 
