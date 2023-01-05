@@ -81,8 +81,8 @@ export function HomeLearn(props: BoxProps) {
 
           <Box flex="1" mt="12" mb="12">
             <BeetsSubHeadline mb="8">Want to dive even deeper?</BeetsSubHeadline>
-            <Button variant="primary" as="a" href="https://docs.beets.fi" target="_blank">
-              Check out our Docs
+            <Button variant="vertekdark" as="a" href="https://docs.beets.fi" target="_blank" px="12">
+              Check Our Docs 
             </Button>
           </Box>
         </GridItem>

@@ -22,7 +22,7 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
         bgColor="vertek.slatepurple.900"
         borderRadius="16px"
         p="1"
-              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+        boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
         flexDirection="column"
         height="327px"
       >
@@ -34,8 +34,8 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
                 address: token.address,
                 ...(token.weight && { weight: token.weight }),
               }))}
-            width={300}
-            imageSize={48}
+            width={150}
+            imageSize={40}
             renderPopover={false}
           />
         </Flex>

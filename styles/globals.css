@@ -4,6 +4,7 @@ body {
     padding: 0;
     margin: 0;
     background-blend-mode: normal;
+    background-image: url(./bg.svg)
 }
 
 a {

@@ -46,6 +46,7 @@ export function Home() {
 
 
   return (
+
     <Box >
       <Box display="flex" justifyContent="flex-end">
       <BeetsLogo />

@@ -1,4 +1,5 @@
 import { ChakraTheme } from '@chakra-ui/theme';
+import background from '../../assets/images/bg.png';
 
 
 export const fantomTheme: Partial<ChakraTheme> = {
@@ -9,15 +10,15 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     // 'radial-gradient(ellipse at top, #030622a8, #000004), radial-gradient(ellipse at bottom, #000004, #000004) !important',
             },
             body: {
-                backgroundImage:
-                './images/vertekbg.png',
-                backgroundColor:
-                'vertek.slatepurple.900', 
+                backgroundImage: './images/bg.png',
+                backgroundColor: 'vertek.slatepurple.900', 
                 backgroundSize: 
                 '100% 100%', 
             },
+            
         },
     },
+    
     fonts: {
         heading: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
         body: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -123,6 +124,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
             }, 
             electricblue: {
                 100: '#5BC0F8', 
+                200: '#0892d0', 
+                300: 'rgba(91, 192, 248, .9)', 
             }
                 
         },
@@ -237,7 +240,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
         },
         Link: {
             baseStyle: {
-                color: 'vertek.gold.400',
+                color: 'vertek.neonpurple.500',
+                textShadow:'0 0 5px #000',
             },
         },
         Tooltip: {
@@ -303,18 +307,20 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 
 
                 verteklight: {
-                    backgroundColor:'#4A4AF6', 
+                    // backgroundColor:'#4A4AF6', 
+                    background: 'linear-gradient(to right top, #161626, #1a1b37, #1e1f48, #22235a, #27276c, #2c2b7d, #312f8e, #37339f, #3c39b4, #413eca, #4544e0, #4a4af6)', 
                     borderWidth:'2px',  
                     borderColor:'vertek.slate.300', 
-                    boxShadow:'0px 0px 12px 1px #000',
+                    boxShadow:'0 0 12px #000', 
+                    // boxShadow:'0 0 8px #5BC0F8, 0 0 16px #4A4AF6', 
                     color: 'white',
                     _active: { backgroundColor:'#4A4AF6'  },
                     _focus: { outline: 'none', boxShadow: 'none' },
                     borderRadius: '8px',
                     _hover: {
-                        
-                        backgroundColor:'vertek.slate.900', 
-                        // color:'vertek.neonpurple.500', 
+                        boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                        background:'vertek.slate.900', 
+                        color:'white', 
                         borderWidth:'2px', 
                         borderColor:'vertek.neonpurple.500', 
                         transform:'scale(1.05)' 
@@ -322,11 +328,12 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     _disabled: {
                         transform: 'none',
                         background: 'gray.400',
+                        color:'white', 
                         },
                     },
                     vertekdark: {
                         backgroundColor:'vertek.slate.900', 
-                        boxShadow:'0px 0px 12px 1px #000',
+                        boxShadow:'0 0 12px #000', 
                         borderWidth:'2px',  
                         borderColor:'vertek.neonpurple.500', 
                         color: 'vertek.neonpurple.500',
@@ -336,22 +343,39 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         borderRadius: '8px',
                         _hover: {
                             color:'white',
-                            // borderWidth:'2px', 
+                            boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                            borderColor:'vertek.slate.300', 
+                            borderWidth:'2px', 
+                            background: 'linear-gradient(to right top, #161626, #1a1b37, #1e1f48, #22235a, #27276c, #2c2b7d, #312f8e, #37339f, #3c39b4, #413eca, #4544e0, #4a4af6)', 
                             transform:'scale(1.05)' 
                                 }, 
                         _disabled: {
                             transform: 'none',
                             background: 'gray.400',
+                            color:'white', 
                             },
                         },
-                        // bgColor="vertek.neonpurple.500"
-                        // borderWidth="2px" borderColor="vertek.slate.500"
-                        // key={`preset-${preset.label}`}
-                        // _focus={{ outline: 'none' }}
-                        // _hover={{ bgColor:'vertek.slate.900', color:'white', 
-                        //             borderWidth:'2px', borderColor:'vertek.neonpurple.500', 
-                        //             transform:'scale(1.05)'}}
-                        // _active={{ bgColor:'vertek.neonpurple.500', color: 'white' }}
+                    vertekthree: {
+                        background: 'linear-gradient(to right bottom, #5bc0f8, #23affe, #009dff, #0089ff, #0072ff, #2461ea, #3050d4, #363fbf, #2c3596, #242b6f, #1e2149, #161626)',                      borderWidth:'1.5px',  
+                        borderColor:'vertek.slate.300', 
+                        boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                        color: 'white',
+                        _active: { backgroundColor:'#4A4AF6'  },
+                        _focus: { outline: 'none', boxShadow: 'none' },
+                        borderRadius: '8px',
+                        _hover: {
+                            backgroundColor:'vertek.slate.900', 
+                            background:'vertek.slate.900', 
+                            borderWidth:'2px', 
+                            borderColor:'vertek.neonpurple.500', 
+                            transform:'scale(1.05)' 
+                                }, 
+                        _disabled: {
+                            transform: 'none',
+                            background: 'gray.400',
+                            color:'white', 
+                            },
+                        },
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 
@@ -394,5 +418,12 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 },
             },
         },
+        // BoxShadow: {
+        //     variants: {
+        //         purpleblue: {
+        //             boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+        //         }
+        //     }
+        // },
     },
 };

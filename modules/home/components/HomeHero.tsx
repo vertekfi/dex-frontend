@@ -23,7 +23,7 @@ export function HomeHero() {
       minHeight="400px"
     >
 
-      <Flex flex="1" mt="8" pl={{ base: '4', xl: '8' }} mb="12" justifyContent="center" 
+      <Flex flex="1" mt="6" pl={{ base: '4', xl: '8' }} mb="12" justifyContent="center" 
       alignItems="center">
         <Flex flexDirection="column" 
          width={{ base: 'auto',  }} >
@@ -56,7 +56,14 @@ export function HomeHero() {
           </Text>
           </HStack>
 
-          <HStack spacing="4" mb={{ base: '6', lg: '10' }}>
+          <HStack spacing="4" 
+          mb={{ base: '6', lg: '8' }} 
+          alignItems="center" 
+          justifyContent={{ base:'flex-end', lg:'flex-start'}}
+          // flex-end on base for accessibility
+          
+          
+          >
             <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
               <Button variant="verteklight" width={{ base: '130px', lg: '160px' }}>
                 Invest

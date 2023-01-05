@@ -1,8 +1,8 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { BeetsHeadline } from '~/components/typography/BeetsHeadline';
 import NextImage from 'next/image';
-import BeetsTokenInfoImage from '~/assets/images/beets-token-info.png';
-import BeetsTokenInfoOpImage from '~/assets/images/beets-token-info-OP.png';
+import BeetsTokenInfoImage from '~/assets/svg/vertek-logo-dark.svg';
+import BeetsTokenInfoOpImage from '~/assets/svg/vertek-logo-dark.svg';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
 export function HomeBeetsInfo(props: BoxProps) {

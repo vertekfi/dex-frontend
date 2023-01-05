@@ -2,6 +2,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Box, Button, HStack, Skeleton, Spinner, Text, Tooltip } from '@chakra-ui/react';
 import Image from 'next/image';
 import BeetsSmart from '~/assets/logo/verteknotext.svg';
+import VertekAlpha from '~/assets/svg/vertektransparent.svg'; 
+import VertekDark from '~/assets/svg/vertektransparent.svg'; 
+import VertekWhite from '~/assets/svg/vertekwhite.svg'; 
 import { useReactiveVar } from '@apollo/client';
 import { txPendingVar } from '~/lib/util/useSubmitTransaction';
 import { IconWallet } from '~/components/icons/IconWallet';
@@ -26,13 +29,6 @@ export default function NavbarWalletConnectButton() {
                 return (
                   <Button
                     variant="verteklight"
-                    // _hover={{
-                    //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
-                    //   transform: 'scale(1.1)',
-                    // }}
-                    // _active={{
-                    //   bgGradient:'linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)', 
-                    // }}
                     onClick={openConnectModal}
                     type="button"
                   >
@@ -96,10 +92,10 @@ export default function NavbarWalletConnectButton() {
                   >
                     <HStack width="full" height="full" spacing="4">
                       <HStack
-                        
                         justifyContent="center"
                         alignItems="center"
-                        px="4" 
+                        px="4"
+                        gap="2"
                         height="40px"
                         rounded="10px"
                         width="full"
@@ -107,9 +103,9 @@ export default function NavbarWalletConnectButton() {
                         {txPending ? (
                           <Spinner color="white" />
                         ) : earlyLudwig ? (
-                          <ChakraImage src={earlyLudwig} width="24px" height="24px" rounded="xl" />
+                          <ChakraImage src={VertekAlpha} width="20px" height="20px" rounded="xl"  />
                         ) : (
-                          <Image src={BeetsSmart} width="24" alt="your-profile" />
+                          <Image src={VertekWhite} width="20px" alt="your-profile" />
                         )}
                         <Text
                           display={{ base: 'none', sm: 'inline' }} 
