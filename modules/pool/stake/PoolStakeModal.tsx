@@ -19,7 +19,6 @@ import { capitalize } from 'lodash';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { useApproveToken } from '~/lib/util/useApproveToken';
 import { useStakingDeposit } from '~/lib/global/useStakingDeposit';
-
 import { usePoolUserStakingAllowance } from '~/modules/pool/stake/lib/usePoolUserStakingAllowance';
 import {
   BeetsTransactionStepsSubmit,

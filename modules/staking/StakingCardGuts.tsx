@@ -79,14 +79,14 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         width="full" 
           >
         
-        <Button variant="vertekdark" 
+        <Button variant="verteklight" 
         disabled={false} 
         width="full"
         >
           Unstake
         </Button>
         <Button
-          variant="verteklight"
+          variant="vertekdark"
           disabled={false}
           width="full"
 

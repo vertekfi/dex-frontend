@@ -113,13 +113,16 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
         depositQuery.reset();
         onClose();
       }}
-      size="xl"
-    >
+      size="xl"  >
       <ModalOverlay />
-      <ModalContent backgroundColor="black">
+      <ModalContent 
+      boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+      backgroundColor="vertek.slate.900" 
+      padding="12px" 
+      borderRadius="16px">
         <ModalCloseButton />
         <ModalHeader className="bg">
-          <Text color="gray.200" fontSize="md">
+          <Text color="gray.100" fontSize="md">
             Stake your VRTK to earn additional rewards
           </Text>
         </ModalHeader>

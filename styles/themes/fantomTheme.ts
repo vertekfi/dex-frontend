@@ -337,7 +337,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         boxShadow:'0 0 12px #000', 
                         borderWidth:'2px',  
                         borderColor:'vertek.neonpurple.500', 
-                        color: 'vertek.neonpurple.500',
+                        color: 'white',
                         fontWeight:'900', 
                         _active: { backgroundColor:'vertek.slate.900'  },
                         _focus: { outline: 'none', boxShadow: 'none' },
