@@ -308,13 +308,12 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 
 
                 verteklight: {
-                    // backgroundColor:'#4A4AF6', 
                     background: 'linear-gradient(to right top, #161626, #1a1b37, #1e1f48, #22235a, #27276c, #2c2b7d, #312f8e, #37339f, #3c39b4, #413eca, #4544e0, #4a4af6)', 
                     borderWidth:'2px',  
                     borderColor:'vertek.slate.300', 
                     boxShadow:'0 0 12px #000', 
-                    // boxShadow:'0 0 8px #5BC0F8, 0 0 16px #4A4AF6', 
                     color: 'white',
+                    fontWeight:'900', 
                     _active: { backgroundColor:'#4A4AF6'  },
                     _focus: { outline: 'none', boxShadow: 'none' },
                     borderRadius: '8px',
