@@ -11,9 +11,12 @@ return (
   <Box padding="1" borderRadius="16px">
     <Box
       mb={4}
-      borderBottomRadius="16px"
+      mx="2"
+      mt="2"
+      paddingX={{ base:'2', lg:'0'}}
+      borderRadius="16px"
       overflow="hidden"
-      shadow="lg"
+      boxShadow={{ base:'none', lg:'0 0px 5px #5BC0F8, 0 0px 10px #4A4AF6'}}
       bg="">
       <Grid
         display={{ base: 'none', lg:'grid'}}
@@ -24,7 +27,9 @@ return (
           base: 'repeat(1fr 1fr)',
           lg: '1fr 3fr 1fr 1fr 1fr' }}
         gap="0"
-        bg="vertek.slate.900" >
+        
+        // boxShadow="0 -5px 5px #5BC0F8, 0 -5px 50px #4A4AF6"
+        bg="vertek.slatepurple.900" >
               <GridItem>
                   <Text fontWeight="bold">Pools</Text>
               </GridItem>
@@ -34,7 +39,7 @@ return (
               <GridItem>
                   <Text fontWeight="bold">Amount</Text>
               </GridItem>
-              <GridItem justifyContent="end" display="flex">
+              <GridItem justifyContent="center" display="flex">
                   <Text fontWeight="bold">Value</Text>
               </GridItem>
               <GridItem justifyContent="end" display="flex">

@@ -1,7 +1,7 @@
 import { SimpleGrid, Box, GridItem, Text, Image } from '@chakra-ui/react';
 import { ClaimPoolsTable } from './ClaimPoolsTable';
 import NextImage from 'next/image';
-import VertekIcon from '~/assets/logo/verteknotext.svg';
+import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { useEffect, useState } from 'react';
@@ -39,7 +39,7 @@ export function ClaimContainer() {
   return (
     <SimpleGrid columns={1} paddingX={0} spacing={6} borderRadius="12px">
       <GridItem paddingY={0}>
-        <Text fontSize="1.5rem" mb="0">
+        <Text fontSize="1.5rem" mb="2">
           BNB Chain Liquidity Incentives
         </Text>
       </GridItem>
@@ -47,7 +47,7 @@ export function ClaimContainer() {
       <GridItem display="flex" flexDirection="column" paddingY="0">
         <Box flexDirection="row" {...boxProps}>
           <Box marginRight="2" display="flex" justifyContent="">
-            <NextImage width="24px" height="24px" src={VertekIcon} />
+            <NextImage width="36px" height="36px" src={VertekIcon} />
           </Box>
           <Text fontSize="1.20rem">
             Vertek (VRTK) Earnings</Text>

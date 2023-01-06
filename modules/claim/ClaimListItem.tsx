@@ -10,7 +10,7 @@ import {
   TokenAvatarSetInListTokenData,
 } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
-import VertekIcon from '~/assets/logo/verteknotext.svg'; 
+import VertekIcon from '~/assets/svg/vertektransparent.svg'; 
 import NextImage from 'next/image';
 import VertekText from '~/assets/logo/verteklogotext.svg'; 
 
@@ -34,18 +34,23 @@ export function ClaimListItem(){
 //     // ...rest
 //   }: Props) {
 return (
-<Box  bg="vertek.slatepurple.900" 
-      borderBottomColor="vertek.slatepurple.600" 
-      borderBottomWidth="1px"
+<Box  
+      // bg="vertek.slatepurple.900" 
+      borderTopColor="#4A4AF6" 
+      boxShadow={{base:'0 0 5px #5BC0F8, 0 0 10px #4A4AF6', lg:'none'}}
+
+      borderTopWidth="1px"
       mt={{ base: '6', lg:'0'}}
       mb={{ base: '4', lg: '0' }} 
       paddingY={{ base:'4', lg:'0'}}
       paddingX={{ base:'2', lg:'0'}}
       borderRadius={{ base:'16px', lg:'0' }}
+      // boxShadow="0 0 10px #5BC0F8, 10px 10px 20px #4A4AF6"
       >
       <Grid 
         pl="4" 
         pr="4"
+        // boxShadow="0 -5px 5px #5BC0F8, 0 -5px 10px #4A4AF6"
         py="2"
         templateColumns={{
             base: 'repeat(1fr 1fr)',
@@ -63,9 +68,9 @@ return (
           <GridItem area="icons" mb={{ base: '6', lg: '0' }}>
             <Box display="flex" 
             justifyContent={{ base:'flex-start', lg:'flex-start'}}>
-                <NextImage  width="100px" height="36px"  src={VertekText} />
-                <NextImage  width="100px" height="36px"  src={VertekText} />
-                <NextImage  width="100px" height="36px"  src={VertekText} />
+                <NextImage  width="100px" height="36px"  src={VertekIcon} />
+                <NextImage  width="100px" height="36px"  src={VertekIcon} />
+                <NextImage  width="100px" height="36px"  src={VertekIcon} />
             </Box>
             {/*  a little VertekSandwich above until MemoizedTokenAvatar is straight
             <MemoizedTokenAvatarSetInList
@@ -111,7 +116,16 @@ return (
             */}
             <ClaimGrid area="claim">
               <Box display="flex" justifyContent={{ base:'center', lg:'flex-end'}}>
-                  <Button  variant="verteklight" width={{ base: '75%', lg: '150px' }}>
+                  <Button  
+                  variant="verteklight" 
+                  padding="1em" borderRadius="10px"
+                  mt="1" 
+                  ml="4"
+                  borderWidth="1px"
+                  alignItems="center" 
+                  height="2em"
+                  disabled={false} 
+                  width={{ base: '75%', lg: '125px' }}>
                       Claim
                 </Button>
               </Box>
@@ -142,7 +156,7 @@ function StatGridItemRight(props: GridItemProps) {
     <GridItem
       area="claim"
       width="100%"
-      textAlign={{ base: 'right', lg: 'right' }}
+      textAlign={{ base: 'right', lg: 'center' }}
       mb={{ base: '4', lg: '0' }}
       {...props}
     />
