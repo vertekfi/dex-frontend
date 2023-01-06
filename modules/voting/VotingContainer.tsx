@@ -13,6 +13,10 @@ import { networkConfig } from '~/lib/config/network-config';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
+import { bnum } from '@balancer-labs/sor';
+import { fNum2, FNumFormats } from '~/lib/util/useNumber';
+import { differenceInDays, format } from 'date-fns';
+import { PRETTY_DATE_FORMAT } from './constants';
 
 export function VotingContainer() {
   const [hasLock, setHasLock] = useState<boolean>(false);
@@ -24,6 +28,17 @@ export function VotingContainer() {
   }>({
     balance: '0',
     usdValue: '0',
+  });
+  const [lockInfoDisplay, setLockInfoDisplay] = useState<{
+    lockedUntilDays: number;
+    lockedUntilDate: string;
+    veBalance: string;
+    percentOwned: string;
+  }>({
+    lockedUntilDays: 0,
+    lockedUntilDate: '-',
+    veBalance: '0',
+    percentOwned: '0',
   });
 
   const {
@@ -58,6 +73,24 @@ export function VotingContainer() {
       console.log(userLockInfo);
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
+
+        const percentOwned = fNum2(
+          bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
+          {
+            style: 'percent',
+            maximumFractionDigits: 4,
+          },
+        );
+        const lockedUntilDays = differenceInDays(new Date(userLockInfo.lockedEndDate), new Date());
+        const veBalance = fNum2(userLockInfo.lockedAmount, FNumFormats.token);
+        const lockedUntilDate = format(userLockInfo.lockedEndDate, PRETTY_DATE_FORMAT);
+
+        setLockInfoDisplay({
+          lockedUntilDays,
+          percentOwned,
+          veBalance,
+          lockedUntilDate,
+        });
       }
 
       if (userLockInfo.hasExistingLock && userLockInfo.isExpired) {
@@ -158,8 +191,74 @@ export function VotingContainer() {
           </Grid>
         </GridItem>
 
-        <GaugeActionCard1 heading="Locked until" />
-        <GaugeActionCard1 heading="My veVRTK" />
+        <GridItem
+          bg="vertek.slatepurple.900"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          borderRadius="25px"
+          maxW="550px"
+          color="white"
+        >
+          <Grid paddingX="2" paddingY="2">
+            <GridItem mt="2">
+              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+                Locked until
+              </Text>
+            </GridItem>
+            <GridItem mt="3">
+              <Text
+                alignItems="center"
+                fontSize="1.2rem"
+                justifyContent="center"
+                textAlign="center"
+              >
+                {lockInfoDisplay.lockedUntilDate}
+              </Text>
+            </GridItem>
+            <GridItem mt="-1">
+              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+                {lockInfoDisplay.lockedUntilDays} days
+              </Text>
+            </GridItem>
+            <GridItem mt={{ base: '3', lg: '6' }}>
+              <Box display="flex" justifyContent="center">
+                <Button variant="verteklight" width="80%">
+                  Button
+                </Button>
+              </Box>
+            </GridItem>
+          </Grid>
+        </GridItem>
+
+        <GridItem
+          bg="vertek.slatepurple.900"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          borderRadius="25px"
+          maxW="550px"
+          color="white"
+        >
+          <Grid h="100%" paddingX="2" paddingY="2">
+            <GridItem mt="2">
+              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+                My veVRTK
+              </Text>
+            </GridItem>
+            <GridItem mt="3">
+              <Text
+                alignItems="center"
+                fontSize="1.5rem"
+                justifyContent="center"
+                textAlign="center"
+              >
+                {lockInfoDisplay.veBalance}
+              </Text>
+            </GridItem>
+            <GridItem mt="-1">
+              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+                {lockInfoDisplay.percentOwned}
+              </Text>
+            </GridItem>
+          </Grid>
+        </GridItem>
       </SimpleGrid>
       <VotingPageSub />
       <GaugeList votingGauges={votingGauges} />
