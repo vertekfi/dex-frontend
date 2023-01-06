@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Text, Button, useDisclosure } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Text, Button, useDisclosure, GridItem, Box } from '@chakra-ui/react';
 import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
 import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
@@ -17,7 +17,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         borderTopRadius="20px"
         columns={2}
         spacing={10}
-        padding="20px"
+        padding="1.5em"
         marginTop="4"
       >
         <Text textAlign="left" fontWeight="bold">
@@ -35,14 +35,25 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         <Text textAlign="left" fontWeight="bold">
           Earning
         </Text>
-        <Flex direction="column">
+        <Flex direction="column" alignItems="flex-end">
           <Text textAlign="right" fontWeight="bold">
             {pool.userInfo?.pendingRewards} {pool.rewardToken.symbol}
           </Text>
           <Text fontSize="0.7rem" textAlign="right">
             ${pool.userInfo?.pendingRewardValue}
           </Text>
-          <Button variant="verteklight" disabled={false} width="full">
+          <Button 
+          variant="verteklight" 
+          bgColor="vertek.neonpurple.500"
+          background="none"
+          padding="1em" borderRadius="10px"
+          mt="2" 
+          ml="4"
+          borderWidth="1px"
+          alignItems="center" 
+          width="full"
+          height="2em"
+          disabled={false} >
             Claim
           </Button>
         </Flex>
@@ -58,19 +69,32 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
             ${pool.userInfo?.depositValue}
           </Text>
         </Flex>
-
+        <GridItem 
+        colSpan={2}
+        gap="3"
+        marginX=""
+        alignItems="center"
+        justifyContent="center"
+        display="flex" 
+        width="full" 
+          >
+        
+        <Button variant="vertekdark" 
+        disabled={false} 
+        width="full"
+        >
+          Unstake
+        </Button>
         <Button
           variant="verteklight"
           disabled={false}
           width="full"
-          size="lg"
+
           onClick={onDepositOpen}
         >
           Stake
         </Button>
-        <Button variant="vertekdark" disabled={false} width="full" size="lg">
-          Unstake
-        </Button>
+        </GridItem>
       </SimpleGrid>
 
       <RewardPoolDepositModal

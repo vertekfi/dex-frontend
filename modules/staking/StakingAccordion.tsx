@@ -23,7 +23,7 @@ export function StakingAccordion(props: { pool: RewardPool }) {
             <AccordionIcon />
           </AccordionButton>
 
-          <AccordionPanel pb={10} bg="vertek.slatepurple.900" borderRadius="20px">
+          <AccordionPanel pb={10} bg="" borderRadius="20px">
             <SimpleGrid
               style={{ minWidth: '100%' }}
               bg=""
@@ -33,17 +33,19 @@ export function StakingAccordion(props: { pool: RewardPool }) {
               padding="4"
               marginTop="4"
             >
-              <Text textAlign="left" fontWeight="bold">
+              <Text textAlign="left" fontWeight="bold" >
                 Total Staked
               </Text>
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
                   ${pool.amountStakedValue}
                 </Text>
+              
                 <Text fontSize="0.7rem" textAlign="right">
                   {pool.amountStaked} VRTK
                 </Text>
               </Flex>
+              
               <Text textAlign="left" fontWeight="bold">
                 Your total share
               </Text>

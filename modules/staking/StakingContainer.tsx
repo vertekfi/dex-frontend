@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid, Text } from '@chakra-ui/react';
 import { StakingCard } from './StakingCard';
 import { useRewardPools } from './lib/useRewardPoolStaking';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
@@ -8,6 +8,9 @@ export function StakingContainer() {
 
   return (
     <UserTokenBalancesProvider>
+      <Text color="white" fontWeight="bold" mt="-8" mb="4">
+          Stake VRTK to earn rewards
+      </Text>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 3 }} paddingX={8} paddingY={4} spacing={35}>
         {pools.length &&
           pools.map((p) => {
