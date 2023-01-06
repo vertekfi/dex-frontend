@@ -50,6 +50,7 @@ export const fantomNetworkConfig: NetworkConfig = {
       veBALHelpers: '',
       tokenAdmin: '',
       lockablePoolId: '',
+      lockPoolAddress: '',
     },
   },
   beetsPoolOwnerAddress: '0xcd983793adb846dce4830c22f30c7ef0c864a776',

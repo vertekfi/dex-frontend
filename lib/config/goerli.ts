@@ -46,6 +46,7 @@ export const goerliNetworkConfig: NetworkConfig = {
       veBALHelpers: '0x3B0b5C741A11cE8e42411af455490BED08Abd91A',
       tokenAdmin: '0xaF3F9EB221f3DB6cEEdC6cC24818A18869Feb268',
       lockablePoolId: '0x3e9f7b85e8ee2107aeca28677b6b416fa60b6200000200000000000000000002',
+      lockPoolAddress: '0x3e9f7B85E8Ee2107aeca28677b6B416fA60b6200',
     },
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',

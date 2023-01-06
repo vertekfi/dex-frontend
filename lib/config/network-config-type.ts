@@ -51,6 +51,7 @@ export interface NetworkConfig {
       veBALHelpers: string;
       tokenAdmin: string;
       lockablePoolId: string;
+      lockPoolAddress: string;
     };
   };
   beetsPoolOwnerAddress: string;

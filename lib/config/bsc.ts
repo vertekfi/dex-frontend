@@ -44,6 +44,7 @@ export const bscNetworkConfig: NetworkConfig = {
       veBALHelpers: '',
       tokenAdmin: '',
       lockablePoolId: '',
+      lockPoolAddress: '',
     },
   },
   beetsPoolOwnerAddress: '',
