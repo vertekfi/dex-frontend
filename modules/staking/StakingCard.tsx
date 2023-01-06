@@ -12,9 +12,9 @@ export function StakingCard(props: { pool: RewardPool | null }) {
     <>
       {pool && (
         <GridItem
-          bg="vertek.slatepurple.900"
+          bgGradient="vertek.slatepurple.900"
           boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-          borderRadius="25px"
+          borderRadius="18px"
           maxW="550px"
           color="white"
         >

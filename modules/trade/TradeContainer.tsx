@@ -38,7 +38,7 @@ export function TradeContainer() {
 
         {/* start of the chart and routing info  */}
         <GridItem area="chart-route" paddingX="2">
-          <Box bgColor="vertek.slate.900" padding="4" borderRadius="16px"  boxShadow='0 0 2px #5BC0F8, 0 0 4px #4A4AF6'>
+          <Box bgColor="vertek.slate.900" padding="4" borderRadius="16px"  boxShadow='0 0 2px #5BC0F8, 0 0 6px #4A4AF6'>
             <TradePageHeader />
 
             <Box mt="4" padding="2" bgColor="vertek.slatepurple.900" borderRadius="12px" >
@@ -52,7 +52,7 @@ export function TradeContainer() {
             padding="4"
             borderRadius="16px"
             mt="2"
-            boxShadow='0 0 2px #5BC0F8, 0 0 4px #4A4AF6'
+            boxShadow='0 0 2px #5BC0F8, 0 0 6px #4A4AF6'
           >
             {/*
                     // @ts-ignore */}

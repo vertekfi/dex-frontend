@@ -13,7 +13,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
     <>
       <SimpleGrid
         style={{ minWidth: '100%' }}
-        bg="vertek.slatepurple.900"
+        bg=""
         borderTopRadius="20px"
         columns={2}
         spacing={10}
