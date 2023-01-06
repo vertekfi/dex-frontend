@@ -9,6 +9,7 @@ import { BalanceMap } from '~/lib/services/token/token-types';
 import { Gauge } from '~/lib/services/staking/types';
 import { GaugePool, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { ClaimTable } from './ClaimTable';
+import { GaugeListProvider, useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
 export type GaugeTable = {
   gauge: Gauge;
   pool: GaugePool;
@@ -16,10 +17,8 @@ export type GaugeTable = {
 const boxProps = {
   display: 'flex',
   mb: '1',
-  paddingX: '1'
+  paddingX: '1',
 };
-
-
 
 export function ClaimContainer() {
   const [vrtkRewardData, setVrtkRewardData] = useState<BalanceMap>({});
@@ -28,6 +27,15 @@ export function ClaimContainer() {
   const rows = [{}, {}, {}, {}, {}];
   const { isConnected } = useUserAccount();
   const { gauges, isLoading: isClaimsLoading } = useClaimsData();
+
+  const {
+    isLoading: loadingGauges,
+    votingGauges,
+    unallocatedVotes,
+    votingPeriodEnd,
+    votingPeriodLastHour,
+    refetch: refetchVotingGauges,
+  } = useVotingGauges();
 
   useEffect(() => {
     if (gauges?.length) {
@@ -49,11 +57,10 @@ export function ClaimContainer() {
           <Box marginRight="2" display="flex" justifyContent="">
             <NextImage width="36px" height="36px" src={VertekIcon} />
           </Box>
-          <Text fontSize="1.20rem">
-            Vertek (VRTK) Earnings</Text>
+          <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
         </Box>
         <Box>
-          <ClaimTable rows={rows}/>
+          <ClaimTable gauges={votingGauges} />
         </Box>
       </GridItem>
 
@@ -62,7 +69,7 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
         </Box>
         <Box>
-        <ClaimTable rows={rows}/>
+          <ClaimTable gauges={votingGauges} />
         </Box>
       </GridItem>
 
@@ -71,7 +78,7 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">Other Token Earnings</Text>
         </Box>
         <Box>
-          <ClaimTable rows={rows}/>
+          <ClaimTable gauges={votingGauges} />
         </Box>
       </GridItem>
     </SimpleGrid>

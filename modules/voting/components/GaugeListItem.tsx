@@ -68,7 +68,6 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
               imageSize={25}
               width={92}
               tokens={props.gauge.pool.tokens}
-              //renderPopover={false}
             />
           </GridItem>
 
