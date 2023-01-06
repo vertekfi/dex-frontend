@@ -42,7 +42,7 @@ export function BatchSwapSorRoute({ swapInfo }: Props) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <BatchSwapRoute route={route} />
+              <BatchSwapRoute route={route} swapInfo={swapInfo} />
             </motion.div>
           </AnimatePresence>
         ))}

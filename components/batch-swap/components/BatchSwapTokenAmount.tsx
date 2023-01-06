@@ -8,14 +8,14 @@ interface Props extends FlexProps {
   bgColor?: string;
 }
 
+
 export function BatchSwapTokenAmount({
   address,
   amount,
   bgColor = 'vertek.slate.30',
-  
-  
   ...rest
 }: Props) {
+  
   return (
     <Flex
       flex="0.1 1 0%"
@@ -36,7 +36,9 @@ export function BatchSwapTokenAmount({
         style={{ backdropFilter: 'blur(3px)' }}
         >
         <TokenAvatar address={address} width="20px" height="20px" />
-        <Box ml="1.5">{tokenFormatAmount(amount)}</Box>
+        <Box ml="1.5">
+          {tokenFormatAmount(amount)}
+        </Box>
       </Flex>
     </Flex>
   );

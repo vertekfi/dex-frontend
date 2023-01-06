@@ -9,12 +9,26 @@ import { BatchSwapTokenAmount } from '~/components/batch-swap/components/BatchSw
 import { BatchSwapHop } from '~/components/batch-swap/components/BatchSwapHop';
 import { GqlSorSwapRouteFragment } from '~/apollo/generated/graphql-codegen-generated';
 import { Fragment } from 'react';
+import { GqlSorGetSwapsResponseFragment } from '~/apollo/generated/graphql-codegen-generated';
+import { useGetTokens } from '~/lib/global/useToken';
+
 
 interface Props {
   route: GqlSorSwapRouteFragment;
+  swapInfo: GqlSorGetSwapsResponseFragment;
+
 }
 
-export function BatchSwapRoute({ route }: Props) {
+export function BatchSwapRoute({ route, swapInfo }: Props) {
+console.log('route:', route);
+console.log('route.tokenInAmount:', route.tokenInAmount);
+console.log('route.tokenOutAmount:', route.tokenOutAmount);
+console.log('swapInfo.tokenOutAmount:', swapInfo.tokenOutAmount); 
+const { getToken } = useGetTokens();
+const tokenIn = getToken(swapInfo.tokenIn);
+const tokenOut = getToken(swapInfo.tokenOut);
+
+
   return (
     <Box height="64px">
       <Flex flex="1" flexDirection="column" justifyContent="space-around">
@@ -36,7 +50,9 @@ export function BatchSwapRoute({ route }: Props) {
                 </Fragment>
               ))}
           </Flex>
-          <BatchSwapTokenAmount address={route.tokenOut} amount={route.tokenOutAmount} />
+          {/* <BatchSwapTokenAmount address={route.tokenOut} amount={route.tokenOutAmount} /> */}
+          <BatchSwapTokenAmount address={swapInfo.tokenOut} amount={swapInfo.tokenOutAmount} />
+
         </Flex>
       </Flex>
     </Box>
