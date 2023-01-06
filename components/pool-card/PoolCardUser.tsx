@@ -59,9 +59,11 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
         >
           {numberFormatUSDValue(balanceUSD)}
         </Box>
-        <Box color="white">{tokenFormatAmount(balance)} BPT</Box>
+        <Box color="white" textAlign="center">
+          {tokenFormatAmount(balance)} BPT
+        </Box>
         <Divider mt="4" mb="4" />
-        <Box
+        {/* <Box
           display="flex"
           mt="6"
           pt="4"
@@ -78,7 +80,7 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
           <Text color="slate.300" textAlign="center" fontSize="18px" lineHeight="24px">
             {numeral(dailyApr).format('0.00[0]%')} Daily
           </Text>
-        </Box>
+        </Box> */}
       </Flex>
     </LinkBox>
   );

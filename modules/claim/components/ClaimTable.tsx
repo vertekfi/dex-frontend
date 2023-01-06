@@ -50,7 +50,7 @@ export function ClaimTable(props: ClaimTableProps) {
         </Grid>
 
         {props.gauges.map((gauge) => (
-          <ClaimListItem gauge={gauge} />
+          <ClaimListItem key={gauge.address} gauge={gauge} />
         ))}
       </Box>
     </Box>

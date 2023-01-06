@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetGaugesQuery } from '~/lib/global/gauges/useGetGaugesQuery';
 import { gaugesDecorator } from '~/lib/services/staking/gauges.decorator';
 import { Gauge, SubgraphGauge } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
+import { RewardGauge } from '../types';
 import { useProtocolRewardsQuery } from './useProtocolRewardsQuery';
 
 export function useClaimsData() {
@@ -10,6 +12,7 @@ export function useClaimsData() {
   //  The pools are already attached to the gauges from the backend now
   // const [gaugePools, setGaugePools] = useState<Gauge[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [rewardGauges, setRewardGauges] = useState<RewardGauge[]>();
 
   const { isConnected, userAddress } = useUserAccount();
   //const { protocolRewards, isLoading: isProtocolRewardsLoading } = useProtocolRewardsQuery();
@@ -31,7 +34,9 @@ export function useClaimsData() {
         gauges as SubgraphGauge[],
         userAddress,
       );
-      // setGaugePools(decoratedGauges);
+
+      console.log(decoratedGauges);
+      setRewardGauges(decoratedGauges as RewardGauge[]);
     }
   };
 
@@ -57,6 +62,7 @@ export function useClaimsData() {
   // }, [isProtocolRewardsLoading, isLoadingGauges]);
   return {
     gauges,
+    rewardGauges,
     // protocolRewards,
     isLoading,
   };

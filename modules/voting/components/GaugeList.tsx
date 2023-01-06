@@ -100,7 +100,7 @@ export function GaugeList(props: GaugeListProps | null) {
           <GaugeListTableHeader />
           <Box>
             {props?.votingGauges.map((gauge) => {
-              return <GaugeListItem gauge={gauge} />;
+              return <GaugeListItem key={gauge.address} gauge={gauge} />;
             })}
           </Box>
         </Box>
