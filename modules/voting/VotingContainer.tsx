@@ -12,6 +12,7 @@ import { UserDataProvider, useUserData } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
+import { tokenFormatAmount } from '~/lib/services/token/token-util';
 
 export function VotingContainer() {
   const [hasLock, setHasLock] = useState<boolean>(false);
@@ -41,7 +42,9 @@ export function VotingContainer() {
   useEffect(() => {
     if (!loadingBalances && isConnected) {
       setUserPoolBalance({
-        balance: bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
+        balance: tokenFormatAmount(
+          bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
+        ),
         usdValue: numberFormatUSDValue(
           usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
         ),
@@ -52,6 +55,7 @@ export function VotingContainer() {
   // set user lock info
   useEffect(() => {
     if (isConnected && userLockInfo) {
+      console.log(userLockInfo);
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
       }
@@ -116,7 +120,44 @@ export function VotingContainer() {
           </Grid>
         </GridItem>
 
-        <GaugeActionCard heading="My locked 80VRTK-20BNB" />
+        <GridItem
+          bg="vertek.slatepurple.900"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          borderRadius="25px"
+          maxW="550px"
+          color="white"
+        >
+          <Grid paddingX="2" paddingY="2">
+            <GridItem mt="2">
+              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+                My locked 80VRTK-20BNB
+              </Text>
+            </GridItem>
+            <GridItem mt="3">
+              <Text
+                alignItems="center"
+                fontSize="1.2rem"
+                justifyContent="center"
+                textAlign="center"
+              >
+                $0.00
+              </Text>
+            </GridItem>
+            <GridItem mt="-1">
+              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+                {userLockInfo?.lockedAmount}
+              </Text>
+            </GridItem>
+            <GridItem mt={{ base: '3', lg: '6' }}>
+              <Box display="flex" justifyContent="center">
+                <Button variant="verteklight" width="80%">
+                  Button
+                </Button>
+              </Box>
+            </GridItem>
+          </Grid>
+        </GridItem>
+
         <GaugeActionCard1 heading="Locked until" />
         <GaugeActionCard1 heading="My veVRTK" />
       </SimpleGrid>
