@@ -643,16 +643,6 @@ export const GetPool = gql`
         id
         type
         address
-        farm {
-          id
-          beetsPerBlock
-          rewarders {
-            id
-            address
-            tokenAddress
-            rewardPerSecond
-          }
-        }
         gauge {
           id
           gaugeAddress

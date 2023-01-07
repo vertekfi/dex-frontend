@@ -1,13 +1,10 @@
 import { GaugeList } from './components/GaugeList';
 import { useVotingGauges } from '../../lib/global/gauges/useVotingGauges';
 import { Box, Button, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
-import { GaugeActionCard } from './components/GaugeActionCard';
 import { VotingPageSub } from './components/VotingPageSub';
-import { GaugeActionCard1 } from './components/GaugeActionCard1';
 import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { UserTokenBalancesProvider, useUserTokenBalances } from '~/lib/user/useUserTokenBalances';
 import { UserDataProvider, useUserData } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
 import { useUserAccount } from '~/lib/user/useUserAccount';
@@ -17,8 +14,15 @@ import { bnum } from '@balancer-labs/sor';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from './constants';
+import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
+import { PoolProvider } from '../pool/lib/usePool';
+
+interface Props {
+  pool: GqlPoolUnion;
+}
 
 export function VotingContainer() {
+  const [pool, setPool] = useState<GqlPoolUnion>();
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>(null);
@@ -53,6 +57,11 @@ export function VotingContainer() {
   const { isConnected } = useUserAccount();
   const { userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
+  const { data: mainPoolData, loading: loadingMainPool } = useGetPoolQuery({
+    variables: {
+      id: networkConfig.balancer.votingEscrow.lockablePoolId,
+    },
+  });
 
   useEffect(() => {
     if (!loadingBalances && isConnected) {

@@ -29,9 +29,8 @@ export function Pool() {
             </VStack>
           </GridItem>
           <GridItem>
-            
-            <PoolComposition 
-            // symbol name weight balance value 
+            <PoolComposition
+            // symbol name weight balance value
             />
           </GridItem>
         </Grid>

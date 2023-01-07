@@ -2119,18 +2119,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -2286,18 +2274,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -2587,18 +2563,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -2751,18 +2715,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -3053,18 +3005,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -3217,18 +3157,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -3518,18 +3446,6 @@ export type GetPoolQuery = {
           id: string;
           type: GqlPoolStakingType;
           address: string;
-          farm?: {
-            __typename: 'GqlPoolStakingMasterChefFarm';
-            id: string;
-            beetsPerBlock: string;
-            rewarders?: Array<{
-              __typename: 'GqlPoolStakingFarmRewarder';
-              id: string;
-              address: string;
-              tokenAddress: string;
-              rewardPerSecond: string;
-            }> | null;
-          } | null;
           gauge?: {
             __typename: 'GqlPoolStakingGauge';
             id: string;
@@ -5672,16 +5588,6 @@ export const GetPoolDocument = gql`
         id
         type
         address
-        farm {
-          id
-          beetsPerBlock
-          rewarders {
-            id
-            address
-            tokenAddress
-            rewardPerSecond
-          }
-        }
         gauge {
           id
           gaugeAddress
