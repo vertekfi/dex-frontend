@@ -62,7 +62,6 @@ function PoolList() {
         bgColor={{base:"none", lg:"vertek.slate.900"}} 
         // bgColor here renders the space between the end of the Pool list, and the "footer"
         // base vs. lg styles is to maintain distinct boundaries between cards on mobile 
-
         boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
         currentPage={state.skip / state.first + 1}
         pageSize={state.first}

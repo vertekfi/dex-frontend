@@ -57,13 +57,13 @@ export function HomePoolsNew(props: BoxProps) {
    <Box minWidth="0" {...props}>
     <BeetsHeadline mb="4">Featured Pools</BeetsHeadline>
     <Grid
-     templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(4, 1fr)' }}
-     columnGap={{ base: '0', lg: '8' }}
-     rowGap="12"
-     mt="4"
-     borderBottomWidth={2}
-     borderBottomColor="gray.100"
-     pb="12"
+        templateColumns={{ base: 'repeat(1, 1fr)', md:'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }}
+        columnGap={{ base: '0', lg: '8' }}
+        rowGap="8"
+        mt="4"
+        borderBottomWidth={2}
+        borderBottomColor="gray.100"
+        pb="12"
     >
      {featuredPoolGroups.map((group) =>
       group.items.map((item) => {

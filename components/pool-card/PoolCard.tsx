@@ -15,15 +15,21 @@ export function PoolCard({ pool, ...rest }: Props) {
   return (
 
 <LinkBox as="article" flex="1"  {...rest} padding="1" >
-
 <Flex
-    bg="vertek.slatepurple.900"
+    bgColor="rgba(0, 0, 0, 0.3)"
     flexDirection="column" 
-    borderRadius="16px"
+    borderRadius="24px"
     height="327px"
     padding="1"
     marginTop="1"
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+    boxShadow="inset 0 0 10px #5BC0F8, inset 0 0 15px #4A4AF6, inset 0 0 20px #fff"
+    css={{
+      transition: "transform 0.5s",
+      "&:hover": {
+        transform: "scale(1.02)",
+      },
+    }}
+// potentially add white to the box shadow 
     > 
     <Flex justify="center" padding="2" paddingTop="4" my="4">
                       <TokenAvatarSet

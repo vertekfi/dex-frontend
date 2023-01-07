@@ -79,6 +79,7 @@ export function PaginatedTable({
                 <Box>
                   <Select
                     style={{ borderRadius: '16px' }}
+                    borderWidth="0px"
                     value={pageSize}
                     onChange={(event) => {
                       onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
@@ -106,6 +107,7 @@ export function PaginatedTable({
                     icon={<ChevronLeft />}
                     borderTopRightRadius={0}
                     borderBottomRightRadius={0}
+                    backgroundColor="transparent"
                   />
                 );
               } else if (type === 'next') {
@@ -116,6 +118,7 @@ export function PaginatedTable({
                     borderTopLeftRadius={0}
                     borderBottomLeftRadius={0}
                     borderBottomRightRadius={{base:'auto', lg:'16px'}}
+                    backgroundColor="transparent"
                   />
                 );
               } else if (type === 'jump-prev') {

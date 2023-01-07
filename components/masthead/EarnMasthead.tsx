@@ -9,10 +9,11 @@ interface Props {
 export function EarnMasthead({ title, image }: Props) {
 return (
 <SimpleGrid 
-    columns={{ sm: 1, md: 5 }} 
-    padding="2"
+    columns={{ sm: 1, md: 6 }} 
+    paddingX="4"
+    paddingY="2"
     marginTop={{ base: 0, lg: 10 }}
-    marginBottom={12}
+    marginBottom={{ base: 6, lg:8 }}
     spacing={{ base: '6', lg: '8' }}
 >
     <GridItem    
@@ -22,7 +23,7 @@ return (
     >
     <Text 
         gap="1" 
-        fontSize="36px" 
+        fontSize="2.2rem" 
         color="white" 
         fontWeight="semibold" 
         flex="1" 
@@ -31,7 +32,7 @@ return (
         {title}
     </Text>
     <Text 
-        fontSize="20px" 
+        fontSize="1.2rem" 
         fontWeight="normal" 
         flex="1" 
         mb="2" 
@@ -41,21 +42,22 @@ return (
         up to 10 times. 
     </Text>
   </GridItem>
+  <GridItem colSpan={1} />
 
   <GridItem
     marginTop={{ base: 0, lg: 2 }}
     display="flex"
+    bgColor="rgba(0,0,0, 0.4)"
     justifyContent="flex-start"
     alignItems="flex-start"
     colSpan={{ sm: 1, md: 2 }}
     flexDirection="column"
-    borderRadius="16px" 
-    bgColor='vertek.slatepurple.900'
-    boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6'
-    padding="4"
+    borderRadius={{ base: '42px', lg:'16px'}}
+    boxShadow='inset 0 0 20px #4A4AF6, inset 0 0 5px #fff'
+    padding={{ base:'6', lg:'4' }}
     >
     <Text 
-        fontSize="20px" 
+        fontSize={{ base:'1rem', lg:'1.1rem'}}
         color="white" 
         fontWeight="semibold" 
         m="2" 
@@ -64,7 +66,7 @@ return (
         Earn more VRTK in Core Pools 
     </Text>
     <Text 
-        fontSize="16px" 
+        fontSize={{ base:'1rem', lg:'1.0rem'}}
         fontWeight="normal" 
         m="2" 
         color="vertek.slate.100" 
@@ -75,7 +77,8 @@ return (
     </Text>
     <Button  
         variant="vertekdark"
-        width="98%"
+        fontSize={{ base:'0.9rem', lg:'0.9rem'}}
+        width="50%"
         margin="3"
         gap="8px"
         mt="3"
