@@ -25,6 +25,11 @@ export const goerliNetworkConfig: NetworkConfig = {
   },
   rpcUrl: 'https://eth-goerli.g.alchemy.com/v2/cK2OOgcOIjM2enbLpRfinpxq8hdY9aGU',
   multicall: '0x1050Bcfb2ec4CAe624BD1Eec5dadc2a3b4f4559a', // V1 type
+  backendUrl: 'http://localhost:5000/graphql',
+  subgraphs: {
+    balancer: '',
+    gauges: '',
+  },
   beets: {
     address: '0xaFbf7fB9Fa206089041218dF93c8B3A1Bb9F4497',
   },

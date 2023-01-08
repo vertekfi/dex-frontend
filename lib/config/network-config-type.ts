@@ -21,14 +21,11 @@ export interface NetworkConfig {
     platformId: string;
   };
   multicall: string;
-  /*subgraphs: {
-        balancer: string;
-        blocks: string;
-        masterchef: string;
-        beetsBar: string;
-        changelog: string;
-        locking: string;
-    };*/
+  backendUrl: string;
+  subgraphs: {
+    balancer: string;
+    gauges: string;
+  };
   beets: {
     address: string;
   };

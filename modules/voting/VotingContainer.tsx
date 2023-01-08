@@ -57,11 +57,11 @@ export function VotingContainer() {
   const { isConnected } = useUserAccount();
   const { userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-  const { data: mainPoolData, loading: loadingMainPool } = useGetPoolQuery({
-    variables: {
-      id: networkConfig.balancer.votingEscrow.lockablePoolId,
-    },
-  });
+  // const { data: mainPoolData, loading: loadingMainPool } = useGetPoolQuery({
+  //   variables: {
+  //     id: networkConfig.balancer.votingEscrow.lockablePoolId,
+  //   },
+  // });
 
   useEffect(() => {
     if (!loadingBalances && isConnected) {
@@ -79,7 +79,6 @@ export function VotingContainer() {
   // set user lock info
   useEffect(() => {
     if (isConnected && userLockInfo) {
-      console.log(userLockInfo);
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
 

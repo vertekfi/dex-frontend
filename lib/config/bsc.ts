@@ -24,6 +24,11 @@ export const bscNetworkConfig: NetworkConfig = {
   },
   rpcUrl: 'https://bsc-dataseed.binance.org',
   multicall: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  backendUrl: '',
+  subgraphs: {
+    balancer: '',
+    gauges: '',
+  },
   beets: {
     address: '',
   },
