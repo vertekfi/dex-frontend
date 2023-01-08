@@ -66,7 +66,14 @@ export function PoolInvestModal() {
         initialFocusRef={initialRef}
       >
         <ModalOverlay />
-        <ModalContent backgroundColor="black">
+        <ModalContent 
+          backgroundColor="black" 
+          boxShadow={{ base: 'inset 0 0 2px', lg:'inset 0 0 5px #fff, inset 0 0 20px #4A4AF6'}} 
+          borderRadius="16px"
+          mb="2"
+
+        
+        >
           <ModalCloseButton />
           {modalState !== 'start' ? (
             <IconButton
@@ -96,10 +103,10 @@ export function PoolInvestModal() {
           <ModalHeader className="bg">
             {modalState === 'start' ? (
               <>
-                <Heading size="md" noOfLines={1}>
+                <Heading size="lg" noOfLines={1}>
                   Invest into {pool.name}
                 </Heading>
-                <Text color="gray.200" fontSize="md">
+                <Text color="vertek.neonpurple.500" fontSize="md">
                   {formattedTypeName}
                 </Text>
               </>
@@ -123,7 +130,7 @@ export function PoolInvestModal() {
               </Heading>
             ) : null}
           </ModalHeader>
-          <ModalBody className="bg" pb="6">
+          <ModalBody className="bg" pb="2">
             {modalState === 'start' ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <PoolInvestTypeChoice

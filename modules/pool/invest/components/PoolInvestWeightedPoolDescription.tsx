@@ -5,7 +5,7 @@ export function PoolInvestWeightedPoolDescription() {
     <>
       <Highlight
         query={['Investing proportionally', 'not', 'price impact']}
-        styles={{ fontWeight: 'bold', color: 'white' }}
+        styles={{ fontWeight: 'bold', color: 'white', lineHeight:'0.9em', fontSize:'0.9rem' }}
       >
         Investing proportionally into this pool ensures you will not be subject to the fees
         associated with price impact.
@@ -14,7 +14,7 @@ export function PoolInvestWeightedPoolDescription() {
       <br />
       <Highlight
         query={['customize your investment', 'price impact']}
-        styles={{ fontWeight: 'bold', color: 'white' }}
+        styles={{ fontWeight: '', color: 'white', lineHeight:'0.9em', fontSize:'0.9rem' }}
       >
         Alternatively, you can customize your investment and deposit in this pool with any tokens in
         your wallet. However, investing in this manner may shift the pool out of balance and is

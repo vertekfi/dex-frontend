@@ -4,7 +4,7 @@ interface Props extends BoxProps {}
 
 export function BeetsBox({ children, ...rest }: Props) {
     return (
-        <Box bgColor="box.500" rounded="md" {...rest}>
+        <Box bgColor="vertek.slatepurple.900" rounded="lg" {...rest}>
             {children}
         </Box>
     );

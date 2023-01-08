@@ -40,16 +40,16 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
 
   return (
     <Box>
-      <Grid mt="4" mb="6" gap="8" templateColumns={{ base: '1fr', md: '1fr', lg: '1fr 1fr' }}>
+      <Grid mt="0" mb="4" gap="6" templateColumns={{ base: '1fr', md: '1fr', lg: '1fr 1fr' }}>
         <GridItem>
-          <BeetsBox p="2" mb="6">
-            <Flex fontSize="lg" fontWeight="semibold" mb="1">
+          <BeetsBox padding="1" mb="4">
+            <Flex fontSize="lg" fontWeight="semibold" mb="0">
               <Text flex="1">You can invest</Text>
               <Text>{numberFormatUSDValue(investableAmount)}</Text>
             </Flex>
 
             {proportionalSupported && (
-              <CardRow alignItems="center" mt="4" mb="0">
+              <CardRow alignItems="center" mt="2" mb="0">
                 <Text flex="1">Max proportional</Text>
                 {typeof data?.maxAmount === 'number' && !isLoading ? (
                   <Text>{numberFormatUSDValue(data.maxAmount)}</Text>
@@ -59,7 +59,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
               </CardRow>
             )}
           </BeetsBox>
-          <BeetsBox p="2">
+          <BeetsBox p="1">
             <Text fontSize="lg" fontWeight="semibold" mb="4">
               Pool tokens in my wallet
             </Text>
@@ -107,22 +107,22 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
               );
             })}
           </BeetsBox>
+          {!isStablePool && !canInvestProportionally && (
+            <Alert bg="vertek.slatepurple.900" status="warning" color="vertek.neonpurple.500" mt="4">
+              <AlertIcon color="vertek.neonpurple.500" />
+              Investing proportionally is only possible when you have all pool tokens in your
+              wallet.
+            </Alert>
+          )}
         </GridItem>
-        <GridItem>
-          <BeetsBox px="4" py="2">
+        <GridItem bg="vertek.slatepurple.900" padding="2" borderRadius="16px" >
+          
             {isStablePool ? (
               <PoolInvestStablePoolDescription />
             ) : (
               <PoolInvestWeightedPoolDescription />
             )}
-          </BeetsBox>
-          {!isStablePool && !canInvestProportionally && (
-            <Alert status="warning" mt="4">
-              <AlertIcon />
-              Investing proportionally is only possible when you have all pool tokens in your
-              wallet.
-            </Alert>
-          )}
+          
         </GridItem>
       </Grid>
 
@@ -130,7 +130,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
         <>
           <Button
             width="full"
-            variant="primary"
+            variant="verteklight"
             isDisabled={investableAmount === 0}
             onClick={onShowCustom}
             mb={proportionalSupported ? '3' : '0'}
@@ -139,7 +139,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
           </Button>
           {pool.investConfig.proportionalEnabled && (
             <Button
-              variant="secondary"
+              variant="vertekdark"
               width="full"
               isDisabled={!canInvestProportionally}
               onClick={onShowProportional}
@@ -152,7 +152,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
         <>
           {proportionalSupported && (
             <Button
-              variant="primary"
+              variant="verteklight"
               width="full"
               mb="3"
               isDisabled={!canInvestProportionally}
@@ -163,7 +163,8 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
           )}
           <Button
             width="full"
-            variant={canInvestProportionally ? 'secondary' : 'primary'}
+            mb="2"
+            variant={canInvestProportionally ? 'vertekdark' : 'primary'}
             isDisabled={investableAmount === 0}
             onClick={onShowCustom}
           >

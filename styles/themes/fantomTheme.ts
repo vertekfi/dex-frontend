@@ -323,7 +323,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         color:'white', 
                         borderWidth:'2px', 
                         borderColor:'vertek.neonpurple.500', 
-                        transform:'scale(1.05)' 
+                        transform:'scale(1.03)' 
                             }, 
                     _disabled: {
                         transform: 'none',
@@ -347,7 +347,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             borderColor:'vertek.slate.300', 
                             borderWidth:'2px', 
                             background: 'linear-gradient(to right top, #161626, #1a1b37, #1e1f48, #22235a, #27276c, #2c2b7d, #312f8e, #37339f, #3c39b4, #413eca, #4544e0, #4a4af6)', 
-                            transform:'scale(1.05)' 
+                            transform:'scale(1.03)' 
                                 }, 
                         _disabled: {
                             transform: 'none',
@@ -368,7 +368,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             background:'vertek.slate.900', 
                             borderWidth:'2px', 
                             borderColor:'vertek.neonpurple.500', 
-                            transform:'scale(1.05)' 
+                            transform:'scale(1.03)' 
                                 }, 
                         _disabled: {
                             transform: 'none',
@@ -390,7 +390,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         color:'white', 
                         borderWidth:'2px', 
                         borderColor:'white', 
-                        transform:'scale(1.05)' 
+                        transform:'scale(1.03)' 
                             }, 
                     _disabled: {
                         transform: 'none',
