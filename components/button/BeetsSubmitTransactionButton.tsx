@@ -64,7 +64,7 @@ export function BeetsSubmitTransactionButton({
 
     return (
         <Button
-            variant="vertekswap"
+            variant="verteklight"
             isDisabled={isDisabled || isLoading || isSubmitting || isPending}
             isLoading={isLoading || isSubmitting || isPending}
             loadingText={isSubmitting ? submittingText : isPending ? pendingText : loadingText}
