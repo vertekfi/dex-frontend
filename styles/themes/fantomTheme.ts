@@ -16,7 +16,10 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 '100% 100%', 
             },
             '.bg': {
-               
+                backgroundImage: './images/bg.png',
+                backgroundColor: 'vertek.slatepurple.900', 
+                backgroundSize: 
+                '100% 100%',
             },
             
         },
