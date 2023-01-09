@@ -170,20 +170,23 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         </Alert>
       )}
       <Button
-        variant="primary"
+        variant="verteklight"
         width="full"
         mb="2"
         isDisabled={!hasBptInWallet}
         onClick={onShowProportional}
+        _hover={{ transform: "scale(1.01)" }}
+
       >
         Withdraw proportionally
       </Button>
       <Button
-        variant="secondary"
+        variant="vertekdark"
         width="full"
         isDisabled={!hasBptInWallet}
         onClick={onShowSingleAsset}
-      >
+        _hover={{ transform: "scale(1.01)" }}
+        >
         Single asset withdraw
       </Button>
 

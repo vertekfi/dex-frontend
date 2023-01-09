@@ -15,6 +15,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 backgroundSize: 
                 '100% 100%', 
             },
+            '.bg': {
+               
+            },
             
         },
     },
