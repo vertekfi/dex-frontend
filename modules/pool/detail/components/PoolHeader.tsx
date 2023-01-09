@@ -57,7 +57,7 @@ function PoolHeader() {
           <HStack
             paddingX="2"
             paddingY="1"
-            bg="vertek.slatepurple.800"
+            bg="vertek.slatepurple.900"
             spacing="4"
             fontSize="md"
             rounded="full"

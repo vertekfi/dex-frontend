@@ -15,7 +15,14 @@ export default function PoolStats() {
     setActiveTab(tabIndex);
   };
   return (
-    <Card px="0" py="0" mb="2" width="full" boxShadow="0 0 5px #5BC0F8, 0 0 12px #4A4AF6">
+    <Card 
+    p="4"
+    mb="0"
+    width="full" 
+    borderRadius="16px"
+    bgColor="rgba(0, 0, 0, 0.3)"
+    boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 12px #fff"
+    >
       <VStack height="full" spacing="4">
         {hasBpt && (
           <Tabs

@@ -19,12 +19,20 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
   return (
     <LinkBox as="article" flex="1" {...rest}>
       <Flex
-        bgColor="vertek.slatepurple.900"
-        borderRadius="16px"
-        p="1"
-        boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-        flexDirection="column"
+        bgColor="rgba(0, 0, 0, 0.3)"
+        flexDirection="column" 
+        borderRadius="24px"
         height="327px"
+        padding="1"
+        marginTop="1"
+        
+        boxShadow="inset 0 0 10px #5BC0F8, inset 0 0 15px #4A4AF6, inset 0 0 20px #fff"
+        css={{
+          transition: "transform 0.5s",
+          "&:hover": {
+            transform: "scale(1.02)",
+          },
+        }}
       >
         <Flex justify="center" padding="2" paddingTop="4" my="4">
           <TokenAvatarSet
@@ -37,6 +45,7 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
             width={150}
             imageSize={40}
             renderPopover={false}
+
           />
         </Flex>
         <Box pb="4" mt="3" justifyContent="center">

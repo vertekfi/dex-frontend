@@ -51,10 +51,10 @@ export default function PoolOverallStats() {
         alignItems="flex-start"
         padding="8px"
         borderRadius="12px"
-        bg="vertek.slatepurple.900"
+
         >
             <VStack alignItems="flex-start" >
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
+                <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
                     Pool APR
                 </Text>
                 <HStack >
@@ -64,7 +64,7 @@ export default function PoolOverallStats() {
             </VStack>
             {/* <Divider /> */}
             {/* <VStack spacing="0" alignItems="flex-start">
-            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
+            <Text lineHeight="1rem" fontWeight="semibold" fontSize="1rem" color="white">
                     BPT price
                 </Text>
                 <Text color="white" fontSize="1.75rem">
@@ -73,28 +73,28 @@ export default function PoolOverallStats() {
                 <PercentChangeBadge percentChange={sharePricePercentChange} />
             </VStack> */}
             <VStack alignItems="flex-start" >
-                <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
+            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
                     TVL
                 </Text>
-                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
+                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
                     {numeral(data.totalLiquidity).format('$0,0.00a')}
                 </Text>
                 {/* <PercentChangeBadge percentChange={tvlPercentChange} /> */}
             </VStack>
             <VStack alignItems="flex-start" >
-            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
+            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
                     24h Volume
                 </Text>
-                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
+                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
                     {numeral(data.volume24h).format('$0,0.00a')}
                 </Text>
                 {/* <PercentChangeBadge percentChange={volumePercentChange} /> */}
             </VStack>
             <VStack alignItems="flex-start" >
-            <Text lineHeight="1rem" fontWeight="semibold" fontSize="14px" color="vertek.slate.300">
+            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
                     24h Fees
                 </Text>
-                <Text color="white" fontSize="16px" fontWeight="bold" lineHeight="20px">
+                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
                     {numeral(data.fees24h).format('$0,0.00a')}
                 </Text>
             </VStack>

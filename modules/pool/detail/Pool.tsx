@@ -8,6 +8,8 @@ import { PoolDetailCharts } from '~/modules/pool/detail/components/PoolDetailCha
 import { PoolInvestModal } from '~/modules/pool/invest/PoolInvestModal';
 import { PoolWithdrawModal } from '~/modules/pool/withdraw/PoolWithdrawModal';
 import { usePool } from '~/modules/pool/lib/usePool';
+import { PoolStatistics } from '~/modules/pool/detail/components/PoolStatistics';
+
 
 export function Pool() {
   const { pool } = usePool();
@@ -15,30 +17,36 @@ export function Pool() {
   return (
     <Box marginBottom="8">
       <PoolHeader />
+
       <VStack width="full" spacing="8">
-        {pool.staking && <PoolStakeInFarmWarning />}
-        <Flex width="full" justifyContent="flex-start" marginBottom="2">
-          <PoolInvestModal />
-          <PoolWithdrawModal />
-        </Flex>
-        <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
-          <GridItem>
-            <VStack spacing="4">
-              <PoolStats />
-              <PoolDetailCharts />
-            </VStack>
-          </GridItem>
-          <GridItem>
-            <PoolComposition
-            // symbol name weight balance value
-            />
-          </GridItem>
-        </Grid>
+            {pool.staking && <PoolStakeInFarmWarning />}
+            <Flex width="full" justifyContent="flex-start" marginBottom="2">
+              <PoolInvestModal />
+              <PoolWithdrawModal />
+              
+            </Flex>
+            
+            <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
+              <GridItem>
+                <VStack spacing="4">
+                  <PoolStats />
+                  <PoolDetailCharts />
+                  <PoolTransactions />
+
+                </VStack>
+              </GridItem>
+              <GridItem>
+                  <VStack spacing="4">
+                    <PoolComposition />
+                    <PoolStatistics />
+                  </VStack>
+              </GridItem>
+            </Grid>
       </VStack>
 
-      <VStack spacing="8" width="full">
+      {/* <VStack spacing="8" width="full">
         <PoolTransactions />
-      </VStack>
+      </VStack> */}
     </Box>
   );
 }

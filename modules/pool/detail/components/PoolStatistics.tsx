@@ -16,7 +16,7 @@ import { poolGetNestedLinearPoolTokens } from '~/lib/services/pool/lib/util';
 import { PoolWithPossibleNesting } from '~/lib/services/pool/pool-types';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
-export function PoolDetailAboutThisPool() {
+export function PoolStatistics() {
   const config = useNetworkConfig();
   const { pool } = usePool();
   const tokensOfInterest = [
@@ -32,25 +32,8 @@ export function PoolDetailAboutThisPool() {
   });
 
   return (
-    <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap="4" width="full">
+    <Grid templateColumns={{ base: '1fr', lg: '1fr' }} gap="4" width="full">
       <GridItem>
-        <Text fontWeight="semibold" fontSize="xl" color="white" mb="4">
-          Pool tokens
-        </Text>
-        {tokensOfInterest.map((token, index) => {
-          return (
-            <PoolDetailTokenInfoCard
-              key={index}
-              token={token}
-              price={priceFor(token.address)}
-              data={data?.staticData.find((item) => item.tokenAddress === token.address)}
-              dynamicData={data?.dynamicData.find((item) => item.tokenAddress === token.address)}
-              mb="2"
-            />
-          );
-        })}
-      </GridItem>
-      {/* <GridItem>
         <Text fontWeight="semibold" fontSize="xl" color="white" mb="4">
           Pool statistics
         </Text>
@@ -187,7 +170,7 @@ export function PoolDetailAboutThisPool() {
             </Link>
           </CardRow>
         </Card>
-      </GridItem> */}
+      </GridItem>
     </Grid>
   );
 }
