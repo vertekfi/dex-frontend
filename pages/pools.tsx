@@ -17,7 +17,7 @@ import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 function Pools() {
   const { chainId } = useNetworkConfig();
 
-  const TITLE = 'Vertex | Investment pools';
+  const TITLE = 'Vertek | Investment pools';
   const DESCRIPTION =
     'Competitive yield with unmatched flexibility. Invest in a pool of your choice or create your own.';
 

@@ -12,7 +12,7 @@ function ClaimPage() {
   return (
     <>
       <Head>
-        <title>Vertex | Claim</title>
+        <title>Vertek | Claim</title>
       </Head>
 
       <PageMasthead

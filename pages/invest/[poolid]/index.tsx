@@ -31,10 +31,10 @@ const PoolPage = ({ pool }: Props) => {
   return (
     <>
       <Head>
-        <title>Vertex | Invest</title>
-        <meta name="title" content={`Vertex | ${pool.name}`} />
-        <meta property="og:title" content={`Vertex | ${pool.name}`} />
-        <meta property="twitter:title" content={`Vertex | ${pool.name}`} />
+        <title>Vertek | Invest</title>
+        <meta name="title" content={`Vertek | ${pool.name}`} />
+        <meta property="og:title" content={`Vertek | ${pool.name}`} />
+        <meta property="twitter:title" content={`Vertek | ${pool.name}`} />
       </Head>
       <PoolProvider pool={pool}>
         <PoolUserBptBalanceProvider>

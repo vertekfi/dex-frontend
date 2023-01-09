@@ -103,6 +103,12 @@ export function Navbar({ scrollY }: Props) {
                 text="Claim"
                 mr="5"
               />
+               <NavbarLink
+                href={'/nft'}
+                selected={router.asPath === '/nft'}
+                text="NFT"
+                mr="5"
+              />
               {/* {networkConfig.launchUrl && (
                 <NavbarLink href={networkConfig.launchUrl} text="Claim" mr={5} />
               )} */}

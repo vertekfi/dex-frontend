@@ -17,7 +17,7 @@ import { LinearPoolList } from '~/modules/linear-pools/LinearPoolList';
 function LinearPools() {
   const { chainId } = useNetworkConfig();
 
-  const TITLE = 'Vertex | Linear pools';
+  const TITLE = 'Vertek | Linear pools';
 
   return (
     <>

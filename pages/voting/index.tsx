@@ -14,7 +14,7 @@ function VotingPage() {
   return (
     <>
       <Head>
-        <title>Vertex | Voting</title>
+        <title>Vertek | Voting</title>
       </Head>
       <UserTokenBalancesProvider>
         <GaugeListProvider>

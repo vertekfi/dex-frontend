@@ -2,7 +2,7 @@ import { NetworkConfig } from '~/lib/config/network-config-type';
 import { AddressZero } from '@ethersproject/constants';
 
 export const bscNetworkConfig: NetworkConfig = {
-  appName: 'Vertex',
+  appName: 'Vertek',
   chainId: '56',
   networkName: 'BNB Chain',
   networkShortName: 'BNB Chain',

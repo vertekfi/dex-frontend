@@ -60,6 +60,8 @@ export function NavbarMobile() {
               <ModalBody mt="4" alignItems="flex-start" flexDirection="column" display="flex">
                 <NavbarLink href={'/voting'} selected={router.asPath === '/voting'} text="Vote" mr="1" px="4" />
                 <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim" mr="1" px="4" />
+                <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" mr="1" px="4" />
+
               </ModalBody>
               <ModalFooter>
                 <Button variant="vertekdark" mr={3} onClick={() => setIsOpen(false)}>
