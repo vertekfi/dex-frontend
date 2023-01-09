@@ -65,12 +65,15 @@ export function PoolInvestModal() {
         size={modalState === 'start' ? '3xl' : '2xl'}
         initialFocusRef={initialRef}
       >
-        <ModalOverlay />
+        <ModalOverlay 
+
+        />
         <ModalContent 
-          backgroundColor="black" 
+          bgColor="black" 
           boxShadow={{ base: 'inset 0 0 2px', lg:'inset 0 0 5px #fff, inset 0 0 20px #4A4AF6'}} 
           borderRadius="16px"
           mb="2"
+          padding="4"
 
         
         >
