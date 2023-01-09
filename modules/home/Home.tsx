@@ -1,36 +1,23 @@
-import { Box, Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
 import { HomeHero } from '~/modules/home/components/HomeHero';
-import { HomePools } from '~/modules/home/components/HomePools';
-import { HomeNews } from '~/modules/home/components/HomeNews';
 import { HomeWhyUs } from '~/modules/home/components/HomeWhyUs';
 import { HomeBeetsInfo } from '~/modules/home/components/HomeBeetsInfo';
 import { HomeLearn } from '~/modules/home/components/HomeLearn';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
 import { useUserData } from '~/lib/user/useUserData';
-import { useGetHomeFeaturedPoolsQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetPoolsLazyQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { orderBy } from 'lodash';
 import { useEffect } from 'react';
-import { PoolCard } from '~/components/pool-card/PoolCard';
 import { HomePoolsNew } from './components/HomePoolsNew';
-export function Home() {
 
+export function Home() {
   const {
     stakedValueUSD,
     portfolioValueUSD,
     loading: userDataLoading,
     userPoolIds,
     usdBalanceForPool,
-    bptBalanceForPool,
   } = useUserData();
-  const { data } = useGetHomeFeaturedPoolsQuery();
-  const featuredPoolGroups = data?.featuredPoolGroups || [];
   const [getPools, getPoolsQuery] = useGetPoolsLazyQuery();
-  const userPools = orderBy(
-    getPoolsQuery.data?.poolGetPools || [],
-    (pool) => usdBalanceForPool(pool.id),
-    'desc',
-  );
   const userPoolIdsStr = userPoolIds.join();
 
   useEffect(() => {
@@ -44,12 +31,10 @@ export function Home() {
     });
   }, [userPoolIdsStr]);
 
-
   return (
-
-    <Box >
+    <Box>
       <Box display="flex" justifyContent="flex-end">
-      <BeetsLogo />
+        <BeetsLogo />
       </Box>
       <HomeHero />
       {/* <Grid
@@ -75,7 +60,7 @@ export function Home() {
             <HomeNews />
           </GridItem>
       </Grid> */}
-      <HomePoolsNew /> 
+      <HomePoolsNew />
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}

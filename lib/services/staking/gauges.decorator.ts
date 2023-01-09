@@ -19,7 +19,7 @@ export class GaugesDecorator {
   /**
    * @summary Combine subgraph gauge schema with onchain data using multicalls.
    */
-  async decorate(subgraphGauges: LiquidityGauge[], userAddress: string): Promise<LiquidityGauge[]> {
+  async decorate(subgraphGauges: LiquidityGauge[], userAddress: string) {
     this.multicaller = this.resetMulticaller();
     this.callRewardTokens(subgraphGauges);
     this.callClaimableTokens(subgraphGauges, userAddress);
@@ -32,7 +32,7 @@ export class GaugesDecorator {
 
     const data = subgraphGauges.map((subgraphGauge) => ({
       ...subgraphGauge,
-      // ...this.format(gaugesDataMap[subgraphGauge.id]),
+      ...this.format(gaugesDataMap[subgraphGauge.id]),
     }));
 
     return data;

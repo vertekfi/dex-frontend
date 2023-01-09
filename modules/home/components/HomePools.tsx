@@ -1,9 +1,8 @@
-import { Box, BoxProps, Button, Flex, Image, Skeleton } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, Skeleton } from '@chakra-ui/react';
 import { PoolCard } from '~/components/pool-card/PoolCard';
 import { BeetsHeadline } from '~/components/typography/BeetsHeadline';
 import { BeetsSubHeadline } from '~/components/typography/BeetsSubHeadline';
 import { PoolCardCarousel } from '~/components/carousel/PoolCardCarousel';
-
 import { useUserData } from '~/lib/user/useUserData';
 import {
   useGetHomeFeaturedPoolsQuery,
@@ -11,7 +10,6 @@ import {
 } from '~/apollo/generated/graphql-codegen-generated';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { useEffect } from 'react';
-
 import { PoolCardUser } from '~/components/pool-card/PoolCardUser';
 import { orderBy } from 'lodash';
 
@@ -45,7 +43,6 @@ export function HomePools(props: BoxProps) {
     });
   }, [userPoolIdsStr]);
 
-  
   //minWidth = 0 is needed for a swiper nested in a flex layout
   return (
     <Box minWidth="0" {...props}>
@@ -83,18 +80,16 @@ export function HomePools(props: BoxProps) {
       <BeetsHeadline mb="10">Featured pools</BeetsHeadline>
 
       {featuredPoolGroups.map((group) => (
-        <Box mb="4" key={group.id}  >
+        <Box mb="4" key={group.id}>
           <PoolCardCarousel
             items={group.items.map((item) => {
               switch (item.__typename) {
                 case 'GqlPoolMinimal':
-                  return <PoolCard pool={item} key={item.id} 
-                  />;
+                  return <PoolCard pool={item} key={item.id} />;
                 case 'GqlFeaturePoolGroupItemExternalLink':
               }
             })}
           />
-
         </Box>
       ))}
     </Box>
