@@ -135,7 +135,7 @@ export function VotingContainer() {
           <Grid paddingX="2" paddingY="2">
             <GridItem mt="2">
               <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
-                My 80VRTK-20BNB
+              My 80VRTK-20BNB
               </Text>
             </GridItem>
             <GridItem mt="3">
@@ -156,7 +156,7 @@ export function VotingContainer() {
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
                 <Button variant="verteklight" width="80%">
-                  Button
+                  Get VRTK-BNB
                 </Button>
               </Box>
             </GridItem>
@@ -165,7 +165,7 @@ export function VotingContainer() {
 
         <GridItem
           bg=""
-          boxShadow="inset 0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
           color="white"
@@ -194,7 +194,7 @@ export function VotingContainer() {
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
                 <Button variant="verteklight" width="80%">
-                  Button
+                  Lock VRTK-BNB
                 </Button>
               </Box>
             </GridItem>
@@ -229,12 +229,14 @@ export function VotingContainer() {
                   <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
                     {lockInfoDisplay.lockedUntilDays} days
                   </Text>
-                  <Box display="flex" justifyContent="center" ml="12" >
-                    <AddIcon 
-                      color="white" 
-                      /> 
-                      </Box>
               </Box>
+              <GridItem mt={{ base: '3', lg: '6' }}>
+              <Box display="flex" justifyContent="center">
+                <Button variant="verteklight" width="80%">
+                  Update My Lock 
+                </Button>
+              </Box>
+            </GridItem>
             </GridItem>
             <GridItem mt={{ base: '3', lg: '6' }}>
             </GridItem>
@@ -243,7 +245,7 @@ export function VotingContainer() {
 
         <GridItem
           bg=""
-          boxShadow="inset 0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
           color="white"
