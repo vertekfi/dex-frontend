@@ -64,11 +64,11 @@ export function Home() {
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}
-        rowGap="12"
-        mt="20"
+        rowGap="4"
+        mt="4"
         borderBottomWidth={2}
         borderBottomColor="gray.100"
-        pb="24"
+        pb="18"
       >
         <GridItem colSpan={2}>
           <HomeWhyUs />
