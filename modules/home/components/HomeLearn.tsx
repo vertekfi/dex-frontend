@@ -11,13 +11,14 @@ export function HomeLearn(props: BoxProps) {
         <GridItem>
           <BeetsHeadline mb="8">Learning the notes</BeetsHeadline>
           <Box>
-            DeFi can be confusing; whether you’re a beginner or a seasoned veteran, we want to
-            provide you with information that helps. Check out the resources below to learn more
+            {/* DeFi can be confusing; whether you’re a beginner or a seasoned veteran, we want to
+            provide you with information that helps.  */}
+            Check out the resources below to learn more
             about DeFi, Vertek and the technology we provide.
           </Box>
         </GridItem>
       </Grid>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }} gap="12">
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="12">
         <GridItem>
           <BeetsSubHeadline mb="8">Vertek Basics</BeetsSubHeadline>
           <HomeLearnItem
@@ -42,7 +43,7 @@ export function HomeLearn(props: BoxProps) {
             last={true}
           />
         </GridItem>
-        <GridItem>
+        {/* <GridItem>
           <BeetsSubHeadline mb="8">DeFi 101</BeetsSubHeadline>
           <HomeLearnItem
             title="Getting started: What is DeFi?"
@@ -60,7 +61,7 @@ export function HomeLearn(props: BoxProps) {
             url="https://lrn.fi/2022/07/06/how-to-bridge-tokens-to-optimism-with-multichain/"
             last={true}
           />
-        </GridItem>
+        </GridItem> */}
         <GridItem>
           <BeetsSubHeadline mb="8">Other resources</BeetsSubHeadline>
           <HomeLearnItem
