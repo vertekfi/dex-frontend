@@ -16,6 +16,8 @@ import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from './constants';
 import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolProvider } from '../pool/lib/usePool';
+import { AddIcon, WarningIcon } from '@chakra-ui/icons'
+
 
 interface Props {
   pool: GqlPoolUnion;
@@ -124,7 +126,7 @@ export function VotingContainer() {
     <UserDataProvider>
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={4} paddingY={2} spacing={4}>
         <GridItem
-          bg="vertek.slatepurple.900"
+          bg=""
           boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
@@ -162,8 +164,8 @@ export function VotingContainer() {
         </GridItem>
 
         <GridItem
-          bg="vertek.slatepurple.900"
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          bg=""
+          boxShadow="inset 0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
           color="white"
@@ -200,7 +202,7 @@ export function VotingContainer() {
         </GridItem>
 
         <GridItem
-          bg="vertek.slatepurple.900"
+          bg=""
           boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
@@ -222,29 +224,31 @@ export function VotingContainer() {
                 {lockInfoDisplay.lockedUntilDate}
               </Text>
             </GridItem>
-            <GridItem mt="-1">
-              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
-                {lockInfoDisplay.lockedUntilDays} days
-              </Text>
+            <GridItem mt="-1" >
+              <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+                  <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+                    {lockInfoDisplay.lockedUntilDays} days
+                  </Text>
+                  <Box display="flex" justifyContent="center" ml="12" >
+                    <AddIcon 
+                      color="white" 
+                      /> 
+                      </Box>
+              </Box>
             </GridItem>
             <GridItem mt={{ base: '3', lg: '6' }}>
-              <Box display="flex" justifyContent="center">
-                <Button variant="verteklight" width="80%">
-                  Button
-                </Button>
-              </Box>
             </GridItem>
           </Grid>
         </GridItem>
 
         <GridItem
-          bg="vertek.slatepurple.900"
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          bg=""
+          boxShadow="inset 0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           borderRadius="25px"
           maxW="550px"
           color="white"
         >
-          <Grid h="100%" paddingX="2" paddingY="2">
+          <Grid minH={{ base: '170px', lg:'auto'}} paddingX="2" paddingY="2">
             <GridItem mt="2">
               <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
                 My veVRTK
