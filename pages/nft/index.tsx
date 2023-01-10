@@ -10,7 +10,7 @@ import { NFTContainer } from '~/modules/nft/NFTContainer';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { PoolUserBptBalanceProvider } from '~/modules/pool/lib/usePoolUserBptBalance';
 
-function VotingPage() {
+function NFTPage() {
   const { chainId } = useNetworkConfig();
   return (
     <>
@@ -49,4 +49,4 @@ function VotingPage() {
   );
 }
 
-export default VotingPage;
+export default NFTPage;

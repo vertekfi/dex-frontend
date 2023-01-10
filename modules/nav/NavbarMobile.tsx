@@ -47,16 +47,18 @@ export function NavbarMobile() {
           icon={<ChevronUpIcon />}
           onClick={() => setIsOpen(!isOpen)}
         />
+        {/* Look at a transparent with blur?  */}
         <Box display="flex" padding="8px" width="100%">
           <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} >
             <ModalContent
               width="100vw"
-                    boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
               borderRadius="25px"
               bgGradient='linear(90deg, vertek.slatepurple.900 0%, vertek.slatepurple.700 100% )'
               position="absolute"
               bottom="5%"
             >
+          
               <ModalBody mt="4" alignItems="flex-start" flexDirection="column" display="flex">
                 <NavbarLink href={'/voting'} selected={router.asPath === '/voting'} text="Vote" mr="1" px="4" />
                 <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim" mr="1" px="4" />
