@@ -16,6 +16,7 @@ import { PRETTY_DATE_FORMAT } from '../constants';
 import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolProvider } from '../../pool/lib/usePool';
 import styled from '@emotion/styled';
+import { LockIcon } from '@chakra-ui/icons';
 
 interface Props {
   pool: GqlPoolUnion;
@@ -207,7 +208,11 @@ export function VotingHeader() {
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
                 <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
-                  Update My Lock
+                  Update My Lock 
+                  <LockIcon 
+                  ml="2" 
+                  color="vertek.slate.200"
+                  /> 
                 </Button>
               </Box>
             </GridItem>
