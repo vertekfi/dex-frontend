@@ -422,6 +422,11 @@ export const fantomTheme: Partial<ChakraTheme> = {
                     fontSize: 'xl',
                     color: 'white',
                 },
+                topLine: {
+                    fontWeight: 'bold',
+                    fontSize: '1.5rem',
+                    color: 'white',
+                },
             },
         },
         // BoxShadow: {

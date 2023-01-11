@@ -36,6 +36,7 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
     });
   }
 
+
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
@@ -43,11 +44,11 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
           bg="vertek.slatepurple.900"
           borderBottomColor="vertek.slatepurple.600"
           borderBottomWidth="1px"
-          paddingY="1.5rem"
-          paddingX="1rem"
-          borderRadius={{ base: '12px', lg: 'none' }}
+          pl="4" 
+          py="4"
+          borderRadius={{ base: '12px', lg: '' }}
           templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
-          gap="2"
+          gap="0"
           mb={{ base: '4', lg: '0' }}
           templateAreas={{
             base: `

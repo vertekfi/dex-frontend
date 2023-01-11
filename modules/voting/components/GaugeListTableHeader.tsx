@@ -7,15 +7,13 @@ export function GaugeListTableHeader(){
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Box mt={3} flexDirection="column" display="flex" >
+        <Box flexDirection="column" display="flex" >
         
         <Grid
-            py="1.5rem"
-            px="1rem"
+            padding="12px"
             textAlign="center"
             fontWeight="bold"
-            borderTopLeftRadius="md"
-            borderTopRightRadius="md"
+            borderTopRadius="16px"
             alignItems="center"
             justifyContent="center"
             bgColor="vertek.slate.900"

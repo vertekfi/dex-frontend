@@ -16,12 +16,38 @@ import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from './constants';
 import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolProvider } from '../pool/lib/usePool';
-import { AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { AddIcon, WarningIcon } from '@chakra-ui/icons'; 
+import { css } from '@emotion/react';
+import styled from '@emotion/styled'
 
 
 interface Props {
   pool: GqlPoolUnion;
 }
+
+const VotingCard = styled.div`
+    bg: '';
+    box-shadow: 0 0 10px #5BC0F8, 0 0 20px #4A4AF6;
+    border-radius: 25px;
+    max-width: 550px;
+    height: 200px;
+    color: white;
+`
+const VotingCardHeader = styled.p`
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    text-align: center; 
+`
+const SubText = styled.p`
+    font-size: 1.1rem; 
+    text-align: center; 
+    font-weight: semibold; 
+`
+const ValueText = styled.p`
+    font-size: 1.0rem; 
+    text-align: center; 
+    font-weight: bold; 
+`
 
 export function VotingContainer() {
   const [pool, setPool] = useState<GqlPoolUnion>();
@@ -121,161 +147,123 @@ export function VotingContainer() {
   function handleVoteSuccess() {
     refetchVotingGauges();
   }
-
+  
   return (
+
     <UserDataProvider>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={4} paddingY={2} spacing={4}>
-        <GridItem
-          bg=""
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-          borderRadius="25px"
-          maxW="550px"
-          color="white"
-        >
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={{base:'4', md:'6', lg:'4'}} paddingY={2} spacing={4}
+     justifyContent="center" alignItems="center" 
+      >
+        <VotingCard>
           <Grid paddingX="2" paddingY="2">
             <GridItem mt="2">
-              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+              <VotingCardHeader>
               My 80VRTK-20BNB
-              </Text>
+              </VotingCardHeader>
             </GridItem>
             <GridItem mt="3">
-              <Text
-                alignItems="center"
-                fontSize="1.2rem"
-                justifyContent="center"
-                textAlign="center"
-              >
+              
+              <SubText>
                 {userPoolBalance.usdValue}
-              </Text>
+              </SubText>
             </GridItem>
             <GridItem mt="-1">
-              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+              <ValueText>
                 {userPoolBalance.balance}
-              </Text>
+              </ValueText>
             </GridItem>
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
-                <Button variant="verteklight" width="80%">
+                <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
                   Get VRTK-BNB
                 </Button>
               </Box>
             </GridItem>
           </Grid>
-        </GridItem>
+        </VotingCard>
 
-        <GridItem
-          bg=""
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-          borderRadius="25px"
-          maxW="550px"
-          color="white"
-        >
+        <VotingCard>
           <Grid paddingX="2" paddingY="2">
             <GridItem mt="2">
-              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+              <VotingCardHeader>
                 My locked 80VRTK-20BNB
-              </Text>
+              </VotingCardHeader>
             </GridItem>
             <GridItem mt="3">
-              <Text
-                alignItems="center"
-                fontSize="1.2rem"
-                justifyContent="center"
-                textAlign="center"
-              >
+              <SubText>
                 $0.00
-              </Text>
+              </SubText>
             </GridItem>
             <GridItem mt="-1">
-              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+              <ValueText>
                 {userLockInfo?.lockedAmount}
-              </Text>
+              </ValueText>
             </GridItem>
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
-                <Button variant="verteklight" width="80%">
+                <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
                   Lock VRTK-BNB
                 </Button>
               </Box>
             </GridItem>
           </Grid>
-        </GridItem>
+        </VotingCard>
 
-        <GridItem
-          bg=""
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-          borderRadius="25px"
-          maxW="550px"
-          color="white"
-        >
+        <VotingCard>
           <Grid paddingX="2" paddingY="2">
             <GridItem mt="2">
-              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+              <VotingCardHeader>
                 Locked until
-              </Text>
+              </VotingCardHeader>
             </GridItem>
             <GridItem mt="3">
-              <Text
-                alignItems="center"
-                fontSize="1.2rem"
-                justifyContent="center"
-                textAlign="center"
-              >
+              <SubText>
                 {lockInfoDisplay.lockedUntilDate}
-              </Text>
+              </SubText>
             </GridItem>
             <GridItem mt="-1" >
               <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-                  <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+                  <ValueText>
                     {lockInfoDisplay.lockedUntilDays} days
-                  </Text>
+                  </ValueText>
               </Box>
+              </GridItem>
+              
               <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
-                <Button variant="verteklight" width="80%">
+              <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
                   Update My Lock 
                 </Button>
               </Box>
             </GridItem>
-            </GridItem>
-            <GridItem mt={{ base: '3', lg: '6' }}>
-            </GridItem>
           </Grid>
-        </GridItem>
+        </VotingCard>
 
-        <GridItem
-          bg=""
-          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-          borderRadius="25px"
-          maxW="550px"
-          color="white"
-        >
-          <Grid minH={{ base: '170px', lg:'auto'}} paddingX="2" paddingY="2">
+        <VotingCard>
+          <Grid  paddingX="2" paddingY="2">
             <GridItem mt="2">
-              <Text fontSize="1.2rem" fontWeight="bold" textAlign="center">
+              <VotingCardHeader>
                 My veVRTK
-              </Text>
+              </VotingCardHeader>
             </GridItem>
             <GridItem mt="3">
-              <Text
-                alignItems="center"
-                fontSize="1.5rem"
-                justifyContent="center"
-                textAlign="center"
-              >
+              <SubText>
                 {lockInfoDisplay.veBalance}
-              </Text>
+              </SubText>
             </GridItem>
             <GridItem mt="-1">
-              <Text alignItems="center" fontSize="1rem" justifyContent="center" textAlign="center">
+              <ValueText>
                 {lockInfoDisplay.percentOwned}
-              </Text>
+              </ValueText>
             </GridItem>
           </Grid>
-        </GridItem>
+        </VotingCard>
       </SimpleGrid>
+
+
       <VotingPageSub />
       <GaugeList votingGauges={votingGauges} />
     </UserDataProvider>
+
   );
 }

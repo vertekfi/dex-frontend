@@ -19,70 +19,12 @@ interface GaugeListProps {
 }
 export function GaugeList(props: GaugeListProps | null) {
   const { isConnected } = useUserAccount();
-
-  const tableHeaders = ['Icons', 'Pool', 'Next period votes', 'My votes', 'Vote'];
-  const columns = [
-    {
-      name: 'Icons',
-      id: 'icons',
-      accessor: 'uri',
-      Header: 'iconColumnHeader',
-      Cell: 'iconColumnCell',
-      width: 125,
-      noGrow: true,
-    },
-    {
-      name: 'Pool',
-      id: 'poolName',
-      accessor: 'id',
-      Cell: 'poolNameCell',
-      width: 350,
-    },
-    {
-      name: 'Next period votes',
-      accessor: 'id',
-      align: 'right',
-      id: 'nextPeriodVotes',
-      Cell: 'nextPeriodVotesCell',
-      sortKey: (gauge: { votesNextPeriod: string }) => Number(gauge.votesNextPeriod) as number,
-      width: 150,
-      cellClassName: 'font-numeric',
-    },
-    {
-      name: 'My votes',
-      accessor(gauge: any) {
-        const normalizedVotes = scale(gauge.userVotes.toString(), -4);
-        return fNum2(normalizedVotes.toString(), {
-          style: 'percent',
-          maximumFractionDigits: 2,
-        });
-      },
-      align: 'right',
-      id: 'myVotes',
-      sortKey: (gauge: any) => Number(gauge.userVotes),
-      width: 150,
-      cellClassName: 'font-numeric',
-      hidden: !isConnected ? true : false,
-    },
-    {
-      name: 'Vote',
-      id: 'vote',
-      accessor: 'id',
-      align: 'right',
-      Cell: 'voteColumnCell',
-      width: 100,
-      hidden: !isConnected ? true : false,
-    },
-  ];
-
   function redirectToPool(gauge: VotingGaugeWithVotes) {
     window.location.href = poolURLFor(gauge.pool.id, gauge.network);
   }
-
   // function getIsGaugeExpired(gaugeAddress: string): boolean {
   //   return !!props?.gaugeInfo?.expiredGauges.some((item) => isSameAddress(gaugeAddress, item));
   // }
-
   function getHasUserVotes(userVotes: string): boolean {
     return !!Number(userVotes);
   }
@@ -96,7 +38,13 @@ export function GaugeList(props: GaugeListProps | null) {
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Box mt={3} mb="6rem" borderRadius="16px" flexDirection="column" display="flex">
+        <Box 
+        mt="3rem" 
+        boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
+        mb="6rem" 
+        borderRadius="16px" 
+        flexDirection="column" 
+        display="flex">
           <GaugeListTableHeader />
           <Box>
             {props?.votingGauges.map((gauge) => {

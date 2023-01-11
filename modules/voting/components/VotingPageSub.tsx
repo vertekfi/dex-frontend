@@ -48,7 +48,7 @@ export function VotingPageSub() {
   return (
     // <Box mt={3} mb='4rem' flexDirection="column" display="flex">
     <Grid
-      mt={8}
+      mt={16}
       justifyContent="center"
       paddingY="2"
       templateColumns={{
@@ -58,22 +58,23 @@ export function VotingPageSub() {
       alignItems="center"
       gap={{ base: '10', lg: '20' }}
     >
-      <GridItem marginRight="10" marginLeft="20" paddingY="0">
-        <Text fontWeight="bold" fontSize="1.8rem">
+      <GridItem marginRight={{base:'4', lg:'10'}} marginLeft={{base:'8', lg:'20'}} paddingY="0">
+        <Text variant="topLine">
           Pools eligible for VRTK emissions
         </Text>
-        <Text fontSize="1.2rem" fontWeight="normal">
+        <Text variant="topline" fontSize="1.2rem" letterSpacing="-0.01rem">
           Liquidity incentives are directed by the community of veVRTK holders. If you hold veVRTK,
           vote below on any pools across BNB Chain. Your vote will persist until you change it and
           editing a pool can only be done once in 10 days.
         </Text>
       </GridItem>
+      {/* <GridItem variant="VotingCard">text </GridItem> */}
 
       <GridItem marginRight={{ base: '0', lg: '24' }}>
         <VStack spacing={4} alignItems={{ base: 'center', lg: 'stretch' }}>
           <Box
-            bgGradient="linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)"
-            // bgColor="vertek.slatepurple.900"
+            bgColor="vertek.neonpurple.500"
+            boxShadow="0 0 24px 1px #000"
             h="full"
             w={{ base: '75%', lg: 'full' }}
             p="12px"
@@ -90,7 +91,8 @@ export function VotingPageSub() {
             </Text>
           </Box>
           <Box
-            bgGradient="linear(90deg, #302B84 0%, #362BA8 50%, #4132D0 100%)"
+            bgColor="vertek.neonpurple.500"
+            boxShadow="0 0 24px 1px #000"
             h="full"
             w={{ base: '75%', lg: 'full' }}
             p="12px"
