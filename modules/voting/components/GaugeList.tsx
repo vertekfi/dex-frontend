@@ -13,27 +13,16 @@ import { GaugeListItem } from './GaugeListItem';
 
 interface GaugeListProps {
   votingGauges: VotingGaugeWithVotes[];
-  // expiredGauges: string[];
-  //  isLoading: boolean;
-  // onVoteClicked: (votingGauge: VotingGaugeWithVotes) => void;
 }
 export function GaugeList(props: GaugeListProps | null) {
   const { isConnected } = useUserAccount();
   function redirectToPool(gauge: VotingGaugeWithVotes) {
     window.location.href = poolURLFor(gauge.pool.id, gauge.network);
   }
-  // function getIsGaugeExpired(gaugeAddress: string): boolean {
-  //   return !!props?.gaugeInfo?.expiredGauges.some((item) => isSameAddress(gaugeAddress, item));
-  // }
+
   function getHasUserVotes(userVotes: string): boolean {
     return !!Number(userVotes);
   }
-
-  // function getTableRowClass(gauge: VotingGaugeWithVotes): string {
-  //   return getHasUserVotes(gauge.userVotes) && getIsGaugeExpired(gauge.address)
-  //     ? 'expired-gauge-row'
-  //     : '';
-  // }
 
   return (
     <PoolListProvider>

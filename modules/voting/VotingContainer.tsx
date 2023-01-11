@@ -1,7 +1,7 @@
 import { GaugeList } from './components/GaugeList';
 import { useVotingGauges } from '../../lib/global/gauges/useVotingGauges';
 import { Box, Button, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
-import { VotingPageSub } from './components/VotingPageSub';
+import { VotingSubheader } from './components/VotingSubheader';
 import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -16,39 +16,12 @@ import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from './constants';
 import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolProvider } from '../pool/lib/usePool';
-import { AddIcon, WarningIcon } from '@chakra-ui/icons'; 
-import { css } from '@emotion/react';
-import styled from '@emotion/styled'
+import { VotingHeader } from './components/VotingHeader';
 
 
 interface Props {
   pool: GqlPoolUnion;
 }
-
-const VotingCard = styled.div`
-    bg: '';
-    box-shadow: 0 0 10px #5BC0F8, 0 0 20px #4A4AF6;
-    border-radius: 25px;
-    max-width: 550px;
-    height: 200px;
-    color: white;
-`
-const VotingCardHeader = styled.p`
-    font-size: 1.2rem; 
-    font-weight: bold; 
-    text-align: center; 
-`
-const SubText = styled.p`
-    font-size: 1.1rem; 
-    text-align: center; 
-    font-weight: semibold; 
-`
-const ValueText = styled.p`
-    font-size: 1.0rem; 
-    text-align: center; 
-    font-weight: bold; 
-`
-
 export function VotingContainer() {
   const [pool, setPool] = useState<GqlPoolUnion>();
   const [hasLock, setHasLock] = useState<boolean>(false);
@@ -150,120 +123,11 @@ export function VotingContainer() {
   
   return (
 
-    <UserDataProvider>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} paddingX={{base:'4', md:'6', lg:'4'}} paddingY={2} spacing={4}
-     justifyContent="center" alignItems="center" 
-      >
-        <VotingCard>
-          <Grid paddingX="2" paddingY="2">
-            <GridItem mt="2">
-              <VotingCardHeader>
-              My 80VRTK-20BNB
-              </VotingCardHeader>
-            </GridItem>
-            <GridItem mt="3">
-              
-              <SubText>
-                {userPoolBalance.usdValue}
-              </SubText>
-            </GridItem>
-            <GridItem mt="-1">
-              <ValueText>
-                {userPoolBalance.balance}
-              </ValueText>
-            </GridItem>
-            <GridItem mt={{ base: '3', lg: '6' }}>
-              <Box display="flex" justifyContent="center">
-                <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
-                  Get VRTK-BNB
-                </Button>
-              </Box>
-            </GridItem>
-          </Grid>
-        </VotingCard>
-
-        <VotingCard>
-          <Grid paddingX="2" paddingY="2">
-            <GridItem mt="2">
-              <VotingCardHeader>
-                My locked 80VRTK-20BNB
-              </VotingCardHeader>
-            </GridItem>
-            <GridItem mt="3">
-              <SubText>
-                $0.00
-              </SubText>
-            </GridItem>
-            <GridItem mt="-1">
-              <ValueText>
-                {userLockInfo?.lockedAmount}
-              </ValueText>
-            </GridItem>
-            <GridItem mt={{ base: '3', lg: '6' }}>
-              <Box display="flex" justifyContent="center">
-                <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
-                  Lock VRTK-BNB
-                </Button>
-              </Box>
-            </GridItem>
-          </Grid>
-        </VotingCard>
-
-        <VotingCard>
-          <Grid paddingX="2" paddingY="2">
-            <GridItem mt="2">
-              <VotingCardHeader>
-                Locked until
-              </VotingCardHeader>
-            </GridItem>
-            <GridItem mt="3">
-              <SubText>
-                {lockInfoDisplay.lockedUntilDate}
-              </SubText>
-            </GridItem>
-            <GridItem mt="-1" >
-              <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-                  <ValueText>
-                    {lockInfoDisplay.lockedUntilDays} days
-                  </ValueText>
-              </Box>
-              </GridItem>
-              
-              <GridItem mt={{ base: '3', lg: '6' }}>
-              <Box display="flex" justifyContent="center">
-              <Button variant="vertekdark" width={{base:'50%', lg:'75%'}}>
-                  Update My Lock 
-                </Button>
-              </Box>
-            </GridItem>
-          </Grid>
-        </VotingCard>
-
-        <VotingCard>
-          <Grid  paddingX="2" paddingY="2">
-            <GridItem mt="2">
-              <VotingCardHeader>
-                My veVRTK
-              </VotingCardHeader>
-            </GridItem>
-            <GridItem mt="3">
-              <SubText>
-                {lockInfoDisplay.veBalance}
-              </SubText>
-            </GridItem>
-            <GridItem mt="-1">
-              <ValueText>
-                {lockInfoDisplay.percentOwned}
-              </ValueText>
-            </GridItem>
-          </Grid>
-        </VotingCard>
-      </SimpleGrid>
-
-
-      <VotingPageSub />
-      <GaugeList votingGauges={votingGauges} />
-    </UserDataProvider>
+<UserDataProvider>
+  <VotingHeader />
+  <VotingSubheader />
+  <GaugeList votingGauges={votingGauges} />
+</UserDataProvider>
 
   );
 }

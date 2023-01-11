@@ -10,7 +10,6 @@ export function GaugeListTableHeader(){
         <Box flexDirection="column" display="flex" >
         
         <Grid
-            padding="12px"
             textAlign="center"
             fontWeight="bold"
             borderTopRadius="16px"
@@ -24,6 +23,8 @@ export function GaugeListTableHeader(){
               { base: '150px 1fr 150px 200px 200px', lg: '150px 1fr 200px 200px 200px' }
             }
             gap="0"
+            pl="4" 
+            py="4"
             display={{ base: 'none', lg: 'grid' }}
         >
         

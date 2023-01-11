@@ -361,27 +361,28 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             color:'white', 
                             },
                         },
-                    vertekthree: {
-                        background: 'linear-gradient(to right bottom, #5bc0f8, #23affe, #009dff, #0089ff, #0072ff, #2461ea, #3050d4, #363fbf, #2c3596, #242b6f, #1e2149, #161626)',                      borderWidth:'1.5px',  
-                        borderColor:'vertek.slate.300', 
-                        boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
-                        color: 'white',
-                        _active: { backgroundColor:'#4A4AF6'  },
-                        _focus: { outline: 'none', boxShadow: 'none' },
-                        borderRadius: '8px',
-                        _hover: {
+                        stayblack: {
                             backgroundColor:'vertek.slate.900', 
-                            background:'vertek.slate.900', 
-                            borderWidth:'2px', 
+                            boxShadow:'0 0 12px #000', 
+                            borderWidth:'2px',  
                             borderColor:'vertek.neonpurple.500', 
-                            transform:'scale(1.03)' 
-                                }, 
-                        _disabled: {
-                            transform: 'none',
-                            background: 'gray.400',
-                            color:'white', 
+                            color: 'white',
+                            fontWeight:'900', 
+                            _active: { backgroundColor:'vertek.slate.900'  },
+                            _focus: { outline: 'none', boxShadow: 'none' },
+                            borderRadius: '8px',
+                            _hover: {
+                                color:'white',
+                                boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                                background: '',  
+                                transform:'scale(1.03)' 
+                                    }, 
+                            _disabled: {
+                                transform: 'none',
+                                background: 'gray.400',
+                                color:'white', 
+                                },
                             },
-                        },
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 

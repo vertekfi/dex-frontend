@@ -33,7 +33,7 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
   return (
     <>
-    <Button variant="vertekdark" width={{ base: '90%', lg: '130px' }}
+    <Button variant="stayblack" width={{ base: '90%', lg: '130px' }}
     onClick={onOpen}>
         Vote
     </Button>

@@ -6,7 +6,7 @@ import { bnum } from '~/lib/util/big-number.utils';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 
-export function VotingPageSub() {
+export function VotingSubheader() {
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();

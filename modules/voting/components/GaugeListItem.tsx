@@ -36,80 +36,98 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
     });
   }
 
-
   return (
-    <PoolListProvider>
-      <UserTokenBalancesProvider>
-        <Grid
-          bg="vertek.slatepurple.900"
-          borderBottomColor="vertek.slatepurple.600"
-          borderBottomWidth="1px"
-          pl="4" 
-          py="4"
-          borderRadius={{ base: '12px', lg: '' }}
-          templateColumns={{ base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
-          gap="0"
-          mb={{ base: '4', lg: '0' }}
-          templateAreas={{
-            base: `
-            "icons pills"
-            "nextvote myvote"
-            "votebutton votebutton" `,
-            lg: `"icons pills nextvote myvote votebutton"`,
-          }}
-        >
-          <GridItem
-            area="icons"
-            display="flex"
-            alignItems="center"
-            justifyContent="left"
-            textAlign="left"
-          >
-            <MemoizedTokenAvatarSetInList
-              imageSize={25}
-              width={92}
-              tokens={props.gauge.pool.tokens}
-            />
-          </GridItem>
+<PoolListProvider>
+  <UserTokenBalancesProvider>
+    <Grid
+      bg="vertek.slatepurple.900"
+      boxShadow={{base: "0 0 10px #5BC0F8, 0 0 20px #4A4AF6", lg:"none" }} 
+      borderBottomColor="vertek.slatepurple.600"
+      borderBottomWidth="1px"
+      pl="4" 
+      py="4"
+      borderRadius={{ base: '12px', lg: '' }}
+      templateColumns={{ 
+        base: 'repeat(1fr 1fr)', lg: '150px 1fr 200px 200px 200px' }}
+      gap={{ base: '4', lg:'0'}}
+      mb={{ base: '4', lg: '0' }}
+      templateAreas={{
+        base: `
+        "name name"
+        "icons icons" 
+        "nextvote myvote"
+        "votebutton votebutton" `,
+        lg: `"icons name nextvote myvote votebutton"`,
+      }}
+    >
+      <GridItem
+        area="icons"
+        display="flex"
+        alignItems="center"
+        justifyContent={{ base: 'center', lg:'flex-start' }}
+      >
+        <MemoizedTokenAvatarSetInList
+          imageSize={28}
+          width={92}
+          tokens={props.gauge.pool.tokens}
+        />
+      </GridItem>
 
-          <GridItem
-            area="pills"
-            display="flex"
-            alignItems="center"
-            justifyContent={{ base: 'flex-end', lg: 'flex-start' }}
-          >
-            {props.gauge.pool.name}
-          </GridItem>
+      <GridItem
+        area="name"
+        display="flex"
+        alignItems="center"
+        fontWeight={{ base: 'bold', lg:'normal' }}
+        justifyContent={{ base: 'center', lg: 'flex-start' }}
+        fontSize="1.2rem"
+      >
+        {props.gauge.pool.name}
+      </GridItem>
 
-          <GridItem
-            area="nextvote"
-            display="flex"
-            alignItems={{ base: 'left', lg: 'center' }}
-            justifyContent={{ base: 'left', lg: 'center' }}
-          >
-            {formatVotesAsPercent(props.gauge.votesNextPeriod)}
-          </GridItem>
+      <GridItem
+        area="nextvote"
+        display={{ base: 'block', lg:'flex' }}
+        alignItems="center"
+        justifyContent={{ base: 'center', lg: 'center' }}
+        textAlign={{ base: 'left', lg:'right'}}
+        ml={{ base:'8', lg:'0' }}
+      >
+        <MobileLabel text="Next Period Votes" />
+        {formatVotesAsPercent(props.gauge.votesNextPeriod)}
+      </GridItem>
 
-          <GridItem
-            area="myvote"
-            display="flex"
-            alignItems="center"
-            justifyContent={{ base: 'flex-end', lg: 'center' }}
-          >
-            {formatVotesAsPercent(props.gauge.userVotes)}
-          </GridItem>
+      <GridItem
+        area="myvote"
+        display={{ base: 'block', lg:'flex' }}
+        alignItems="center"
+        justifyContent={{ base: 'center', lg: 'center' }}
+        textAlign={{ base: 'right', lg:'right'}}
+        mr={{ base:'8', lg:'2' }}
+      >
+         <MobileLabel text="My Votes" />
+        {formatVotesAsPercent(props.gauge.userVotes)}
+      </GridItem>
 
-          <GridItem
-            area="votebutton"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            textAlign="center"
-          >
-            <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
-          </GridItem>
-        </Grid>
-      </UserTokenBalancesProvider>
-    </PoolListProvider>
+      <GridItem
+        area="votebutton"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+      >
+        <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
+      </GridItem>
+    </Grid>
+  </UserTokenBalancesProvider>
+</PoolListProvider>
+  );
+}
+
+
+function MobileLabel({ text }: { text: string }) {
+  return (
+    <Text fontSize="sm" color="gray.200" display={{ base: 'block', lg: 'none' }}>
+      {text}
+    </Text>
   );
 }
