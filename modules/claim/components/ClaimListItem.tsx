@@ -18,6 +18,7 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 export function ClaimListItem(props: { gauge: VotingGaugeWithVotes }) {
   return (
+
     <Box
       // bg="vertek.slatepurple.900"
       borderTopColor="#4A4AF6"
@@ -51,15 +52,15 @@ export function ClaimListItem(props: { gauge: VotingGaugeWithVotes }) {
         }}
       >
         <GridItem area="icons" mb={{ base: '6', lg: '0' }}>
-          <Box display="flex" justifyContent={{ base: 'flex-start', lg: 'flex-start' }}>
+          <Box display="flex" justifyContent={{ base: 'center', lg: 'flex-start' }}>
             <MemoizedTokenAvatarSetInList
-              imageSize={25}
+              imageSize={32}
               width={92}
               tokens={props.gauge.pool.tokens}
             />
           </Box>
         </GridItem>
-        <GridItem area="name" textAlign="left" mb={{ base: '1', lg: '0' }}>
+        <GridItem area="name" textAlign={{base:'center', lg:'left'}} mb={{ base: '1', lg: '0' }}>
           <Text
             color="white"
             fontSize={{ base: 'xl', lg: 'md' }}

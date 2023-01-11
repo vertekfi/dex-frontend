@@ -39,6 +39,7 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
   return (
 <PoolListProvider>
   <UserTokenBalancesProvider>
+    
     <Grid
       bg="vertek.slatepurple.900"
       boxShadow={{base: "0 0 10px #5BC0F8, 0 0 20px #4A4AF6", lg:"none" }} 
