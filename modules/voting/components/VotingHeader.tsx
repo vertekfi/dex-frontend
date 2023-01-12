@@ -1,6 +1,5 @@
-import { GaugeList } from './GaugeList';
 import { useVotingGauges } from '../../../lib/global/gauges/useVotingGauges';
-import { Box, Button, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem } from '@chakra-ui/react';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -13,8 +12,7 @@ import { bnum } from '@balancer-labs/sor';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from '../constants';
-import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { PoolProvider } from '../../pool/lib/usePool';
+import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import styled from '@emotion/styled';
 import { LockIcon } from '@chakra-ui/icons';
 
@@ -208,11 +206,8 @@ export function VotingHeader() {
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
                 <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
-                  Update My Lock 
-                  <LockIcon 
-                  ml="2" 
-                  color="vertek.slate.200"
-                  /> 
+                  Update My Lock
+                  <LockIcon ml="2" color="vertek.slate.200" />
                 </Button>
               </Box>
             </GridItem>

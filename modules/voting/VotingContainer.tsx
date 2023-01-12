@@ -1,6 +1,6 @@
 import { GaugeList } from './components/GaugeList';
 import { useVotingGauges } from '../../lib/global/gauges/useVotingGauges';
-import { Box, Button, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 import { VotingSubheader } from './components/VotingSubheader';
 import { useUserVeLockInfoQuery } from './lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
@@ -14,10 +14,8 @@ import { bnum } from '@balancer-labs/sor';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from './constants';
-import { GqlPoolUnion, useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { PoolProvider } from '../pool/lib/usePool';
+import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import { VotingHeader } from './components/VotingHeader';
-
 
 interface Props {
   pool: GqlPoolUnion;
@@ -47,7 +45,7 @@ export function VotingContainer() {
   });
 
   const {
-    isLoading: loadingGauges,
+    isLoading: isLoadingGauges,
     votingGauges,
     unallocatedVotes,
     votingPeriodEnd,
@@ -120,14 +118,14 @@ export function VotingContainer() {
   function handleVoteSuccess() {
     refetchVotingGauges();
   }
-  
+
   return (
-
-<UserDataProvider>
-  <VotingHeader />
-  <VotingSubheader />
-  <GaugeList votingGauges={votingGauges} />
-</UserDataProvider>
-
+    <UserDataProvider>
+      <VotingHeader />
+      <VotingSubheader />
+      <Skeleton isLoaded={!isLoadingGauges}>
+        <GaugeList votingGauges={votingGauges} />
+      </Skeleton>
+    </UserDataProvider>
   );
 }

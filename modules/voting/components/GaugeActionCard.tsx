@@ -1,5 +1,4 @@
-import { Box, Grid, Button, Flex, GridItem, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Grid, Button, GridItem, Text } from '@chakra-ui/react';
 
 export interface GaugeActionCardProps {
   heading: string;
