@@ -22,7 +22,7 @@ class BeetsDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://beethoven-assets.s3.eu-central-1.amazonaws.com/social-image.png"
+            content="https://github.com/vertekfi/token-list/blob/0a6d274a23eb54249e0ed0cb88877546bc6095ef/images/vertek_meta.png"
           />
 
           <meta property="twitter:card" content="summary_large_image" />
@@ -34,7 +34,7 @@ class BeetsDocument extends Document {
           />
           <meta
             property="twitter:image"
-            content="https://beethoven-assets.s3.eu-central-1.amazonaws.com/social-image.png"
+            content="https://github.com/vertekfi/token-list/blob/0a6d274a23eb54249e0ed0cb88877546bc6095ef/images/vertek_meta.png"
           />
 
           {/* <script
