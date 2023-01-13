@@ -17,6 +17,8 @@ import { PRETTY_DATE_FORMAT } from './constants';
 import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import { VotingHeader } from './components/VotingHeader';
 
+
+
 interface Props {
   pool: GqlPoolUnion;
 }

@@ -12,6 +12,9 @@ import { PoolListMobileHeader } from '~/modules/pools/components/PoolListMobileH
 import { networkConfig } from '~/lib/config/network-config';
 import { useGetTokens } from '~/lib/global/useToken';
 import { GqlPoolMinimalFragment } from '~/apollo/generated/graphql-codegen-generated';
+import { GaugeListTableHeader } from '../voting/components/GaugeListTableHeader';
+import { GaugeListItem } from '../voting/components/GaugeListItem';
+import { PoolListFooter } from './components/PoolListFooter';
 
 function PoolList() {
   const { getToken } = useGetTokens();
@@ -56,7 +59,42 @@ function PoolList() {
           will accumulate over time when your BPT are staked.
         </Alert>
       )}
-      <PaginatedTable
+        <Box 
+          mt="3rem" 
+          boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
+          mb="8rem" 
+          borderRadius="16px" 
+          flexDirection="column" 
+          display="flex"
+          >
+            <PoolListTableHeader />
+            {poolsToRender.map((item, index) => (
+            <Box>
+              <PoolListItem
+                key={index}
+                pool={item}
+                userBalance={`${usdBalanceForPool(item.id)}`}
+                showUserBalance={showMyInvestments}
+                borderBottomColor="vertek.slatepurple.600"
+                borderBottomWidth={index === pools.length - 1 ? 0 : 1}
+                bg="vertek.slatepurple.900"
+                padding={{ base: "12px", lg:"6px"}}
+                tokens={item.allTokens
+                  .filter((token) => !token.isNested && !token.isPhantomBpt)
+                  .map((token) => ({
+                    ...token,
+                    logoURI: getToken(token.address)?.logoURI || undefined,
+                  }))}
+                hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
+              />
+            </Box>
+              ))}
+              <PoolListFooter />
+            </Box>
+
+
+
+      {/* <PaginatedTable
         borderRadius="16px"
         items={poolsToRender}
         bgColor={{base:"none", lg:"vertek.slate.900"}} 
@@ -94,7 +132,8 @@ function PoolList() {
             />
           );
         }}
-      />
+      /> */}
+
 
       <Box mt="10">
         <Text fontSize="xl" color="white" mb="4">
