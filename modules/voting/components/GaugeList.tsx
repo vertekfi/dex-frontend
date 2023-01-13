@@ -25,7 +25,7 @@ export function GaugeList(props: GaugeListProps | null) {
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-        <Skeleton isLoaded={!isLoading}>
+
           <Box 
           mt="3rem" 
           boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
@@ -42,7 +42,7 @@ export function GaugeList(props: GaugeListProps | null) {
             </Box>
             <GaugeListFooter />
           </Box>
-        </Skeleton>
+
       </UserTokenBalancesProvider>
     </PoolListProvider>
   );
