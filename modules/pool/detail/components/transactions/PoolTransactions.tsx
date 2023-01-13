@@ -1,17 +1,7 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  TabList,
-  Tabs,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, HStack, Menu, MenuButton, MenuItem, MenuList, TabList, Tab, Tabs, VStack } from '@chakra-ui/react';
 import { BoxProps } from '@chakra-ui/layout';
 import BeetsTab from '~/components/tabs/BeetsTab';
+
 import { useState } from 'react';
 import { PoolDetailAboutThisPool } from '~/modules/pool/detail/components/PoolDetailAboutThisPool';
 import { PoolSwapsTable } from '~/modules/pool/detail/components/transactions/PoolSwapsTable';
@@ -22,7 +12,6 @@ import { PoolUserSwapsTable } from '~/modules/pool/detail/components/transaction
 import { usePool } from '~/modules/pool/lib/usePool';
 
 type Props = {};
-
 export function PoolTransactions({ ...rest }: Props & BoxProps) {
   const [activeTab, setActiveTab] = useState(0);
   const { pool, isComposablePool } = usePool();
@@ -53,7 +42,7 @@ export function PoolTransactions({ ...rest }: Props & BoxProps) {
             </Menu>
           </Box>
           <TabList display={{ base: 'none', md: 'block' }}>
-            <HStack mb="4">
+          <HStack mb="4">
               {tabs.map((tab, index) => (
                 <BeetsTab key={index}>{tab}</BeetsTab>
               ))}

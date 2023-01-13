@@ -33,8 +33,6 @@ export function PoolListItem({
 }: Props) {
   return (
 
-
-
 <Box
   mb={{ base: '4', lg: '0' }}
   borderRadius={{ base: 'md', lg: '0' }}

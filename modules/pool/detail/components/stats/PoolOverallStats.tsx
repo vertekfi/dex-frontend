@@ -16,6 +16,7 @@ import { useGetTokens } from '~/lib/global/useToken';
 import { sumBy } from 'lodash';
 import { InfoButton } from '~/components/info-button/InfoButton';
 
+
 export default function PoolOverallStats() {
     const { pool } = usePool();
     const { priceFor } = useGetTokens();
@@ -40,107 +41,104 @@ export default function PoolOverallStats() {
             pool.staking?.farm?.rewarders || [],
             (rewarder) => priceFor(rewarder.tokenAddress) * parseFloat(rewarder.rewardPerSecond) * 86400,
         );
-
-    return (
-        
-        <HStack 
-        display="flex" 
-        flexDirection="row" 
-        width="full" height="full"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        padding="8px"
-        borderRadius="12px"
-
-        >
-            <VStack alignItems="flex-start" >
-                <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
-                    Pool APR
-                </Text>
-                <HStack >
-                    <div className="apr-stripes">{numeral(data.apr.total).format('0.00%')}</div>
-                    <AprTooltip onlySparkles data={data.apr} />
-                </HStack>
-            </VStack>
-            {/* <Divider /> */}
-            {/* <VStack spacing="0" alignItems="flex-start">
-            <Text lineHeight="1rem" fontWeight="semibold" fontSize="1rem" color="white">
-                    BPT price
-                </Text>
+return (
+    <HStack 
+    display="flex" 
+    flexDirection="row" 
+    width="full" height="full"
+    justifyContent="space-between"
+    alignItems="flex-start"
+    padding="8px"
+    borderRadius="12px"
+    >
+        <VStack alignItems="flex-start" >
+            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
+                Pool APR
+            </Text>
+            <HStack >
+                <div className="apr-stripes">{numeral(data.apr.total).format('0.00%')}</div>
+                <AprTooltip onlySparkles data={data.apr} />
+            </HStack>
+        </VStack>
+        {/* <Divider /> */}
+        {/* <VStack spacing="0" alignItems="flex-start">
+        <Text lineHeight="1rem" fontWeight="semibold" fontSize="1rem" color="white">
+                BPT price
+            </Text>
+            <Text color="white" fontSize="1.75rem">
+                {numberFormatUSDValue(sharePrice)}
+            </Text>
+            <PercentChangeBadge percentChange={sharePricePercentChange} />
+        </VStack> */}
+        <VStack alignItems="flex-start" >
+        <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
+                TVL
+            </Text>
+            <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
+                {numeral(data.totalLiquidity).format('$0,0.00a')}
+            </Text>
+            {/* <PercentChangeBadge percentChange={tvlPercentChange} /> */}
+        </VStack>
+        <VStack alignItems="flex-start" >
+        <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
+                24h Volume
+            </Text>
+            <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
+                {numeral(data.volume24h).format('$0,0.00a')}
+            </Text>
+            {/* <PercentChangeBadge percentChange={volumePercentChange} /> */}
+        </VStack>
+        <VStack alignItems="flex-start" >
+        <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
+                24h Fees
+            </Text>
+            <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
+                {numeral(data.fees24h).format('$0,0.00a')}
+            </Text>
+        </VStack>
+        {/* {pool.staking?.farm && (
+            <VStack spacing="0" alignItems="flex-start">
+                <InfoButton
+                    labelProps={{
+                        lineHeight: '1rem',
+                        fontWeight: 'semibold',
+                        fontSize: 'sm',
+                        color: 'beets.base.50',
+                    }}
+                    label="Liquidity incentives"
+                    infoText={`Liquidity incentives are additional incentives available for this pool when you stake your BPT in the ${networkConfig.farmTypeName}. The daily value is an approximation based on current token prices and emissions.`}
+                />
                 <Text color="white" fontSize="1.75rem">
-                    {numberFormatUSDValue(sharePrice)}
-                </Text>
-                <PercentChangeBadge percentChange={sharePricePercentChange} />
-            </VStack> */}
-            <VStack alignItems="flex-start" >
-            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
-                    TVL
-                </Text>
-                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
-                    {numeral(data.totalLiquidity).format('$0,0.00a')}
-                </Text>
-                {/* <PercentChangeBadge percentChange={tvlPercentChange} /> */}
-            </VStack>
-            <VStack alignItems="flex-start" >
-            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
-                    24h Volume
-                </Text>
-                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
-                    {numeral(data.volume24h).format('$0,0.00a')}
-                </Text>
-                {/* <PercentChangeBadge percentChange={volumePercentChange} /> */}
-            </VStack>
-            <VStack alignItems="flex-start" >
-            <Text lineHeight="1rem" fontWeight="bold" fontSize="1rem" color="vertek.slate.200">
-                    24h Fees
-                </Text>
-                <Text color="white" fontSize="1rem" fontWeight="bold" lineHeight="20px">
-                    {numeral(data.fees24h).format('$0,0.00a')}
-                </Text>
-            </VStack>
-            {/* {pool.staking?.farm && (
-                <VStack spacing="0" alignItems="flex-start">
-                    <InfoButton
-                        labelProps={{
-                            lineHeight: '1rem',
-                            fontWeight: 'semibold',
-                            fontSize: 'sm',
-                            color: 'beets.base.50',
-                        }}
-                        label="Liquidity incentives"
-                        infoText={`Liquidity incentives are additional incentives available for this pool when you stake your BPT in the ${networkConfig.farmTypeName}. The daily value is an approximation based on current token prices and emissions.`}
-                    />
-                    <Text color="white" fontSize="1.75rem">
-                        ~{numeral(incentivesDailyValue).format('$0,0.00a')}
-                        <Text as="span" fontSize="md">
-                            {' '}
-                            / day
-                        </Text>
+                    ~{numeral(incentivesDailyValue).format('$0,0.00a')}
+                    <Text as="span" fontSize="md">
+                        {' '}
+                        / day
                     </Text>
-                    <Box>
-                        {beetsPerDay > 0 && (
-                            <HStack spacing="1" mb="0.5">
-                                <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
-                                <Tooltip
-                                    label={`BEETS emissions are calculated per block, so daily emissions are an estimate based on an average block time over last 5,000 blocks. Avg block time: ${blocksData?.avgBlockTime}s.`}
-                                >
-                                    <Text fontSize="1rem" lineHeight="1rem">
-                                        {numeral(beetsPerDay).format('0,0')} / day
-                                    </Text>
-                                </Tooltip>
-                            </HStack>
-                        )}
-                        {pool.staking.farm.rewarders?.map((rewarder) => (
-                            <HStack spacing="1" mb="0.5" key={rewarder.id}>
-                                <TokenAvatar height="20px" width="20px" address={rewarder.tokenAddress} />
+                </Text>
+                <Box>
+                    {beetsPerDay > 0 && (
+                        <HStack spacing="1" mb="0.5">
+                            <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
+                            <Tooltip
+                                label={`BEETS emissions are calculated per block, so daily emissions are an estimate based on an average block time over last 5,000 blocks. Avg block time: ${blocksData?.avgBlockTime}s.`}
+                            >
                                 <Text fontSize="1rem" lineHeight="1rem">
-                                    {numeral(parseFloat(rewarder.rewardPerSecond) * 86400).format('0,0')} / day
+                                    {numeral(beetsPerDay).format('0,0')} / day
                                 </Text>
-                            </HStack>
-                        ))}
-                    </Box>
-                </VStack>
-            )} */}
-        </HStack>
-    );
+                            </Tooltip>
+                        </HStack>
+                    )}
+                    {pool.staking.farm.rewarders?.map((rewarder) => (
+                        <HStack spacing="1" mb="0.5" key={rewarder.id}>
+                            <TokenAvatar height="20px" width="20px" address={rewarder.tokenAddress} />
+                            <Text fontSize="1rem" lineHeight="1rem">
+                                {numeral(parseFloat(rewarder.rewardPerSecond) * 86400).format('0,0')} / day
+                            </Text>
+                        </HStack>
+                    ))}
+                </Box>
+            </VStack>
+        )} */}
+    </HStack>
+);
 }

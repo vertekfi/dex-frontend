@@ -3,7 +3,6 @@ import { NetworkStatus } from '@apollo/client';
 import { usePoolList } from './usePoolList';
 import { PoolListItem } from '~/modules/pools/components/PoolListItem';
 import { PoolListTableHeader } from '~/modules/pools/components/PoolListTableHeader';
-import { PaginatedTable } from '~/components/table/PaginatedTable';
 import { PoolListTop } from '~/modules/pools/components/PoolListTop';
 import { useUserData } from '~/lib/user/useUserData';
 import { useEffect } from 'react';
@@ -12,8 +11,6 @@ import { PoolListMobileHeader } from '~/modules/pools/components/PoolListMobileH
 import { networkConfig } from '~/lib/config/network-config';
 import { useGetTokens } from '~/lib/global/useToken';
 import { GqlPoolMinimalFragment } from '~/apollo/generated/graphql-codegen-generated';
-import { GaugeListTableHeader } from '../voting/components/GaugeListTableHeader';
-import { GaugeListItem } from '../voting/components/GaugeListItem';
 import { PoolListFooter } from './components/PoolListFooter';
 
 function PoolList() {
@@ -91,9 +88,6 @@ function PoolList() {
               ))}
               <PoolListFooter />
             </Box>
-
-
-
       {/* <PaginatedTable
         borderRadius="16px"
         items={poolsToRender}
