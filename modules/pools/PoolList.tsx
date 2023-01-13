@@ -69,7 +69,7 @@ function PoolList() {
           >
             <PoolListTableHeader />
             {poolsToRender.map((item, index) => (
-            <Box>
+            
               <PoolListItem
                 key={index}
                 pool={item}
@@ -87,7 +87,7 @@ function PoolList() {
                   }))}
                 hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
               />
-            </Box>
+
               ))}
               <PoolListFooter />
             </Box>
