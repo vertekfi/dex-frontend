@@ -62,6 +62,15 @@ export function HomeWhyUs(props: BoxProps) {
 
           </Box>
         </GridItem>
+        <GridItem>
+          <BeetsSubHeadline mb={{ base: '2', md: '6' }}>Break Free</BeetsSubHeadline>
+          <Box color="white">
+          Escape the shackles of traditional finance with the silver smooth, 
+          lightning fast, indestructible surety of decentralized finance. 
+          Take control of your own wealth and grow it permissionlessly. No middle man.
+
+          </Box>
+        </GridItem>
 
 
       </Grid>
