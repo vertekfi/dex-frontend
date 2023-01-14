@@ -10,17 +10,19 @@ export function HomeBeetsInfo(props: BoxProps) {
 
   return (
     <Box {...props}>
-      <BeetsHeadline mb="2">Governance redefined</BeetsHeadline>
-      <Box display="flex" justifyContent={{ base:'flex-start', md:'center' }} mb="0" mt={{ base:'-32', md:'-20' }} alignItems="flex-start">
+      <BeetsHeadline mb="2" fontSize="3xl" mt="2">
+        Empowered Governance
+        </BeetsHeadline>
+      <Box display="flex" justifyContent={{ base:'flex-start', md:'center' }} mb="0" mt={{ base:'-24', md:'-20' }} alignItems="flex-start">
         <NextImage
           src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
           width="250px"
         />
       </Box>
-      <Box mb="2">
-        Bringing power back to the people: The VRTK token grants users the ability to influence the
-        evolution of the protocol through decentralized governance; make sure your voice is heard
-        and have your say in decisions that shape the future of Vertek.
+      <Box mb="4" mt={{ base: '-20', md:'-20'}}>
+      Injected with a digital voice: The veVRTK system grants every user the power to influence the 
+      developmental trajectory of the Vertek matrix. Vote to direct VRTK emissions to your favorite pools, 
+      and join the swarm of cyber hornets in the Vertek DAO, all the while boosting your rewards by up to 2.5x as you accumulate veVRTK.
       </Box>
       <Button
         display="flex" 
@@ -28,8 +30,9 @@ export function HomeBeetsInfo(props: BoxProps) {
         as="a"
         href="https://docs.beets.fi/beets/tokenomics"
         target="_blank"
+        mb="4"
       >
-        VRTK tokenomics
+        veVRTK tokenomics
       </Button>
     </Box>
   );
