@@ -48,7 +48,7 @@ export function HomeWhyUs(props: BoxProps) {
           </Box>
         </GridItem>
         <GridItem>
-          <BeetsSubHeadline mb={{ base: '2', md: '6' }}>Hodl</BeetsSubHeadline>
+          <BeetsSubHeadline mb={{ base: '2', md: '6' }}>Collect</BeetsSubHeadline>
           <Box>
           List your NFTs and transact digital art and rarities with incorruptible ownership. 
           The Vertek Marketplace has some of the lowest fees across all NFT platforms. Denominate your prices in a variety of cryptocurrencies.
