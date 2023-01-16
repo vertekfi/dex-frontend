@@ -35,7 +35,18 @@ export function PoolWithdrawModal() {
 
     return (
         <>
-            <Button onClick={onOpen} variant="vertekdark" width={{ base: 'full', md: '140px' }}>
+            <Button 
+            onClick={onOpen} 
+            variant="vertekdark" 
+            _hover={{ 
+                    color: 'white',
+                    boxShadow: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                    borderColor: 'vertek.slate.300', 
+                    borderWidth: '2px', 
+                    background: 'linear-gradient(to right top, #161626, #1a1b37, #1e1f48, #22235a, #27276c, #2c2b7d, #312f8e, #37339f, #3c39b4, #413eca, #4544e0, #4a4af6)', 
+                    transform: 'scale(1.02)'
+            }}
+            width={{ base: 'full', md: '140px' }}>
                 Withdraw
             </Button>
             <Modal

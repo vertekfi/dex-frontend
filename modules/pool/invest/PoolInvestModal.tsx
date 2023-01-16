@@ -56,7 +56,19 @@ export function PoolInvestModal() {
 
   return (
     <>
-      <Button variant="verteklight" onClick={onOpen} width={{ base: 'full', md: '140px' }} mr="2">
+      <Button 
+      _hover={{ 
+        boxShadow: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+        background: 'vertek.slate.900', 
+        color: 'white', 
+        borderWidth: '2px', 
+        borderColor: 'vertek.neonpurple.500', 
+        transform: 'scale(1.01)' 
+       }}
+      variant="verteklight" 
+      onClick={onOpen} 
+      width={{ base: 'full', md: '140px' }} 
+      mr="2">
         Invest
       </Button>
       <Modal
