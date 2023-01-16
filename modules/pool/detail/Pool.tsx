@@ -10,7 +10,6 @@ import { PoolWithdrawModal } from '~/modules/pool/withdraw/PoolWithdrawModal';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { PoolStatistics } from '~/modules/pool/detail/components/PoolStatistics';
 
-
 export function Pool() {
   const { pool } = usePool();
 
@@ -19,29 +18,27 @@ export function Pool() {
       <PoolHeader />
 
       <VStack width="full" spacing="8">
-            {pool.staking && <PoolStakeInFarmWarning />}
-            <Flex width="full" justifyContent="flex-start" marginBottom="2">
-              <PoolInvestModal />
-              <PoolWithdrawModal />
-              
-            </Flex>
-            
-            <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
-              <GridItem>
-                <VStack spacing="4">
-                  <PoolStats />
-                  <PoolDetailCharts />
-                  <PoolTransactions />
+        {pool.staking && <PoolStakeInFarmWarning />}
+        <Flex width="full" justifyContent="flex-start" marginBottom="2">
+          <PoolInvestModal />
+          <PoolWithdrawModal />
+        </Flex>
 
-                </VStack>
-              </GridItem>
-              <GridItem>
-                  <VStack spacing="4">
-                    <PoolComposition />
-                    <PoolStatistics />
-                  </VStack>
-              </GridItem>
-            </Grid>
+        <Grid gap="4" templateColumns={{ base: '1fr', lg: '3fr 1fr' }} width="full">
+          <GridItem>
+            <VStack spacing="4">
+              <PoolStats />
+              <PoolDetailCharts />
+              <PoolTransactions />
+            </VStack>
+          </GridItem>
+          <GridItem>
+            <VStack spacing="4">
+              <PoolComposition />
+              <PoolStatistics />
+            </VStack>
+          </GridItem>
+        </Grid>
       </VStack>
 
       {/* <VStack spacing="8" width="full">
