@@ -134,7 +134,7 @@ function PoolList() {
           Can&apos;t find what you&apos;re looking for?
         </Text>
         <Button variant="verteklight" size="md" as={Link} href={networkConfig.createPoolUrl}>
-          Compose a pool
+          Create a pool
         </Button>
       </Box>
     </Box>
