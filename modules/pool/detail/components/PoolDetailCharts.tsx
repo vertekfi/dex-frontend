@@ -9,7 +9,6 @@ import {
   useGetPoolSnapshotsQuery,
 } from '~/apollo/generated/graphql-codegen-generated';
 import { usePool } from '~/modules/pool/lib/usePool';
-import { usePoolChartData } from '../../lib/usePoolChartData';
 
 type ChartType = 'BPT_PRICE' | 'VOLUME_TVL' | 'FEES' | 'TVL';
 
@@ -17,9 +16,7 @@ export function PoolDetailCharts() {
   const { pool } = usePool();
   const [chartType, setChartType] = useState<ChartType>('BPT_PRICE');
   const [range, setRange] = useState<GqlPoolSnapshotDataRange>('THIRTY_DAYS');
-  // const { data } = useGetPoolSnapshotsQuery({ variables: { poolId: pool.id, range } });
-
-  const { data } = usePoolChartData({ poolId: pool.id, range });
+  const { data } = useGetPoolSnapshotsQuery({ variables: { poolId: pool.id, range } });
 
   return (
     <Card width="full" minHeight="540px" padding="8px" borderRadius="12px">

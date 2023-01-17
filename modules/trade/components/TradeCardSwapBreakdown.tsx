@@ -37,8 +37,14 @@ export function TradeCardSwapBreakdown({}: Props) {
 
   return (
     <AnimatePresence>
-
-      <VStack backgroundColor="vertek.slatepurple.900" padding="3" width="full" spacing="1" marginTop="1" borderRadius="12">
+      <VStack
+        backgroundColor="vertek.slatepurple.900"
+        padding="3"
+        width="full"
+        spacing="1"
+        marginTop="1"
+        borderRadius="12"
+      >
         <HStack width="full" justifyContent="space-between">
           <Text color="gray.100" fontSize=".85rem">
             Price impact
@@ -66,7 +72,7 @@ export function TradeCardSwapBreakdown({}: Props) {
             {tokenFormatAmount(swapInfo.effectivePrice)} {tokenIn.symbol}
           </Text>
         </HStack>
-        <HStack width="full" justifyContent="space-between">
+        {/* <HStack width="full" justifyContent="space-between">
           <HStack alignItems="center" spacing="1">
             <Text color="gray.100" fontSize=".85rem">
               Compared to
@@ -83,9 +89,8 @@ export function TradeCardSwapBreakdown({}: Props) {
           >
             {coingeckoVariationText}
           </Text>
-        </HStack>
+        </HStack> */}
       </VStack>
-
     </AnimatePresence>
   );
 }

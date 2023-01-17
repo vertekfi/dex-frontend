@@ -868,6 +868,7 @@ enum GqlSorSwapType {
 type GqlToken {
   address: String!
   chainId: Int!
+  coingeckoTokenId: String
   decimals: Int!
   description: String
   discordUrl: String
@@ -1058,14 +1059,13 @@ type Mutation {
   poolReloadAllPoolAprs: String!
   poolReloadAllTokenNestedPoolIds: String!
   poolReloadPoolNestedTokens(poolId: String!): String!
-  poolReloadStakingForAllPools(stakingTypes: [GqlPoolStakingType!]!): String!
+  poolReloadStakingForAllPools: String!
   poolSyncAllPoolsFromSubgraph: [String!]!
   poolSyncLatestSnapshotsForAllPools(daysToSync: Int): String!
   poolSyncNewPoolsFromSubgraph: [String!]!
   poolSyncPool(poolId: String!): String!
   poolSyncPoolAllTokensRelationship: String!
   poolSyncSanityPoolData: String!
-  poolSyncStakingForPools: String!
   poolSyncSwapsForLast48Hours: String!
   poolSyncTotalShares: String!
   poolUpdateAprs: String!

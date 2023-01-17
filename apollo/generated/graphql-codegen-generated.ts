@@ -886,6 +886,7 @@ export interface GqlToken {
   __typename: 'GqlToken';
   address: Scalars['String'];
   chainId: Scalars['Int'];
+  coingeckoTokenId?: Maybe<Scalars['String']>;
   decimals: Scalars['Int'];
   description?: Maybe<Scalars['String']>;
   discordUrl?: Maybe<Scalars['String']>;
@@ -1057,7 +1058,6 @@ export interface Mutation {
   poolSyncPool: Scalars['String'];
   poolSyncPoolAllTokensRelationship: Scalars['String'];
   poolSyncSanityPoolData: Scalars['String'];
-  poolSyncStakingForPools: Scalars['String'];
   poolSyncSwapsForLast48Hours: Scalars['String'];
   poolSyncTotalShares: Scalars['String'];
   poolUpdateAprs: Scalars['String'];
@@ -1088,10 +1088,6 @@ export interface MutationPoolInitializeSnapshotsForPoolArgs {
 
 export interface MutationPoolReloadPoolNestedTokensArgs {
   poolId: Scalars['String'];
-}
-
-export interface MutationPoolReloadStakingForAllPoolsArgs {
-  stakingTypes: Array<GqlPoolStakingType>;
 }
 
 export interface MutationPoolSyncLatestSnapshotsForAllPoolsArgs {
