@@ -10,15 +10,12 @@ import { useUserTokenBalances } from '~/lib/user/useUserTokenBalances';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import PresetSelector from './PresetSelector';
 import { ChevronDown, Lock } from 'react-feather';
-import numeral from 'numeral';
-import { KeyboardEvent } from 'react';
 import {
   tokenInputBlockInvalidCharacters,
   tokenInputTruncateDecimalPlaces,
 } from '~/lib/util/input-util';
 import { numberFormatLargeUsdValue } from '~/lib/util/number-formats';
-import { parseUnits } from 'ethers/lib/utils';
-import { oldBnumScaleAmount, oldBnumScaleDown } from '~/lib/services/pool/lib/old-big-number';
+import { oldBnumScaleAmount } from '~/lib/services/pool/lib/old-big-number';
 import { formatFixed } from '@ethersproject/bignumber';
 
 type Props = {
@@ -34,16 +31,7 @@ type Props = {
 
 export const TokenInput = forwardRef(
   (
-    {
-      label,
-      toggleTokenSelect,
-      address,
-      onChange,
-      value,
-      requiresApproval,
-      showBalance = true,
-      showPresets,
-    }: Props,
+    { label, toggleTokenSelect, address, onChange, value, requiresApproval, showPresets }: Props,
     ref,
   ) => {
     const { getToken, priceForAmount } = useGetTokens();

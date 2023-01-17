@@ -9,8 +9,6 @@ export function TradeChart() {
   const { setRange, range, data, loading } = useTradeChart();
   const { tokenOut, tokenIn } = useTradeData();
 
-  console.log(data);
-
   const sevenDaySelected = range === 'SEVEN_DAY';
   const thirtyDaySelected = range === 'THIRTY_DAY';
 

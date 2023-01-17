@@ -18,7 +18,7 @@ interface TokenWithImportedFlag extends GqlToken {
 export function _useGetTokens() {
   const networkConfig = useNetworkConfig();
   const { data: tokensResponse } = useGetTokensQuery({ fetchPolicy: 'cache-first' });
-  const { data: pricesResponse } = useGetTokenPricesQuery({ fetchPolicy: 'cache-first' });
+  const { data: pricesResponse } = useGetTokenPricesQuery();
   const { userImportedTokens } = useUserImportedTokens();
 
   const tokens: TokenWithImportedFlag[] = [
@@ -62,7 +62,6 @@ export function _useGetTokens() {
   }
 
   function priceFor(address: string): number {
-    console.log(prices);
     return prices[address?.toLowerCase()]?.price || 0;
   }
 

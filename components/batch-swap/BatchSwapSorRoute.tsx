@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function BatchSwapSorRoute({ swapInfo }: Props) {
-  const { getToken } = useGetTokens();
+  const { getToken, prices } = useGetTokens();
   const tokenIn = getToken(swapInfo.tokenIn);
   const tokenOut = getToken(swapInfo.tokenOut);
 
