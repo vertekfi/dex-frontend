@@ -163,15 +163,15 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
         </BeetsBox>
         <VStack width="full" spacing="4">
           {hasHighPriceImpact && (
-            <Alert status="error" mt="4" display="flex" alignItems="flex-start">
+            <Alert bgColor="vertek.neonpurple.500" color="white" status="error" mt="4" display="flex" alignItems="flex-start">
               <Checkbox
-                colorScheme="red"
+                colorScheme="green"
                 mt="1"
                 mr="4"
                 isChecked={highPiAccepted}
                 onChange={() => setHighPiAccepted(!highPiAccepted)}
               />
-              <Box>I understand that this trade will significantly move the market price.</Box>
+              <Box color="white" >I understand that this trade will significantly move the market price.</Box>
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
