@@ -33,27 +33,31 @@ export function Footer() {
               <FooterLink href="/swap" linkType="internal">
                 Swap
               </FooterLink>
-              <FooterLink href="https://v1.beets.fi/#/stake" linkType="internal">
+              <FooterLink href="/stake" linkType="internal">
                 Stake
                 <Text as="span" fontSize="2xs">
                   {' '}
                   (BSC)
                 </Text>
               </FooterLink>
-              <FooterLink href="https://v1.beets.fi/#/launch" linkType="internal">
+              {/* <FooterLink href="https://v1.beets.fi/#/launch" linkType="internal">
                 Launch
                 <Text as="span" fontSize="2xs">
                   {' '}
                   (BSC)
                 </Text>
-              </FooterLink>
+              </FooterLink> */}
+               <FooterLink href="https://aalto-defi.notion.site/Vertek-Dex-d9958759f4424962a700bb2cf90559ea">Whitepaper</FooterLink>
+            
+            <FooterLink href="https://aalto-defi.notion.site/Tokenomics-199366c64eb64684b33684ffe6b6bf89">Tokenomics</FooterLink>
+           
             </GridItem>
             <Box justifyContent="center" display="flex" flexDirection="column" mb="">{chainId === '10' ? 
               <BeetsBalLogo /> : <BeetsLogo />}
               <HStack spacing="6" mt="4">
             <Box>
               <Link
-                href="https://discord.gg/jedS4zGk28"
+                href=" https://discord.gg/vertek-ames-aalto"
                 target="_blank"
                 _active={{ boxShadow: 'none' }}
               >
@@ -62,7 +66,7 @@ export function Footer() {
             </Box>
             <Box>
               <Link
-                href="https://twitter.com/beethoven_x"
+                href=" https://twitter.com/Vertek_Dex"
                 target="_blank"
                 _active={{ boxShadow: 'none' }}
               >
@@ -80,18 +84,27 @@ export function Footer() {
             </Box>
             <Box>
               <Link
-                href="https://beethovenxio.medium.com/"
+                href="https://medium.com/@verteklabs"
                 target="_blank"
                 _active={{ boxShadow: 'none' }}
               >
                 <NextImage src={MediumIcon} />
               </Link>
             </Box>
+
+
+            
           </HStack>
           </Box>
             <GridItem marginRight="2" textAlign="end" fontWeight="bold">
-              <FooterLink href="https://snapshot.org/#/beets.eth">Vote</FooterLink>
-              <FooterLink href="https://info.beets.fi">Analytics</FooterLink>
+            <FooterLink href="https://aalto-defi.notion.site/Liquidity-Pool-Types-9ee6d04b7cab4f1b8352e0db492b7672">
+              Weighted Pools
+            </FooterLink>
+            <FooterLink href="https://aalto-defi.notion.site/Liquidity-Pool-Types-9ee6d04b7cab4f1b8352e0db492b7672">
+              Boosted Pools
+            </FooterLink>
+            <FooterLink href="https://snapshot.org/#/beets.eth">Snapshot</FooterLink>
+              {/* <FooterLink href="https://info.beets.fi">Analytics</FooterLink> */}
               <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
               <FooterLink href={networkConfig.createPoolUrl}>Create a pool</FooterLink>
             </GridItem>

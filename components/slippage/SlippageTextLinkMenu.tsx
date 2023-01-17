@@ -15,16 +15,20 @@ export function SlippageTextLinkMenu() {
             <MenuButton as={Link} color="vertek.neonpurple.500" userSelect="none">
                 {numeral(slippage).format('0.0[000]%')}
             </MenuButton>
-            <MenuList>
+            <MenuList 
+            color="vertek.neonpurple.500" 
+            bgColor="black" 
+            
+            >
                 <MenuItem onClick={() => setSlippage('0.001')}>0.1%</MenuItem>
                 <MenuItem onClick={() => setSlippage('0.005')}>0.5%</MenuItem>
                 <MenuItem onClick={() => setSlippage('0.01')}>1.0%</MenuItem>
-                <Flex px="2" pt="2">
+                <Flex px="4" pt="2">
                     <Input
                         placeholder="Custom"
                         flex="1"
-                        width="100px"
-                        mr="1"
+                        width="200px"
+                        mr="4"
                         type="number"
                         value={custom}
                         onChange={(e) => setCustom(e.currentTarget.value)}

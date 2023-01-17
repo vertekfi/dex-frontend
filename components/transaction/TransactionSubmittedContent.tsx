@@ -50,7 +50,7 @@ export function TransactionSubmittedContent({ query, confirmedMessage, showSpinn
             <VStack px="4" width="full">
                 {error ? (
                     <Box width="full">
-                        <Alert width="full" status="error">
+                        <Alert width="full" status="error" color="black">
                             <AlertIcon />
                             {transactionMessageFromError(error)}
                         </Alert>

@@ -82,14 +82,15 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
   return (
     <VStack width="full">
       <Box width="full" p="4" pt="0" pb="2">
-        <BeetsBox width="full" p="2" px="4">
+        <BeetsBox width="full" p="2" px="2" mt="4">
           <VStack
             divider={<StackDivider borderColor="whiteAlpha.200" />}
             spacing="4"
+            
             alignItems="flex-start"
           >
             <HStack justifyContent="space-between" width="full">
-              <HStack>
+              <HStack >
                 <TokenAvatar width="40px" height="40px" address={swapInfo.tokenIn} />
                 <Text>
                   You sell
@@ -162,19 +163,19 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
         </BeetsBox>
         <VStack width="full" spacing="4">
           {hasHighPriceImpact && (
-            <Alert status="error" mt="4" display="flex" alignItems="flex-start">
+            <Alert bgColor="vertek.neonpurple.500" color="white" status="error" mt="4" display="flex" alignItems="flex-start">
               <Checkbox
-                colorScheme="red"
+                colorScheme="green"
                 mt="1"
                 mr="4"
                 isChecked={highPiAccepted}
                 onChange={() => setHighPiAccepted(!highPiAccepted)}
               />
-              <Box>I understand that this trade will significantly move the market price.</Box>
+              <Box color="white" >I understand that this trade will significantly move the market price.</Box>
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
-            <Alert status="error" mt={4}>
+            <Alert status="error" mt={4} color="black">
               <AlertIcon />
               {transactionMessageFromError(batchSwapQuery.submitError)}
             </Alert>

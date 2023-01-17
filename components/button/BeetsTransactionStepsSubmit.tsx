@@ -160,7 +160,7 @@ export function BeetsTransactionStepsSubmit({
         </Button>
       )}
       {currentQuery && currentQuery.submitError ? (
-        <Alert status="error" mt={4}>
+        <Alert status="error" mt={4} color="black">
           <AlertIcon />
           {transactionMessageFromError(currentQuery.submitError)}
         </Alert>
