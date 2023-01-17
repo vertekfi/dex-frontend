@@ -40,6 +40,7 @@ interface Props {
 export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
   const networkConfig = useNetworkConfig();
   const [percent, setPercent] = useState(100);
+
   const {
     userWalletBptBalance,
     hasBptInWallet,
@@ -47,17 +48,21 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
     isRefetching: isRefetchingBalances,
     refetch: refetchBptBalances,
   } = usePoolUserBptBalance();
+
   const { pool, bptPrice } = usePool();
+
   const {
     hasApprovalToStakeAmount,
     isLoading: isLoadingAllowances,
     refetch: refetchAllowances,
     isRefetching,
   } = usePoolUserStakingAllowance();
+
   const [userSyncBalance] = useUserSyncBalanceMutation();
   const amount = oldBnumToHumanReadable(
     oldBnumScaleAmount(userWalletBptBalance).times(percent).div(100),
   );
+
   const usdValue = bptPrice * parseFloat(amount);
   const hasValue = hasBptInWallet && amount !== '' && percent !== 0;
   const amountIsValid = !hasValue || parseFloat(userWalletBptBalance) >= parseFloat(amount);

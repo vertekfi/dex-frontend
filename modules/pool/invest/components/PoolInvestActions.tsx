@@ -24,20 +24,24 @@ interface Props {
 }
 
 export function PoolInvestActions({ onInvestComplete, onClose }: Props) {
+  const [steps, setSteps] = useState<TransactionStep[] | null>(null);
+
   const networkConfig = useNetworkConfig();
   const { pool } = usePool();
   const { selectedInvestTokensWithAmounts, totalInvestValue, zapEnabled } = useInvest();
   const { joinPool, ...joinQuery } = useJoinPool(pool, zapEnabled);
+
   const allInvestTokens = pool.investConfig.options.map((option) => option.tokenOptions).flat();
   const {
     hasApprovalForAmount,
     isLoading,
     refetch: refetchUserAllowances,
   } = useUserAllowances(allInvestTokens, networkConfig.balancer.vault);
-  const [steps, setSteps] = useState<TransactionStep[] | null>(null);
+
   const { bptOutAndPriceImpact } = usePoolJoinGetBptOutAndPriceImpactForTokensIn();
   const { data: contractCallData, isLoading: isLoadingContractCallData } =
     usePoolJoinGetContractCallData(bptOutAndPriceImpact?.minBptReceived || null, zapEnabled);
+
   const { refetch: refetchUserTokenBalances } = usePoolUserTokenBalancesInWallet();
   const { refetch: refetchUserBptBalance } = usePoolUserBptBalance();
   const [userSyncBalance, { loading }] = useUserSyncBalanceMutation();
@@ -77,7 +81,7 @@ export function PoolInvestActions({ onInvestComplete, onClose }: Props) {
           Transaction details
         </Text>
         <TransactionSubmittedContent
-          color="black" 
+          color="black"
           query={joinQuery}
           confirmedMessage={`You've successfully invested ${numberFormatUSDValue(
             totalInvestValue,

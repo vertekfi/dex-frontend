@@ -24,7 +24,7 @@ import { BeetsBox } from '~/components/box/BeetsBox';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import { ExternalLink } from 'react-feather';
 import { etherscanGetTokenUrl } from '~/lib/util/etherscan';
-import { CoingeckoIcon } from '~/assets/icons/CoingeckoIcon';
+// import { CoingeckoIcon } from '~/assets/icons/CoingeckoIcon';
 import { SubmitTransactionQuery } from '~/lib/util/useSubmitTransaction';
 import { GqlSorGetSwapsResponseFragment } from '~/apollo/generated/graphql-codegen-generated';
 import { transactionMessageFromError } from '~/lib/util/transaction-util';
@@ -86,17 +86,21 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
           <VStack
             divider={<StackDivider borderColor="whiteAlpha.200" />}
             spacing="4"
-            
             alignItems="flex-start"
           >
             <HStack justifyContent="space-between" width="full">
-              <HStack >
+              <HStack>
                 <TokenAvatar width="40px" height="40px" address={swapInfo.tokenIn} />
                 <Text>
                   You sell
                   <HStack spacing="1">
                     <Text fontWeight="bold">{tokenIn?.symbol}</Text>
-                    <Link href={etherscanGetTokenUrl(swapInfo.tokenIn)} color="vertek.neonpurple.500" target="_blank" ml="1.5">
+                    <Link
+                      href={etherscanGetTokenUrl(swapInfo.tokenIn)}
+                      color="vertek.neonpurple.500"
+                      target="_blank"
+                      ml="1.5"
+                    >
                       <ExternalLink size={14} />
                     </Link>
                   </HStack>
@@ -120,7 +124,12 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
                   to receive
                   <HStack spacing="1">
                     <Text fontWeight="bold">{tokenOut?.symbol}</Text>
-                    <Link href={etherscanGetTokenUrl(swapInfo.tokenOut)} color="vertek.neonpurple.500" target="_blank" ml="1.5">
+                    <Link
+                      href={etherscanGetTokenUrl(swapInfo.tokenOut)}
+                      color="vertek.neonpurple.500"
+                      target="_blank"
+                      ml="1.5"
+                    >
                       <ExternalLink size={14} />
                     </Link>
                   </HStack>
@@ -163,7 +172,14 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
         </BeetsBox>
         <VStack width="full" spacing="4">
           {hasHighPriceImpact && (
-            <Alert bgColor="vertek.neonpurple.500" color="white" status="error" mt="4" display="flex" alignItems="flex-start">
+            <Alert
+              bgColor="vertek.neonpurple.500"
+              color="white"
+              status="error"
+              mt="4"
+              display="flex"
+              alignItems="flex-start"
+            >
               <Checkbox
                 colorScheme="green"
                 mt="1"
@@ -171,7 +187,9 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
                 isChecked={highPiAccepted}
                 onChange={() => setHighPiAccepted(!highPiAccepted)}
               />
-              <Box color="white" >I understand that this trade will significantly move the market price.</Box>
+              <Box color="white">
+                I understand that this trade will significantly move the market price.
+              </Box>
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
@@ -222,7 +240,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
             {tokenFormatAmount(swapInfo.effectivePrice)} {tokenIn?.symbol}
           </Text>
         </HStack>
-        <HStack width="full" justifyContent="space-between">
+        {/* <HStack width="full" justifyContent="space-between">
           <HStack alignItems="center" spacing="1">
             <Text color="gray.100" fontSize=".85rem">
               Compared to
@@ -234,7 +252,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
           <Text color="white" fontSize=".85rem">
             {coingeckoVariationText}
           </Text>
-        </HStack>
+        </HStack> */}
       </VStack>
     </VStack>
   );

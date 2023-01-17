@@ -1,25 +1,12 @@
-import {
-  Button,
-  TabProps,
-  HStack,
-  Tab,
-  Text,
-  useTab,
-  useMultiStyleConfig,
-  Box,
-} from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
+import { Button, TabProps, HStack, useTab, Box } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { Eye } from 'react-feather';
-import { AnimatedBox } from '~/components/animation/chakra';
 
 const BeetsTab = forwardRef((props: { children: any } & TabProps, ref: any) => {
   const tabProps = useTab({ ...props, ref });
   const isSelected = !!tabProps['aria-selected'];
-  console.log(props)
 
   return (
-
     <Button
       fontSize="sm"
       rounded="full"
