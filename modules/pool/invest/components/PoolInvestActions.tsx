@@ -77,6 +77,7 @@ export function PoolInvestActions({ onInvestComplete, onClose }: Props) {
           Transaction details
         </Text>
         <TransactionSubmittedContent
+          color="black" 
           query={joinQuery}
           confirmedMessage={`You've successfully invested ${numberFormatUSDValue(
             totalInvestValue,

@@ -82,14 +82,15 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
   return (
     <VStack width="full">
       <Box width="full" p="4" pt="0" pb="2">
-        <BeetsBox width="full" p="2" px="4">
+        <BeetsBox width="full" p="2" px="2" mt="4">
           <VStack
             divider={<StackDivider borderColor="whiteAlpha.200" />}
             spacing="4"
+            
             alignItems="flex-start"
           >
             <HStack justifyContent="space-between" width="full">
-              <HStack>
+              <HStack >
                 <TokenAvatar width="40px" height="40px" address={swapInfo.tokenIn} />
                 <Text>
                   You sell
@@ -174,7 +175,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
-            <Alert status="error" mt={4}>
+            <Alert status="error" mt={4} color="black">
               <AlertIcon />
               {transactionMessageFromError(batchSwapQuery.submitError)}
             </Alert>
