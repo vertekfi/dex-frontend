@@ -62,6 +62,7 @@ export function _useGetTokens() {
   }
 
   function priceFor(address: string): number {
+    console.log(prices);
     return prices[address?.toLowerCase()]?.price || 0;
   }
 

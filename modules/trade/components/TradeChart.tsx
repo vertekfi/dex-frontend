@@ -6,14 +6,16 @@ import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { BeetsBox } from '~/components/box/BeetsBox';
 
 export function TradeChart() {
-  const { setRange, range, data, loading, networkStatus } = useTradeChart();
+  const { setRange, range, data, loading } = useTradeChart();
   const { tokenOut, tokenIn } = useTradeData();
+
+  console.log(data);
 
   const sevenDaySelected = range === 'SEVEN_DAY';
   const thirtyDaySelected = range === 'THIRTY_DAY';
 
   return (
-    <Box >
+    <Box>
       {!loading && data && data.prices.length === 0 ? (
         <BeetsBox
           height="150px"

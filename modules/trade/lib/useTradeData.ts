@@ -8,8 +8,14 @@ export function useTradeData() {
   const { reactiveTradeState } = useTrade();
   const tokenIn = getToken(reactiveTradeState.tokenIn);
   const tokenOut = getToken(reactiveTradeState.tokenOut);
-  const currentRatio = priceFor(reactiveTradeState.tokenOut) / priceFor(reactiveTradeState.tokenIn);
-  const reverseRatio = priceFor(reactiveTradeState.tokenIn) / priceFor(reactiveTradeState.tokenOut);
+
+  const priceOut = priceFor(reactiveTradeState.tokenOut);
+  const priceIn = priceFor(reactiveTradeState.tokenIn);
+  const currentRatio = priceOut / priceIn;
+  const reverseRatio = priceIn / priceOut;
+
+  // console.log(priceIn);
+  // console.log(priceOut);
 
   const query = useGetTradeSelectedTokenDataQuery({
     variables: { tokenIn: reactiveTradeState.tokenIn, tokenOut: reactiveTradeState.tokenOut },
