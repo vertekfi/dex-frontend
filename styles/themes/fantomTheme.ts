@@ -383,6 +383,32 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 color:'white', 
                                 },
                             },
+                            stayblacklock: {
+                                backgroundColor:'vertek.slate.900', 
+                                boxShadow:'0 0 12px #000', 
+                                paddingY:'1px',
+                                height:'2rem', 
+                                marginX:'0.5rem', 
+                                width:'20%', 
+                                borderWidth:'1px',  
+                                borderColor:'vertek.neonpurple.500', 
+                                color: 'white',
+                                fontWeight:'900', 
+                                _active: { backgroundColor:'vertek.slate.900'  },
+                                _focus: { outline: 'none', boxShadow: 'none' },
+                                borderRadius: '12px',
+                                _hover: {
+                                    color:'white',
+                                    boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                                    background: '',  
+                                    transform:'scale(1.03)' 
+                                        }, 
+                                _disabled: {
+                                    transform: 'none',
+                                    background: 'gray.400',
+                                    color:'white', 
+                                    },
+                                },
                 vertekswap: {
                     bgGradient:'linear-gradient(217.41deg, #CA6615 -28.33%, #F0BF59 75.76%)', 
                     borderRadius:'8px', 

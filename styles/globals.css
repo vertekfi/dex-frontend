@@ -36,6 +36,9 @@ a {
     list-style: none;
     display: flex;
 }
+.modalContent {
+    width: 100% !important;
+}
 
 .apr-stripes {
     /*background: linear-gradient(

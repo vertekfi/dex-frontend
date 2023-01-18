@@ -15,6 +15,14 @@ import { PRETTY_DATE_FORMAT } from '../constants';
 import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import styled from '@emotion/styled';
 import { LockIcon } from '@chakra-ui/icons';
+import { LockForm } from './lock/LockForm'; 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
 
 interface Props {
   pool: GqlPoolUnion;
@@ -45,6 +53,8 @@ const ValueText = styled.p`
 `;
 
 export function VotingHeader() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
   const [pool, setPool] = useState<GqlPoolUnion>();
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
@@ -160,9 +170,16 @@ export function VotingHeader() {
             </GridItem>
             <GridItem mt={{ base: '3', lg: '6' }}>
               <Box display="flex" justifyContent="center">
-                <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
+                <Button 
+                as="a"
+                href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
+                target=""
+                variant="stayblack" width={{ base: '50%', lg: '75%' }}
+                >
                   Get VRTK-BNB
                 </Button>
+
+                {/* will need to update this link when the real pool is live!  */}
               </Box>
             </GridItem>
           </Grid>
@@ -179,13 +196,23 @@ export function VotingHeader() {
             <GridItem mt="-1">
               <ValueText>{userLockInfo?.lockedAmount}</ValueText>
             </GridItem>
-            <GridItem mt={{ base: '3', lg: '6' }}>
-              <Box display="flex" justifyContent="center">
-                <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
-                  Lock VRTK-BNB
-                </Button>
-              </Box>
-            </GridItem>
+            <GridItem mt={{ base: "3", lg: "6" }}>
+        <Box display="flex" justifyContent="center">
+          <Button
+            variant="stayblack"
+            width={{ base: "50%", lg: "75%" }}
+            onClick={handleOpenModal}
+          >
+            Lock VRTK-BNB
+          </Button>
+        </Box>
+      </GridItem>
+      {isModalOpen && (
+        <LockForm
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
           </Grid>
         </VotingCard>
 
