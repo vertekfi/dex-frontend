@@ -30,7 +30,7 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
     <PoolListProvider>
       <UserTokenBalancesProvider>
         <Grid
-          bg="vertek.slatepurple.900"
+          bg=""
           boxShadow={{ base: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', lg: 'none' }}
           borderBottomColor="vertek.slatepurple.600"
           borderBottomWidth="1px"

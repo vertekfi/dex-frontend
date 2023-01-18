@@ -1,5 +1,5 @@
 import { useVotingGauges } from '../../../lib/global/gauges/useVotingGauges';
-import { Box, Button, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Text, GridItemProps } from '@chakra-ui/react';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -16,13 +16,6 @@ import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import styled from '@emotion/styled';
 import { LockIcon } from '@chakra-ui/icons';
 import { LockForm } from './lock/LockForm'; 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from '@chakra-ui/react';
 
 interface Props {
   pool: GqlPoolUnion;

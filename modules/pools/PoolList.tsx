@@ -74,7 +74,7 @@ function PoolList() {
                 showUserBalance={showMyInvestments}
                 borderBottomColor="vertek.slatepurple.600"
                 borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-                bg="vertek.slatepurple.900"
+                bg=""
                 padding={{ base: "12px", lg:"6px"}}
                 tokens={item.allTokens
                   .filter((token) => !token.isNested && !token.isPhantomBpt)
