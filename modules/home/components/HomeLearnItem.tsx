@@ -9,7 +9,7 @@ interface Props {
 
 export function HomeLearnItem({ title, description, url, last }: Props) {
   return (
-    <Box borderBottomWidth={last ? 0 : 1} borderBottomColor="beets.base.500" mb="6" pb="6">
+    <Box height="8.5rem" borderBottomWidth={last ? 2 : 2} borderBottomColor="vertek.neonpurple.500" mb="6" pb="6">
       <Box>
         <Link fontSize="lg" fontWeight="semibold" mb="4" href={url} target="_blank">
           {title}
