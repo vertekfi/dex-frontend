@@ -12,9 +12,14 @@ import { networkConfig } from '~/lib/config/network-config';
 import { useGetTokens } from '~/lib/global/useToken';
 import { GqlPoolMinimalFragment } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolListFooter } from './components/PoolListFooter';
+import { CreateForm } from '../../components/create/CreateForm'; 
+import { useState } from 'react';
 
 function PoolList() {
   const { getToken } = useGetTokens();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+
   const {
     pools,
     refetch,
@@ -133,9 +138,20 @@ function PoolList() {
         <Text fontSize="xl" color="white" mb="4">
           Can&apos;t find what you&apos;re looking for?
         </Text>
-        <Button variant="verteklight" size="md" as={Link} href={networkConfig.createPoolUrl}>
+        <Button 
+          variant="verteklight" 
+          size="md" 
+          as={Link} 
+          onClick={handleOpenModal}
+        >
           Create a pool
         </Button>
+        {isModalOpen && (
+            <CreateForm
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
+          )}
       </Box>
     </Box>
   );
