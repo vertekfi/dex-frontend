@@ -44,15 +44,14 @@ return (
 <GridItem colSpan={1} />
 
 <GridItem
+className="verteklightpurplebox"
 marginTop={{ base: 0, lg: 2 }}
 display="flex"
-bgColor="rgba(0,0,0, 0.4)"
 justifyContent="flex-start"
 alignItems="flex-start"
 colSpan={{ sm: 1, md: 2 }}
 flexDirection="column"
 borderRadius={{ base: '42px', lg:'16px'}}
-boxShadow='inset 0 0 20px #4A4AF6, inset 0 0 5px #fff'
 padding={{ base:'6', lg:'4' }}
 >
 <Text 
@@ -75,7 +74,7 @@ padding={{ base:'6', lg:'4' }}
     Core Pools.
 </Text>
 <Button  
-    variant="vertekdark"
+    variant="stayblack"
     fontSize={{ base:'0.9rem', lg:'0.9rem'}}
     width="50%"
     margin="3"

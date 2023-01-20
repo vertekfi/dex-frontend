@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Link, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, Link, Grid, Text } from '@chakra-ui/react';
 import { NetworkStatus } from '@apollo/client';
 import { usePoolList } from './usePoolList';
 import { PoolListItem } from '~/modules/pools/components/PoolListItem';
@@ -50,110 +50,49 @@ function PoolList() {
       .length > 0;
 
   return (
-    <Box>
-      <PoolListMobileHeader />
-      <PoolListTop />
+<Box>
+  <PoolListMobileHeader />
+  <PoolListTop />
+  {hasUnstakedBpt && (
+    <Alert status="warning" mb="4">
+        <AlertIcon />
+        You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
+        will accumulate over time when your VPT are staked.
+    </Alert>
+  )}
+  <Box 
+    mt="3rem" 
+    boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
+    mb="8rem" 
+    borderRadius="16px" 
+    flexDirection="column" 
+    display="flex"
+    >
+      <PoolListTableHeader />
+      {poolsToRender.map((item, index) => (
+      
+      <PoolListItem
+        key={index}
+        pool={item}
+        userBalance={`${usdBalanceForPool(item.id)}`}
+        showUserBalance={showMyInvestments}
+        borderBottomColor="vertek.slatepurple.600"
+        borderBottomWidth={index === pools.length - 1 ? 0 : 1}
+        bg=""
+        padding={{ base: "12px", lg:"6px"}}
+        tokens={item.allTokens
+          .filter((token) => !token.isNested && !token.isPhantomBpt)
+          .map((token) => ({
+            ...token,
+            logoURI: getToken(token.address)?.logoURI || undefined,
+          }))}
+        hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
+      />
 
-      {hasUnstakedBpt && (
-        <Alert status="warning" mb="4">
-          <AlertIcon />
-          You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
-          will accumulate over time when your VPT are staked.
-        </Alert>
-      )}
-        <Box 
-          mt="3rem" 
-          boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
-          mb="8rem" 
-          borderRadius="16px" 
-          flexDirection="column" 
-          display="flex"
-          >
-            <PoolListTableHeader />
-            {poolsToRender.map((item, index) => (
-            
-              <PoolListItem
-                key={index}
-                pool={item}
-                userBalance={`${usdBalanceForPool(item.id)}`}
-                showUserBalance={showMyInvestments}
-                borderBottomColor="vertek.slatepurple.600"
-                borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-                bg=""
-                padding={{ base: "12px", lg:"6px"}}
-                tokens={item.allTokens
-                  .filter((token) => !token.isNested && !token.isPhantomBpt)
-                  .map((token) => ({
-                    ...token,
-                    logoURI: getToken(token.address)?.logoURI || undefined,
-                  }))}
-                hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
-              />
-
-              ))}
-              <PoolListFooter />
-            </Box>
-      {/* <PaginatedTable
-        borderRadius="16px"
-        items={poolsToRender}
-        bgColor={{base:"none", lg:"vertek.slate.900"}} 
-        // bgColor here renders the space between the end of the Pool list, and the "footer"
-        // base vs. lg styles is to maintain distinct boundaries between cards on mobile 
-        boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
-        currentPage={state.skip / state.first + 1}
-        pageSize={state.first}
-        count={poolCount}
-        onPageChange={(page) => {
-          refetch({ ...state, skip: state.first * (page - 1) });
-        }}
-        loading={loading}
-        fetchingMore={networkStatus === NetworkStatus.refetch}
-        onPageSizeChange={setPageSize}
-        renderTableHeader={() => <PoolListTableHeader />}
-        renderTableRow={(item: GqlPoolMinimalFragment, index) => {
-          return (
-            <PoolListItem
-              key={index}
-              pool={item}
-              userBalance={`${usdBalanceForPool(item.id)}`}
-              showUserBalance={showMyInvestments}
-              borderBottomColor="vertek.slatepurple.600"
-              borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-              bg="vertek.slatepurple.900"
-              padding={{ base: "12px", lg:"6px"}}
-              tokens={item.allTokens
-                .filter((token) => !token.isNested && !token.isPhantomBpt)
-                .map((token) => ({
-                  ...token,
-                  logoURI: getToken(token.address)?.logoURI || undefined,
-                }))}
-              hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
-            />
-          );
-        }}
-      /> */}
-
-
-      <Box mt="10">
-        <Text fontSize="xl" color="white" mb="4">
-          Can&apos;t find what you&apos;re looking for?
-        </Text>
-        <Button 
-          variant="verteklight" 
-          size="md" 
-          as={Link} 
-          onClick={handleOpenModal}
-        >
-          Create a pool
-        </Button>
-        {isModalOpen && (
-            <CreateForm
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-            />
-          )}
-      </Box>
-    </Box>
+        ))}
+        <PoolListFooter />
+  </Box>
+  </Box> 
   );
 }
 

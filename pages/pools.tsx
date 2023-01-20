@@ -13,6 +13,7 @@ import InvestMastheadImage from '~/assets/images/invest-masthead-image.png';
 import InvestMastheadOpImage from '~/assets/images/invest-masthead-image-OP.png';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
+import { PoolsCreate } from '~/modules/pools/PoolsCreate'; 
 
 function Pools() {
   const { chainId } = useNetworkConfig();
@@ -46,6 +47,7 @@ function Pools() {
             }
           />
           <PoolList />
+          <PoolsCreate  />
         </UserTokenBalancesProvider>
       </PoolListProvider>
     </>

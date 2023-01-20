@@ -73,8 +73,7 @@ export function VotingSubheader() {
       <GridItem marginRight={{ base: '0', lg: '24' }}>
         <VStack spacing={4} alignItems={{ base: 'center', lg: 'stretch' }}>
           <Box
-            bgColor="vertek.neonpurple.500"
-            boxShadow="0 0 24px 1px #000"
+            className="verteklightpurplebox"
             h="full"
             w={{ base: '75%', lg: 'full' }}
             p="12px"
@@ -91,8 +90,7 @@ export function VotingSubheader() {
             </Text>
           </Box>
           <Box
-            bgColor="vertek.neonpurple.500"
-            boxShadow="0 0 24px 1px #000"
+            className="verteklightpurplebox"
             h="full"
             w={{ base: '75%', lg: 'full' }}
             p="12px"

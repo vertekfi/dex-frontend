@@ -40,6 +40,10 @@ a {
     width: 100% !important;
 }
 
+
+/* custom vertek */ 
+
+/*text */
 .vertektitle {
     /* background-image: radial-gradient(circle, #4A4AF6, #5BC0F8, #fff, #4132D0); */
     background-image: linear-gradient(to top right, #4A4AF6, #4A4AF6); 
@@ -47,19 +51,19 @@ a {
     background-clip: text;
     color: transparent;
     font-weight: bold; 
-    -webkit-animation: gradient-animation 1s linear infinite;
-    -moz-animation: gradient-animation 1s linear infinite;
-    animation: gradient-animation 1s linear infinite;
 }
 
-@keyframes gradient-animation {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
+/*boxes */ 
+.verteklightpurplebox {
+background-color: #4A4AF6; 
+box-Shadow: 0 0 24px 2px #000; 
+/* padding: 12px; 
+align-items: center; 
+justify-content: center;  */
 }
+
+
+
 
 
 .apr-stripes {
