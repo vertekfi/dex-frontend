@@ -14,7 +14,7 @@ export function HomeBeetsInfo(props: BoxProps) {
       Injected with a digital voice. 
     </Text>
     <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
-      <Box fontSize="1.2rem" textAlign="right" width={{base: '100%', md:'60%'}} display="flex"  >
+      <Box fontSize="1.2rem" textAlign={{base: 'left', md:'right'}} width={{base: '100%', md:'60%'}} display="flex"  >
             The veVRTK system grants every user the power to influence the 
             developmental trajectory of the Vertek matrix. Vote to direct VRTK emissions to your favorite pools, 
             and join the swarm of cyber hornets in the Vertek DAO, all the while boosting your rewards by up to 2.5x as you accumulate veVRTK.
@@ -32,7 +32,7 @@ export function HomeBeetsInfo(props: BoxProps) {
            
       </Text>
       </Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mt={{ base:'auto', lg:'-20'}}>
+      <Box display="flex" flexDirection={{ base:'column', md:'row' }} justifyContent="space-between" alignItems="center" mt={{ base:'auto', lg:'-20'}}>
       <NextImage
           src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
           width="250px"
