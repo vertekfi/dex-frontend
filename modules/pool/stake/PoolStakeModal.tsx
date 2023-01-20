@@ -82,16 +82,16 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
               {
                 id: 'approve',
                 type: 'other' as const,
-                buttonText: 'Approve BPT',
-                tooltipText: 'Approve BPT',
+                buttonText: 'Approve VPT',
+                tooltipText: 'Approve VPT',
               },
             ]
           : []),
         {
           id: 'stake',
           type: 'other',
-          buttonText: 'Stake BPT',
-          tooltipText: 'Stake your BPT to earn additional rewards.',
+          buttonText: 'Stake VPT',
+          tooltipText: 'Stake your VPT to earn additional rewards.',
         },
       ]);
     }
@@ -121,13 +121,13 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
             {capitalize(networkConfig.farmTypeName)}
           </Heading>
           <Text color="gray.200" fontSize="md">
-            Stake your BPT to earn additional rewards
+            Stake your VPT to earn additional rewards
           </Text>
         </ModalHeader>
         <ModalBody className="bg" pt="4" pb="6">
           <Text mb="4">
             Drag the slider to configure the amount you would like to stake. To maximize your
-            rewards, stake all of your BPT into the {networkConfig.farmTypeName}.
+            rewards, stake all of your VPT into the {networkConfig.farmTypeName}.
           </Text>
           <Slider mt="8" aria-label="slider-ex-1" value={percent} onChange={setPercent}>
             <SliderTrack>
@@ -165,7 +165,7 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
                   <>
                     <Box textAlign="right">{numberFormatUSDValue(usdValue)}</Box>
                     <Box textAlign="right" color="gray.200">
-                      {tokenFormatAmount(amount)} BPT
+                      {tokenFormatAmount(amount)} VPT
                     </Box>
                   </>
                 )}

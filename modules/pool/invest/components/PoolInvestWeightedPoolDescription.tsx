@@ -22,7 +22,7 @@ export function PoolInvestWeightedPoolDescription() {
       </Highlight>
       <br />
       <br />
-      When investing in any liquidity pool, you will receive pool tokens (BPT) which represent your
+      When investing in any liquidity pool, you will receive pool tokens (VPT) which represent your
       share of the pool.
     </>
   );

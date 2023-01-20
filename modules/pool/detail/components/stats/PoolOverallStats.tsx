@@ -63,7 +63,7 @@ return (
         {/* <Divider /> */}
         {/* <VStack spacing="0" alignItems="flex-start">
         <Text lineHeight="1rem" fontWeight="semibold" fontSize="1rem" color="white">
-                BPT price
+                VPT price
             </Text>
             <Text color="white" fontSize="1.75rem">
                 {numberFormatUSDValue(sharePrice)}
@@ -106,7 +106,7 @@ return (
                         color: 'beets.base.50',
                     }}
                     label="Liquidity incentives"
-                    infoText={`Liquidity incentives are additional incentives available for this pool when you stake your BPT in the ${networkConfig.farmTypeName}. The daily value is an approximation based on current token prices and emissions.`}
+                    infoText={`Liquidity incentives are additional incentives available for this pool when you stake your VPT in the ${networkConfig.farmTypeName}. The daily value is an approximation based on current token prices and emissions.`}
                 />
                 <Text color="white" fontSize="1.75rem">
                     ~{numeral(incentivesDailyValue).format('$0,0.00a')}

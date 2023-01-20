@@ -79,7 +79,7 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
                         {capitalize(networkConfig.farmTypeName)}
                     </Heading>
                     <Text color="gray.200" fontSize="md">
-                        Unstake your BPT
+                        Unstake your VPT
                     </Text>
                 </ModalHeader>
                 <ModalBody className="bg" pt="4" pb="6">
@@ -123,7 +123,7 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
                                     <>
                                         <Box textAlign="right">{numberFormatUSDValue(amountValue)}</Box>
                                         <Box textAlign="right" color="gray.200">
-                                            {tokenFormatAmount(amount)} BPT
+                                            {tokenFormatAmount(amount)} VPT
                                         </Box>
                                     </>
                                 )}
@@ -142,7 +142,7 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
                             refetchBptBalances();
                             userSyncBalance({ variables: { poolId: pool.id } });
                         }}
-                        steps={[{ id: 'unstake', tooltipText: '', type: 'other', buttonText: 'Unstake BPT' }]}
+                        steps={[{ id: 'unstake', tooltipText: '', type: 'other', buttonText: 'Unstake VPT' }]}
                         queries={[{ ...unstakeQuery, id: 'unstake' }]}
                         isDisabled={!hasValue || !amountIsValid}
                     />

@@ -71,7 +71,7 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
                             {' / '}
                             {numeral(data).format('0.00a')}{' '}
                             <Text as="span" fontSize="md" color="beets.base.50">
-                                BPT
+                                VPT
                             </Text>
                         </Text>
                     )}

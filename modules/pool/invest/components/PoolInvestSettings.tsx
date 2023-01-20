@@ -62,10 +62,10 @@ export function PoolInvestSettings({ ...rest }: BoxProps) {
               <Box flex="1">
                 <InfoButton
                   label="Zap into farm"
-                  infoText="With ZAP enabled, your investment BPTs are automatically deposited to the farm, saving time & maximizing yield."
+                  infoText="With ZAP enabled, your investment VPTs are automatically deposited to the farm, saving time & maximizing yield."
                 />
                 <Text color="gray.200" fontSize="sm">
-                  Deposit my BPTs directly into the farm with ZAP.
+                  Deposit my VPTs directly into the farm with ZAP.
                 </Text>
               </Box>
               <Switch
