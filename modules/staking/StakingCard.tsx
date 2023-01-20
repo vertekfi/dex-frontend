@@ -12,13 +12,17 @@ const pool = props.pool;
 return (
   pool ? (
     <GridItem
-        bgGradient="vertek.slatepurple.900"
         boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
         borderRadius="18px"
         maxW="550px"
         color="white"
     >
-      <Flex direction="row" justify="center" fontWeight="bold" padding="2" ml="2" borderColor="box.500" borderBottomWidth="2px" alignItems="center">
+      <Flex 
+      direction="row" 
+      justify="center" 
+      fontWeight="bold" 
+      padding="2" ml="2" borderColor="box.500" 
+      borderBottomWidth="2px" alignItems="center">
         <Box marginRight="2">
           <Text fontSize="1rem">
             Stake 

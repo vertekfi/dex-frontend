@@ -8,7 +8,7 @@ interface Props {
 export function EarnMasthead({ title, image }: Props) {
 return (
 <SimpleGrid 
-    columns={{ sm: 1, md: 6 }} 
+    columns={{ sm: 1, lg: 6 }} 
     paddingX="4"
     paddingY="2"
     marginTop={{ base: 0, lg: 10 }}
@@ -18,7 +18,7 @@ return (
     <GridItem    
     display="flex" 
     flexDirection="column"  
-    colSpan={{ sm: 1, md: 3 }}
+    colSpan={{ sm: 1, lg: 3 }}
     >
     <Text 
         gap="1" 
@@ -49,7 +49,7 @@ marginTop={{ base: 0, lg: 2 }}
 display="flex"
 justifyContent="flex-start"
 alignItems="flex-start"
-colSpan={{ sm: 1, md: 2 }}
+colSpan={{ sm: 1, lg: 2 }}
 flexDirection="column"
 borderRadius={{ base: '42px', lg:'16px'}}
 padding={{ base:'6', lg:'4' }}
