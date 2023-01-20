@@ -57,8 +57,8 @@ function PoolList() {
       {hasUnstakedBpt && (
         <Alert status="warning" mb="4">
           <AlertIcon />
-          You have unstaked BPT in your wallet. Incentivized pools offer additional rewards that
-          will accumulate over time when your BPT are staked.
+          You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
+          will accumulate over time when your VPT are staked.
         </Alert>
       )}
         <Box 

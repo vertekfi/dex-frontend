@@ -18,7 +18,7 @@ export function PoolWithdrawWeightedPoolDescription() {
             </Highlight>
             <br />
             <br />
-            When withdrawing from any liquidity pool, your BPT tokens are exchanged for the underlying pool assets.
+            When withdrawing from any liquidity pool, your VPT tokens are exchanged for the underlying pool assets.
         </>
     );
 }

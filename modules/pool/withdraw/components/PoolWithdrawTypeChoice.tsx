@@ -161,8 +161,8 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         <Alert status="warning" borderRadius="md" mb="4">
           <AlertIcon />
           <Box flex="1" mr="4">
-            You have ~{numberFormatUSDValue(valueStaked)} worth of BPT staked. In order to withdraw
-            this amount, you must first unstake your BPT.
+            You have ~{numberFormatUSDValue(valueStaked)} worth of VPT staked. In order to withdraw
+            this amount, you must first unstake your VPT.
           </Box>
           <Button variant="outline" onClick={unstakeDisclosure.onOpen}>
             Unstake
