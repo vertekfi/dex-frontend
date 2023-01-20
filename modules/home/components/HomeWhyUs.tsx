@@ -34,7 +34,7 @@ return (
   mx="4"
   paddingX={{ base: 'none', md: '6'}} 
   mt="4" >
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
           <Text 
               textDecoration="underline" 
               mb="1" 
@@ -50,7 +50,7 @@ return (
               Self-custody and freely trade your assets as you see fit 24/7 hours a day, 365 days a year.
           </Box>
       </GridItem>
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
           <Text mb="1" mt="4" fontSize={{ base: '1.5rem', md: '2rem'}}  className="vertektitle">
               Invest
           </Text>
@@ -59,7 +59,7 @@ return (
               Adjust your portfolio and get rewarded for using it as liquidity position. Earn yield on top of yield.
           </Box>
       </GridItem>
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
         <Text mb="1" mt="4" fontSize={{ base: '1.5rem', md: '2rem'}}  className="vertektitle">
               Hodl 
         </Text>
@@ -70,7 +70,7 @@ return (
               traditional broker, acquisition or liquidation of these assets is seamless, near instant, and never sleeps.
         </Box>
       </GridItem>
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
             <Text mb="1" mt="4" fontSize={{ base: '1.5rem', md: '2rem'}}  className="vertektitle">
                     Collect
             </Text>
@@ -79,7 +79,7 @@ return (
             The Vertek Marketplace has some of the lowest fees across all NFT platforms. Denominate your prices in a variety of cryptocurrencies.
             </Box>
       </GridItem>
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
             <Text mb="1" mt="4" fontSize={{ base: '1.5rem', md: '2rem'}}  className="vertektitle">
                 Build
             </Text>
@@ -89,7 +89,7 @@ return (
 
             </Box>
       </GridItem>
-      <GridItem borderBottomWidth={{base: '0px', lg:'1px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
+      <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">
         <Text mb="1" mt="4" fontSize={{ base: '1.5rem', md: '2rem'}}  className="vertektitle">
           Break Free
         </Text>
