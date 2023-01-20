@@ -1,22 +1,23 @@
 import { Box, BoxProps, Button, HStack, Grid, GridItem } from '@chakra-ui/react';
+import { Text, useColorMode } from '@chakra-ui/react'; 
 import { BeetsHeadline } from '~/components/typography/BeetsHeadline';
 import { BeetsSubHeadline } from '~/components/typography/BeetsSubHeadline';
 import { HomeLearnItem } from '~/modules/home/components/HomeLearnItem';
 
 export function HomeLearn(props: BoxProps) {
   return (
-    <Box {...props}>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} mb="8">
-        <GridItem>
-          <BeetsHeadline mb="4">Integrate into the Vertek Matrix</BeetsHeadline>
-          <Box>
+    <Box {...props} mb="16rem">
+      <Text mb="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
+            Integrate with the Vertek Matrix
+      </Text>
+      <Box fontSize="1.2rem">
             Check out the resources below to learn more
             about DeFi, Vertek and the technology we provide.
-          </Box>
-        </GridItem>
-      </Grid>
-      <BeetsSubHeadline  mb="8" >Vertek Basics</BeetsSubHeadline>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="12">
+      </Box>
+      {/* <BeetsSubHeadline  mt="8" mb="4">
+        Vertek Basics
+      </BeetsSubHeadline> */}
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="12" mt="4">
         <GridItem>
           <HomeLearnItem
             title="Earn Yield on Vertek"
@@ -33,7 +34,8 @@ export function HomeLearn(props: BoxProps) {
         
             <HomeLearnItem
               title="The Vertek Volta"
-              description="This is core DeFi instrument of Vertek. Lock your VRTK-WBNB in here to get veVRTK, which can be used to vote for and direct emissions to your favorite Core Pools, increasing their APRs. Accumulate and compound veVRTK to boost rewards when farming Core Pools, while also receiving dividends from 50% of dex fee profits."
+              description="The core DeFi instrument of Vertek. Lock VRTK-WBNB here to get veVRTK, which can be used to vote for and direct emissions to your favorite Core Pools, increasing their APRs. 
+              Accumulate and compound veVRTK to boost rewards when farming Core Pools, while also receiving dividends from 50% of dex fee profits."
               url="https://aalto-defi.notion.site/Vertek-Volta-veVRTK-c4cde926ad344b2b9e1e464469bd1873"
             />
             <HomeLearnItem 
@@ -54,6 +56,7 @@ export function HomeLearn(props: BoxProps) {
               px="12">
                 Check Our Docs 
               </Button>
+              
         </HStack>
     </Box>
   );

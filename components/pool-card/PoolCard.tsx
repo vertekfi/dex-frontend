@@ -16,13 +16,13 @@ export function PoolCard({ pool, ...rest }: Props) {
 
 <LinkBox as="article" flex="1"  {...rest} padding="1" >
 <Flex
-    bgColor="rgba(0, 0, 0, 0.3)"
     flexDirection="column" 
-    borderRadius="24px"
+    bgColor="rgba(91, 192, 248, .03)"
+    borderRadius="18px"
     height="327px"
     padding="1"
     marginTop="1"
-    boxShadow="inset 0 0 10px #5BC0F8, inset 0 0 15px #4A4AF6, inset 0 0 20px #fff"
+    boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
     css={{
       transition: "transform 0.5s",
       "&:hover": {
@@ -31,7 +31,7 @@ export function PoolCard({ pool, ...rest }: Props) {
     }}
 // potentially add white to the box shadow 
     > 
-    <Flex justify="center" padding="2" paddingTop="4" my="4">
+    <Flex justify="center" padding="2" paddingTop="4" my="4" >
                       <TokenAvatarSet
                             tokenData={pool.allTokens
                             .filter((token) => !token.isNested && !token.isPhantomBpt)

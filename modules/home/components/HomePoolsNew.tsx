@@ -6,6 +6,7 @@ import {
  Grid,
  Skeleton,
  GridItem,
+ Text, 
 } from '@chakra-ui/react';
 import { PoolCard } from '~/components/pool-card/PoolCard';
 import { HomeNews } from './HomeNews';
@@ -55,9 +56,12 @@ export function HomePoolsNew(props: BoxProps) {
  return (
   <>
    <Box minWidth="0" {...props}>
-    <BeetsHeadline mb="4">Featured Pools</BeetsHeadline>
+   <Text mb="4" fontSize={{ base: '1.5rem', md: '2.2rem'}}  color="white" fontWeight="bold">
+Featured Pools 
+</Text>
+    {/* <BeetsHeadline mb="4">Featured Pools</BeetsHeadline> */}
     <Grid
-        templateColumns={{ base: 'repeat(1, 1fr)', md:'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }}
+        templateColumns={{ base: 'repeat(1, 1fr)', lg:'repeat(4, 1fr)',  }}
         columnGap={{ base: '0', lg: '8' }}
         rowGap="8"
         mt="4"
