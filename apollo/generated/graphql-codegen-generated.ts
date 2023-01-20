@@ -826,6 +826,7 @@ export interface GqlSorGetSwapsResponse {
   __typename: 'GqlSorGetSwapsResponse';
   effectivePrice: Scalars['AmountHumanReadable'];
   effectivePriceReversed: Scalars['AmountHumanReadable'];
+  isV1BetterTrade: Scalars['Boolean'];
   marketSp: Scalars['String'];
   priceImpact: Scalars['AmountHumanReadable'];
   returnAmount: Scalars['AmountHumanReadable'];
