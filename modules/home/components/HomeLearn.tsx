@@ -8,9 +8,12 @@ export function HomeLearn(props: BoxProps) {
   return (
     <Box {...props} mb="16rem">
 
-      <Text mb="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
+<Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
             Integrate with the Vertek Matrix
       </Text>
+      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="10" textAlign="right">
+      Symbiotic equilibrium
+    </Text>
       <Box fontSize="1.2rem">
             Check out the resources below to learn more
             about DeFi, Vertek and the technology we provide.
