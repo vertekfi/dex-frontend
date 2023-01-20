@@ -20,7 +20,7 @@ export function PoolStakeInFarmWarning() {
           <AlertIcon />
           <Box flex="1" mr="8" bg="black">
             You have ~{numberFormatUSDValue(valueInWallet)} worth of VPT in your wallet. This pool
-            offers additional rewards that will accumulate over time when your BPT are staked.{' '}
+            offers additional rewards that will accumulate over time when your VPT are staked.{' '}
             {/*<Link color="beets.highlight">More details</Link>*/}
           </Box>
           <Button variant="verteklight" onClick={onOpen}>

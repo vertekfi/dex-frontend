@@ -70,7 +70,7 @@ export function PoolStatistics() {
             </Box>
           </CardRow>
           <PoolDetailUsdStatsWithDate
-            title="BPT price"
+            title="VPT price"
             stats={[
               {
                 label: 'All-time high',
@@ -128,7 +128,7 @@ export function PoolStatistics() {
         </Text>
         <Card padding="2">
           <CardRow>
-            <Box flex="1">BPT symbol</Box>
+            <Box flex="1">VPT symbol</Box>
             <Box>{pool.symbol}</Box>
           </CardRow>
           <CardRow>
