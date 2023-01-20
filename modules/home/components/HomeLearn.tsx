@@ -7,6 +7,7 @@ import { HomeLearnItem } from '~/modules/home/components/HomeLearnItem';
 export function HomeLearn(props: BoxProps) {
   return (
     <Box {...props} mb="16rem">
+      
       <Text mb="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
             Integrate with the Vertek Matrix
       </Text>

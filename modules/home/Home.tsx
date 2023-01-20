@@ -76,14 +76,16 @@ export function Home() {
         borderBottomColor="gray.100"
         pb="18"
       >
-        <GridItem colSpan={3}>
+        <GridItem 
+        colSpan={3}
+        borderBottomWidth={2} borderBottomColor="gray.100">
           <HomeWhyUs />
         </GridItem>
         <GridItem colSpan={3}>
           <HomeBeetsInfo />
         </GridItem>
       </Grid>
-      <Box mt="20">
+      <Box mt="20" borderBottomWidth={2} borderBottomColor="gray.100">
         <HomeLearn />
       </Box>
     </Box>
