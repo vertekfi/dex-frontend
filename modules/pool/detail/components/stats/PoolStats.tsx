@@ -13,15 +13,15 @@ export default function PoolStats() {
   const handleTabChanged = (tabIndex: number) => {
     setActiveTab(tabIndex);
   };
-  
+
   return (
-    <Card 
-    p="4"
-    mb="0"
-    width="full" 
-    borderRadius="16px"
-    bgColor="rgba(0, 0, 0, 0.3)"
-    boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 12px #fff"
+    <Card
+      p="4"
+      mb="0"
+      width="full"
+      borderRadius="16px"
+      bgColor="rgba(0, 0, 0, 0.3)"
+      boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 12px #fff"
     >
       <VStack height="full" spacing="4">
         {hasBpt && (
@@ -33,14 +33,14 @@ export default function PoolStats() {
             px="2"
           >
             <TabList>
-            <HStack spacing="2">
+              <HStack spacing="2">
                 <BeetsTab paddingX="4" paddingY="2" fontSize="xs">
                   My Stats
                 </BeetsTab>
                 <BeetsTab paddingX="2" paddingY="2" fontSize="xs">
                   Pool Stats
                 </BeetsTab>
-            </HStack>
+              </HStack>
             </TabList>
           </Tabs>
         )}
