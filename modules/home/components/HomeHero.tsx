@@ -30,10 +30,17 @@ export function HomeHero() {
               textTransform="uppercase"
               color="white"
               fontWeight="semibold"
+              css={{
+                transition: "transform 0.5s",
+                "&:hover": {
+                  transform: "scale(1.02)",
+                },
+              }}
             >
               Welcome to
               <br />
-              Vertek
+              <span className="vertektitle" >
+              Vertek </span>
             </Text>
           </HStack>
 

@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { HomeHero } from '~/modules/home/components/HomeHero';
 import { HomeWhyUs } from '~/modules/home/components/HomeWhyUs';
 import { HomeBeetsInfo } from '~/modules/home/components/HomeBeetsInfo';
@@ -61,6 +61,12 @@ export function Home() {
           </GridItem>
       </Grid> */}
       <HomePoolsNew />
+      <Text mb="0" mt="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
+        The pinnacle of DeFi technological evolution. <br /> 
+      </Text>
+      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="8" textAlign="right">
+        Advanced, yet simple. Sophisticated, yet <u>intuitive</u>. 
+      </Text>
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
         columnGap={{ base: '0', lg: '16' }}
@@ -70,10 +76,10 @@ export function Home() {
         borderBottomColor="gray.100"
         pb="18"
       >
-        <GridItem colSpan={2}>
+        <GridItem colSpan={3}>
           <HomeWhyUs />
         </GridItem>
-        <GridItem>
+        <GridItem colSpan={3}>
           <HomeBeetsInfo />
         </GridItem>
       </Grid>
