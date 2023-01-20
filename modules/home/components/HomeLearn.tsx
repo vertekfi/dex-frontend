@@ -7,7 +7,7 @@ import { HomeLearnItem } from '~/modules/home/components/HomeLearnItem';
 export function HomeLearn(props: BoxProps) {
   return (
     <Box {...props} mb="16rem">
-      
+
       <Text mb="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
             Integrate with the Vertek Matrix
       </Text>
@@ -19,7 +19,7 @@ export function HomeLearn(props: BoxProps) {
         Vertek Basics
       </BeetsSubHeadline> */}
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="12" mt="4">
-        <GridItem>
+        <GridItem mt="4">
           <HomeLearnItem
             title="Earn Yield on Vertek"
             description="From multiple assets, customized token weightings and dynamic swap fees, weighted pools are the industry standard when it comes to tailored investment strategies. Discover more about this unique type of liquidity pool and how you can get the most out of it."
@@ -31,7 +31,7 @@ export function HomeLearn(props: BoxProps) {
             url="https://aalto-defi.notion.site/Noob-s-Guide-to-Investing-in-a-Liquidity-Pool-c1fef5c4122e4bfe9c8d6a3841bab2b0"
           />
         </GridItem>
-        <GridItem>
+        <GridItem mt="4">
         
             <HomeLearnItem
               title="The Vertek Volta"
