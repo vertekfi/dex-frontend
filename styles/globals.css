@@ -40,6 +40,28 @@ a {
     width: 100% !important;
 }
 
+.vertektitle {
+    /* background-image: radial-gradient(circle, #4A4AF6, #5BC0F8, #fff, #4132D0); */
+    background-image: linear-gradient(to top right, #4A4AF6, #4A4AF6); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold; 
+    -webkit-animation: gradient-animation 1s linear infinite;
+    -moz-animation: gradient-animation 1s linear infinite;
+    animation: gradient-animation 1s linear infinite;
+}
+
+@keyframes gradient-animation {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+
 .apr-stripes {
     /*background: linear-gradient(
         45deg,
