@@ -35,7 +35,6 @@ export function PoolListItem({
 
 <Box
   mb={{ base: '4', lg: '0' }}
-  borderRadius={{ base: 'md', lg: '0' }}
   {...rest}
   bgColor={showUserBalance && hasUnstakedBpt ? 'rgba(251, 211, 141, 0.16)' : undefined}
 >

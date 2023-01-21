@@ -1,5 +1,5 @@
 import { useVotingGauges } from '../../../lib/global/gauges/useVotingGauges';
-import { Box, Button, Grid, GridItem, Text, GridItemProps } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Text, GridItemProps, Heading} from '@chakra-ui/react';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -20,31 +20,23 @@ import { LockForm } from './lock/LockForm';
 interface Props {
   pool: GqlPoolUnion;
 }
-
 const VotingCard = styled.div`
-  bg: '';
+  padding: 16px; 
+  min-height: 30vh; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-between; 
   box-shadow: 0 0 10px #5bc0f8, 0 0 20px #4a4af6;
   border-radius: 25px;
-  max-width: 550px;
-  height: 200px;
   color: white;
+  border-width: 1px; 
+  
 `;
 const VotingCardHeader = styled.p`
   font-size: 1.2rem;
-  font-weight: bold;
   text-align: center;
 `;
-const SubText = styled.p`
-  font-size: 1.1rem;
-  text-align: center;
-  font-weight: semibold;
-`;
-const ValueText = styled.p`
-  font-size: 1rem;
-  text-align: center;
-  font-weight: bold;
-`;
-
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -143,108 +135,57 @@ export function VotingHeader() {
   return (
 <UserDataProvider>
   <Grid
-    templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(4, 1fr)' }}
+    templateColumns={{ base: 'repeat(1, 1fr)', md:'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
     paddingX={{ base: '0', md: '6', lg: '4' }}
     paddingY={2}
     gap="4"
     justifyContent="center"
-    alignItems="center"
-  >
-    <VotingCard>
-      <Grid paddingX="2" paddingY="2">
-          <GridItem mt="2">
-              <VotingCardHeader>My 80VRTK-20BNB</VotingCardHeader>
-          </GridItem>
-          <GridItem mt="3">
-            <SubText>{userPoolBalance.usdValue}</SubText>
-          </GridItem>
-          <GridItem mt="-1">
-            <ValueText>{userPoolBalance.balance}</ValueText>
-          </GridItem>
-          <GridItem mt={{ base: '3', lg: '6' }}>
-            <Box display="flex" justifyContent="center">
-              <Button 
-              as="a"
-              href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
-              target=""
-              variant="stayblack" width={{ base: '50%', lg: '75%' }}
-              >
-                Get VRTK-BNB
-              </Button>
-
-              {/* will need to update this link when the real pool is live!  */}
-            </Box>
-          </GridItem>
-      </Grid>
+    alignItems="center" >
+    <VotingCard >
+        <VotingCardHeader>My VRTK-WBNB </VotingCardHeader>
+        <Text>{userPoolBalance.usdValue}</Text>
+        <Text mb="2rem">{userPoolBalance.balance}</Text>
+        <Button 
+            as="a"
+            href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
+            variant="moistblack" width={{ base: '50%', lg: '75%' }}
+            >
+              Get VRTK-BNB
+        </Button>
     </VotingCard>
-
     <VotingCard>
-      <Grid paddingX="2" paddingY="2">
-        <GridItem mt="2">
-          <VotingCardHeader>My locked 80VRTK-20BNB</VotingCardHeader>
-        </GridItem>
-        <GridItem mt="3">
-          <SubText>$0.00</SubText>
-        </GridItem>
-        <GridItem mt="-1">
-          <ValueText>{userLockInfo?.lockedAmount}</ValueText>
-        </GridItem>
-        <GridItem mt={{ base: "3", lg: "6" }}>
-          <Box display="flex" justifyContent="center">
-            <Button
-              variant="stayblack"
-              width={{ base: "50%", lg: "75%" }}
-              onClick={handleOpenModal} >
-              Lock VRTK-BNB
-            </Button>
-          </Box>
-        </GridItem>
-          {isModalOpen && (
-            <LockForm
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-            />
-          )}
-      </Grid>
+        <VotingCardHeader>
+              My locked VRTK-WBNB
+        </VotingCardHeader>
+        <Text mb="2rem" >$0.00</Text>
+        <Text>{userLockInfo?.lockedAmount}</Text>
+        <Button
+                variant="moistblack"
+                width={{ base: "50%", lg: "75%" }}
+                onClick={handleOpenModal} >
+                Lock VRTK-BNB
+        </Button>
+        {isModalOpen && (
+          <LockForm
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
     </VotingCard>
-
     <VotingCard>
-      <Grid paddingX="2" paddingY="2">
-        <GridItem mt="2">
-          <VotingCardHeader>Locked until</VotingCardHeader>
-        </GridItem>
-        <GridItem mt="3">
-          <SubText>{lockInfoDisplay.lockedUntilDate}</SubText>
-        </GridItem>
-        <GridItem mt="-1">
-          <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-            <ValueText>{lockInfoDisplay.lockedUntilDays} days</ValueText>
-          </Box>
-        </GridItem>
-
-        <GridItem mt={{ base: '3', lg: '6' }}>
-          <Box display="flex" justifyContent="center">
-            <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
+          <VotingCardHeader>Locked until </VotingCardHeader>
+          <Text>{lockInfoDisplay.lockedUntilDate}</Text>
+          <Text>{lockInfoDisplay.lockedUntilDays} days</Text>
+          <Button variant="moistblack" width={{ base: '50%', lg: '75%' }}>
               Update My Lock
               <LockIcon ml="2" color="vertek.slate.200" />
             </Button>
-          </Box>
-        </GridItem>
-      </Grid>
     </VotingCard>
 
     <VotingCard>
-      <Grid paddingX="2" paddingY="2">
-        <GridItem mt="2">
           <VotingCardHeader>My veVRTK</VotingCardHeader>
-        </GridItem>
-        <GridItem mt="3">
-          <SubText>{lockInfoDisplay.veBalance}</SubText>
-        </GridItem>
-        <GridItem mt="-1">
-          <ValueText>{lockInfoDisplay.percentOwned}</ValueText>
-        </GridItem>
-      </Grid>
+          <Text>{lockInfoDisplay.veBalance}</Text>
+          <Text mb="4">{lockInfoDisplay.percentOwned}</Text>
     </VotingCard>
   </Grid>
 </UserDataProvider>

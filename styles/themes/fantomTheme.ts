@@ -383,6 +383,26 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 color:'white', 
                                 },
                             },
+                            moistblack: {
+                                backgroundColor:'vertek.slate.900', 
+                                boxShadow:'0 0 8px #fff', 
+                                color: 'white',
+                                fontWeight:'900', 
+                                _active: { backgroundColor:'vertek.slate.900'  },
+                                _focus: { outline: 'none', boxShadow: 'none' },
+                                borderRadius: '8px',
+                                _hover: {
+                                    color:'white',
+                                    boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                                    background: '',  
+                                    transform:'scale(1.02)' 
+                                        }, 
+                                _disabled: {
+                                    transform: 'none',
+                                    background: 'gray.400',
+                                    color:'white', 
+                                    },
+                                },
                             stayblacklock: {
                                 backgroundColor:'vertek.slate.900', 
                                 boxShadow:'0 0 12px #000', 

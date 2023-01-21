@@ -30,12 +30,8 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
     <PoolListProvider>
       <UserTokenBalancesProvider>
         <Grid
-          bg=""
-          boxShadow={{ base: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', lg: 'none' }}
-          borderBottomColor="vertek.slatepurple.600"
-          borderBottomWidth="1px"
-          pl="4"
-          py="4"
+          className="moistmobilecard"
+          boxShadow={{ lg: 'none' }}
           borderRadius={{ base: '12px', lg: '' }}
           templateColumns={{
             base: 'repeat(1fr 1fr)',
