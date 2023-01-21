@@ -79,6 +79,7 @@ function PoolList() {
         showUserBalance={showMyInvestments}
         borderBottomColor="vertek.slatepurple.600"
         borderBottomWidth={index === pools.length - 1 ? 0 : 1}
+        boxShadow={{ lg: 'none'}}
         bg=""
         className="moistmobilecard"
         tokens={item.allTokens
