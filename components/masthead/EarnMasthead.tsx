@@ -1,11 +1,16 @@
 import { Text, Button, SimpleGrid, GridItem } from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { LockForm } from '~/modules/voting/components/lock/LockForm';
+
 
 interface Props {
     title: string;
     image: ReactNode;
 }
 export function EarnMasthead({ title, image }: Props) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpenModal = () => setIsModalOpen(true);
 return (
 <SimpleGrid 
     columns={{ sm: 1, lg: 6 }} 
@@ -47,12 +52,14 @@ return (
 className="verteklightpurplebox"
 marginTop={{ base: 0, lg: 2 }}
 display="flex"
+width={{ base: '75%', md:'60%', lg:'auto'}}
+mx="auto"
 justifyContent="flex-start"
 alignItems="flex-start"
 colSpan={{ sm: 1, lg: 2 }}
 flexDirection="column"
 borderRadius={{ base: '42px', lg:'16px'}}
-padding={{ base:'6', lg:'4' }}
+padding={{ base:'4', lg:'4' }}
 >
 <Text 
     fontSize={{ base:'1rem', lg:'1.1rem'}}
@@ -81,10 +88,17 @@ padding={{ base:'6', lg:'4' }}
     gap="8px"
     mt="3"
     alignSelf="center"
+    onClick={handleOpenModal}
 >
     Earn More
 </Button>
 </GridItem>
+{isModalOpen && (
+            <LockForm
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
+          )}
 </SimpleGrid>
 );
 }
