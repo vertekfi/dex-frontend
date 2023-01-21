@@ -71,6 +71,7 @@ function PoolList() {
       <PoolListTableHeader />
       {poolsToRender.map((item, index) => (
       
+
       <PoolListItem
         key={index}
         pool={item}
@@ -79,7 +80,7 @@ function PoolList() {
         borderBottomColor="vertek.slatepurple.600"
         borderBottomWidth={index === pools.length - 1 ? 0 : 1}
         bg=""
-        padding={{ base: "12px", lg:"6px"}}
+        className="moistmobilecard"
         tokens={item.allTokens
           .filter((token) => !token.isNested && !token.isPhantomBpt)
           .map((token) => ({
