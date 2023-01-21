@@ -32,6 +32,7 @@ return (
   templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }} 
   gap={{ base: '6', md:'12'}}
   mx="4"
+  mb="8"
   paddingX={{ base: 'none', md: '6'}} 
   mt="4" >
       <GridItem borderBottomWidth={{base: '0px', lg:'0px'}} height={{ base:'auto', lg:'17rem', xl:'14rem'}} borderColor="vertek.neonpurple.500">

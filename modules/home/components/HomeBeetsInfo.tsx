@@ -25,26 +25,18 @@ export function HomeBeetsInfo(props: BoxProps) {
             developmental trajectory of the Vertek matrix. Vote to direct VRTK emissions to your favorite pools, 
             and join the swarm of cyber hornets in the Vertek DAO, all the while boosting your rewards by up to 2.5x as you accumulate veVRTK.
   </Box>
-
-
-    <Box display="flex" justifyContent="flex-start" alignItems="flex-end">
-      <Box fontSize="1.2rem" textAlign={{base: 'left', md:'left'}} width={{base: '100%', md:'60%'}} display="flex"  >
-          
-      </Box>
-    </Box>
-      {/* <Box display="flex" justifyContent={{ base:'flex-start', md:'flex-start' }} mb="0" alignItems="flex-start">
-        <Text mb="1" fontSize={{ base: '2.5rem', md: '3rem'}} textAlign={{base:'right', md:'right'}} className="vertektitle">
-         
-        </Text>
-      </Box> */}
       <Box 
       display="flex" 
-      justifyItems="flex-end" alignContent="flex-end" mb="4" width={{base: 'auto', md:'75%'}}>
+      justifyItems="flex-end" alignContent="flex-end" mb="" width={{base: 'auto', md:'75%'}}>
         <Text align="right">
            
       </Text>
       </Box>
-      <Box display="flex" flexDirection={{ base:'column', md:'row' }} justifyContent="space-between" alignItems="center" mt={{ base:'auto', lg:'-20'}}>
+      <Box 
+      mt="4"
+      display="flex" flexDirection={{ base:'column', md:'row' }} 
+      justifyContent="space-between" 
+      alignItems="center" mt={{ base:'auto', lg:'-20'}}>
         <Box ml="4">
           <NextImage
               src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
