@@ -8,7 +8,7 @@ export function HomeLearn(props: BoxProps) {
   return (
     <Box {...props} mb="16rem">
 
-<Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
+      <Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
             Integrate with the Vertek Matrix
       </Text>
       <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="10" textAlign="right">
