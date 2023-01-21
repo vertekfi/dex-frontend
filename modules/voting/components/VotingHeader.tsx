@@ -20,7 +20,6 @@ import { LockForm } from './lock/LockForm';
 interface Props {
   pool: GqlPoolUnion;
 }
-
 const VotingCard = styled.div`
   padding: 16px; 
   min-height: 30vh; 
@@ -33,22 +32,10 @@ const VotingCard = styled.div`
   color: white;
   border-width: 1px; 
 `;
-
 const VotingCardHeader = styled.p`
   font-size: 1.2rem;
   text-align: center;
 `;
-const SubText = styled.p`
-  font-size: 1.1rem;
-  text-align: center;
-  font-weight: semibold;
-`;
-const ValueText = styled.p`
-  font-size: 1rem;
-  text-align: center;
-  font-weight: bold;
-`;
-
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
