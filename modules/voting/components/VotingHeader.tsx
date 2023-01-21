@@ -31,6 +31,7 @@ const VotingCard = styled.div`
   border-radius: 25px;
   color: white;
   border-width: 1px; 
+  
 `;
 const VotingCardHeader = styled.p`
   font-size: 1.2rem;
@@ -140,15 +141,14 @@ export function VotingHeader() {
     gap="4"
     justifyContent="center"
     alignItems="center" >
-    <VotingCard>
+    <VotingCard >
         <VotingCardHeader>My VRTK-WBNB </VotingCardHeader>
         <Text>{userPoolBalance.usdValue}</Text>
         <Text mb="2rem">{userPoolBalance.balance}</Text>
         <Button 
             as="a"
             href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
-            target=""
-            variant="stayblack" width={{ base: '50%', lg: '75%' }}
+            variant="moistblack" width={{ base: '50%', lg: '75%' }}
             >
               Get VRTK-BNB
         </Button>
@@ -160,7 +160,7 @@ export function VotingHeader() {
         <Text mb="2rem" >$0.00</Text>
         <Text>{userLockInfo?.lockedAmount}</Text>
         <Button
-                variant="stayblack"
+                variant="moistblack"
                 width={{ base: "50%", lg: "75%" }}
                 onClick={handleOpenModal} >
                 Lock VRTK-BNB
@@ -176,7 +176,7 @@ export function VotingHeader() {
           <VotingCardHeader>Locked until </VotingCardHeader>
           <Text>{lockInfoDisplay.lockedUntilDate}</Text>
           <Text>{lockInfoDisplay.lockedUntilDays} days</Text>
-          <Button variant="stayblack" width={{ base: '50%', lg: '75%' }}>
+          <Button variant="moistblack" width={{ base: '50%', lg: '75%' }}>
               Update My Lock
               <LockIcon ml="2" color="vertek.slate.200" />
             </Button>
