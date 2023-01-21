@@ -1,6 +1,6 @@
 import { Text, Button, SimpleGrid, GridItem } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LockForm } from '~/modules/voting/components/lock/LockForm';
 
 

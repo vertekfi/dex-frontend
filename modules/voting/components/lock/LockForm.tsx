@@ -30,16 +30,18 @@ return (
             </BeetsModalHeadline>
         </BeetsModalHeader>
     <BeetsModalBody bgColor="transparent" p="4" textAlign="center" fontSize="1.2rem">
-        <Grid pl="4" pr="4" templateColumns={{ base: '1fr 200px 1fr', md: '1fr 400px 1fr' }}>
+        <Grid 
+        pl="4" 
+        pr="4" 
+        templateColumns={{ base: '1fr 200px 1fr', md: '2fr 3fr 2fr' }}>
         <GridItem 
             boxShadow="0 0 5px #fff"
             m="2" 
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
                 <Box padding="2" borderRadius="12px" mb="6" >
-                <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
-
-                        Lockable tokens in my wallet
+                    <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
+                            Lockable tokens in my wallet
                     </Text>
                     <Flex align="center" mt="6">
                             <Text fontSize="1rem" mr="auto">80VRTK-20WBNB</Text>
@@ -49,8 +51,12 @@ return (
                             <Text fontSize="1rem" mr="auto">Vertek Governance</Text>
                             <Text fontSize="1rem" ml="auto">$0.00</Text>
                     </Flex>
-                    <Flex align="start" mt="4" >
-                        <Button variant="stayblacklock" borderWidth="1px" width="75%" height="2.2rem" >
+                    <Flex  
+                    mt="8" >
+                        <Button 
+                        variant="stayblacklock" 
+                        borderWidth="1px" 
+                        width="100%" height="2.2rem" >
                             Get VRTK-WBNB
                         </Button>
                     </Flex>
