@@ -19,8 +19,8 @@ return (
   <Box fontSize="1.2rem">
     Advanced, yet simple. Sophisticated, yet intuitive. 
   </Box> */}
-  <BeetsHeadline mb="" mt="8" fontSize={{ base: '1.5rem', md: '2.2rem'}} color="white" fontWeight="bold">
-      Empowered Governance
+  <BeetsHeadline mb="" mt="8" fontSize={{ base: '1.5rem', md: '2.2rem'}} textAlign="justify" color="white" fontWeight="bold">
+      DeFi Matrix
   </BeetsHeadline>
   <Box mr={{ base: '0', lg: '20' }} width={{ base: 'full', lg: '75%'}}>
   Vertek is a full-suite matrix of trading tools that users and developers 
