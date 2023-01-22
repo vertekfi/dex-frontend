@@ -25,7 +25,7 @@ return (
     >
     <ModalOverlay bgColor="vertek.slate.900"/> 
     <ModalContent 
-    minW={{ base:'auto', md:'90vw' }} maxW={{base:'auto', md:'90vw'}} 
+    minW={{ base:'auto', md:'90vw' }} maxW={{base:'auto', md:'95vw'}} 
     bg="vertek.slatepurple.900" 
     paddingY="2rem" borderRadius="12px" 
     marginTop="1.5rem">
@@ -39,9 +39,11 @@ return (
         <Grid 
         pl={{base: '2', md:'4'}}
         pr={{ base: '2', md:'4'}} 
-        templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}>
+        templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
+        gap="8"
+        >
         <GridItem 
-            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            boxShadow={{base:'none', md:'none'}}
             width={{base:'90%', lg:'auto'}}
             m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
@@ -96,7 +98,7 @@ return (
                 </Box>
             </GridItem>
             <GridItem 
-            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            boxShadow={{base:'none', md:'none'}}
             width={{base:'90%', lg:'auto'}}
             m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
@@ -211,7 +213,7 @@ return (
                 </Box>
             </GridItem>
             <GridItem 
-            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            boxShadow={{base:'none', md:'none'}}
             width={{base:'90%', lg:'auto'}}
             m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
