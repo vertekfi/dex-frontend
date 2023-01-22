@@ -22,7 +22,8 @@ interface Props {
 }
 const VotingCard = styled.div`
   padding: 16px; 
-  min-height: 30vh; 
+  height: 30vh; 
+  max-height: 300px; 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
@@ -34,8 +35,11 @@ const VotingCard = styled.div`
   
 `;
 const VotingCardHeader = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
+  color: #4a4af6; 
+  font-weight: bold; 
+  text-shadow: 0 0 12px #000; 
 `;
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -136,7 +140,7 @@ export function VotingHeader() {
 <UserDataProvider>
   <Grid
     templateColumns={{ base: 'repeat(1, 1fr)', md:'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
-    paddingX={{ base: '0', md: '6', lg: '4' }}
+    paddingX={{ base: '0', md: '4', lg: '4' }}
     paddingY={2}
     gap="4"
     justifyContent="center"

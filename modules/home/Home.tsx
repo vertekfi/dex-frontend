@@ -61,11 +61,11 @@ export function Home() {
           </GridItem>
       </Grid> */}
       <HomePoolsNew />
-      <Text mb="0" mt="4" fontSize={{ base: '2rem', md: '3rem'}}  className="vertektitle">
+      <Text mb="0" mt="12" fontSize={{ base: '2rem', md: '3rem'}}  textAlign="justify" className="vertektitle">
         The pinnacle of DeFi technological evolution. <br /> 
       </Text>
-      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="8" textAlign="right">
-        Advanced, yet simple. Sophisticated, yet <u>intuitive</u>. 
+      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="8" textAlign="justify">
+        Advanced, yet simple. Sophisticated, yet intuitive. 
       </Text>
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
@@ -74,18 +74,19 @@ export function Home() {
         mt="4"
         borderBottomWidth={2}
         borderBottomColor="gray.100"
-        pb="18"
-      >
-        <GridItem 
-        colSpan={3}
-        borderBottomWidth={2} borderBottomColor="gray.100">
-          <HomeWhyUs />
-        </GridItem>
-        <GridItem colSpan={3}>
-          <HomeBeetsInfo />
-        </GridItem>
+        pb="18">
+          
+            <GridItem 
+            colSpan={3}
+            borderBottomWidth={2} borderBottomColor="gray.100">
+                  <HomeWhyUs />
+            </GridItem>
+
+            <GridItem colSpan={3} mt="12">
+              <HomeBeetsInfo />
+            </GridItem>
       </Grid>
-      <Box mt="20" borderBottomWidth={2} borderBottomColor="gray.100">
+      <Box mt="12" borderBottomWidth={0} borderBottomColor="gray.100">
         <HomeLearn />
       </Box>
     </Box>

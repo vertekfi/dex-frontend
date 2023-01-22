@@ -4,22 +4,26 @@ import { useState } from 'react';
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { Calendar } from "react-feather";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react';
-
+import { LockPreview } from "./LockPreview";
 interface Props {
 isOpen: boolean;
 onClose: () => void;
 }
 
 export function LockForm(props: Props) {
+const [isModalOpen, setIsModalOpen] = useState(false);
+const handleOpenModal = () => setIsModalOpen(true);
+
 return (
     <Modal 
     isOpen={props.isOpen} 
     onClose={props.onClose} 
     size="xl"
+
     >
     <ModalOverlay bgColor="vertek.slate.900"/> 
     <ModalContent 
-    minW='90vw' maxW='90vw' 
+    minW={{ base:'auto', md:'90vw' }} maxW={{base:'99vw', md:'90vw'}} 
     bg="vertek.slatepurple.900" 
     paddingY="2rem" borderRadius="12px" 
     marginTop="1.5rem">
@@ -29,17 +33,19 @@ return (
                 Lock VRTK-WBNB
             </BeetsModalHeadline>
         </BeetsModalHeader>
-    <BeetsModalBody bgColor="transparent" p="4" textAlign="center" fontSize="1.2rem">
+    <BeetsModalBody bgColor="transparent" p="0" textAlign="center" fontSize="1.2rem">
         <Grid 
-        pl="4" 
-        pr="4" 
-        templateColumns={{ base: '1fr 200px 1fr', md: '2fr 3fr 2fr' }}>
+        pl={{base: 'none', md:'4'}}
+        pr={{ base: 'none', md:'4'}} 
+        templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}>
         <GridItem 
             boxShadow="0 0 5px #fff"
-            m="2" 
+            width="100%"
+            m={{ base:'0', md:'2'}}
+            display="flex" alignItems="center" 
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
-                <Box padding="2" borderRadius="12px" mb="6" >
+                <Box padding={{ base:'0', md:'2'}} borderRadius="12px" mb="6" >
                     <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
                             Lockable tokens in my wallet
                     </Text>
@@ -187,9 +193,17 @@ return (
                     </Flex>
                 </Box>
                 
-                    <Button variant="stayblack" mb="4" width={{ base: '90%', lg: '100%' }}>
+                    <Button 
+                    onClick={handleOpenModal} 
+                    variant="stayblack" mb="4" width={{ base: '90%', lg: '100%' }}>
                         Preview
                     </Button>
+                    {isModalOpen && (
+                            <LockPreview
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                        />
+                        )}
                 </Box>
             </GridItem>
             <GridItem 
