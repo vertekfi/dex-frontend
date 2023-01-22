@@ -133,7 +133,6 @@ return (
                             // rules={inputRules}
                             // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
                             size="md"
-                            autoFocus
                             />
                         <FormLabel mt="2" mb="4" color="white" >
                             Balance: 0 
@@ -166,7 +165,6 @@ return (
                             // rules={inputRules}
                             // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
                             size="md"
-                            autoFocus
                             />
                             <Box 
                             w="99%" 
