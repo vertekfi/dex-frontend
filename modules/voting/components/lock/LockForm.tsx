@@ -5,10 +5,13 @@ import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { Calendar } from "react-feather";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react';
 import { LockPreview } from "./LockPreview";
+import styled from "@emotion/styled";
+
 interface Props {
 isOpen: boolean;
 onClose: () => void;
 }
+
 
 export function LockForm(props: Props) {
 const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,11 +22,10 @@ return (
     isOpen={props.isOpen} 
     onClose={props.onClose} 
     size="xl"
-
     >
     <ModalOverlay bgColor="vertek.slate.900"/> 
     <ModalContent 
-    minW={{ base:'auto', md:'90vw' }} maxW={{base:'99vw', md:'90vw'}} 
+    minW={{ base:'auto', md:'90vw' }} maxW={{base:'auto', md:'90vw'}} 
     bg="vertek.slatepurple.900" 
     paddingY="2rem" borderRadius="12px" 
     marginTop="1.5rem">
@@ -35,17 +37,16 @@ return (
         </BeetsModalHeader>
     <BeetsModalBody bgColor="transparent" p="0" textAlign="center" fontSize="1.2rem">
         <Grid 
-        pl={{base: 'none', md:'4'}}
-        pr={{ base: 'none', md:'4'}} 
+        pl={{base: '2', md:'4'}}
+        pr={{ base: '2', md:'4'}} 
         templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}>
         <GridItem 
-            boxShadow="0 0 5px #fff"
-            width="100%"
-            m={{ base:'0', md:'2'}}
-            display="flex" alignItems="center" 
+            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            width={{base:'90%', lg:'auto'}}
+            m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
-                <Box padding={{ base:'0', md:'2'}} borderRadius="12px" mb="6" >
+                <Box padding={{ base:'2', md:'2'}} borderRadius="12px" mb="6" >
                     <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
                             Lockable tokens in my wallet
                     </Text>
@@ -61,6 +62,8 @@ return (
                     mt="8" >
                         <Button 
                         variant="stayblacklock" 
+                        as="a"
+                        href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
                         borderWidth="1px" 
                         width="100%" height="2.2rem" >
                             Get VRTK-WBNB
@@ -80,7 +83,7 @@ return (
                             </AccordionButton>
                             
                             <AccordionPanel pb={5} bg="" >
-                                <Text align="left" color="white" fontSize="0.8rem">
+                                <Text align="left" color="white" fontSize="1rem">
                                     1. Invest in the pool. <br />
                                     2. How to lock and earn? 80VRTK-20BNB APT <br />
                                     3. veVRTK holders get boosted liquidity mining yields (up to 2.5x) and increased voting power. <br />
@@ -93,8 +96,9 @@ return (
                 </Box>
             </GridItem>
             <GridItem 
-            boxShadow="0 0 5px #fff"
-            m="2" 
+            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            width={{base:'90%', lg:'auto'}}
+            m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
             <Box padding="2" borderRadius="12px" mb="6" bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)">
@@ -165,10 +169,10 @@ return (
                             <Box 
                             w="99%" 
                             paddingY="2"
-                            paddingX="1"
+                            paddingX={{base:'none', md:'1'}}
                             justifyContent="space-between" 
                             display="flex" >
-                                <Button variant="stayblacklock">
+                                <Button variant="stayblacklock" >
                                     1w
                                 </Button>
                                 <Button variant="stayblacklock">
@@ -207,8 +211,9 @@ return (
                 </Box>
             </GridItem>
             <GridItem 
-            boxShadow="0 0 5px #fff"
-            m="2" 
+            boxShadow={{base:'none', md:'0 0px 10px 1px #fff'}}
+            width={{base:'90%', lg:'auto'}}
+            m={{ base:'2', md:'2'}}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
             <Box padding="2" borderRadius="12px" mb="6" bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)">
