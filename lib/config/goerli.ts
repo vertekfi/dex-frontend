@@ -31,76 +31,62 @@ export const goerliNetworkConfig: NetworkConfig = {
     gauges: '',
   },
   beets: {
-    address: '0xaFbf7fB9Fa206089041218dF93c8B3A1Bb9F4497',
+    address: '0x0bD5AC1eDcA0380E8709773F502C2960DeCcaF79',
   },
   balancer: {
-    vault: '0x4b93431a1942A0F3Be0a082834200FFd9BE54FD4',
+    vault: '0x1F56FDcB9E3a818E4BB2E6Fe2cb73F7385D3Aeac',
     feeDistributor: '0x41e5dE004C19497B04A6Dc4902DF5f6b5a6859C5',
     batchRelayer: '',
     composableStableFactory: '',
-    weightedPoolV2Factory: '',
-    weightedPoolFactory: '0x274B157a7b312175936Dc16fCA5209ee9DE8422e',
+    weightedPoolV2Factory: '0x8F1a6dD65E8d76de878dEb776A5D41b5919Feba7',
+    weightedPoolFactory: '0x8F1a6dD65E8d76de878dEb776A5D41b5919Feba7',
     linearFactories: {
       erc4626: [],
       reaper: [],
     },
     linearRebalancers: {},
     votingEscrow: {
-      veAddress: '0x0701037C5Af32ec230dB00af18075C5a91a4D259',
-      gaugeController: '0xEcc318f292B896651613A029a966Ff19E35A2fa1',
-      veBALHelpers: '0x3B0b5C741A11cE8e42411af455490BED08Abd91A',
-      tokenAdmin: '0xaF3F9EB221f3DB6cEEdC6cC24818A18869Feb268',
-      lockablePoolId: '0x3e9f7b85e8ee2107aeca28677b6b416fa60b6200000200000000000000000002',
-      lockPoolAddress: '0x3e9f7B85E8Ee2107aeca28677b6B416fA60b6200',
+      veAddress: '0xE135f5772f7dd368dDDC759FA31a11419e253d00',
+      gaugeController: '0x88FA9a8887DdB5d7F27d5a9A10fb70aEf47dd2F1',
+      veBALHelpers: '0x9Eb753aA97a6E748e1a3334197666f608fFe90BB',
+      tokenAdmin: '0xb8e6D3700BCE2CC163BD4FfC52dA1F65CFeE8909',
+      lockablePoolId: '0x39f84fe24135d3c160b5e1bca36b0e66b6c11c4e000200000000000000000004',
+      lockPoolAddress: '0x39F84FE24135D3C160b5E1BCa36b0e66b6C11c4E',
     },
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6',
-  defaultTokenOut: '0xaFbf7fB9Fa206089041218dF93c8B3A1Bb9F4497',
+  defaultTokenOut: '0x0bD5AC1eDcA0380E8709773F502C2960DeCcaF79',
   farmTypeName: 'gauge',
   additionalLinks: [
-    {
-      title: 'Vote',
-      url: 'https://snapshot.org/#/beets.eth',
-    },
-    {
-      title: 'Analytics',
-      url: 'https://info.beets.fi',
-    },
-    {
-      title: 'Docs & Help',
-      url: 'https://docs.beets.fi',
-    },
+    // {
+    //   title: 'Vote',
+    //   url: 'https://snapshot.org/#/beets.eth',
+    // },
+    // {
+    //   title: 'Analytics',
+    //   url: 'https://info.beets.fi',
+    // },
+    // {
+    //   title: 'Docs & Help',
+    //   url: 'https://docs.beets.fi',
+    // },
     {
       title: 'Github',
-      url: 'https://github.com/beethovenxfi',
+      url: 'https://github.com/vertekfi',
     },
     {
       title: 'Twitter',
-      url: 'https://twitter.com/beethoven_x',
+      url: 'https://twitter.com/Vertek_Dex',
     },
-    {
-      title: 'Medium',
-      url: 'https://beethovenxio.medium.com/',
-    },
+    // {
+    //   title: 'Medium',
+    //   url: 'https://beethovenxio.medium.com/',
+    // },
     {
       title: 'Discord',
-      url: 'https://discord.gg/jedS4zGk28',
-    },
-    {
-      title: 'Olympus Bonds',
-      url: 'https://pro.olympusdao.finance/#/bond',
-    },
-    {
-      title: 'Multichain Bridge',
-      subTitle: 'ETH / AVAX / BSC / MATIC',
-      url: 'https://app.multichain.org/#/router',
-    },
-    {
-      title: 'AllBridge',
-      subTitle: 'SOL / MATIC / CELO',
-      url: 'https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL',
+      url: 'https://discord.com/invite/vertek-ames-aalto',
     },
   ],
   priceImpact: {
@@ -120,6 +106,6 @@ export const goerliNetworkConfig: NetworkConfig = {
   gauge: {
     rewardHelperAddress: AddressZero,
   },
-  createPoolUrl: 'https://dex-frontend-v2.vercel.app/#/pool-create',
-  stakeUrl: 'https://dex-frontend-v2.vercel.app/#/voting',
+  createPoolUrl: 'https://vertek.exchange/#/pool-create',
+  stakeUrl: '',
 };
