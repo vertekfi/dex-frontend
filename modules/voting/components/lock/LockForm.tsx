@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { Calendar } from "react-feather";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react';
-
+import { LockPreview } from "./LockPreview";
 interface Props {
 isOpen: boolean;
 onClose: () => void;
 }
 
 export function LockForm(props: Props) {
+const [isModalOpen, setIsModalOpen] = useState(false);
+const handleOpenModal = () => setIsModalOpen(true);
+
 return (
     <Modal 
     isOpen={props.isOpen} 
@@ -187,9 +190,17 @@ return (
                     </Flex>
                 </Box>
                 
-                    <Button variant="stayblack" mb="4" width={{ base: '90%', lg: '100%' }}>
+                    <Button 
+                    onClick={handleOpenModal} 
+                    variant="stayblack" mb="4" width={{ base: '90%', lg: '100%' }}>
                         Preview
                     </Button>
+                    {isModalOpen && (
+                            <LockPreview
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                        />
+                        )}
                 </Box>
             </GridItem>
             <GridItem 

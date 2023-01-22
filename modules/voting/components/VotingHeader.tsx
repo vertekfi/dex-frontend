@@ -22,7 +22,8 @@ interface Props {
 }
 const VotingCard = styled.div`
   padding: 16px; 
-  min-height: 30vh; 
+  height: 30vh; 
+  max-height: 300px; 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
