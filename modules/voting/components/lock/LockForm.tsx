@@ -26,7 +26,9 @@ return (
     <ModalOverlay bgColor="vertek.slate.900"/> 
     <ModalContent 
     minW={{ base:'auto', md:'90vw' }} maxW={{base:'auto', md:'95vw'}} 
-    bg="vertek.slatepurple.900" 
+    bg={`radial-gradient(circle at top center, 
+        rgba(77, 63, 236, 0.5) 0%, 
+        rgba(0,0,0, 0.8) 70% )`}
     paddingY="2rem" borderRadius="12px" 
     marginTop="1.5rem">
         <ModalCloseButton />

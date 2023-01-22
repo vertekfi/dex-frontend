@@ -83,7 +83,7 @@ padding={{ base:'4', lg:'4' }}
 <Button  
     variant="stayblack"
     fontSize={{ base:'0.9rem', lg:'0.9rem'}}
-    width="50%"
+    width="70%"
     margin="3"
     gap="8px"
     mt="3"
