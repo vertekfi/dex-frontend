@@ -63,15 +63,13 @@ function PoolList() {
   <Box 
     mt="3rem" 
     boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
-    mb="8rem" 
+    mb="4rem" 
     borderRadius="16px" 
     flexDirection="column" 
     display="flex"
     >
       <PoolListTableHeader />
       {poolsToRender.map((item, index) => (
-      
-
       <PoolListItem
         key={index}
         pool={item}
@@ -90,7 +88,6 @@ function PoolList() {
           }))}
         hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
       />
-
         ))}
         <PoolListFooter />
   </Box>

@@ -61,10 +61,12 @@ export function Home() {
           </GridItem>
       </Grid> */}
       <HomePoolsNew />
-      <Text mb="0" mt="12" fontSize={{ base: '2rem', md: '3rem'}}  textAlign="justify" className="vertektitle">
+      <Text mb="0" mt="12" fontSize={{ base: '2rem', md: '3rem'}}  
+      lineHeight={{ base: '1.1', md: 'auto' }} 
+      textAlign={{ base: 'left', md:'justify' }} className="vertektitle">
         The pinnacle of DeFi technological evolution. <br /> 
       </Text>
-      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="8" textAlign="justify">
+      <Text mt="1" fontSize={{ base: '1.3rem', md:"2rem"}}  mb="8" textAlign={{ base: 'left', md:'justify' }}>
         Advanced, yet simple. Sophisticated, yet intuitive. 
       </Text>
       <Grid

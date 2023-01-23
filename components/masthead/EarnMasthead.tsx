@@ -14,7 +14,7 @@ export function EarnMasthead({ title, image }: Props) {
 return (
 <SimpleGrid 
     columns={{ sm: 1, lg: 6 }} 
-    paddingX="4"
+    paddingX={{ base:'2', lg:'4'}}
     paddingY="2"
     marginTop={{ base: 0, lg: 10 }}
     marginBottom={{ base: 6, lg:8 }}
@@ -52,7 +52,7 @@ return (
 className="verteklightpurplebox"
 marginTop={{ base: 0, lg: 2 }}
 display="flex"
-width={{ base: '75%', md:'60%', lg:'auto'}}
+width={{ base: '100%', md:'60%', lg:'auto'}}
 mx="auto"
 justifyContent="flex-start"
 alignItems="flex-start"
@@ -83,7 +83,7 @@ padding={{ base:'4', lg:'4' }}
 <Button  
     variant="stayblack"
     fontSize={{ base:'0.9rem', lg:'0.9rem'}}
-    width="50%"
+    width="70%"
     margin="3"
     gap="8px"
     mt="3"

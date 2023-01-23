@@ -10,11 +10,12 @@ export function HomeBeetsInfo(props: BoxProps) {
 
   return (
     <Box {...props} mb="0rem">
-    <Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}}  textAlign="justify" className="vertektitle">
+    <Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}} lineHeight={{ base: '1.1', md: 'auto' }} 
+    textAlign={{ base: 'left', md:'justify' }} className="vertektitle">
       Injected with a digital voice. 
     </Text>
-    <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="10" textAlign="justify">
-        I speak, therefore I am
+    <Text fontSize={{ base: '1.3rem', md:"2rem"}} mt="1" mb="10" textAlign={{ base: 'left', md:'justify' }}>
+        I speak, therefore I am. 
     </Text>
    
     <BeetsHeadline mb="" mt="12" fontSize={{ base: '1.5rem', md: '2.2rem'}} color="white" fontWeight="bold">
@@ -28,28 +29,23 @@ export function HomeBeetsInfo(props: BoxProps) {
       <Box 
       display="flex" 
       justifyItems="flex-end" alignContent="flex-end" mb="" width={{base: 'auto', md:'75%'}}>
-        <Text align="right">
-           
-      </Text>
       </Box>
       <Box 
-      mt="4"
       display="flex" flexDirection={{ base:'column', md:'row' }} 
       justifyContent="space-between" 
-      alignItems="center" mt={{ base:'auto', lg:'-20'}}>
+      alignItems="center" mt={{ base:'-8', lg:'-20'}}>
         <Box ml="4">
           <NextImage
               src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
               width="250px"
-
             />
         </Box>
-
           <Button
             display="flex" 
-            mr="25%"
+            mr={{ base:'auto', md:'25%'}}
             variant="vertekdark"
             width={{ base: '100%', lg: '25%'}}
+            mt={{ base: '-8', lg:'auto' }}
             as="a"
             href="https://docs.beets.fi/beets/tokenomics"
             target="_blank"

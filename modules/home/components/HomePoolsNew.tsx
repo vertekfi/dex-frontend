@@ -53,13 +53,13 @@ export function HomePoolsNew(props: BoxProps) {
   });
  }, [userPoolIdsStr]);
 
- return (
-  <>
-   <Box minWidth="0" {...props}>
-   <Text mb="4" fontSize={{ base: '1.5rem', md: '2.2rem'}}  color="white" fontWeight="bold">
-Featured Pools 
-</Text>
-    {/* <BeetsHeadline mb="4">Featured Pools</BeetsHeadline> */}
+return (
+<>
+<Box minWidth="0" {...props}>
+    <Text mb="4" fontSize={{ base: '1.5rem', md: '2.2rem'}}  color="white" fontWeight="bold">
+    Featured Pools 
+    </Text>
+{/* <BeetsHeadline mb="4">Featured Pools</BeetsHeadline> */}
     <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', lg:'repeat(4, 1fr)',  }}
         columnGap={{ base: '0', lg: '8' }}
@@ -68,22 +68,22 @@ Featured Pools
         borderBottomWidth={2}
         borderBottomColor="gray.100"
         pb="12"
-    >
-     {featuredPoolGroups.map((group) =>
-      group.items.map((item) => {
-       switch (item.__typename) {
-        case 'GqlPoolMinimal':
-         return <PoolCard pool={item} key={item.id} />;
-        case 'GqlFeaturePoolGroupItemExternalLink':
-        // Render something for the external link item
-       }
-      }),
-     )}
-     <GridItem>
-      <HomeNews />
-     </GridItem>
+        >
+            {featuredPoolGroups.map((group) =>
+            group.items.map((item) => {
+            switch (item.__typename) {
+            case 'GqlPoolMinimal':
+                return <PoolCard pool={item} key={item.id} />;
+            case 'GqlFeaturePoolGroupItemExternalLink':
+            // Render something for the external link item
+            }
+            }),
+            )}
+        <GridItem>
+            <HomeNews />
+        </GridItem>
     </Grid>
-   </Box>
+</Box>
 
    {(userPools.length > 0 || getPoolsQuery.loading) && (
     <>

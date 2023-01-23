@@ -37,7 +37,7 @@ function PoolHeader() {
 
   return (
     <VStack width="full" alignItems="flex-start" mb="12">
-      <Text textStyle="h3" as="h3" fontWeight="bold" mr="4" display={{ base: 'block', lg: 'none' }}>
+      <Text textStyle="h3" as="h3" fontWeight="bold" mr="0" display={{ base: 'block', lg: 'none' }}>
         {pool.name}
       </Text>
       <Wrap>
@@ -52,12 +52,11 @@ function PoolHeader() {
           </WrapItem>
         ))}
       </Wrap>
-      <Popover trigger="hover" placement="right">
+      <Popover trigger="hover" placement="auto">
         <PopoverTrigger>
           <HStack
-            paddingX="2"
+            paddingX="4"
             paddingY="1"
-            bg="vertek.slatepurple.900"
             spacing="4"
             fontSize="md"
             rounded="full"
@@ -80,8 +79,9 @@ function PoolHeader() {
             </HStack>
           </HStack>
         </PopoverTrigger>
-        <PopoverContent w="200px" bgColor="vertek.neonpurple.500" shadow="2xl">
-          <Box p="4" borderRadius="18px" fontSize="sm" bgColor="whiteAlpha.200">
+        <PopoverContent w="250px" borderRadius="12px" padding="1" bgColor="black" >
+          <Box className="verteklightpurplebox" padding="4" borderRadius="12px"  
+              fontSize="md" >
             {tooltipText1} {!hasZeroOwner && tooltipText2}
           </Box>
         </PopoverContent>

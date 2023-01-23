@@ -15,7 +15,7 @@ export function HomeHero() {
     >
       <Flex
         flex="1"
-        mt="6"
+        mt={{ base: '12', lg:'4'}}
         pl={{ base: '4', xl: '8' }}
         mb="12"
         justifyContent="center"
@@ -59,7 +59,8 @@ export function HomeHero() {
 
           <HStack
             spacing="4"
-            mb={{ base: '6', lg: '8' }}
+            mt={{ base: '4', lg:'0' }}
+            mb={{ base: '4', lg: '8' }}
             alignItems="center"
             justifyContent={{ base: 'flex-end', lg: 'flex-start' }}
             // flex-end on base for accessibility

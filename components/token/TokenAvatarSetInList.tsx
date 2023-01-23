@@ -6,7 +6,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Text,
+  Text, PlacementWithLogical
 } from '@chakra-ui/react';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import numeral from 'numeral';
@@ -23,6 +23,8 @@ interface Props extends FlexProps {
   imageSize?: number;
   maxAssetsPerLine?: number;
   width: number;
+  placement?: PlacementWithLogical;
+
 }
 
 export function TokenAvatarSetInList({
@@ -34,7 +36,6 @@ export function TokenAvatarSetInList({
 }: Props) {
   const numTokens = Math.min(tokens.length, maxAssetsPerLine);
   const count = Math.min(tokens.length, maxAssetsPerLine);
-
   function leftOffsetFor(index: number) {
     const spacer = -2.5 * count + imageSize / count;
 
@@ -76,7 +77,11 @@ export function TokenAvatarSetInList({
           </Flex>
         </button>
       </PopoverTrigger>
-      <PopoverContent w="fit-content" bgColor="beets.base.800" shadow="2xl" p="1">
+      <PopoverContent 
+      w="200px" padding="4" borderRadius="16px" 
+      bgColor="vertek.slatepurple.900" 
+      boxShadow="0 0 12px #000"
+      >
         {tokens?.map((token, index) => (
           <Flex alignItems="center" p="1" key={index}>
             <Avatar

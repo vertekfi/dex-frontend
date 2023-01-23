@@ -8,14 +8,15 @@ const handleOpenModal = () => setIsModalOpen(true);
 
 return (
 <Box 
-marginBottom={{base: '8rem', lg:'4rem'}}
+marginBottom={{base: '8rem', md:'4rem'}}
 >
 <Box 
 mx="auto"
 my="auto" 
 display="flex" 
-width={{ base: '80%', lg: '30%'}}
+width={{ base: '100%', md: '30%'}}
 padding="12px"
+paddingY="16px" 
 borderRadius="16px" 
 flexDirection="column"
 justifyContent="center" 
@@ -27,8 +28,8 @@ className="verteklightpurplebox"
     </Text>
     <Button 
     variant="stayblack" 
-    marginBottom="2"
-    width={{ base: '75%', lg: '75%' }}
+    marginBottom="8" marginTop="4"
+    width={{ base: '75%', md: '75%' }}
     as={Link} 
     onClick={handleOpenModal}
     >
