@@ -67,7 +67,8 @@ export function HomeLearn(props: BoxProps) {
               <Button 
               display="flex" 
               justifyContent="center" alignItems="center" 
-              variant="vertekdark" as="a" href="https://docs.beets.fi" 
+              variant="vertekdark" as="a" 
+              href="https://aalto-defi.notion.site/Vertek-Dex-d9958759f4424962a700bb2cf90559ea" 
               target="_blank" 
               px="12">
                 Check Our Docs 

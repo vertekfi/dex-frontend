@@ -47,7 +47,7 @@ export function HomeBeetsInfo(props: BoxProps) {
             width={{ base: '100%', lg: '25%'}}
             mt={{ base: '-8', lg:'auto' }}
             as="a"
-            href="https://docs.beets.fi/beets/tokenomics"
+            href=" https://aalto-defi.notion.site/Vertek-Volta-veVRTK-c4cde926ad344b2b9e1e464469bd1873"
             target="_blank"
             mb="4"
           >
