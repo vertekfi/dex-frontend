@@ -69,6 +69,7 @@ return (
           <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="2"/>
           <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="2" />
           <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="2" />
+          <NavbarLink href={'/bridge'} selected={router.asPath === '/bridge'} text="Bridge"  py="2" />
           <Box display="flex" alignItems="flex-end" justifyContent="flex-end" mb="-1" mt="2">
               <Button variant="vertekdark" width="50%" onClick={() => setIsOpen(false)}>
                 Close
