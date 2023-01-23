@@ -375,7 +375,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 color:'white',
                                 boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
                                 background: '',  
-                                transform:'scale(1.03)' 
+                                transform:'scale(1.02)' 
                                     }, 
                             _disabled: {
                                 transform: 'none',
@@ -421,7 +421,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                     color:'white',
                                     boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
                                     background: '',  
-                                    transform:'scale(1.03)' 
+                                    transform:'scale(1.02)' 
                                         }, 
                                 _disabled: {
                                     transform: 'none',
@@ -443,7 +443,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         color:'white', 
                         borderWidth:'2px', 
                         borderColor:'white', 
-                        transform:'scale(1.03)' 
+                        transform:'scale(1.02)' 
                             }, 
                     _disabled: {
                         transform: 'none',
