@@ -33,7 +33,7 @@ export function Footer() {
               <FooterLink href="/swap" linkType="internal">
                 Swap
               </FooterLink>
-              <FooterLink href="/stake" linkType="internal">
+              <FooterLink href="/staking" linkType="internal">
                 Stake
                 <Text as="span" fontSize="2xs">
                   {' '}
@@ -75,7 +75,7 @@ export function Footer() {
             </Box>
             <Box>
               <Link
-                href="https://github.com/beethovenxfi"
+                href="https://github.com/vertekfi/vertek-lib"
                 target="_blank"
                 _active={{ boxShadow: 'none' }}
               >
@@ -103,11 +103,11 @@ export function Footer() {
             <FooterLink href="https://aalto-defi.notion.site/Liquidity-Pool-Types-9ee6d04b7cab4f1b8352e0db492b7672">
               Boosted Pools
             </FooterLink>
-            <FooterLink href="https://snapshot.org/#/beets.eth">Snapshot</FooterLink>
-              {/* <FooterLink href="https://info.beets.fi">Analytics</FooterLink> */}
-              <FooterLink href="https://docs.beets.fi">Docs & Help</FooterLink>
-              <FooterLink href={networkConfig.createPoolUrl}>Create a pool</FooterLink>
+            <FooterLink href="/voting" linkType="internal">veVRTK</FooterLink>
+            <FooterLink href={networkConfig.createPoolUrl}>Create a pool</FooterLink>
             </GridItem>
+            {/* <FooterLink href="https://snapshot.org/#/beets.eth">Snapshot</FooterLink> */}
+            {/* <FooterLink href="https://info.beets.fi">Analytics</FooterLink> */}
             {/* <GridItem>
               <FooterLink href="https://pro.olympusdao.finance/#/bond">Olympus Bonds</FooterLink>
               <FooterLink href="https://app.multichain.org/#/router">Multichain Bridge</FooterLink>
