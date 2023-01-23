@@ -54,7 +54,10 @@ return (
             </Button>
         </PopoverTrigger>
     </HStack>
-    <PopoverContent w="200px" padding="4" borderRadius="16px" bgColor="vertek.slatepurple.900" boxShadow="0 0 12px #000">
+    <PopoverContent 
+    w="200px" 
+    padding="4" borderRadius="16px" 
+    bgColor="vertek.slatepurple.900" boxShadow="0 0 12px #000">
         <PopoverHeader bgColor="vertek.slatepurple.900">
             <Text textAlign="center" fontSize="1rem">
                 Total APR
