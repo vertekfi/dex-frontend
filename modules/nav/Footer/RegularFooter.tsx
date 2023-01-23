@@ -59,7 +59,7 @@ paddingY="2"
     flexDirection="column" 
     borderBottomWidth="0px" 
     borderColor="vertek.neonpurple.500" 
-    paddingY="0" paddingX="2" 
+    paddingY="2" paddingX="2" 
     >
       {chainId === '10' ? 
       <BeetsBalLogo mt="1" width="150px"  /> : <BeetsLogo width="150px" mt="1" />}
@@ -124,11 +124,9 @@ paddingY="2"
         </FooterLink>
         <FooterLink 
               href="https://aalto-defi.notion.site/Liquidity-Pool-Types-9ee6d04b7cab4f1b8352e0db492b7672">
-            Weighted Pools
+            Pool Types 
         </FooterLink>
-        <FooterLink href="https://aalto-defi.notion.site/Liquidity-Pool-Types-9ee6d04b7cab4f1b8352e0db492b7672">
-            Boosted Pools
-        </FooterLink>
+       
        
         <FooterLink href={networkConfig.createPoolUrl}>Create a pool</FooterLink>
     </Box>
