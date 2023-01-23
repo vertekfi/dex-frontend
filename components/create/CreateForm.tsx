@@ -205,27 +205,29 @@ return (
                         </Button>
                     </Box>
                 </GridItem>
-                <GridItem 
+                <Grid 
+                gap={4}
                 boxShadow={{base:'none', md:'none'}}
                 width={{base:'90%', lg:'auto'}}
+                height={{ base:'auto', lg:'50%'}}
                 m={{ base:'2', md:'2'}}
-                bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+                mt={{ base:'auto', md:'24'}}
                 borderRadius="12px">
-            <Box padding="2" borderRadius="12px" mb="6" bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)">
-                <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
+                <GridItem mb="">
+                    <Box padding="2" borderRadius="12px" mb="12" bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)">
+                    <Text align="left" padding="1" mb="12" fontWeight="bold" color="white" fontSize="1.2rem">
                         Pool Summary
-                        </Text>
-                    <Box mt="20" >
-                        <Text fontSize="1.2rem" fontWeight="bold" align="center">0 veVRTK</Text>
+                    </Text>
                     </Box>
-                    <Box mt="20" >
-                    <Flex align="center">
-                            <Text fontSize="1rem" mr="auto">% of total veVRTK</Text>
-                            <Text fontSize="1rem" ml="auto">Locked until</Text>
-                    </Flex>
-                    </Box>
-                </Box>
                 </GridItem>
+                <GridItem>
+                <Box padding="2" borderRadius="12px" mb="6" bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)">
+                    <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
+                        Token Prices 
+                    </Text>
+                    </Box>
+                </GridItem>
+                </Grid>
             </Grid>
     </BeetsModalBody>
     </ModalContent>
