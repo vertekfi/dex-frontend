@@ -4,7 +4,7 @@ import { Navbar } from '~/modules/nav/Navbar';
 import { SubNavBar } from '~/modules/nav/SubNavBar';
 import { useRef } from 'react';
 import { useElementScroll } from 'framer-motion';
-import { Footer } from '~/modules/nav/Footer';
+import { Footer } from '~/modules/nav/Footer/Footer';
 import { NavbarMobile } from '~/modules/nav/NavbarMobile';
 import { GlobalRenderer } from '~/modules/global/GlobalRenderer';
 

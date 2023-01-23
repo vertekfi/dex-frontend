@@ -10,7 +10,7 @@ interface Props extends LinkProps {
 
 export function FooterLink({ linkType = 'external', href, ...rest }: Props) {
   return (
-    <Box mb="4">
+    <Box mb="1" fontSize="1rem">
       {linkType === 'internal' ? (
         <NextLink
           chakraProps={{
