@@ -72,6 +72,10 @@ justify-content: center;  */
     border-radius: 12px; 
 }
 
+.datepicker input {
+    background-color: transparent;
+}
+
 .apr-stripes {
     /*background: linear-gradient(
         45deg,

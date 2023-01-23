@@ -6,6 +6,11 @@ import { Calendar } from "react-feather";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, } from '@chakra-ui/react';
 import { LockPreview } from "./LockPreview";
 import styled from "@emotion/styled";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { forwardRef } from 'react'; 
+import { useRef } from "react";
+
 
 interface Props {
 isOpen: boolean;
@@ -16,6 +21,10 @@ onClose: () => void;
 export function LockForm(props: Props) {
 const [isModalOpen, setIsModalOpen] = useState(false);
 const handleOpenModal = () => setIsModalOpen(true);
+const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+
+const myRef = useRef(null);
+
 
 return (
     <Modal 
@@ -119,7 +128,7 @@ return (
                 </Text>
                 <Box padding="2" bgColor="black" borderRadius="12px" mb="6">
                     <FormControl mb="8" >
-                        <Input
+                    <Input
                             focusBorderColor="vertek.neonpurple.500"
                             id="voteWeight"
                             name="voteWeight"
@@ -152,43 +161,39 @@ return (
                 </Text>
                 <Box padding="2" bgColor="black" borderRadius="12px" mb="6">
                     <FormControl mb="8" >
-                        <Input id="voteWeight"
-                            focusBorderColor="vertek.neonpurple.500"
-                            name="voteWeight"
-                            type="number"
-                            // value={voteWeight}
-                            // onChange={(event) => setVoteWeight(event.target.value)}
-                            autoComplete="off"
-                            autoCorrect="off"
-                            spellCheck={false}
-                            step="any"
-                            placeholder="mm/dd/yyyy"
-                            // validateOn="input"
-                            // rules={inputRules}
-                            // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
-                            size="md"
-                            />
+                    <DatePicker
+  selected={selectedDate}
+  onChange={date => setSelectedDate(date)}
+  dateFormat="MM/dd/yyyy"
+  placeholderText="mm/dd/yyyy"
+  id="voteWeight"
+  name="voteWeight"
+  autoComplete="off"
+  calendarClassName="datepicker"
+/>
+
                             <Box 
                             w="99%" 
                             paddingY="2"
                             paddingX={{base:'none', md:'1'}}
                             justifyContent="space-between" 
                             display="flex" >
-                                <Button variant="stayblacklock" >
-                                    1w
+                                <Button variant="stayblacklock" onClick={() => setSelectedDate(new Date(Date.now() + (7 * 24 * 60 * 60 * 1000)))}>
+                                1w
                                 </Button>
-                                <Button variant="stayblacklock">
-                                    1m
+                                <Button variant="stayblacklock" onClick={() => setSelectedDate(new Date(Date.now() + (30 * 24 * 60 * 60 * 1000)))}>
+                                1m
                                 </Button>
-                                <Button variant="stayblacklock">
-                                    3m
+                                <Button variant="stayblacklock" onClick={() => setSelectedDate(new Date(Date.now() + (90 * 24 * 60 * 60 * 1000)))}>
+                                3m
                                 </Button>
-                                <Button variant="stayblacklock">
-                                    6m
+                                <Button variant="stayblacklock" onClick={() => setSelectedDate(new Date(Date.now() + (180 * 24 * 60 * 60 * 1000)))}>
+                                6m
                                 </Button>
-                                <Button variant="stayblacklock">
-                                    1y
+                                <Button variant="stayblacklock" onClick={() => setSelectedDate(new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)))}>
+                                1y
                                 </Button>
+
                         </Box>
                     </FormControl>
                 </Box>

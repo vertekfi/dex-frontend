@@ -72,8 +72,10 @@
     "@chakra-ui/icons": "^2.0.13",
     "@chakra-ui/system": "2",
     "@chakra-ui/tabs": "^2.1.5",
+    "@types/react-datepicker": "^4.8.0",
     "add": "^2.0.6",
     "graphql-request": "^5.1.0",
+    "react-datepicker": "^4.8.0",
     "react-svg": "^15.1.15",
     "yarn": "^1.22.19"
   }
