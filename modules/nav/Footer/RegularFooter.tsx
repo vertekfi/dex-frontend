@@ -65,7 +65,7 @@ export function RegularFooter() {
       <Box
         display="flex"
         justifyContent="space-between"
-        mb="6"
+        mb="4"
         alignItems="center"
         flexDirection="column"
         borderBottomWidth="0px"
@@ -78,7 +78,7 @@ export function RegularFooter() {
         ) : (
           <BeetsLogo width="150px" mt="1" />
         )}
-        <HStack spacing="10" mt="" display="flex" justifyContent="center" alignItems="center">
+        <HStack spacing="10" mt="2" display="flex" justifyContent="center" alignItems="center">
           <Box>
             <StyledLink
               href=" https://discord.gg/vertek-ames-aalto"
