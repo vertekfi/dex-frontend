@@ -8,10 +8,15 @@ export function HomeLearn(props: BoxProps) {
   return (
     <Box {...props} mb="16rem">
 
-      <Text mb="-2" fontSize={{ base: '2rem', md: '3rem'}}  textAlign="justify" className="vertektitle">
+      <Text 
+      mb="-2" 
+      fontSize={{ base: '2rem', md: '3rem'}}  
+      lineHeight={{ base: '1.1', md: 'auto' }} 
+      textAlign={{ base: 'left', md:'justify' }} 
+      className="vertektitle">
             Integrate with the Vertek Matrix
       </Text>
-      <Text fontSize={{ base: '1.3rem', md:"2rem"}}  mb="10" textAlign="justify">
+      <Text fontSize={{ base: '1.3rem', md:"2rem"}} mt="1" mb="10" textAlign="justify">
       Symbiotic equilibrium
     </Text>
       <Box fontSize="1.2rem">
@@ -50,7 +55,14 @@ export function HomeLearn(props: BoxProps) {
               />
         </GridItem>
         </Grid>
-        <HStack display="flex" mt="12" mb="12" mx="4" gap="8" justifyContent="left" alignItems="center">
+        <Box 
+        display="flex" 
+        flexDirection={{ base:'column', md:'row'}}
+        mt="12" 
+        mb="12" 
+        gap="8" 
+        justifyContent="center" 
+        alignItems="center">
               <BeetsSubHeadline mb="">Want to dive even deeper?</BeetsSubHeadline>
               <Button 
               display="flex" 
@@ -61,7 +73,7 @@ export function HomeLearn(props: BoxProps) {
                 Check Our Docs 
               </Button>
               
-        </HStack>
+        </Box>
     </Box>
   );
 }

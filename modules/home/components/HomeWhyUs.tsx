@@ -13,12 +13,7 @@ export function HomeWhyUs(props: BoxProps) {
 
 return (
 <Box {...props}>
-  {/* <Text mb="4" fontSize="2rem" className="vertektitle">
-    The pinnacle of DeFi technological evolution. <br /> 
-  </Text>
-  <Box fontSize="1.2rem">
-    Advanced, yet simple. Sophisticated, yet intuitive. 
-  </Box> */}
+ 
   <BeetsHeadline mb="" mt="8" fontSize={{ base: '1.5rem', md: '2.2rem'}} textAlign="justify" color="white" fontWeight="bold">
       DeFi Matrix
   </BeetsHeadline>
