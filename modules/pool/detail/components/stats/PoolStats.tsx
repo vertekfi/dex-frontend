@@ -1,7 +1,6 @@
-import { VStack, HStack } from '@chakra-ui/layout';
-import Card from '~/components/card/Card';
+import { VStack, HStack, Grid, GridItem, Box  } from '@chakra-ui/layout';
 import PoolUserStats from './PoolUserStats';
-import PoolOverallStats from './PoolOverallStats';
+import PoolOverallMd from './PoolOverallMd';
 import { TabList, Tabs } from '@chakra-ui/react';
 import BeetsTab from '~/components/tabs/BeetsTab';
 import { useState } from 'react';
@@ -15,15 +14,16 @@ export default function PoolStats() {
   };
 
   return (
-    <Card
-      p="4"
+    <>
+    <Box
+      p={{base: 'none', md:'4' }}
       mb="0"
-      width="full"
+      width={{ base:'50%', md:'full'}}
       borderRadius="16px"
       bgColor="rgba(0, 0, 0, 0.3)"
       boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 12px #fff"
     >
-      <VStack height="full" spacing="4">
+      <VStack height="full" spacing="4" >
         {hasBpt && (
           <Tabs
             width="full"
@@ -45,9 +45,11 @@ export default function PoolStats() {
           </Tabs>
         )}
         {hasBpt && activeTab === 0 && <PoolUserStats />}
-        {(!hasBpt || activeTab === 1) && <PoolOverallStats />}
+        {(!hasBpt || activeTab === 1) && <PoolOverallMd />}
         {/* style PoolUserStats similar to PoolOverallStats */}
       </VStack>
-    </Card>
+    </Box>
+  </>
+    
   );
 }
