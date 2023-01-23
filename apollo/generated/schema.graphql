@@ -1097,6 +1097,7 @@ type Query {
   blocksGetBlocksPerDay: Int!
   contentGetNewsItems: [GqlContentNewsItem]!
   getLiquidityGauges: [LiquidityGauge]!
+  getProtocolPoolData: [String]!
   getProtocolTokenList: [String]
   getRewardPools(user: String): [RewardPool]!
   getUserGaugeStakes(poolIds: [String!]!, user: String!): [LiquidityGauge]!
