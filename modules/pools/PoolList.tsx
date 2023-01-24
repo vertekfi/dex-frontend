@@ -54,8 +54,8 @@ function PoolList() {
   <PoolListMobileHeader />
   <PoolListTop />
   {hasUnstakedBpt && (
-    <Alert status="warning" mb="4">
-        <AlertIcon />
+<Alert borderRadius="12px" bg="vertek.slatepurple.900" status="warning" color="vertek.neonpurple.500" mt="4">
+<AlertIcon color="vertek.neonpurple.500" />
         You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
         will accumulate over time when your VPT are staked.
     </Alert>

@@ -61,18 +61,6 @@ export function PoolDetailMyBalance({ ...rest }: Props) {
           );
         })}
       </Box>
-      {/*<Box p={4}>
-                {pool.staking ? (
-                    <Text color="gray.200">
-                        You have {isLoading ? '-' : tokenFormatAmount(userStakedBptBalance || '0')} BPT staked in the
-                        farm and {isLoading ? '-' : tokenFormatAmount(userWalletBptBalance || '0')} BPT in your wallet.
-                    </Text>
-                ) : (
-                    <Text color="gray.200">
-                        You have {isLoading ? '-' : tokenFormatAmount(userWalletBptBalance || '0')} BPT in your wallet.
-                    </Text>
-                )}
-            </Box>*/}
     </BeetsBox>
   );
 }

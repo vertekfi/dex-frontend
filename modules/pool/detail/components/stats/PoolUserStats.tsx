@@ -11,7 +11,42 @@ export default function PoolUserStats() {
   const { pool, totalApr } = usePool();
   const { userPoolBalanceUSD, isLoading } = usePoolUserDepositBalance();
 
-  return (
+return (
+<>
+  <HStack
+    display="flex"
+    flexDirection="row"
+    width="full"
+    height="full"
+    justifyContent="flex-start"
+    alignItems="flex-start"
+    borderRadius="12px"
+  >
+  <VStack spacing="0" alignItems="flex-start">
+    <Text lineHeight="1rem" fontWeight="semibold" fontSize="md" color="vertek.slate.200">
+      My APR
+    </Text>
+    <HStack>
+      <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>
+      <AprTooltip onlySparkles data={pool.dynamicData.apr} />
+    </HStack>
+  </VStack>
+  <VStack spacing="0" alignItems="flex-start">
+    <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+      My liquidity
+    </Text>
+    {isLoading ? (
+      <Box>
+        <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
+      </Box>
+    ) : (
+      <Text color="white" fontSize="1.2rem">
+        {numberFormatUSDValue(userPoolBalanceUSD)}
+      </Text>
+    )}
+  </VStack>
+</HStack>
+
     <HStack
       display="flex"
       flexDirection="row"
@@ -21,40 +56,18 @@ export default function PoolUserStats() {
       alignItems="flex-start"
       padding="8px"
       borderRadius="12px"
-    >
-      <VStack spacing="0" alignItems="flex-start">
-        <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="vertek.slate.200">
-          My APR
-        </Text>
-        <HStack>
-          <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>
-          <AprTooltip onlySparkles data={pool.dynamicData.apr} />
-        </HStack>
-      </VStack>
-      <VStack spacing="0" alignItems="flex-start">
-        <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
-          My liquidity
-        </Text>
-        {isLoading ? (
-          <Box>
-            <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
-          </Box>
-        ) : (
-          <Text color="white" fontSize="1.2rem">
-            {numberFormatUSDValue(userPoolBalanceUSD)}
-          </Text>
-        )}
-      </VStack>
-      {pool.staking && (
-        <PoolUserStakedStats
-          poolAddress={pool.address}
-          staking={pool.staking}
-          totalApr={totalApr}
-          userPoolBalanceUSD={userPoolBalanceUSD}
-        />
-      )}
+      >
+    {pool.staking && (
+      <PoolUserStakedStats
+        poolAddress={pool.address}
+        staking={pool.staking}
+        totalApr={totalApr}
+        userPoolBalanceUSD={userPoolBalanceUSD}
+      />
+    )}
+    </HStack>
       {/* PoolUserStakedStats needs proper formatting/udpating */}
       {/*<PoolDetailPossibleYieldText />*/}
-    </HStack>
+      </>
   );
 }

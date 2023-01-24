@@ -47,7 +47,7 @@ return (
     flexDirection="row" 
     width="full" height="full"
     justifyContent="space-between"
-    alignItems="flex-start"
+    alignItems="space-between"
     padding="8px"
     borderRadius="12px"
     >
