@@ -171,7 +171,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
               alignItems="flex-start"
             >
               <Checkbox
-                colorScheme="green"
+                colorScheme="white"
                 mt="1"
                 mr="4"
                 isChecked={highPiAccepted}
