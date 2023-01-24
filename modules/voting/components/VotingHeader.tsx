@@ -1,5 +1,5 @@
 import { useVotingGauges } from '../../../lib/global/gauges/useVotingGauges';
-import { Box, Button, Grid, GridItem, Text, GridItemProps, Heading } from '@chakra-ui/react';
+import { Button, Grid, Text } from '@chakra-ui/react';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -46,7 +46,6 @@ export function VotingHeader() {
   const [pool, setPool] = useState<GqlPoolUnion>();
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
-  const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>(null);
   const [userPoolBalance, setUserPoolBalance] = useState<{
     balance: string;
     usdValue: string;
@@ -65,15 +64,6 @@ export function VotingHeader() {
     veBalance: '0',
     percentOwned: '0',
   });
-
-  const {
-    isLoading: loadingGauges,
-    votingGauges,
-    unallocatedVotes,
-    votingPeriodEnd,
-    votingPeriodLastHour,
-    refetch: refetchVotingGauges,
-  } = useVotingGauges();
 
   const { isConnected } = useUserAccount();
   const { userLockInfo } = useUserVeLockInfoQuery();
@@ -122,19 +112,6 @@ export function VotingHeader() {
     }
   }, [isConnected, userLockInfo]);
 
-  function setActiveGaugeVote(votingGauge: VotingGaugeWithVotes) {
-    setActiveVotingGauge(votingGauge);
-  }
-
-  function handleModalClose() {
-    setActiveVotingGauge(null);
-    refetchVotingGauges();
-  }
-
-  function handleVoteSuccess() {
-    refetchVotingGauges();
-  }
-
   return (
     <UserDataProvider>
       <Grid
@@ -151,7 +128,7 @@ export function VotingHeader() {
           <Text mb="2rem">{userPoolBalance.balance}</Text>
           <Button
             as="a"
-            href="/pool/0xc107b351b787e64c0a59a1f44cb393704da07d3f000200000000000000000006"
+            href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
             variant="moistblack"
             width={{ base: '50%', lg: '75%' }}
           >
