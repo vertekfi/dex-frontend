@@ -2,15 +2,12 @@ import Head from 'next/head';
 import { useAnimation } from 'framer-motion';
 import { PageMasthead } from '~/components/masthead/PageMasthead';
 import Card from '~/components/card/Card';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import BeetsTokenInfoImage from '~/assets/svg/vertek-logo-dark.svg';
 import BeetsTokenInfoOpImage from '~/assets/svg/vertek-logo-dark.svg';
 import { useTheme } from '@chakra-ui/react'
-// import WidgetType from '@layerzerolabs/stargate-ui';
-// import {themes} from '@layerzerolabs/stargate-ui';
-import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { FC } from 'react';
 
@@ -19,22 +16,13 @@ const BridgePage: FC = () => {
   const theme = useTheme();
   const controls = useAnimation();
 
-  // const customTheme = {
-  //   ...themes.dark,
-  //   palette: {
-  //     ...themes.dark.palette,
-  //     background: {
-  //       ...themes.dark!.palette!.background,
-  //       default: '#FF00FF',
-  //     },
-  //   }
-  // };
-
   return (
     <>
       <Head>
         <title>Vertek | Bridge</title>
       </Head>
+      {/* 
+      // @ts-ignore  */}
       <style jsx global>{`
         .MuiScopedCssBaseline-root {
           background-color: transparent !important;
@@ -123,6 +111,8 @@ const BridgePage: FC = () => {
       boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6'
       borderRadius="16px"
     >
+       {/* 
+      // @ts-ignore  */}
       <stargate-widget
         theme="dark"
         partnerId="0x0010"
