@@ -137,7 +137,7 @@ export function PoolInvestModal() {
             ) : null}
 
             {modalState === 'custom' ? (
-              <Heading size="md" textAlign="center">
+              <Heading size="lg" textAlign="center">
                 Custom investment
               </Heading>
             ) : null}

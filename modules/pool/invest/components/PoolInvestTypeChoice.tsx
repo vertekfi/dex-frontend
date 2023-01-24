@@ -164,7 +164,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
           <Button
             width="full"
             mb="2"
-            variant={canInvestProportionally ? 'vertekdark' : 'primary'}
+            variant={canInvestProportionally ? 'vertekdark' : 'verteklight'}
             isDisabled={investableAmount === 0}
             onClick={onShowCustom}
           >

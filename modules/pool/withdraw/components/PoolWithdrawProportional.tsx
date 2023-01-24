@@ -54,10 +54,12 @@ export function PoolWithdrawProportional({ onShowPreview, ...rest }: Props) {
     return (
         <Box {...rest}>
             <Box mt="4">
-                <Text>Drag the slider to configure your withdraw amount.</Text>
-                <Slider mt="12" aria-label="slider-ex-1" value={proportionalPercent} onChange={setProportionalPercent}>
-                    <SliderTrack>
-                        <SliderFilledTrack />
+                <Text>Drag the slider to configure your withdrawal amount.</Text>
+                <Slider 
+                mt="12" aria-label="slider-ex-1" 
+                value={proportionalPercent} onChange={setProportionalPercent}>
+                      <SliderTrack bg="gray.100">
+            <SliderFilledTrack bg="vertek.neonpurple.500" />
                     </SliderTrack>
                     <SliderThumb boxSize={4} />
                     <SliderMark
