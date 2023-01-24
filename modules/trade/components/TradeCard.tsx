@@ -29,6 +29,8 @@ export function TradeCard() {
   const tradePreviewDisclosure = useDisclosure();
   const { getToken, tokens } = useGetTokens();
 
+  console.log(tokens);
+
   const {
     sellAmount,
     buyAmount,
@@ -81,110 +83,109 @@ export function TradeCard() {
     tokenSelectDisclosure.onOpen();
   }
 
-return (
-  <Box width="full" position="relative" 
-  >
-    <Card
-      animate={controls}
-      position="relative"
-      topRight={sorResponse ? <TradeCardRefreshButton onClick={() => refetchTrade()} /> : null}
-      boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6'
-      borderRadius="16px"
-    >
-      <VStack spacing="2" padding="4" width="full">
-        <Box position="relative" width="full" bgColor="">
-          <TokenInput
-            ref={finalRefTokenIn}
-            label="Sell"
-            address={tokenIn}
-            toggleTokenSelect={() => showTokenSelect('tokenIn')}
-            onChange={handleSellAmountChanged}
-            value={sellAmount}
-            showPresets
-            requiresApproval={!hasApprovalForSellAmount && !isNativeAssetUnwrap}
-          />
-        </Box>
-        <TokenInputSwapButton onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
-        <TokenInput
-          ref={finalRefTokenOut}
-          label="Buy"
-          address={tokenOut}
-          toggleTokenSelect={() => showTokenSelect('tokenOut')}
-          onChange={handleBuyAmountChanged}
-          value={buyAmount}
-        />
-        <Box width="full" paddingTop="2">
-          {!isConnected ? (
-            <WalletConnectButton width="full" size="lg" />
-          ) : isNativeAssetWrap ? (
-            <BeetsSubmitTransactionButton
-              {...wrapEthQuery}
-              isDisabled={isAmountMoreThanUserBalance}
-              onClick={() => wrapEthQuery.wrap(sellAmount)}
-              onConfirmed={() => refetchUserBalances()}
-              width="full"
-              size="lg"
-            >
-              {isAmountMoreThanUserBalance
-                ? `Insufficient ${networkConfig.eth.symbol} balance`
-                : `Wrap ${networkConfig.eth.symbol}`}
-            </BeetsSubmitTransactionButton>
-          ) : isNativeAssetUnwrap ? (
-            <BeetsSubmitTransactionButton
-              {...unwrapEthQuery}
-              isDisabled={isAmountMoreThanUserBalance}
-              onClick={() => unwrapEthQuery.unwrap(sellAmount)}
-              onConfirmed={() => refetchUserBalances()}
-              width="full"
-              size="lg"
-            >
-              {isAmountMoreThanUserBalance
-                ? `Insufficient ${networkConfig.eth.symbol} balance`
-                : `Unwrap ${networkConfig.eth.symbol}`}
-            </BeetsSubmitTransactionButton>
-          ) : !hasApprovalForSellAmount && tokenInData ? (
-            <BeetsTokenApprovalButton
-              tokenWithAmount={{ ...tokenInData, amount: sellAmount }}
-              onConfirmed={() => {
-                refetchAllowances();
-              }}
-              size="lg"
+  return (
+    <Box width="full" position="relative">
+      <Card
+        animate={controls}
+        position="relative"
+        topRight={sorResponse ? <TradeCardRefreshButton onClick={() => refetchTrade()} /> : null}
+        boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+        borderRadius="16px"
+      >
+        <VStack spacing="2" padding="4" width="full">
+          <Box position="relative" width="full" bgColor="">
+            <TokenInput
+              ref={finalRefTokenIn}
+              label="Sell"
+              address={tokenIn}
+              toggleTokenSelect={() => showTokenSelect('tokenIn')}
+              onChange={handleSellAmountChanged}
+              value={sellAmount}
+              showPresets
+              requiresApproval={!hasApprovalForSellAmount && !isNativeAssetUnwrap}
             />
-          ) : (
-            <Button
-              variant="vertekdark"
-              disabled={isReviewDisabled}
-              onClick={() => {
-                tradeStopPolling();
-                tradePreviewDisclosure.onOpen();
-              }}
-              width="full"
-              size="lg"
-            >
-              {isNotEnoughLiquidity
-                ? 'Not enough liquidity'
-                : isAmountMoreThanUserBalance
-                ? `Insufficient ${getToken(tokenIn)?.symbol} balance`
-                : 'Review swap'}
-            </Button>
-          )}
-        </Box>
-      </VStack>
-      {!isNativeAssetWrap && !isNativeAssetUnwrap && <TradeCardSwapBreakdown />}
-    </Card>
-    <TokenSelectModal
-      finalFocusRef={tokenSelectKey === 'tokenIn' ? finalRefTokenIn : finalRefTokenOut}
-      isOpen={tokenSelectDisclosure.isOpen}
-      onOpen={tokenSelectDisclosure.onOpen}
-      onClose={tokenSelectDisclosure.onClose}
-    />
-    <TradePreviewModal
-      isOpen={tradePreviewDisclosure.isOpen}
-      onClose={() => {
-        tradePreviewDisclosure.onClose();
-        tradeStartPolling();
-      }}
-    />
-  </Box>
-);
+          </Box>
+          <TokenInputSwapButton onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
+          <TokenInput
+            ref={finalRefTokenOut}
+            label="Buy"
+            address={tokenOut}
+            toggleTokenSelect={() => showTokenSelect('tokenOut')}
+            onChange={handleBuyAmountChanged}
+            value={buyAmount}
+          />
+          <Box width="full" paddingTop="2">
+            {!isConnected ? (
+              <WalletConnectButton width="full" size="lg" />
+            ) : isNativeAssetWrap ? (
+              <BeetsSubmitTransactionButton
+                {...wrapEthQuery}
+                isDisabled={isAmountMoreThanUserBalance}
+                onClick={() => wrapEthQuery.wrap(sellAmount)}
+                onConfirmed={() => refetchUserBalances()}
+                width="full"
+                size="lg"
+              >
+                {isAmountMoreThanUserBalance
+                  ? `Insufficient ${networkConfig.eth.symbol} balance`
+                  : `Wrap ${networkConfig.eth.symbol}`}
+              </BeetsSubmitTransactionButton>
+            ) : isNativeAssetUnwrap ? (
+              <BeetsSubmitTransactionButton
+                {...unwrapEthQuery}
+                isDisabled={isAmountMoreThanUserBalance}
+                onClick={() => unwrapEthQuery.unwrap(sellAmount)}
+                onConfirmed={() => refetchUserBalances()}
+                width="full"
+                size="lg"
+              >
+                {isAmountMoreThanUserBalance
+                  ? `Insufficient ${networkConfig.eth.symbol} balance`
+                  : `Unwrap ${networkConfig.eth.symbol}`}
+              </BeetsSubmitTransactionButton>
+            ) : !hasApprovalForSellAmount && tokenInData ? (
+              <BeetsTokenApprovalButton
+                tokenWithAmount={{ ...tokenInData, amount: sellAmount }}
+                onConfirmed={() => {
+                  refetchAllowances();
+                }}
+                size="lg"
+              />
+            ) : (
+              <Button
+                variant="vertekdark"
+                disabled={isReviewDisabled}
+                onClick={() => {
+                  tradeStopPolling();
+                  tradePreviewDisclosure.onOpen();
+                }}
+                width="full"
+                size="lg"
+              >
+                {isNotEnoughLiquidity
+                  ? 'Not enough liquidity'
+                  : isAmountMoreThanUserBalance
+                  ? `Insufficient ${getToken(tokenIn)?.symbol} balance`
+                  : 'Review swap'}
+              </Button>
+            )}
+          </Box>
+        </VStack>
+        {!isNativeAssetWrap && !isNativeAssetUnwrap && <TradeCardSwapBreakdown />}
+      </Card>
+      <TokenSelectModal
+        finalFocusRef={tokenSelectKey === 'tokenIn' ? finalRefTokenIn : finalRefTokenOut}
+        isOpen={tokenSelectDisclosure.isOpen}
+        onOpen={tokenSelectDisclosure.onOpen}
+        onClose={tokenSelectDisclosure.onClose}
+      />
+      <TradePreviewModal
+        isOpen={tradePreviewDisclosure.isOpen}
+        onClose={() => {
+          tradePreviewDisclosure.onClose();
+          tradeStartPolling();
+        }}
+      />
+    </Box>
+  );
 }

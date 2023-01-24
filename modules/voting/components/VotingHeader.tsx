@@ -1,8 +1,6 @@
-import { useVotingGauges } from '../../../lib/global/gauges/useVotingGauges';
 import { Button, Grid, Text } from '@chakra-ui/react';
 import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
 import { useEffect, useState } from 'react';
-import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { UserDataProvider, useUserData } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
 import { useUserAccount } from '~/lib/user/useUserAccount';

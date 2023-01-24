@@ -15,15 +15,15 @@ export function PoolStakeInFarmWarning() {
 
   return (
     <>
-      <FadeInOutBox isVisible={hasBptInWallet} containerWidth="100%">
-        <Alert status="warning" borderRadius="lg" mb="5" width="full">
-          <AlertIcon />
-          <Box flex="1" mr="8" bg="black">
+      <FadeInOutBox isVisible={hasBptInWallet} style={{ backgroundColor:'black', borderRadius:'16px' }} containerWidth="100%">
+      <Alert bg="black" status="warning" color="white" mt="4" borderRadius="12px" >
+        <AlertIcon color="vertek.neonpurple.500" />     
+          <Box flex="1" mr="8">
             You have ~{numberFormatUSDValue(valueInWallet)} worth of VPT in your wallet. This pool
             offers additional rewards that will accumulate over time when your VPT are staked.{' '}
             {/*<Link color="beets.highlight">More details</Link>*/}
           </Box>
-          <Button variant="verteklight" onClick={onOpen}>
+          <Button variant="stayblack" width="20%" onClick={onOpen}>
             Stake now
           </Button>
         </Alert>

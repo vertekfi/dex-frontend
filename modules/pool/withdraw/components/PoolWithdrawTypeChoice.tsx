@@ -158,8 +158,8 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         </GridItem>
       </Grid>
       {hasBptStaked && (
-        <Alert status="warning" borderRadius="md" mb="4">
-          <AlertIcon />
+        <Alert bg="vertek.slatepurple.900" status="warning" color="vertek.neonpurple.500" mt="4">
+        <AlertIcon color="vertek.neonpurple.500" />
           <Box flex="1" mr="4">
             You have ~{numberFormatUSDValue(valueStaked)} worth of VPT staked. In order to withdraw
             this amount, you must first unstake your VPT.

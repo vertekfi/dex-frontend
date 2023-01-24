@@ -51,23 +51,23 @@ export function PoolInvestCustom({ onShowPreview }: Props) {
       <PoolInvestSummary mt="6" />
       <PoolInvestSettings mt="8" />
       <Collapse in={hasHighPriceImpact} animateOpacity>
-        <Alert status="error" borderRadius="md" mt="4">
+        <Alert bgColor="vertek.slatepurple.900" boxShadow="0 0 12px rgba(0, 0, 0, 0.3)" status="error" borderRadius="md" mt="4">
           <Checkbox
             id="high-price-impact-acknowledge"
             isChecked={acknowledgeHighPriceImpact}
-            colorScheme="red"
+            colorScheme="vertek.neonpurple.500"
             onChange={toggleAcknowledgeHighPriceImpact}
             mt="1"
             mr="2"
           />
-          <Box>
+          <Box color="vertek.neonpurple.500" fontWeight="bold" >
             I confirm that my custom investment will result in a {formattedPriceImpact} price
             impact, subjecting me to fees and possible impermanent loss.
           </Box>
         </Alert>
       </Collapse>
       <Button
-        variant="primary"
+        variant="stayblack"
         width="full"
         mt="8"
         onClick={onShowPreview}

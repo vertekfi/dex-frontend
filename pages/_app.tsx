@@ -97,7 +97,7 @@ function BeetsApp(props: AppProps) {
           coolMode
           chains={networkChainDefinitions}
           showRecentTransactions={true}
-          appInfo={{ appName: 'Vertek', learnMoreUrl: 'https://dex-frontend-v2.vercel.app' }}
+          appInfo={{ appName: 'Vertek', learnMoreUrl: 'https://vertek.exchange' }}
           theme={darkTheme()}
           avatar={() => <WalletUserAvatar />}
         >

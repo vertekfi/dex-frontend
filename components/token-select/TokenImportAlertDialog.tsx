@@ -37,36 +37,37 @@ export function TokenImportAlertDialog({
             isOpen={isOpen}
             isCentered
             size="xl"
+           
         >
             <AlertDialogOverlay />
 
-            <AlertDialogContent>
+            <AlertDialogContent bgColor="vertek.slate.900">
                 <AlertDialogHeader>
                     <HStack>
                         <AlertTriangle />
-                        <Box>Token import</Box>
+                        <Box color="white" >Token import</Box>
                     </HStack>
                 </AlertDialogHeader>
                 <AlertDialogCloseButton />
-                <AlertDialogBody>
-                    <Alert status="warning" mb="4">
-                        <AlertIcon />
+                <AlertDialogBody >
+                    <Alert status="warning" mb="4" bgColor="black">
+                        <AlertIcon color="vertek.neonpurple.500" />
                         Anyone can create a token with any name, including fake versions of existing tokens and tokens
                         that claim to represent projects that do not have a token.
                     </Alert>
-                    <Alert status="warning" mb="4">
-                        <AlertIcon />
+                    <Alert status="warning" mb="4" bgColor="black">
+                        <AlertIcon color="vertek.neonpurple.500" />
                         This interface can load arbitrary tokens by address. Please take extra caution and do your
                         research when interacting with unlisted tokens.
                     </Alert>
-                    <Alert status="warning">
-                        <AlertIcon />
+                    <Alert status="warning" mb="4" bgColor="black">
+                        <AlertIcon color="vertek.neonpurple.500" />
                         If you purchase an unlisted token, you may be unable to sell it back.
                     </Alert>
                 </AlertDialogBody>
                 <AlertDialogFooter>
                     <Box flex="1">
-                        <Checkbox isChecked={checked} onChange={(e) => setChecked(e.target.checked)}>
+                        <Checkbox colorScheme="white" isChecked={checked} onChange={(e) => setChecked(e.target.checked)}>
                             I understand
                         </Checkbox>
                     </Box>

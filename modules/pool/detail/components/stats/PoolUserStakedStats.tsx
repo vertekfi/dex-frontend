@@ -1,5 +1,5 @@
 import { GqlPoolStaking, useGetBlocksPerDayQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { Box, HStack, Text, VStack } from '@chakra-ui/layout';
+import { Box, HStack, Grid, Text, VStack, GridItem } from '@chakra-ui/layout';
 import numeral from 'numeral';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import TokenAvatar from '~/components/token/TokenAvatar';
@@ -42,130 +42,161 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
     const dailyYieldUSD = userPoolBalanceUSD * dailyYield;
     const beetsPerDay = parseFloat(staking.farm?.beetsPerBlock || '0') * (blocksData?.blocksPerDay || 0) * userShare;
 
-    return (
-        <>
-            <VStack spacing="0" alignItems="flex-start" mb="5" px="2">
-                <InfoButton
-                    labelProps={{
-                        lineHeight: '1rem',
-                        fontWeight: 'semibold',
-                        fontSize: 'sm',
-                        color: 'beets.base.50',
-                    }}
-                    label="My staked share"
-                    infoText={`The size of your stake relative to all value staked in this pool. Your staked share represents the percent of liquidity incentives you are entitled to.`}
-                />
-                <VStack spacing="none" alignItems="flex-start">
-                    {isLoadingStake ? (
-                        <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
-                    ) : (
-                        <Text color="white" fontSize="1.75rem">
-                            {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
-                        </Text>
-                    )}
-                    {isLoadingStake ? (
-                        <Skeleton height="16px" width="45px" />
-                    ) : (
-                        <Text fontSize="1rem" lineHeight="1rem">
-                            {numeral(userStakedBptBalance).format('0.00a')}
-                            {' / '}
-                            {numeral(data).format('0.00a')}{' '}
-                            <Text as="span" fontSize="md" color="beets.base.50">
-                                VPT
-                            </Text>
-                        </Text>
-                    )}
-                </VStack>
-            </VStack>
-            <VStack spacing="0" alignItems="flex-start" mb="8" px="2" flex="1">
-                <InfoButton
-                    labelProps={{
-                        lineHeight: '1rem',
-                        fontWeight: 'semibold',
-                        fontSize: 'sm',
-                        color: 'beets.base.50',
-                    }}
-                    label="My potential daily yield"
-                    infoText="The potential daily value is an approximation based on swap fees, current token prices and your staked share. A number of external factors can influence this value from second to second."
-                />
-                {isLoadingPendingRewards ? (
-                    <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
-                ) : (
-                    <Text color="white" fontSize="1.75rem">
-                        {numberFormatUSDValue(dailyYieldUSD)}
+return (
+<>
+<VStack width="full" gap={2}>
+<HStack 
+width="full"
+bg="whiteAlpha.100"
+padding="2"
+borderRadius="12px"
+boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
+display="flex"
+flexDirection="row" 
+justifyContent="space-between"
+alignItems="space-between"
+>
+    <VStack alignItems="flex=start">
+        <InfoButton
+            labelProps={{
+                lineHeight: '1rem',
+                fontWeight: 'semibold',
+                fontSize: 'md',
+                color: 'vertek.neonpurple.500',
+            }}
+            label="My staked share"
+            infoText={`The size of your stake relative to all value staked in this pool. 
+            Your staked share represents the percent of liquidity incentives you are entitled to.`}
+        />
+        <VStack spacing="none" alignItems="flex-start">
+            {isLoadingStake ? (
+                <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
+            ) : (
+                <Text color="white" fontSize="1.75rem">
+                    {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
+                </Text>
+            )}
+            {isLoadingStake ? (
+                <Skeleton height="16px" width="45px" />
+            ) : (
+                <Text fontSize="1rem" lineHeight="1rem">
+                    {numeral(userStakedBptBalance).format('0.00a')}
+                    {' / '}
+                    {numeral(data).format('0.00a')}{' '}
+                    <Text as="span" fontSize="md" color="beets.base.50">
+                        VPT
                     </Text>
-                )}
-                <Box>
-                    {beetsPerDay > 0 && (
-                        <HStack spacing="1" mb="0.5">
-                            <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
-                            <Tooltip
-                                label={`BEETS emissions are calculated per block, so daily emissions are an estimate based on an average block time over last 5,000 blocks. Avg block time: ${blocksData?.avgBlockTime}s.`}
-                            >
-                                <Text fontSize="1rem" lineHeight="1rem">
-                                    {numeral(beetsPerDay).format('0,0')} / day
-                                </Text>
-                            </Tooltip>
-                        </HStack>
-                    )}
-                    {staking.farm?.rewarders?.map((rewarder) => (
-                        <HStack spacing="1" mb="0.5" key={rewarder.id}>
-                            <TokenAvatar height="20px" width="20px" address={rewarder.tokenAddress} />
-                            <Text fontSize="1rem" lineHeight="1rem">
-                                {numeral(parseFloat(rewarder.rewardPerSecond) * 86400 * userShare).format('0,0')} / day
-                            </Text>
-                        </HStack>
-                    ))}
-                </Box>
-            </VStack>
-            <CardRow mb="4" width="full">
-                <VStack spacing="0" alignItems="flex-start">
-                    <InfoButton
-                        labelProps={{
-                            lineHeight: '1rem',
-                            fontWeight: 'semibold',
-                            fontSize: 'sm',
-                            color: 'vertek.neonpurple.500',
-                        }}
-                        label="My pending rewards"
-                        infoText={`Your accumulated liquidity rewards for this pool. You can claim your rewards at any time.`}
-                    />
+                </Text>
+            )}
+        </VStack>
+    </VStack>
 
-                    {isLoadingPendingRewards ? (
-                        <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
-                    ) : (
-                        <Text color="white" fontSize="1.75rem">
-                            {numberFormatUSDValue(pendingRewardsTotalUSD)}
+    <VStack alignItems="flex-end">
+        <InfoButton
+            labelProps={{
+                lineHeight: '1rem',
+                fontWeight: 'semibold',
+                fontSize: 'md', 
+                color: 'vertek.neonpurple.500',
+            }}
+            label="My potential daily yield"
+            infoText="The potential daily value is an approximation based on swap fees, 
+            current token prices and your staked share. A number of external factors can influence this value from second to second."
+        />
+        {isLoadingPendingRewards ? (
+            <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
+        ) : (
+            <Text color="white" fontSize="1.5rem">
+                {numberFormatUSDValue(dailyYieldUSD)}
+            </Text>
+        )}
+        <Box>
+            {beetsPerDay > 0 && (
+                <HStack spacing="1" mb="0.5">
+                    <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
+                    <Tooltip
+                        label={`Vertek emissions are calculated per block, so daily emissions are an estimate 
+                        based on an average block time over last 5,000 blocks. Avg block time: ${blocksData?.avgBlockTime}s.`}
+                    >
+                        <Text fontSize="1rem" lineHeight="1rem">
+                            {numeral(beetsPerDay).format('0,0')} / day
                         </Text>
-                    )}
-                    <Box>
-                        {pendingRewards.map((reward, index) => (
-                            <HStack key={index} spacing="1" mb={index === pendingRewards.length - 1 ? '0' : '0.5'}>
-                                <TokenAvatar height="20px" width="20px" address={reward.address} />
-                                <Skeleton isLoaded={!isLoadingPendingRewards}>
-                                    <Text fontSize="1rem" lineHeight="1rem">
-                                        {tokenFormatAmount(reward.amount)}
-                                    </Text>
-                                </Skeleton>
-                            </HStack>
-                        ))}
-                    </Box>
-                </VStack>
-            </CardRow>
-            <Box width="full">
-                <BeetsSubmitTransactionButton
-                    {...harvestQuery}
-                    isDisabled={!hasPendingRewards}
-                    onClick={() => claim()}
-                    onConfirmed={() => {
-                        refetchPendingRewards();
-                        refetchUserTokenBalances();
-                    }}
-                    width="full"
-                >
-                    Claim rewards
-                </BeetsSubmitTransactionButton>
-            </Box>
-        </>
-    );
+                    </Tooltip>
+                </HStack>
+            )}
+            {staking.farm?.rewarders?.map((rewarder) => (
+                <HStack spacing="1" mb="0.5" key={rewarder.id}>
+                    <TokenAvatar height="20px" width="20px" address={rewarder.tokenAddress} />
+                    <Text fontSize="1rem" lineHeight="1rem">
+                        {numeral(parseFloat(rewarder.rewardPerSecond) * 86400 * userShare).format('0,0')} / day
+                    </Text>
+                </HStack>
+            ))}
+        </Box>
+    </VStack>
+</HStack>
+
+<HStack 
+width="full"
+bg="whiteAlpha.100"
+padding="2"
+borderRadius="12px"
+boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
+display="flex"
+flexDirection="row" 
+justifyContent="space-between"
+alignItems="space-between"
+>
+<VStack alignItems="flex-start" justifyContent="flex-end" display="flex" width="50%">
+    <InfoButton
+        labelProps={{
+            lineHeight: '1rem',
+            fontWeight: 'semibold',
+            fontSize: 'md',
+            color: 'vertek.neonpurple.500',
+        }}
+        label="My pending rewards"
+        infoText={`Your accumulated liquidity rewards for this pool. You can claim your rewards at any time.`}
+    />
+
+    {isLoadingPendingRewards ? (
+        <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
+    ) : (
+        <Text color="white" fontSize="1.5rem">
+            {numberFormatUSDValue(pendingRewardsTotalUSD)}
+        </Text>
+    )}
+    <Box >
+        {pendingRewards.map((reward, index) => (
+        <HStack key={index} spacing="1" mb={index === pendingRewards.length - 1 ? '0' : '0.5'}>
+            <TokenAvatar height="20px" width="20px" address={reward.address} />
+            <Skeleton isLoaded={!isLoadingPendingRewards}>
+                <Text fontSize="1rem" lineHeight="1rem">
+                    {tokenFormatAmount(reward.amount)}
+                </Text>
+            </Skeleton>
+        </HStack>
+        ))}
+    </Box>
+</VStack>
+
+<Box alignItems="center" justifyContent="flex-end" display="flex" width="40%">
+    <BeetsSubmitTransactionButton
+        {...harvestQuery}
+        isDisabled={!hasPendingRewards}
+        onClick={() => claim()}
+        onConfirmed={() => {
+            refetchPendingRewards();
+            refetchUserTokenBalances();
+        }}
+        width="full"
+        variant="stayblack"
+    >
+        Claim rewards
+    </BeetsSubmitTransactionButton>
+</Box>
+    </HStack>
+    </VStack>
+</>      
+);
 }
