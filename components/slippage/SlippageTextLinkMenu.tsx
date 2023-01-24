@@ -12,8 +12,8 @@ const customIsValid = custom !== '' && parseFloat(custom) < 50 && parseFloat(cus
 
 return (
     <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
-        <MenuButton as={Link} color="gray.100" fontWeight="bold" userSelect="none">
-            {numeral(slippage).format('0.0[000]%')}
+        <MenuButton as={Link} color="#5BC0F8" fontWeight="bold" userSelect="none" textDecoration="underline">
+             {numeral(slippage).format('0.0[000]%')}
         </MenuButton>
         <MenuList 
         color="grey.100" 
