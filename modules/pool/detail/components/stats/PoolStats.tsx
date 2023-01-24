@@ -21,8 +21,8 @@ export default function PoolStats() {
         width={{ base: '50%', md: 'full' }}
         borderRadius="16px"
         bgColor="rgba(0, 0, 0, 0.3)"
-        boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 12px #fff"
-      >
+        boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 2px #fff"
+        >
         <VStack height="full" spacing="4">
           {hasBpt && (
             <Tabs
