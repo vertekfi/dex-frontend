@@ -44,10 +44,10 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
 
 return (
 <>
-<VStack width="full" gap={8}>
+<VStack width="full" gap={2}>
 <HStack 
 width="full"
-bgColor="vertek.slatepurple.800"
+bg="whiteAlpha.100"
 padding="2"
 borderRadius="12px"
 boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
@@ -138,7 +138,7 @@ alignItems="space-between"
 
 <HStack 
 width="full"
-bgColor="vertek.slatepurple.800"
+bg="whiteAlpha.100"
 padding="2"
 borderRadius="12px"
 boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
