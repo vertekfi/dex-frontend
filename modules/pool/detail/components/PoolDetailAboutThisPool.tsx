@@ -33,7 +33,7 @@ export function PoolDetailAboutThisPool() {
 
   return (
     <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap="4" width="full">
-      <GridItem>
+      <GridItem >
         <Text fontWeight="semibold" fontSize="xl" color="white" mb="4">
           Pool tokens
         </Text>
@@ -46,7 +46,8 @@ export function PoolDetailAboutThisPool() {
               data={data?.staticData.find((item) => item.tokenAddress === token.address)}
               dynamicData={data?.dynamicData.find((item) => item.tokenAddress === token.address)}
               mb="2"
-            />
+              boxShadow=" 0 0 24px 2px #000" 
+              />
           );
         })}
       </GridItem>

@@ -3,6 +3,7 @@ import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
+import { ZERO_ADDRESS } from '~/lib/util/web3';
 import { Multicaller } from '../util/multicaller.service';
 
 import { OnchainGaugeData, OnchainGaugeDataMap } from './types';
@@ -21,13 +22,19 @@ export class GaugesDecorator {
    */
   async decorate(subgraphGauges: LiquidityGauge[], userAddress: string) {
     this.multicaller = this.resetMulticaller();
+
+    subgraphGauges = subgraphGauges.map((g) => {
+      return {
+        ...g,
+        rewardTokens: g.rewardTokens.filter((r) => r?.id !== ZERO_ADDRESS),
+      };
+    });
+
     this.callRewardTokens(subgraphGauges);
     this.callClaimableTokens(subgraphGauges, userAddress);
 
     let gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>();
-
     this.callClaimableRewards(subgraphGauges, userAddress);
-
     gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>(gaugesDataMap);
 
     const data = subgraphGauges.map((subgraphGauge) => ({
@@ -93,10 +100,14 @@ export class GaugesDecorator {
     const methodName = 'claimable_reward';
     subgraphGauges.forEach((gauge) => {
       gauge.rewardTokens.forEach((rewardToken) => {
-        this.multicaller.call(`${gauge.id}.claimableRewards.${rewardToken}`, gauge.id, methodName, [
-          userAddress,
-          rewardToken,
-        ]);
+        if (rewardToken?.id) {
+          this.multicaller.call(
+            `${gauge.id}.claimableRewards.${rewardToken}`,
+            gauge.id,
+            methodName,
+            [userAddress, rewardToken.id],
+          );
+        }
       });
     });
   }
