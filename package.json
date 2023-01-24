@@ -72,7 +72,6 @@
     "@chakra-ui/icons": "^2.0.13",
     "@chakra-ui/system": "2",
     "@chakra-ui/tabs": "^2.1.5",
-    "@layerzerolabs/stargate-ui": "^0.0.25-mainnet.20",
     "add": "^2.0.6",
     "graphql-request": "^5.1.0",
     "react-svg": "^15.1.15",
