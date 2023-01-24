@@ -72,7 +72,6 @@ export function _useGauges() {
     };
 
     if (userAddress && !isLoading && gauges?.getLiquidityGauges) {
-      console.log(gauges);
       // decorate for UI and use state version in other effects
       setGauges();
     }

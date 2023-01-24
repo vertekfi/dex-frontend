@@ -25,24 +25,22 @@ export function GaugeList(props: GaugeListProps | null) {
   return (
     <PoolListProvider>
       <UserTokenBalancesProvider>
-
-          <Box 
-          mt="3rem" 
-          boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
-          mb="6rem" 
-          borderRadius="16px" 
-          flexDirection="column" 
-          display="flex">
-            <GaugeListTableHeader />
-            <Box>
-
-              {props?.votingGauges.map((gauge) => {
-                return <GaugeListItem key={gauge.address} gauge={gauge} />;
-              })}
-            </Box>
-            <GaugeListFooter />
+        <Box
+          mt="3rem"
+          boxShadow={{ base: 'none', lg: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6' }}
+          mb="6rem"
+          borderRadius="16px"
+          flexDirection="column"
+          display="flex"
+        >
+          <GaugeListTableHeader />
+          <Box>
+            {props?.votingGauges.map((gauge) => {
+              return <GaugeListItem key={gauge.address} gauge={gauge} />;
+            })}
           </Box>
-
+          <GaugeListFooter />
+        </Box>
       </UserTokenBalancesProvider>
     </PoolListProvider>
   );
