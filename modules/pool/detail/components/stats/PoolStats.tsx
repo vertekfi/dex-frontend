@@ -18,7 +18,8 @@ export default function PoolStats() {
       <Box
         p={{ base: 'none', md: '4' }}
         mb="0"
-        width={{ base: '50%', md: 'full' }}
+        minHeight="540px"
+        maxWidth="100vw"
         borderRadius="16px"
         bgColor="rgba(0, 0, 0, 0.3)"
         boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 2px #fff"
@@ -30,17 +31,16 @@ export default function PoolStats() {
               variant="soft-rounded"
               display="flex"
               onChange={handleTabChanged}
-              px="2"
             >
               <TabList>
-                <HStack spacing="2">
-                  <BeetsTab paddingX="4" paddingY="2" fontSize="xs">
+                <Box flexDirection="row"  alignContent="flex-start" display="flex" justifyContent="flex-start" mb="4">
+                  <BeetsTab paddingX="2" paddingY="2" fontSize="sm">
                     My Stats
                   </BeetsTab>
-                  <BeetsTab paddingX="2" paddingY="2" fontSize="xs">
+                  <BeetsTab paddingX="2" paddingY="2" fontSize="md">
                     Pool Stats
                   </BeetsTab>
-                </HStack>
+                </Box>
               </TabList>
             </Tabs>
           )}
