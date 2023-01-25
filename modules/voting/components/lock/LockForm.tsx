@@ -85,10 +85,11 @@ export function LockForm(props: Props) {
 
 return (
   <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
-    <ModalOverlay bgColor="vertek.slate.900" />
-    <ModalContent
-      minW={{ base: 'auto', md: '90vw' }}
-      maxW={{ base: 'auto', md: '95vw' }}
+    <ModalOverlay bgColor="vertek.slate.900"/> 
+     <ModalContent
+      minW={{ base: 'auto', md: '99vw' }}
+      maxW={{ base: 'auto', md: '99vw' }}
+      h="full"
       bg={`radial-gradient(circle at top center, 
         rgba(77, 63, 236, 0.5) 0%, 
         rgba(0,0,0, 0.8) 70% )`}
@@ -117,12 +118,13 @@ return (
           gap="8"
         >
           <GridItem
-            boxShadow={{ base: 'none', md: 'none' }}
-            width={{ base: '90%', lg: 'auto' }}
-            m={{ base: '2', md: '2' }}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
-            borderRadius="12px"
-          >
+            boxShadow={{base:'none', md:'none'}}
+            width={{base:'90%', lg:'auto'}}
+            height={{ base:'auto', lg:'50%'}}
+            m={{ base:'2', md:'2'}}
+            mt={{ base:'auto', md:'24'}}
+            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+            borderRadius="12px">
             <Box padding={{ base: '2', md: '2' }} borderRadius="12px" mb="6">
               <Text
                 align="left"
@@ -376,12 +378,13 @@ return (
             </Box>
           </GridItem>
           <GridItem
-            boxShadow={{ base: 'none', md: 'none' }}
-            width={{ base: '90%', lg: 'auto' }}
-            m={{ base: '2', md: '2' }}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
-            borderRadius="12px"
-          >
+            boxShadow={{base:'none', md:'none'}}
+            width={{base:'90%', lg:'auto'}}
+            height={{ base:'auto', lg:'50%'}}
+            m={{ base:'2', md:'2'}}
+            mt={{ base:'auto', md:'24'}}
+            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+            borderRadius="12px">
             <Box
               padding="2"
               borderRadius="12px"
@@ -389,29 +392,40 @@ return (
               bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
             >
               <Text
-                align="left"
+                align="center"
                 padding="1"
                 mb="4"
+                mt="8"
                 fontWeight="bold"
                 color="white"
                 fontSize="1.2rem"
               >
                 My veVRTK
               </Text>
-              <Box mt="20">
+              <Box mt="2">
                 <Text fontSize="1.2rem" fontWeight="bold" align="center">
-                  0 veVRTK
+                  {userPoolBalance.balance}
                 </Text>
               </Box>
-              <Box mt="20">
-                <Flex align="center">
-                  <Text fontSize="1rem" mr="auto">
-                    % of total veVRTK
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
+              <Box mt="20" alignItems="center" 
+              display="flex" flexDirection="row" justifyContent="center" 
+              >
+                  <Box display="flex" flexDirection="column" mr="4">
+                      <Text fontSize="1.1rem" fontWeight="semibold" >
+                        % of total veVRTK
+                      </Text>
+                      <Text fontSize="1.1rem" >
+                        % 
+                      </Text>
+                  </Box>
+                  <Box display="flex" flexDirection="column" ml="4" >
+                  <Text fontSize="1.1rem" fontWeight="semibold" >
                     Locked until
                   </Text>
-                </Flex>
+                  <Text fontSize="1.1rem">
+                    Date
+                  </Text>
+                  </Box>
               </Box>
             </Box>
           </GridItem>
