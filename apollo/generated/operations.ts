@@ -1016,6 +1016,10 @@ export const GetLiquidityGauges = gql`
         decimals
         symbol
       }
+      fees {
+        depositFee
+        withdrawFee
+      }
       pool {
         id
         name

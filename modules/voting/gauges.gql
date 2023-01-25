@@ -13,6 +13,10 @@ query GetLiquidityGauges {
       decimals
       symbol
     }
+    fees {
+      depositFee
+      withdrawFee
+    }
     pool {
       id
       name
