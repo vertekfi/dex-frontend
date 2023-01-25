@@ -1,4 +1,4 @@
-import { useTheme } from '@chakra-ui/react';
+import { useTheme, Box } from '@chakra-ui/react';
 import ReactECharts from 'echarts-for-react';
 import { useMemo } from 'react';
 import { EChartsOption, graphic } from 'echarts';
@@ -18,27 +18,39 @@ export function PoolDetailFeesChart({ data }: Props) {
   const option = useMemo<EChartsOption>(
     () => ({
       tooltip: {
-        show: true,
         trigger: 'axis',
+        type: 'shadow',
+        backgroundColor: 'rgba(24, 24, 46, 0.95)',
+        borderColor: 'transparent',
+        borderRadius: 8,
+        textStyle: {
+          color: 'white',
+        },
+        padding: 16,
         axisPointer: {
+          animation: false,
           type: 'cross',
-          crossStyle: {
-            color: '#999',
+          lineStyle: {
+            color: '#376df4',
+            width: 2,
+            opacity: 1,
           },
         },
       },
       grid: {
-        bottom: '2%',
-        right: '1.5%',
-        left: '1.5%',
-        top: '10%',
-        containLabel: true,
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        containLabel: false,
       },
       xAxis: {
+        show: false,
         type: 'time',
-        minorSplitLine: { show: false },
-        axisTick: { show: false },
+        axisLine: { lineStyle: { color: '#8392A5' },  },
+        offset: 0,
         axisLabel: {
+          fontSize: 14, 
           formatter: (value: number, index: number) => {
             return format(new Date(value), 'MMM d');
           },
@@ -56,7 +68,6 @@ export function PoolDetailFeesChart({ data }: Props) {
             },
           },
         },
-        axisLine: { show: false },
       },
       yAxis: {
         type: 'value',
@@ -77,7 +88,7 @@ export function PoolDetailFeesChart({ data }: Props) {
           },
         },
       },
-      color: ['rgba(0,255,255, 1.0)'],
+      color: ['#4A4AF6'],
       series: [
         {
           data: data.map((item) => [item.timestamp * 1000, item.fees24h]),
@@ -88,14 +99,17 @@ export function PoolDetailFeesChart({ data }: Props) {
               return `$${numeral(value).format('0a')}`;
             },
           },
-          itemStyle: {
+          areaStyle: {
             opacity: 1,
-            borderRadius: [5, 5, 0, 0],
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: chartGetPrimaryColor(networkConfig.chainId, 1) },
-              { offset: 0.5, color: chartGetPrimaryColor(networkConfig.chainId, 0.7) },
-              { offset: 1, color: chartGetPrimaryColor(networkConfig.chainId, 0) },
+              { offset: 0, color: 'rgba(80, 78, 144, 1)' },
+              { offset: 1, color: 'rgba(28, 28, 52, 1)' },
             ]),
+          },
+          itemStyle: {
+            borderRadius: [5, 5, 0, 0],
+            color: '#4A4AF6',
+            borderColor: '#4A4AF6',
           },
         },
       ],
@@ -103,5 +117,9 @@ export function PoolDetailFeesChart({ data }: Props) {
     [JSON.stringify(data)],
   );
 
-  return <ReactECharts option={option} style={{ height: '100%' }} />;
+  return (
+    <Box width="full" height="full">
+   <ReactECharts option={option} style={{ height: '100%' }} />
+  </Box>
+  );
 }
