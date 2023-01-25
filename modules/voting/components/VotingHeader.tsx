@@ -151,11 +151,13 @@ export function VotingHeader() {
           <Text>{lockInfoDisplay.lockedUntilDate}</Text>
           <Text marginTop="-2rem">{lockInfoDisplay.lockedUntilDays} days</Text>
           <Button variant="moistblack" 
-            marginBottom="1rem"
-            width={{ base: '50%', lg: '75%' }}>
+              marginBottom="1rem"
+              width={{ base: '50%', lg: '75%' }}
+              onClick={handleOpenModal}>
             Update My Lock
             <LockIcon ml="2" color="vertek.slate.200" />
           </Button>
+          {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
         </VotingCard>
 
         <VotingCard>
