@@ -8,7 +8,7 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 export function _useGauges() {
   const [votingPeriodEnd, setVotingPeriodEnd] = useState<number[]>();
   const [votingPeriodLastHour, setVotingPeriodLastHour] = useState<boolean>();
-  const [unallocatedVotes, setUnallocatedVotes] = useState<number>();
+  const [unallocatedVoteWeight, setUnallocatedVoteWeight] = useState<number>(0);
   const [votingGauges, setVotingGauges] = useState<VotingGaugeWithVotes[]>([]);
 
   const { userAddress } = useUserAccount();
@@ -87,9 +87,9 @@ export function _useGauges() {
         return remainingVotes - parseFloat(gauge.userVotes);
       }, totalVotes);
 
-      setUnallocatedVotes(votesRemaining);
+      setUnallocatedVoteWeight(votesRemaining);
     } else {
-      setUnallocatedVotes(totalVotes);
+      setUnallocatedVoteWeight(totalVotes);
     }
   }, [votingGauges]);
 
@@ -102,7 +102,7 @@ export function _useGauges() {
   return {
     isLoading,
     votingGauges,
-    unallocatedVotes,
+    unallocatedVoteWeight,
     votingPeriodEnd,
     votingPeriodLastHour,
     refetch,
