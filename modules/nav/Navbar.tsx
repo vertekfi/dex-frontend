@@ -38,22 +38,24 @@ export function Navbar({ scrollY }: Props) {
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        borderBottomColor="vertek.slatepurple.600"
-        borderBottomWidth="1px"
+        borderBottomColor="vertek.neonpurple.500"
+        backdropFilter="blur(16px)"
+        borderBottomWidth="3px"
         padding="24px, 40px, 0px, 40px"
       >
         <Flex px={{ base: '4', xl: '8' }} py="0" alignItems="center">
           <motion.div
             style={{ opacity, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           >
-            <Box width="full" height="full" bg="vertek.slatepurple.900" shadow="xl" />
+                        <Box width="full" height="full" bg="transparent" shadow="xl" />
+
           </motion.div>
           <Flex
             alignItems="center"
             mr="6"
             zIndex="2"
             cursor="pointer"
-            bgColor="vertek.slate.gradient"
+            bgColor="transparent"
           >
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
               {chainId === '10' ? (
