@@ -25,13 +25,13 @@ export function PoolWithdrawModal() {
     }, [pool.id]);
 
     function onModalClose() {
-        if (withdrawComplete) {
-            setModalState('start');
-            setInvestType(null);
-        }
-
-        onClose();
+        onClose(); 
+        setModalState('start');
+        setInvestType(null);
+        clearWithdrawState();
     }
+
+    
 
     return (
         <>
@@ -54,8 +54,6 @@ export function PoolWithdrawModal() {
                 onClose={onModalClose}
                 size={modalState === 'start' ? '3xl' : '2xl'}
                 initialFocusRef={initialRef}
-
-
             >
 
 <ModalOverlay 
