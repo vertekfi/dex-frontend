@@ -172,7 +172,7 @@ export function GaugeVoteModal(props: Props) {
             </Box>
             <div>
               <FormControl>
-                <FormLabel color="white">%</FormLabel>
+                {/* <FormLabel color="white">%</FormLabel> */}
                 <Input
                   id="voteWeight"
                   name="voteWeight"
@@ -182,8 +182,9 @@ export function GaugeVoteModal(props: Props) {
                   autoComplete="off"
                   autoCorrect="off"
                   spellCheck={false}
+                  color="grey.100"
                   step="any"
-                  placeholder="0"
+                  placeholder="0%"
                   // validateOn="input"
                   // rules={inputRules}
                   // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
