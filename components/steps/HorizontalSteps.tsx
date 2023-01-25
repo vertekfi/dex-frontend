@@ -53,7 +53,7 @@ export function HorizontalSteps({ steps, ...rest }: Props) {
                                             ? 'gray.300'
                                             : status === 'complete'
                                             ? 'beets.green'
-                                            : 'beets.highlight'
+                                            : 'vertek.neonpurple.500'
                                     }
                                     color={status === 'idle' ? 'gray.100' : 'beets.highlight'}
                                     fontWeight={status === 'idle' ? 'normal' : 'bold'}

@@ -76,9 +76,6 @@ export function HomeHero() {
               </Button>
             </NextLink>
           </HStack>
-          {/*<Link color="beets.highlight" alignSelf="flex-start">
-                        {"I'm new! Help me get started."}
-                    </Link>*/}
         </Flex>
       </Flex>
       {/* <ReactSVG
@@ -87,10 +84,6 @@ export function HomeHero() {
                 width="400.62px"
                  height="68px"
                   /> */}
-      {/* <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-          <BeetsLogo width="500px" />
-      </Box>
-      <Box flex="0" display={{ base: 'none', md: 'block' }} /> */}
     </Flex>
   );
 }
