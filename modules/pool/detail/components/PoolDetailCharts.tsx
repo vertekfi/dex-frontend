@@ -21,11 +21,13 @@ export function PoolDetailCharts() {
   return (
     <Card
       width="full"
-      boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 2px #fff"
+      boxShadow=" 0 0 4px #5BC0F8, 0 0 8px #4A4AF6,  0 0 2px #fff"
       minHeight="540px"
       padding="8px"
-      borderRadius="12px"
-    >
+      borderRadius="16px"
+      bgColor="vertek.slatepurple.900" 
+     
+          >
       <HStack
         padding={{ base: '2', lg: '4' }}
         pb="0"
@@ -83,7 +85,7 @@ export function PoolDetailCharts() {
         </Select>
       </HStack>
       {chartType === 'BPT_PRICE' && (
-        <PoolDetailBptPriceChart
+        <PoolDetailBptPriceChart  
           prices={(data?.snapshots || []).map((snapshot) => ({
             timestamp: snapshot.timestamp,
             price: snapshot.sharePrice,
