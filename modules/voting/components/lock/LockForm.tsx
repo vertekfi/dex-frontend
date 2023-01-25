@@ -54,6 +54,7 @@ export function LockForm(props: Props) {
     usdValue: '0',
   });
 
+
   const [lockInfoDisplay, setLockInfoDisplay] = useState<{
     lockedUntilDays: number;
     lockedUntilDate: string;
@@ -83,26 +84,34 @@ export function LockForm(props: Props) {
   }, [loadingBalances, isConnected]);
 
 return (
-  <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
-    <ModalOverlay bgColor="vertek.slate.900"/> 
+
+  
+  <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl" >
+   <ModalOverlay 
+      bg=
+      {`radial-gradient(circle at center, 
+          #4132D0 0%, 
+          rgba(0,0,0, 0.7) 70% )`}
+          
+      />
      <ModalContent
-      minW={{ base: 'auto', md: '99vw' }}
-      maxW={{ base: 'auto', md: '99vw' }}
-      h="full"
-      bg={`radial-gradient(circle at top center, 
-        rgba(77, 63, 236, 0.5) 0%, 
-        rgba(0,0,0, 0.8) 70% )`}
+      minW={{ base: 'auto', md: '95vw' }}
+      maxW={{ base: 'auto', md: '95vw' }}
+      h="85vh"
+      bgColor="rgba(0, 0, 0, 0.4)"
+      boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
       paddingY="2rem"
-      borderRadius="12px"
+      borderRadius="8rem"
       marginTop="1.5rem"
+      padding="4" 
       >
       <ModalCloseButton />
-      <BeetsModalHeader>
+      <BeetsModalHeader  >
           <BeetsModalHeadline
             textAlign="center"
             fontSize="1.5rem"
             color="white"
-            mb="12px"
+            mb=""
             mt="-1rem"
           >
               Lock VRTK-BNB
@@ -111,10 +120,11 @@ return (
       
       <BeetsModalBody bgColor="transparent" p="0" textAlign="center" fontSize="1.2rem">
         <Grid
+          backgroundColor="transparent" 
           pl={{ base: '2', md: '4' }}
           pr={{ base: '2', md: '4' }}
           templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
-          gap="8"
+          gap="4"
         >
           <GridItem
             boxShadow={{base:'none', md:'none'}}
@@ -432,5 +442,7 @@ return (
       </BeetsModalBody>
     </ModalContent>
   </Modal>
+
+
 );
 }
