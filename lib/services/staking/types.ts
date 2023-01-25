@@ -53,16 +53,6 @@ export type VotingGauge = {
 
 export type VotingGaugeWithVotes = VotingGauge & VotesData;
 
-// export interface SubgraphGauge {
-//   id: string;
-//   symbol: string;
-//   poolId: string;
-//   totalSupply: string;
-//   factory: {
-//     id: string;
-//   };
-// }
-
 export type SubgraphGauge = LiquidityGauge;
 
 export interface OnchainGaugeData {

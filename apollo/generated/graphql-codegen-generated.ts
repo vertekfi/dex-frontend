@@ -4305,6 +4305,7 @@ export type GetLiquidityGaugesQuery = {
       decimals: number;
       symbol: string;
     } | null>;
+    fees: { __typename: 'GaugeFees'; depositFee: number; withdrawFee: number };
     pool: {
       __typename: 'GaugePool';
       id: string;
@@ -6588,6 +6589,10 @@ export const GetLiquidityGaugesDocument = gql`
         id
         decimals
         symbol
+      }
+      fees {
+        depositFee
+        withdrawFee
       }
       pool {
         id
