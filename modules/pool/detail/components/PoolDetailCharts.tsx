@@ -36,8 +36,18 @@ export function PoolDetailCharts() {
           value={chartType}
           onChange={(e) => setChartType(e.currentTarget.value as ChartType)}
           width="160px"
-          bgColor="black" 
-          color="white" 
+          bg="vertek.slatepurple.900" 
+          color="vertek.neonpurple.500" 
+          css={`
+            & > option {
+              background-color: #161626;
+              color: #4A4AF6;
+              & > option:hover {
+                background-color: black;
+                color: #fff
+              }
+            }
+          `}
           variant="filled"
         >
 
@@ -51,12 +61,16 @@ export function PoolDetailCharts() {
           value={range}
           onChange={(e) => setRange(e.currentTarget.value as GqlPoolSnapshotDataRange)}
           width="160px"
-          bgColor="vertek.slatepurple.900" 
-          color="gray.100" 
+          bg="vertek.slatepurple.900" 
+          color="vertek.neonpurple.500" 
           css={`
             & > option {
-              background-color: black;
-              color: white;
+              background-color: #161626;
+              color: #4A4AF6;
+              & > option:hover {
+                background-color: black;
+                color: #fff
+              }
             }
           `}
           variant="filled"
