@@ -43,7 +43,7 @@ export function HomeLearn(props: BoxProps) {
         
             <HomeLearnItem
               title="The Vertek Volta"
-              description="The core DeFi instrument of Vertek. Lock VRTK-WBNB here to get veVRTK, which can be used to vote for and direct emissions to your favorite Core Pools, increasing their APRs. 
+              description="The core DeFi instrument of Vertek. Lock VRTK-BNB here to get veVRTK, which can be used to vote for and direct emissions to your favorite Core Pools, increasing their APRs. 
               Accumulate and compound veVRTK to boost rewards when farming Core Pools, while also receiving dividends from 50% of dex fee profits."
               url="https://aalto-defi.notion.site/Vertek-Volta-veVRTK-c4cde926ad344b2b9e1e464469bd1873"
             />

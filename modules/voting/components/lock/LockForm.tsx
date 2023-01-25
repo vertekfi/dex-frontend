@@ -134,10 +134,11 @@ return (
                 fontSize="1.2rem"
               >
                 Lockable tokens in my wallet
+
               </Text>
               <Flex align="center" mt="6">
                 <Text fontSize="1rem" mr="auto">
-                  VRTK-WBNB
+                  VRTK-BNB
                 </Text>
                 <Text fontSize="1rem" ml="auto">
                 {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
@@ -160,7 +161,7 @@ return (
                   width="100%"
                   height="2.2rem"
                 >
-                  Get VRTK-WBNB
+                  Get VRTK-BNB
                 </Button>
               </Flex>
             </Box>
