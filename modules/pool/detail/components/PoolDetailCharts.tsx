@@ -1,4 +1,4 @@
-import { HStack, Select } from '@chakra-ui/react';
+import { HStack, Select, Box } from '@chakra-ui/react';
 import Card from '~/components/card/Card';
 import { PoolDetailBptPriceChart } from '~/modules/pool/detail/components/charts/PoolDetailBptPriceChart';
 import { useState } from 'react';
@@ -29,19 +29,23 @@ export function PoolDetailCharts() {
       <HStack
         padding={{ base: '2', lg: '4' }}
         pb="0"
+        
         justify={{ base: 'space-between', lg: 'flex-start' }}
       >
         <Select
           value={chartType}
           onChange={(e) => setChartType(e.currentTarget.value as ChartType)}
           width="160px"
-          bgColor="vertek.slatepurple.900" 
-          color="gray.100" 
+          bgColor="black" 
+          color="white" 
+          variant="filled"
         >
+
           <option value="BPT_PRICE">VPT price</option>
           <option value="FEES">Fees</option>
           <option value="TVL">TVL</option>
           <option value="VOLUME_TVL">Volume / TVL</option>
+
         </Select>
         <Select
           value={range}
@@ -49,6 +53,13 @@ export function PoolDetailCharts() {
           width="160px"
           bgColor="vertek.slatepurple.900" 
           color="gray.100" 
+          css={`
+            & > option {
+              background-color: black;
+              color: white;
+            }
+          `}
+          variant="filled"
         >
           <option value="THIRTY_DAYS">last 30 days</option>
           <option value="NINETY_DAYS">last 90 days</option>
