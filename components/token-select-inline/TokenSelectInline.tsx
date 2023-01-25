@@ -34,12 +34,12 @@ export function TokenSelectInline({ tokenOptions, selectedAddress, onOptionSelec
                             </Text>
                         </HStack>
                     </MenuButton>
-                    <MenuList bgColor="vertek.slatepurple.900" 
-                        borderWidth="2px" 
+                    <MenuList bgColor="vertek.slatepurple.700" 
+                        borderWidth="2px"
                         >
                         {tokenOptions.map((option) => (
                             <MenuItem
-                            bgColor="vertek.slatepurple.900" 
+                            bgColor="vertek.slatepurple.700" 
                             borderWidth="1px" 
                             _hover={{ backgroundColor:"vertek.slatepurple.800"}}
                             _focus={{ backgroundColor:"vertek.slatepurple.800" }}
