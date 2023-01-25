@@ -123,21 +123,25 @@ export function VotingHeader() {
         <VotingCard>
           <VotingCardHeader>My VRTK-WBNB </VotingCardHeader>
           <Text>{userPoolBalance.usdValue}</Text>
-          <Text mb="2rem">{userPoolBalance.balance}</Text>
+          <Text marginTop="-2rem">{userPoolBalance.balance}</Text>
           <Button
             as="a"
             href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
             variant="moistblack"
             width={{ base: '50%', lg: '75%' }}
+            marginBottom="1rem"
           >
             Get VRTK-BNB
           </Button>
         </VotingCard>
         <VotingCard>
           <VotingCardHeader>My locked VRTK-WBNB</VotingCardHeader>
-          <Text mb="2rem">$0.00</Text>
-          <Text>{userLockInfo?.lockedAmount}</Text>
-          <Button variant="moistblack" width={{ base: '50%', lg: '75%' }} onClick={handleOpenModal}>
+          <Text >$0.00</Text>
+          <Text marginTop={{base: '-1rem', md:'-2rem'}}>{userLockInfo?.lockedAmount}</Text>
+          <Button variant="moistblack" 
+              marginBottom="1rem" 
+              width={{ base: '50%', lg: '75%' }}
+              onClick={handleOpenModal}>
             Lock VRTK-BNB
           </Button>
           {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
@@ -145,8 +149,10 @@ export function VotingHeader() {
         <VotingCard>
           <VotingCardHeader>Locked until </VotingCardHeader>
           <Text>{lockInfoDisplay.lockedUntilDate}</Text>
-          <Text>{lockInfoDisplay.lockedUntilDays} days</Text>
-          <Button variant="moistblack" width={{ base: '50%', lg: '75%' }}>
+          <Text marginTop="-2rem">{lockInfoDisplay.lockedUntilDays} days</Text>
+          <Button variant="moistblack" 
+            marginBottom="1rem"
+            width={{ base: '50%', lg: '75%' }}>
             Update My Lock
             <LockIcon ml="2" color="vertek.slate.200" />
           </Button>
@@ -155,7 +161,7 @@ export function VotingHeader() {
         <VotingCard>
           <VotingCardHeader>My veVRTK</VotingCardHeader>
           <Text>{lockInfoDisplay.veBalance}</Text>
-          <Text mb="4">{lockInfoDisplay.percentOwned}</Text>
+          <Text  marginBottom="4rem">{lockInfoDisplay.percentOwned}</Text>
         </VotingCard>
       </Grid>
     </UserDataProvider>
