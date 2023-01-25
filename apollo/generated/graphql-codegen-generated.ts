@@ -28,6 +28,12 @@ export interface GaugeFactory {
   id: Scalars['String'];
 }
 
+export interface GaugeFees {
+  __typename: 'GaugeFees';
+  depositFee: Scalars['Int'];
+  withdrawFee: Scalars['Int'];
+}
+
 export interface GaugePool {
   __typename: 'GaugePool';
   address: Scalars['String'];
@@ -1024,6 +1030,7 @@ export interface LiquidityGauge {
   /**  Address of the pool (lp_token of the gauge)  */
   address: Scalars['String'];
   factory?: Maybe<GaugeFactory>;
+  fees: GaugeFees;
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
@@ -4298,6 +4305,7 @@ export type GetLiquidityGaugesQuery = {
       decimals: number;
       symbol: string;
     } | null>;
+    fees: { __typename: 'GaugeFees'; depositFee: number; withdrawFee: number };
     pool: {
       __typename: 'GaugePool';
       id: string;
@@ -6581,6 +6589,10 @@ export const GetLiquidityGaugesDocument = gql`
         id
         decimals
         symbol
+      }
+      fees {
+        depositFee
+        withdrawFee
       }
       pool {
         id

@@ -118,7 +118,7 @@ export function PoolDetailTokenInfoCard({ token, price, data, dynamicData, ...re
                 href={data.websiteUrl}
                 target="_blank"
                 color="gray.100"
-                _hover={{ color: 'beets.highlight' }}
+                _hover={{ color: 'vertek.neonpurple.500' }}
               >
                 <Globe size={24} />
               </Link>

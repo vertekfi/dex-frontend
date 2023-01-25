@@ -77,7 +77,7 @@ padding={{ base:'4', lg:'4' }}
     color="vertek.slate.100" 
     textAlign="left"
 >
-    Lock VRTK-WBNB and receive up to 2.5x boosted rewards when farming 
+    Lock VRTK-BNB and receive up to 2.5x boosted rewards when farming 
     Core Pools.
 </Text>
 <Button  

@@ -159,20 +159,21 @@ export function GaugeVoteModal(props: Props) {
           </BeetsModalHeader>
 
           <BeetsModalBody textAlign="center" fontSize="1.2rem">
-            <Box display="flex" gap={4} alignItems="center" h="full">
+            <Box display="flex" flexDirection="column" gap={4} padding="2" alignItems="flex-start" h="full">
               <Text fontWeight="medium">
                 {props.gauge.pool.name}
-
+                </Text>
                 <MemoizedTokenAvatarSetInList
                   imageSize={28}
+                  marginBottom="4"
                   width={92}
                   tokens={props.gauge.pool.tokens}
                 />
-              </Text>
+             
             </Box>
             <div>
               <FormControl>
-                <FormLabel color="white">%</FormLabel>
+                {/* <FormLabel color="white">%</FormLabel> */}
                 <Input
                   id="voteWeight"
                   name="voteWeight"
@@ -182,8 +183,9 @@ export function GaugeVoteModal(props: Props) {
                   autoComplete="off"
                   autoCorrect="off"
                   spellCheck={false}
+                  color="grey.100"
                   step="any"
-                  placeholder="0"
+                  placeholder="0%"
                   // validateOn="input"
                   // rules={inputRules}
                   // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}

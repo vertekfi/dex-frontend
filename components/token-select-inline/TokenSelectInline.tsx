@@ -20,8 +20,11 @@ export function TokenSelectInline({ tokenOptions, selectedAddress, onOptionSelec
                     <MenuButton
                         isActive={isOpen}
                         as={Button}
-                        rightIcon={<ChevronDown color={theme.colors.beets.green} />}
-                        variant="ghost"
+                        rightIcon={<ChevronDown color={theme.colors.vertek.neonpurple['500']} />}
+                        bgColor="transparent"
+                        borderWidth="1px" 
+                        _hover={{ backgroundColor:"vertek.slatepurple.800"}}
+                        _active={{ backgroundColor:"vertek.slatepurple.800"}}
                         px="1.5"
                     >
                         <HStack spacing="1.5" flex="1">
@@ -31,9 +34,16 @@ export function TokenSelectInline({ tokenOptions, selectedAddress, onOptionSelec
                             </Text>
                         </HStack>
                     </MenuButton>
-                    <MenuList>
+                    <MenuList bgColor="vertek.slatepurple.900" 
+                        borderWidth="2px" 
+                        >
                         {tokenOptions.map((option) => (
                             <MenuItem
+                            bgColor="vertek.slatepurple.900" 
+                            borderWidth="1px" 
+                            _hover={{ backgroundColor:"vertek.slatepurple.800"}}
+                            _focus={{ backgroundColor:"vertek.slatepurple.800" }}
+                            _active={{ backgroundColor:"vertek.slatepurple.800"}}
                                 key={option.address}
                                 display="flex"
                                 onClick={() => onOptionSelect(option.address)}

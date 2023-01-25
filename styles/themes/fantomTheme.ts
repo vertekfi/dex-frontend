@@ -136,9 +136,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 
         },
         beets: {
-            green: '#00F89C',
+            green: '#5BC0F8',
             red: '#FF0000',
-            highlight: '#00FFFF',
+            highlight: '#4A4AF6',
             base: {
                 '50': '#C3C5E9',
                 '100': '#8F93D6',
@@ -368,7 +368,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             borderColor:'vertek.neonpurple.500', 
                             color: 'white',
                             fontWeight:'900', 
-                            _active: { backgroundColor:'vertek.slate.900'  },
+                            _active: { backgroundColor:'vertek.slate.900', boxShadow:'0 0 12px #000'  },
                             _focus: { outline: 'none', boxShadow: 'none' },
                             borderRadius: '8px',
                             _hover: {
@@ -388,8 +388,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 boxShadow:'0 0 8px #fff', 
                                 color: 'white',
                                 fontWeight:'900', 
-                                _active: { backgroundColor:'vertek.slate.900'  },
-                                _focus: { outline: 'none', boxShadow: 'none' },
+                                // _active: { backgroundColor:'vertek.slate.900'  },
+                                // _focus: { outline: 'none', boxShadow: 'none' },
                                 borderRadius: '8px',
                                 _hover: {
                                     color:'white',

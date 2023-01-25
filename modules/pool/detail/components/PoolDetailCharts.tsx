@@ -1,4 +1,4 @@
-import { HStack, Select } from '@chakra-ui/react';
+import { HStack, Select, Box } from '@chakra-ui/react';
 import Card from '~/components/card/Card';
 import { PoolDetailBptPriceChart } from '~/modules/pool/detail/components/charts/PoolDetailBptPriceChart';
 import { useState } from 'react';
@@ -19,30 +19,62 @@ export function PoolDetailCharts() {
   const { data } = useGetPoolSnapshotsQuery({ variables: { poolId: pool.id, range } });
 
   return (
-    <Card width="full" 
-    boxShadow=" 0 0 4px #5BC0F8,  0 0 8px #4A4AF6,  0 0 2px #fff"
-    minHeight="540px" 
-    padding="8px" borderRadius="12px">
+    <Card
+      width="full"
+      boxShadow=" 0 0 4px #5BC0F8, 0 0 8px #4A4AF6,  0 0 2px #fff"
+      minHeight="540px"
+      padding="8px"
+      borderRadius="16px"
+      bgColor="vertek.slatepurple.900" 
+     
+          >
       <HStack
         padding={{ base: '2', lg: '4' }}
         pb="0"
+        
         justify={{ base: 'space-between', lg: 'flex-start' }}
       >
         <Select
           value={chartType}
           onChange={(e) => setChartType(e.currentTarget.value as ChartType)}
           width="160px"
+          bg="vertek.slatepurple.900" 
+          color="vertek.neonpurple.500" 
+          css={`
+            & > option {
+              background-color: #161626;
+              color: #4A4AF6;
+              & > option:hover {
+                background-color: black;
+                color: #fff
+              }
+            }
+          `}
           variant="filled"
         >
-          <option value="BPT_PRICE">VRTK price</option>
+
+          <option value="BPT_PRICE">VPT price</option>
           <option value="FEES">Fees</option>
           <option value="TVL">TVL</option>
           <option value="VOLUME_TVL">Volume / TVL</option>
+
         </Select>
         <Select
           value={range}
           onChange={(e) => setRange(e.currentTarget.value as GqlPoolSnapshotDataRange)}
           width="160px"
+          bg="vertek.slatepurple.900" 
+          color="vertek.neonpurple.500" 
+          css={`
+            & > option {
+              background-color: #161626;
+              color: #4A4AF6;
+              & > option:hover {
+                background-color: black;
+                color: #fff
+              }
+            }
+          `}
           variant="filled"
         >
           <option value="THIRTY_DAYS">last 30 days</option>
@@ -52,8 +84,10 @@ export function PoolDetailCharts() {
           <option value="ALL_TIME">All time</option>
         </Select>
       </HStack>
+      <Box height="400px">
       {chartType === 'BPT_PRICE' && (
-        <PoolDetailBptPriceChart
+       
+        <PoolDetailBptPriceChart  
           prices={(data?.snapshots || []).map((snapshot) => ({
             timestamp: snapshot.timestamp,
             price: snapshot.sharePrice,
@@ -67,6 +101,7 @@ export function PoolDetailCharts() {
         <PoolDetailVolumeLiquidityChart data={data?.snapshots || []} hideVolume />
       )}
       {chartType === 'FEES' && <PoolDetailFeesChart data={data?.snapshots || []} />}
+      </Box>
     </Card>
   );
 }
