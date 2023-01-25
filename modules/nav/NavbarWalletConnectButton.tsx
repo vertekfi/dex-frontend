@@ -10,7 +10,6 @@ import { txPendingVar } from '~/lib/util/useSubmitTransaction';
 import { IconWallet } from '~/components/icons/IconWallet';
 import { BarChart2 } from 'react-feather';
 import { useUserData } from '~/lib/user/useUserData';
-import { Image as ChakraImage } from '@chakra-ui/react';
 import { numberFormatLargeUsdValue } from '~/lib/util/number-formats';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
 
@@ -103,7 +102,7 @@ export default function NavbarWalletConnectButton() {
                         {txPending ? (
                           <Spinner color="white" />
                         ) : earlyLudwig ? (
-                          <ChakraImage src={VertekAlpha.src} width="20px" height="20px" rounded="xl"  />
+                          <Image src={VertekAlpha} width="20px" height="20px"   />
                         ) : (
                           <Image src={VertekWhite} width="20px" alt="your-profile" />
                         )}
