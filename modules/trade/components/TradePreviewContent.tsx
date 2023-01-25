@@ -183,8 +183,8 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
-            <Alert status="error" mt={4} color="black">
-              <AlertIcon />
+            <Alert status="error" mt={4} color="black" >
+              <AlertIcon  color="vertek.neonpurple.500"/>
               {transactionMessageFromError(batchSwapQuery.submitError)}
             </Alert>
           ) : null}
