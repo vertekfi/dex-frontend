@@ -81,7 +81,7 @@ export function TradeTokenDataCard({ token, price, data, dynamicData, ...rest }:
               dangerouslySetInnerHTML={{ __html: data.description }}
             />
             <Box mt="1">
-              <Link color="beets.highlight" textDecoration="underline" onClick={onOpen}>
+              <Link color="vertek.neonpurple.500" textDecoration="underline" onClick={onOpen}>
                 Read more
               </Link>
             </Box>
