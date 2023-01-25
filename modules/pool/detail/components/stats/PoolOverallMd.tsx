@@ -44,7 +44,7 @@ return (
     <>
     <HStack 
     display={{ base:'none', md:'flex' }}
-    flexDirection="row" 
+    flexDirection="column" 
     width="full" height="full"
     justifyContent="space-between"
     alignItems="space-between"
@@ -90,7 +90,7 @@ return (
     <Box gap={6}  
     display={{ base:'block', md:'none' }}
     flexDirection="column" 
-    width="90%"
+    width="100%"
     justifyContent="center"
     alignItems="center"
     padding="8px"

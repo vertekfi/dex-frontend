@@ -32,7 +32,7 @@ export function PoolDetailAboutThisPool() {
   });
 
   return (
-    <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap="4" width="full">
+    <Grid  gap="4" width="full">
       <GridItem >
         <Text fontWeight="semibold" fontSize="xl" color="white" mb="4">
           Pool tokens

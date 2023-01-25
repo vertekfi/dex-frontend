@@ -44,35 +44,25 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
 
 return (
 <>
-<VStack width="full" gap={2}>
-<HStack 
-width="full"
-bg="whiteAlpha.100"
-padding="2"
-borderRadius="12px"
-boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
-display="flex"
-flexDirection="row" 
-justifyContent="space-between"
-alignItems="space-between"
->
-    <VStack alignItems="flex=start">
+
+<VStack width="full" spacing="6"  >
+    <VStack alignItems="flex-start" width="full" >
         <InfoButton
             labelProps={{
                 lineHeight: '1rem',
                 fontWeight: 'semibold',
                 fontSize: 'md',
-                color: 'vertek.neonpurple.500',
+                color: 'gray.100',
             }}
             label="My staked share"
             infoText={`The size of your stake relative to all value staked in this pool. 
             Your staked share represents the percent of liquidity incentives you are entitled to.`}
         />
-        <VStack spacing="none" alignItems="flex-start">
+        <VStack alignItems="flex-start">
             {isLoadingStake ? (
                 <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
             ) : (
-                <Text color="white" fontSize="1.75rem">
+                <Text color="vertek.neonpurple.500" fontSize="1.5rem">
                     {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
                 </Text>
             )}
@@ -91,13 +81,13 @@ alignItems="space-between"
         </VStack>
     </VStack>
 
-    <VStack alignItems="flex-end">
+    <VStack width="full" alignItems="flex-start" >
         <InfoButton
             labelProps={{
                 lineHeight: '1rem',
                 fontWeight: 'semibold',
                 fontSize: 'md', 
-                color: 'vertek.neonpurple.500',
+                color: 'gray.100',
             }}
             label="My potential daily yield"
             infoText="The potential daily value is an approximation based on swap fees, 
@@ -106,13 +96,13 @@ alignItems="space-between"
         {isLoadingPendingRewards ? (
             <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
         ) : (
-            <Text color="white" fontSize="1.5rem">
+            <Text color="vertek.neonpurple.500" fontSize="1.5rem">
                 {numberFormatUSDValue(dailyYieldUSD)}
             </Text>
         )}
         <Box>
             {beetsPerDay > 0 && (
-                <HStack spacing="1" mb="0.5">
+                <HStack spacing="0">
                     <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
                     <Tooltip
                         label={`Vertek emissions are calculated per block, so daily emissions are an estimate 
@@ -125,7 +115,7 @@ alignItems="space-between"
                 </HStack>
             )}
             {staking.farm?.rewarders?.map((rewarder) => (
-                <HStack spacing="1" mb="0.5" key={rewarder.id}>
+                <HStack spacing="0"  key={rewarder.id}>
                     <TokenAvatar height="20px" width="20px" address={rewarder.tokenAddress} />
                     <Text fontSize="1rem" lineHeight="1rem">
                         {numeral(parseFloat(rewarder.rewardPerSecond) * 86400 * userShare).format('0,0')} / day
@@ -134,26 +124,15 @@ alignItems="space-between"
             ))}
         </Box>
     </VStack>
-</HStack>
 
-<HStack 
-width="full"
-bg="whiteAlpha.100"
-padding="2"
-borderRadius="12px"
-boxShadow="0 0 12px rgba(0, 0, 0, 0.4)"
-display="flex"
-flexDirection="row" 
-justifyContent="space-between"
-alignItems="space-between"
->
-<VStack alignItems="flex-start" justifyContent="flex-end" display="flex" width="50%">
+
+    <VStack width="full" alignItems="flex-start" >
     <InfoButton
         labelProps={{
             lineHeight: '1rem',
             fontWeight: 'semibold',
             fontSize: 'md',
-            color: 'vertek.neonpurple.500',
+            color: 'white',
         }}
         label="My pending rewards"
         infoText={`Your accumulated liquidity rewards for this pool. You can claim your rewards at any time.`}
@@ -162,14 +141,14 @@ alignItems="space-between"
     {isLoadingPendingRewards ? (
         <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
     ) : (
-        <Text color="white" fontSize="1.5rem">
+        <Text color="vertek.neonpurple.500" fontSize="1.5rem">
             {numberFormatUSDValue(pendingRewardsTotalUSD)}
         </Text>
     )}
     <Box >
         {pendingRewards.map((reward, index) => (
-        <HStack key={index} spacing="1" mb={index === pendingRewards.length - 1 ? '0' : '0.5'}>
-            <TokenAvatar height="20px" width="20px" address={reward.address} />
+        <HStack key={index} spacing="0" mb={index === pendingRewards.length - 1 ? '0' : '0.5'}>
+            <TokenAvatar height="40px" width="40px" address={reward.address} />
             <Skeleton isLoaded={!isLoadingPendingRewards}>
                 <Text fontSize="1rem" lineHeight="1rem">
                     {tokenFormatAmount(reward.amount)}
@@ -180,7 +159,7 @@ alignItems="space-between"
     </Box>
 </VStack>
 
-<Box alignItems="center" justifyContent="flex-end" display="flex" width="40%">
+<Box width="full" alignItems="flex-start" justifyContent="center" display="flex" >
     <BeetsSubmitTransactionButton
         {...harvestQuery}
         isDisabled={!hasPendingRewards}
@@ -189,13 +168,13 @@ alignItems="space-between"
             refetchPendingRewards();
             refetchUserTokenBalances();
         }}
-        width="full"
+        width="80%"
         variant="stayblack"
     >
         Claim rewards
     </BeetsSubmitTransactionButton>
 </Box>
-    </HStack>
+
     </VStack>
 </>      
 );

@@ -13,26 +13,19 @@ export default function PoolUserStats() {
 
 return (
 <>
-  <HStack
-    display="flex"
-    flexDirection="row"
-    width="full"
-    height="full"
-    justifyContent="flex-start"
-    alignItems="flex-start"
-    borderRadius="12px"
-  >
-  <VStack spacing="0" alignItems="flex-start">
-    <Text lineHeight="1rem" fontWeight="semibold" fontSize="md" color="vertek.slate.200">
+
+<HStack justifyContent="space-between" paddingX={2}  display="flex" width="full" mt={1}>
+  <VStack alignItems="flex-start" >
+    <Text lineHeight="1rem" fontWeight="bold" fontSize="md" color="gray.100">
       My APR
     </Text>
-    <HStack>
+    <HStack >
       <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>
       <AprTooltip onlySparkles data={pool.dynamicData.apr} />
     </HStack>
   </VStack>
-  <VStack spacing="0" alignItems="flex-start">
-    <Text lineHeight="1rem" fontWeight="semibold" fontSize="sm" color="beets.base.50">
+  <VStack alignItems="flex-end">
+    <Text lineHeight="1rem" fontWeight="bold" textAlign="center" fontSize="md" color="gray.100">
       My liquidity
     </Text>
     {isLoading ? (
@@ -40,34 +33,35 @@ return (
         <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
       </Box>
     ) : (
-      <Text color="white" fontSize="1.2rem">
+      <Text color="vertek.neonpurple.500" textAlign="center" fontSize="1.2rem">
         {numberFormatUSDValue(userPoolBalanceUSD)}
       </Text>
     )}
   </VStack>
-</HStack>
+  </HStack>
 
-    <HStack
-      display="flex"
-      flexDirection="row"
-      width="full"
-      height="full"
-      justifyContent="space-between"
-      alignItems="flex-start"
-      padding="8px"
-      borderRadius="12px"
-      >
-    {pool.staking && (
-      <PoolUserStakedStats
-        poolAddress={pool.address}
-        staking={pool.staking}
-        totalApr={totalApr}
-        userPoolBalanceUSD={userPoolBalanceUSD}
-      />
-    )}
-    </HStack>
-      {/* PoolUserStakedStats needs proper formatting/udpating */}
-      {/*<PoolDetailPossibleYieldText />*/}
-      </>
+  
+
+
+  <Box >
+
+{pool.staking && (
+  <PoolUserStakedStats
+    poolAddress={pool.address}
+    staking={pool.staking}
+    totalApr={totalApr}
+    userPoolBalanceUSD={userPoolBalanceUSD}
+  />
+
+)}
+</Box>
+  {/* PoolUserStakedStats needs proper formatting/udpating */}
+  {/*<PoolDetailPossibleYieldText />*/}
+
+
+
+
+
+  </>
   );
 }
