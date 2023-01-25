@@ -26,8 +26,8 @@ export function HorizontalSteps({ steps, ...rest }: Props) {
                                     <Spinner
                                         thickness="2px"
                                         speed="0.65s"
-                                        emptyColor="orange.400"
-                                        color="orange.600"
+                                        emptyColor="vertek.slatepurple.900"
+                                        color="vertek.neonpurple.500"
                                         size="lg"
                                         height="30px"
                                         width="30px"

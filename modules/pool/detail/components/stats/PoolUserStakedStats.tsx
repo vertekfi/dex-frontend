@@ -46,23 +46,23 @@ return (
 <>
 
 <VStack width="full" spacing="6"  >
-    <VStack alignItems="flex-start" width="full" >
-        <InfoButton
-            labelProps={{
-                lineHeight: '1rem',
-                fontWeight: 'semibold',
-                fontSize: 'md',
-                color: 'gray.100',
-            }}
-            label="My staked share"
-            infoText={`The size of your stake relative to all value staked in this pool. 
-            Your staked share represents the percent of liquidity incentives you are entitled to.`}
-        />
-        <VStack alignItems="flex-start">
+    <Box alignItems="flex-start" padding="1" width="full" mt="8">
+            <InfoButton
+                labelProps={{
+                    lineHeight: '1rem',
+                    fontWeight: 'semibold',
+                    fontSize: 'md',
+                    color: 'gray.100',
+                }}
+                label="My staked share"
+                infoText={`The size of your stake relative to all value staked in this pool. 
+                Your staked share represents the percent of liquidity incentives you are entitled to.`}
+            />
+        <Box alignItems="flex-start"  >
             {isLoadingStake ? (
-                <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
+                <Skeleton height="34px" width="140px" />
             ) : (
-                <Text color="vertek.neonpurple.500" fontSize="1.5rem">
+                <Text color="vertek.neonpurple.500" fontSize="1.3rem">
                     {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
                 </Text>
             )}
@@ -78,10 +78,10 @@ return (
                     </Text>
                 </Text>
             )}
-        </VStack>
-    </VStack>
+        </Box>
+    </Box>
 
-    <VStack width="full" alignItems="flex-start" >
+    <Box alignItems="flex-start" padding="1" width="full" mt="8">
         <InfoButton
             labelProps={{
                 lineHeight: '1rem',
@@ -96,7 +96,7 @@ return (
         {isLoadingPendingRewards ? (
             <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
         ) : (
-            <Text color="vertek.neonpurple.500" fontSize="1.5rem">
+            <Text color="vertek.neonpurple.500" fontSize="1.3rem">
                 {numberFormatUSDValue(dailyYieldUSD)}
             </Text>
         )}
@@ -123,16 +123,16 @@ return (
                 </HStack>
             ))}
         </Box>
-    </VStack>
+    </Box>
 
 
-    <VStack width="full" alignItems="flex-start" >
+    <Box alignItems="flex-start" padding="1" width="full" mt="8">
     <InfoButton
         labelProps={{
             lineHeight: '1rem',
             fontWeight: 'semibold',
             fontSize: 'md',
-            color: 'white',
+            color: 'gray.100',
         }}
         label="My pending rewards"
         infoText={`Your accumulated liquidity rewards for this pool. You can claim your rewards at any time.`}
@@ -141,7 +141,7 @@ return (
     {isLoadingPendingRewards ? (
         <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
     ) : (
-        <Text color="vertek.neonpurple.500" fontSize="1.5rem">
+        <Text color="vertek.neonpurple.500" fontSize="1.3rem">
             {numberFormatUSDValue(pendingRewardsTotalUSD)}
         </Text>
     )}
@@ -157,7 +157,7 @@ return (
         </HStack>
         ))}
     </Box>
-</VStack>
+</Box>
 
 <Box width="full" alignItems="flex-start" justifyContent="center" display="flex" >
     <BeetsSubmitTransactionButton

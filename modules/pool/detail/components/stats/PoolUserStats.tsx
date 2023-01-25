@@ -43,7 +43,7 @@ return (
   
 
 
-  <Box >
+
 
 {pool.staking && (
   <PoolUserStakedStats
@@ -54,7 +54,7 @@ return (
   />
 
 )}
-</Box>
+
   {/* PoolUserStakedStats needs proper formatting/udpating */}
   {/*<PoolDetailPossibleYieldText />*/}
 
