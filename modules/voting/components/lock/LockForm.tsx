@@ -65,7 +65,6 @@ export function LockForm(props: Props) {
     veBalance: '0',
     percentOwned: '0',
   });
-
   const { isConnected } = useUserAccount();
   const { userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
@@ -106,7 +105,7 @@ return (
             mb="12px"
             mt="-1rem"
           >
-              Lock VRTK-WBNB
+              Lock VRTK-BNB
           </BeetsModalHeadline>
       </BeetsModalHeader>
       
@@ -141,7 +140,7 @@ return (
                   VRTK-WBNB
                 </Text>
                 <Text fontSize="1rem" ml="auto">
-                  {userPoolBalance.balance}
+                {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
                 </Text>
               </Flex>
               <Flex align="center" mt="1">
@@ -149,7 +148,7 @@ return (
                   Vertek Governance
                 </Text>
                 <Text fontSize="1rem" ml="auto">
-                  {userPoolBalance.usdValue}
+                ${usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)}
                 </Text>
               </Flex>
               <Flex mt="8">
@@ -247,9 +246,8 @@ return (
                     // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
                     size="md"
                   />
-
                   <FormLabel mt="2" mb="4" color="white">
-                    {userPoolBalance.balance}
+                  {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares available 
                   </FormLabel>
                 </FormControl>
               </Box>
@@ -404,7 +402,7 @@ return (
               </Text>
               <Box mt="2">
                 <Text fontSize="1.2rem" fontWeight="bold" align="center">
-                  {userPoolBalance.balance}
+               
                 </Text>
               </Box>
               <Box mt="20" alignItems="center" 
@@ -423,7 +421,7 @@ return (
                     Locked until
                   </Text>
                   <Text fontSize="1.1rem">
-                    Date
+                  {lockInfoDisplay.lockedUntilDays}
                   </Text>
                   </Box>
               </Box>
