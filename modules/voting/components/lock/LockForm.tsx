@@ -282,41 +282,61 @@ export function LockForm(props: Props) {
                     >
                       <Button
                         variant="stayblacklock"
-                        onClick={() =>
-                          setSelectedDate(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000))
-                        }
+                        onClick={() => {
+                          let nextThursday = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                          while (nextThursday.getUTCDay() !== 4) {
+                            nextThursday.setDate(nextThursday.getDate() + 1)
+                          }
+                          setSelectedDate(nextThursday)
+                        }}
                       >
                         1w
                       </Button>
                       <Button
                         variant="stayblacklock"
-                        onClick={() =>
-                          setSelectedDate(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
-                        }
+                        onClick={() => {
+                          let nextThursday = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+                          while (nextThursday.getUTCDay() !== 4) {
+                            nextThursday.setDate(nextThursday.getDate() + 1)
+                          }
+                          setSelectedDate(nextThursday)
+                        }}
                       >
                         1m
                       </Button>
                       <Button
                         variant="stayblacklock"
-                        onClick={() =>
-                          setSelectedDate(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000))
-                        }
+                        onClick={() => {
+                          let nextThursday = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
+                          while (nextThursday.getUTCDay() !== 4) {
+                            nextThursday.setDate(nextThursday.getDate() + 1)
+                          }
+                          setSelectedDate(nextThursday)
+                        }}
                       >
                         3m
                       </Button>
                       <Button
                         variant="stayblacklock"
-                        onClick={() =>
-                          setSelectedDate(new Date(Date.now() + 180 * 24 * 60 * 60 * 1000))
-                        }
+                        onClick={() => {
+                          let nextThursday = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000)
+                          while (nextThursday.getUTCDay() !== 4) {
+                            nextThursday.setDate(nextThursday.getDate() + 1)
+                          }
+                          setSelectedDate(nextThursday)
+                        }}
                       >
                         6m
                       </Button>
                       <Button
                         variant="stayblacklock"
-                        onClick={() =>
-                          setSelectedDate(new Date(Date.now() + 365 * 24 * 60 * 60 * 1000))
-                        }
+                        onClick={() => {
+                          let nextThursday = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+                          while (nextThursday.getUTCDay() !== 4) {
+                            nextThursday.setDate(nextThursday.getDate() + 1)
+                          }
+                          setSelectedDate(nextThursday)
+                        }}
                       >
                         1y
                       </Button>
