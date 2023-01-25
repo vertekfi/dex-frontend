@@ -121,7 +121,7 @@ export function VotingHeader() {
         alignItems="center"
       >
         <VotingCard>
-          <VotingCardHeader>My VRTK-WBNB </VotingCardHeader>
+          <VotingCardHeader>My VRTK-BNB </VotingCardHeader>
           <Text>{userPoolBalance.usdValue}</Text>
           <Text marginTop="-2rem">{userPoolBalance.balance}</Text>
           <Button
@@ -135,7 +135,7 @@ export function VotingHeader() {
           </Button>
         </VotingCard>
         <VotingCard>
-          <VotingCardHeader>My locked VRTK-WBNB</VotingCardHeader>
+          <VotingCardHeader>My locked VRTK-BNB</VotingCardHeader>
           <Text >$0.00</Text>
           <Text marginTop={{base: '-1rem', md:'-2rem'}}>{userLockInfo?.lockedAmount}</Text>
           <Button variant="moistblack" 

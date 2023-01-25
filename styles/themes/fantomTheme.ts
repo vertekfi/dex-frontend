@@ -388,8 +388,8 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 boxShadow:'0 0 8px #fff', 
                                 color: 'white',
                                 fontWeight:'900', 
-                                _active: { backgroundColor:'vertek.slate.900'  },
-                                _focus: { outline: 'none', boxShadow: 'none' },
+                                // _active: { backgroundColor:'vertek.slate.900'  },
+                                // _focus: { outline: 'none', boxShadow: 'none' },
                                 borderRadius: '8px',
                                 _hover: {
                                     color:'white',
