@@ -14,7 +14,7 @@ export function Pool() {
   const { pool } = usePool();
 
   return (
-<Box marginBottom="8">
+<Box marginBottom="8" >
   <PoolHeader />
   <VStack width="full" spacing="8">
         {pool.staking && 
@@ -27,7 +27,7 @@ export function Pool() {
     </Flex>
   </VStack>
   <SimpleGrid
-    columns={{ sm: 1, lg: 7 }} 
+    columns={{ base: 1, lg: 7 }} 
     paddingX={{ base:'2', lg:'0'}}
     paddingY="2"
     marginTop={{ base: 0, lg: 5 }}
