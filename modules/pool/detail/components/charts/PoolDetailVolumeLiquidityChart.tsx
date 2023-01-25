@@ -21,27 +21,40 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
             tooltip: {
                 show: true,
                 trigger: 'axis',
+                type: 'shadow',
+                backgroundColor: 'rgba(24, 24, 46, 0.95)',
+                borderColor: 'transparent',
+                borderRadius: 8,
+                padding: 16, 
+                textStyle: {
+                    color: 'white',
+                },
                 axisPointer: {
                     type: 'cross',
                     crossStyle: {
-                        color: '#999',
+                        color: '#fff',
                     },
+                    lineStyle: {
+                        color: '#376df4',
+                        width: 2,
+                        opacity: 1,
+                      },
                 },
             },
             legend: {
                 show: false,
                 data: ['TVL', 'Daily Volume'],
                 textStyle: {
-                    color: colors.beets.base['50'],
+                    color: colors.gray['100'],
                 },
                 top: '0',
                 right: '2%',
             },
             grid: {
-                bottom: '2%',
-                right: '1.5%',
-                left: '1.5%',
-                top: '10%',
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
                 containLabel: true,
             },
             xAxis: {
@@ -52,7 +65,8 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
                     formatter: (value: number, index: number) => {
                         return format(new Date(value), 'MMM d');
                     },
-                    color: colors.gray['200'],
+                    fontSize: 14, 
+                    color: colors.gray['100'],
                     interval: 'auto',
 
                     showMaxLabel: false,
@@ -79,7 +93,7 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
                         formatter: function (value: number, index: number) {
                             return index % 3 === 1 ? `$${numeral(value).format('0a')}` : '';
                         },
-                        color: colors.beets.base['100'],
+                        color: colors.gray['100'],
                     },
                     axisPointer: {
                         label: {
@@ -99,7 +113,7 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
                         formatter: function (value: number, index: number) {
                             return index % 3 === 1 ? `$${numeral(value).format('0a')}` : '';
                         },
-                        color: colors.white,
+                        color: colors.gray['100'],
                     },
                     axisPointer: {
                         label: {
@@ -124,9 +138,8 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
                         opacity: 1,
                         borderRadius: [5, 5, 0, 0],
                         color: new graphic.LinearGradient(0, 0, 0, 1, [
-                            { offset: 0, color: chartGetPrimaryColor(networkConfig.chainId, 1) },
-                            { offset: 0.5, color: chartGetPrimaryColor(networkConfig.chainId, 0.7) },
-                            { offset: 1, color: chartGetPrimaryColor(networkConfig.chainId, 0) },
+                            { offset: 0, color: 'rgba(80, 78, 144, 1)' },
+              { offset: 1, color: 'rgba(28, 28, 52, 1)' },
                         ]),
                     },
                 },
@@ -143,9 +156,8 @@ export function PoolDetailVolumeLiquidityChart({ data, hideVolume = false }: Pro
                     symbol: 'circle',
                     symbolSize: data.length > 60 ? 6 : 8,
                     itemStyle: {
-                        color: colors.black,
-                        borderColor: colors.white,
-                        borderWidth: 1.5,
+                        color:  colors.vertek.neonpurple['500'],
+
                     },
                     lineStyle: {
                         color: colors.white,

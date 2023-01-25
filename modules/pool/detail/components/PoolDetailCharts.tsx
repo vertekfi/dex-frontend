@@ -84,7 +84,9 @@ export function PoolDetailCharts() {
           <option value="ALL_TIME">All time</option>
         </Select>
       </HStack>
+      <Box height="400px">
       {chartType === 'BPT_PRICE' && (
+       
         <PoolDetailBptPriceChart  
           prices={(data?.snapshots || []).map((snapshot) => ({
             timestamp: snapshot.timestamp,
@@ -99,6 +101,7 @@ export function PoolDetailCharts() {
         <PoolDetailVolumeLiquidityChart data={data?.snapshots || []} hideVolume />
       )}
       {chartType === 'FEES' && <PoolDetailFeesChart data={data?.snapshots || []} />}
+      </Box>
     </Card>
   );
 }
