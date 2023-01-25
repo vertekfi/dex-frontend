@@ -65,6 +65,7 @@ export function PoolInvestModal() {
         borderColor: 'vertek.neonpurple.500', 
         transform: 'scale(1.01)' 
        }}
+      mb={{ base:'3', md:'0'}}
       variant="verteklight" 
       onClick={onOpen} 
       width={{ base: 'full', md: '140px' }} 

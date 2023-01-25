@@ -16,39 +16,40 @@ export function Pool() {
   return (
 <Box marginBottom="8" >
   <PoolHeader />
-  <VStack width="full" spacing="8">
+  <Box width="full" marginY="2">
         {pool.staking && 
         
         <PoolStakeInFarmWarning />}
 
-    <Flex width="full" justifyContent="flex-start" marginBottom="2">
+    <Box width="full" justifyContent="flex-start" marginBottom="4" paddingY="4" >
         <PoolInvestModal />
         <PoolWithdrawModal />
-    </Flex>
-  </VStack>
+    </Box>
+  </Box>
   <SimpleGrid
-    columns={{ base: 1, lg: 7 }} 
-    paddingX={{ base:'2', lg:'0'}}
+    columns={{ base: 1, md: 7 }} 
+    paddingX={{ base:'2', md:'0'}}
     paddingY="2"
-    marginTop={{ base: 0, lg: 5 }}
-    marginBottom={{ base: 6, lg:8 }}
-    spacing={{ base: '6', lg: '8' }}
+    marginTop={{ base:'8', md: '5' }}
+    marginBottom={{ base: '6', md:'8' }}
+    spacing={{ base: '6', md: '8' }}
+    width={{ base: 'full', md:'auto' }}
 >      
       <GridItem    
           display="flex" 
           flexDirection="column"  
-          colSpan={{ sm: 1, lg: 2 }}
+          colSpan={{ sm: 1, md: 2 }}
           >            
             <PoolStats />
       </GridItem>
       
-      <GridItem colSpan={{ sm:1, lg:5 }} paddingX="2">
+      <GridItem colSpan={{ sm:1, md:5 }} paddingX="2">
             <PoolDetailCharts />
       </GridItem>
-      <GridItem colSpan={{sm: 1, lg:4}}>
+      <GridItem colSpan={{sm: 1, md:4}}>
             <PoolTransactions />
       </GridItem>
-      <GridItem colSpan={{ sm:1, lg:3 }}>
+      <GridItem colSpan={{ sm:1, md:3 }}>
         <VStack spacing="4">
           <PoolComposition />
           <PoolStatistics />

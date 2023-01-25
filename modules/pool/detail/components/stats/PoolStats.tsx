@@ -16,7 +16,8 @@ export default function PoolStats() {
   return (
     <>
       <Box
-        p={{ base: 'none', md: '4' }}
+        paddingX={{ base: '1', md: '4' }}
+        paddingY={{ base:'3', md:'auto' }}
         mb="0"
         minHeight="540px"
         maxWidth="100vw"
@@ -33,11 +34,11 @@ export default function PoolStats() {
               onChange={handleTabChanged}
             >
               <TabList>
-                <Box flexDirection="row"  alignContent="flex-start" display="flex" justifyContent="flex-start" mb="4">
-                  <BeetsTab paddingX="2" paddingY="2" fontSize="sm">
+                <Box flexDirection="row"  paddingX="1" alignContent="flex-start" display="flex" justifyContent="flex-start" mb="4">
+                  <BeetsTab paddingX="4" paddingY="2" fontSize="md">
                     My Stats
                   </BeetsTab>
-                  <BeetsTab paddingX="2" paddingY="2" fontSize="md">
+                  <BeetsTab paddingX="4" paddingY="2" fontSize="md">
                     Pool Stats
                   </BeetsTab>
                 </Box>
