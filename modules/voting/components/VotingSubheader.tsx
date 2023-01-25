@@ -14,7 +14,7 @@ export function VotingSubheader() {
   const {
     isLoading: loadingGauges,
     votingGauges,
-    unallocatedVotes,
+    unallocatedVoteWeight,
     votingPeriodEnd,
     votingPeriodLastHour,
     refetch: refetchVotingGauges,
@@ -23,14 +23,14 @@ export function VotingSubheader() {
   const { userLockInfo } = useUserVeLockInfoQuery();
 
   useEffect(() => {
-    if (unallocatedVotes) {
+    if (unallocatedVoteWeight) {
       setUnallocatedVotesFormatted(
-        fNum2(scale(bnum(unallocatedVotes), -4).toString(), FNumFormats.percent),
+        fNum2(scale(bnum(unallocatedVoteWeight), -4).toString(), FNumFormats.percent),
       );
     } else {
       setUnallocatedVotesFormatted('0%');
     }
-  }, [unallocatedVotes]);
+  }, [unallocatedVoteWeight]);
 
   // set user lock info
   useEffect(() => {
@@ -58,10 +58,12 @@ export function VotingSubheader() {
       alignItems="center"
       gap={{ base: '10', lg: '20' }}
     >
-      <GridItem marginRight={{base:'4', lg:'10'}} marginLeft={{base:'8', lg:'20'}} paddingY="0">
-        <Text variant="topLine">
-          Pools eligible for VRTK emissions
-        </Text>
+      <GridItem
+        marginRight={{ base: '4', lg: '10' }}
+        marginLeft={{ base: '8', lg: '20' }}
+        paddingY="0"
+      >
+        <Text variant="topLine">Pools eligible for VRTK emissions</Text>
         <Text variant="topline" fontSize="1.2rem" letterSpacing="-0.01rem">
           Liquidity incentives are directed by the community of veVRTK holders. If you hold veVRTK,
           vote below on any pools across BNB Chain. Your vote will persist until you change it and
