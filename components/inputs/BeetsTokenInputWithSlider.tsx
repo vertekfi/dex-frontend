@@ -130,6 +130,7 @@ export function BeetsTokenInputWithSlider({
             }
           }}
         >
+          
           <SliderTrack bg="gray.100">
             <SliderFilledTrack bg="vertek.neonpurple.500" />
           </SliderTrack>

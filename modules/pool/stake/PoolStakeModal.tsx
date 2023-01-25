@@ -130,8 +130,8 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
             rewards, stake all of your VPT into the {networkConfig.farmTypeName}.
           </Text>
           <Slider mt="8" aria-label="slider-ex-1" value={percent} onChange={setPercent}>
-            <SliderTrack>
-              <SliderFilledTrack />
+            <SliderTrack bg="gray.100">
+                  <SliderFilledTrack bg="vertek.neonpurple.500" />
             </SliderTrack>
             <SliderThumb boxSize={4} />
             <SliderMark

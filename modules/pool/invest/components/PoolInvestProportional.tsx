@@ -70,8 +70,8 @@ export function PoolInvestProportional({ onShowPreview }: Props) {
         value={proportionalPercent}
         onChange={setProportionalPercent}
       >
-        <SliderTrack>
-          <SliderFilledTrack />
+        <SliderTrack bg="gray.100">
+            <SliderFilledTrack bg="vertek.neonpurple.500" />
         </SliderTrack>
         <SliderThumb boxSize={4} />
         <SliderMark

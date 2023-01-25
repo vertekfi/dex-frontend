@@ -68,7 +68,7 @@ export function PoolWithdrawSingleAsset({ onShowPreview, ...rest }: Props) {
             <PoolWithdrawSummary mt="6" />
             <PoolWithdrawSettings mt="6" />
             <Collapse in={hasHighPriceImpact} animateOpacity>
-                <Alert status="error" borderRadius="md" mt="4">
+                <Alert status="error" bgColor="black" borderRadius="md" mt="4">
                     <Checkbox
                         id="high-price-impact-acknowledge"
                         isChecked={acknowledgeHighPriceImpact}
