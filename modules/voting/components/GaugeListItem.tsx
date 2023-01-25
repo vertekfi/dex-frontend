@@ -9,11 +9,15 @@ import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { bnum } from '@balancer-labs/sor';
 import { scale } from '@georgeroman/balancer-v2-pools/dist/src/utils/big-number';
 import { fNum2 } from '~/lib/util/useNumber';
+import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { unallocatedVoteWeight } = useVotingGauges();
+
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
 
@@ -103,7 +107,12 @@ export function GaugeListItem(props: { gauge: VotingGaugeWithVotes }) {
             justifyContent="center"
             textAlign="center"
           >
-            <GaugeVoteModal isOpen={isOpen} onClose={onClose} />
+            <GaugeVoteModal
+              isOpen={isOpen}
+              onClose={onClose}
+              gauge={props.gauge}
+              unallocatedVoteWeight={unallocatedVoteWeight}
+            />
           </GridItem>
         </Grid>
       </UserTokenBalancesProvider>
