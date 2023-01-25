@@ -159,16 +159,17 @@ export function GaugeVoteModal(props: Props) {
           </BeetsModalHeader>
 
           <BeetsModalBody textAlign="center" fontSize="1.2rem">
-            <Box display="flex" gap={4} alignItems="center" h="full">
+            <Box display="flex" flexDirection="column" gap={4} padding="2" alignItems="flex-start" h="full">
               <Text fontWeight="medium">
                 {props.gauge.pool.name}
-
+                </Text>
                 <MemoizedTokenAvatarSetInList
                   imageSize={28}
+                  marginBottom="4"
                   width={92}
                   tokens={props.gauge.pool.tokens}
                 />
-              </Text>
+             
             </Box>
             <div>
               <FormControl>
