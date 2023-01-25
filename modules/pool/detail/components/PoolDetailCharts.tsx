@@ -32,9 +32,10 @@ export function PoolDetailCharts() {
           value={chartType}
           onChange={(e) => setChartType(e.currentTarget.value as ChartType)}
           width="160px"
-          variant="filled"
+          bgColor="vertek.slatepurple.900" 
+          color="gray.100" 
         >
-          <option value="BPT_PRICE">VRTK price</option>
+          <option value="BPT_PRICE">VPT price</option>
           <option value="FEES">Fees</option>
           <option value="TVL">TVL</option>
           <option value="VOLUME_TVL">Volume / TVL</option>
@@ -43,7 +44,8 @@ export function PoolDetailCharts() {
           value={range}
           onChange={(e) => setRange(e.currentTarget.value as GqlPoolSnapshotDataRange)}
           width="160px"
-          variant="filled"
+          bgColor="vertek.slatepurple.900" 
+          color="gray.100" 
         >
           <option value="THIRTY_DAYS">last 30 days</option>
           <option value="NINETY_DAYS">last 90 days</option>
