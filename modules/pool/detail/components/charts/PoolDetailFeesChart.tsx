@@ -30,6 +30,9 @@ export function PoolDetailFeesChart({ data }: Props) {
         axisPointer: {
           animation: false,
           type: 'cross',
+          crossStyle: {
+            color: '#fff',
+          },
           lineStyle: {
             color: '#376df4',
             width: 2,
@@ -42,19 +45,19 @@ export function PoolDetailFeesChart({ data }: Props) {
         right: 0,
         top: 0,
         bottom: 0,
-        containLabel: false,
+        containLabel: true,
       },
       xAxis: {
-        show: false,
+        show: true,
         type: 'time',
-        axisLine: { lineStyle: { color: '#8392A5' },  },
+        axisLine: { show: false },
         offset: 0,
         axisLabel: {
           fontSize: 14, 
           formatter: (value: number, index: number) => {
             return format(new Date(value), 'MMM d');
           },
-          color: colors.gray['200'],
+          color: colors.gray['100'],
           interval: 'auto',
 
           showMaxLabel: false,
@@ -78,7 +81,7 @@ export function PoolDetailFeesChart({ data }: Props) {
           formatter: function (value: number, index: number) {
             return index % 3 === 1 ? `$${numeral(value).format('0a')}` : '';
           },
-          color: colors.beets.base['100'],
+          color: colors.gray['100'],
         },
         axisPointer: {
           label: {
@@ -99,17 +102,14 @@ export function PoolDetailFeesChart({ data }: Props) {
               return `$${numeral(value).format('0a')}`;
             },
           },
-          areaStyle: {
+         
+          itemStyle: {
             opacity: 1,
+            borderRadius: [5, 5, 0, 0],
             color: new graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgba(80, 78, 144, 1)' },
               { offset: 1, color: 'rgba(28, 28, 52, 1)' },
             ]),
-          },
-          itemStyle: {
-            borderRadius: [5, 5, 0, 0],
-            color: '#4A4AF6',
-            borderColor: '#4A4AF6',
           },
         },
       ],

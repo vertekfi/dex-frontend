@@ -22,18 +22,22 @@ export function PoolDetailBptPriceChart({ prices }: Props) {
   const option = useMemo<EChartsOption>(
     () => ({
       tooltip: {
+        show: true,
         trigger: 'axis',
         type: 'shadow',
         backgroundColor: 'rgba(24, 24, 46, 0.95)',
         borderColor: 'transparent',
         borderRadius: 8,
+        padding: 16, 
         textStyle: {
-          color: 'white',
+            color: 'white',
         },
-        padding: 16,
+
         axisPointer: {
-          animation: false,
           type: 'cross',
+          crossStyle: {
+            color: '#fff',
+        },
           lineStyle: {
             color: '#376df4',
             width: 2,
@@ -43,16 +47,16 @@ export function PoolDetailBptPriceChart({ prices }: Props) {
 
       },
       xAxis: {
-        show: false,
+        show: true,
         type: 'time',
-        offset: 0,
+
         minorSplitLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
           formatter: (value: number, index: number) => {
             return index % 2 === 0 ? format(new Date(value), 'MMM d') : '';
           },
-          // color: colors.gray['200'],
+          color: colors.gray['100'],
           fontSize: 14, 
           showMaxLabel: false,
           showMinLabel: false,
@@ -79,7 +83,7 @@ export function PoolDetailBptPriceChart({ prices }: Props) {
         right: 0,
         top: 0,
         bottom: 0,
-        containLabel: false,
+        containLabel: true,
       },
       series: [
         {
