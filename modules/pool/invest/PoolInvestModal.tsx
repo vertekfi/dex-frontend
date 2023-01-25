@@ -35,7 +35,6 @@ export function PoolInvestModal() {
     if (modalState !== 'start') {
       setModalState('start');
     }
-
     clearInvestState();
   }, [pool.id]);
 
@@ -46,12 +45,10 @@ export function PoolInvestModal() {
   }, [isOpen]);
 
   function onModalClose() {
-    if (investComplete) {
-      setModalState('start');
-      setInvestType(null);
-    }
-
     onClose();
+    setModalState('start');
+    setInvestType(null);
+    clearInvestState();
   }
 
   return (
