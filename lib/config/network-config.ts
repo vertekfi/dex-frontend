@@ -13,13 +13,13 @@ export const networkList = [
   {
     name: bscNetworkConfig.networkShortName,
     chainId: bscNetworkConfig.chainId,
-    url: 'https://beets.fi',
+    url: 'https://vertek.exchange',
     iconUrl: bscNetworkConfig.eth.iconUrl,
   },
-  {
-    name: goerliNetworkConfig.networkShortName,
-    chainId: goerliNetworkConfig.chainId,
-    url: 'https://dex-frontend-v2.vercel.app/',
-    iconUrl: goerliNetworkConfig.eth.iconUrl,
-  },
+  // {
+  //   name: goerliNetworkConfig.networkShortName,
+  //   chainId: goerliNetworkConfig.chainId,
+  //   url: 'https://dex-frontend-v2.vercel.app/',
+  //   iconUrl: goerliNetworkConfig.eth.iconUrl,
+  // },
 ];
