@@ -84,85 +84,81 @@ export function LockForm(props: Props) {
   }, [loadingBalances, isConnected]);
 
 return (
-
-  
-  <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl" >
-   <ModalOverlay 
+<Modal isOpen={props.isOpen} onClose={props.onClose} size="xl" >
+  <ModalOverlay 
       bg=
       {`radial-gradient(circle at center, 
           #4132D0 0%, 
           rgba(0,0,0, 0.7) 70% )`}
-          
       />
-     <ModalContent
-      minW={{ base: 'auto', md: '95vw' }}
-      maxW={{ base: 'auto', md: '95vw' }}
-      h="85vh"
-      bgColor="rgba(0, 0, 0, 0.4)"
-      boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-      paddingY="2rem"
-      borderRadius="8rem"
-      marginTop="1.5rem"
-      padding="4" 
-      >
-      <ModalCloseButton />
-      <BeetsModalHeader  >
-          <BeetsModalHeadline
-            textAlign="center"
-            fontSize="1.5rem"
-            color="white"
-            mb=""
-            mt="-1rem"
-          >
-              Lock VRTK-BNB
-          </BeetsModalHeadline>
-      </BeetsModalHeader>
-      
-      <BeetsModalBody bgColor="transparent" p="0" textAlign="center" fontSize="1.2rem">
-        <Grid
-          backgroundColor="transparent" 
-          pl={{ base: '2', md: '4' }}
-          pr={{ base: '2', md: '4' }}
-          templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
-          gap="4"
+  <ModalContent
+    minW={{ base: 'auto', md: '95vw' }}
+    maxW={{ base: 'auto', md: '95vw' }}
+    h="85vh"
+    bgColor="rgba(0, 0, 0, 0.4)"
+    boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+    paddingY="2rem"
+    borderRadius="8rem"
+    marginTop="1.5rem"
+    padding="4" 
+    >
+    <ModalCloseButton />
+    <BeetsModalHeader  >
+      <BeetsModalHeadline
+        textAlign="center"
+        fontSize="1.5rem"
+        color="white"
+        mb=""
+        mt="-1rem"
         >
-          <GridItem
-            boxShadow={{base:'none', md:'none'}}
-            width={{base:'90%', lg:'auto'}}
-            height={{ base:'auto', lg:'50%'}}
-            m={{ base:'2', md:'2'}}
-            mt={{ base:'auto', md:'24'}}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
-            borderRadius="12px">
-            <Box padding={{ base: '2', md: '2' }} borderRadius="12px" mb="6">
-              <Text
-                align="left"
-                padding="1"
-                mb="4"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
+        Lock VRTK-BNB
+      </BeetsModalHeadline>
+    </BeetsModalHeader>
+      
+    <BeetsModalBody bgColor="transparent" p="0" textAlign="center" fontSize="1.2rem">
+      <Grid
+        backgroundColor="transparent" 
+        pl={{ base: '2', md: '4' }}
+        pr={{ base: '2', md: '4' }}
+        templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
+        gap="4"
+      >
+        <GridItem
+          boxShadow={{base:'none', md:'none'}}
+          width={{base:'90%', lg:'auto'}}
+          height={{ base:'auto', lg:'50%'}}
+          m={{ base:'2', md:'2'}}
+          mt={{ base:'auto', md:'24'}}
+          bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+          borderRadius="12px">
+          <Box padding={{ base: '2', md: '2' }} borderRadius="12px" mb="6">
+            <Text
+              align="left"
+              padding="1"
+              mb="4"
+              fontWeight="bold"
+              color="white"
+              fontSize="1.2rem"
+            >
                 Lockable tokens in my wallet
-
-              </Text>
-              <Flex align="center" mt="6">
+            </Text>
+            <Flex align="center" mt="6">
                 <Text fontSize="1rem" mr="auto">
                   VRTK-BNB
                 </Text>
                 <Text fontSize="1rem" ml="auto">
                 {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
                 </Text>
-              </Flex>
-              <Flex align="center" mt="1">
+            </Flex>
+            <Flex align="center" mt="1">
                 <Text fontSize="1rem" mr="auto">
                   Vertek Governance
                 </Text>
                 <Text fontSize="1rem" ml="auto">
                 ${usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)}
                 </Text>
-              </Flex>
-              <Flex mt="8">
+            </Flex>
+            <Flex mt="8">
                 <Button
                   variant="stayblacklock"
                   as="a"
@@ -173,15 +169,15 @@ return (
                 >
                   Get VRTK-BNB
                 </Button>
-              </Flex>
-            </Box>
-            <Box
-              padding="2"
-              borderRadius="12px"
-              mb="6"
-              bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
-            >
-              <Text fontSize="1rem" mr="auto"></Text>
+            </Flex>
+          </Box>
+          <Box
+            padding="2"
+            borderRadius="12px"
+            mb="6"
+            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+          >
+            <Text fontSize="1rem" mr="auto"></Text>
               <Accordion allowToggle padding={1}>
                 <AccordionItem>
                   <AccordionButton _expanded={{}}>
