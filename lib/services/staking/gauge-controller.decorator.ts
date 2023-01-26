@@ -69,7 +69,6 @@ export class GaugeControllerDecorator {
    */
   private callGaugeWeightThisPeriod(votingGauges: VotingGauge[]) {
     let thisWeekTimestamp = toUnixTimestamp(Math.floor(Date.now() / oneWeekInMs) * oneWeekInMs);
-    console.log(new Date(thisWeekTimestamp * 1000).toLocaleString());
     // this makes sure we don't compute votes from before the gauge voting should happen in the "This period" entry,
     // since the system is not fully active during the first 7 days
     // (ie the first period starts the Thursday after ve/gauge controller setup took place)
