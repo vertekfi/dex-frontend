@@ -6,15 +6,12 @@ import {
   BeetsModalHeader,
   BeetsModalHeadline,
 } from '~/components/modal/BeetsModal';
-import { Box, HStack, Modal, ModalOverlay, Portal, Text, Button } from '@chakra-ui/react';
+import { Box, HStack, Modal, Text, Button } from '@chakra-ui/react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
-import {
-  TokenAvatarSetInList,
-  TokenAvatarSetInListTokenData,
-} from '~/components/token/TokenAvatarSetInList';
+import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
 import { bnum, scale } from '~/lib/util/big-number.utils';
+import { useVeVRTK } from '../lib/useVeVRTK';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -55,6 +52,8 @@ export function GaugeVoteModal(props: Props) {
     confirmed: false,
     confirmedAt: '',
   });
+
+  const { veBalBalance } = useVeVRTK();
 
   // const currentWeight = computed(() => props.gauge.userVotes);
   // const currentWeightNormalized = computed(() => scale(bnum(currentWeight.value), -2).toString());
@@ -159,17 +158,21 @@ export function GaugeVoteModal(props: Props) {
           </BeetsModalHeader>
 
           <BeetsModalBody textAlign="center" fontSize="1.2rem">
-            <Box display="flex" flexDirection="column" gap={4} padding="2" alignItems="flex-start" h="full">
-              <Text fontWeight="medium">
-                {props.gauge.pool.name}
-                </Text>
-                <MemoizedTokenAvatarSetInList
-                  imageSize={28}
-                  marginBottom="4"
-                  width={92}
-                  tokens={props.gauge.pool.tokens}
-                />
-             
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              padding="2"
+              alignItems="flex-start"
+              h="full"
+            >
+              <Text fontWeight="medium">{props.gauge.pool.name}</Text>
+              <MemoizedTokenAvatarSetInList
+                imageSize={28}
+                marginBottom="4"
+                width={92}
+                tokens={props.gauge.pool.tokens}
+              />
             </Box>
             <div>
               <FormControl>

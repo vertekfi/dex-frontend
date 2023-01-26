@@ -29,8 +29,6 @@ export function TradeCard() {
   const tradePreviewDisclosure = useDisclosure();
   const { getToken, tokens } = useGetTokens();
 
-  console.log(tokens);
-
   const {
     sellAmount,
     buyAmount,
