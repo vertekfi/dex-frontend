@@ -85,7 +85,7 @@ return (
     </Grid>
 </Box>
 
-   {(userPools.length > 0 || getPoolsQuery.loading) && (
+   {/* {(userPools.length > 0 || getPoolsQuery.loading) && (
     <>
      <Box>
       <BeetsHeadline mb="4">My Investments </BeetsHeadline>
@@ -107,11 +107,10 @@ return (
         />
        ))}
 
-       <GridItem>{/* <HomeNews /> */}</GridItem>
       </Grid>
      </Box>
     </>
-   )}
-  </>
+       )}*/}
+  </> 
  );
 }
