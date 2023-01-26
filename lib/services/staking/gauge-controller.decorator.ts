@@ -13,7 +13,7 @@ import GaugeControllerAbi from '../../abi/GaugeController.json';
 
 const STARTING_WEEKS_TIMESTAMP: { [key: number]: number } = {
   5: 1671685200,
-  56: 0,
+  56: 1674686088,
 };
 
 export class GaugeControllerDecorator {
@@ -69,15 +69,12 @@ export class GaugeControllerDecorator {
    */
   private callGaugeWeightThisPeriod(votingGauges: VotingGauge[]) {
     let thisWeekTimestamp = toUnixTimestamp(Math.floor(Date.now() / oneWeekInMs) * oneWeekInMs);
+    console.log(new Date(thisWeekTimestamp * 1000).toLocaleString());
     // this makes sure we don't compute votes from before the gauge voting should happen in the "This period" entry,
     // since the system is not fully active during the first 7 days
     // (ie the first period starts the Thursday after ve/gauge controller setup took place)
 
     const chainStartTime = STARTING_WEEKS_TIMESTAMP[getChainId()];
-    if (chainStartTime == 0) {
-      throw new Error('Chain start time not set');
-    }
-
     if (thisWeekTimestamp == chainStartTime) {
       thisWeekTimestamp = thisWeekTimestamp - oneWeekInMs;
     }
