@@ -385,7 +385,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             },
                             moistblack: {
                                 backgroundColor:'vertek.slate.900', 
-                                boxShadow:'0 0 8px #fff', 
+                                boxShadow:'0 12px 2px #000', 
                                 color: 'white',
                                 fontWeight:'900', 
                                 // _active: { backgroundColor:'vertek.slate.900'  },

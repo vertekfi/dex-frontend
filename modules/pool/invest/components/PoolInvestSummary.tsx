@@ -33,7 +33,7 @@ export function PoolInvestSummary({ ...rest }: Props) {
         <Box flex="1">
           <InfoButton
             label="Price impact"
-            moreInfoUrl="https://dex-frontend-v2.vercel.app"
+            moreInfoUrl="https://vertek.exchange"
             infoText="This is the difference between the current market price and the price you will pay due to your investment influencing the balance and internal price of tokens within the pool."
           />
         </Box>
@@ -47,7 +47,7 @@ export function PoolInvestSummary({ ...rest }: Props) {
         <Box flex="1">
           <InfoButton
             label="Potential weekly yield"
-            moreInfoUrl="https://dex-frontend-v2.vercel.app"
+            moreInfoUrl="https://vertek.exchange"
             infoText="This is your projected weekly yield based on the last 24 hours. The APR is a culmination of swap fees and additional incentives."
           />
         </Box>

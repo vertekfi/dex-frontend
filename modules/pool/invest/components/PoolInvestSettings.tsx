@@ -27,7 +27,8 @@ export function PoolInvestSettings({ ...rest }: BoxProps) {
   const batchRelayerInfoButton = (
     <InfoButton
       label="Batch Relayer"
-      infoText="The Batch Relayer is a smart contract that allows multiple individual actions to be grouped together into a single transaction. Zapping requires you to approve the Batch Relayer once."
+      infoText="The Batch Relayer is a smart contract that allows multiple individual actions to be grouped together into a single transaction. 
+      Zapping requires you to approve the Batch Relayer once."
     />
   );
 

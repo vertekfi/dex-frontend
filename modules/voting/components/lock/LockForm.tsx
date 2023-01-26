@@ -89,17 +89,17 @@ return (
       bg=
       {`radial-gradient(circle at center, 
           #4132D0 0%, 
-          rgba(0,0,0, 0.7) 70% )`}
+          rgba(0,0,0, 0.8) 70% )`}
       />
   <ModalContent
     minW={{ base: 'auto', md: '95vw' }}
     maxW={{ base: 'auto', md: '95vw' }}
     h="85vh"
-    bgColor="rgba(0, 0, 0, 0.4)"
-    boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-    paddingY="2rem"
-    borderRadius="8rem"
-    marginTop="1.5rem"
+    bgColor="rgba(0, 0, 0, 0)"
+    boxShadow="2px 24px 12px 0px #000"
+        paddingY="2rem"
+    borderRadius="4rem"
+    marginTop="2rem"
     padding="4" 
     >
     <ModalCloseButton />
@@ -124,14 +124,17 @@ return (
         gap="4"
       >
         <GridItem
-          boxShadow={{base:'none', md:'none'}}
+          boxShadow={{base:'none', md:'0 12px 12px #000'}}
           width={{base:'90%', lg:'auto'}}
           height={{ base:'auto', lg:'50%'}}
           m={{ base:'2', md:'2'}}
           mt={{ base:'auto', md:'24'}}
+          // backgroundColor="rgba(0, 0, 0, 0.1)"
+          backdropFilter="blur(12px)"
           bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
           borderRadius="12px">
-          <Box padding={{ base: '2', md: '2' }} borderRadius="12px" mb="6">
+          <Box padding={{ base: '2', md: '2' }} 
+                        borderRadius="12px" mb="6">
             <Text
               align="left"
               padding="1"
@@ -166,6 +169,7 @@ return (
                   borderWidth="1px"
                   width="100%"
                   height="2.2rem"
+                  boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
                 >
                   Get VRTK-BNB
                 </Button>
@@ -189,11 +193,11 @@ return (
 
                   <AccordionPanel pb={5} bg="">
                     <Text align="left" color="white" fontSize="1rem">
-                      1. Invest in the pool. <br />
-                      2. How to lock and earn? 80VRTK-20BNB APT <br />
-                      3. veVRTK holders get boosted liquidity mining yields (up to 2.5x) and
+                      1. Invest in the VRTK-BNB pool. <br />
+                      2. Lock VRTK-BNB to receive veVRTK <br />
+                      3. veVRTK holders receive boosted liquidity mining yields (up to 2.5x) and
                       increased voting power. <br />
-                      4. Use this voting power to choose which pool gauges get allocated liquidity
+                      4. This voting power can be used to choose which pool gauges get allocated liquidity
                       mining incentives.
                     </Text>
                   </AccordionPanel>
@@ -202,7 +206,7 @@ return (
             </Box>
           </GridItem>
           <GridItem
-            boxShadow={{ base: 'none', md: 'none' }}
+            boxShadow={{ base: 'none', md: '0 12px 12px #000' }}
             width={{ base: '90%', lg: 'auto' }}
             m={{ base: '2', md: '2' }}
             bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
@@ -234,7 +238,9 @@ return (
               >
                 How much do you want to lock?
               </Text>
-              <Box padding="2" bgColor="black" borderRadius="12px" mb="6">
+              <Box padding="2" bgColor="black"              
+              boxShadow="0 12px 12px rgba(0, 0, 0, 0.5)" 
+              borderRadius="12px" mb="6">
                 <FormControl mb="8">
                   <Input
                     focusBorderColor="vertek.neonpurple.500"
@@ -269,7 +275,9 @@ return (
               >
                 Lock until
               </Text>
-              <Box padding="2" bgColor="black" borderRadius="12px" mb="6">
+              <Box padding="2"               
+              boxShadow="0 12px 12px rgba(0, 0, 0, 0.5)" 
+bgColor="black" borderRadius="12px" mb="6">
                 <FormControl mb="8">
                   <DatePicker
                     selected={selectedDate}
@@ -356,8 +364,7 @@ return (
                 p="4"
                 bgColor="black"
                 mb="6"
-                borderWidth="1px"
-                borderColor="rgba(255, 255, 255, 0.3)"
+                boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
               >
                 <Flex align="center">
                   <Text fontSize="0.9rem" mr="auto">
@@ -373,6 +380,7 @@ return (
                 onClick={handleOpenModal}
                 variant="stayblack"
                 mb="4"
+                boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
                 width={{ base: '90%', lg: '100%' }}
               >
                 Preview
@@ -383,18 +391,21 @@ return (
             </Box>
           </GridItem>
           <GridItem
-            boxShadow={{base:'none', md:'none'}}
+            boxShadow={{base:'none', md:'0 12px 12px #000'}}
             width={{base:'90%', lg:'auto'}}
             height={{ base:'auto', lg:'50%'}}
             m={{ base:'2', md:'2'}}
             mt={{ base:'auto', md:'24'}}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+            // bgColor="vertek.slatepurple.900"
+            padding="4"
             borderRadius="12px">
             <Box
               padding="2"
               borderRadius="12px"
-              mb="6"
-              bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+              // boxShadow={{base:'none', md:'0 12px 12px #000'}}
+              // bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+
             >
               <Text
                 align="center"
@@ -407,12 +418,7 @@ return (
               >
                 My veVRTK
               </Text>
-              <Box mt="2">
-                <Text fontSize="1.2rem" fontWeight="bold" align="center">
-               
-                </Text>
-              </Box>
-              <Box mt="20" alignItems="center" 
+              <Box mt="20" mb="10" alignItems="center" 
               display="flex" flexDirection="row" justifyContent="center" 
               >
                   <Box display="flex" flexDirection="column" mr="4">
