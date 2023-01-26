@@ -1,31 +1,6 @@
-import {
-  Modal,
-  Text,
-  ModalOverlay,
-  ModalContent,
-  GridItem,
-  ModalCloseButton,
-  Grid,
-  Box,
-  Button,
-  Flex,
-} from '@chakra-ui/react';
-import {
-  BeetsModalBody,
-  BeetsModalContent,
-  BeetsModalHeader,
-  BeetsModalHeadline,
-} from '~/components/modal/BeetsModal';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { Calendar } from 'react-feather';
+import { Modal, Text, ModalOverlay, ModalContent, GridItem, ModalCloseButton, Grid, Box, Button, Flex, } from '@chakra-ui/react';
+import { BeetsModalHeader, BeetsModalHeadline, } from '~/components/modal/BeetsModal';
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from '@chakra-ui/react';
 
 interface Props {
   isOpen: boolean;
@@ -33,77 +8,125 @@ interface Props {
 }
 
 export function LockPreview(props: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => setIsModalOpen(true);
-  return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
-      <ModalOverlay
-        bg={`radial-gradient(circle at center, 
-            #4132D0 0%, 
-            rgba(0,0,0, 0.8) 70% )`}
-      />
-      <ModalContent bg="black" paddingY="2rem" borderRadius="24px" alignSelf="center">
-        <ModalCloseButton />
-        <BeetsModalHeader>
+const [isModalOpen, setIsModalOpen] = useState(false);
+const handleOpenModal = () => setIsModalOpen(true);
+return (
+<Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
+  <ModalOverlay
+    bg={`radial-gradient(circle at center, 
+        #4132D0 0%, 
+        rgba(0,0,0, .95) 70% )`}
+  />
+  <ModalContent 
+  bgColor="vertek.slate.900" 
+  paddingX="1rem" 
+  paddingY="0rem"
+  paddingTop="2rem"
+  borderRadius="16px"
+  alignSelf="center"
+  boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+  >
+  <ModalCloseButton />
+  <BeetsModalHeader>
           <BeetsModalHeadline
             textAlign="center"
             fontSize="1.5rem"
-            color="white"
-            mb="12px"
+            fontWeight="bold"
+            color="vertek.neonpurple.500"
+            mb="2rem"
             mt="-1rem"
           >
             Locking Preview
           </BeetsModalHeadline>
-        </BeetsModalHeader>
-        <Box padding="4">
-          <Box
-            padding="12px"
-            borderRadius="12px"
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-            borderWidth="1px"
-            borderColor="vertek.neonpurple.500"
-          >
-            <Text align="left">VPT Tokens</Text>
-            <Text align="left">80% VRTK/20% WBNB</Text>
-          </Box>
-        </Box>
-        <Box padding="4">
-          <Text textAlign="center" fontWeight="bold">
-            Locking summary
-          </Text>
-          <Flex align="center" mt="6">
-            <Text fontSize="1rem" mr="auto">
-              Total to lock
-            </Text>
-            <Text fontSize="1rem" ml="auto">
-              $12.10
-            </Text>
-          </Flex>
-          <Flex align="center" mt="1">
-            <Text fontSize="1rem" mr="auto">
-              Lock-up end date
-            </Text>
-            <Text fontSize="1rem" ml="auto">
-              17 January 2024{' '}
-            </Text>
-          </Flex>
-          <Flex align="center" mt="1">
-            <Text fontSize="1rem" mr="auto">
-              Total voting escrow{' '}
-            </Text>
-            <Text fontSize="1rem" ml="auto">
-              21.81 veVRTK{' '}
-            </Text>
-          </Flex>
-        </Box>
-        <Flex mt="8">
-          <Button variant="stayblacklock" borderWidth="1px" width="100%" height="2.2rem">
-            Approve LP for locking
-          </Button>
+  </BeetsModalHeader>
+  <Box 
+  bg="vertek.slatepurple.900" 
+  height="full"
+  padding="2"
+  boxShadow="2px 24px 12px 0px #000, 0px 0px 12px 4px #000"
+  borderRadius="md" 
+  mb="2rem"
+  >
+    <Box
+      padding="1"
+      borderRadius="12px"
+      display="flex"
+      flexDirection="column"
+    >
+        <Flex align="center" mt="4">
+                  <Text fontWeight="bold" fontSize="1rem" mr="auto">
+                  VPT Tokens                </Text>
+                  <Text fontSize="1rem" fontWeight="bold"  ml="auto">
+                  ____ (Amount designated to lock)  
+                  </Text>
         </Flex>
-      </ModalContent>
-    </Modal>
-  );
+        <Text align="left" color="gray.200">VRTK-BNB </Text>
+    </Box>
+  </Box>
+
+  <Box 
+  bg="vertek.slatepurple.900" 
+  height="full"
+  padding="4"
+  boxShadow="2px 24px 12px 0px #000, 0px 0px 12px 4px #000"
+  borderRadius="md" 
+  mb="4"
+  >
+    <Box mt="1" 
+    pt="2" 
+    mb="8" 
+    justifyContent="center" 
+    fontWeight="normal" 
+    fontSize="1.1rem" 
+    alignItems="center" 
+    flexDirection="column">
+      <BeetsModalHeadline
+            textAlign="center"
+            fontSize="1.3rem"
+            fontWeight="bold"
+            color="vertek.neonpurple.500"
+            mb="2rem"
+            mt="-1rem"
+            textDecoration="underline" 
+          >
+            Summary
+      </BeetsModalHeadline>
+      <Flex align="center" mt="6">
+          <Text mr="auto">
+              Total to lock
+          </Text>
+          <Text fontWeight="bold" ml="auto">
+            $12.10
+          </Text>
+      </Flex>
+      <Flex align="center" mt="1">
+          <Text mr="auto">
+              Lock-up end date
+          </Text>
+          <Text fontWeight="bold" ml="auto">
+              17 January 2024{' '}
+          </Text>
+      </Flex>
+      <Flex align="center" mt="1">
+          <Text mr="auto">
+              Total voting escrow{' '}
+          </Text>
+          <Text fontWeight="bold" ml="auto">
+              21.81 veVRTK{' '}
+          </Text>
+      </Flex>
+      <Flex mt="8">
+            <Button 
+            variant="vertekdark" 
+            width="100%" 
+            height="2.2rem"
+            >
+                  Approve LP for locking
+            </Button>
+      </Flex>
+      </Box>
+    </Box>
+  </ModalContent>
+</Modal>
+);
 }
