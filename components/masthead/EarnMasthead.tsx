@@ -67,6 +67,7 @@ padding={{ base:'4', lg:'4' }}
     fontWeight="semibold" 
     m="2" 
     textAlign="left"
+
 >
     Earn more VRTK in Core Pools 
 </Text>
@@ -82,6 +83,7 @@ padding={{ base:'4', lg:'4' }}
 </Text>
 <Button  
     variant="stayblack"
+    boxShadow="0px 12px 2px #000"
     fontSize={{ base:'0.9rem', lg:'0.9rem'}}
     width="70%"
     margin="3"
