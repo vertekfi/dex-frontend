@@ -11,6 +11,7 @@ const nextConfig = {
   },
 
   images: {
+    domains: ['avatar.tobi.sh'],
     remotePatterns: [
       {
         protocol: 'https',
