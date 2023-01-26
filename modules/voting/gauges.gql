@@ -5,18 +5,20 @@ query GetLiquidityGauges {
     symbol
     poolId
     totalSupply
+    depositFee
+    withdrawFee
+    isKilled
+
     factory {
       id
     }
+
     rewardTokens {
       id
       decimals
       symbol
     }
-    fees {
-      depositFee
-      withdrawFee
-    }
+
     pool {
       id
       name
@@ -29,7 +31,6 @@ query GetLiquidityGauges {
         logoURI
       }
     }
-    isKilled
   }
 }
 
