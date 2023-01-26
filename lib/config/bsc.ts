@@ -52,7 +52,7 @@ export const bscNetworkConfig: NetworkConfig = {
       lockPoolAddress: '0xDD64E2EC144571b4320f7BFB14a56b2b2cBF37ad',
     },
   },
-  beetsPoolOwnerAddress: '',
+  beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   defaultTokenOut: '0xeD236c32f695c83Efde232c288701d6f9C23E60E',
