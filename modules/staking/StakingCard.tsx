@@ -12,6 +12,7 @@ const pool = props.pool;
 return (
   pool ? (
     <GridItem
+        className="blk"
         boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
         borderRadius="18px"
         maxW="550px"
