@@ -6,10 +6,9 @@ import { Image as ChakraImage } from '@chakra-ui/react';
 
 export function WalletUserAvatar() {
     const { data } = useEarlyLudwigNft();
-
-    // if (data) {
-    //     return <ChakraImage src={data} height="70px" width="150px" />;
-    // }
+    if (data) {
+        return <ChakraImage src={data} height="70px" width="150px" />;
+    }
 
     return <Image src={VertekAlpha}  alt="your-profile" />;
 }

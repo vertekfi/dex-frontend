@@ -103,7 +103,7 @@ export default function NavbarWalletConnectButton() {
                         {txPending ? (
                           <Spinner color="white" />
                         ) : earlyLudwig ? (
-                          <ChakraImage src={VertekAlpha} width="20px" height="20px" rounded="xl"  />
+                          <ChakraImage src={VertekAlpha.src} width="20px" height="20px" rounded="xl"  />
                         ) : (
                           <Image src={VertekWhite} width="20px" alt="your-profile" />
                         )}

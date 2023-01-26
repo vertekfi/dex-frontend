@@ -34,14 +34,17 @@ export function useEarlyLudwigNft() {
       const tokenId = await earlyLudwigNft.tokenOfOwnerByIndex(userAddress, 0);
       const ipfsMetadataUri = await earlyLudwigNft.tokenURI(tokenId);
       const metadataCid = ipfsMetadataUri.replace('ipfs://', '');
-      const metadataResponse = await axios.get(`https://ipfs.io/ipfs/${metadataCid}`);
+      const metadataResponse = await axios.get(`https://nftstorage.link/ipfs/${metadataCid}`);
+      // const metadataResponse = await axios.get(`https://ipfs.io/ipfs/${metadataCid}`);
       const ipfsImageUri = metadataResponse.data.image;
       const imageCid = ipfsImageUri.replace('ipfs://', '');
 
-      cachedParsed[userAddress] = `https://ipfs.io/ipfs/${imageCid}`;
+      cachedParsed[userAddress] = `https://nftstorage.link/ipfs/${imageCid}`;
+      // cachedParsed[userAddress] = `https://ipfs.io/ipfs/${imageCid}`;
       localStorage.setItem(EARLY_LUDWIG_NFTS, JSON.stringify(cachedParsed));
 
-      return `https://ipfs.io/ipfs/${imageCid}`;
+      return `https://nftstorage.link/ipfs/${imageCid}`;
+      // return `https://ipfs.io/ipfs/${imageCid}`;
     },
     { enabled: isConnected && !!userAddress, staleTime: Infinity },
   );

@@ -66,6 +66,7 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
   const { approve, ...approveQuery } = useApproveToken(vrtkInfo);
 
   const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
+  debugger;
   const userAmount = oldBnumToHumanReadable(
     oldBnumScaleAmount(getUserBalance(userVrtkBalance)).times(percent).div(100),
   );

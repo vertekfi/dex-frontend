@@ -31,7 +31,9 @@ export const goerliNetworkConfig: NetworkConfig = {
     gauges: 'https://api.thegraph.com/subgraphs/name/vertekfi/goerli-gauges-v2',
   },
   beets: {
-    address: '0x5E1D334E7CFF8436bA39E24d452eB6E8451B5F9b',
+    // address: '0x5E1D334E7CFF8436bA39E24d452eB6E8451B5F9b',
+    // simba look into this
+    address: '0xaFbf7fB9Fa206089041218dF93c8B3A1Bb9F4497',
   },
   balancer: {
     vault: '0xBA5CE8dFcB1E077B4537aCaD17400D843842c520',

@@ -12,6 +12,11 @@ type GaugeFactory {
   id: String!
 }
 
+type GaugeFees {
+  depositFee: Int!
+  withdrawFee: Int!
+}
+
 type GaugePool {
   address: String!
   id: String!
@@ -1009,6 +1014,7 @@ type LiquidityGauge {
   """
   address: String!
   factory: GaugeFactory
+  fees: GaugeFees!
 
   """
    LiquidityGauge contract address

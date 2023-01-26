@@ -10,15 +10,19 @@ export function useRewardPoolDeposit(pool: RewardPool) {
   const { submitAsync, ...rest } = useSubmitTransaction({
     config: {
       addressOrName: pool.address,
-      contractInterface: ['function deposit(uint256) external'],
-      functionName: 'deposit(uint256)',
+      contractInterface: ['function deposit(uint256,uint256) external'],
+      functionName: 'deposit(uint256,uint256)',
+      // contractInterface: ['function deposit(uint256) external'],
+      // functionName: 'deposit(uint256)',
     },
     transactionType: 'STAKE',
   });
 
   async function depositToPool(amount: string) {
     await submitAsync({
-      args: [parseUnits(amount, 18)],
+      // args: [parseUnits(amount, 18)],
+      // testing with pool 0
+      args: [parseUnits(amount, 18),0],
       toastText: `Deposit VRTK into staking pool`,
       walletText: `Deposit ${tokenFormatAmount(amount)} VRTK into staking pool`,
     });
