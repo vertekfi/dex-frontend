@@ -1008,6 +1008,9 @@ export const GetLiquidityGauges = gql`
       symbol
       poolId
       totalSupply
+      depositFee
+      withdrawFee
+      isKilled
       factory {
         id
       }
@@ -1015,10 +1018,6 @@ export const GetLiquidityGauges = gql`
         id
         decimals
         symbol
-      }
-      fees {
-        depositFee
-        withdrawFee
       }
       pool {
         id
@@ -1032,7 +1031,6 @@ export const GetLiquidityGauges = gql`
           logoURI
         }
       }
-      isKilled
     }
   }
 `;

@@ -12,11 +12,6 @@ type GaugeFactory {
   id: String!
 }
 
-type GaugeFees {
-  depositFee: Int!
-  withdrawFee: Int!
-}
-
 type GaugePool {
   address: String!
   id: String!
@@ -1013,8 +1008,8 @@ type LiquidityGauge {
    Address of the pool (lp_token of the gauge)
   """
   address: String!
+  depositFee: Int!
   factory: GaugeFactory
-  fees: GaugeFees!
 
   """
    LiquidityGauge contract address
@@ -1055,6 +1050,7 @@ type LiquidityGauge {
    Total of BPTs users have staked in the LiquidityGauge
   """
   totalSupply: BigDecimal!
+  withdrawFee: Int!
 }
 
 type Mutation {
