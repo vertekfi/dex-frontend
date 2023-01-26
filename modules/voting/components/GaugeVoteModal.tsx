@@ -37,13 +37,28 @@ type VoteState = {
 export function GaugeVoteModal(props: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [voteTitle, setVoteTitle] = useState<string>('');
+  const [voteButtonText, setVoteButtonText] = useState<string>('');
+
   const [hasEnoughVotes, setHasEnoughVotes] = useState<boolean>(false);
   const [hasVotes, setHasVotes] = useState<boolean>(false);
+
   const [voteWeight, setVoteWeight] = useState<string>('');
   const [currentWeight, setCurrentWeight] = useState<string>('');
   const [currentWeightNormalized, setCurrentWeightNormalized] = useState<string>('');
+
   const [unallocatedVotesFormatted, setunallocatedVotesFormatted] = useState<string>('');
   const [remainingVotes, setRemainingVotes] = useState<string>('');
+  const [voteLockedUntilText, setVoteLockedUntilText] = useState<string>('');
+
+  const [voteError, setVoteError] = useState<boolean>(false);
+  const [voteWarning, setVoteWarning] = useState<boolean>(false);
+  const [veBalVoteOverLimitWarning, setVeBalVoteOverLimitWarning] = useState<boolean>(false);
+
+  const [votedToRecentlyWarning, setVotedToRecentlyWarning] = useState<{
+    title: string;
+    description: string;
+  }>();
 
   // Probably wont need this
   const [voteState, setVoteState] = useState<VoteState>({
@@ -68,6 +83,11 @@ export function GaugeVoteModal(props: Props) {
   useEffect(() => {
     if (hasVotes) {
       setVoteWeight(currentWeightNormalized);
+      setVoteTitle('Edit gauge vote');
+      setVoteButtonText('Edit vote');
+    } else {
+      setVoteTitle('Gauge vote');
+      setVoteButtonText('Confirm vote');
     }
   }, [hasVotes]);
 
@@ -153,7 +173,7 @@ export function GaugeVoteModal(props: Props) {
         <BeetsModalContent bg="black" paddingY="2rem" borderRadius="12px">
           <BeetsModalHeader>
             <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
-              Voting
+              {voteTitle}
             </BeetsModalHeadline>
           </BeetsModalHeader>
 
