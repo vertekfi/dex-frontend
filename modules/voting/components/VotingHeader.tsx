@@ -247,8 +247,8 @@ return (
     boxShadow="2px 24px 12px 0px #000"
     >
         <VotingCardHeader>My veVRTK</VotingCardHeader>
-        <Text>{lockInfoDisplay.veBalance}</Text>
-        <Text  marginBottom="4rem">{lockInfoDisplay.percentOwned}</Text>
+        <Text>{lockInfoDisplay.veBalance} shares</Text>
+        <Text  marginBottom="4rem">{lockInfoDisplay.percentOwned} percent owned</Text>
     </Box>
   </Card> 
 </Grid>

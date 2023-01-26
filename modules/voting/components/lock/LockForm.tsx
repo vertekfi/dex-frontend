@@ -129,12 +129,12 @@ return (
           height={{ base:'auto', lg:'50%'}}
           m={{ base:'2', md:'2'}}
           mt={{ base:'auto', md:'24'}}
-          // backgroundColor="rgba(0, 0, 0, 0.1)"
           backdropFilter="blur(12px)"
           bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
           borderRadius="12px">
-          <Box padding={{ base: '2', md: '2' }} 
-                        borderRadius="12px" mb="6">
+          <Box 
+              padding={{ base: '2', md: '2' }} 
+              borderRadius="12px" mb="6">
             <Text
               align="left"
               padding="1"
@@ -371,8 +371,8 @@ bgColor="black" borderRadius="12px" mb="6">
                     Total Voting Escrow
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
-                    0 veVRTK
-                  </Text>
+                      NEXT 
+                 </Text>
                 </Flex>
               </Box>
 
@@ -396,48 +396,47 @@ bgColor="black" borderRadius="12px" mb="6">
             height={{ base:'auto', lg:'50%'}}
             m={{ base:'2', md:'2'}}
             mt={{ base:'auto', md:'24'}}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
-            // bgColor="vertek.slatepurple.900"
-            padding="4"
+            backdropFilter="blur(12px)"
+            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
             borderRadius="12px">
-            <Box
-              padding="2"
-              borderRadius="12px"
-              // boxShadow={{base:'none', md:'0 12px 12px #000'}}
-              // bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
-
-            >
+            <Box 
+              padding={{ base: '2', md: '2' }} 
+              borderRadius="12px" mb="6">
               <Text
-                align="center"
+                align="left"
                 padding="1"
                 mb="4"
-                mt="8"
                 fontWeight="bold"
                 color="white"
                 fontSize="1.2rem"
               >
-                My veVRTK
+                Governance -- veVRTK
               </Text>
-              <Box mt="20" mb="10" alignItems="center" 
-              display="flex" flexDirection="row" justifyContent="center" 
-              >
-                  <Box display="flex" flexDirection="column" mr="4">
-                      <Text fontSize="1.1rem" fontWeight="semibold" >
-                        % of total veVRTK
-                      </Text>
-                      <Text fontSize="1.1rem" >
-                        % 
-                      </Text>
-                  </Box>
-                  <Box display="flex" flexDirection="column" ml="4" >
-                  <Text fontSize="1.1rem" fontWeight="semibold" >
-                    Locked until
+              <Flex align="center" mt="12">
+                  <Text fontWeight="bold" fontSize="1rem" mr="auto">
+                    My veVRTK
                   </Text>
-                  <Text fontSize="1.1rem">
-                  {lockInfoDisplay.lockedUntilDays}
+                  <Text fontSize="1rem" ml="auto">
+                  {lockInfoDisplay.veBalance} shares 
                   </Text>
-                  </Box>
-              </Box>
+              </Flex>
+
+              <Flex align="center" mt="3">
+                  <Text fontWeight="bold" fontSize="1rem" mr="auto">
+                          My share of total veVRTK
+                  </Text>
+                  <Text fontSize="1rem" ml="auto">
+                  {lockInfoDisplay.percentOwned}%
+                  </Text>
+              </Flex>
+              <Flex align="center" mt="3">
+                  <Text fontWeight="bold" fontSize="1rem" mr="auto">
+                          Locked until 
+                  </Text>
+                  <Text fontSize="1rem" ml="auto">
+                          {lockInfoDisplay.lockedUntilDays}
+                  </Text>
+              </Flex>
             </Box>
           </GridItem>
         </Grid>
