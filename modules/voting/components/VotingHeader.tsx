@@ -26,7 +26,7 @@ const VotingCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 0 10px #5bc0f8, 0 0 20px #4a4af6;
+  box-shadow: 0px 0 6px #5bc0f8, 0 0px 12px 1px #4a4af6, 2px 20px 20px 1px #000; 
   border-radius: 25px;
   color: white;
   border-width: 1px;
@@ -130,6 +130,7 @@ return (
           variant="moistblack"
           width={{ base: '50%', lg: '75%' }}
           marginBottom="1rem"
+          boxShadow="0 12px 2px #000"
         >
           Get VRTK-BNB
         </Button>
