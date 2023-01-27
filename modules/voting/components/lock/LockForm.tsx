@@ -452,6 +452,7 @@ return (
             m={{ base:'2', md:'2'}}
             padding="2"
             mt={{ base:'6', md:'24'}}
+            mb={{ base:'6rem', md:'auto' }}
             bgColor="vertek.slate.900"
             borderRadius="12px">
                <Text
