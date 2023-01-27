@@ -51,7 +51,7 @@ export function VotingContainer() {
   } = useVotingGauges();
 
   const { isConnected } = useUserAccount();
-  const { userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
   // const { data: mainPoolData, loading: loadingMainPool } = useGetPoolQuery({
   //   variables: {

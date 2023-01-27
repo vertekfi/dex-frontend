@@ -73,7 +73,7 @@ export function LockForm(props: Props) {
     percentOwned: '0',
   });
   const { isConnected } = useUserAccount();
-  const { userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
 
   useEffect(() => {
