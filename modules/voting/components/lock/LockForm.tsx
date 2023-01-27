@@ -95,17 +95,17 @@ return (
       bg=
       {`radial-gradient(circle at center, 
           #4132D0 0%, 
-          rgba(0,0,0, 0.8) 70% )`}
+          rgba(0,0,0, 0.8) 90% )`}
       />
   <ModalContent
     minW={{ base: 'auto', md: '95vw' }}
     maxW={{ base: 'auto', md: '95vw' }}
-    h="85vh"
-    bgColor="rgba(0, 0, 0, 0)"
-    boxShadow="2px 24px 12px 0px #000"
+    h="100vh"
+    bgColor="rgba(0, 0, 0, 0.3)"
+    // boxShadow="2px 24px 12px 0px #000"
         paddingY="2rem"
     borderRadius="4rem"
-    marginTop="2rem"
+    marginTop="0rem"
     padding="4" 
     >
   <ModalCloseButton />
