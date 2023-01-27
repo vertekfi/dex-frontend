@@ -44,13 +44,14 @@ export default class GaugeControllerService {
     weight: BigNumber,
     options: Record<string, any> = {},
   ): Promise<TransactionResponse> {
-    return this.web3.sendTransaction(
-      this.address,
-      this.abi,
-      'vote_for_gauge_weights',
-      [gaugeAddress, weight],
-      options,
-    );
+    const { submit, submitAsync, ...rest } = useSubmitTransaction({
+      config: {
+        addressOrName: this.address,
+        contractInterface: this.abi,
+        functionName: 'vote_for_gauge_weights(address, uint256)',
+      },
+      transactionType: 'VOTE',
+    });
   }
 }
 
