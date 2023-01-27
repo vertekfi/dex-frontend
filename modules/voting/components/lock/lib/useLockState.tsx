@@ -25,9 +25,17 @@ export function useLockState() {
     });
   }
 
+  function setLockAmount(lockAmount: string) {
+    setLockState({
+      lockAmount,
+      lockEndDate: lockState.lockEndDate,
+    });
+  }
+
   return {
     ...lockState,
     resetLockState,
     setLockEndDate,
+    setLockAmount,
   };
 }

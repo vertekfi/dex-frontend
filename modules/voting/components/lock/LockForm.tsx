@@ -23,8 +23,6 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import 'react-datepicker/dist/react-datepicker.css';
-import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { useUserVeLockInfoQuery } from '../../lib/useUserVeLockInfoQuery';
 import { useUserData } from '~/lib/user/useUserData';
@@ -34,6 +32,9 @@ import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { useVeVRTK } from '../../lib/useVeVRTK';
 import { LockFormInner } from './LockFormInner';
+import { LockPreview } from './LockPreview';
+import { nextThursday } from 'date-fns';
+import { MyVeVRTK } from '../MyVeVRTK';
 
 interface Props {
   isOpen: boolean;
@@ -43,7 +44,6 @@ interface Props {
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const [userPoolBalance, setUserPoolBalance] = useState<{
     balance: string;
@@ -223,262 +223,8 @@ export function LockForm(props: Props) {
                 </Accordion>
               </Box>
             </GridItem>
-
-            <GridItem
-              width={{ base: '90%', md: 'auto' }}
-              mt={{ base: '3rem', md: 'auto' }}
-              bgColor="vertek.slate.900"
-              borderRadius="16px"
-              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-            >
-              <Text
-                align="left"
-                padding="2"
-                mb="4"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Lock to get veVRTK
-              </Text>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                marginX="2"
-                mb="6"
-                paddingX="2"
-                paddingY="4"
-                bgColor="vertek.slatepurple.900"
-                boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
-                flexDirection="column"
-              >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
-                  How much do you want to lock?
-                </Text>
-
-                <FormControl mb="4">
-                  <Input
-                    focusBorderColor="vertek.neonpurple.500"
-                    id="voteWeight"
-                    name="voteWeight"
-                    type="number"
-                    // value={voteWeight}
-                    // onChange={(event) => setVoteWeight(event.target.value)}
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    step="any"
-                    placeholder="0.00"
-                    // validateOn="input"
-                    // rules={inputRules}
-                    // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
-                    size="md"
-                    fontWeight="bold"
-                  />
-                  <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
-                    {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
-                    available
-                  </FormLabel>
-                </FormControl>
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                mb="6"
-                mx="2"
-                paddingX="2"
-                paddingY="4"
-                bgColor="vertek.slatepurple.900"
-                boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
-                flexDirection="column"
-              >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
-                  Lock until
-                </Text>
-                <FormControl mb="2">
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
-                    dateFormat="MM/dd/yyyy"
-                    placeholderText="mm/dd/yyyy"
-                    id="voteWeight"
-                    name="voteWeight"
-                    autoComplete="off"
-                    calendarClassName="datepicker"
-                  />
-                  <Box
-                    w="99%"
-                    paddingY="2"
-                    mt="2"
-                    paddingX={{ base: 'none', md: '1' }}
-                    justifyContent="space-between"
-                    display="flex"
-                  >
-                    <Button
-                      variant="stayblacklock"
-                      onClick={() => {
-                        let nextThursday = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-                        while (nextThursday.getUTCDay() !== 4) {
-                          nextThursday.setDate(nextThursday.getDate() + 1);
-                        }
-                        setSelectedDate(nextThursday);
-                      }}
-                    >
-                      1w
-                    </Button>
-                    <Button
-                      variant="stayblacklock"
-                      onClick={() => {
-                        let nextThursday = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-                        while (nextThursday.getUTCDay() !== 4) {
-                          nextThursday.setDate(nextThursday.getDate() + 1);
-                        }
-                        setSelectedDate(nextThursday);
-                      }}
-                    >
-                      1m
-                    </Button>
-                    <Button
-                      variant="stayblacklock"
-                      onClick={() => {
-                        let nextThursday = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
-                        while (nextThursday.getUTCDay() !== 4) {
-                          nextThursday.setDate(nextThursday.getDate() + 1);
-                        }
-                        setSelectedDate(nextThursday);
-                      }}
-                    >
-                      3m
-                    </Button>
-                    <Button
-                      variant="stayblacklock"
-                      onClick={() => {
-                        let nextThursday = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000);
-                        while (nextThursday.getUTCDay() !== 4) {
-                          nextThursday.setDate(nextThursday.getDate() + 1);
-                        }
-                        setSelectedDate(nextThursday);
-                      }}
-                    >
-                      6m
-                    </Button>
-                    <Button
-                      variant="stayblacklock"
-                      onClick={() => {
-                        let nextThursday = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
-                        while (nextThursday.getUTCDay() !== 4) {
-                          nextThursday.setDate(nextThursday.getDate() + 1);
-                        }
-                        setSelectedDate(nextThursday);
-                      }}
-                    >
-                      1y
-                    </Button>
-                  </Box>
-                </FormControl>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                mb="6"
-                mx="2"
-                padding="4"
-                paddingY="6"
-                bgColor="vertek.slatepurple.900"
-                boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
-                flexDirection="column"
-              >
-                <Flex>
-                  <Text fontSize="0.9rem" mr="auto">
-                    Total Voting Escrow
-                  </Text>
-                  <Text fontSize="0.9rem" ml="auto">
-                    NEXT
-                  </Text>
-                </Flex>
-              </Box>
-              <Button
-                onClick={handleOpenModal}
-                variant="stayblack"
-                _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
-                mb="4"
-                // boxShadow="0 28px 12px rgba(0, 0, 0, 1)"
-                width={{ base: '85%', md: '90%' }}
-              >
-                Preview
-              </Button>
-              {isModalOpen && (
-                <LockPreview isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-              )}
-            </GridItem>
-
-            <GridItem
-              width={{ base: '90%', md: 'auto' }}
-              height={{ base: 'auto', md: '40%' }}
-              m={{ base: '2', md: '2' }}
-              padding="2"
-              mt={{ base: '6', md: '24' }}
-              mb={{ base: '6rem', md: 'auto' }}
-              bgColor="vertek.slate.900"
-              borderRadius="12px"
-            >
-              <Text
-                align="left"
-                padding="1"
-                mb="2"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Governance -- veVRTK
-              </Text>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="space-between"
-                paddingX="1"
-                paddingY="4"
-                mx="1"
-                my="4"
-                bgColor="vertek.slatepurple.900"
-                boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
-                flexDirection="column"
-              >
-                <Flex align="center" mt="3">
-                  <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                    My veVRTK
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                    {lockInfoDisplay.veBalance} shares
-                  </Text>
-                </Flex>
-
-                <Flex align="center" mt="2">
-                  <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                    My share of total veVRTK
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                    {lockInfoDisplay.percentOwned}%
-                  </Text>
-                </Flex>
-                <Flex align="center" mt="2">
-                  <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                    Locked until
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                    {lockInfoDisplay.lockedUntilDays}
-                  </Text>
-                </Flex>
-              </Box>
-            </GridItem>
+            <LockFormInner lockablePoolBptBalance={userPoolBalance.balance} />
+            <MyVeVRTK veBalLockInfo={userLockInfo} />
           </Grid>
         </BeetsModalBody>
       </ModalContent>

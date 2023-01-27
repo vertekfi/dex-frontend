@@ -1,39 +1,38 @@
 import { Text, GridItem, Box, Button, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { FormControl } from '@chakra-ui/react';
 import { LockPreview } from './LockPreview';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useUserVeLockInfoQuery } from '../../lib/useUserVeLockInfoQuery';
-import { useUserData } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
-import { useVeVRTK } from '../../lib/useVeVRTK';
+import { expectedVeBal, useVeVRTK } from '../../lib/useVeVRTK';
 import { useLockState } from './lib/useLockState';
 import { useLockAmount } from './lib/useLockAmount';
 import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useLockEndDate } from './lib/useLockEndDate';
 import { LockType } from './types';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import { LockAmount } from './LockAmount';
+import { useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
+import { bnum } from '~/lib/util/big-number.utils';
 import { LockEndDate } from './LockEndDate';
 
 interface Props {
   // lockablePool: Pool;
   // lockablePoolTokenInfo: TokenInfo;
+  lockablePoolBptBalance: string;
   veBalLockInfo?: VeBalLockInfo;
 }
 
 export function LockFormInner(props: Props) {
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
-
-  const [lockablePoolBptBalance, setLockablePoolBptBalance] = useState<string>();
-  const [submissionDisabled, setSubmissionDisabled] = useState<string>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [submissionDisabled, setSubmissionDisabled] = useState<boolean>();
   const [expectedVeBalAmount, setExpectedVeBalAmount] = useState<string>();
   const [lockType, setLockType] = useState<LockType>();
 
-  const { data: userLockInfo } = useUserVeLockInfoQuery();
-  const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-  const { lockablePoolId } = useVeVRTK();
-
+  const { veBalTokenInfo } = useVeVRTK();
   const { lockEndDate, lockAmount } = useLockState();
-
   const { isValidLockAmount, isIncreasedLockAmount, totalLpTokens } = useLockAmount(
     props.veBalLockInfo,
   );
@@ -45,116 +44,114 @@ export function LockFormInner(props: Props) {
     isExtendedLockEndDate,
   } = useLockEndDate(props.veBalLockInfo);
 
-  const handleOpenModal = () => setShowPreviewModal(true);
+  const { data: lockPool, loading: isLoadPool } = useGetPoolQuery({
+    variables: {
+      id: networkConfig.balancer.votingEscrow.lockablePoolId,
+    },
+  });
 
-  useEffect(() => {}, []);
+  const handleOpenModal = () => setIsModalOpen(true);
+
+  useEffect(() => {
+    if (totalLpTokens && totalLpTokens) {
+      setExpectedVeBalAmount(expectedVeBal(totalLpTokens, lockEndDate));
+    }
+  }, [totalLpTokens, lockEndDate]);
+
+  useEffect(() => {
+    if (props.veBalLockInfo?.hasExistingLock && !props.veBalLockInfo?.isExpired) {
+      setSubmissionDisabled(!isIncreasedLockAmount && !isExtendedLockEndDate);
+    } else {
+      const disabled =
+        !bnum(props.lockablePoolBptBalance).gt(0) || !isValidLockAmount || !isValidLockEndDate;
+
+      setSubmissionDisabled(disabled);
+    }
+  }, [props.veBalLockInfo, props.lockablePoolBptBalance]);
 
   function handleClosePreviewModal() {
-    setShowPreviewModal(false);
+    setIsModalOpen(false);
   }
 
   function handleShowPreviewModal() {
     if (submissionDisabled) return;
-    setShowPreviewModal(true);
+    setIsModalOpen(true);
   }
 
   return (
     <GridItem
-      boxShadow={{ base: 'none', md: '0 12px 12px #000' }}
-      width={{ base: '90%', lg: 'auto' }}
-      m={{ base: '2', md: '2' }}
-      bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
-      borderRadius="12px"
+      width={{ base: '90%', md: 'auto' }}
+      mt={{ base: '3rem', md: 'auto' }}
+      bgColor="vertek.slate.900"
+      borderRadius="16px"
+      boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
     >
+      <Text align="left" padding="2" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
+        Lock to get veVRTK
+      </Text>
       <Box
-        padding="2"
-        borderRadius="12px"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="space-between"
+        marginX="2"
         mb="6"
-        bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+        paddingX="2"
+        paddingY="4"
+        bgColor="vertek.slatepurple.900"
+        boxShadow="2px 24px 12px 0px #000"
+        borderRadius="16px"
+        flexDirection="column"
       >
-        <Text align="left" padding="1" mb="4" fontWeight="bold" color="white" fontSize="1.2rem">
-          Lock to get veVRTK
-        </Text>
-        <Text align="left" paddingX="3" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+        <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
           How much do you want to lock?
         </Text>
-        <Box
-          padding="2"
-          bgColor="black"
-          boxShadow="0 12px 12px rgba(0, 0, 0, 0.5)"
-          borderRadius="12px"
-          mb="6"
-        >
-          <FormControl mb="8">
-            <Input
-              focusBorderColor="vertek.neonpurple.500"
-              id="voteWeight"
-              name="voteWeight"
-              type="number"
-              // value={voteWeight}
-              // onChange={(event) => setVoteWeight(event.target.value)}
-              autoComplete="off"
-              autoCorrect="off"
-              spellCheck={false}
-              step="any"
-              placeholder="0.00"
-              // validateOn="input"
-              // rules={inputRules}
-              // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
-              size="md"
-            />
-            <FormLabel mt="2" mb="4" color="white">
-              {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
-              available
-            </FormLabel>
-          </FormControl>
-        </Box>
-        <Text
-          align="left"
-          paddingX="3"
-          mb="0"
-          fontWeight="normal"
-          color="white"
-          fontSize="1rem"
-          textDecoration="uppercase"
-        >
-          Lock until
-        </Text>
-        <LockEndDate
-          veBalLockInfo={userLockInfo}
-          minLockEndDateTimestamp={minLockEndDateTimestamp}
-          maxLockEndDateTimestamp={maxLockEndDateTimestamp}
-        />
-        <Box
-          borderRadius="12px"
-          p="4"
-          bgColor="black"
-          mb="6"
-          boxShadow="0 12px 12px rgba(0, 0, 0, 1)"
-        >
-          <Flex align="center">
-            <Text fontSize="0.9rem" mr="auto">
-              Total Voting Escrow
-            </Text>
-            <Text fontSize="0.9rem" ml="auto">
-              NEXT
-            </Text>
-          </Flex>
-        </Box>
 
-        <Button
-          onClick={handleOpenModal}
-          variant="stayblack"
-          mb="4"
-          boxShadow="0 12px 12px rgba(0, 0, 0, 1)"
-          width={{ base: '90%', lg: '100%' }}
-        >
-          Preview
-        </Button>
-        {showPreviewModal && (
-          <LockPreview isOpen={showPreviewModal} onClose={() => setShowPreviewModal(false)} />
-        )}
+        <LockAmount lockablePool={lockPool?.pool} />
       </Box>
+
+      <LockEndDate
+        minLockEndDateTimestamp={minLockEndDateTimestamp}
+        maxLockEndDateTimestamp={maxLockEndDateTimestamp}
+        veBalLockInfo={props.veBalLockInfo}
+      />
+
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="space-between"
+        mb="6"
+        mx="2"
+        padding="4"
+        paddingY="6"
+        bgColor="vertek.slatepurple.900"
+        boxShadow="2px 24px 12px 0px #000"
+        borderRadius="16px"
+        flexDirection="column"
+      >
+        <Flex>
+          <Text fontSize="0.9rem" mr="auto">
+            Total Voting Escrow
+          </Text>
+          <Text fontSize="0.9rem" ml="auto">
+            {expectedVeBalAmount && (
+              <div>
+                {expectedVeBalAmount}: - {veBalTokenInfo?.symbol}
+              </div>
+            )}
+          </Text>
+        </Flex>
+      </Box>
+      <Button
+        onClick={handleOpenModal}
+        variant="stayblack"
+        _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
+        mb="4"
+        width={{ base: '85%', md: '90%' }}
+        disabled={submissionDisabled}
+      >
+        Preview
+      </Button>
+      {isModalOpen && <LockPreview isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
     </GridItem>
   );
 }

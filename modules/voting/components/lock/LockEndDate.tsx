@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { INPUT_DATE_FORMAT } from '../../constants';
 import { useLockState } from './lib/useLockState';
-import { FormControl, Button, Box } from '@chakra-ui/react';
+import { FormControl, Button, Box, Text } from '@chakra-ui/react';
 
 type Props = {
   minLockEndDateTimestamp: number;
   maxLockEndDateTimestamp: number;
-  veBalLockInfo: VeBalLockInfo;
+  veBalLockInfo?: VeBalLockInfo;
 };
 
 export function LockEndDate(props: Props) {
@@ -26,7 +26,7 @@ export function LockEndDate(props: Props) {
     }[]
   >();
 
-  const { setLockEndDate } = useLockState();
+  const { setLockEndDate, lockEndDate } = useLockState();
 
   useEffect(() => {
     if (props.veBalLockInfo?.hasExistingLock) {
@@ -37,40 +37,42 @@ export function LockEndDate(props: Props) {
   }, []);
 
   useEffect(() => {
-    setLockDates([
-      {
-        id: 'one-week',
-        label: '~1W',
-        date: getDateInput(props.minLockEndDateTimestamp),
-        action: () => updateLockEndDate(props.minLockEndDateTimestamp),
-      },
-      {
-        id: 'one-month',
-        label: '~1M',
-        date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 4).getTime()),
-        action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 4).getTime()),
-      },
-      {
-        id: 'three-month',
-        label: '~3M',
-        date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 12).getTime()),
-        action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 12).getTime()),
-      },
-      {
-        id: 'six-month',
-        label: '~6M',
-        date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 24).getTime()),
-        action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 24).getTime()),
-      },
-      {
-        id: 'one-year',
-        label: '~1Y',
-        date: formatDateInput(props.maxLockEndDateTimestamp),
-        action: () => {
-          setLockEndDate(formatDateInput(props.maxLockEndDateTimestamp));
+    if (props.minLockEndDateTimestamp) {
+      setLockDates([
+        {
+          id: 'one-week',
+          label: '~1W',
+          date: getDateInput(props.minLockEndDateTimestamp),
+          action: () => updateLockEndDate(props.minLockEndDateTimestamp),
         },
-      },
-    ]);
+        {
+          id: 'one-month',
+          label: '~1M',
+          date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 4).getTime()),
+          action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 4).getTime()),
+        },
+        {
+          id: 'three-month',
+          label: '~3M',
+          date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 12).getTime()),
+          action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 12).getTime()),
+        },
+        {
+          id: 'six-month',
+          label: '~6M',
+          date: getDateInput(addWeeks(props.minLockEndDateTimestamp, 24).getTime()),
+          action: () => updateLockEndDate(addWeeks(props.minLockEndDateTimestamp, 24).getTime()),
+        },
+        {
+          id: 'one-year',
+          label: '~1Y',
+          date: formatDateInput(props.maxLockEndDateTimestamp),
+          action: () => {
+            setLockEndDate(formatDateInput(props.maxLockEndDateTimestamp));
+          },
+        },
+      ]);
+    }
   }, [props]);
 
   function getDateInput(timestamp: number) {
@@ -85,17 +87,28 @@ export function LockEndDate(props: Props) {
     return format(date, INPUT_DATE_FORMAT);
   }
 
+  function getDateOptions() {}
+
   return (
     <Box
-      padding="2"
-      boxShadow="0 12px 12px rgba(0, 0, 0, 0.5)"
-      bgColor="black"
-      borderRadius="12px"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="space-between"
       mb="6"
+      mx="2"
+      paddingX="2"
+      paddingY="4"
+      bgColor="vertek.slatepurple.900"
+      boxShadow="2px 24px 12px 0px #000"
+      borderRadius="16px"
+      flexDirection="column"
     >
-      <FormControl mb="8">
+      <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+        Lock until
+      </Text>
+      <FormControl mb="2">
         <DatePicker
-          selected={selectedDate}
+          value={lockEndDate}
           onChange={(date) => setSelectedDate(date)}
           dateFormat="MM/dd/yyyy"
           placeholderText="mm/dd/yyyy"
@@ -107,70 +120,18 @@ export function LockEndDate(props: Props) {
         <Box
           w="99%"
           paddingY="2"
+          mt="2"
           paddingX={{ base: 'none', md: '1' }}
           justifyContent="space-between"
           display="flex"
         >
-          <Button
-            variant="stayblacklock"
-            onClick={() => {
-              let nextThursday = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-              while (nextThursday.getUTCDay() !== 4) {
-                nextThursday.setDate(nextThursday.getDate() + 1);
-              }
-              setSelectedDate(nextThursday);
-            }}
-          >
-            1w
-          </Button>
-          <Button
-            variant="stayblacklock"
-            onClick={() => {
-              let nextThursday = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-              while (nextThursday.getUTCDay() !== 4) {
-                nextThursday.setDate(nextThursday.getDate() + 1);
-              }
-              setSelectedDate(nextThursday);
-            }}
-          >
-            1m
-          </Button>
-          <Button
-            variant="stayblacklock"
-            onClick={() => {
-              let nextThursday = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
-              while (nextThursday.getUTCDay() !== 4) {
-                nextThursday.setDate(nextThursday.getDate() + 1);
-              }
-              setSelectedDate(nextThursday);
-            }}
-          >
-            3m
-          </Button>
-          <Button
-            variant="stayblacklock"
-            onClick={() => {
-              let nextThursday = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000);
-              while (nextThursday.getUTCDay() !== 4) {
-                nextThursday.setDate(nextThursday.getDate() + 1);
-              }
-              setSelectedDate(nextThursday);
-            }}
-          >
-            6m
-          </Button>
-          <Button
-            variant="stayblacklock"
-            onClick={() => {
-              let nextThursday = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
-              while (nextThursday.getUTCDay() !== 4) {
-                nextThursday.setDate(nextThursday.getDate() + 1);
-              }
-              setSelectedDate(nextThursday);
-            }}
-          >
-            1y
-          </Button>
+          {lockDates?.map((lockDate) => {
+            return (
+              <Button variant="stayblacklock" onClick={lockDate.action}>
+                {lockDate.label}
+              </Button>
+            );
+          })}
         </Box>
       </FormControl>
     </Box>

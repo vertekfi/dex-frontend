@@ -11,7 +11,7 @@ export function useUserVeLockInfoQuery(): UseQueryResult<any> {
     }
   };
 
-  return useQuery(['VeBalLockInfo', 'userAddress'], queryFn, {
+  return useQuery(['VeBalLockInfo', userAddress], queryFn, {
     refetchInterval: 30000,
   });
 }

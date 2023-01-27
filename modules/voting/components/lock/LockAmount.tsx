@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { GqlPoolDynamicData } from '~/apollo/generated/graphql-codegen-generated';
 import { bnum } from '~/lib/util/big-number.utils';
-import { TokenInfo } from '~/modules/claim/types';
 import { useLockState } from './lib/useLockState';
+import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { networkConfig } from '~/lib/config/network-config';
+import { useUserData } from '~/lib/user/useUserData';
 
 type Props = {
-  lockablePool: GqlPoolDynamicData;
-  lockablePoolTokenInfo: TokenInfo;
+  lockablePool: any;
+  // lockablePoolTokenInfo: TokenInfo;
 };
 
 export function LockAmount(props: Props) {
   const [lockAmountFiatValue, setLockAmountFiatValue] = useState<BigNumber>();
 
-  const { lockAmount } = useLockState();
+  const { lockAmount, setLockAmount } = useLockState();
+  const { bptBalanceForPool } = useUserData();
 
   useEffect(() => {
     if (props.lockablePool) {
@@ -24,4 +26,36 @@ export function LockAmount(props: Props) {
       );
     }
   }, [props.lockablePool]);
+
+  const setAmountIn = (amount: string) => {
+    console.log(amount);
+    setLockAmount(amount);
+  };
+
+  return (
+    <>
+      <div>
+        <FormControl mb="4">
+          <Input
+            focusBorderColor="vertek.neonpurple.500"
+            id="voteWeight"
+            name="voteWeight"
+            type="number"
+            value={lockAmount}
+            onChange={(event) => setAmountIn(event.target.value)}
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
+            step="any"
+            placeholder="0.00"
+            size="md"
+            fontWeight="bold"
+          />
+          <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
+            {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares available
+          </FormLabel>
+        </FormControl>
+      </div>
+    </>
+  );
 }
