@@ -141,6 +141,8 @@ export function GaugeVoteModal(props: Props) {
         },
       });
     }
+    
+
   }
 
   return (
@@ -150,14 +152,14 @@ export function GaugeVoteModal(props: Props) {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
-        <BeetsModalContent bg="black" paddingY="2rem" borderRadius="12px">
-          <BeetsModalHeader>
+        <BeetsModalContent bgColor="vertek.slate.900">
+          <BeetsModalHeader mt="2" >
             <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
               {voteTitle}
             </BeetsModalHeadline>
           </BeetsModalHeader>
 
-          <BeetsModalBody textAlign="center" fontSize="1.2rem">
+          <BeetsModalBody mt="4" bgColor="vertek.slatepurple.900" textAlign="center" fontSize="1.2rem">
             <Box
               display="flex"
               flexDirection="column"
@@ -202,7 +204,7 @@ export function GaugeVoteModal(props: Props) {
             </Button>
             <Button
               width="40%"
-              variant="vertekdark"
+              variant="stayblack"
               disabled={voteButtonDisabled}
               onClick={submitVote}
             >
@@ -211,6 +213,7 @@ export function GaugeVoteModal(props: Props) {
           </HStack>
         </BeetsModalContent>
       </Modal>
+      
     </>
   );
 }
