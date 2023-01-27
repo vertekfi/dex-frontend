@@ -28,7 +28,7 @@ export function GaugeListTableHeader() {
             display={{ base: 'none', lg: 'grid' }}
           >
             <GridItem textAlign="left">
-              <Text fontSize="md">Icons</Text>
+              <Text fontSize="md">Pool</Text>
             </GridItem>
 
             <GridItem textAlign="left">
