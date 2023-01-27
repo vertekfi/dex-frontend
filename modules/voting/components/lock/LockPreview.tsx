@@ -36,7 +36,7 @@ return (
             mb="2rem"
             mt="-1rem"
           >
-            Locking Preview
+            Locking Summary
           </BeetsModalHeadline>
   </BeetsModalHeader>
   <Box 
@@ -44,12 +44,12 @@ return (
   height="full"
   padding="2"
   boxShadow="2px 24px 12px 0px #000, 0px 0px 12px 4px #000"
-  borderRadius="md" 
+  borderRadius="16px" 
   mb="2rem"
   >
     <Box
       padding="1"
-      borderRadius="12px"
+      borderRadius="16px"
       display="flex"
       flexDirection="column"
     >
@@ -74,44 +74,36 @@ return (
   >
     <Box mt="1" 
     pt="2" 
-    mb="8" 
+    mb="" 
+    borderRadius="16px" 
     justifyContent="center" 
-    fontWeight="normal" 
+    fontWeight="bold" 
     fontSize="1.1rem" 
     alignItems="center" 
+    
     flexDirection="column">
-      <BeetsModalHeadline
-            textAlign="center"
-            fontSize="1.3rem"
-            fontWeight="bold"
-            color="vertek.neonpurple.500"
-            mb="2rem"
-            mt="-1rem"
-            textDecoration="underline" 
-          >
-            Summary
-      </BeetsModalHeadline>
-      <Flex align="center" mt="6">
-          <Text mr="auto">
-              Total to lock
+     
+      <Flex align="center" mt="2">
+      <Text fontWeight="normal" mr="auto">
+              Total amount locked
           </Text>
-          <Text fontWeight="bold" ml="auto">
+          <Text ml="auto">
             $12.10
           </Text>
       </Flex>
       <Flex align="center" mt="1">
-          <Text mr="auto">
-              Lock-up end date
+      <Text fontWeight="normal" mr="auto">
+              Lock-up end date 
           </Text>
           <Text fontWeight="bold" ml="auto">
               17 January 2024{' '}
           </Text>
       </Flex>
       <Flex align="center" mt="1">
-          <Text mr="auto">
+      <Text fontWeight="normal" mr="auto">
               Total voting escrow{' '}
           </Text>
-          <Text fontWeight="bold" ml="auto">
+          <Text ml="auto">
               21.81 veVRTK{' '}
           </Text>
       </Flex>
