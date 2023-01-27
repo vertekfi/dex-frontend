@@ -4,48 +4,17 @@ import {
 } from '~/apollo/generated/graphql-codegen-generated';
 import { TokenBase } from '~/lib/services/token/token-types';
 import { BeetsBox } from '~/components/box/BeetsBox';
-import {
-  Box,
-  BoxProps,
-  Flex,
-  Grid,
-  GridItem,
-  HStack,
-  Link,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-  useTheme,
-} from '@chakra-ui/react';
+import { Box, BoxProps, Flex, HStack, Link, Text } from '@chakra-ui/react';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import { useBoolean } from '@chakra-ui/hooks';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import numeral from 'numeral';
-import { IconDiscord } from '~/components/icons/IconDiscord';
-import { ExternalLink, Feather, Globe, MessageCircle, Mic } from 'react-feather';
-import { IconTelegram } from '~/components/icons/IconTelegram';
-import { IconTwitter } from '~/components/icons/IconTwitter';
-import { IconMedium } from '~/components/icons/IconMedium';
-import { Message } from 'postcss';
-import Card from '~/components/card/Card';
-import { CardRow } from '~/components/card/CardRow';
+import { ExternalLink, Globe } from 'react-feather';
 import DiscordIcon from '~/assets/icons/discord.svg';
 import TwitterIcon from '~/assets/icons/twitter.svg';
-import MediumIcon from '~/assets/icons/medium.svg';
-import GithubIcon from '~/assets/icons/github.svg';
-import { IconButton } from '@chakra-ui/react';
 import NextImage from 'next/image';
-import { etherscanGetAddressUrl, etherscanGetTokenUrl } from '~/lib/util/etherscan';
-import { addressShortDisplayName } from '~/lib/util/address';
+import { etherscanGetTokenUrl } from '~/lib/util/etherscan';
 import { PercentChangeBadge } from '~/components/badge/PercentChangeBadge';
-import CoingeckoLogo from '~/assets/images/coingecko.svg';
 import { Divider } from '@chakra-ui/layout';
-import Image from 'next/image';
 
 interface Props extends BoxProps {
   token: TokenBase;
@@ -109,9 +78,9 @@ export function PoolDetailTokenInfoCard({ token, price, data, dynamicData, ...re
       {hasLinks && <Divider mt="4" mb="4" />}
       {hasLinks && (
         <Flex>
-          <Link mr="3" href={`https://www.coingecko.com/en/coins/${token.address}`} target="_blank">
+          {/* <Link mr="3" href={`https://www.coingecko.com/en/coins/${token.address}`} target="_blank">
             <NextImage src={CoingeckoLogo} width="24" height="24" />
-          </Link>
+          </Link> */}
           {data?.websiteUrl && (
             <Box mr="3">
               <Link
