@@ -422,13 +422,13 @@ return (
                   </Text>
                 </Flex>
               </Box>
-
               <Button
                 onClick={handleOpenModal}
                 variant="stayblack"
+                _hover={{ boxShadow:'0 28px 12px rgba(0, 0, 0, 1)', borderColor:'white' }}
                 mb="4"
                 boxShadow="0 28px 12px rgba(0, 0, 0, 1)" 
-                width={{ base: '85%', md: '95%' }}
+                width={{ base: '85%', md: '90%' }}
               >
                 Preview
               </Button>
