@@ -52,8 +52,9 @@ export function VotingHeader() {
   });
 
   const { isConnected } = useUserAccount();
-  const { userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
+
   useEffect(() => {
     if (!loadingBalances && isConnected) {
       setUserPoolBalance({
@@ -72,6 +73,8 @@ export function VotingHeader() {
     if (isConnected && userLockInfo) {
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
+
+        console.log(bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString());
 
         const percentOwned = fNum2(
           bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
@@ -98,160 +101,171 @@ export function VotingHeader() {
     }
   }, [isConnected, userLockInfo]);
 
-return (
-<UserDataProvider>
-  <Grid
-    templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
-    paddingX={{ base: '0', md: '4', lg: '4' }}
-    paddingY={2}
-    gap="4"
-    justifyContent="center"
-    alignItems="center"
-  >
-  <Card
-  flexDirection="column" 
-  borderRadius="16px"
-  height="250"
-  padding="4"
-  marginTop="1"
-  boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-  css={{
-    transition: "transform 0.5s",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
-  }}
->
-    <Box height="full" 
-    width="full" 
-    flexDirection="column" 
-    display="flex" 
-    justifyContent="space-between" 
-    alignItems="center"
-    bg="vertek.slatepurple.900" borderRadius="md" 
-    boxShadow="2px 24px 12px 0px #000"
-    >
-      <VotingCardHeader>My VRTK-BNB </VotingCardHeader>
-      <Text>{userPoolBalance.usdValue}</Text>
-      <Text marginTop="-2rem">{userPoolBalance.balance}</Text>
-      <Button
-        as="a"
-        href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
-        variant="moistblack"
-        width={{ base: '50%', lg: '75%' }}
-        marginBottom="1rem"
-        boxShadow="0 0 10px #4A4AF6"
+  return (
+    <UserDataProvider>
+      <Grid
+        templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
+        paddingX={{ base: '0', md: '4', lg: '4' }}
+        paddingY={2}
+        gap="4"
+        justifyContent="center"
+        alignItems="center"
       >
-        Get VRTK-BNB
-      </Button>
-    </Box>
-  </Card>
-  
-  <Card
-  flexDirection="column" 
-  borderRadius="16px"
-  height="250"
-  padding="4"
-  marginTop="1"
-  boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-  css={{
-    transition: "transform 0.5s",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
-  }}
-  >
-    <Box height="full" 
-        width="full" 
-        flexDirection="column" 
-        display="flex" 
-        justifyContent="space-between" 
-        alignItems="center"
-        bg="vertek.slatepurple.900" borderRadius="md" 
-        boxShadow="2px 24px 12px 0px #000"
-    >
-        <VotingCardHeader>My locked VRTK-BNB</VotingCardHeader>
-        <Text >$0.00</Text>
-        <Text marginTop={{base: '-1rem', md:'-2rem'}}>{userLockInfo?.lockedAmount}</Text>
-        <Button variant="moistblack" 
-            marginBottom="1rem" 
-            width={{ base: '50%', lg: '75%' }}
-            boxShadow="0 0 10px #4A4AF6"
-            onClick={handleOpenModal}>
-          Lock VRTK-BNB
-        </Button>
-        {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
-    </Box>
-  </Card>
+        <Card
+          flexDirection="column"
+          borderRadius="16px"
+          height="250"
+          padding="4"
+          marginTop="1"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          css={{
+            transition: 'transform 0.5s',
+            '&:hover': {
+              transform: 'scale(1.02)',
+            },
+          }}
+        >
+          <Box
+            height="full"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 24px 12px 0px #000"
+          >
+            <VotingCardHeader>My VRTK-BNB </VotingCardHeader>
+            <Text>{userPoolBalance.usdValue}</Text>
+            <Text marginTop="-2rem">{userPoolBalance.balance}</Text>
+            <Button
+              as="a"
+              href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
+              variant="moistblack"
+              width={{ base: '50%', lg: '75%' }}
+              marginBottom="1rem"
+              boxShadow="0 0 10px #4A4AF6"
+            >
+              Get VRTK-BNB
+            </Button>
+          </Box>
+        </Card>
 
-  <Card
-  flexDirection="column" 
-  borderRadius="16px"
-  height="250"
-  padding="4"
-  marginTop="1"
-  boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-  css={{
-    transition: "transform 0.5s",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
-  }}
-  >
-    <Box height="full" 
-        width="full" 
-        flexDirection="column" 
-        display="flex" 
-        justifyContent="space-between" 
-        alignItems="center"
-        bg="vertek.slatepurple.900" borderRadius="md" 
-        boxShadow="2px 24px 12px 0px #000"
-    >
-        <VotingCardHeader>Locked until </VotingCardHeader>
-        <Text>{lockInfoDisplay.lockedUntilDate}</Text>
-        <Text marginTop="-2rem">{lockInfoDisplay.lockedUntilDays} days</Text>
-        <Button variant="moistblack" 
-            marginBottom="1rem"
-            boxShadow="0 0 10px #4A4AF6"
-            width={{ base: '50%', lg: '75%' }}
-            onClick={handleOpenModal}>
-          Update My Lock
-          <LockIcon ml="2" color="vertek.slate.200" />
-        </Button>
-      {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
-    </Box>
-  </Card>
+        <Card
+          flexDirection="column"
+          borderRadius="16px"
+          height="250"
+          padding="4"
+          marginTop="1"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          css={{
+            transition: 'transform 0.5s',
+            '&:hover': {
+              transform: 'scale(1.02)',
+            },
+          }}
+        >
+          <Box
+            height="full"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 24px 12px 0px #000"
+          >
+            <VotingCardHeader>My locked VRTK-BNB</VotingCardHeader>
+            <Text>$0.00</Text>
+            <Text marginTop={{ base: '-1rem', md: '-2rem' }}>{userLockInfo?.lockedAmount}</Text>
+            <Button
+              variant="moistblack"
+              marginBottom="1rem"
+              width={{ base: '50%', lg: '75%' }}
+              boxShadow="0 0 10px #4A4AF6"
+              onClick={handleOpenModal}
+            >
+              Lock VRTK-BNB
+            </Button>
+            {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
+          </Box>
+        </Card>
 
-  <Card
-  flexDirection="column" 
-  borderRadius="16px"
-  height="250"
-  padding="4"
-  marginTop="1"
-  boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-  css={{
-    transition: "transform 0.5s",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
-  }}
-  >
-    <Box 
-    height="full" 
-    width="full" 
-    flexDirection="column" 
-    display="flex" 
-    justifyContent="space-between" 
-    alignItems="center"
-    bg="vertek.slatepurple.900" borderRadius="md" 
-    boxShadow="2px 24px 12px 0px #000"
-    >
-        <VotingCardHeader>My veVRTK</VotingCardHeader>
-        <Text>{lockInfoDisplay.veBalance} shares</Text>
-        <Text  marginBottom="4rem">{lockInfoDisplay.percentOwned} percent owned</Text>
-    </Box>
-  </Card> 
-</Grid>
-</UserDataProvider>
-);
+        <Card
+          flexDirection="column"
+          borderRadius="16px"
+          height="250"
+          padding="4"
+          marginTop="1"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          css={{
+            transition: 'transform 0.5s',
+            '&:hover': {
+              transform: 'scale(1.02)',
+            },
+          }}
+        >
+          <Box
+            height="full"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 24px 12px 0px #000"
+          >
+            <VotingCardHeader>Locked until </VotingCardHeader>
+            <Text>{lockInfoDisplay.lockedUntilDate}</Text>
+            <Text marginTop="-2rem">{lockInfoDisplay.lockedUntilDays} days</Text>
+            <Button
+              variant="moistblack"
+              marginBottom="1rem"
+              boxShadow="0 0 10px #4A4AF6"
+              width={{ base: '50%', lg: '75%' }}
+              onClick={handleOpenModal}
+            >
+              Update My Lock
+              <LockIcon ml="2" color="vertek.slate.200" />
+            </Button>
+            {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
+          </Box>
+        </Card>
+
+        <Card
+          flexDirection="column"
+          borderRadius="16px"
+          height="250"
+          padding="4"
+          marginTop="1"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+          css={{
+            transition: 'transform 0.5s',
+            '&:hover': {
+              transform: 'scale(1.02)',
+            },
+          }}
+        >
+          <Box
+            height="full"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 24px 12px 0px #000"
+          >
+            <VotingCardHeader>My veVRTK</VotingCardHeader>
+            <Text>{lockInfoDisplay.veBalance} shares</Text>
+            <Text marginBottom="4rem">{lockInfoDisplay.percentOwned} percent owned</Text>
+          </Box>
+        </Card>
+      </Grid>
+    </UserDataProvider>
+  );
 }
