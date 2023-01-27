@@ -22,7 +22,7 @@ interface Props {
 const VotingCardHeader = styled.p`
   font-size: 1.3rem;
   text-align: center;
-  color: #4a4af6;
+  color: #C1C1D1;
   font-weight: bold;
   text-shadow: 0 0 12px #000;
 `;
