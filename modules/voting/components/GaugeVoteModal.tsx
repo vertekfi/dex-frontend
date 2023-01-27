@@ -141,6 +141,7 @@ export function GaugeVoteModal(props: Props) {
         },
       });
     }
+    onClose(); 
     
 
   }
@@ -150,7 +151,6 @@ export function GaugeVoteModal(props: Props) {
       <Button variant="stayblack" width={{ base: '90%', lg: '130px' }} onClick={onOpen}>
         Vote
       </Button>
-
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <BeetsModalContent bgColor="vertek.slate.900">
           <BeetsModalHeader mt="2" >
@@ -213,6 +213,8 @@ export function GaugeVoteModal(props: Props) {
           </HStack>
         </BeetsModalContent>
       </Modal>
+      {/* Need an "update vote" function. this function should be clickable once you've already submitted a vote. There is an 
+      edit vote here, i know that for a fact, but it popped up late  */}
       
     </>
   );
