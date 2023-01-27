@@ -50,8 +50,6 @@ export function VotingContainer() {
     refetch: refetchVotingGauges,
   } = useVotingGauges();
 
-  console.log(votingGauges);
-
   const { isConnected } = useUserAccount();
   const { data: userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();

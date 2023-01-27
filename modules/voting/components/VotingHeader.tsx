@@ -16,17 +16,15 @@ import { LockIcon } from '@chakra-ui/icons';
 import { LockForm } from './lock/LockForm';
 import Card from '~/components/card/Card';
 
-
 interface Props {
   pool: GqlPoolUnion;
 }
 const VotingCardHeader = styled.p`
   font-size: 1.3rem;
   text-align: center;
-  color: #C1C1D1;
+  color: #c1c1d1;
   font-weight: bold;
   text-shadow: 0 0 12px #000;
-
 `;
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,6 +73,8 @@ export function VotingHeader() {
     if (isConnected && userLockInfo) {
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
+
+        console.log(bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString());
 
         const percentOwned = fNum2(
           bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),

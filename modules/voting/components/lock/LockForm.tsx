@@ -41,11 +41,6 @@ interface Props {
   onClose: () => void;
 }
 
-const StyledGridItem = styled(GridItem)({
-
-});
-
-
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
