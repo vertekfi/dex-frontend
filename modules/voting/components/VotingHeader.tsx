@@ -16,6 +16,7 @@ import { LockIcon } from '@chakra-ui/icons';
 import { LockForm } from './lock/LockForm';
 import Card from '~/components/card/Card';
 
+
 interface Props {
   pool: GqlPoolUnion;
 }
@@ -25,6 +26,7 @@ const VotingCardHeader = styled.p`
   color: #C1C1D1;
   font-weight: bold;
   text-shadow: 0 0 12px #000;
+
 `;
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);

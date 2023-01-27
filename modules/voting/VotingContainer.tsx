@@ -117,12 +117,15 @@ export function VotingContainer() {
   }
 
   return (
-    <UserDataProvider>
-      <VotingHeader />
-      <VotingSubheader />
-      <Skeleton isLoaded={!isLoadingGauges}>
-        <GaugeList votingGauges={votingGauges} />
-      </Skeleton>
-    </UserDataProvider>
+  <UserDataProvider>
+        <VotingHeader />
+        
+        <VotingSubheader />
+        
+        <Skeleton isLoaded={!isLoadingGauges}>
+          <GaugeList votingGauges={votingGauges} />
+        </Skeleton>
+
+  </UserDataProvider>
   );
 }

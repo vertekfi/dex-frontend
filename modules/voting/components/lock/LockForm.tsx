@@ -86,7 +86,7 @@ export function LockForm(props: Props) {
       <ModalOverlay
         bg={`radial-gradient(circle at center, 
           #4132D0 0%, 
-          rgba(0,0,0, 0.8) 70% )`}
+          rgba(0,0,0, 0.8) 65% )`}
       />
       <ModalContent
         minW={{ base: 'auto', md: '95vw' }}
