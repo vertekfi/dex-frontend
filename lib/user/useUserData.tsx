@@ -1,5 +1,4 @@
 import { useGetUserDataQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { useGetTokens } from '~/lib/global/useToken';
 import { sum } from 'lodash';
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { useUserAccount } from '~/lib/user/useUserAccount';

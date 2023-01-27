@@ -33,13 +33,11 @@ export function useLockEndDate(veBalLockInfo?: VeBalLockInfo) {
 
   const maxLockEndDateTimestamp = getMaxLockEndDateTimestamp(todaysDate);
 
-  const { lockState } = useLockState();
+  const { lockEndDate } = useLockState();
 
   useEffect(() => {
-    lockState.lockEndDate === ''
-      ? setLockEndDateTimestamp(0)
-      : startOfDay(new Date(lockState.lockEndDate)).getTime();
-  }, [lockState]);
+    lockEndDate === '' ? setLockEndDateTimestamp(0) : startOfDay(new Date(lockEndDate)).getTime();
+  }, [lockEndDate]);
 
   useEffect(() => {
     if (lockEndDateTimestamp && lockEndDateTimestamp !== 0) {
