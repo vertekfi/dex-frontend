@@ -34,11 +34,17 @@ import { useEffect } from 'react';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
+import styled from '@emotion/styled';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const StyledGridItem = styled(GridItem)({
+
+});
+
 
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -86,7 +92,7 @@ export function LockForm(props: Props) {
       <ModalOverlay
         bg={`radial-gradient(circle at center, 
           #4132D0 0%, 
-          rgba(0,0,0, 0.8) 65% )`}
+          rgba(0,0,0, 0.8) 70% )`}
       />
       <ModalContent
         minW={{ base: 'auto', md: '95vw' }}
