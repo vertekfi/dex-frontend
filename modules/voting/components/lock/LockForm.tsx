@@ -89,7 +89,7 @@ return (
       bg=
       {`radial-gradient(circle at center, 
           #4132D0 0%, 
-          rgba(0,0,0, 0.8) 70% )`}
+          rgba(0,0,0, 0.8) 65% )`}
       />
   <ModalContent
     minW={{ base: 'auto', md: '95vw' }}
@@ -130,8 +130,8 @@ return (
           m={{ base:'2', md:'2'}}
           mt={{ base:'auto', md:'24'}}
           backdropFilter="blur(12px)"
-          bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
-          borderRadius="12px">
+          bgColor="vertek.slate.900"
+          borderRadius="16px">
           <Box 
               padding={{ base: '2', md: '2' }} 
               borderRadius="12px" mb="6">
@@ -169,7 +169,7 @@ return (
                   borderWidth="1px"
                   width="100%"
                   height="2.2rem"
-                  boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
+                  boxShadow="0 0 12px rgba(0, 0, 0, 1)" 
                 >
                   Get VRTK-BNB
                 </Button>
@@ -179,7 +179,7 @@ return (
             padding="2"
             borderRadius="12px"
             mb="6"
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+            bgColor="vertek.slate.900"
           >
             <Text fontSize="1rem" mr="auto"></Text>
               <Accordion allowToggle padding={1}>
@@ -209,14 +209,14 @@ return (
             boxShadow={{ base: 'none', md: '0 12px 12px #000' }}
             width={{ base: '90%', lg: 'auto' }}
             m={{ base: '2', md: '2' }}
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+            bgColor="vertek.slate.900"
             borderRadius="12px"
           >
             <Box
               padding="2"
               borderRadius="12px"
               mb="6"
-              bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)"
+              bgColor="vertek.slate.900"
             >
               <Text
                 align="left"
@@ -381,7 +381,7 @@ bgColor="black" borderRadius="12px" mb="6">
                 variant="stayblack"
                 mb="4"
                 boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
-                width={{ base: '90%', lg: '100%' }}
+                width={{ base: '85%', lg: '95%' }}
               >
                 Preview
               </Button>
@@ -396,8 +396,8 @@ bgColor="black" borderRadius="12px" mb="6">
             height={{ base:'auto', lg:'50%'}}
             m={{ base:'2', md:'2'}}
             mt={{ base:'auto', md:'24'}}
-            backdropFilter="blur(12px)"
-            bgGradient="linear-gradient(90deg, #302B84 0%, #362BA8 80%, #4132D0 100%)" 
+
+            bgColor="vertek.slate.900"
             borderRadius="12px">
             <Box 
               padding={{ base: '2', md: '2' }} 

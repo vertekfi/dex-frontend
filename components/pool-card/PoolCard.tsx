@@ -58,7 +58,10 @@ export function PoolCard({ pool, ...rest }: Props) {
         </NextLinkOverlay>
     </Box>
   </Box>
-<Box height="full" marginTop="4" bg="vertek.slatepurple.900" 
+<Box 
+height="full" 
+marginTop="4" 
+bg="vertek.slatepurple.900" 
 borderRadius="md" 
 boxShadow="2px 24px 12px 0px #000"
 >
