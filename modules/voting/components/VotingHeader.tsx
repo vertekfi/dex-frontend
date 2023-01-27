@@ -54,7 +54,7 @@ export function VotingHeader() {
   });
 
   const { isConnected } = useUserAccount();
-  const { userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
   useEffect(() => {
     if (!loadingBalances && isConnected) {
