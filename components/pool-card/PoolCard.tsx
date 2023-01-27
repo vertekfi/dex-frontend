@@ -49,7 +49,7 @@ export function PoolCard({ pool, ...rest }: Props) {
         <NextLinkOverlay href={`pool/${pool.id}`}>
             <Text  
             fontSize="1.3rem" 
-            color="vertek.neonpurple.500"
+            color="gray.100"
             textAlign="center" 
             fontWeight="bold" 
             noOfLines={1}>
@@ -77,7 +77,7 @@ boxShadow="2px 24px 12px 0px #000"
               textProps={{ fontSize: '24px', fontWeight: 'normal', mr: '0', lineHeight: '32px' }}
               data={pool.dynamicData.apr}/>
         <Text 
-          color="slate.300" 
+          color="gray.100" 
           textAlign="center" 
           fontSize="18px" 
           lineHeight="24px" >
