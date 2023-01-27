@@ -87,8 +87,6 @@ export function LockEndDate(props: Props) {
     return format(date, INPUT_DATE_FORMAT);
   }
 
-  function getDateOptions() {}
-
   return (
     <Box
       display="flex"
@@ -125,13 +123,14 @@ export function LockEndDate(props: Props) {
           justifyContent="space-between"
           display="flex"
         >
-          {lockDates?.map((lockDate) => {
-            return (
-              <Button variant="stayblacklock" onClick={lockDate.action}>
-                {lockDate.label}
-              </Button>
-            );
-          })}
+          {props.minLockEndDateTimestamp < props.maxLockEndDateTimestamp &&
+            lockDates?.map((lockDate, i) => {
+              return (
+                <Button key={i} variant="stayblacklock" onClick={lockDate.action}>
+                  {lockDate.label}
+                </Button>
+              );
+            })}
         </Box>
       </FormControl>
     </Box>

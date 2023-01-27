@@ -11,26 +11,57 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { BeetsModalHeader, BeetsModalHeadline } from '~/components/modal/BeetsModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
-import { LockType } from './types';
+import { LockTitles, LockType } from './types';
 import { TokenInfo } from '~/modules/claim/types';
+import { useLockState } from './lib/useLockState';
+import { useVeBalQuery } from '../../lib/useVeBalQuery';
 
 type Props = {
   //  lockablePool: Pool;
   // lockablePoolTokenInfo: TokenInfo;
   // lockAmount: string;
   // lockEndDate: string;
-  // lockType: LockType[];
-  // veBalLockInfo: VeBalLockInfo;
+  lockType: LockType[];
+  veBalLockInfo?: VeBalLockInfo;
   // totalLpTokens: string;
   isOpen: boolean;
   onClose: () => void;
 };
 
 export function LockPreview(props: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => setIsModalOpen(true);
+  const [title, setTitle] = useState<string>();
+  const [lockConfirmed, setLockConfirmed] = useState<boolean>();
+
+  const { resetLockState } = useLockState();
+  const { refetch: refetchLockInfo } = useVeBalQuery();
+
+  useEffect(() => {
+    if (props.lockType.length === 1) {
+      setTitle(
+        lockConfirmed
+          ? LockTitles[props.lockType[0]].confirmed
+          : LockTitles[props.lockType[0]].default,
+      );
+    } else {
+      setTitle(
+        lockConfirmed
+          ? LockTitles[LockType.CREATE_LOCK].confirmed
+          : LockTitles[LockType.CREATE_LOCK].default,
+      );
+    }
+  }, [props.lockType]);
+
+  function handleClose() {
+    props.onClose();
+  }
+
+  function handleSuccess() {
+    setLockConfirmed(true);
+    refetchLockInfo();
+    resetLockState();
+  }
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">

@@ -1,7 +1,6 @@
 import { Text, GridItem, Box, Button, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { FormControl } from '@chakra-ui/react';
-import { LockPreview } from './LockPreview';
+import { LockPreview } from './LockPreviewModal';
 import 'react-datepicker/dist/react-datepicker.css';
 import { networkConfig } from '~/lib/config/network-config';
 import { expectedVeBal, useVeVRTK } from '../../lib/useVeVRTK';
@@ -11,7 +10,6 @@ import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useLockEndDate } from './lib/useLockEndDate';
 import { LockType } from './types';
 import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
 import { LockAmount } from './LockAmount';
 import { useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { bnum } from '~/lib/util/big-number.utils';
@@ -26,10 +24,9 @@ interface Props {
 
 export function LockFormInner(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [submissionDisabled, setSubmissionDisabled] = useState<boolean>();
   const [expectedVeBalAmount, setExpectedVeBalAmount] = useState<string>();
-  const [lockType, setLockType] = useState<LockType>();
+  const [lockType, setLockType] = useState<LockType[]>([]);
 
   const { veBalTokenInfo } = useVeVRTK();
   const { lockEndDate, lockAmount } = useLockState();
@@ -50,9 +47,26 @@ export function LockFormInner(props: Props) {
     },
   });
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  useEffect(() => {
+    if (props.veBalLockInfo?.hasExistingLock && !props.veBalLockInfo?.isExpired) {
+      if (isIncreasedLockAmount && isExtendedLockEndDate) {
+        setLockType([LockType.INCREASE_LOCK, LockType.EXTEND_LOCK]);
+      } else if (isExtendedLockEndDate) {
+        setLockType([LockType.EXTEND_LOCK]);
+      } else if (isIncreasedLockAmount) {
+        setLockType([LockType.INCREASE_LOCK]);
+      } else {
+        setLockType([LockType.INCREASE_LOCK]);
+      }
+    }
+  }, [props.veBalLockInfo]);
 
   useEffect(() => {
+    if (submissionDisabled) {
+      setExpectedVeBalAmount('0');
+      return;
+    }
+
     if (totalLpTokens && totalLpTokens) {
       setExpectedVeBalAmount(expectedVeBal(totalLpTokens, lockEndDate));
     }
@@ -142,7 +156,7 @@ export function LockFormInner(props: Props) {
         </Flex>
       </Box>
       <Button
-        onClick={handleOpenModal}
+        onClick={handleShowPreviewModal}
         variant="stayblack"
         _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
         mb="4"
@@ -151,7 +165,14 @@ export function LockFormInner(props: Props) {
       >
         Preview
       </Button>
-      {isModalOpen && <LockPreview isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <LockPreview
+          isOpen={isModalOpen}
+          onClose={handleClosePreviewModal}
+          lockType={lockType}
+          veBalLockInfo={props.veBalLockInfo}
+        />
+      )}
     </GridItem>
   );
 }

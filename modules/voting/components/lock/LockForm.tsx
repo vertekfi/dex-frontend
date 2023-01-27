@@ -32,7 +32,7 @@ import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { useVeVRTK } from '../../lib/useVeVRTK';
 import { LockFormInner } from './LockFormInner';
-import { LockPreview } from './LockPreview';
+import { LockPreview } from './LockPreviewModal';
 import { nextThursday } from 'date-fns';
 import { MyVeVRTK } from '../MyVeVRTK';
 

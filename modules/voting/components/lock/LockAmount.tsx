@@ -27,11 +27,6 @@ export function LockAmount(props: Props) {
     }
   }, [props.lockablePool]);
 
-  const setAmountIn = (amount: string) => {
-    console.log(amount);
-    setLockAmount(amount);
-  };
-
   return (
     <>
       <div>
@@ -42,7 +37,7 @@ export function LockAmount(props: Props) {
             name="voteWeight"
             type="number"
             value={lockAmount}
-            onChange={(event) => setAmountIn(event.target.value)}
+            onChange={(event) => setLockAmount(event.target.value)}
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
