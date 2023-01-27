@@ -94,6 +94,7 @@ export function useSubmitTransaction({
         });
       } catch {
         //TODO: need to handle this gracefully, can happen when user has too many recent transactions
+        console.error('addRecentTransaction failed');
       }
 
       txPendingVar(true);

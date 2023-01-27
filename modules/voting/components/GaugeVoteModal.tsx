@@ -12,7 +12,9 @@ import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
 import { bnum, scale } from '~/lib/util/big-number.utils';
 import { useVeVRTK } from '../lib/useVeVRTK';
-import gaugeControllerService from '~/lib/services/staking/gauge-controller.service';
+import { WalletError } from '~/lib/services/web3/web3.service';
+import { useGaugeVoting } from '../lib/useGaugeVoting';
+import { BigNumber } from 'ethers';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -55,9 +57,11 @@ export function GaugeVoteModal(props: Props) {
   const [remainingVotes, setRemainingVotes] = useState<string>('');
   const [voteLockedUntilText, setVoteLockedUntilText] = useState<string>('');
 
-  const [voteError, setVoteError] = useState<boolean>(false);
+  const [voteError, setVoteError] = useState<{ title: string; description: string }>();
   const [voteWarning, setVoteWarning] = useState<boolean>(false);
   const [veBalVoteOverLimitWarning, setVeBalVoteOverLimitWarning] = useState<boolean>(false);
+  const [voteButtonDisabled, setVoteButtonDisabled] = useState<boolean>();
+  const [voteInputDisabled, setVoteInputDisabled] = useState<boolean>();
 
   const [votedToRecentlyWarning, setVotedToRecentlyWarning] = useState<{
     title: string;
@@ -72,6 +76,7 @@ export function GaugeVoteModal(props: Props) {
   });
 
   const { veBalBalance } = useVeVRTK();
+  const { voteForGauge } = useGaugeVoting();
 
   // const currentWeight = computed(() => props.gauge.userVotes);
   // const currentWeightNormalized = computed(() => scale(bnum(currentWeight.value), -2).toString());
@@ -82,6 +87,15 @@ export function GaugeVoteModal(props: Props) {
     setCurrentWeightNormalized(scale(bnum(currentWeight), -2).toString());
     setHasVotes(bnum(currentWeight).gt(0));
   }, [props.gauge.userVotes]);
+
+  useEffect(() => {
+    const voteDisabled = !(!!voteWarning || !!voteError || !hasEnoughVotes);
+    setVoteButtonDisabled(voteDisabled);
+
+    if (!!voteError) {
+      setVoteInputDisabled(true);
+    }
+  }, [voteWarning, voteError, hasEnoughVotes]);
 
   useEffect(() => {
     if (hasVotes) {
@@ -105,66 +119,29 @@ export function GaugeVoteModal(props: Props) {
   }
 
   async function submitVote() {
+    if (!voteWeight) {
+      return;
+    }
+    console.log(voteWeight);
     const totalVoteShares = scale(voteWeight, 2).toString();
+    console.log('submitting user vote weight of: ' + totalVoteShares);
 
     try {
-      setVoteState({
-        ...voteState,
-        init: true,
-      });
-      const tx = await gaugeControllerService.voteForGaugeWeights(
-        props.gauge.address,
-        BigNumber.from(totalVoteShares),
-      );
-      voteState.init = false;
-      voteState.confirming = true;
-      handleTransaction(tx);
+      voteForGauge(props.gauge.address, BigNumber.from(totalVoteShares));
     } catch (e) {
       console.error(e);
       const error = e as WalletError;
-      voteState.init = false;
-      voteState.confirming = false;
-      voteState.error = {
-        title: 'Vote failed',
-        description: error.message,
-      };
+      setVoteState({
+        ...voteState,
+        init: false,
+        confirming: false,
+        error: {
+          title: 'Vote failed',
+          description: error.message,
+        },
+      });
     }
   }
-
-  // async function handleTransaction(tx) {
-  //   addTransaction({
-  //     id: tx.hash,
-  //     type: 'tx',
-  //     action: 'voteForGauge',
-  //     summary: t('veBAL.liquidityMining.popover.voteForGauge', [
-  //       fNum2(scale(voteWeight, -2).toString(), FNumFormats.percent),
-  //       props.gauge.pool.symbol
-  //     ]),
-  //     details: {
-  //       voteWeight: voteWeight
-  //     }
-  //   });
-
-  //   txListener(tx, {
-  //     onTxConfirmed: async (receipt: TransactionReceipt) => {
-  //       voteState.receipt = receipt;
-
-  //       const confirmedAt = await getTxConfirmedAt(receipt);
-  //       voteState.confirmedAt = dateTimeLabelFor(confirmedAt);
-  //       voteState.confirmed = true;
-  //       voteState.confirming = false;
-  //       emit('success');
-  //     },
-  //     onTxFailed: () => {
-  //       console.error('Vote failed');
-  //       voteState.error = {
-  //         title: 'Vote Failed',
-  //         description: 'Vote failed for an unknown reason'
-  //       };
-  //       voteState.confirming = false;
-  //     }
-  //   });
-  // }
 
   return (
     <>
@@ -173,8 +150,6 @@ export function GaugeVoteModal(props: Props) {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
-        {/* <ModalOverlay bg="vertek.slatepurple.900" /> */}
-
         <BeetsModalContent bg="black" paddingY="2rem" borderRadius="12px">
           <BeetsModalHeader>
             <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
@@ -201,12 +176,10 @@ export function GaugeVoteModal(props: Props) {
             </Box>
             <div>
               <FormControl>
-                {/* <FormLabel color="white">%</FormLabel> */}
                 <Input
                   id="voteWeight"
                   name="voteWeight"
                   type="number"
-                  // value={voteWeight}
                   onChange={(event) => setVoteWeight(event.target.value)}
                   autoComplete="off"
                   autoCorrect="off"
@@ -214,13 +187,12 @@ export function GaugeVoteModal(props: Props) {
                   color="grey.100"
                   step="any"
                   placeholder="0%"
-                  // validateOn="input"
-                  // rules={inputRules}
-                  // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
+                  disabled={voteInputDisabled}
                   size="md"
                   autoFocus
                 />
               </FormControl>
+              {!!voteError && <Box>{voteError.description}</Box>}
             </div>
           </BeetsModalBody>
 
@@ -228,8 +200,13 @@ export function GaugeVoteModal(props: Props) {
             <Button width="40%" variant="verteklight" onClick={onClose}>
               Cancel
             </Button>
-            <Button width="40%" variant="vertekdark">
-              Save
+            <Button
+              width="40%"
+              variant="vertekdark"
+              disabled={voteButtonDisabled}
+              onClick={submitVote}
+            >
+              {voteButtonText}
             </Button>
           </HStack>
         </BeetsModalContent>

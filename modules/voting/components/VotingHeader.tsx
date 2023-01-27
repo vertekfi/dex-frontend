@@ -74,8 +74,6 @@ export function VotingHeader() {
       if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
         setHasLock(true);
 
-        console.log(bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString());
-
         const percentOwned = fNum2(
           bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
           {

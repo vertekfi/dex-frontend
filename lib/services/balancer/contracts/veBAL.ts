@@ -49,8 +49,6 @@ export class VeBAL {
   formatLockInfo(lockInfo: VeBalLockInfoResult) {
     const [lockedAmount, lockedEndDate] = lockInfo.locked;
 
-    console.log(lockedAmount);
-
     const hasExistingLock = lockedAmount.gt(0);
     const lockedEndDateNormalised = toJsTimestamp(lockedEndDate.toNumber());
     const isExpired = hasExistingLock && Date.now() > lockedEndDateNormalised;
