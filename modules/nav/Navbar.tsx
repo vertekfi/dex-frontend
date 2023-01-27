@@ -105,10 +105,16 @@ export function Navbar({ scrollY }: Props) {
                 text="Claim"
                 mr="5"
               />
+              <NavbarLink
+                href={'/bridge'}
+                selected={router.asPath === '/bridge'}
+                text="Bridge"
+                mr="5"
+              />
                <NavbarLink
                 href={'/nft'}
                 selected={router.asPath === '/nft'}
-                text="NFT"
+                text="NFT Marketplace"
                 mr="5"
               />
               <NavbarLink
