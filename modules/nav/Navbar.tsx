@@ -44,15 +44,15 @@ export function Navbar({ scrollY }: Props) {
         padding="24px, 40px, 0px, 40px"
       >
         <Flex px={{ base: '4', xl: '8' }} py="0" alignItems="center">
-          <motion.div
+          {/* <motion.div
             style={{ opacity, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           >
                         <Box width="full" height="full" bg="transparent" shadow="xl" />
 
-          </motion.div>
+          </motion.div> */}
           <Flex
             alignItems="center"
-            mr="6"
+            mr="4"
             zIndex="2"
             cursor="pointer"
             bgColor="transparent"
@@ -74,16 +74,16 @@ export function Navbar({ scrollY }: Props) {
                 href={'/'}
                 selected={router.asPath.endsWith('/')}
                 text="Home"
-                mr="5"
+                mr="3" 
               ></NavbarLink>
 
               <NavbarLink
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
                 text="Earn"
-                mr="5"
+                mr="3" 
               ></NavbarLink>
-              <NavbarLink href={'/swap'} selected={router.asPath === '/swap'} text="Swap" mr="5" />
+              <NavbarLink href={'/swap'} selected={router.asPath === '/swap'} text="Swap" mr="3"  />
               {/* {networkConfig.stakeUrl && (
                 <NavbarLink href={networkConfig.stakeUrl} text="Stake" mr={5} />
               )} */}
@@ -91,37 +91,38 @@ export function Navbar({ scrollY }: Props) {
                 href={'/staking'}
                 selected={router.asPath === '/staking'}
                 text="Stake"
-                mr="5"
+                mr="3" 
               />
               <NavbarLink
                 href={'/voting'}
                 selected={router.asPath === '/voting'}
                 text="Vote"
-                mr="5"
+                mr="3" 
               />
               <NavbarLink
                 href={'/claim'}
                 selected={router.asPath === '/claim'}
                 text="Claim"
-                mr="5"
+                mr="3" 
               />
               <NavbarLink
                 href={'/bridge'}
                 selected={router.asPath === '/bridge'}
                 text="Bridge"
-                mr="5"
+                mr="3" 
               />
                <NavbarLink
                 href={'/nft'}
                 selected={router.asPath === '/nft'}
                 text="NFT Marketplace"
-                mr="5"
+                textAlign="center"
+                mr="3" 
               />
               <NavbarLink
                 href={'/perpetuals'}
                 selected={router.asPath === '/perpetuals'}
                 text="Perpetuals"
-                mr="5"
+                mr="3" 
               />
               {/* {networkConfig.launchUrl && (
                 <NavbarLink href={networkConfig.launchUrl} text="Claim" mr={5} />
@@ -130,7 +131,7 @@ export function Navbar({ scrollY }: Props) {
               {/*<NavbarAdditionalLinksMenu />*/}
             </Flex>
           </Box>
-          <FadeInOutBox mr="5" isVisible={isConnected}>
+          <FadeInOutBox mr="3"  isVisible={isConnected}>
             <HStack spacing="3">
               <NetworkSelectorPopover>
                 <Button
