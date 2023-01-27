@@ -20,7 +20,7 @@ export function VotingSubheader() {
     refetch: refetchVotingGauges,
   } = useVotingGauges();
 
-  const { userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo } = useUserVeLockInfoQuery();
 
   useEffect(() => {
     if (unallocatedVoteWeight) {
