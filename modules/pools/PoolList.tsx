@@ -14,7 +14,7 @@ import { GqlPoolMinimalFragment } from '~/apollo/generated/graphql-codegen-gener
 import { PoolListFooter } from './components/PoolListFooter';
 import { CreateForm } from '../../components/create/CreateForm'; 
 import { useState } from 'react';
-
+import { PoolCard } from '~/components/pool-card/PoolCard';
 function PoolList() {
   const { getToken } = useGetTokens();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,15 +71,11 @@ function PoolList() {
       <PoolListTableHeader />
       {poolsToRender.map((item, index) => (
       <PoolListItem
+        padding="1"
         key={index}
         pool={item}
         userBalance={`${usdBalanceForPool(item.id)}`}
-        showUserBalance={showMyInvestments}
-        borderBottomColor="vertek.slatepurple.600"
-        borderBottomWidth={index === pools.length - 1 ? 0 : 1}
-        boxShadow={{ lg: 'none'}}
-        bg=""
-        className="moistmobilecard"
+        showUserBalance={showMyInvestments}        
         tokens={item.allTokens
           .filter((token) => !token.isNested && !token.isPhantomBpt)
           .map((token) => ({

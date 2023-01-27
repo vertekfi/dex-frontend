@@ -58,7 +58,7 @@ justifyContent="flex-start"
 alignItems="flex-start"
 colSpan={{ sm: 1, lg: 2 }}
 flexDirection="column"
-borderRadius={{ base: '42px', lg:'16px'}}
+borderRadius={{ base: '16px', lg:'16px'}}
 padding={{ base:'4', lg:'4' }}
 >
 <Text 
@@ -82,12 +82,11 @@ padding={{ base:'4', lg:'4' }}
     Core Pools.
 </Text>
 <Button  
-    variant="stayblack"
-    boxShadow="0px 12px 2px #000"
-    fontSize={{ base:'0.9rem', lg:'0.9rem'}}
-    width="70%"
-    margin="3"
-    gap="8px"
+    variant="moistblack" 
+    marginBottom="1rem" 
+    width={{ base: '75%', lg: '75%' }}
+    boxShadow="0px 2px 2px 4px #000"
+    fontSize={{ base:'0.9rem', lg:'1rem'}}
     mt="3"
     alignSelf="center"
     onClick={handleOpenModal}

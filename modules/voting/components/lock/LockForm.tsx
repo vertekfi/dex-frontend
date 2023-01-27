@@ -169,7 +169,7 @@ return (
                   borderWidth="1px"
                   width="100%"
                   height="2.2rem"
-                  boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
+                  boxShadow="0 0 12px rgba(0, 0, 0, 1)" 
                 >
                   Get VRTK-BNB
                 </Button>
@@ -381,7 +381,7 @@ bgColor="black" borderRadius="12px" mb="6">
                 variant="stayblack"
                 mb="4"
                 boxShadow="0 12px 12px rgba(0, 0, 0, 1)" 
-                width={{ base: '90%', lg: '100%' }}
+                width={{ base: '85%', lg: '95%' }}
               >
                 Preview
               </Button>
