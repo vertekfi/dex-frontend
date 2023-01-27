@@ -137,7 +137,6 @@ return (
         m={{ base:'0', md:'2'}}
         mt={{ base:'2', md:'12'}}
         bgColor="vertek.slate.900"
-        
         borderRadius="16px">
           <Text
             align="left"
@@ -188,7 +187,6 @@ return (
                     borderWidth="1px"
                     width="90%"
                     height="2.2rem"
-                    
                   >
                     Get VRTK-BNB
                   </Button>
@@ -219,7 +217,6 @@ return (
                       marginY="4" 
                       borderRadius="16px"
                       boxShadow="2px 12px 12px 0px #000"
-
                       >
                         <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
                           1. Invest in the VRTK-BNB pool. 
@@ -240,13 +237,11 @@ return (
                   </Accordion>
                 </Box>
       </GridItem>
-          
-          
+
       <GridItem
         width={{ base: '90%', md: 'auto' }}
         mt={{ base: '3rem', md:'auto'}}
         bgColor="vertek.slate.900"
-       
         borderRadius="16px"
         boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
       >
@@ -314,8 +309,7 @@ return (
               boxShadow="2px 24px 12px 0px #000"
               borderRadius="16px" 
               flexDirection="column" 
-          >
-           
+            >
               <Text
                 align="left"
                 mb="0"
@@ -425,7 +419,7 @@ return (
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
                       NEXT 
-                 </Text>
+                  </Text>
                 </Flex>
               </Box>
 
@@ -441,72 +435,70 @@ return (
               {isModalOpen && (
                 <LockPreview isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
               )}
-          </GridItem>
+      </GridItem>
           
-          
-          
-          <GridItem
-            
-            width={{base:'90%', md:'auto'}}
-            height={{ base:'auto', md:'40%'}}
-            m={{ base:'2', md:'2'}}
-            padding="2"
-            mt={{ base:'6', md:'24'}}
-            mb={{ base:'6rem', md:'auto' }}
-            bgColor="vertek.slate.900"
-            borderRadius="12px">
-               <Text
-                align="left"
-                padding="1"
-                mb="2"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Governance -- veVRTK
-                </Text>
-            <Box 
-              display="flex" 
-              justifyContent="center" 
-              alignItems="space-between" 
-              paddingX="1" paddingY="4" mx="1" my="4"
-              bgColor="vertek.slatepurple.900"
-              boxShadow="2px 24px 12px 0px #000"
-              borderRadius="16px" 
-              flexDirection="column" 
+      <GridItem
+        
+        width={{base:'90%', md:'auto'}}
+        height={{ base:'auto', md:'40%'}}
+        m={{ base:'2', md:'2'}}
+        padding="2"
+        mt={{ base:'6', md:'24'}}
+        mb={{ base:'6rem', md:'auto' }}
+        bgColor="vertek.slate.900"
+        borderRadius="12px">
+            <Text
+            align="left"
+            padding="1"
+            mb="2"
+            fontWeight="bold"
+            color="white"
+            fontSize="1.2rem"
           >
-             
-              <Flex align="center" mt="3">
-                  <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                    My veVRTK
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                  {lockInfoDisplay.veBalance} shares 
-                  </Text>
-              </Flex>
+            Governance -- veVRTK
+            </Text>
+        <Box 
+          display="flex" 
+          justifyContent="center" 
+          alignItems="space-between" 
+          paddingX="1" paddingY="4" mx="1" my="4"
+          bgColor="vertek.slatepurple.900"
+          boxShadow="2px 24px 12px 0px #000"
+          borderRadius="16px" 
+          flexDirection="column" 
+      >
+          
+          <Flex align="center" mt="3">
+              <Text fontWeight="bold" fontSize=".9rem" mr="auto">
+                My veVRTK
+              </Text>
+              <Text fontSize="1rem" ml="auto">
+              {lockInfoDisplay.veBalance} shares 
+              </Text>
+          </Flex>
 
-              <Flex align="center" mt="2">
-              <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                          My share of total veVRTK
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                  {lockInfoDisplay.percentOwned}%
-                  </Text>
-              </Flex>
-              <Flex align="center" mt="2">
-              <Text fontWeight="bold" fontSize=".9rem" mr="auto">
-                          Locked until 
-                  </Text>
-                  <Text fontSize="1rem" ml="auto">
-                          {lockInfoDisplay.lockedUntilDays}
-                  </Text>
-              </Flex>
-            </Box>
-          </GridItem>
-        </Grid>
-      </BeetsModalBody>
-    </ModalContent>
-  </Modal>
+          <Flex align="center" mt="2">
+          <Text fontWeight="bold" fontSize=".9rem" mr="auto">
+                      My share of total veVRTK
+              </Text>
+              <Text fontSize="1rem" ml="auto">
+              {lockInfoDisplay.percentOwned}%
+              </Text>
+          </Flex>
+          <Flex align="center" mt="2">
+          <Text fontWeight="bold" fontSize=".9rem" mr="auto">
+                      Locked until 
+              </Text>
+              <Text fontSize="1rem" ml="auto">
+                      {lockInfoDisplay.lockedUntilDays}
+              </Text>
+          </Flex>
+        </Box>
+      </GridItem>
+    </Grid>
+  </BeetsModalBody>
+</ModalContent>
+</Modal>
 
 
 );
