@@ -16,7 +16,6 @@ import {
   BeetsModalHeadline,
 } from '~/components/modal/BeetsModal';
 import { useState } from 'react';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import {
   Accordion,
   AccordionItem,
@@ -24,8 +23,6 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import { LockPreview } from './LockPreview';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
 import { useUserAccount } from '~/lib/user/useUserAccount';
@@ -35,7 +32,6 @@ import { useEffect } from 'react';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import styled from '@emotion/styled';
 import { useVeVRTK } from '../../lib/useVeVRTK';
 import { LockFormInner } from './LockFormInner';
 
