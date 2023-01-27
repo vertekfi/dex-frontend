@@ -92,16 +92,19 @@ export function LockForm(props: Props) {
 return (
 <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl" >
   <ModalOverlay 
-      bg=
-      {`radial-gradient(circle at center, 
-          #4132D0 0%, 
-          rgba(0,0,0, 0.8) 90% )`}
-      />
+    display={{ base:'none', md:'block'}}
+    bg={`radial-gradient(circle at center, #4132D0 0%, rgba(0,0,0, 0.8) 90% )`}
+  />
+  <ModalOverlay 
+    display={{ base:'block', md:'none'}}
+    bg="black"
+
+  />
   <ModalContent
     minW={{ base: 'auto', md: '95vw' }}
     maxW={{ base: 'auto', md: '95vw' }}
     h="100vh"
-    bgColor="rgba(0, 0, 0, 0.3)"
+    bgColor="rgba(0, 0, 0, 0.5)"
     // boxShadow="2px 24px 12px 0px #000"
         paddingY="2rem"
     borderRadius="4rem"
@@ -125,7 +128,7 @@ return (
     p="0" textAlign="center" fontSize="1.2rem">
   
     <Grid
-      backgroundColor="transparent" 
+      backgroundColor={{ base: 'rgba(0, 0, 0, 0.8)', md:'transparent'}}
       pl={{ base: '0', md: '4' }}
       pr={{ base: '0', md: '4' }}
       templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
@@ -427,7 +430,7 @@ return (
                 variant="stayblack"
                 _hover={{ boxShadow:'0 28px 12px rgba(0, 0, 0, 1)', borderColor:'white' }}
                 mb="4"
-                boxShadow="0 28px 12px rgba(0, 0, 0, 1)" 
+                // boxShadow="0 28px 12px rgba(0, 0, 0, 1)" 
                 width={{ base: '85%', md: '90%' }}
               >
                 Preview
