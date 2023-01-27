@@ -12,6 +12,7 @@ import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
 import { bnum, scale } from '~/lib/util/big-number.utils';
 import { useVeVRTK } from '../lib/useVeVRTK';
+import gaugeControllerService from '~/lib/services/staking/gauge-controller.service';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -31,7 +32,10 @@ type VoteState = {
   init: boolean;
   confirming: boolean;
   confirmed: boolean;
-  confirmedAt: string;
+  error?: {
+    title: string;
+    description: string;
+  };
 };
 
 export function GaugeVoteModal(props: Props) {
@@ -65,7 +69,6 @@ export function GaugeVoteModal(props: Props) {
     init: false,
     confirming: false,
     confirmed: false,
-    confirmedAt: '',
   });
 
   const { veBalBalance } = useVeVRTK();
@@ -101,30 +104,32 @@ export function GaugeVoteModal(props: Props) {
     return isValid;
   }
 
-  // async function submitVote() {
-  //   const totalVoteShares = scale(voteWeight, 2).toString();
-  //
-  //   try {
-  //     voteState.init = true;
-  //     voteState.error = null;
-  //     const tx = await gaugeControllerService.voteForGaugeWeights(
-  //       props.gauge.address,
-  //       BigNumber.from(totalVoteShares)
-  //     );
-  //     voteState.init = false;
-  //     voteState.confirming = true;
-  //     handleTransaction(tx);
-  //   } catch (e) {
-  //     console.error(e);
-  //     const error = e as WalletError;
-  //     voteState.init = false;
-  //     voteState.confirming = false;
-  //     voteState.error = {
-  //       title: 'Vote failed',
-  //       description: error.message
-  //     };
-  //   }
-  // }
+  async function submitVote() {
+    const totalVoteShares = scale(voteWeight, 2).toString();
+
+    try {
+      setVoteState({
+        ...voteState,
+        init: true,
+      });
+      const tx = await gaugeControllerService.voteForGaugeWeights(
+        props.gauge.address,
+        BigNumber.from(totalVoteShares),
+      );
+      voteState.init = false;
+      voteState.confirming = true;
+      handleTransaction(tx);
+    } catch (e) {
+      console.error(e);
+      const error = e as WalletError;
+      voteState.init = false;
+      voteState.confirming = false;
+      voteState.error = {
+        title: 'Vote failed',
+        description: error.message,
+      };
+    }
+  }
 
   // async function handleTransaction(tx) {
   //   addTransaction({
