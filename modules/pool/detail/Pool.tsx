@@ -30,7 +30,7 @@ export function Pool() {
             <PoolWithdrawModal />
         </Box>
         <Box width={{ base:'auto', md:'auto' }} display={{ base:'flex', md:'block'}} flexDirection={{ base:'column', md:'row'}}>
-            <Text textAlign={{ base:'right', md:'right'}}  color="gray.100" >
+            <Text textAlign={{ base:'right', md:'right'}}  mr={{ base:'auto', md:'2' }} color="gray.100" >
                 VPT token staking 
             </Text>
             <PoolStakeModal   /> 

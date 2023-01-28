@@ -41,6 +41,8 @@ export function PoolListTabs() {
   return (
     <Tabs
       variant="soft-rounded"
+      
+     
       display="flex"
       onChange={handleTabChanged}
       defaultIndex={
@@ -49,9 +51,9 @@ export function PoolListTabs() {
     >
       <TabList>
         <HStack spacing="2">
-          <BeetsTab key="incentivized">Incentivized pools</BeetsTab>
-          <BeetsTab key="community">Community pools</BeetsTab>
-          {isConnected ? <BeetsTab key="my-investments">My investments</BeetsTab> : null}
+          <BeetsTab key="incentivized" >Incentivized pools</BeetsTab>
+          {/* <BeetsTab key="community">Community pools</BeetsTab> */}
+          {isConnected ? <BeetsTab   key="my-investments">My investments</BeetsTab> : null}
         </HStack>
       </TabList>
     </Tabs>
