@@ -30,11 +30,11 @@ export function LockEndDate(props: Props) {
 
   useEffect(() => {
     if (props.veBalLockInfo?.hasExistingLock) {
-      setLockEndDate(formatDateInput(props.veBalLockInfo.lockedEndDate));
+      updateLockEndDate(props.veBalLockInfo.lockedEndDate);
     } else {
       setLockEndDate(formatDateInput(props.maxLockEndDateTimestamp));
     }
-  }, []);
+  }, [props.veBalLockInfo]);
 
   useEffect(() => {
     if (props.minLockEndDateTimestamp) {
@@ -80,12 +80,20 @@ export function LockEndDate(props: Props) {
   }
 
   function updateLockEndDate(timestamp: number) {
+    console.log('LockEndDate comp updateLockEndDate: ' + timestamp);
+    console.log(lockEndDate);
     setLockEndDate(getDateInput(timestamp));
+    console.log(lockEndDate);
   }
 
   function formatDateInput(date: Date | number) {
     return format(date, INPUT_DATE_FORMAT);
   }
+
+  const handleDate = (val: any) => {
+    console.log('LockEndDate comp: ' + val);
+    setLockEndDate(val);
+  };
 
   return (
     <Box
@@ -107,7 +115,7 @@ export function LockEndDate(props: Props) {
       <FormControl mb="2">
         <DatePicker
           value={lockEndDate}
-          onChange={(date) => setSelectedDate(date)}
+          onChange={(date) => handleDate(date)}
           dateFormat="MM/dd/yyyy"
           placeholderText="mm/dd/yyyy"
           id="voteWeight"

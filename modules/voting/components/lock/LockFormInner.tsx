@@ -1,6 +1,6 @@
 import { Text, GridItem, Box, Button, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { LockPreview } from './LockPreviewModal';
+import { LockPreview } from './LockPreviewModal/LockPreviewModal';
 import 'react-datepicker/dist/react-datepicker.css';
 import { networkConfig } from '~/lib/config/network-config';
 import { expectedVeBal, useVeVRTK } from '../../lib/useVeVRTK';
@@ -29,7 +29,7 @@ export function LockFormInner(props: Props) {
   const [lockType, setLockType] = useState<LockType[]>([]);
 
   const { veBalTokenInfo } = useVeVRTK();
-  const { lockEndDate, lockAmount } = useLockState();
+  const { lockEndDate } = useLockState();
   const { isValidLockAmount, isIncreasedLockAmount, totalLpTokens } = useLockAmount(
     props.veBalLockInfo,
   );
@@ -41,7 +41,7 @@ export function LockFormInner(props: Props) {
     isExtendedLockEndDate,
   } = useLockEndDate(props.veBalLockInfo);
 
-  const { data: lockPool, loading: isLoadPool } = useGetPoolQuery({
+  const { data: lockablePool } = useGetPoolQuery({
     variables: {
       id: networkConfig.balancer.votingEscrow.lockablePoolId,
     },
@@ -88,7 +88,7 @@ export function LockFormInner(props: Props) {
   }
 
   function handleShowPreviewModal() {
-    if (submissionDisabled) return;
+    // if (submissionDisabled) return;
     setIsModalOpen(true);
   }
 
@@ -120,7 +120,7 @@ export function LockFormInner(props: Props) {
           How much do you want to lock?
         </Text>
 
-        <LockAmount lockablePool={lockPool?.pool} />
+        <LockAmount lockablePool={lockablePool?.pool} />
       </Box>
 
       <LockEndDate
@@ -161,7 +161,7 @@ export function LockFormInner(props: Props) {
         _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
         mb="4"
         width={{ base: '85%', md: '90%' }}
-        disabled={submissionDisabled}
+        // disabled={submissionDisabled}
       >
         Preview
       </Button>
@@ -171,6 +171,9 @@ export function LockFormInner(props: Props) {
           onClose={handleClosePreviewModal}
           lockType={lockType}
           veBalLockInfo={props.veBalLockInfo}
+          totalLpTokens={totalLpTokens || '0'}
+          lockEndDate={lockEndDate}
+          lockablePool={lockablePool}
         />
       )}
     </GridItem>

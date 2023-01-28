@@ -13,19 +13,20 @@ import {
 import { BeetsModalHeader, BeetsModalHeadline } from '~/components/modal/BeetsModal';
 import { useEffect, useState } from 'react';
 import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
-import { LockTitles, LockType } from './types';
-import { TokenInfo } from '~/modules/claim/types';
-import { useLockState } from './lib/useLockState';
-import { useVeBalQuery } from '../../lib/useVeBalQuery';
+import { LockTitles, LockType } from '../types';
+import { useLockState } from '../lib/useLockState';
+import { useVeBalQuery } from '../../../lib/useVeBalQuery';
+import { LockSummary } from './LockSummary';
+import { expectedVeBal } from '~/modules/voting/lib/useVeVRTK';
 
 type Props = {
-  //  lockablePool: Pool;
+  lockablePool: any;
   // lockablePoolTokenInfo: TokenInfo;
   // lockAmount: string;
-  // lockEndDate: string;
+  lockEndDate: string;
   lockType: LockType[];
   veBalLockInfo?: VeBalLockInfo;
-  // totalLpTokens: string;
+  totalLpTokens: string;
   isOpen: boolean;
   onClose: () => void;
 };
@@ -33,8 +34,9 @@ type Props = {
 export function LockPreview(props: Props) {
   const [title, setTitle] = useState<string>();
   const [lockConfirmed, setLockConfirmed] = useState<boolean>();
+  const [expectedVeBalAmount, setExpectedVeBalAmount] = useState<string>();
 
-  const { resetLockState } = useLockState();
+  const { resetLockState, lockAmount } = useLockState();
   const { refetch: refetchLockInfo } = useVeBalQuery();
 
   useEffect(() => {
@@ -52,6 +54,12 @@ export function LockPreview(props: Props) {
       );
     }
   }, [props.lockType]);
+
+  useEffect(() => {
+    if (props.totalLpTokens && props.lockEndDate) {
+      setExpectedVeBalAmount(expectedVeBal(props.totalLpTokens, props.lockEndDate));
+    }
+  }, [props.totalLpTokens, props.lockEndDate]);
 
   function handleClose() {
     props.onClose();
@@ -89,7 +97,7 @@ export function LockPreview(props: Props) {
             mb="2rem"
             mt="-1rem"
           >
-            Locking Summary
+            {title}
           </BeetsModalHeadline>
         </BeetsModalHeader>
         <Box
@@ -115,52 +123,15 @@ export function LockPreview(props: Props) {
           </Box>
         </Box>
 
-        <Box
-          bg="vertek.slatepurple.900"
-          height="full"
-          padding="4"
-          boxShadow="2px 24px 12px 0px #000, 0px 0px 12px 4px #000"
-          borderRadius="md"
-          mb="4"
-        >
-          <Box
-            mt="1"
-            pt="2"
-            mb=""
-            borderRadius="16px"
-            justifyContent="center"
-            fontWeight="bold"
-            fontSize="1.1rem"
-            alignItems="center"
-            flexDirection="column"
-          >
-            <Flex align="center" mt="2">
-              <Text fontWeight="normal" mr="auto">
-                Total amount locked
-              </Text>
-              <Text ml="auto">$12.10</Text>
-            </Flex>
-            <Flex align="center" mt="1">
-              <Text fontWeight="normal" mr="auto">
-                Lock-up end date
-              </Text>
-              <Text fontWeight="bold" ml="auto">
-                17 January 2024{' '}
-              </Text>
-            </Flex>
-            <Flex align="center" mt="1">
-              <Text fontWeight="normal" mr="auto">
-                Total voting escrow{' '}
-              </Text>
-              <Text ml="auto">21.81 veVRTK </Text>
-            </Flex>
-            <Flex mt="8">
-              <Button variant="vertekdark" width="100%" height="2.2rem">
-                Approve LP for locking
-              </Button>
-            </Flex>
-          </Box>
-        </Box>
+        <LockSummary
+          totalLpTokens={props.totalLpTokens}
+          lockAmount={lockAmount}
+          lockEndDate={props.lockEndDate}
+          lockType={props.lockType}
+          expectedVeBalAmount={expectedVeBalAmount || '0'}
+          lockablePool={props.lockablePool}
+          veBalLockInfo={props.veBalLockInfo}
+        />
       </ModalContent>
     </Modal>
   );

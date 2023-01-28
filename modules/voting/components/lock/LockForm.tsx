@@ -30,10 +30,7 @@ import { useEffect } from 'react';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { useVeVRTK } from '../../lib/useVeVRTK';
 import { LockFormInner } from './LockFormInner';
-import { LockPreview } from './LockPreviewModal';
-import { nextThursday } from 'date-fns';
 import { MyVeVRTK } from '../MyVeVRTK';
 
 interface Props {
@@ -66,9 +63,8 @@ export function LockForm(props: Props) {
   });
 
   const { isConnected } = useUserAccount();
-  const { data: userLockInfo } = useUserVeLockInfoQuery();
+  const { data: userLockInfo, isLoading: isLoadingUserVeData } = useUserVeLockInfoQuery();
   const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-  const { lockablePoolId } = useVeVRTK();
 
   useEffect(() => {
     if (!loadingBalances && isConnected) {
@@ -224,7 +220,7 @@ export function LockForm(props: Props) {
               </Box>
             </GridItem>
             <LockFormInner lockablePoolBptBalance={userPoolBalance.balance} />
-            <MyVeVRTK veBalLockInfo={userLockInfo} />
+            <MyVeVRTK veBalLockInfo={userLockInfo} isLoading={isLoadingUserVeData} />
           </Grid>
         </BeetsModalBody>
       </ModalContent>

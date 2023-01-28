@@ -1,5 +1,6 @@
 import { Box, Flex, GridItem, Text } from '@chakra-ui/react';
 import { format } from 'date-fns';
+import { Skeleton } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useNumbers } from '~/lib/global/useNumbers';
 import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
@@ -9,6 +10,7 @@ import { useVeVRTK } from '../lib/useVeVRTK';
 
 type Props = {
   veBalLockInfo?: VeBalLockInfo;
+  isLoading: boolean;
 };
 
 export function MyVeVRTK(props: Props) {
@@ -63,7 +65,9 @@ export function MyVeVRTK(props: Props) {
             My veVRTK
           </Text>
           <Text fontSize="1rem" ml="auto">
-            {props.veBalLockInfo?.lockedAmount} - {veBalTokenInfo?.symbol}
+            <Skeleton isLoaded={!props.isLoading}>
+              {props.veBalLockInfo?.lockedAmount} - {veBalTokenInfo?.symbol}
+            </Skeleton>
           </Text>
         </Flex>
 
@@ -72,7 +76,7 @@ export function MyVeVRTK(props: Props) {
             My share of total veVRTK
           </Text>
           <Text fontSize="1rem" ml="auto">
-            {percentVeVRTK}
+            <Skeleton isLoaded={!props.isLoading}>{percentVeVRTK}</Skeleton>
           </Text>
         </Flex>
         <Flex align="center" mt="2">
@@ -80,9 +84,11 @@ export function MyVeVRTK(props: Props) {
             Locked until
           </Text>
           <Text fontSize="1rem" ml="auto">
-            {props.veBalLockInfo?.hasExistingLock
-              ? format(props.veBalLockInfo.lockedEndDate, PRETTY_DATE_FORMAT)
-              : '-'}
+            <Skeleton isLoaded={!props.isLoading}>
+              {props.veBalLockInfo?.hasExistingLock
+                ? format(props.veBalLockInfo.lockedEndDate, PRETTY_DATE_FORMAT)
+                : '-'}
+            </Skeleton>
           </Text>
         </Flex>
       </Box>
