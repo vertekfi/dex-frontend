@@ -31,6 +31,10 @@ export function LockSummary(props: Props) {
   const { fNum2 } = useNumbers();
   const { veBalTokenInfo } = useVeVRTK();
 
+  const lockEndDateObject = new Date(props.lockEndDate);
+  console.log(props.lockEndDate);
+
+
   useEffect(() => {
     if (props.lockablePool) {
       setPoolShares(bnum(props.lockablePool.totalLiquidity).div(props.lockablePool.totalShares));
@@ -101,11 +105,10 @@ export function LockSummary(props: Props) {
 
         <Flex align="center" mt="1">
           <Text fontWeight="normal" mr="auto">
-            {isExtendLockOnly ? 'New lock-up end date' : 'Lock-up end date'}
+              {isExtendLockOnly ? 'New lock-up end date' : 'Lock-up end date'}
           </Text>
-
           <Text fontWeight="bold" ml="auto">
-            {props.lockEndDate && format(new Date(props.lockEndDate), PRETTY_DATE_FORMAT)}
+              {props.lockEndDate && format(lockEndDateObject, PRETTY_DATE_FORMAT)}
           </Text>
         </Flex>
 

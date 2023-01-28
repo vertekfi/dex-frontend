@@ -349,7 +349,10 @@ export function LockForm(props: Props) {
             calendarClassName="datepicker"
           /> */}
 
-                  <Input placeholder="Select Date and Time" size="md" type="datetime-local" />
+                  <Input placeholder="Select Date and Time" size="md" type="datetime-local"     
+                  // onChange={(event) => console.log(event.target.value)}
+                  onChange={(event) => setSelectedDate(event.target.value)}
+/>
                   <Box
                     w="99%"
                     paddingY="2"
@@ -397,7 +400,10 @@ export function LockForm(props: Props) {
                 </Flex>
               </Box>
               <Button
-                onClick={handleShowPreviewModal}
+                 onClick={() => {
+                  console.log(selectedDate);
+                  handleShowPreviewModal();
+              }}
                 variant="stayblack"
                 _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
                 mb="4"
@@ -409,6 +415,7 @@ export function LockForm(props: Props) {
               {isModalOpen && (
                 <LockPreview
                   isOpen={isModalOpen}
+
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
                   veBalLockInfo={userLockInfo}
