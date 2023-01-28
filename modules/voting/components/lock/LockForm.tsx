@@ -9,6 +9,7 @@ import {
   Box,
   Button,
   Flex,
+  Skeleton,
 } from '@chakra-ui/react';
 import {
   BeetsModalBody,
@@ -219,7 +220,10 @@ export function LockForm(props: Props) {
                 </Accordion>
               </Box>
             </GridItem>
-            <LockFormInner lockablePoolBptBalance={userPoolBalance.balance} />
+            <Skeleton isLoaded={!isLoadingUserVeData}>
+              <LockFormInner lockablePoolBptBalance={userPoolBalance.balance} />
+            </Skeleton>
+
             <MyVeVRTK veBalLockInfo={userLockInfo} isLoading={isLoadingUserVeData} />
           </Grid>
         </BeetsModalBody>
