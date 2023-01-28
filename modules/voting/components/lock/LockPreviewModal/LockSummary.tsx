@@ -33,6 +33,7 @@ export function LockSummary(props: Props) {
 
   const lockEndDateObject = new Date(props.lockEndDate);
   console.log(props.lockEndDate);
+  console.log(props.lockAmount);
 
 
   useEffect(() => {
