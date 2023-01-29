@@ -101,17 +101,17 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
       return (
         <HStack>
           {cell.row.depth > 0 ? (
-            <Box color="whiteAlpha.400" paddingLeft={cell.row.depth === 1 ? '2' : '12'}>
+            <Box color="gray.100" paddingLeft={cell.row.depth === 1 ? '2' : '12'}>
               <CornerDownRight />
             </Box>
           ) : null}
           <TokenAvatar size="xs" address={address} />
           <HStack spacing="1">
-            <Text fontSize="sm" color="beets.base.50">
+            <Text fontSize="sm" color="white">
               {symbol}
             </Text>
             <Link href={etherscanGetTokenUrl(address)} target="_blank">
-              <ExternalLink size={14} />
+              <ExternalLink size={12} />
             </Link>
           </HStack>
         </HStack>
@@ -119,7 +119,7 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
     } else if (cell.column.id === Columns.Weight) {
       // only show the progress bar for the pool tokenWithAmount and not for any nested tokens
       if (cell.row.depth === 0) {
-        return <Progress width="80%" rounded="lg" value={parseFloat(cell.value || '0') * 100} />;
+        return <Progress width="70%" rounded="md" value={parseFloat(cell.value || '0') * 100} />;
       } else {
         return null;
       }
@@ -153,7 +153,7 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
           </Flex>
         </Flex>
       )}
-      <TableContainer>
+      <TableContainer> 
         <Table {...getTableProps()} style={{ borderCollapse: 'separate', borderSpacing: '0 3px' }}>
           <Thead width="full" paddingX="2">
             {headerGroups.map((headerGroup) => (
@@ -165,9 +165,9 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
                     padding={column.id === Columns.Expander ? '0' : '2'}
                   >
                     {column.id === Columns.Expander ? (
-                      <Box color="beets.base.50">{column.render('Header')}</Box>
+                      <Box color="gray.100">{column.render('Header')}</Box>
                     ) : (
-                      <Text fontSize="xs" color="beets.base.50">
+                      <Text fontSize="xs" color="gray.100">
                         {column.render('Header')}
                       </Text>
                     )}
@@ -180,12 +180,13 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <Tr {...row.getRowProps()} padding="2" width="full" background="whiteAlpha.100">
+                <Tr {...row.getRowProps()} padding="2" width="full" background="rgba(255, 255, 255, 0.05)">
                   {row.cells.map((cell, i) => {
                     return (
                       <Td
                         {...cell.getCellProps()}
                         borderBottom="0"
+                        fontSize="1rem"
                         p="2"
                         marginBottom="4"
                         borderTopLeftRadius={i == 0 ? 'lg' : undefined}
@@ -287,7 +288,7 @@ export function PoolComposition() {
   );
 
   return (
-    <Card px="2" py="2" mt={4} width="full">
+    <Card px="1" py="2" mt={4} width="full">
       <PoolCompositionTable columns={columns} data={data} hasNestedTokens={hasNestedTokens} />
     </Card>
   );
