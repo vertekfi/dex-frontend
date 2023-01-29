@@ -30,10 +30,10 @@ export class VeBAL {
 
   constructor() {}
 
-  async getLockInfo(account?: string): Promise<VeBalLockInfo | null> {
-    if (!account) {
-      return null;
-    }
+  async getLockInfo(account?: string): Promise<VeBalLockInfo> {
+    // if (!account) {
+    //   return null;
+    // }
 
     const veBalMulticaller = new Multicaller(networkProvider, veBalAbi);
 
@@ -42,6 +42,8 @@ export class VeBAL {
     veBalMulticaller.call('totalSupply', this.address, 'totalSupply()');
 
     const result = await veBalMulticaller.execute<VeBalLockInfoResult>();
+
+    console.log(result);
 
     return this.formatLockInfo(result);
   }

@@ -1,5 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import {
+  FormControl,
+  Input,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Skeleton,
+} from '@chakra-ui/react';
 import {
   BeetsModalBody,
   BeetsModalContent,
@@ -15,6 +23,10 @@ import { useVeVRTK } from '../lib/useVeVRTK';
 import { WalletError } from '~/lib/services/web3/web3.service';
 import { useGaugeVoting } from '../lib/useGaugeVoting';
 import { BigNumber } from 'ethers';
+import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
+import { fNum2, FNumFormats } from '~/lib/util/useNumber';
+import { useUserAccount } from '~/lib/user/useUserAccount';
+import { VeBAL } from '~/lib/services/balancer/contracts/veBAL';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -30,43 +42,48 @@ type Props = {
   onClose: () => void;
 };
 
+type ErrorMessage = {
+  title: string;
+  description: string;
+};
+
 type VoteState = {
   init: boolean;
   confirming: boolean;
   confirmed: boolean;
-  error?: {
-    title: string;
-    description: string;
-  };
+  error?: ErrorMessage;
 };
 
 export function GaugeVoteModal(props: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [voteTitle, setVoteTitle] = useState<string>('');
   const [voteButtonText, setVoteButtonText] = useState<string>('');
 
-  const [hasEnoughVotes, setHasEnoughVotes] = useState<boolean>(false);
-  const [hasVotes, setHasVotes] = useState<boolean>(false);
+  const [hasEnoughVotes, setHasEnoughVotes] = useState<boolean>();
+  const [hasVotes, setHasVotes] = useState<boolean>();
 
   const [voteWeight, setVoteWeight] = useState<string>('');
   const [currentWeight, setCurrentWeight] = useState<string>('');
   const [currentWeightNormalized, setCurrentWeightNormalized] = useState<string>('');
 
-  const [unallocatedVotesFormatted, setunallocatedVotesFormatted] = useState<string>('');
-  const [remainingVotes, setRemainingVotes] = useState<string>('');
+  const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
+  const [remainingVotes, setRemainingVotes] = useState<string>();
   const [voteLockedUntilText, setVoteLockedUntilText] = useState<string>('');
 
-  const [voteError, setVoteError] = useState<{ title: string; description: string }>();
-  const [voteWarning, setVoteWarning] = useState<boolean>(false);
-  const [veBalVoteOverLimitWarning, setVeBalVoteOverLimitWarning] = useState<boolean>(false);
-  const [voteButtonDisabled, setVoteButtonDisabled] = useState<boolean>();
-  const [voteInputDisabled, setVoteInputDisabled] = useState<boolean>();
-
-  const [votedToRecentlyWarning, setVotedToRecentlyWarning] = useState<{
+  const [voteError, setVoteError] = useState<ErrorMessage>();
+  const [noVeBalWarning, setNoVeBalWarning] = useState<ErrorMessage>();
+  const [veBalLockTooShortWarning, setVeBalLockTooShortWarning] = useState<{
     title: string;
     description: string;
   }>();
+  const [voteWarning, setVoteWarning] = useState<ErrorMessage>();
+  const [veBalVoteOverLimitWarning, setVeBalVoteOverLimitWarning] = useState<ErrorMessage>();
+  const [votesNextPeriodGt10pct, setVotesNextPeriodGt10pct] = useState<boolean>();
+  const [voteButtonDisabled, setVoteButtonDisabled] = useState<boolean>();
+  const [voteInputDisabled, setVoteInputDisabled] = useState<boolean>();
+
+  const [votedToRecentlyWarning, setVotedToRecentlyWarning] = useState<ErrorMessage>();
 
   // Probably wont need this
   const [voteState, setVoteState] = useState<VoteState>({
@@ -75,26 +92,132 @@ export function GaugeVoteModal(props: Props) {
     confirmed: false,
   });
 
-  const { veBalBalance } = useVeVRTK();
+  // const { veBalBalance } = useVeVRTK();
   const { voteForGauge } = useGaugeVoting();
+  const { data: veBalLockInfo, isLoading: isVeLoading } = useUserVeLockInfoQuery();
 
-  // const currentWeight = computed(() => props.gauge.userVotes);
-  // const currentWeightNormalized = computed(() => scale(bnum(currentWeight.value), -2).toString());
-  // const hasVotes = computed((): boolean => bnum(currentWeight.value).gt(0));
+  const { userAddress, isConnected } = useUserAccount();
+
+  useEffect(() => {
+    const getIt = async () => {
+      const userInfo = await new VeBAL().getLockInfo(userAddress);
+      console.log(userInfo);
+    };
+
+    if (userAddress && isConnected) {
+      getIt();
+    }
+  }, [userAddress, isConnected]);
+
+  useEffect(() => {
+    const remainingVotesFormatted = fNum2(
+      scale(bnum(props.unallocatedVoteWeight).plus(bnum(currentWeight)), -4).toString(),
+      FNumFormats.percent,
+    );
+
+    const currentVotesFormatted = fNum2(
+      scale(bnum(currentWeight), -4).toString(),
+      FNumFormats.percent,
+    );
+
+    let remainingVotesText;
+    if (!hasEnoughVotes) {
+      remainingVotesText = `This exceeds your remaining votes of: ${remainingVotesFormatted}`;
+    } else {
+      remainingVotesText = hasVotes
+        ? `Your remaining votes: ${remainingVotesFormatted} (${currentVotesFormatted} current allocation in this pool + ${unallocatedVotesFormatted}  unallocated votes)`
+        : `Your remaining votes: ${remainingVotesFormatted}`;
+    }
+
+    setRemainingVotes(remainingVotesText);
+  }, [hasEnoughVotes, currentWeight, hasVotes, props.unallocatedVoteWeight]);
+
+  useEffect(() => {
+    setUnallocatedVotesFormatted(
+      fNum2(scale(bnum(props.unallocatedVoteWeight), -4).toString(), FNumFormats.percent),
+    );
+  }, [props.unallocatedVoteWeight]);
+
+  useEffect(() => {
+    if (props.gauge) {
+      const gaugeVoteWeightNormalized = scale(props.gauge.votesNextPeriod, -18);
+      setVotesNextPeriodGt10pct(gaugeVoteWeightNormalized.gte(bnum('0.1')));
+    }
+  }, [props.gauge]);
+
+  useEffect(() => {
+    if (votesNextPeriodGt10pct) {
+      setVeBalVoteOverLimitWarning({
+        title: 'You may be wasting your vote: veVRTK cap hit',
+        description:
+          'Distributions to veVRTK holders of weekly emissions are capped at 35%. Any votes exceeding this amount at Thursday 0:00 UTC will not be counted.',
+      });
+    }
+  }, [votesNextPeriodGt10pct]);
+
+  useEffect(() => {
+    if (!isVeLoading && veBalLockInfo?.hasExistingLock && !veBalLockInfo?.isExpired) {
+      const lockEndDate = veBalLockInfo.lockedEndDate;
+      if (lockEndDate < Date.now() + MINIMUM_LOCK_TIME) {
+        setVeBalLockTooShortWarning({
+          title: 'veVRTK not locked for 7 days.',
+          description: 'You must have veVRTK locked for more than 7 days to vote on gagues.',
+        });
+      }
+    }
+  }, [veBalLockInfo, isVeLoading]);
+
+  useEffect(() => {
+    if (
+      !isVeLoading &&
+      (!veBalLockInfo?.hasExistingLock || Number(veBalLockInfo?.lockedAmount) === 0)
+    ) {
+      console.log();
+      setNoVeBalWarning({
+        title: 'You need some veVRTK to vote on gauges',
+        description: 'Get veVRTK by locking up VPT tokens from the 80% VRTK / 20% BNB pool.',
+      });
+    }
+  }, [veBalLockInfo, isVeLoading]);
+
+  useEffect(() => {
+    if (isVoteWeightValid(voteWeight)) {
+      setHasEnoughVotes(true);
+    }
+  }, [voteWeight]);
+
+  useEffect(() => {
+    if (!!veBalVoteOverLimitWarning) return setVoteWarning(veBalVoteOverLimitWarning);
+  }, [veBalVoteOverLimitWarning]);
+
+  useEffect(() => {
+    if (!!votedToRecentlyWarning) return setVoteError(votedToRecentlyWarning);
+    if (!!noVeBalWarning) return setVoteError(noVeBalWarning);
+    if (!!veBalLockTooShortWarning) return setVoteError(veBalLockTooShortWarning);
+    if (!!voteState.error) return setVoteError(voteState.error);
+  }, [votedToRecentlyWarning, noVeBalWarning, veBalLockTooShortWarning, voteState]);
 
   useEffect(() => {
     setCurrentWeight(props.gauge.userVotes);
-    setCurrentWeightNormalized(scale(bnum(currentWeight), -2).toString());
-    setHasVotes(bnum(currentWeight).gt(0));
   }, [props.gauge.userVotes]);
 
   useEffect(() => {
-    const voteDisabled = !(!!voteWarning || !!voteError || !hasEnoughVotes);
-    setVoteButtonDisabled(voteDisabled);
+    setCurrentWeightNormalized(scale(bnum(currentWeight), -2).toString());
+  }, [currentWeight]);
 
-    if (!!voteError) {
-      setVoteInputDisabled(true);
+  useEffect(() => {
+    setHasVotes(bnum(currentWeight).gt(0));
+  }, [currentWeightNormalized, currentWeight]);
+
+  useEffect(() => {
+    if (!!voteError || !hasEnoughVotes) {
+      console.log('Not enough votes');
+      return setVoteInputDisabled(true);
     }
+
+    const voteDisabled = !(!!voteWarning || !!voteError || !hasEnoughVotes);
+    console.log(voteDisabled);
+    setVoteButtonDisabled(voteDisabled);
   }, [voteWarning, voteError, hasEnoughVotes]);
 
   useEffect(() => {
@@ -106,7 +229,7 @@ export function GaugeVoteModal(props: Props) {
       setVoteTitle('Gauge vote');
       setVoteButtonText('Confirm vote');
     }
-  }, [hasVotes]);
+  }, [hasVotes, currentWeightNormalized]);
 
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -122,9 +245,7 @@ export function GaugeVoteModal(props: Props) {
     if (!voteWeight) {
       return;
     }
-    console.log(voteWeight);
     const totalVoteShares = scale(voteWeight, 2).toString();
-    console.log('submitting user vote weight of: ' + totalVoteShares);
 
     try {
       voteForGauge(props.gauge.address, BigNumber.from(totalVoteShares));
@@ -141,9 +262,7 @@ export function GaugeVoteModal(props: Props) {
         },
       });
     }
-    onClose(); 
-    
-
+    onClose();
   }
 
   return (
@@ -153,13 +272,18 @@ export function GaugeVoteModal(props: Props) {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <BeetsModalContent bgColor="vertek.slate.900">
-          <BeetsModalHeader mt="2" >
+          <BeetsModalHeader mt="2">
             <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
               {voteTitle}
             </BeetsModalHeadline>
           </BeetsModalHeader>
 
-          <BeetsModalBody mt="4" bgColor="vertek.slatepurple.900" textAlign="center" fontSize="1.2rem">
+          <BeetsModalBody
+            mt="4"
+            bgColor="vertek.slatepurple.900"
+            textAlign="center"
+            fontSize="1.2rem"
+          >
             <Box
               display="flex"
               flexDirection="column"
@@ -168,6 +292,39 @@ export function GaugeVoteModal(props: Props) {
               alignItems="flex-start"
               h="full"
             >
+              {!!voteWarning ? (
+                <Alert status="warning">
+                  <AlertIcon />
+                  <AlertTitle>{voteWarning.title}</AlertTitle>
+                  <AlertDescription>{voteWarning.description}</AlertDescription>
+                </Alert>
+              ) : (
+                <div>
+                  <ul>
+                    <li>
+                      Your vote directs future liquidity mining emissions starting from the next
+                      period on Thursday at 0:00 UTC.
+                    </li>
+                    <li>
+                      Voting power is set at the time of the vote. If you get more veAEQ later,
+                      resubmit your vote to use your increased power.
+                    </li>
+                    <li>
+                      Votes are timelocked for 10 days. If you vote now, no edits can be made until{' '}
+                      {voteLockedUntilText}.
+                    </li>
+                  </ul>
+                </div>
+              )}
+
+              {!!voteError && (
+                <Alert status="error">
+                  <AlertIcon />
+                  <AlertTitle>{voteError.title}</AlertTitle>
+                  <AlertDescription>{voteError.description}</AlertDescription>
+                </Alert>
+              )}
+
               <Text fontWeight="medium">{props.gauge.pool.name}</Text>
               <MemoizedTokenAvatarSetInList
                 imageSize={28}
@@ -182,6 +339,7 @@ export function GaugeVoteModal(props: Props) {
                   id="voteWeight"
                   name="voteWeight"
                   type="number"
+                  value={voteWeight}
                   onChange={(event) => setVoteWeight(event.target.value)}
                   autoComplete="off"
                   autoCorrect="off"
@@ -194,7 +352,7 @@ export function GaugeVoteModal(props: Props) {
                   autoFocus
                 />
               </FormControl>
-              {!!voteError && <Box>{voteError.description}</Box>}
+              {!!voteError ? <Box>{voteError.description}</Box> : <Box>{remainingVotes}</Box>}
             </div>
           </BeetsModalBody>
 
@@ -215,7 +373,6 @@ export function GaugeVoteModal(props: Props) {
       </Modal>
       {/* Need an "update vote" function. this function should be clickable once you've already submitted a vote. There is an 
       edit vote here, i know that for a fact, but it popped up late  */}
-      
     </>
   );
 }

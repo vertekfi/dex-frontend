@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from 'react-query';
 import { VeBAL, VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
-export function useUserVeLockInfoQuery(): UseQueryResult<any> {
+export function useUserVeLockInfoQuery(): UseQueryResult<VeBalLockInfo> {
   const { userAddress, isConnected } = useUserAccount();
 
   const queryFn = async () => {
