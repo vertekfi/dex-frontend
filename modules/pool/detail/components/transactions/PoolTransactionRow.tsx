@@ -56,7 +56,7 @@ function PoolTransactionAction(props: PoolTransaction) {
     return (
         <HStack>
             <Box color={getColor()}>{getIcon()}</Box>
-            <Text textStyle="" fontSize="md">
+            <Text textStyle="" fontSize="1rem">
                 {TxToReadableMap[props.type]}
             </Text>
         </HStack>
@@ -80,7 +80,9 @@ function Pool(props: PoolTransaction) {
                             .filter((tokenAmount) => tokenAmount.amount !== '0')
                             .map((tokenAmount, index) => (
                                 <TokenAmountPill
-                                    fontSize="md"
+                                    fontSize="xs"
+                                    bgColor="rgba(0, 0, 0, 0.2)"
+                                    borderRadius="16px" 
                                     key={index}
                                     amount={tokenAmount.amount}
                                     address={tokenAmount.address}
@@ -89,15 +91,19 @@ function Pool(props: PoolTransaction) {
                     {!isInvestAction && (
                         <>
                             <TokenAmountPill
-                                fontSize="md"
+                                fontSize="xs"
+                                bgColor="rgba(0, 0, 0, 0.2)"
+                                borderRadius="16px" 
                                 amount={(props.transaction as GqlPoolSwap).tokenAmountIn}
                                 address={(props.transaction as GqlPoolSwap).tokenIn}
                             />
-                            <Box mx={{ base: 0, lg: 2 }} pl={{ base: 10, lg: 0 }}>
+                            <Box mx={{ base: 0, lg: 1 }} pl={{ base: 10, lg: 0 }}>
                                 {isMobile ? <ArrowDown /> : <ArrowRight />}
                             </Box>
                             <TokenAmountPill
-                                fontSize="md"
+                                fontSize="xs"
+                                bgColor="rgba(0, 0, 0, 0.2)"
+                                borderRadius="16px" 
                                 amount={(props.transaction as GqlPoolSwap).tokenAmountOut}
                                 address={(props.transaction as GqlPoolSwap).tokenOut}
                             />
@@ -109,19 +115,23 @@ function Pool(props: PoolTransaction) {
                 <>
                     {(isSwapAction || isJoinAction) && (
                         <TokenAmountPill
-                            fontSize="md"
+                            fontSize="xs"
+                            bgColor="rgba(0, 0, 0, 0.2)"
+                            borderRadius="16px" 
                             amount={(props.transaction as GqlPoolSwap).tokenAmountIn}
                             address={(props.transaction as GqlPoolSwap).tokenIn}
                         />
                     )}
                     {isSwapAction && (
-                        <Box mx={2}>
+                        <Box mx={1}>
                             <ArrowRight />
                         </Box>
                     )}
                     {(isSwapAction || isExitAction) && (
                         <TokenAmountPill
-                            fontSize="md"
+                        fontSize="xs"
+                        bgColor="rgba(0, 0, 0, 0.2)"
+                        borderRadius="16px" 
                             amount={(props.transaction as GqlPoolSwap).tokenAmountOut}
                             address={(props.transaction as GqlPoolSwap).tokenOut}
                         />
@@ -143,20 +153,20 @@ export default function PoolTransactionItem({ transaction, ...rest }: Props) {
 
     return (
         <Grid
-            px="4"
-            py={{ base: '4', lg: '2' }}
-            templateColumns={{
-                base: '1fr 1fr',
-                lg: '200px 1fr 200px 200px',
-            }}
-            gap="0"
-            templateAreas={{
-                base: `"action time"
-                             "details value"`,
-                lg: `"action details value time"`,
-            }}
-            bgColor="rgba(255,255,255,0.05)"
-            _hover={{ bg: 'vertek.slatepurple.900', }}
+        px="1"
+        py={{ base: '4', lg: '2' }}
+        templateColumns={{
+            base: '1fr 1fr',
+            lg: '1fr 250px 200px 1fr',
+        }}
+        gap="0"
+        templateAreas={{
+            base: `"action time"
+                            "details value"`,
+            lg: `"action details value time"`,
+        }}
+        bgColor="rgba(255,255,255,0.05)"
+        _hover={{ bg: 'vertek.slatepurple.900', }}
         >
             <Flex align={flexAlign}>
                 <GridItem area="action">
@@ -164,21 +174,23 @@ export default function PoolTransactionItem({ transaction, ...rest }: Props) {
                     <PoolTransactionAction {...transaction} />
                 </GridItem>
             </Flex>
-            <GridItem area="details" mb={gridItemMb}>
+            <Flex align={flexAlign} justifyContent={{base:'auto', lg:'flex-start'}}>
+            <GridItem area="details" mb={gridItemMb}  >
                 <MobileLabel text="Details" />
                 <Pool {...transaction} />
             </GridItem>
-            <Flex align={flexAlign}>
+            </Flex>
+            <Flex align={flexAlign}  justifyContent={{base:'auto', lg:'center'}}>
                 <GridItem area="value" mb={gridItemMb}>
                     <MobileLabel text="Value" />
-                    <Text fontSize="md">{getFormattedValue()}</Text>
+                    <Text fontSize="0.9rem">{getFormattedValue()}</Text>
                 </GridItem>
             </Flex>
             <Flex align={flexAlign} justify={justifyContent}>
                 <GridItem area="time" mb={gridItemMb}>
                     <MobileLabel text="Time" />
                     <HStack width="full" justify={justifyContent}>
-                        <Text fontSize="md">
+                        <Text fontSize="0.9rem">
                             {formatDistanceToNow(new Date(transaction.transaction.timestamp * 1000), {
                                 addSuffix: true,
                             })}
