@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FormControl, Input, Alert, AlertIcon, AlertTitle, AlertDescription, Skeleton, VStack } from '@chakra-ui/react';
+import { FormControl, Flex, Input, Alert, AlertIcon, AlertTitle, AlertDescription, Skeleton, VStack } from '@chakra-ui/react';
 import { BeetsModalBody, BeetsModalContent, BeetsModalHeader, BeetsModalHeadline } from '~/components/modal/BeetsModal';
 import { Box, HStack, Modal, Text, Button } from '@chakra-ui/react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -20,6 +20,9 @@ import { networkConfig } from '~/lib/config/network-config';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { differenceInDays, format } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from '../constants';
+import { RepeatClockIcon } from '@chakra-ui/icons';
+import { SunIcon } from '@chakra-ui/icons';
+import { LockIcon } from '@chakra-ui/icons';
 
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
@@ -196,7 +199,7 @@ useEffect(() => {
     ) {
       setNoVeBalWarning({
         title: 'You need some veVRTK to vote on gauges',
-        description: 'Get veVRTK by locking up VPT tokens from the 80% VRTK / 20% BNB pool.',
+        description: 'Get veVRTK by locking VPT tokens from the VRTK/BNB pool.',
       });
     }
   }, [isVeLoading, lockInfoDisplay.veBalance]);
@@ -292,12 +295,11 @@ useEffect(() => {
 <Modal isOpen={isOpen} onClose={onClose} size="xl">
   <BeetsModalContent bgColor="vertek.slate.900">
     <BeetsModalHeader mt="2">
-   
-      <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
+      <BeetsModalHeadline textAlign="center" fontSize="2rem">
         {voteTitle}
-        <Text fontSize="1rem" color="white">
-          veVRTK: {lockInfoDisplay.veBalance} shares
-        </Text>
+            <Text fontSize="1rem" textAlign="center"  mt="2"  >
+              Your balance of veVRTK: {lockInfoDisplay.veBalance} shares
+            </Text>
       </BeetsModalHeadline>
     </BeetsModalHeader>
 
@@ -315,9 +317,6 @@ useEffect(() => {
         alignItems="flex-start"
         h="full"
       >
-       
-       
-
 
         {!!voteWarning ? (
           <Alert 
@@ -336,22 +335,24 @@ useEffect(() => {
           </Alert>
         ) : (
           
-          <div>
-            <ul>
-              <li>
-                Your vote directs future liquidity mining emissions starting from the next
-                period on Thursday at 0:00 UTC.
-              </li>
-              <li>
-                Voting power is set at the time of the vote. If you get more veAEQ later,
-                resubmit your vote to use your increased power.
-              </li>
-              <li>
-                Votes are timelocked for 10 days. If you vote now, no edits can be made until{' '}
+          <Box display="flex" flexDirection="column" fontSize="1rem" textAlign="left" >
+            <Text mb="2" >
+              <RepeatClockIcon ml="2" mr="2"  />
+              Your vote directs future liquidity mining emissions starting from the next
+              period on Thursday at 0:00 UTC.
+            </Text>
+            <Text mb="2" >
+              <LockIcon ml="2" mr="2"  />
+              Votes are timelocked for 10 days. If you vote now, no edits can be made until{' '}
                 {voteLockedUntilText}.
-              </li>
-            </ul>
-          </div>
+            </Text>
+            <Text mb="2" >
+              <SunIcon ml="2" mr="2"  />
+              Voting power is set at the time of the vote. If you get more veVRTK later,
+                resubmit your vote to use your increased power.
+            </Text>
+           
+          </Box>
         )}
 
         {!!voteError && (
