@@ -79,7 +79,8 @@ export function TokenAvatarSetInList({
       </PopoverTrigger>
       <PopoverContent 
       w="200px" padding="4" borderRadius="16px" 
-      bgColor="vertek.slatepurple.900" 
+      bgColor="transparent" backdropFilter="blur(12px)"
+      color="white"
       boxShadow="0 0 12px #000"
       >
         {tokens?.map((token, index) => (
