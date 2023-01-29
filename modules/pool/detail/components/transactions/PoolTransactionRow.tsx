@@ -160,7 +160,6 @@ export default function PoolTransactionItem({ transaction, ...rest }: Props) {
             lg: '1fr 250px 200px 1fr',
         }}
         gap="0"
-        borderBottomRadius={{ base:'auto', lg:'16px'}}
         templateAreas={{
             base: `"action time"
                             "details value"`,
@@ -175,7 +174,7 @@ export default function PoolTransactionItem({ transaction, ...rest }: Props) {
                     <PoolTransactionAction {...transaction} />
                 </GridItem>
             </Flex>
-            <Flex align={flexAlign} justifyContent={{base:'auto', lg:'center'}}>
+            <Flex align={flexAlign} justifyContent={{base:'auto', lg:'flex-start'}}>
             <GridItem area="details" mb={gridItemMb}  >
                 <MobileLabel text="Details" />
                 <Pool {...transaction} />
