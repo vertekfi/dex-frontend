@@ -104,7 +104,9 @@ export default function NavbarWalletConnectButton() {
                         ) : earlyLudwig ? (
                           <Image src={VertekAlpha} width="20px" height="20px"   />
                         ) : (
-                          <Image src={VertekWhite} width="20px" alt="your-profile" />
+                          <Box borderRadius="full" overflow="hidden" width="20px" height="20px">
+                            <Image src={ "https://avatar.tobi.sh/" + account.address + "?size=20" } width="100%" height="100%" alt="your-profile" />
+                          </Box>
                         )}
                         <Text
                           display={{ base: 'none', sm: 'inline' }} 
