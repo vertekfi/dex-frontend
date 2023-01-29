@@ -82,14 +82,8 @@ export function GaugeVoteModal(props: Props) {
   const [hasLock, setHasLock] = useState<boolean>(false);
   const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
   const { veBalBalance, veBalTokenInfo } = useVeVRTK();
-  const [userPoolBalance, setUserPoolBalance] = useState<{
-    balance: string;
-    usdValue: string;
-  }>({
-    balance: '0',
-    usdValue: '0',
-  });
   
+
   const [lockInfoDisplay, setLockInfoDisplay] = useState<{
     lockedUntilDays: number;
     lockedUntilDate: string;
@@ -102,51 +96,34 @@ export function GaugeVoteModal(props: Props) {
     percentOwned: '0',
   });
   const { data: userLockInfo } = useUserVeLockInfoQuery();
-  const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-  useEffect(() => {
-    if (!loadingBalances && isConnected) {
-      setUserPoolBalance({
-        balance: tokenFormatAmount(
-          bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-        usdValue: numberFormatUSDValue(
-          usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-      });
-    }
-  }, [loadingBalances, isConnected]);
 
 useEffect(() => {
     if (isConnected && userLockInfo) {
-      if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
-        setHasLock(true);
+    if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
+      setHasLock(true);
 
-        const percentOwned = fNum2(
-          bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
-          {
-            style: 'percent',
-            maximumFractionDigits: 4,
-          },
-        );
-        const lockedUntilDays = differenceInDays(new Date(userLockInfo.lockedEndDate), new Date());
-        const veBalance = fNum2(userLockInfo.lockedAmount, FNumFormats.token);
-        const lockedUntilDate = format(userLockInfo.lockedEndDate, PRETTY_DATE_FORMAT);
-
-        setLockInfoDisplay({
-          lockedUntilDays,
-          percentOwned,
-          veBalance,
-          lockedUntilDate,
+    const percentOwned = fNum2(
+      bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
+      {
+        style: 'percent',
+        maximumFractionDigits: 4,
+      },
+    );
+    const lockedUntilDays = differenceInDays(new Date(userLockInfo.lockedEndDate), new Date());
+    const veBalance = fNum2(userLockInfo.lockedAmount, FNumFormats.token);
+    const lockedUntilDate = format(userLockInfo.lockedEndDate, PRETTY_DATE_FORMAT);
+      setLockInfoDisplay({
+        lockedUntilDays,
+        percentOwned,
+        veBalance,
+        lockedUntilDate,
         });
       }
-
       if (userLockInfo.hasExistingLock && userLockInfo.isExpired) {
         setExpiredHasLock(true);
       }
     }
   }, [isConnected, userLockInfo]);
-
-
 
   // const { veBalBalance } = useVeVRTK();
   const { voteForGauge } = useGaugeVoting();
@@ -215,16 +192,14 @@ useEffect(() => {
 
   useEffect(() => {
     if (
-      !isVeLoading &&
-      (!veBalLockInfo?.hasExistingLock || Number(veBalLockInfo?.lockedAmount) === 0)
+      !isVeLoading && lockInfoDisplay.veBalance === '0'
     ) {
-      console.log();
       setNoVeBalWarning({
         title: 'You need some veVRTK to vote on gauges',
         description: 'Get veVRTK by locking up VPT tokens from the 80% VRTK / 20% BNB pool.',
       });
     }
-  }, [veBalLockInfo, isVeLoading]);
+  }, [isVeLoading, lockInfoDisplay.veBalance]);
 
   useEffect(() => {
     if (isVoteWeightValid(voteWeight)) {
@@ -349,6 +324,7 @@ useEffect(() => {
           bg="black" flexDirection="column" 
           status="warning" color="white" mt={{base:'2', md:'4'}} borderRadius="12px">
             <Box display="flex" flexDirection="row">
+              
                 <AlertIcon color="vertek.neonpurple.500" />  
                 <AlertTitle fontSize="1rem" >
                     {voteWarning.title}
