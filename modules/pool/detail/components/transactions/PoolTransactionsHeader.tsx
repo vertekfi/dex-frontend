@@ -4,31 +4,31 @@ import { Grid, GridItem } from '@chakra-ui/react';
 export default function PoolTransactionHeader() {
     return (
         <Grid
-            px="4"
-            py={{ base: '4', xl: '2' }}
-            borderTopLeftRadius="md"
-            borderTopRightRadius="md"
+            px="1"
+            py={{ base: '4', lg: '2' }}
+            borderTopLeftRadius="16px"
+            borderTopRightRadius="16px"
             alignItems="center"
             bgColor="rgba(255,255,255,0.08)"
             borderBottom="2px"
-            borderColor="beets.base.500"
+            borderBottomColor="vertek.neonpurple.500"
             mb={{ base: '4', lg: '0' }}
-            templateColumns={'200px 1fr 200px 200px'}
+            templateColumns={'1fr 250px 200px 1fr'}
             gap="0"
-            display={{ base: 'none', xl: 'grid' }}
+            display={{ base: 'none', lg: 'grid' }}
         >
             <GridItem>
-                <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+                <Text fontSize="md" fontWeight="semibold" color="gray.100">
                     Action
                 </Text>
             </GridItem>
-            <GridItem>
-                <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+            <GridItem justifyContent="flex-start" alignItems="center" display="flex" >
+                <Text fontSize="md" fontWeight="semibold" color="gray.100">
                     Details
                 </Text>
             </GridItem>
-            <GridItem>
-                <Text fontSize="md" fontWeight="semibold" color="beets.base.100">
+            <GridItem justifyContent="center" alignItems="center" display="flex" >
+                <Text fontSize="md" fontWeight="semibold" color="gray.100">
                     Value
                 </Text>
             </GridItem>
@@ -36,7 +36,7 @@ export default function PoolTransactionHeader() {
                 <Text
                     fontSize="md"
                     fontWeight="semibold"
-                    color="beets.base.100"
+                    color="gray.100"
                     textAlign={{ base: 'left', lg: 'right' }}
                     mr="6"
                 >
