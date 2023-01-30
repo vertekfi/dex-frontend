@@ -1045,3 +1045,17 @@ export const GetUserStakes = gql`
     }
   }
 `;
+export const GetUserVeLockInfo = gql`
+  query GetUserVeLockInfo {
+    userGetVeLockInfo {
+      lockedAmount
+      lockEndDate
+      totalSupply
+      currentBalance
+      epoch
+      hasExistingLock
+      isExpired
+      percentOwned
+    }
+  }
+`;

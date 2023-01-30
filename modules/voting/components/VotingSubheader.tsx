@@ -1,52 +1,14 @@
-import { Box, Text, Grid, GridItem, VStack } from '@chakra-ui/react';
-import { scale } from '@georgeroman/balancer-v2-pools/dist/src/utils/big-number';
-import { useEffect, useState } from 'react';
-import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
-import { bnum } from '~/lib/util/big-number.utils';
-import { fNum2, FNumFormats } from '~/lib/util/useNumber';
-import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
+import { Box, Grid, GridItem, VStack, Text } from '@chakra-ui/react';
+import { useVotingGauges } from '../lib/useVotingGauges';
 
-export function VotingSubheader() {
-  const [hasLock, setHasLock] = useState<boolean>(false);
-  const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
-  const [unallocatedVotesFormatted, setUnallocatedVotesFormatted] = useState<string>();
+type Props = {
+  unallocatedVotesFormatted: string;
+};
 
-  const {
-    isLoading: loadingGauges,
-    votingGauges,
-    unallocatedVoteWeight,
-    votingPeriodEnd,
-    votingPeriodLastHour,
-    refetch: refetchVotingGauges,
-  } = useVotingGauges();
-
-  const { data: userLockInfo } = useUserVeLockInfoQuery();
-
-  useEffect(() => {
-    if (unallocatedVoteWeight) {
-      setUnallocatedVotesFormatted(
-        fNum2(scale(bnum(unallocatedVoteWeight), -4).toString(), FNumFormats.percent),
-      );
-    } else {
-      setUnallocatedVotesFormatted('0%');
-    }
-  }, [unallocatedVoteWeight]);
-
-  // set user lock info
-  useEffect(() => {
-    if (userLockInfo) {
-      if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
-        setHasLock(true);
-      }
-
-      if (userLockInfo.hasExistingLock && userLockInfo.isExpired) {
-        setExpiredHasLock(true);
-      }
-    }
-  }, [userLockInfo]);
+export function VotingSubheader(props: Props) {
+  const { votingPeriodEnd } = useVotingGauges();
 
   return (
-    // <Box mt={3} mb='4rem' flexDirection="column" display="flex">
     <Grid
       mt={16}
       justifyContent="center"
@@ -88,7 +50,7 @@ export function VotingSubheader() {
               My unallocated votes
             </Text>
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
-              {unallocatedVotesFormatted}
+              {props.unallocatedVotesFormatted}
             </Text>
           </Box>
           <Box
@@ -116,6 +78,5 @@ export function VotingSubheader() {
         </VStack>
       </GridItem>
     </Grid>
-    // </Box>
   );
 }

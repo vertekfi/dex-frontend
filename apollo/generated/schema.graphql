@@ -1001,6 +1001,17 @@ input GqlUserSwapVolumeFilter {
   tokenOutIn: [String!]
 }
 
+type GqlUserVoteEscrowInfo {
+  currentBalance: String!
+  epoch: String!
+  hasExistingLock: Boolean!
+  isExpired: Boolean!
+  lockEndDate: String!
+  lockedAmount: String!
+  percentOwned: String!
+  totalSupply: String!
+}
+
 scalar JSON
 
 type LiquidityGauge {
@@ -1173,6 +1184,7 @@ type Query {
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
   userGetStaking: [GqlPoolStaking!]!
   userGetSwaps(first: Int!, poolId: String!, skip: Int!): [GqlPoolSwap!]!
+  userGetVeLockInfo: GqlUserVoteEscrowInfo!
 }
 
 type RewardPool {

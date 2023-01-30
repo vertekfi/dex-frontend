@@ -14,8 +14,6 @@ export function useGaugeVoting() {
   });
 
   function voteForGauge(gaugeAddress: string, voteWeight: BigNumber) {
-    console.log(gaugeAddress);
-    console.log('Submitting gauge vote..');
     return submit({
       args: [gaugeAddress, voteWeight],
       toastText: `Voting for gauge`,
@@ -25,6 +23,6 @@ export function useGaugeVoting() {
 
   return {
     voteForGauge,
-    rest,
+    ...rest,
   };
 }

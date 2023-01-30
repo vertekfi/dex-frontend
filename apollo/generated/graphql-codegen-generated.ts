@@ -1019,6 +1019,18 @@ export interface GqlUserSwapVolumeFilter {
   tokenOutIn?: InputMaybe<Array<Scalars['String']>>;
 }
 
+export interface GqlUserVoteEscrowInfo {
+  __typename: 'GqlUserVoteEscrowInfo';
+  currentBalance: Scalars['String'];
+  epoch: Scalars['String'];
+  hasExistingLock: Scalars['Boolean'];
+  isExpired: Scalars['Boolean'];
+  lockEndDate: Scalars['String'];
+  lockedAmount: Scalars['String'];
+  percentOwned: Scalars['String'];
+  totalSupply: Scalars['String'];
+}
+
 export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
   /**  Address of the pool (lp_token of the gauge)  */
@@ -1170,6 +1182,7 @@ export interface Query {
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
+  userGetVeLockInfo: GqlUserVoteEscrowInfo;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -4330,6 +4343,23 @@ export type GetUserStakesQuery = {
   getUserGaugeStakes: Array<{ __typename: 'LiquidityGauge'; id: string } | null>;
 };
 
+export type GetUserVeLockInfoQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUserVeLockInfoQuery = {
+  __typename: 'Query';
+  userGetVeLockInfo: {
+    __typename: 'GqlUserVoteEscrowInfo';
+    lockedAmount: string;
+    lockEndDate: string;
+    totalSupply: string;
+    currentBalance: string;
+    epoch: string;
+    hasExistingLock: boolean;
+    isExpired: boolean;
+    percentOwned: string;
+  };
+};
+
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
   fragment GqlPoolBatchSwapSwap on GqlPoolBatchSwapSwap {
     id
@@ -6702,4 +6732,61 @@ export type GetUserStakesLazyQueryHookResult = ReturnType<typeof useGetUserStake
 export type GetUserStakesQueryResult = Apollo.QueryResult<
   GetUserStakesQuery,
   GetUserStakesQueryVariables
+>;
+export const GetUserVeLockInfoDocument = gql`
+  query GetUserVeLockInfo {
+    userGetVeLockInfo {
+      lockedAmount
+      lockEndDate
+      totalSupply
+      currentBalance
+      epoch
+      hasExistingLock
+      isExpired
+      percentOwned
+    }
+  }
+`;
+
+/**
+ * __useGetUserVeLockInfoQuery__
+ *
+ * To run a query within a React component, call `useGetUserVeLockInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserVeLockInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserVeLockInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserVeLockInfoQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetUserVeLockInfoQuery, GetUserVeLockInfoQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserVeLockInfoQuery, GetUserVeLockInfoQueryVariables>(
+    GetUserVeLockInfoDocument,
+    options,
+  );
+}
+export function useGetUserVeLockInfoLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserVeLockInfoQuery,
+    GetUserVeLockInfoQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserVeLockInfoQuery, GetUserVeLockInfoQueryVariables>(
+    GetUserVeLockInfoDocument,
+    options,
+  );
+}
+export type GetUserVeLockInfoQueryHookResult = ReturnType<typeof useGetUserVeLockInfoQuery>;
+export type GetUserVeLockInfoLazyQueryHookResult = ReturnType<typeof useGetUserVeLockInfoLazyQuery>;
+export type GetUserVeLockInfoQueryResult = Apollo.QueryResult<
+  GetUserVeLockInfoQuery,
+  GetUserVeLockInfoQueryVariables
 >;
