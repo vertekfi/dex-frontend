@@ -17,31 +17,31 @@ return (
   <Flex
     flex="1"
     mt={{ base: '12', lg:'4'}}
-    pl={{ base: '4', xl: '8' }}
+    pl={{ base: '4', lg: '8' }}
     mb="12"
     justifyContent="center"
     alignItems="center"
   >
     <Flex flexDirection="column" width={{ base: 'auto' }}>
       <HStack alignItems="center" justifyContent="space-between">
-        <Text
-          as="h1"
-          // letterSpacing="0.1em"
-          textStyle={{ base: 'h2', lg: 'h1' }}
-          textTransform="uppercase"
-          color="white"
-          fontWeight="semibold"
-          css={{
-            transition: "transform 0.5s",
-            "&:hover": {
-              transform: "scale(1.02)",
-            },
-          }}
-        >
-          Welcome to
+          <Text
+            as="h1"
+            textStyle={{ base: 'h2', lg: 'h1' }}
+            textTransform="uppercase"
+            color="white"
+            fontWeight="semibold"
+            css={{
+              transition: "transform 0.5s",
+              "&:hover": {
+                transform: "scale(1.02)",
+              },
+            }}
+          >
+              Welcome to
           <br />
           <VLogoPVWT 
-          height="100px" mt="2" />
+              height={{ base: '65px', md:'100px'}}  mt="3" 
+          />
         </Text>
       </HStack>
       {/* <NextImage

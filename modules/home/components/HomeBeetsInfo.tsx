@@ -4,6 +4,7 @@ import NextImage from 'next/image';
 import BeetsTokenInfoImage from '~/assets/svg/vertek-logo-dark.svg';
 import BeetsTokenInfoOpImage from '~/assets/svg/vertek-logo-dark.svg';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
+import { VLogoPVWT } from '~/assets/logo/Vertek/VLogoPVWT';
 
 export function HomeBeetsInfo(props: BoxProps) {
   const { chainId } = useNetworkConfig();
@@ -33,24 +34,22 @@ export function HomeBeetsInfo(props: BoxProps) {
       <Box 
       display="flex" flexDirection={{ base:'column', md:'row' }} 
       justifyContent="space-between" 
-      alignItems="center" mt={{ base:'-8', lg:'-20'}}>
-        <Box ml="4">
-          <NextImage
-              src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
-              width="250px"
-            />
+      alignItems="center" mt={{ base:'4', lg:'2'}}>
+        <Box ml="0">
+            <VLogoPVWT 
+              height={{ base:'75px', md:'90px'}} mt="6" mb={{ base:'auto', md:'8' }} />
         </Box>
-          <Button
-            display="flex" 
-            mr={{ base:'auto', md:'25%'}}
-            variant="vertekdark"
-            width={{ base: '100%', lg: '25%'}}
-            mt={{ base: '-8', lg:'auto' }}
-            as="a"
-            href=" https://aalto-defi.notion.site/Vertek-Volta-veVRTK-c4cde926ad344b2b9e1e464469bd1873"
-            target="_blank"
-            mb="4"
-          >
+        <Button
+          display="flex" 
+          mr={{ base:'auto', md:'25%'}}
+          variant="vertekdark"
+          width={{ base: '100%', lg: '25%'}}
+          mt={{ base: '10', lg:'auto' }}
+          as="a"
+          href=" https://aalto-defi.notion.site/Vertek-Volta-veVRTK-c4cde926ad344b2b9e1e464469bd1873"
+          target="_blank"
+          mb="8"
+        >
             veVRTK tokenomics
           </Button>
       </Box>
