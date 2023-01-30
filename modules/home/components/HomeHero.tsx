@@ -40,7 +40,7 @@ return (
         >
           Welcome to
           <br />
-          <VLogoPVWT className="lightning flashit" 
+          <VLogoPVWT 
           height="100px" mt="2" />
         </Text>
       </HStack>
