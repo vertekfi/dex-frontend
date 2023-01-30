@@ -40,6 +40,32 @@ a {
     width: 100% !important;
 }
 
+.flashit{
+    -webkit-animation: flash ease-out 7s infinite;
+    -moz-animation: flash ease-out 7s infinite;
+    animation: flash ease-out 7s infinite;
+    animation-delay: 2s;
+    }
+    
+@-webkit-keyframes flash {
+    from { opacity: 1; } 
+    8% { opacity: 1; }
+    9% { opacity: 0.1; }
+    10% { opacity: 0.8; }
+    11% { opacity: 0.1; }
+    12% { opacity: 1; }
+    to { opacity: 1; }
+}
+    
+@keyframes flash {
+    from { opacity: 1; } 
+    8% { opacity: 1; }
+    9% { opacity: 0.1; }
+    10% { opacity: 0.8; }
+    11% { opacity: 0.1; }
+    12% { opacity: 1; }
+    to { opacity: 1; }
+}
 
 /* custom vertek */ 
 
