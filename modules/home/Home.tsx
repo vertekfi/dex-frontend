@@ -9,6 +9,8 @@ import { useGetPoolsLazyQuery } from '~/apollo/generated/graphql-codegen-generat
 import { useEffect } from 'react';
 import { HomePoolsNew } from './components/HomePoolsNew';
 
+
+
 export function Home() {
   const {
     stakedValueUSD,
@@ -34,7 +36,7 @@ export function Home() {
   return (
     <Box>
       <Box display="flex" justifyContent="flex-end">
-        <BeetsLogo />
+        {/* <BeetsLogo /> */}
       </Box>
       <HomeHero />
       {/* <Grid
