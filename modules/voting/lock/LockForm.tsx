@@ -9,7 +9,6 @@ import {
   Box,
   Button,
   Flex,
-  Skeleton,
   FormControl,
   Input,
   FormLabel,
@@ -19,7 +18,7 @@ import {
   BeetsModalHeader,
   BeetsModalHeadline,
 } from '~/components/modal/BeetsModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -27,21 +26,17 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import { useUserAccount } from '~/lib/user/useUserAccount';
-import { useUserVeLockInfoQuery } from '../../lib/useUserVeLockInfoQuery';
-import { useUserData } from '~/lib/user/useUserData';
-import { useEffect } from 'react';
-import { tokenFormatAmount } from '~/lib/services/token/token-util';
+import { LockPreviewModal } from './LockPreviewModal/LockPreviewModal';
+import { MyVeVRTK } from '../components/MyVeVRTK';
+import { useUserVeData } from '../lib/useUserVeData';
 import { networkConfig } from '~/lib/config/network-config';
-import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { LockFormInner } from './LockFormInner';
-import { MyVeVRTK } from '../MyVeVRTK';
 import { LockType } from './types';
-import { useGetPoolQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { useLockEndDate } from './lib/useLockEndDate';
-import { useVeVRTK } from '../../lib/useVeVRTK';
-import { useLockAmount } from './lib/useLockAmount';
-import { LockPreview } from './LockPreviewModal/LockPreviewModal';
+import { INPUT_DATE_FORMAT } from '../constants';
+import { addWeeks, format } from 'date-fns';
+import useLockAmount from './lib/useLockAmount';
+import { bnum } from '~/lib/util/big-number.utils';
+import Card from '~/components/card/Card';
 
 interface Props {
   isOpen: boolean;
@@ -50,78 +45,150 @@ interface Props {
 
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => setIsModalOpen(true);
-  const [userPoolBalance, setUserPoolBalance] = useState<{
-    balance: string;
-    usdValue: string;
-  }>({
-    balance: '0',
-    usdValue: '0',
-  });
-  const [lockInfoDisplay, setLockInfoDisplay] = useState<{
-    lockedUntilDays: number;
-    lockedUntilDate: string;
-    veBalance: string;
-    percentOwned: string;
-  }>({
-    lockedUntilDays: 0,
-    lockedUntilDate: '-',
-    veBalance: '0',
-    percentOwned: '0',
-  });
-  const [selectedDate, setSelectedDate] = useState<string>('');
-  const [submissionDisabled, setSubmissionDisabled] = useState<boolean>();
-  const [expectedVeBalAmount, setExpectedVeBalAmount] = useState<string>();
   const [lockType, setLockType] = useState<LockType[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const [lockAmount, setLockAmount] = useState<string>();
-  const [lockDates, setLockDates] = useState<
-    {
-      id: string;
-      label: string;
-      date: string;
-      action: () => void;
-    }[]
-  >();
+  const [submissionDisabled, setSubmissionDisabled] = useState<boolean>(true);
 
-  const { isConnected } = useUserAccount();
-  const { data: userLockInfo, isLoading: isLoadingUserVeData } = useUserVeLockInfoQuery();
-  const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-  const { veBalTokenInfo } = useVeVRTK();
-  const { isValidLockAmount, isIncreasedLockAmount, totalLpTokens } = useLockAmount(userLockInfo);
+  const {
+    isLoadingUserVeData,
+    userLockablePoolBalance,
+    userLockablePoolBalanceUSD,
+    currentVeBalance,
+    percentOwned,
+    expectedVeBal,
+    lockEndDate,
+    lockablePool,
+    hasExistingLock,
+    isExpired,
+  } = useUserVeData();
+
   const {
     minLockEndDateTimestamp,
     maxLockEndDateTimestamp,
-    isValidLockEndDate,
     isExtendedLockEndDate,
-  } = useLockEndDate(userLockInfo);
-
-  const { data: lockablePool } = useGetPoolQuery({
-    variables: {
-      id: networkConfig.balancer.votingEscrow.lockablePoolId,
-    },
-  });
+    isValidLockEndDate,
+  } = useLockEndDate();
+  const { isValidLockAmount, isIncreasedLockAmount, totalLpTokens } = useLockAmount();
 
   useEffect(() => {
-    if (!loadingBalances && isConnected) {
-      setUserPoolBalance({
-        balance: tokenFormatAmount(
-          bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-        usdValue: numberFormatUSDValue(
-          usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-      });
+    if (!isLoadingUserVeData) {
+      if (!hasExistingLock && !isExpired) {
+        setSubmissionDisabled(!isIncreasedLockAmount && !isExtendedLockEndDate);
+      }
+
+      if (
+        !bnum(userLockablePoolBalance || '0').gt(0) ||
+        !isValidLockAmount ||
+        !isValidLockEndDate
+      ) {
+        setSubmissionDisabled(true);
+      }
     }
-  }, [loadingBalances, isConnected]);
+  }, [isLoadingUserVeData]);
+
+  useEffect(() => {
+    if (!isLoadingUserVeData) {
+      if (hasExistingLock && !isExpired) {
+        if (isIncreasedLockAmount && isExtendedLockEndDate) {
+          return setLockType([LockType.INCREASE_LOCK, LockType.EXTEND_LOCK]);
+        }
+        if (isExtendedLockEndDate) {
+          return setLockType([LockType.EXTEND_LOCK]);
+        }
+        if (isIncreasedLockAmount) {
+          return setLockType([LockType.INCREASE_LOCK]);
+        }
+      }
+      setLockType([LockType.CREATE_LOCK]);
+    }
+  }, [isLoadingUserVeData]);
 
   function handleClosePreviewModal() {
     setIsModalOpen(false);
   }
 
+  useEffect(() => {
+    if (!isLoadingUserVeData && lockEndDate > 0) {
+      updateLockEndDate(lockEndDate);
+    }
+  }, [isLoadingUserVeData, lockEndDate]);
+
   function handleShowPreviewModal() {
-    // if (submissionDisabled) return;
+    console.log(submissionDisabled);
+    if (!lockAmount || !selectedDate) {
+      setSubmissionDisabled(true);
+      return;
+    }
     setIsModalOpen(true);
   }
+
+  function getDateInput(timestamp: number) {
+    return formatDateInput(Math.min(timestamp, maxLockEndDateTimestamp));
+  }
+
+  function updateLockEndDate(timestamp: number) {
+    const newDate = getDateInput(timestamp);
+    console.log('newDate: ' + newDate);
+    setSelectedDate(newDate);
+  }
+
+  function formatDateInput(date: Date | number) {
+    return format(date, INPUT_DATE_FORMAT);
+  }
+
+  function handleDateChanged(date: string) {
+    updateLockEndDate(new Date(date).getTime());
+    // round up to thursday of the selected week?
+  }
+
+  function handleAmountChange(amount: string) {
+    // expected out
+    // console.log(amount);
+
+    if (!amount) {
+      setSubmissionDisabled(true);
+    }
+
+    setLockAmount(amount);
+  }
+
+  const expectedVeBalAmount = expectedVeBal(lockAmount || '0', selectedDate);
+
+  const lockDates = [
+    {
+      id: 'one-week',
+      label: '~1W',
+      date: getDateInput(minLockEndDateTimestamp),
+      action: () => updateLockEndDate(minLockEndDateTimestamp),
+    },
+    {
+      id: 'one-month',
+      label: '~1M',
+      date: getDateInput(addWeeks(minLockEndDateTimestamp, 4).getTime()),
+      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 4).getTime()),
+    },
+    {
+      id: 'three-month',
+      label: '~3M',
+      date: getDateInput(addWeeks(minLockEndDateTimestamp, 12).getTime()),
+      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 12).getTime()),
+    },
+    {
+      id: 'six-month',
+      label: '~6M',
+      date: getDateInput(addWeeks(minLockEndDateTimestamp, 24).getTime()),
+      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 24).getTime()),
+    },
+    {
+      id: 'one-year',
+      label: '~1Y',
+      date: formatDateInput(maxLockEndDateTimestamp),
+      action: () => {
+        setSelectedDate(formatDateInput(maxLockEndDateTimestamp));
+      },
+    },
+  ];
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
@@ -192,7 +259,7 @@ export function LockForm(props: Props) {
                     VRTK-BNB
                   </Text>
                   <Text fontSize="1rem" ml="auto">
-                    {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
+                    {userLockablePoolBalance}
                   </Text>
                 </Flex>
                 <Flex>
@@ -200,7 +267,7 @@ export function LockForm(props: Props) {
                     Vertek Governance
                   </Text>
                   <Text fontSize="1rem" ml="auto">
-                    ${usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)}
+                    {userLockablePoolBalanceUSD}
                   </Text>
                 </Flex>
               </Box>
@@ -305,18 +372,17 @@ export function LockForm(props: Props) {
                     name="voteWeight"
                     type="number"
                     value={lockAmount}
-                    onChange={(event) => setLockAmount(event.target.value)}
+                    onChange={(event) => handleAmountChange(event.target.value)}
                     autoComplete="off"
                     autoCorrect="off"
                     spellCheck={false}
                     step="any"
-                    placeholder="0.00"
+                    placeholder={userLockablePoolBalance || '0.00'}
                     size="md"
                     fontWeight="bold"
                   />
                   <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
-                    {bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)} shares
-                    available
+                    {userLockablePoolBalance} shares available
                   </FormLabel>
                 </FormControl>
               </Box>
@@ -338,21 +404,13 @@ export function LockForm(props: Props) {
                   Lock until
                 </Text>
                 <FormControl mb="2">
-                  {/* <DatePicker
-            value={selectedDate}
-            onChange={(date) => null}
-            dateFormat="MM/dd/yyyy"
-            placeholderText="mm/dd/yyyy"
-            id="voteWeight"
-            name="voteWeight"
-            autoComplete="off"
-            calendarClassName="datepicker"
-          /> */}
-
-                  <Input placeholder="Select Date and Time" size="md" type="datetime-local"     
-                  // onChange={(event) => console.log(event.target.value)}
-                  onChange={(event) => setSelectedDate(event.target.value)}
-/>
+                  <Input
+                    placeholder="Select Date and Time"
+                    size="md"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(event) => handleDateChanged(event.target.value)}
+                  />
                   <Box
                     w="99%"
                     paddingY="2"
@@ -391,42 +449,57 @@ export function LockForm(props: Props) {
                     Total Voting Escrow
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
-                    {expectedVeBalAmount && (
-                      <div>
-                        {expectedVeBalAmount}: - {veBalTokenInfo?.symbol}
-                      </div>
-                    )}
+                    {/* <div>{tokenFormatAmount(expectedVeBalAmount || '0')} - veVRTK</div> */}
+                    <div>{expectedVeBalAmount} - veVRTK</div>
                   </Text>
                 </Flex>
               </Box>
               <Button
-                 onClick={() => {
-                  console.log(selectedDate);
-                  handleShowPreviewModal();
-              }}
+                onClick={handleShowPreviewModal}
                 variant="stayblack"
                 _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
                 mb="4"
                 width={{ base: '85%', md: '90%' }}
-                // disabled={submissionDisabled}
+                disabled={submissionDisabled}
               >
                 Preview
               </Button>
               {isModalOpen && (
-                <LockPreview
+                <LockPreviewModal
                   isOpen={isModalOpen}
-
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
-                  veBalLockInfo={userLockInfo}
-                  totalLpTokens={totalLpTokens || '0'}
+                  totalLpTokens={lockAmount || '0'}
                   lockEndDate={selectedDate}
                   lockablePool={lockablePool}
+                  lockAmount={lockAmount || '0'}
+                  expectedVeBalAmount={expectedVeBalAmount}
+                  currentVeBalance={currentVeBalance || '0'}
                 />
               )}
             </GridItem>
 
-            <MyVeVRTK veBalLockInfo={userLockInfo} isLoading={isLoadingUserVeData} />
+            <Card
+              flexDirection="column"
+              borderRadius="16px"
+              height="200px"
+              padding="4"
+              alignItems="center"
+              justifyContent="center"
+              marginTop="5rem"
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+              css={{
+                transition: 'transform 0.5s',
+                '&:hover': {
+                  transform: 'scale(1.01)',
+                },
+              }}
+            >
+              <MyVeVRTK
+                currentVeBalance={currentVeBalance || ''}
+                percentOwned={percentOwned || ''}
+              />
+            </Card>
           </Grid>
         </BeetsModalBody>
       </ModalContent>

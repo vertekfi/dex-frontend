@@ -1127,10 +1127,6 @@ export interface MutationTokenInitChartDataArgs {
   tokenAddress: Scalars['String'];
 }
 
-export interface MutationUserInitStakedBalancesArgs {
-  stakingTypes: Array<GqlPoolStakingType>;
-}
-
 export interface MutationUserInitWalletBalancesForPoolArgs {
   poolId: Scalars['String'];
 }

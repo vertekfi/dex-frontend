@@ -1,104 +1,37 @@
-import { Button, Grid, Text, Box } from '@chakra-ui/react';
-import { useUserVeLockInfoQuery } from '../lib/useUserVeLockInfoQuery';
-import { useEffect, useState } from 'react';
-import { UserDataProvider, useUserData } from '~/lib/user/useUserData';
+import { Button, Grid, Text, Box, Skeleton } from '@chakra-ui/react';
+import { useState } from 'react';
+import { UserDataProvider } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
-import { useUserAccount } from '~/lib/user/useUserAccount';
-import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { tokenFormatAmount } from '~/lib/services/token/token-util';
-import { bnum } from '@balancer-labs/sor';
-import { fNum2, FNumFormats } from '~/lib/util/useNumber';
-import { differenceInDays, format } from 'date-fns';
-import { PRETTY_DATE_FORMAT } from '../constants';
-import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import styled from '@emotion/styled';
 import { LockIcon } from '@chakra-ui/icons';
-import { LockForm } from './lock/LockForm';
+import { LockForm } from '../lock/LockForm';
 import Card from '~/components/card/Card';
-import { useVeVRTK } from '../lib/useVeVRTK';
+import { useUserVeData } from '../lib/useUserVeData';
+import { MyVeVRTK } from './MyVeVRTK';
 
-interface Props {
-  pool: GqlPoolUnion;
-}
-const VotingCardHeader = styled.p`
+export const VotingCardHeader = styled.p`
   font-size: 1.3rem;
   text-align: center;
   color: #c1c1d1;
   font-weight: bold;
   text-shadow: 0 0 12px #000;
 `;
+
 export function VotingHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
-  const [pool, setPool] = useState<GqlPoolUnion>();
-  const [hasLock, setHasLock] = useState<boolean>(false);
-  const [hasExpiredLock, setExpiredHasLock] = useState<boolean>(false);
-  const [userPoolBalance, setUserPoolBalance] = useState<{
-    balance: string;
-    usdValue: string;
-  }>({
-    balance: '0',
-    usdValue: '0',
-  });
-  const [lockInfoDisplay, setLockInfoDisplay] = useState<{
-    lockedUntilDays: number;
-    lockedUntilDate: string;
-    veBalance: string;
-    percentOwned: string;
-  }>({
-    lockedUntilDays: 0,
-    lockedUntilDate: '-',
-    veBalance: '0',
-    percentOwned: '0',
-  });
 
-  const { isConnected } = useUserAccount();
-  const { data: userLockInfo } = useUserVeLockInfoQuery();
-  const { loading: loadingBalances, bptBalanceForPool, usdBalanceForPool } = useUserData();
-
-  useEffect(() => {
-    if (!loadingBalances && isConnected) {
-      setUserPoolBalance({
-        balance: tokenFormatAmount(
-          bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-        usdValue: numberFormatUSDValue(
-          usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
-        ),
-      });
-    }
-  }, [loadingBalances, isConnected]);
-
-  // set user lock info
-  useEffect(() => {
-    if (isConnected && userLockInfo) {
-      if (userLockInfo.hasExistingLock && !userLockInfo.isExpired) {
-        setHasLock(true);
-
-        const percentOwned = fNum2(
-          bnum(userLockInfo.lockedAmount).div(userLockInfo.totalSupply).toString(),
-          {
-            style: 'percent',
-            maximumFractionDigits: 4,
-          },
-        );
-        const lockedUntilDays = differenceInDays(new Date(userLockInfo.lockedEndDate), new Date());
-        const veBalance = fNum2(userLockInfo.lockedAmount, FNumFormats.token);
-        const lockedUntilDate = format(userLockInfo.lockedEndDate, PRETTY_DATE_FORMAT);
-
-        setLockInfoDisplay({
-          lockedUntilDays,
-          percentOwned,
-          veBalance,
-          lockedUntilDate,
-        });
-      }
-
-      if (userLockInfo.hasExistingLock && userLockInfo.isExpired) {
-        setExpiredHasLock(true);
-      }
-    }
-  }, [isConnected, userLockInfo]);
+  const {
+    userLockablePoolBalance,
+    userLockablePoolBalanceUSD,
+    isLoadingUserVeData,
+    lockedUntilDate,
+    lockedUntilDays,
+    lockedBalance,
+    lockedBalanceUSD,
+    currentVeBalance,
+    percentOwned,
+  } = useUserVeData();
 
   return (
     <UserDataProvider>
@@ -164,8 +97,10 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 28px 12px 0px #000"
           >
-            <Text>{userPoolBalance.usdValue}</Text>
-            <Text>{userPoolBalance.balance} shares</Text>
+            <Skeleton isLoaded={!!userLockablePoolBalance && !!userLockablePoolBalanceUSD}>
+              <Text>{userLockablePoolBalanceUSD}</Text>
+              <Text>{userLockablePoolBalance} shares</Text>
+            </Skeleton>
             <Button
               as="a"
               href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
@@ -220,8 +155,10 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 28px 12px 0px #000"
           >
-            <Text>$0.00</Text>
-            <Text>{userLockInfo?.lockedAmount} shares</Text>
+            <Skeleton isLoaded={!isLoadingUserVeData}>
+              <Text>{lockedBalanceUSD}</Text>
+              <Text>{lockedBalance} shares</Text>
+            </Skeleton>
             <Button
               variant="moistblack"
               marginY="1rem"
@@ -276,8 +213,10 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 28px 12px 0px #000"
           >
-            <Text>{lockInfoDisplay.lockedUntilDate}</Text>
-            <Text>{lockInfoDisplay.lockedUntilDays} days</Text>
+            <Skeleton isLoaded={!isLoadingUserVeData}>
+              <Text>{lockedUntilDate}</Text>
+              <Text>{lockedUntilDays} days</Text>
+            </Skeleton>
             <Button
               variant="moistblack"
               marginBottom="1rem"
@@ -308,22 +247,7 @@ export function VotingHeader() {
             },
           }}
         >
-          <Box
-            height="75%"
-            padding="2"
-            width="full"
-            flexDirection="column"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            bg="vertek.slatepurple.900"
-            borderRadius="md"
-            boxShadow="2px 58px 12px 0px #000"
-          >
-            <VotingCardHeader>My veVRTK</VotingCardHeader>
-            <Text>{lockInfoDisplay.veBalance} shares</Text>
-            <Text>{lockInfoDisplay.percentOwned} percent owned</Text>
-          </Box>
+          <MyVeVRTK currentVeBalance={currentVeBalance || ''} percentOwned={percentOwned || ''} />
         </Card>
       </Grid>
     </UserDataProvider>

@@ -1095,7 +1095,7 @@ type Mutation {
   tokenReloadTokenPrices: Boolean
   tokenSyncTokenDefinitions: String!
   tokenSyncTokenDynamicData: String!
-  userInitStakedBalances(stakingTypes: [GqlPoolStakingType!]!): String!
+  userInitStakedBalances: String!
   userInitWalletBalancesForAllPools: String!
   userInitWalletBalancesForPool(poolId: String!): String!
   userSyncBalance(poolId: String!): String!

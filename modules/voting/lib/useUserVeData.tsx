@@ -2,11 +2,16 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import { useUserData } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
 import { useUserAccount } from '~/lib/user/useUserAccount';
-import { differenceInDays, format } from 'date-fns';
+import { differenceInDays, differenceInSeconds, format, sub } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from '../constants';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
-import { useGetUserVeLockInfoQuery } from '~/apollo/generated/graphql-codegen-generated';
+import {
+  useGetPoolQuery,
+  useGetUserVeLockInfoQuery,
+} from '~/apollo/generated/graphql-codegen-generated';
+import { bnum } from '~/lib/util/big-number.utils';
+import { getPreviousThursday, oneYearInSecs } from '~/lib/util/time';
 
 export function _useUserVotingData() {
   const [userLockablePoolBalance, setUserLockablePoolBalance] = useState<string>();
@@ -31,8 +36,15 @@ export function _useUserVotingData() {
     data: userVeLockInfo,
     loading: isLoadingUserVeData,
     error: veError,
+    refetch: refetchUserVeData,
   } = useGetUserVeLockInfoQuery({
     pollInterval: 10000,
+  });
+
+  const { loading: isLoadingPool, data: poolData } = useGetPoolQuery({
+    variables: {
+      id: networkConfig.balancer.votingEscrow.lockablePoolId,
+    },
   });
 
   useEffect(() => {
@@ -43,8 +55,9 @@ export function _useUserVotingData() {
 
   useEffect(() => {
     if (isConnected && !isLoadingUserBalances) {
+      console.log(bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId));
       setUserLockablePoolBalance(
-        tokenFormatAmount(bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)),
+        bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
       );
       setUserLockablePoolBalanceUSD(
         numberFormatUSDValue(usdBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId)),
@@ -77,8 +90,42 @@ export function _useUserVotingData() {
     }
   }, [userVeLockInfo, isLoadingUserVeData, isConnected]);
 
+  /**
+   * ~summary Calculate expected veBAL given BPT being locked and lock time in seconds.
+   * ~param {string} bpt - BPT amount being locked up
+   * ~param {str} lockDateStr - Date in string format used to create Date of lock
+   */
+  function expectedVeBal(bpt: string, lockDateStr: string): string {
+    const now = new Date();
+    const lockDate = new Date(lockDateStr);
+    const previousThursdayBeforeLockDate = getPreviousThursday(lockDate);
+    const lockTime = differenceInSeconds(previousThursdayBeforeLockDate, now);
+
+    return bnum(bpt).times(lockTime).div(oneYearInSecs).toString();
+  }
+
+  /**
+   * ~summary Get date object of previous epoch given number of weeks to go back.
+   * ~param {number} weeksToGoBack - Number of weeks to go back for epoch, if 0
+   * gets the immediate epoch in the past. If 1, gets the week before that and so on.
+   */
+  function getPreviousEpoch(weeksToGoBack = 0): Date {
+    const now = new Date();
+    const todayAtMidnightUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+
+    let daysSinceThursday = now.getDay() - 4;
+    if (daysSinceThursday < 0) daysSinceThursday += 7;
+
+    daysSinceThursday = daysSinceThursday + weeksToGoBack * 7;
+
+    return sub(todayAtMidnightUTC, {
+      days: daysSinceThursday,
+    });
+  }
+
   return {
-    isLoadingUserVeData,
+    isLoadingUserVeData: isLoadingUserVeData || isLoadingPool,
+    lockablePool: poolData?.pool,
     userLockablePoolBalance,
     userLockablePoolBalanceUSD,
     hasExistingLock,
@@ -90,6 +137,10 @@ export function _useUserVotingData() {
     percentOwned: userVeLockInfo?.userGetVeLockInfo.percentOwned,
     lockEndDate: Number(userVeLockInfo?.userGetVeLockInfo.lockEndDate),
     isExpired: userVeLockInfo?.userGetVeLockInfo.isExpired,
+
+    refetchUserVeData,
+    expectedVeBal,
+    getPreviousEpoch,
   };
 }
 
