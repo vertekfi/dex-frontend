@@ -233,7 +233,8 @@ export function LockForm(props: Props) {
             >
               <Text
                 align="left"
-                padding="2"
+                paddingX="4"
+                paddingY="2" 
                 mb="4"
                 fontWeight="bold"
                 color="white"
@@ -248,7 +249,7 @@ export function LockForm(props: Props) {
                 height="40%"
                 marginX="2"
                 mb="6"
-                padding="4"
+                padding="6"
                 bgColor="vertek.slatepurple.900"
                 boxShadow="2px 24px 12px 0px #000"
                 borderRadius="12px"
