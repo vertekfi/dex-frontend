@@ -3848,6 +3848,7 @@ export type GetPoolsQuery = {
     dynamicData: {
       __typename: 'GqlPoolDynamicData';
       totalLiquidity: string;
+      totalLiquidity24hAgo: string;
       totalShares: string;
       fees24h: string;
       swapFee: string;
@@ -3920,6 +3921,7 @@ export type GqlPoolMinimalFragment = {
   dynamicData: {
     __typename: 'GqlPoolDynamicData';
     totalLiquidity: string;
+    totalLiquidity24hAgo: string;
     totalShares: string;
     fees24h: string;
     swapFee: string;
@@ -4608,6 +4610,7 @@ export const GqlPoolMinimalFragmentDoc = gql`
     createTime
     dynamicData {
       totalLiquidity
+      totalLiquidity24hAgo
       totalShares
       fees24h
       swapFee

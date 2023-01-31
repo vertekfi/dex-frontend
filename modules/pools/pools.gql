@@ -42,6 +42,7 @@ fragment GqlPoolMinimal on GqlPoolMinimal {
   createTime
   dynamicData {
     totalLiquidity
+    totalLiquidity24hAgo
     totalShares
     fees24h
     swapFee

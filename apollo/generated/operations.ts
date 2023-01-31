@@ -247,6 +247,7 @@ export const GqlPoolMinimal = gql`
     createTime
     dynamicData {
       totalLiquidity
+      totalLiquidity24hAgo
       totalShares
       fees24h
       swapFee
