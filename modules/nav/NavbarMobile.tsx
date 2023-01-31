@@ -77,6 +77,9 @@ return (
       >
         <ModalBody>
           <NavbarLink  href={'/voting'} selected={router.asPath === '/voting'} mt="2" py="2" text="Vote"  />
+          <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="2"/>
+          <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="2" />
+          <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="2" />
           <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="1"/>
           <NavbarLink  href={'/bridge'} selected={router.asPath === '/bridge'} mt="2" py="1" text="Bridge"  />
           <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="1" />

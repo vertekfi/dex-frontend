@@ -124,6 +124,12 @@ export function Navbar({ scrollY }: Props) {
                 text="Perpetuals"
                 mr="3" 
               />
+              <NavbarLink
+                href={'/bridge'}
+                selected={router.asPath === '/bridge'}
+                text="Bridge"
+                mr="5"
+              />
               {/* {networkConfig.launchUrl && (
                 <NavbarLink href={networkConfig.launchUrl} text="Claim" mr={5} />
               )} */}
