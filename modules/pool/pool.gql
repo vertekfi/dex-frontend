@@ -202,6 +202,7 @@ fragment GqlPoolToken on GqlPoolToken {
   decimals
   weight
   totalBalance
+  logoURI
 }
 
 fragment GqlPoolTokenLinear on GqlPoolTokenLinear {
