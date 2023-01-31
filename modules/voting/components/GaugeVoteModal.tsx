@@ -1,17 +1,5 @@
 import { useEffect } from 'react';
-import {
-  FormControl,
-  Input,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Box,
-  HStack,
-  Modal,
-  Text,
-  Button,
-} from '@chakra-ui/react';
+import { FormControl, Input, Alert, AlertIcon, AlertTitle, AlertDescription, Box, HStack, Modal, Text, Button, ModalOverlay } from '@chakra-ui/react';
 import {
   BeetsModalBody,
   BeetsModalContent,
@@ -92,6 +80,10 @@ export function GaugeVoteModal(props: Props) {
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
+      <ModalOverlay
+        display={{ base: 'none', md: 'block' }}
+        bg={`radial-gradient(circle at center, #4132D0 0%, rgba(0,0,0, 0.85) 55% )`}
+      />
         <BeetsModalContent bgColor="vertek.slate.900">
           <BeetsModalHeader mt="2">
             <BeetsModalHeadline textAlign="center" fontSize="2rem">
