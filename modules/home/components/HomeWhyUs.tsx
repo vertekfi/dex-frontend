@@ -7,16 +7,22 @@ import { BeetsSubHeadline } from '~/components/typography/BeetsSubHeadline';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import BeetsTokenInfoImage from '~/assets/svg/vertek-logo-dark.svg';
 import BeetsTokenInfoOpImage from '~/assets/svg/vertek-logo-dark.svg';
+import Image from 'next/image';
+import matrix from '~/assets/vertekicons/block1.svg'; 
 
 export function HomeWhyUs(props: BoxProps) {
   const { chainId } = useNetworkConfig();
 
 return (
 <Box {...props}>
- 
-  <BeetsHeadline mb="" mt="8" fontSize={{ base: '1.5rem', md: '2.2rem'}} textAlign="justify" color="white" fontWeight="bold">
-      DeFi Matrix
+ <Box display="flex" mt="8" alignItems="center" >
+ <Image  src={matrix} width="40" height="40"   />
+  <BeetsHeadline fontSize={{ base: '1.5rem', md: '2.2rem'}} 
+  textAlign="justify" color="white" fontWeight="bold">
+  DeFi Matrix 
   </BeetsHeadline>
+  
+</Box>
   <Box mr={{ base: '0', lg: '20' }} width={{ base: 'full', lg: '75%'}}>
   Vertek is a full-suite matrix of trading tools that users and developers 
   of any skill level can use to participate in the most advanced DeFi paradigm. 
