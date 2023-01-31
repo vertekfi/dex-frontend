@@ -159,6 +159,7 @@ export const GqlPoolToken = gql`
     decimals
     weight
     totalBalance
+    logoURI
   }
 `;
 export const GqlPoolTokenLinear = gql`

@@ -16,7 +16,7 @@ const ALLOWANCES_CACHE_TIME_MS = 30_000;
 
 export function useAllowances(
   account: string | null,
-  tokens: TokenBase[],
+  tokens: TokenBase[] | { address: string; decimals: number }[],
   contract = networkConfig.balancer.vault,
 ) {
   const containsEth =

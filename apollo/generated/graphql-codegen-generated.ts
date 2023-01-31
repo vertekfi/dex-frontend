@@ -2064,6 +2064,7 @@ export type GetPoolQuery = {
           decimals: number;
           weight?: string | null;
           totalBalance: string;
+          logoURI?: string | null;
         }>;
         dynamicData: {
           __typename: 'GqlPoolDynamicData';
@@ -2166,6 +2167,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2189,6 +2191,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2219,6 +2222,7 @@ export type GetPoolQuery = {
           decimals: number;
           weight?: string | null;
           totalBalance: string;
+          logoURI?: string | null;
         }>;
         dynamicData: {
           __typename: 'GqlPoolDynamicData';
@@ -2321,6 +2325,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2344,6 +2349,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2372,6 +2378,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }
           | {
               __typename: 'GqlPoolTokenLinear';
@@ -2416,6 +2423,7 @@ export type GetPoolQuery = {
                   decimals: number;
                   weight?: string | null;
                   totalBalance: string;
+                  logoURI?: string | null;
                 }>;
               };
             }
@@ -2458,6 +2466,7 @@ export type GetPoolQuery = {
                       decimals: number;
                       weight?: string | null;
                       totalBalance: string;
+                      logoURI?: string | null;
                     }
                   | {
                       __typename: 'GqlPoolTokenLinear';
@@ -2502,6 +2511,7 @@ export type GetPoolQuery = {
                           decimals: number;
                           weight?: string | null;
                           totalBalance: string;
+                          logoURI?: string | null;
                         }>;
                       };
                     }
@@ -2610,6 +2620,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2633,6 +2644,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2660,6 +2672,7 @@ export type GetPoolQuery = {
           decimals: number;
           weight?: string | null;
           totalBalance: string;
+          logoURI?: string | null;
         }>;
         dynamicData: {
           __typename: 'GqlPoolDynamicData';
@@ -2762,6 +2775,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2785,6 +2799,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -2814,6 +2829,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }
           | {
               __typename: 'GqlPoolTokenLinear';
@@ -2858,6 +2874,7 @@ export type GetPoolQuery = {
                   decimals: number;
                   weight?: string | null;
                   totalBalance: string;
+                  logoURI?: string | null;
                 }>;
               };
             }
@@ -2900,6 +2917,7 @@ export type GetPoolQuery = {
                       decimals: number;
                       weight?: string | null;
                       totalBalance: string;
+                      logoURI?: string | null;
                     }
                   | {
                       __typename: 'GqlPoolTokenLinear';
@@ -2944,6 +2962,7 @@ export type GetPoolQuery = {
                           decimals: number;
                           weight?: string | null;
                           totalBalance: string;
+                          logoURI?: string | null;
                         }>;
                       };
                     }
@@ -3052,6 +3071,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3075,6 +3095,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3102,6 +3123,7 @@ export type GetPoolQuery = {
           decimals: number;
           weight?: string | null;
           totalBalance: string;
+          logoURI?: string | null;
         }>;
         dynamicData: {
           __typename: 'GqlPoolDynamicData';
@@ -3204,6 +3226,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3227,6 +3250,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3255,6 +3279,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }
           | {
               __typename: 'GqlPoolTokenLinear';
@@ -3299,6 +3324,7 @@ export type GetPoolQuery = {
                   decimals: number;
                   weight?: string | null;
                   totalBalance: string;
+                  logoURI?: string | null;
                 }>;
               };
             }
@@ -3341,6 +3367,7 @@ export type GetPoolQuery = {
                       decimals: number;
                       weight?: string | null;
                       totalBalance: string;
+                      logoURI?: string | null;
                     }
                   | {
                       __typename: 'GqlPoolTokenLinear';
@@ -3385,6 +3412,7 @@ export type GetPoolQuery = {
                           decimals: number;
                           weight?: string | null;
                           totalBalance: string;
+                          logoURI?: string | null;
                         }>;
                       };
                     }
@@ -3493,6 +3521,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3516,6 +3545,7 @@ export type GetPoolQuery = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           }>;
         };
@@ -3534,6 +3564,7 @@ export type GqlPoolTokenFragment = {
   decimals: number;
   weight?: string | null;
   totalBalance: string;
+  logoURI?: string | null;
 };
 
 export type GqlPoolTokenLinearFragment = {
@@ -3579,6 +3610,7 @@ export type GqlPoolTokenLinearFragment = {
       decimals: number;
       weight?: string | null;
       totalBalance: string;
+      logoURI?: string | null;
     }>;
   };
 };
@@ -3622,6 +3654,7 @@ export type GqlPoolTokenPhantomStableFragment = {
           decimals: number;
           weight?: string | null;
           totalBalance: string;
+          logoURI?: string | null;
         }
       | {
           __typename: 'GqlPoolTokenLinear';
@@ -3666,6 +3699,7 @@ export type GqlPoolTokenPhantomStableFragment = {
               decimals: number;
               weight?: string | null;
               totalBalance: string;
+              logoURI?: string | null;
             }>;
           };
         }
@@ -4522,6 +4556,7 @@ export const GqlPoolTokenFragmentDoc = gql`
     decimals
     weight
     totalBalance
+    logoURI
   }
 `;
 export const GqlPoolTokenLinearFragmentDoc = gql`
