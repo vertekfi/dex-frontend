@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { UserDataProvider } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
 import styled from '@emotion/styled';
-import { LockIcon } from '@chakra-ui/icons';
 import { LockForm } from '../lock/LockForm';
 import Card from '~/components/card/Card';
 import { useUserVeData } from '../lib/useUserVeData';
 import { MyVeVRTK } from './MyVeVRTK';
+import { Activity, Database, Zap, Key } from 'react-feather';
 
 export const VotingCardHeader = styled.p`
   font-size: 1.3rem;
@@ -82,7 +82,12 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 24px 12px 0px #000"
           >
-            <VotingCardHeader>My VRTK-BNB </VotingCardHeader>
+            <VotingCardHeader>
+              My VRTK-BNB
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Activity size="20" color="#4A4AF6" strokeWidth={2} />
+              </Box>
+            </VotingCardHeader>
           </Box>
           <Box
             marginTop="1rem"
@@ -104,7 +109,7 @@ export function VotingHeader() {
             <Button
               as="a"
               href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
-              variant="moistblack"
+              variant="verteklight"
               width={{ base: '50%', lg: '75%' }}
               marginY="1rem"
               boxShadow="0 0 10px #4A4AF6"
@@ -140,7 +145,12 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 24px 12px 0px #000"
           >
-            <VotingCardHeader>My locked VRTK-BNB</VotingCardHeader>
+            <VotingCardHeader>
+              My locked VRTK-BNB
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Database size="20" color="#4A4AF6" strokeWidth={2} />
+              </Box>
+            </VotingCardHeader>
           </Box>
           <Box
             marginTop="1rem"
@@ -160,7 +170,7 @@ export function VotingHeader() {
               <Text>{lockedBalance} shares</Text>
             </Skeleton>
             <Button
-              variant="moistblack"
+              variant="verteklight"
               marginY="1rem"
               width={{ base: '50%', lg: '75%' }}
               boxShadow="0 0 10px #4A4AF6"
@@ -198,7 +208,12 @@ export function VotingHeader() {
             borderRadius="md"
             boxShadow="2px 24px 12px 0px #000"
           >
-            <VotingCardHeader>Locked until </VotingCardHeader>
+            <VotingCardHeader>
+              Locked until
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Key size="20" color="#4A4AF6" strokeWidth={2} />
+              </Box>
+            </VotingCardHeader>
           </Box>
           <Box
             marginTop="1rem"
@@ -218,14 +233,14 @@ export function VotingHeader() {
               <Text>{lockedUntilDays} days</Text>
             </Skeleton>
             <Button
-              variant="moistblack"
+              variant="verteklight"
               marginBottom="1rem"
               boxShadow="0 0 10px #4A4AF6"
               width={{ base: '50%', lg: '75%' }}
               onClick={handleOpenModal}
             >
               Update My Lock
-              <LockIcon ml="2" color="vertek.slate.200" />
+              {/* <LockIcon ml="2" color="vertek.slate.200" /> */}
             </Button>
             {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
           </Box>
@@ -236,8 +251,6 @@ export function VotingHeader() {
           borderRadius="16px"
           height="275px"
           padding="4"
-          alignItems="center"
-          justifyContent="center"
           marginTop="1"
           boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
           css={{
@@ -247,7 +260,43 @@ export function VotingHeader() {
             },
           }}
         >
-          <MyVeVRTK currentVeBalance={currentVeBalance || ''} percentOwned={percentOwned || ''} />
+          <Box
+            height="50%"
+            padding="2"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 24px 12px 0px #000"
+          >
+            <VotingCardHeader>
+              My veVRTK
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Zap size="20" color="#4A4AF6" strokeWidth={2} />
+              </Box>
+            </VotingCardHeader>
+          </Box>
+          <Box
+            marginTop="1rem"
+            padding="2"
+            height="full"
+            width="full"
+            flexDirection="column"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bg="vertek.slatepurple.900"
+            borderRadius="md"
+            boxShadow="2px 28px 12px 0px #000"
+          >
+            <Skeleton isLoaded={!isLoadingUserVeData}>
+              <Text marginBottom="1rem">{currentVeBalance} shares</Text>
+              <Text>{percentOwned} percent owned</Text>
+            </Skeleton>
+          </Box>
         </Card>
       </Grid>
     </UserDataProvider>

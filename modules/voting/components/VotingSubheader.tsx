@@ -1,5 +1,10 @@
 import { Box, Grid, GridItem, VStack, Text } from '@chakra-ui/react';
 import { useVotingGauges } from '../lib/useVotingGauges';
+import { Archive, Inbox } from 'react-feather';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckToSlot } from '@fortawesome/free-solid-svg-icons';
+import { faBusinessTime } from '@fortawesome/free-solid-svg-icons';
+import { faPenFancy } from '@fortawesome/free-solid-svg-icons';   
 
 type Props = {
   unallocatedVotesFormatted: string;
@@ -32,8 +37,6 @@ export function VotingSubheader(props: Props) {
           editing a pool can only be done once in 10 days.
         </Text>
       </GridItem>
-      {/* <GridItem variant="VotingCard">text </GridItem> */}
-
       <GridItem marginRight={{ base: '0', lg: '24' }}>
         <VStack spacing={4} alignItems={{ base: 'center', lg: 'stretch' }}>
           <Box
@@ -46,9 +49,12 @@ export function VotingSubheader(props: Props) {
             justifyContent="center"
             mx={{ base: 'auto', lg: 0 }}
           >
-            <Text fontWeight="bold" fontSize="1.0rem" marginTop="2%">
-              My unallocated votes
-            </Text>
+            <Box display="flex" flexDirection="row" alignItems="center" marginTop="2%">
+                <FontAwesomeIcon icon={faCheckToSlot} />
+                <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
+                  My unallocated votes
+                </Text>
+            </Box> 
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
               {props.unallocatedVotesFormatted}
             </Text>
@@ -63,9 +69,12 @@ export function VotingSubheader(props: Props) {
             justifyContent="center"
             mx={{ base: 'auto', lg: 0 }}
           >
-            <Text fontWeight="bold" fontSize="1.0rem" marginTop="2%">
-              Voting period ends
-            </Text>
+            <Box display="flex" flexDirection="row" alignItems="center" marginTop="2%">
+                <FontAwesomeIcon icon={faBusinessTime} />
+                <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
+                  Voting period ends
+                </Text>
+            </Box>
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
               {votingPeriodEnd?.length && (
                 <Text>
