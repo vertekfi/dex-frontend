@@ -27,7 +27,8 @@ export function PoolInvestSettings({ ...rest }: BoxProps) {
   const batchRelayerInfoButton = (
     <InfoButton
       label="Batch Relayer"
-      infoText="The Batch Relayer is a smart contract that allows multiple individual actions to be grouped together into a single transaction. Zapping requires you to approve the Batch Relayer once."
+      infoText="The Batch Relayer is a smart contract that allows multiple individual actions to be grouped together into a single transaction. 
+      Zapping requires you to approve the Batch Relayer once."
     />
   );
 
@@ -39,7 +40,7 @@ export function PoolInvestSettings({ ...rest }: BoxProps) {
           <CardRow>
             <Box flex="1">
               {batchRelayerInfoButton}
-              <Text color="gray.200" fontSize="sm">
+              <Text color="gray.100" fontSize="sm">
                 Investing into this pool requires the batch relayer.
               </Text>
             </Box>
@@ -64,7 +65,7 @@ export function PoolInvestSettings({ ...rest }: BoxProps) {
                   label="Zap into farm"
                   infoText="With ZAP enabled, your investment VPTs are automatically deposited to the farm, saving time & maximizing yield."
                 />
-                <Text color="gray.200" fontSize="sm">
+                <Text color="gray.100" fontSize="sm">
                   Deposit my VPTs directly into the farm with ZAP.
                 </Text>
               </Box>

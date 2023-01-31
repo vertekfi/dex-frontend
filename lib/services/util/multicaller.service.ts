@@ -22,7 +22,9 @@ export class Multicaller {
   async execute<T>(from?: any): Promise<T> {
     const obj = from || {};
     const result = await multicall(this.provider, this.abi, this.calls, this.options);
-    result.forEach((r, i) => set(obj, this.paths[i], r));
+    result.forEach((r, i) => {
+      set(obj, this.paths[i], r);
+    });
     this.calls = [];
     this.paths = [];
     return obj as T;
@@ -47,18 +49,22 @@ export async function multicall<T>(
     ],
     provider,
   );
-  const itf = new Interface(abi);
+  const contractInterface = new Interface(abi);
+
   try {
     const res: [boolean, string][] = await multi.tryAggregate(
       // if false, allows individual calls to fail without causing entire multicall to fail
       requireSuccess,
-      calls.map((call) => [call[0].toLowerCase(), itf.encodeFunctionData(call[1], call[2])]),
+      calls.map((call) => {
+        return [call[0].toLowerCase(), contractInterface.encodeFunctionData(call[1], call[2])];
+      }),
       options,
     );
 
     return res.map(([success, returnData], i) => {
       if (!success) return null;
-      const decodedResult = itf.decodeFunctionResult(calls[i][1], returnData);
+
+      const decodedResult = contractInterface.decodeFunctionResult(calls[i][1], returnData);
       // Automatically unwrap any simple return values
       return decodedResult.length > 1 ? decodedResult : decodedResult[0];
     });

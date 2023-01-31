@@ -130,16 +130,17 @@ export function BeetsTokenInputWithSlider({
             }
           }}
         >
-          <SliderTrack bg="gray.400">
-            <SliderFilledTrack />
+          
+          <SliderTrack bg="gray.100">
+            <SliderFilledTrack bg="vertek.neonpurple.500" />
           </SliderTrack>
           <SliderThumb boxSize={3} boxShadow="xl" />
           {changing ? (
             <SliderMark
               value={sliderValue}
               textAlign="center"
-              //bg="beets.base.500"
-              color="white"
+              // bg="beets.base.500"
+              color="gray.100"
               mt="3"
               ml="-20px"
               w="12"
@@ -156,8 +157,8 @@ export function BeetsTokenInputWithSlider({
         <Box flex="1" height="18px">
           {!changing && (
             <Link
-              color="gray.200"
-              fontSize="sm"
+              color="gray.100"
+              fontSize="md"
               display="flex"
               onClick={() => {
                 if (hasBalance) {
@@ -169,7 +170,7 @@ export function BeetsTokenInputWithSlider({
             >
               Balance: {tokenFormatAmountPrecise(balance, 4)}
               {hasBalance ? (
-                <Text color="beets.highlight" ml="1">
+                <Text color="vertek.neonpurple.500" fontWeight="bold" ml="1">
                   Max
                 </Text>
               ) : null}
@@ -178,7 +179,7 @@ export function BeetsTokenInputWithSlider({
         </Box>
         <Box height="18px">
           {!changing && (
-            <Text color="gray.200" fontSize="sm">
+            <Text color="gray.100" fontSize="sm">
               {formattedPrice({ address: selectedTokenOption.address, amount: value || '0' })}
             </Text>
           )}

@@ -14,8 +14,8 @@ export function NavbarLink({ href, selected, text, isActive, ...rest }: any) {
     <Box {...rest}>
       <Link href={href}>
         <Text
-          fontSize="md"
-          margin="16px"
+          fontSize="0.9rem"
+          margin="12px"
           fontWeight={selected ? '700' : '500'}
           textDecoration={selected ? 'underline' : 'none'}
           textDecorationColor="vertek.neonpurple.500"

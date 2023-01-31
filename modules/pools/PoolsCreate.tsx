@@ -10,7 +10,7 @@ return (
 <Box 
 marginBottom={{base: '8rem', md:'4rem'}}
 >
-<Box 
+{/* <Box 
 mx="auto"
 my="auto" 
 display="flex" 
@@ -41,7 +41,7 @@ className="verteklightpurplebox"
         onClose={() => setIsModalOpen(false)}
         />
     )}
-</Box>
+</Box> */}
 </Box>
 ); 
 }

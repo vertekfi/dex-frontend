@@ -1,5 +1,4 @@
 import { useGetUserDataQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { useGetTokens } from '~/lib/global/useToken';
 import { sum } from 'lodash';
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
@@ -53,6 +52,15 @@ export function _useUserData() {
     return balance.tokenPrice * parseFloat(balance.totalBalance);
   }
 
+  function usdBalanceForPoolAmount(poolId: string, amount: string): number {
+    const balance = poolBalances.find((pool) => pool.poolId === poolId);
+    if (!balance) {
+      return 0;
+    }
+
+    return balance.tokenPrice * parseFloat(amount);
+  }
+
   function hasBptInWalletForPool(poolId: string): boolean {
     const bptBalance = poolBalances.find((pool) => pool.poolId === poolId);
 
@@ -69,6 +77,7 @@ export function _useUserData() {
     userPoolIds: [...poolBalances.map((balance) => balance.poolId)],
     bptBalanceForPool,
     usdBalanceForPool,
+    usdBalanceForPoolAmount,
     hasBptInWalletForPool,
     stakedValueUSD,
   };

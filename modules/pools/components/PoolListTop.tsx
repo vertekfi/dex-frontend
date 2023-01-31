@@ -6,6 +6,7 @@ import { PoolListTokenMultiSelect } from '~/modules/pools/components/PoolListTok
 import { PoolListFilterMultiSelect } from '~/modules/pools/components/PoolListFilterMultiSelect';
 import { usePoolList } from '~/modules/pools/usePoolList';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
+import { PoolListAttributeMultiSelect } from './PoolListAttributeMultiSelect';
 
 export function PoolListTop() {
   const { showFilters, toggleFilterVisibility, state } = usePoolList();
@@ -14,18 +15,19 @@ export function PoolListTop() {
 
   return (
     <Box display={{ base: 'none', lg: 'block' }}>
-      <Flex pb={4}>
+      <Flex pb={0}>
         <Flex flex={1}>
-          {/* <PoolListTabs /> */}
-          {/* <Box position="relative">
+          <PoolListTabs />
+          <Box position="relative">
             <IconButton
               aria-label="filter-button"
               icon={<Filter />}
               ml={4}
+             
               onClick={toggleFilterVisibility}
               color={showFilters ? 'gray.100' : 'white'}
-              bgColor={showFilters ? 'beets.base.300' : 'beets.lightAlpha.300'}
-              _hover={{ bgColor: 'beets.light' }}
+              bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.neonpurple.900'}
+              _hover={{ bgColor: 'vertek.neonpurple.500' }}
             />
             {hasFiltersSelected ? (
               <Circle
@@ -37,28 +39,28 @@ export function PoolListTop() {
                 right="-4px"
               />
             ) : null}
-          </Box> */}
+          </Box>
         </Flex>
         <Box>
-          {/* <PoolListSearch /> */}
+          <PoolListSearch />
         </Box>
       </Flex>
-      <FadeInOutBox isVisible={showFilters} bg="black">
+      <FadeInOutBox isVisible={showFilters} >
         <Grid
           templateColumns={{ base: 'repeat(1, 1fr)', md: '1fr 1fr 0px', lg: '1fr 1fr 1fr' }}
           gap="0"
-          pb="4"
-          pt="2"
+          pb="0"
+          pt="1"
         >
-          <GridItem bgColor="vertek.slatepurple.900"  mr={{ base: '0', md: '2' }} mb={{ base: '4', md: '0' }}>
+          <GridItem  borderRadius="4px"  mr={{ base: '0', md: '2' }} mb={{ base: '4', md: '0' }}>
             <PoolListTokenMultiSelect />
           </GridItem>
-          <GridItem ml={{ base: '0', md: '2' }} bgColor="vertek.slatepurple.900">
+          <GridItem  ml={{ base: '0', md: '2' }} >
             <PoolListFilterMultiSelect />
           </GridItem>
-          <GridItem display={{ base: 'none', md: 'block' }}>
-            {/*<PoolListAttributeMultiSelect />*/}
-          </GridItem>
+          {/* <GridItem display={{ base: 'none', md: 'block' }}>
+            <PoolListAttributeMultiSelect />
+          </GridItem> */}
         </Grid>
       </FadeInOutBox>
     </Box>

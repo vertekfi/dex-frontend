@@ -4,35 +4,26 @@ import { useGetGaugesQuery } from '~/lib/global/gauges/useGetGaugesQuery';
 import { gaugesDecorator } from '~/lib/services/staking/gauges.decorator';
 import { SubgraphGauge } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
-import { RewardGauge } from '../types';
+import { useProtocolRewardsQuery } from './useProtocolRewardsQuery';
 
 export function useClaimsData() {
-  const [gaugePoolIds, setGaugePoolIds] = useState<string[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [rewardGauges, setRewardGauges] = useState<RewardGauge[]>();
+  const [rewardGauges, setRewardGauges] = useState<LiquidityGauge[]>();
 
   const { isConnected, userAddress } = useUserAccount();
-
   // Fetch subgraph liquidity gauges
   const { gauges, isLoading: isLoadingGauges, refetchGauges } = useGetGaugesQuery();
+  const { data: protocolRewardsData, isLoading: isLoadingProtocolRewards } =
+    useProtocolRewardsQuery();
 
   const setGaugeData = async () => {
     if (userAddress) {
-      const ids: string[] = [];
-      gauges.forEach((g) => {
-        if (g) {
-          ids.push(g.id);
-        }
-      });
-      setGaugePoolIds(ids);
-
       const decoratedGauges = await gaugesDecorator.decorate(
         gauges as SubgraphGauge[],
         userAddress,
       );
 
-      console.log(decoratedGauges);
-      setRewardGauges(decoratedGauges as RewardGauge[]);
+      setRewardGauges(decoratedGauges as LiquidityGauge[]);
     }
   };
 
@@ -43,13 +34,18 @@ export function useClaimsData() {
   }, [gauges, isConnected, userAddress]);
 
   useEffect(() => {
-    if (gaugePoolIds?.length) {
+    if (isLoadingProtocolRewards || isLoadingGauges) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
     }
-  }, [gaugePoolIds]);
+  }, [isLoadingGauges, isLoadingProtocolRewards]);
 
   return {
     gauges,
     rewardGauges,
+    protocolRewardsData,
     isLoading,
+    refetchGauges,
   };
 }

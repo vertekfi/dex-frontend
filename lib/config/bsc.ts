@@ -23,83 +23,83 @@ export const bscNetworkConfig: NetworkConfig = {
     platformId: 'binance',
   },
   rpcUrl: 'https://bsc-dataseed.binance.org',
-  multicall: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  multicall: '0x4Ba82B21658CAE1975Fa26097d87bd48FF270124',
   backendUrl: '',
   subgraphs: {
-    balancer: '',
-    gauges: '',
+    balancer: 'https://api.thegraph.com/subgraphs/name/vertekfi/vertek-subgraph',
+    gauges: 'https://api.thegraph.com/subgraphs/name/vertekfi/vertek-gauges-subgraph',
   },
   beets: {
-    address: '',
+    address: '0xeD236c32f695c83Efde232c288701d6f9C23E60E',
   },
   balancer: {
-    vault: '',
-    feeDistributor: '',
+    vault: '0x719488F4E859953967eFE963c6Bed059BaAab60c',
+    feeDistributor: '0x1ac7c3C34d03f0b4E97FB4a3F08dF4DE6989FfB3',
     batchRelayer: '',
     composableStableFactory: '',
-    weightedPoolV2Factory: '',
+    weightedPoolV2Factory: '0xDE8993Bf9D6Eb1e0d752fe56ccB85Ef76538ABb6',
     linearFactories: {
       erc4626: [],
       reaper: [],
     },
     linearRebalancers: {},
     votingEscrow: {
-      veAddress: '',
-      gaugeController: '',
-      veBALHelpers: '',
-      tokenAdmin: '',
-      lockablePoolId: '',
-      lockPoolAddress: '',
+      veAddress: '0x98A73443fb00EDC2EFF0520a00C53633226BF9ED',
+      gaugeController: '0x99bFf5953843A211792BF3715b1b3b4CBeE34CE6',
+      veBALHelpers: '0xab31C0E1019a8e08748235a76f94497AF9d8718E',
+      tokenAdmin: '0x8A935a7c86CA749aD1C6fD7dAA0A916A0ACF8bF8',
+      lockablePoolId: '0xdd64e2ec144571b4320f7bfb14a56b2b2cbf37ad000200000000000000000000',
+      lockPoolAddress: '0xDD64E2EC144571b4320f7BFB14a56b2b2cBF37ad',
     },
   },
-  beetsPoolOwnerAddress: '',
+  beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
-  defaultTokenIn: '',
-  defaultTokenOut: '',
+  defaultTokenIn: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  defaultTokenOut: '0xeD236c32f695c83Efde232c288701d6f9C23E60E',
   farmTypeName: 'gauge',
   additionalLinks: [
-    {
-      title: 'Vote',
-      url: 'https://snapshot.org/#/beets.eth',
-    },
-    {
-      title: 'Analytics',
-      url: 'https://info.beets.fi',
-    },
-    {
-      title: 'Docs & Help',
-      url: 'https://docs.beets.fi',
-    },
-    {
-      title: 'Github',
-      url: 'https://github.com/beethovenxfi',
-    },
-    {
-      title: 'Twitter',
-      url: 'https://twitter.com/beethoven_x',
-    },
-    {
-      title: 'Medium',
-      url: 'https://beethovenxio.medium.com/',
-    },
-    {
-      title: 'Discord',
-      url: 'https://discord.gg/jedS4zGk28',
-    },
-    {
-      title: 'Olympus Bonds',
-      url: 'https://pro.olympusdao.finance/#/bond',
-    },
-    {
-      title: 'Multichain Bridge',
-      subTitle: 'ETH / AVAX / BSC / MATIC',
-      url: 'https://app.multichain.org/#/router',
-    },
-    {
-      title: 'AllBridge',
-      subTitle: 'SOL / MATIC / CELO',
-      url: 'https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL',
-    },
+    // {
+    //   title: 'Vote',
+    //   url: 'https://snapshot.org/#/beets.eth',
+    // },
+    // {
+    //   title: 'Analytics',
+    //   url: 'https://info.beets.fi',
+    // },
+    // {
+    //   title: 'Docs & Help',
+    //   url: 'https://docs.beets.fi',
+    // },
+    // {
+    //   title: 'Github',
+    //   url: 'https://github.com/beethovenxfi',
+    // },
+    // {
+    //   title: 'Twitter',
+    //   url: 'https://twitter.com/beethoven_x',
+    // },
+    // {
+    //   title: 'Medium',
+    //   url: 'https://beethovenxio.medium.com/',
+    // },
+    // {
+    //   title: 'Discord',
+    //   url: 'https://discord.gg/jedS4zGk28',
+    // },
+    // {
+    //   title: 'Olympus Bonds',
+    //   url: 'https://pro.olympusdao.finance/#/bond',
+    // },
+    // {
+    //   title: 'Multichain Bridge',
+    //   subTitle: 'ETH / AVAX / BSC / MATIC',
+    //   url: 'https://app.multichain.org/#/router',
+    // },
+    // {
+    //   title: 'AllBridge',
+    //   subTitle: 'SOL / MATIC / CELO',
+    //   url: 'https://app.allbridge.io/bridge?from=SOL&to=FTM&asset=SOL',
+    // },
   ],
   priceImpact: {
     invest: {

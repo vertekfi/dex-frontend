@@ -40,6 +40,32 @@ a {
     width: 100% !important;
 }
 
+.flashit{
+    -webkit-animation: flash ease-out 7s infinite;
+    -moz-animation: flash ease-out 7s infinite;
+    animation: flash ease-out 7s infinite;
+    animation-delay: 2s;
+    }
+    
+@-webkit-keyframes flash {
+    from { opacity: 1; } 
+    8% { opacity: 1; }
+    9% { opacity: 0.1; }
+    10% { opacity: 0.8; }
+    11% { opacity: 0.1; }
+    12% { opacity: 1; }
+    to { opacity: 1; }
+}
+    
+@keyframes flash {
+    from { opacity: 1; } 
+    8% { opacity: 1; }
+    9% { opacity: 0.1; }
+    10% { opacity: 0.8; }
+    11% { opacity: 0.1; }
+    12% { opacity: 1; }
+    to { opacity: 1; }
+}
 
 /* custom vertek */ 
 
@@ -52,11 +78,23 @@ a {
     color: transparent;
     font-weight: bold; 
 }
+.homecard {
+    background-image: linear-gradient(to right, #5bc0f8, #4A4AF6, #4A4AF6, #5bc0f8); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold; 
+}
 
+.blk { 
+    box-shadow: 2px 24px 12px 0px #000; 
+}
 /*boxes */ 
 .verteklightpurplebox {
 background-color: #4A4AF6; 
-box-Shadow: 0 0 24px 2px #000; 
+box-shadow: -3px 12px 2px -1px #000; 
+
+/* box-Shadow: 0 0 24px 2px #000;  */
 /* padding: 12px; 
 align-items: center; 
 justify-content: center;  */
@@ -70,6 +108,10 @@ justify-content: center;  */
     padding-bottom: 16px; 
     padding-top: 16px; 
     border-radius: 12px; 
+}
+
+.datepicker input {
+    background-color: transparent;
 }
 
 .apr-stripes {

@@ -14,6 +14,7 @@ export function useVeLockInfo() {
       id: networkConfig.balancer.votingEscrow.lockablePoolId,
     },
   });
+
   const lockQuery = useVeBalQuery();
 
   useEffect(() => {

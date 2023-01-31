@@ -158,8 +158,8 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         </GridItem>
       </Grid>
       {hasBptStaked && (
-        <Alert status="warning" borderRadius="md" mb="4">
-          <AlertIcon />
+        <Alert bg="vertek.slatepurple.900" status="warning" color="vertek.neonpurple.500" mt="4">
+          <AlertIcon color="vertek.neonpurple.500" />
           <Box flex="1" mr="4">
             You have ~{numberFormatUSDValue(valueStaked)} worth of VPT staked. In order to withdraw
             this amount, you must first unstake your VPT.
@@ -175,8 +175,7 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         mb="2"
         isDisabled={!hasBptInWallet}
         onClick={onShowProportional}
-        _hover={{ transform: "scale(1.01)" }}
-
+        _hover={{ transform: 'scale(1.01)' }}
       >
         Withdraw proportionally
       </Button>
@@ -185,12 +184,12 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
         width="full"
         isDisabled={!hasBptInWallet}
         onClick={onShowSingleAsset}
-        _hover={{ transform: "scale(1.01)" }}
-        >
+        _hover={{ transform: 'scale(1.01)' }}
+      >
         Single asset withdraw
       </Button>
 
-      <PoolUnstakeModal {...unstakeDisclosure} />
+      <PoolUnstakeModal />
     </Box>
   );
 }

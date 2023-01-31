@@ -25,13 +25,13 @@ export function PoolWithdrawModal() {
     }, [pool.id]);
 
     function onModalClose() {
-        if (withdrawComplete) {
-            setModalState('start');
-            setInvestType(null);
-        }
-
-        onClose();
+        onClose(); 
+        setModalState('start');
+        setInvestType(null);
+        clearWithdrawState();
     }
+
+    
 
     return (
         <>
@@ -54,14 +54,16 @@ export function PoolWithdrawModal() {
                 onClose={onModalClose}
                 size={modalState === 'start' ? '3xl' : '2xl'}
                 initialFocusRef={initialRef}
-
-
             >
 
-                <ModalOverlay />
-                <ModalContent 
-                bgColor="black"
-                boxShadow={{ base: 'inset 0 0 2px', lg:'inset 0 0 5px #fff, inset 0 0 20px #4A4AF6'}} 
+<ModalOverlay 
+    bg= {`radial-gradient(circle at center, 
+        #4132D0 0%, 
+        rgba(0,0,0, 0.8) 70% )`}
+        />
+        <ModalContent 
+          bgColor="rgba(0, 0, 0, 0.8)"
+          boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
                 borderRadius="16px"
                 mb="2"
                 padding="4"

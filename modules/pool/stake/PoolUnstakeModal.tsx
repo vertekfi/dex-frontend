@@ -9,7 +9,7 @@ import {
     SliderMark,
     SliderThumb,
     SliderTrack,
-    Text,
+    Text, Button
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
@@ -27,16 +27,12 @@ import { CardRow } from '~/components/card/CardRow';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { useUserSyncBalanceMutation } from '~/apollo/generated/graphql-codegen-generated';
+import { useDisclosure } from '@chakra-ui/react';
 
-interface Props {
-    isOpen: boolean;
-    onOpen(): void;
-    onClose(): void;
-}
-
-export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
+export function PoolUnstakeModal() {
     const networkConfig = useNetworkConfig();
     const { userPoolBalanceUSD } = usePoolUserDepositBalance();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [percent, setPercent] = useState(100);
     const {
         userTotalBptBalance,
@@ -70,6 +66,25 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
     }
 
     return (
+        <>
+        <Button 
+            mb={{ base:'3', md:'0'}}
+            variant="verteklight" 
+            alignSelf={{ base:'flex-end', md:'auto' }}
+            onClick={onOpen} 
+            width={{ base: '75%', md: '140px' }} 
+            mr={{ base:'none', md:'2' }}
+            _hover={{ 
+                boxShadow: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                background: 'vertek.slate.900', 
+                color: 'white', 
+                borderWidth: '2px', 
+                borderColor: 'vertek.neonpurple.500', 
+                transform: 'scale(1.01)' 
+            }}
+         >
+            Unstake
+        </Button>
         <Modal isOpen={isOpen} onClose={onCloseModal} size="xl">
             <ModalOverlay />
             <ModalContent backgroundColor="black">
@@ -88,8 +103,8 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
                         {networkConfig.farmTypeName}.
                     </Text>
                     <Slider mt="8" aria-label="slider-ex-1" value={percent} onChange={setPercent}>
-                        <SliderTrack>
-                            <SliderFilledTrack />
+                        <SliderTrack bg="gray.100">
+                                <SliderFilledTrack bg="vertek.neonpurple.500" />
                         </SliderTrack>
                         <SliderThumb boxSize={4} />
                         <SliderMark
@@ -149,5 +164,6 @@ export function PoolUnstakeModal({ isOpen, onOpen, onClose }: Props) {
                 </ModalBody>
             </ModalContent>
         </Modal>
+        </>
     );
 }

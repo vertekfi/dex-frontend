@@ -10,7 +10,7 @@ import { PoolUserInvestmentsTable } from '~/modules/pool/detail/components/trans
 import { ChevronDown } from 'react-feather';
 import { PoolUserSwapsTable } from '~/modules/pool/detail/components/transactions/PoolUserSwapsTable';
 import { usePool } from '~/modules/pool/lib/usePool';
-
+import { useTheme } from '@chakra-ui/react';
 type Props = {};
 export function PoolTransactions({ ...rest }: Props & BoxProps) {
   const [activeTab, setActiveTab] = useState(0);
@@ -22,19 +22,39 @@ export function PoolTransactions({ ...rest }: Props & BoxProps) {
     ...(!isPhantomStable ? ['Swaps'] : []),
     `My ${isPhantomStable ? 'transactions' : 'investments'}`,
   ];
+  const theme = useTheme();
+
 
   return (
+
+
     <Box width="full" {...rest}>
       <Tabs variant="soft-rounded" onChange={setActiveTab}>
         <VStack width="full" alignItems="flex-start">
           <Box width="full" display={{ base: 'block', md: 'none' }} mb="2">
             <Menu matchWidth={true}>
-              <MenuButton as={Button} rightIcon={<ChevronDown />} width="full">
+              <MenuButton as={Button} 
+              rightIcon={<ChevronDown color={theme.colors.vertek.neonpurple['500']} />}
+              width="full"
+              bgColor="transparent"
+                        borderWidth="1px" 
+                        _hover={{ backgroundColor:"vertek.slatepurple.800"}}
+                        _active={{ backgroundColor:"vertek.slatepurple.800"}}
+                        px="1.5"
+              >
                 {tabs[activeTab]}
               </MenuButton>
-              <MenuList>
+              <MenuList bgColor="vertek.slatepurple.900" 
+                        borderWidth="2px" >
                 {tabs.map((tab, index) => (
-                  <MenuItem onClick={() => setActiveTab(index)} key={index}>
+                  <MenuItem onClick={() => setActiveTab(index)} key={index}
+                  bgColor="vertek.slatepurple.900" 
+                            borderWidth="1px" 
+                            _hover={{ backgroundColor:"vertek.slatepurple.800"}}
+                            _focus={{ backgroundColor:"vertek.slatepurple.800" }}
+                            _active={{ backgroundColor:"vertek.slatepurple.800"}}
+                  
+                  >
                     {tab}
                   </MenuItem>
                 ))}

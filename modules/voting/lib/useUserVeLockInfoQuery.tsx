@@ -1,26 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useQuery, UseQueryResult } from 'react-query';
 import { VeBAL, VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
-export function useUserVeLockInfoQuery() {
-  const [userLockInfo, setUserLockInfo] = useState<VeBalLockInfo | null>();
-
+export function useUserVeLockInfoQuery(): UseQueryResult<VeBalLockInfo> {
   const { userAddress, isConnected } = useUserAccount();
 
-  useEffect(() => {
-    const getLockInfo = async () => {
-      if (userAddress) {
-        const data = await new VeBAL().getLockInfo(userAddress);
-        setUserLockInfo(data);
-      }
-    };
-
-    if (isConnected) {
-      getLockInfo();
+  const queryFn = async () => {
+    if (userAddress && isConnected) {
+      return await new VeBAL().getLockInfo(userAddress);
     }
-  }, [isConnected]);
-
-  return {
-    userLockInfo,
   };
+
+  return useQuery(['VeBalLockInfo', userAddress], queryFn, {
+    refetchInterval: 30000,
+  });
 }

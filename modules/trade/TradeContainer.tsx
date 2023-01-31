@@ -2,7 +2,6 @@ import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
 import { TradeInterfaceContainer } from '~/modules/trade/components/TradeInterfaceContainer';
 import { TradePageHeader } from '~/modules/trade/components/TradePageHeader';
 import { TradeChart } from '~/modules/trade/components/TradeChart';
-import { useGetTokens } from '~/lib/global/useToken';
 import { useTradeData } from '~/modules/trade/lib/useTradeData';
 import { useTrade } from '~/modules/trade/lib/useTrade';
 import { BatchSwapSorRoute } from '~/components/batch-swap/BatchSwapSorRoute';
@@ -10,13 +9,11 @@ import { BatchSwapList } from '~/components/batch-swap/BatchSwapList';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 export function TradeContainer() {
-  const { priceFor } = useGetTokens();
-  const { tokenInData, tokenOutData, tokenInDynamicData, tokenOutDynamicData, tokenOut, tokenIn } =
-    useTradeData();
+  const { tokenOut, tokenIn } = useTradeData();
   const { swapInfo, loadingSwaps, isNativeAssetUnwrap, isNativeAssetWrap } = useTrade();
   const showRouting =
     !isNativeAssetUnwrap && !isNativeAssetWrap && swapInfo && swapInfo.swaps.length > 0;
-  const hasNoRoute = !loadingSwaps && (!swapInfo || swapInfo.swaps.length === 0);
+  // const hasNoRoute = !loadingSwaps && (!swapInfo || swapInfo.swaps.length === 0);
 
   return (
     <Box>

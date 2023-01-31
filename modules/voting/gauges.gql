@@ -5,14 +5,20 @@ query GetLiquidityGauges {
     symbol
     poolId
     totalSupply
+    depositFee
+    withdrawFee
+    isKilled
+
     factory {
       id
     }
+
     rewardTokens {
       id
       decimals
       symbol
     }
+
     pool {
       id
       name
@@ -25,12 +31,24 @@ query GetLiquidityGauges {
         logoURI
       }
     }
-    isKilled
   }
 }
 
 query GetUserStakes($user: String!, $poolIds: [String!]!) {
   getUserGaugeStakes(user: $user, poolIds: $poolIds) {
     id
+  }
+}
+
+query GetUserVeLockInfo {
+  userGetVeLockInfo {
+    lockedAmount
+    lockEndDate
+    totalSupply
+    currentBalance
+    epoch
+    hasExistingLock
+    isExpired
+    percentOwned
   }
 }

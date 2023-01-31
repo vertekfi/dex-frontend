@@ -9,7 +9,7 @@ import {
   SliderMark,
   SliderThumb,
   SliderTrack,
-  Text,
+  Text, Button
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
@@ -30,17 +30,14 @@ import { CardRow } from '~/components/card/CardRow';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { useUserSyncBalanceMutation } from '~/apollo/generated/graphql-codegen-generated';
+import { useDisclosure } from '@chakra-ui/react';
 
-interface Props {
-  isOpen: boolean;
-  onOpen(): void;
-  onClose(): void;
-}
 
-export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
+
+export function PoolStakeModal() {
   const networkConfig = useNetworkConfig();
   const [percent, setPercent] = useState(100);
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     userWalletBptBalance,
     hasBptInWallet,
@@ -104,24 +101,51 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
   }, [isOpen]);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={() => {
-        approveQuery.reset();
-        stakeQuery.reset();
-        onClose();
+    <>
+    <Button 
+    mb={{ base:'3', md:'0'}}
+    variant="vertekdark" 
+    alignSelf={{ base:'flex-end', md:'auto' }}
+    onClick={onOpen} 
+    width={{ base: '75%', md: '140px' }} 
+    mr={{ base:'none', md:'2' }}
+    _hover={{ 
+      boxShadow: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+      background: 'vertek.slate.900', 
+      color: 'white', 
+      borderWidth: '2px', 
+      borderColor: 'vertek.neonpurple.500', 
+      transform: 'scale(1.01)' 
       }}
-      size="xl"
     >
-      <ModalOverlay />
-      <ModalContent backgroundColor="black">
+        Stake
+  </Button>
+  <Modal
+    isOpen={isOpen}
+    onClose={() => {
+      approveQuery.reset();
+      stakeQuery.reset();
+      onClose();
+    }}
+    size="xl"
+  >
+      <ModalOverlay  bg=
+      {`radial-gradient(circle at center, 
+          #4132D0 0%, 
+          rgba(0,0,0, 0.8) 70% )`}
+      />
+      <ModalContent bgColor="rgba(0, 0, 0, 0.8)"
+        boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+        borderRadius="16px"
+        mb="2"
+        padding="4">
         <ModalCloseButton />
         <ModalHeader className="bg">
           <Heading size="md" noOfLines={1}>
             {capitalize(networkConfig.farmTypeName)}
           </Heading>
           <Text color="gray.200" fontSize="md">
-            Stake your VPT to earn additional rewards
+            Stake your VPT tokens to earn additional rewards
           </Text>
         </ModalHeader>
         <ModalBody className="bg" pt="4" pb="6">
@@ -130,8 +154,8 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
             rewards, stake all of your VPT into the {networkConfig.farmTypeName}.
           </Text>
           <Slider mt="8" aria-label="slider-ex-1" value={percent} onChange={setPercent}>
-            <SliderTrack>
-              <SliderFilledTrack />
+            <SliderTrack bg="gray.100">
+              <SliderFilledTrack bg="vertek.neonpurple.500" />
             </SliderTrack>
             <SliderThumb boxSize={4} />
             <SliderMark
@@ -205,5 +229,6 @@ export function PoolStakeModal({ isOpen, onOpen, onClose }: Props) {
         </ModalBody>
       </ModalContent>
     </Modal>
+    </>
   );
 }

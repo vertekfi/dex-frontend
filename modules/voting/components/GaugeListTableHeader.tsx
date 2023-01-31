@@ -28,22 +28,22 @@ export function GaugeListTableHeader() {
             display={{ base: 'none', lg: 'grid' }}
           >
             <GridItem textAlign="left">
-              <Text fontSize="md">Icons</Text>
+              <Text fontSize="md">Tokens</Text>
             </GridItem>
 
             <GridItem textAlign="left">
-              <PoolListSortLink title="Composition" fontSize="1.5rem" />
+            <Text fontSize="md">Pool Name</Text>
             </GridItem>
 
             <GridItem textAlign="center">
-              <PoolListSortLink title="Next Period Votes" />
+            <Text fontSize="md">Next Period Votes</Text>
             </GridItem>
 
             <GridItem textAlign="center" justifyContent="center" alignItems="center">
-              <PoolListSortLink title="My Votes" />
+            <Text fontSize="md">My Votes</Text>
             </GridItem>
             <GridItem textAlign="center">
-              <PoolListSortLink title="Vote" />
+            <Text fontSize="md">Vote</Text>
             </GridItem>
           </Grid>
         </Box>

@@ -1,116 +1,204 @@
-import { useRef, useState } from 'react';
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { BeetsModalBody, BeetsModalContent, BeetsModalHeader, BeetsModalHeadline } from '~/components/modal/BeetsModal';
-import { Box, HStack, Modal, ModalOverlay, Portal, Text, Button } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import {
+  FormControl,
+  Input,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Box,
+  HStack,
+  Modal,
+  Text,
+  Button,
+} from '@chakra-ui/react';
+import {
+  BeetsModalBody,
+  BeetsModalContent,
+  BeetsModalHeader,
+  BeetsModalHeadline,
+} from '~/components/modal/BeetsModal';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
-import { TokenAvatarSetInList, TokenAvatarSetInListTokenData } from '~/components/token/TokenAvatarSetInList';
+import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
+import { RepeatClockIcon } from '@chakra-ui/icons';
+import { SunIcon } from '@chakra-ui/icons';
+import { LockIcon } from '@chakra-ui/icons';
+import { useGaugeVoting } from '../lib/useGaugeVoting';
+import { useVotingState } from '../lib/useVotingState';
+import { useUserVeData } from '../lib/useUserVeData';
+import { BigNumber } from 'ethers';
+import { scale } from '~/lib/util/big-number.utils';
+import { useUserAccount } from '~/lib/user/useUserAccount';
+
+const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 type Props = {
-    // gauge: VotingGaugeWithVotes;
-    // unallocatedVoteWeight: number;
-    // logoURIs: string[];
-    // poolURL: string;
-    // veBalLockInfo?: VeBalLockInfo;
-    isOpen: boolean; 
-    onClose: () => void; 
+  gauge: VotingGaugeWithVotes;
+  unallocatedVoteWeight: number;
+  onClose: () => void;
+  onSucess: () => void;
+  isOpen: boolean;
+  veBalLockInfo?: {
+    hasExistingLock: boolean;
+    isExpired: boolean;
+    lockEndDate: number;
   };
+};
 
 export function GaugeVoteModal(props: Props) {
-const MINIMUM_LOCK_TIME = 86_400_000 * 7;
-// const props = defineProps<Props>();
+  const { voteForGauge, isConfirmed, isFailed, isPending } = useGaugeVoting();
+  const { currentVeBalance, lockEndDate } = useUserVeData();
+  const { isConnected } = useUserAccount();
 
-const [isOpen, setIsOpen] = useState(false);
-const onClose = () => setIsOpen(false);
-const onOpen = () => setIsOpen(true);
-const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
-// const currentWeight = computed(() => props.gauge.userVotes);
+  const {
+    voteWeight,
+    setVoteWeight,
+    voteError,
+    voteTitle,
+    voteButtonText,
+    voteButtonDisabled,
+    voteInputDisabled,
+    voteLockedUntilText,
+    remainingVotes,
+  } = useVotingState(props.gauge, props.unallocatedVoteWeight, {
+    ...props.veBalLockInfo,
+    currentVeBalance: currentVeBalance || '0',
+    lockEndDate,
+  });
 
+  useEffect(() => {
+    if (isConfirmed) {
+      props.onSucess();
+    }
 
-// STATE
+    if (isFailed) {
+      // TODO: how should we handle this?
+    }
+  }, [isConfirmed, isFailed]);
 
+  async function submitVote() {
+    if (!voteWeight) {
+      return;
+    }
+    const totalVoteShares = scale(voteWeight, 2).toString();
+    try {
+      voteForGauge(props.gauge.address, BigNumber.from(totalVoteShares));
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <>
-    <Button variant="stayblack" width={{ base: '90%', lg: '130px' }}
-    onClick={onOpen}>
-        Vote
-    </Button>
-    
-    <Modal
-    isOpen={isOpen}
-    onClose={onClose}
-    size="xl" 
-    >
-    {/* <ModalOverlay bg="vertek.slatepurple.900" /> */}
-    
-    <BeetsModalContent bg="black" paddingY="2rem" borderRadius="12px" >
-        <BeetsModalHeader>
-          <BeetsModalHeadline textAlign="center" fontSize="1.5rem">
-            Voting
-          </BeetsModalHeadline>
-        </BeetsModalHeader>
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
+        <BeetsModalContent bgColor="vertek.slate.900">
+          <BeetsModalHeader mt="2">
+            <BeetsModalHeadline textAlign="center" fontSize="2rem">
+              {voteTitle}
+              <Text fontSize="1rem" textAlign="center" mt="2">
+                Your balance of veVRTK: {currentVeBalance}
+              </Text>
+            </BeetsModalHeadline>
+          </BeetsModalHeader>
 
-        <BeetsModalBody textAlign="center" fontSize="1.2rem">
-        <Box display="flex" gap={4} alignItems="center" h="full">
-            Placeholder text for MemoizedTokenAvatarSetInList
-            {/* <MemoizedTokenAvatarSetInList 
-                logoURIs={props.logoURIs} width={100} size={32} />
-        {props.gauge.pool.name ? (
-        <>
-            <Text fontWeight="medium" color="black" >
-                {props.gauge.pool.name}
-            </Text>
-            <Text fontSize="sm" color="white">
-                {props.gauge.pool.symbol}
-            </Text>
-        </>
-        ) : (
-            <Text fontWeight="medium" color="black">
-            {props.gauge.pool.symbol}
-            </Text>
-      )} */}
-    </Box>
-        <div >
-            <FormControl>
-            <FormLabel color="white" >
-                %
-            </FormLabel>
-            <Input
-            id="voteWeight"
-            name="voteWeight"
-            type="number"
-            // value={voteWeight}
-            // onChange={(event) => setVoteWeight(event.target.value)}
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
-            step="any"
-            placeholder="0"
-            // validateOn="input"
-            // rules={inputRules}
-            // disabled={voteInputDisabled || transactionInProgress || voteState.receipt}
-            size="md"
-            autoFocus
-            />
-            </FormControl>
-</div>
+          <BeetsModalBody
+            mt="0"
+            bgColor="vertek.slatepurple.900"
+            textAlign="center"
+            fontSize="1.2rem"
+          >
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              padding="2"
+              alignItems="flex-start"
+              h="full"
+            >
+              <Box display="flex" flexDirection="column" fontSize="1rem" textAlign="left">
+                <Text mb="2">
+                  <RepeatClockIcon ml="2" mr="2" />
+                  Your vote directs future liquidity mining emissions starting from the next period
+                  on Thursday at 0:00 UTC.
+                </Text>
+                <Text mb="2">
+                  <LockIcon ml="2" mr="2" />
+                  Votes are timelocked for 10 days. If you vote now, no edits can be made until{' '}
+                  {voteLockedUntilText}.
+                </Text>
+                <Text mb="2">
+                  <SunIcon ml="2" mr="2" />
+                  Voting power is set at the time of the vote. If you get more veVRTK later,
+                  resubmit your vote to use your increased power.
+                </Text>
+              </Box>
 
-        </BeetsModalBody>
-       
-       <HStack alignItems="center" justifyContent="center" width="100%" >
-        <Button width="40%" variant="verteklight" onClick={onClose}>
-            Cancel
-        </Button>
-        <Button width="40%" variant="vertekdark">
-            Save
-        </Button>
-        </HStack>
+              {!!voteError && (
+                <Alert
+                  bg="black"
+                  flexDirection="column"
+                  status="error"
+                  color="white"
+                  mt={{ base: '2', md: '4' }}
+                  borderRadius="12px"
+                >
+                  <Box display="flex" flexDirection="row">
+                    <AlertIcon color="beets.green" />
+                    <AlertTitle fontSize="1rem">{voteError.title}</AlertTitle>
+                  </Box>
+                  <AlertDescription fontSize="0.9rem" textAlign="left" lineHeight="1.1rem">
+                    {voteError.description}
+                  </AlertDescription>
+                </Alert>
+              )}
 
-      </BeetsModalContent>
-    </Modal>
+              <Text fontWeight="medium">{props.gauge.pool.name}</Text>
+              <MemoizedTokenAvatarSetInList
+                imageSize={28}
+                marginBottom="4"
+                width={92}
+                tokens={props.gauge.pool.tokens}
+              />
+            </Box>
+            <div>
+              <FormControl>
+                <Input
+                  id="voteWeight"
+                  name="voteWeight"
+                  type="number"
+                  value={voteWeight}
+                  onChange={(event) => (setVoteWeight ? setVoteWeight(event.target.value) : null)}
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  color="grey.100"
+                  step="any"
+                  placeholder="0%"
+                  disabled={voteInputDisabled}
+                  size="md"
+                  autoFocus
+                />
+              </FormControl>
+              {!!voteError ? <Box>{voteError.description}</Box> : <Box>{remainingVotes}</Box>}
+            </div>
+          </BeetsModalBody>
 
+          <HStack alignItems="center" justifyContent="center" width="100%">
+            <Button width="40%" variant="verteklight" onClick={props.onClose}>
+              Cancel
+            </Button>
+            <Button
+              width="40%"
+              variant="stayblack"
+              disabled={!isConnected || isPending || voteButtonDisabled}
+              onClick={submitVote}
+            >
+              {voteButtonText}
+            </Button>
+          </HStack>
+        </BeetsModalContent>
+      </Modal>
     </>
   );
 }

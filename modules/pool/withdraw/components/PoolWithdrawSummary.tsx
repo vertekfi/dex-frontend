@@ -51,7 +51,8 @@ export function PoolWithdrawSummary({ ...rest }: Props) {
                 <Box flex="1">
                     <InfoButton
                         label="Price impact"
-                        infoText="This is the difference between the current market price and the price you will pay due to your withdraw influencing the balance and internal price of tokens within the pool."
+                        infoText="This is the difference between the current market price and 
+                        the price you will pay due to your withdraw influencing the balance and internal price of tokens within the pool."
                     />
                 </Box>
                 <Box>

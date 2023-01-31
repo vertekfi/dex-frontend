@@ -45,7 +45,7 @@ const BridgePage: FC = () => {
         }
         .StgHeader {
           border-bottom: 1px solid #0070f3 !important;
-          font-family: ${theme.fonts.heading}
+          font-family: ${theme.fonts.heading};
         }
         .StgHeader .MuiTypography-subtitle1 {
           font-family: ${theme.fonts.body};
@@ -105,21 +105,21 @@ const BridgePage: FC = () => {
         defer
         async
       ></Script>
-          <Card
-      animate={controls}
-      position="relative"
-      boxShadow='0 0 10px #5BC0F8, 0 0 20px #4A4AF6'
-      borderRadius="16px"
-    >
-       {/* 
+      <Card
+        animate={controls}
+        position="relative"
+        boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+        borderRadius="16px"
+      >
+        {/* 
       // @ts-ignore  */}
-      <stargate-widget
-        theme="dark"
-        partnerId="0x0010"
-        // need to add this wallet
-        feeCollector="0x26441aE27Ce06D140Ef5b1Bc5E4f43B83bdBa0e4"
-        tenthBps="10"
-      />
+        <stargate-widget
+          theme="dark"
+          partnerId="0x0010"
+          // need to add this wallet
+          feeCollector="0x26441aE27Ce06D140Ef5b1Bc5E4f43B83bdBa0e4"
+          tenthBps="10"
+        />
       </Card>
       <Box
         display="flex"
@@ -141,3 +141,4 @@ const BridgePage: FC = () => {
 };
 
 export default BridgePage;
+

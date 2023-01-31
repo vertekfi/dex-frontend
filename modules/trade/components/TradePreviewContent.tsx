@@ -1,15 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  Box,
-  Checkbox,
-  Flex,
-  HStack,
-  Link,
-  StackDivider,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Checkbox, Flex, HStack, Link, StackDivider, Text, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { BeetsSubmitTransactionButton } from '~/components/button/BeetsSubmitTransactionButton';
 import { useTrade } from '~/modules/trade/lib/useTrade';
@@ -149,13 +138,14 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
           </VStack>
         </BeetsBox>
         <BeetsBox mt="4" p="2" px="4">
-          <VStack>
-            <HStack width="full" justifyContent="space-between">
+          <VStack paddingY="2"  divider={<StackDivider borderColor="vertek.neonpurple.500" />}
+ >
+            <HStack width="full" justifyContent="space-between" >
               <InfoButton
                 label="Max slippage"
                 infoText="The maximum change in the price you are willing to accept to account for external market movements."
               />
-              <SlippageTextLinkMenu />
+              <SlippageTextLinkMenu  />
             </HStack>
             {exactIn ? (
               <HStack width="full" justifyContent="space-between">
@@ -181,7 +171,7 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
               alignItems="flex-start"
             >
               <Checkbox
-                colorScheme="green"
+                colorScheme="white"
                 mt="1"
                 mr="4"
                 isChecked={highPiAccepted}
@@ -193,8 +183,8 @@ export function TradePreviewContent({ query, onTransactionSubmitted }: Props) {
             </Alert>
           )}
           {batchSwapQuery && batchSwapQuery.submitError ? (
-            <Alert status="error" mt={4} color="black">
-              <AlertIcon />
+            <Alert status="error" mt={4} color="black" >
+              <AlertIcon  color="vertek.neonpurple.500"/>
               {transactionMessageFromError(batchSwapQuery.submitError)}
             </Alert>
           ) : null}

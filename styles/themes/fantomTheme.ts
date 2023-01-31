@@ -136,9 +136,9 @@ export const fantomTheme: Partial<ChakraTheme> = {
                 
         },
         beets: {
-            green: '#00F89C',
+            green: '#5BC0F8',
             red: '#FF0000',
-            highlight: '#00FFFF',
+            highlight: '#4A4AF6',
             base: {
                 '50': '#C3C5E9',
                 '100': '#8F93D6',
@@ -368,14 +368,14 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             borderColor:'vertek.neonpurple.500', 
                             color: 'white',
                             fontWeight:'900', 
-                            _active: { backgroundColor:'vertek.slate.900'  },
+                            _active: { backgroundColor:'vertek.slate.900', boxShadow:'0 0 12px #000'  },
                             _focus: { outline: 'none', boxShadow: 'none' },
                             borderRadius: '8px',
                             _hover: {
                                 color:'white',
                                 boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
                                 background: '',  
-                                transform:'scale(1.03)' 
+                                transform:'scale(1.02)' 
                                     }, 
                             _disabled: {
                                 transform: 'none',
@@ -385,11 +385,11 @@ export const fantomTheme: Partial<ChakraTheme> = {
                             },
                             moistblack: {
                                 backgroundColor:'vertek.slate.900', 
-                                boxShadow:'0 0 8px #fff', 
+                                boxShadow:'0 12px 2px #000', 
                                 color: 'white',
                                 fontWeight:'900', 
-                                _active: { backgroundColor:'vertek.slate.900'  },
-                                _focus: { outline: 'none', boxShadow: 'none' },
+                                // _active: { backgroundColor:'vertek.slate.900'  },
+                                // _focus: { outline: 'none', boxShadow: 'none' },
                                 borderRadius: '8px',
                                 _hover: {
                                     color:'white',
@@ -421,7 +421,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                     color:'white',
                                     boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
                                     background: '',  
-                                    transform:'scale(1.03)' 
+                                    transform:'scale(1.02)' 
                                         }, 
                                 _disabled: {
                                     transform: 'none',
@@ -443,7 +443,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                         color:'white', 
                         borderWidth:'2px', 
                         borderColor:'white', 
-                        transform:'scale(1.03)' 
+                        transform:'scale(1.02)' 
                             }, 
                     _disabled: {
                         transform: 'none',

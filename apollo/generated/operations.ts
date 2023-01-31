@@ -402,6 +402,10 @@ export const GetAppGlobalData = gql`
       priority
       tradable
     }
+    tokenGetCurrentPrices {
+      price
+      address
+    }
     blocksGetBlocksPerDay
     blocksGetAverageBlockTime
   }
@@ -1008,6 +1012,9 @@ export const GetLiquidityGauges = gql`
       symbol
       poolId
       totalSupply
+      depositFee
+      withdrawFee
+      isKilled
       factory {
         id
       }
@@ -1028,7 +1035,6 @@ export const GetLiquidityGauges = gql`
           logoURI
         }
       }
-      isKilled
     }
   }
 `;
@@ -1036,6 +1042,20 @@ export const GetUserStakes = gql`
   query GetUserStakes($user: String!, $poolIds: [String!]!) {
     getUserGaugeStakes(user: $user, poolIds: $poolIds) {
       id
+    }
+  }
+`;
+export const GetUserVeLockInfo = gql`
+  query GetUserVeLockInfo {
+    userGetVeLockInfo {
+      lockedAmount
+      lockEndDate
+      totalSupply
+      currentBalance
+      epoch
+      hasExistingLock
+      isExpired
+      percentOwned
     }
   }
 `;

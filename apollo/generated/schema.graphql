@@ -1001,6 +1001,17 @@ input GqlUserSwapVolumeFilter {
   tokenOutIn: [String!]
 }
 
+type GqlUserVoteEscrowInfo {
+  currentBalance: String!
+  epoch: String!
+  hasExistingLock: Boolean!
+  isExpired: Boolean!
+  lockEndDate: String!
+  lockedAmount: String!
+  percentOwned: String!
+  totalSupply: String!
+}
+
 scalar JSON
 
 type LiquidityGauge {
@@ -1008,6 +1019,7 @@ type LiquidityGauge {
    Address of the pool (lp_token of the gauge)
   """
   address: String!
+  depositFee: Int!
   factory: GaugeFactory
 
   """
@@ -1049,6 +1061,7 @@ type LiquidityGauge {
    Total of BPTs users have staked in the LiquidityGauge
   """
   totalSupply: BigDecimal!
+  withdrawFee: Int!
 }
 
 type Mutation {
@@ -1171,6 +1184,7 @@ type Query {
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
   userGetStaking: [GqlPoolStaking!]!
   userGetSwaps(first: Int!, poolId: String!, skip: Int!): [GqlPoolSwap!]!
+  userGetVeLockInfo: GqlUserVoteEscrowInfo!
 }
 
 type RewardPool {

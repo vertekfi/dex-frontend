@@ -1,49 +1,101 @@
-import { Box } from '@chakra-ui/react';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { poolURLFor } from '~/modules/pool/lib/pool-utils';
-import { PoolListProvider } from '~/modules/pools/usePoolList';
-import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
-import { GaugeListTableHeader } from './GaugeListTableHeader';
+import { scale, bnum } from '~/lib/util/big-number.utils';
+import { fNum2, FNumFormats } from '~/lib/util/useNumber';
+import { Box, Skeleton } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useUserVeData } from '../lib/useUserVeData';
+import { useVotingGauges } from '../lib/useVotingGauges';
 import { GaugeListItem } from './GaugeListItem';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { GaugeVoteModal } from './GaugeVoteModal';
+import { VotingSubheader } from './VotingSubheader';
 import { GaugeListFooter } from './GaugeListFooter';
+import { GaugeListTableHeader } from './GaugeListTableHeader';
 
-interface GaugeListProps {
-  votingGauges: VotingGaugeWithVotes[];
-}
+export function GaugeList() {
+  const [unallocatedVoteWeight, setUnallocatedVoteWeight] = useState<number>();
+  const [activeVotingGauge, setActiveVotingGauge] = useState<VotingGaugeWithVotes | null>();
 
-export function GaugeList(props: GaugeListProps | null) {
-  function redirectToPool(gauge: VotingGaugeWithVotes) {
-    window.location.href = poolURLFor(gauge.pool.id, gauge.network);
+  const {
+    isLoading: isLoadingGauges,
+    votingGauges,
+    unallocatedVotes,
+    refetch: refetchVotingGauges,
+  } = useVotingGauges();
+
+  const { hasExistingLock, lockEndDate, isExpired } = useUserVeData();
+
+  // Set users voting info
+  useEffect(() => {
+    const totalVotes = 1e4; // 10,000
+
+    if (!isLoadingGauges && votingGauges?.length) {
+      // Set the users remaining votes
+      const votesRemaining = votingGauges.reduce((remainingVotes: number, gauge) => {
+        return remainingVotes - parseFloat(gauge.userVotes);
+      }, totalVotes);
+
+      setUnallocatedVoteWeight(votesRemaining);
+    } else {
+      setUnallocatedVoteWeight(totalVotes);
+    }
+  }, [isLoadingGauges, votingGauges]);
+
+  function setActiveGaugeVote(votingGauge: VotingGaugeWithVotes) {
+    setActiveVotingGauge(votingGauge);
   }
 
-  function getHasUserVotes(userVotes: string): boolean {
-    return !!Number(userVotes);
+  function handleModalClose() {
+    setActiveVotingGauge(null);
+  }
+
+  function handleModalSuccess() {
+    refetchVotingGauges();
+    handleModalClose();
   }
 
   return (
-    <PoolListProvider>
-      <UserTokenBalancesProvider>
+    <>
+      <VotingSubheader
+        unallocatedVotesFormatted={fNum2(
+          scale(bnum(unallocatedVotes || '0'), -4).toString(),
+          FNumFormats.percent,
+        )}
+      />
+      <Box
+        mt="3rem"
+        boxShadow={{ base: 'none', lg: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6' }}
+        mb="6rem"
+        borderRadius="16px"
+        flexDirection="column"
+        display="flex"
+      >
+        <GaugeListTableHeader />
+        <Box>
+          <Skeleton isLoaded={!isLoadingGauges}>
+            {votingGauges?.map((gauge) => {
+              return (
+                <GaugeListItem key={gauge.address} gauge={gauge} onVoteClick={setActiveGaugeVote} />
+              );
+            })}
+          </Skeleton>
+        </Box>
+        <GaugeListFooter />
+      </Box>
 
-          <Box 
-          mt="3rem" 
-          boxShadow={{base: "none", lg:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6" }} 
-          mb="6rem" 
-          borderRadius="16px" 
-          flexDirection="column" 
-          display="flex">
-            <GaugeListTableHeader />
-            <Box>
-
-              {props?.votingGauges.map((gauge) => {
-                return <GaugeListItem key={gauge.address} gauge={gauge} />;
-              })}
-            </Box>
-            <GaugeListFooter />
-          </Box>
-
-      </UserTokenBalancesProvider>
-    </PoolListProvider>
+      {unallocatedVoteWeight && activeVotingGauge && (
+        <GaugeVoteModal
+          onClose={handleModalClose}
+          onSucess={handleModalSuccess}
+          gauge={activeVotingGauge}
+          isOpen={activeVotingGauge !== null}
+          unallocatedVoteWeight={unallocatedVoteWeight}
+          veBalLockInfo={{
+            hasExistingLock: hasExistingLock || false,
+            lockEndDate: lockEndDate || 0,
+            isExpired: isExpired || true,
+          }}
+        />
+      )}
+    </>
   );
 }

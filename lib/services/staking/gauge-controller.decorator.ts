@@ -13,7 +13,7 @@ import GaugeControllerAbi from '../../abi/GaugeController.json';
 
 const STARTING_WEEKS_TIMESTAMP: { [key: number]: number } = {
   5: 1671685200,
-  56: 0,
+  56: 1674686088,
 };
 
 export class GaugeControllerDecorator {
@@ -74,10 +74,6 @@ export class GaugeControllerDecorator {
     // (ie the first period starts the Thursday after ve/gauge controller setup took place)
 
     const chainStartTime = STARTING_WEEKS_TIMESTAMP[getChainId()];
-    if (chainStartTime == 0) {
-      throw new Error('Chain start time not set');
-    }
-
     if (thisWeekTimestamp == chainStartTime) {
       thisWeekTimestamp = thisWeekTimestamp - oneWeekInMs;
     }

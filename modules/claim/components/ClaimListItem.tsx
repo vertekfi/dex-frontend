@@ -17,10 +17,10 @@ import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 export function ClaimListItem(props: { gauge: VotingGaugeWithVotes }) {
-  return (
+  // console.log(props);
 
+  return (
     <Box
-      // bg="vertek.slatepurple.900"
       borderTopColor="#4A4AF6"
       boxShadow={{ base: '0 0 5px #5BC0F8, 0 0 10px #4A4AF6', lg: 'none' }}
       borderTopWidth="1px"
@@ -29,12 +29,10 @@ export function ClaimListItem(props: { gauge: VotingGaugeWithVotes }) {
       paddingY={{ base: '4', lg: '0' }}
       paddingX={{ base: '2', lg: '0' }}
       borderRadius={{ base: '16px', lg: '0' }}
-      // boxShadow="0 0 10px #5BC0F8, 10px 10px 20px #4A4AF6"
     >
       <Grid
         pl="4"
         pr="4"
-        // boxShadow="0 -5px 5px #5BC0F8, 0 -5px 10px #4A4AF6"
         py="2"
         templateColumns={{
           base: 'repeat(1fr 1fr)',
@@ -60,7 +58,11 @@ export function ClaimListItem(props: { gauge: VotingGaugeWithVotes }) {
             />
           </Box>
         </GridItem>
-        <GridItem area="name" textAlign={{base:'center', lg:'left'}} mb={{ base: '1', lg: '0' }}>
+        <GridItem
+          area="name"
+          textAlign={{ base: 'center', lg: 'left' }}
+          mb={{ base: '1', lg: '0' }}
+        >
           <Text
             color="white"
             fontSize={{ base: 'xl', lg: 'md' }}
