@@ -1661,6 +1661,8 @@ export type GetUserDataQuery = {
       __typename: 'GqlPoolStakingGauge';
       id: string;
       gaugeAddress: string;
+      depositFee: number;
+      withdrawFee: number;
       rewards: Array<{
         __typename: 'GqlPoolStakingGaugeReward';
         id: string;
@@ -5302,6 +5304,8 @@ export const GetUserDataDocument = gql`
       gauge {
         id
         gaugeAddress
+        depositFee
+        withdrawFee
         rewards {
           id
           rewardPerSecond

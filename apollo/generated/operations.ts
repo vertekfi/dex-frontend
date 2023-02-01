@@ -514,6 +514,8 @@ export const GetUserData = gql`
       gauge {
         id
         gaugeAddress
+        depositFee
+        withdrawFee
         rewards {
           id
           rewardPerSecond
