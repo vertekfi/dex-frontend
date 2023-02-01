@@ -1,5 +1,4 @@
 import { addDays, isThursday, nextThursday, previousThursday, startOfDay } from 'date-fns';
-import { VeBalLockInfo } from '~/lib/services/balancer/contracts/veBAL';
 import { toUtcTime } from '~/lib/util/time';
 import { MAX_LOCK_PERIOD_IN_DAYS, MIN_LOCK_PERIOD_IN_DAYS } from '~/modules/voting/constants';
 import { useLockState } from './useLockState';
@@ -14,7 +13,7 @@ function getMaxLockEndDateTimestamp(date: number) {
   return startOfDay(timestamp).getTime();
 }
 
-export function useLockEndDate(veBalLockInfo?: VeBalLockInfo) {
+export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; lockedEndDate: number }) {
   const todaysDate = toUtcTime(new Date());
 
   const minLockEndDateTimestamp = startOfDay(

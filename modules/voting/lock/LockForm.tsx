@@ -61,6 +61,7 @@ export function LockForm(props: Props) {
     lockablePool,
     hasExistingLock,
     isExpired,
+    lockedBalance,
   } = useUserVeData();
 
   const {
@@ -68,8 +69,15 @@ export function LockForm(props: Props) {
     maxLockEndDateTimestamp,
     isExtendedLockEndDate,
     isValidLockEndDate,
-  } = useLockEndDate();
-  const { isValidLockAmount, isIncreasedLockAmount, totalLpTokens } = useLockAmount();
+  } = useLockEndDate({
+    hasExistingLock: hasExistingLock || false,
+    lockedEndDate: lockEndDate,
+  });
+
+  const { isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
+    hasExistingLock: hasExistingLock || false,
+    lockedAmount: lockedBalance,
+  });
 
   useEffect(() => {
     if (!isLoadingUserVeData) {
@@ -115,7 +123,6 @@ export function LockForm(props: Props) {
   }, [isLoadingUserVeData, lockEndDate]);
 
   function handleShowPreviewModal() {
-    console.log(submissionDisabled);
     if (!lockAmount || !selectedDate) {
       setSubmissionDisabled(true);
       return;
@@ -234,7 +241,7 @@ export function LockForm(props: Props) {
               <Text
                 align="left"
                 paddingX="4"
-                paddingY="2" 
+                paddingY="2"
                 mb="4"
                 fontWeight="bold"
                 color="white"
