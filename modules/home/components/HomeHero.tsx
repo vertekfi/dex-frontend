@@ -42,6 +42,7 @@ return (
           
           <Text
             textAlign="left"
+            color="white"
             fontWeight="bold"
             marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
             fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
