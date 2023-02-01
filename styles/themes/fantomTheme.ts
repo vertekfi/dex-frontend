@@ -33,7 +33,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
     textStyles: {
         h1: {
             fontFamily: `'Clash', 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-            fontSize: ['3.0rem'],
+            fontSize: ['3.5rem'],
             lineHeight: '100%',
             fontWeight: 'bold',
             letterSpacing: '0.1rem',

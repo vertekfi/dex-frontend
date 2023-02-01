@@ -1,6 +1,7 @@
-import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { Button, Flex, HStack, Text, Box } from '@chakra-ui/react';
 import { NextLink } from '~/components/link/NextLink';
 import { VLogoPVWT } from '~/assets/logo/Vertek/VLogoPVWT';
+import { VLogoPNT } from '~/assets/logo/Vertek/VLogoPNT';
 
 export function HomeHero() {
 return (
@@ -23,44 +24,44 @@ return (
     alignItems="center"
   >
     <Flex flexDirection="column" width={{ base: 'auto' }}>
-      <HStack alignItems="center" justifyContent="space-between">
-          <Text
-            as="h1"
-            textStyle={{ base: 'h2', lg: 'h1' }}
-            textTransform="uppercase"
-            color="white"
-            fontWeight="semibold"
-            css={{
+      <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start" css={{
               transition: "transform 0.5s",
               "&:hover": {
                 transform: "scale(1.02)",
               },
-            }}
-          >
-              Welcome to
-          <br />
-          <VLogoPVWT 
-              height={{ base: '65px', md:'100px'}}  mt="3" 
+            }}>
+          <Box width="15%">
+          <VLogoPNT 
+              height={{ base: '65px', md:'100px'}} 
           />
+          </Box>
+          <Box width="full" >
+          <Text
+            as="h1"
+            textStyle={{ base: 'h2', lg: 'h1' }}
+            textAlign="left"
+            fontWeight="bold"
+            fontSize="8rem" 
+            
+          >
+            VERTEK
         </Text>
-      </HStack>
-      {/* <NextImage
-          src={HomeImage}
-          width="100px"
-
-          
-        /> */}
+        </Box>
+      </Box>
+      
         
       <HStack>
         <Text
           color="white"
-          as="h5"
-          textStyle={{ base: undefined, lg: 'h5' }}
-          fontSize={{ base: 'lg', lg: undefined }}
+          as="h4"
+          textStyle={{ base: undefined, lg: 'h4' }}
+          // fontSize={{ base: 'lg', lg: '2rem' }}
           my={{ base: '6', lg: '10' }}
           mr="8"
         >
-          The future of DeFi re-imagineered. Your next generation Decentralised Exchange.
+          The pinnacle of panoptic evolution in Decentralized Exchanges.<br />
+          Choose your investment reality. <br /> 
+          Get integrated.
         </Text>
       </HStack>
 

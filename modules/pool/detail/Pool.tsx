@@ -11,9 +11,17 @@ import { usePool } from '~/modules/pool/lib/usePool';
 import { PoolStatistics } from '~/modules/pool/detail/components/PoolStatistics';
 import { PoolStakeModal } from '~/modules/pool/stake/PoolStakeModal'; 
 import { PoolUnstakeModal } from '~/modules/pool/stake/PoolUnstakeModal';
+import numeral from 'numeral';
+import { GetLiquidityGaugesDocument } from '~/apollo/generated/graphql-codegen-generated'; 
+import { useQuery } from '@apollo/client';
 
-export function Pool() {
+
+export function Pool(){
   const { pool } = usePool();
+  const { data } = useQuery(GetLiquidityGaugesDocument);
+  const liquidityGauges = data && data.getLiquidityGauges;
+  const depositFee = liquidityGauges ? liquidityGauges[0].depositFee : "0";
+  const withdrawalFee = liquidityGauges ? liquidityGauges[0].withdrawFee : "0";
   
 
   return (
@@ -22,19 +30,32 @@ export function Pool() {
     <Box width="full" marginY="2">
       {pool.staking && <PoolStakeInFarmWarning />}
       <Box width="full" display="flex" flexDirection={{ base:'column', md:'row' }} justifyContent="space-between" marginBottom="4" paddingY={{ base:'0', md:'3'}}>
-        <Box width={{ base:'75%', md:'auto' }} mb={{ base: '2rem', md:'0'}}>
-            <Text color="gray.100">
-              Liquidity provision 
+        <Box width={{ base:'75%', md:'25%' }} mb={{ base: '2rem', md:'0'}}>
+            <Text fontWeight="bold" fontSize="1.1rem" textAlign="center" color="gray.100" mb="1">
+              Provide Liquidity
             </Text>
             <PoolInvestModal />
             <PoolWithdrawModal />
         </Box>
-        <Box width={{ base:'auto', md:'auto' }} display={{ base:'flex', md:'block'}} flexDirection={{ base:'column', md:'row'}}>
-            <Text textAlign={{ base:'right', md:'right'}}  mr={{ base:'auto', md:'2' }} color="gray.100" >
-                VPT token staking 
+        <Box width={{ base:'auto', md:'25%' }} display={{ base:'flex', md:'block'}} flexDirection={{ base:'column', md:'row'}}>
+            <Text fontWeight="bold" fontSize="1.1rem" mb="1" 
+            textAlign={{ base:'right', md:'center'}}  mr={{ base:'auto', md:'0' }} 
+            color="gray.100" >
+                Stake VPT Tokens
             </Text>
             <PoolStakeModal   /> 
             <PoolUnstakeModal />
+            <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+            <Text fontSize="0.8rem" textAlign={{ base:'right', md:'left'}}  ml={{ base:'auto', md:'0' }} width="50%" color="gray.100" >
+                Deposit fee:&nbsp; 
+                {numeral(depositFee/10000).format('0.0%')} 
+            </Text>
+            <Text fontSize="0.8rem" textAlign={{ base:'right', md:'left'}}  mr={{ base:'auto', md:'3' }} width="50%" color="gray.100" >
+                Withdrawal fee:&nbsp;               
+                {numeral(withdrawalFee/10000).format('0.0%')} 
+
+            </Text>
+            </Box>
         </Box>
       </Box>
     </Box>
