@@ -36,34 +36,30 @@ export function Navbar({ scrollY }: Props) {
         zIndex="3"
         height="92px"
         display="flex"
+        alignItems="space-between"
         flexDirection="column"
         justifyContent="center"
         borderBottomColor="vertek.neonpurple.500"
         backdropFilter="blur(16px)"
         borderBottomWidth="3px"
-        padding="24px, 40px, 0px, 40px"
+        // padding="12px, 40px, 0px, 40px"
       >
-        <Flex px={{ base: '4', xl: '8' }} py="0" alignItems="center">
-          {/* <motion.div
-            style={{ opacity, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-          >
-                        <Box width="full" height="full" bg="transparent" shadow="xl" />
-
-          </motion.div> */}
-          <Flex alignItems="center" mr="4" zIndex="2" cursor="pointer" bgColor="transparent">
+        <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{base:'auto', lg:'center'}} >
+          <Flex alignItems="center" mr={{ base:'0', lg:'2'}}  
+          zIndex="2" cursor="pointer" bgColor="transparent">
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
               {chainId === '10' ? (
                 <BeetsBalLogo width="132px" />
               ) : (
-                <Box mb="2">
-                  <BeetsLogo width="132px" />
+                <Box mb="">
+                  <BeetsLogo width={{ base: '120px', md:'130px', xl:'180px' }}  />
                 </Box>
               )}
             </NextLink>
           </Flex>
 
-          <Box flex="1" zIndex="2" margin="16px">
-            <Flex alignItems="center" display={{ base: 'none', md: 'flex' }}>
+          <Box flex="1" zIndex="2" margin="4px">
+            <Flex alignItems="center" display={{ base: 'none', lg: 'flex' }}>
               <NavbarLink
                 href={'/'}
                 selected={router.asPath.endsWith('/')}
@@ -125,8 +121,8 @@ export function Navbar({ scrollY }: Props) {
               {/*<NavbarAdditionalLinksMenu />*/}
             </Flex>
           </Box>
-          <FadeInOutBox mr="3" isVisible={isConnected}>
-            <HStack spacing="3">
+          <FadeInOutBox mr={{ base:'3', lg:'0'}} isVisible={isConnected}>
+            <HStack spacing={{ base:'4', lg:'1' }}>
               <NetworkSelectorPopover>
                 <Button
                   bgColor="transparent"
@@ -139,7 +135,7 @@ export function Navbar({ scrollY }: Props) {
                   _hover={{ transform: 'scale(1.1)' }}
                   px="0"
                 >
-                  <Image mr="8" width="24px" height="24px" src={networkConfig.eth.iconUrl} />
+                  <Image mr={{ base:'2', lg:'4'}} width="24px" height="24px" src={networkConfig.eth.iconUrl} />
                 </Button>
               </NetworkSelectorPopover>
               {/* <BeetsLogoNoText width="85px" /> */}
