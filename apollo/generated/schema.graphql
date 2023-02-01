@@ -605,9 +605,11 @@ type GqlPoolStakingFarmRewarder {
 }
 
 type GqlPoolStakingGauge {
+  depositFee: Int!
   gaugeAddress: String!
   id: ID!
   rewards: [GqlPoolStakingGaugeReward!]!
+  withdrawFee: Int!
 }
 
 type GqlPoolStakingGaugeReward {
@@ -1065,6 +1067,7 @@ type LiquidityGauge {
 }
 
 type Mutation {
+  cacheAverageBlockTime: String!
   doStakes: Boolean!
   poolInitializeSnapshotsForPool(poolId: String!): String!
   poolLoadOnChainDataForAllPools: String!
@@ -1106,8 +1109,10 @@ type Mutation {
 
 type Query {
   beetsGetBeetsPrice: String!
-  blocksGetAverageBlockTime: Int!
-  blocksGetBlocksPerDay: Int!
+  blocksGetAverageBlockTime: Float!
+  blocksGetBlocksPerDay: Float!
+  blocksGetBlocksPerSecond: Float!
+  blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [String]!

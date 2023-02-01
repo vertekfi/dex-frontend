@@ -610,9 +610,11 @@ export interface GqlPoolStakingFarmRewarder {
 
 export interface GqlPoolStakingGauge {
   __typename: 'GqlPoolStakingGauge';
+  depositFee: Scalars['Int'];
   gaugeAddress: Scalars['String'];
   id: Scalars['ID'];
   rewards: Array<GqlPoolStakingGaugeReward>;
+  withdrawFee: Scalars['Int'];
 }
 
 export interface GqlPoolStakingGaugeReward {
@@ -1058,6 +1060,7 @@ export interface LiquidityGauge {
 
 export interface Mutation {
   __typename: 'Mutation';
+  cacheAverageBlockTime: Scalars['String'];
   doStakes: Scalars['Boolean'];
   poolInitializeSnapshotsForPool: Scalars['String'];
   poolLoadOnChainDataForAllPools: Scalars['String'];
@@ -1138,8 +1141,10 @@ export interface MutationUserSyncBalanceArgs {
 export interface Query {
   __typename: 'Query';
   beetsGetBeetsPrice: Scalars['String'];
-  blocksGetAverageBlockTime: Scalars['Int'];
-  blocksGetBlocksPerDay: Scalars['Int'];
+  blocksGetAverageBlockTime: Scalars['Float'];
+  blocksGetBlocksPerDay: Scalars['Float'];
+  blocksGetBlocksPerSecond: Scalars['Float'];
+  blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<Scalars['String']>>;
@@ -1523,8 +1528,6 @@ export type GetAppGlobalDataQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAppGlobalDataQuery = {
   __typename: 'Query';
-  blocksGetBlocksPerDay: number;
-  blocksGetAverageBlockTime: number;
   tokenGetTokens: Array<{
     __typename: 'GqlToken';
     address: string;
@@ -2135,6 +2138,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -2293,6 +2298,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -2588,6 +2595,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -2743,6 +2752,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -3039,6 +3050,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -3194,6 +3207,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -3489,6 +3504,8 @@ export type GetPoolQuery = {
             __typename: 'GqlPoolStakingGauge';
             id: string;
             gaugeAddress: string;
+            depositFee: number;
+            withdrawFee: number;
             rewards: Array<{
               __typename: 'GqlPoolStakingGaugeReward';
               id: string;
@@ -3918,17 +3935,18 @@ export type GetPoolsQuery = {
       id: string;
       type: GqlPoolStakingType;
       address: string;
-      farm?: {
-        __typename: 'GqlPoolStakingMasterChefFarm';
+      gauge?: {
+        __typename: 'GqlPoolStakingGauge';
         id: string;
-        beetsPerBlock: string;
-        rewarders?: Array<{
-          __typename: 'GqlPoolStakingFarmRewarder';
+        gaugeAddress: string;
+        depositFee: number;
+        withdrawFee: number;
+        rewards: Array<{
+          __typename: 'GqlPoolStakingGaugeReward';
           id: string;
-          address: string;
-          tokenAddress: string;
           rewardPerSecond: string;
-        }> | null;
+          tokenAddress: string;
+        }>;
       } | null;
     } | null;
   }>;
@@ -3991,17 +4009,18 @@ export type GqlPoolMinimalFragment = {
     id: string;
     type: GqlPoolStakingType;
     address: string;
-    farm?: {
-      __typename: 'GqlPoolStakingMasterChefFarm';
+    gauge?: {
+      __typename: 'GqlPoolStakingGauge';
       id: string;
-      beetsPerBlock: string;
-      rewarders?: Array<{
-        __typename: 'GqlPoolStakingFarmRewarder';
+      gaugeAddress: string;
+      depositFee: number;
+      withdrawFee: number;
+      rewards: Array<{
+        __typename: 'GqlPoolStakingGaugeReward';
         id: string;
-        address: string;
-        tokenAddress: string;
         rewardPerSecond: string;
-      }> | null;
+        tokenAddress: string;
+      }>;
     } | null;
   } | null;
 };
@@ -4676,14 +4695,15 @@ export const GqlPoolMinimalFragmentDoc = gql`
       id
       type
       address
-      farm {
+      gauge {
         id
-        beetsPerBlock
-        rewarders {
+        gaugeAddress
+        depositFee
+        withdrawFee
+        rewards {
           id
-          address
-          tokenAddress
           rewardPerSecond
+          tokenAddress
         }
       }
     }
@@ -4847,8 +4867,6 @@ export const GetAppGlobalDataDocument = gql`
       price
       address
     }
-    blocksGetBlocksPerDay
-    blocksGetAverageBlockTime
   }
 `;
 
@@ -5663,6 +5681,8 @@ export const GetPoolDocument = gql`
         gauge {
           id
           gaugeAddress
+          depositFee
+          withdrawFee
           rewards {
             id
             rewardPerSecond

@@ -74,6 +74,8 @@ query GetPool($id: String!) {
       gauge {
         id
         gaugeAddress
+        depositFee
+        withdrawFee
         rewards {
           id
           rewardPerSecond

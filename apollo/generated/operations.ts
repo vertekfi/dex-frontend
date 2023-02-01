@@ -283,14 +283,15 @@ export const GqlPoolMinimal = gql`
       id
       type
       address
-      farm {
+      gauge {
         id
-        beetsPerBlock
-        rewarders {
+        gaugeAddress
+        depositFee
+        withdrawFee
+        rewards {
           id
-          address
-          tokenAddress
           rewardPerSecond
+          tokenAddress
         }
       }
     }
@@ -408,8 +409,6 @@ export const GetAppGlobalData = gql`
       price
       address
     }
-    blocksGetBlocksPerDay
-    blocksGetAverageBlockTime
   }
 `;
 export const GetAppGlobalPollingData = gql`
@@ -652,6 +651,8 @@ export const GetPool = gql`
         gauge {
           id
           gaugeAddress
+          depositFee
+          withdrawFee
           rewards {
             id
             rewardPerSecond
