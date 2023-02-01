@@ -14,6 +14,9 @@ import { useUserVeData } from '~/modules/voting/lib/useUserVeData';
 import { useEffect, useState } from 'react';
 import { useSubmitLock } from '../../lib/useSubmitLock';
 import { LockType } from '../../types';
+import { useUserSyncBalanceMutation } from '~/apollo/generated/graphql-codegen-generated';
+import { usePoolUserBptBalance } from '~/modules/pool/lib/usePoolUserBptBalance';
+import { usePoolUserTokenBalancesInWallet } from '~/modules/pool/lib/usePoolUserTokenBalancesInWallet';
 
 type Props = {
   lockAmount: string;
@@ -33,6 +36,8 @@ export function LockActions(props: Props) {
   );
 
   const { refetchUserVeData } = useUserVeData();
+  // const { refetch: refetchUserBptBalance } = usePoolUserBptBalance();
+  // const [userSyncBalance] = useUserSyncBalanceMutation();
 
   const vrtkBnbInfo: TokenBase = {
     address: networkConfig.balancer.votingEscrow.lockPoolAddress,
@@ -50,8 +55,6 @@ export function LockActions(props: Props) {
     [vrtkBnbInfo],
     networkConfig.balancer.votingEscrow.veAddress,
   );
-
-  const { refetch: refetchTokenBalances } = useUserTokenBalances();
 
   const { approve, ...approveQuery } = useApproveToken(vrtkBnbInfo);
 
@@ -106,7 +109,10 @@ export function LockActions(props: Props) {
             refetchAllowances();
           } else if (id === 'stake') {
             refetchUserVeData();
-            refetchTokenBalances();
+            // refetchUserBptBalance();
+            // userSyncBalance({
+            //   variables: { poolId: networkConfig.balancer.votingEscrow.lockablePoolId },
+            // });
           }
         }}
         steps={steps || []}
