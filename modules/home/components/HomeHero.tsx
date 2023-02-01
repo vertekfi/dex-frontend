@@ -24,46 +24,50 @@ return (
     alignItems="center"
   >
     <Flex flexDirection="column" width={{ base: 'auto' }}>
-      <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start" css={{
+      <Box 
+      display="flex" 
+      flexDirection="row" 
+      alignItems="center" 
+      justifyContent="flex-start" css={{
               transition: "transform 0.5s",
               "&:hover": {
                 transform: "scale(1.02)",
               },
             }}>
-          <Box width="15%">
           <VLogoPNT 
-              height={{ base: '65px', md:'100px'}} 
+              alignSelf="center" marginLeft={{ base:'0', md:'1rem' }}
+              height={{ base: '80px', md:'120px', xl:'180px'}} 
+              marginTop={{ base: '1rem', md:'1.9rem'}}
           />
-          </Box>
-          <Box width="full" >
+          
           <Text
-            as="h1"
-            textStyle={{ base: 'h2', lg: 'h1' }}
             textAlign="left"
             fontWeight="bold"
-            fontSize="8rem" 
+            marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
+            fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
+            className="vertekhome"
             
           >
             VERTEK
         </Text>
-        </Box>
       </Box>
       
         
-      <HStack>
+      
         <Text
           color="white"
-          as="h4"
-          textStyle={{ base: undefined, lg: 'h4' }}
-          // fontSize={{ base: 'lg', lg: '2rem' }}
-          my={{ base: '6', lg: '10' }}
-          mr="8"
+          fontSize={{ base: '1.3rem', md:'1.5rem', xl:'2rem' }}
+          letterSpacing="-0.02rem"
+          lineHeight={{base:'1.5rem', xl:'1.9rem' }}
+          fontWeight="bold" 
+          my={{ base: '6', md:'4' }}
+          mr={{ base: '-1rem', md:'4' }}
         >
           The pinnacle of panoptic evolution in Decentralized Exchanges.<br />
-          Choose your investment reality. <br /> 
+          Choose your investment reality. <br />
           Get integrated.
         </Text>
-      </HStack>
+
 
       <HStack
         spacing="4"
@@ -79,7 +83,7 @@ return (
           </Button>
         </NextLink>
         <NextLink href="/swap" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-          <Button width={{ base: '130px', lg: '160px' }} variant="vertekdark">
+          <Button width={{ base: '130px', lg: '160px' }} variant="stayblack">
             Swap
           </Button>
         </NextLink>
