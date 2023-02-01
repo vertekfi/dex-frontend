@@ -49,7 +49,6 @@ paddingY="2"
         <FooterLink href="/voting" linkType="internal">
             veVRTK
         </FooterLink>
-       
     </Box>
     <Box 
     display="flex"

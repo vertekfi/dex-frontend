@@ -11,8 +11,6 @@ import { HomePoolsNew } from './components/HomePoolsNew';
 import Image from 'next/image';
 import puzzle from '~/assets/vertekicons/puzzle.svg'; 
 
-
-
 export function Home() {
   const {
     stakedValueUSD,

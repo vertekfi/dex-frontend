@@ -39,7 +39,7 @@ export function ClaimTable(props: ClaimTableProps) {
             <Text fontWeight="bold"></Text>
           </GridItem>
           <GridItem>
-            <Text fontWeight="bold">Amount</Text>
+            <Text fontWeight="bold" textAlign="left">Amount</Text>
           </GridItem>
           <GridItem justifyContent="center" display="flex">
             <Text fontWeight="bold">Value</Text>
