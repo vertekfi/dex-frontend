@@ -77,14 +77,15 @@ fragment GqlPoolMinimal on GqlPoolMinimal {
     id
     type
     address
-    farm {
+    gauge {
       id
-      beetsPerBlock
-      rewarders {
+      gaugeAddress
+      depositFee
+      withdrawFee
+      rewards {
         id
-        address
-        tokenAddress
         rewardPerSecond
+        tokenAddress
       }
     }
   }

@@ -13,8 +13,8 @@ query GetAppGlobalData {
     price
     address
   }
-  blocksGetBlocksPerDay
-  blocksGetAverageBlockTime
+  # blocksGetBlocksPerDay
+  # blocksGetAverageBlockTime
 }
 
 query GetAppGlobalPollingData {
