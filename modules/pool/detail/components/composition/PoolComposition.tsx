@@ -153,7 +153,7 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
           </Flex>
         </Flex>
       )}
-      <TableContainer> 
+      <TableContainer>
         <Table {...getTableProps()} style={{ borderCollapse: 'separate', borderSpacing: '0 3px' }}>
           <Thead width="full" paddingX="2">
             {headerGroups.map((headerGroup) => (
@@ -180,7 +180,12 @@ function PoolCompositionTable({ columns, data, hasNestedTokens }: PoolCompositio
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <Tr {...row.getRowProps()} padding="2" width="full" background="rgba(255, 255, 255, 0.05)">
+                <Tr
+                  {...row.getRowProps()}
+                  padding="2"
+                  width="full"
+                  background="rgba(255, 255, 255, 0.05)"
+                >
                   {row.cells.map((cell, i) => {
                     return (
                       <Td
@@ -218,6 +223,8 @@ export function PoolComposition() {
   const hasNestedTokens = pool.tokens.some((token) =>
     ['GqlPoolTokenLinear', 'GqlPoolTokenPhantomStable'].includes(token.__typename),
   );
+
+  console.log(pool);
 
   const columns: Column<TableDataTemplate>[] = React.useMemo(
     () => [
@@ -257,7 +264,7 @@ export function PoolComposition() {
     return tokens.map((token) => {
       const tokenPrice = priceFor(token.address);
       const totalTokenValue = parseFloat(token.balance) * tokenPrice;
-      const calculatedWeight = totalTokenValue / parseFloat(pool.dynamicData.totalLiquidity);
+      const calculatedWeight = totalTokenValue / parseFloat(pool.dynamicData.totalLiquidity24hAgo);
       const userBalance = isComposablePool
         ? getUserPoolTokenBalance(token.address)
         : hasNestedTokens && 'pool' in token

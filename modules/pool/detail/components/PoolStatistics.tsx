@@ -8,28 +8,15 @@ import { etherscanGetAddressUrl } from '~/lib/util/etherscan';
 import { numberFormatLargeUsdValue, numberFormatLargeValue } from '~/lib/util/number-formats';
 import { Divider, VStack } from '@chakra-ui/layout';
 import { PoolDetailUsdStatsWithDate } from '~/modules/pool/detail/components/PoolDetailUsdStatsWithDate';
-import { useGetTokens } from '~/lib/global/useToken';
-import { useGetPoolTokensDynamicDataQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { PoolDetailTokenInfoCard } from '~/modules/pool/detail/components/PoolDetailTokenInfoCard';
 import { usePool } from '~/modules/pool/lib/usePool';
-import { poolGetNestedLinearPoolTokens } from '~/lib/services/pool/lib/util';
-import { PoolWithPossibleNesting } from '~/lib/services/pool/pool-types';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 
 export function PoolStatistics() {
   const config = useNetworkConfig();
   const { pool } = usePool();
-  const tokensOfInterest = [
-    ...poolGetNestedLinearPoolTokens(pool as PoolWithPossibleNesting),
-    ...pool.withdrawConfig.options.map((option) => option.tokenOptions),
-  ].flat();
   const dynamicData = pool.dynamicData;
   const sharePrice =
-    parseFloat(pool.dynamicData.totalLiquidity) / parseFloat(pool.dynamicData.totalShares);
-  const { priceFor } = useGetTokens();
-  const { data } = useGetPoolTokensDynamicDataQuery({
-    variables: { addresses: tokensOfInterest.map((token) => token.address) },
-  });
+    parseFloat(pool.dynamicData.totalLiquidity24hAgo) / parseFloat(pool.dynamicData.totalShares);
 
   return (
     <Grid templateColumns={{ base: '1fr', lg: '1fr' }} gap="4" width="full">
@@ -109,7 +96,7 @@ export function PoolStatistics() {
               {
                 label: 'All-time high',
                 value: dynamicData.totalLiquidityAth,
-                currentValue: dynamicData.totalLiquidity,
+                currentValue: dynamicData.totalLiquidity24hAgo,
                 timestamp: dynamicData.totalLiquidityAthTimestamp,
               },
             ]}
