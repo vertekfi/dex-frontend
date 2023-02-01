@@ -134,7 +134,7 @@ export function PoolListItem({
                   fontSize={{ base: 'xl', lg: 'md' }}
                   color="white"
                 >
-                  {numeral(pool.dynamicData.totalLiquidity).format('$0,0')}
+                  {numeral(pool.dynamicData.totalLiquidity24hAgo).format('$0,0')}
                 </Text>
               </StatGridItem>
               <StatGridItem
