@@ -294,8 +294,8 @@ export function VotingHeader() {
             boxShadow="2px 28px 12px 0px #000"
           >
             <Skeleton isLoaded={!isLoadingUserVeData}>
-              <Text marginBottom="1rem">{currentVeBalance} shares</Text>
-              <Text>{percentOwned} percent owned</Text>
+              <Text marginBottom=".2rem">{currentVeBalance} shares</Text>
+              <Text>{percentOwned}% owned</Text>
             </Skeleton>
           </Box>
         </Card>

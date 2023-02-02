@@ -1,5 +1,6 @@
-import { Text, Button, SimpleGrid, GridItem } from '@chakra-ui/react';
+import { Text, Button, SimpleGrid, GridItem , Box} from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import { NextLink } from '../link/NextLink';
 import { useState } from 'react';
 import { LockForm } from '~/modules/voting/lock/LockForm';
 
@@ -68,20 +69,31 @@ export function EarnMasthead({ title, image }: Props) {
         >
           Lock VRTK-BNB and receive up to 2.5x boosted rewards when farming Core Pools.
         </Text>
-        <Button
-          variant="moistblack"
-          marginBottom="1rem"
-          width={{ base: '75%', lg: '75%' }}
-          boxShadow="0px 2px 2px 4px #000"
-          fontSize={{ base: '0.9rem', lg: '1rem' }}
-          mt="3"
-          alignSelf="center"
-          onClick={handleOpenModal}
-        >
-          Earn More
-        </Button>
+        <Box
+          
+          display="flex" 
+          justifyContent="center" 
+          width="full" 
+          alignItems="center" 
+          mx="auto"  >
+          <NextLink href="/voting" chakraProps={{ _hover: { textDecoration: 'none' } }}>
+          <Button
+            variant="moistblack"
+            marginBottom="1rem"
+            width="full"
+            // width={{ base: '75%', lg: '75%' }}
+            boxShadow="0px 2px 2px 4px #000"
+            fontSize={{ base: '0.9rem', lg: '1rem' }}
+            mt="3"
+            alignSelf="center"
+            // onClick={handleOpenModal}
+          >
+            Earn More
+          </Button>
+          </NextLink>
+        </Box>
       </GridItem>
-      {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
+      {/* {isModalOpen && <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />} */}
     </SimpleGrid>
   );
 }

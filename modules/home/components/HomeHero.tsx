@@ -42,11 +42,24 @@ return (
           
           <Text
             textAlign="left"
+            display={{ base:'none', md:'block' }}
             color="white"
             fontWeight="bold"
             marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
             fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
             className="vertekhome"
+            
+          >
+            VERTEK
+        </Text>
+        <Text
+            display={{ base: 'auto', md:'none'}}
+            textAlign="left"
+            color="white"
+            fontWeight="bold"
+            marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
+            fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
+            className="vertekhomemobile"
             
           >
             VERTEK
@@ -59,10 +72,10 @@ return (
           color="white"
           fontSize={{ base: '1.3rem', md:'1.5rem', xl:'2rem' }}
           letterSpacing="-0.02rem"
-          lineHeight={{base:'1.5rem', xl:'1.9rem' }}
-          fontWeight="bold" 
+          lineHeight={{base:'1.6rem', md: '2.3rem' }}
+          fontWeight={{ base: 'semibold', md:'bold' }} 
           my={{ base: '6', md:'4' }}
-          mr={{ base: '-1rem', md:'4' }}
+          mr={{ base: '-1.5rem', md:'4' }}
         >
           The pinnacle of panoptic evolution in Decentralized Exchanges.<br />
           Choose your investment reality. <br />
