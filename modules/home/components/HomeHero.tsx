@@ -42,11 +42,24 @@ return (
           
           <Text
             textAlign="left"
+            display={{ base:'none', md:'block' }}
             color="white"
             fontWeight="bold"
             marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
             fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
             className="vertekhome"
+            
+          >
+            VERTEK
+        </Text>
+        <Text
+            display={{ base: 'auto', md:'none'}}
+            textAlign="left"
+            color="white"
+            fontWeight="bold"
+            marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
+            fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
+            className="vertekhomemobile"
             
           >
             VERTEK

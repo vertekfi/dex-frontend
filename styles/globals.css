@@ -84,7 +84,14 @@ a {
     font-weight: bold; 
     -webkit-background-clip: text;
     background-clip: text;
-    text-shadow: 0 0 5px #302B84, 0 0 10px #5BC0F8, 0 0 15px #4A4AF6; 
+    text-shadow: 0 0 2px #302B84, 0 0 8px #5BC0F8, 0 0 12px #4A4AF6; 
+}
+.vertekhomemobile {
+    color: #ccc;
+    font-weight: bold; 
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 4px #5BC0F8, 0 0 8px #4A4AF6; 
 }
 .homecard {
     background-image: linear-gradient(to right, #5bc0f8, #4A4AF6, #4A4AF6, #5bc0f8); 
