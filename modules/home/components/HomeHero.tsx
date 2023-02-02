@@ -60,7 +60,7 @@ return (
           fontSize={{ base: '1.3rem', md:'1.5rem', xl:'2rem' }}
           letterSpacing="-0.02rem"
           lineHeight={{base:'1.6rem', md: '2.3rem' }}
-          fontWeight="bold" 
+          fontWeight={{ base: 'semibold', md:'bold' }} 
           my={{ base: '6', md:'4' }}
           mr={{ base: '-1.5rem', md:'4' }}
         >
