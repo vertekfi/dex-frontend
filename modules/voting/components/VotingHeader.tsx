@@ -8,6 +8,7 @@ import Card from '~/components/card/Card';
 import { useUserVeData } from '../lib/useUserVeData';
 import { MyVeVRTK } from './MyVeVRTK';
 import { Activity, Database, Zap, Key } from 'react-feather';
+import { tokenFormatAmount } from '~/lib/services/token/token-util';
 
 export const VotingCardHeader = styled.p`
   font-size: 1.3rem;
@@ -104,7 +105,7 @@ export function VotingHeader() {
           >
             <Skeleton isLoaded={!!userLockablePoolBalance && !!userLockablePoolBalanceUSD}>
               <Text>{userLockablePoolBalanceUSD}</Text>
-              <Text>{userLockablePoolBalance} shares</Text>
+              <Text>{tokenFormatAmount(userLockablePoolBalance || '')} shares</Text>
             </Skeleton>
             <Button
               as="a"
