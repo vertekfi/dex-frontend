@@ -295,7 +295,7 @@ export function VotingHeader() {
           >
             <Skeleton isLoaded={!isLoadingUserVeData}>
               <Text marginBottom="1rem">{currentVeBalance} shares</Text>
-              <Text>{percentOwned} percent owned</Text>
+              <Text>{percentOwned}% owned</Text>
             </Skeleton>
           </Box>
         </Card>
