@@ -90,7 +90,7 @@ export class PoolWeightedService implements PoolService {
     return poolGetProportionalExitAmountsForBptIn(
       bptIn,
       this.pool.tokens,
-      this.pool.dynamicData.totalShares24hAgo,
+      this.pool.dynamicData.totalShares,
     );
   }
 
