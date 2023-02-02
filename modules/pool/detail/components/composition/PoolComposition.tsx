@@ -224,8 +224,6 @@ export function PoolComposition() {
     ['GqlPoolTokenLinear', 'GqlPoolTokenPhantomStable'].includes(token.__typename),
   );
 
-  console.log(pool);
-
   const columns: Column<TableDataTemplate>[] = React.useMemo(
     () => [
       {

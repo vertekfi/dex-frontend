@@ -80,21 +80,6 @@ export class PoolWeightedService implements PoolService {
     );
     const maxAmountsIn = poolScaleTokenAmounts(data.maxAmountsIn, this.pool.tokens);
     const userData = this.encodeJoinPool(data);
-
-    if (
-      data.zapIntoMasterchefFarm &&
-      this.pool.staking?.type === 'MASTER_CHEF' &&
-      this.pool.staking.farm
-    ) {
-      return this.batchRelayerService.encodeJoinPoolAndStakeInMasterChefFarm({
-        userData,
-        pool: this.pool,
-        assets,
-        maxAmountsIn,
-        userAddress: data.userAddress,
-      });
-    }
-
     return { type: 'JoinPool', assets, maxAmountsIn, userData };
   }
 
@@ -105,7 +90,7 @@ export class PoolWeightedService implements PoolService {
     return poolGetProportionalExitAmountsForBptIn(
       bptIn,
       this.pool.tokens,
-      this.pool.dynamicData.totalShares,
+      this.pool.dynamicData.totalShares24hAgo,
     );
   }
 
@@ -184,12 +169,14 @@ export class PoolWeightedService implements PoolService {
   public bptForTokensZeroPriceImpact(tokenAmounts: TokenAmountHumanReadable[]): OldBigNumber {
     const denormAmounts = oldBnumPoolScaleTokenAmounts(tokenAmounts, this.pool.tokens);
 
+    //  console.log(this.pool);
+
     const result = weightedBPTForTokensZeroPriceImpact(
       this.baseService.tokenBalancesScaled.map((balance) => oldBnumToBnum(balance)),
       this.pool.tokens.map((token) => token.decimals),
       this.baseService.tokenWeightsScaled.map((weight) => oldBnumToBnum(weight)),
       denormAmounts.map((amount) => oldBnumToBnum(amount)),
-      parseUnits(this.pool.dynamicData.totalShares),
+      parseUnits(this.pool.dynamicData.totalShares24hAgo),
     );
 
     return oldBnumFromBnum(result);
