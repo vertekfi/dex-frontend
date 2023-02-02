@@ -28,7 +28,6 @@ function PoolList() {
     ? orderBy(pools, (pool) => usdBalanceForPool(pool.id), 'desc')
     : pools;
 
-  console.log(poolsToRender);
   const hasUnstakedBpt =
     showMyInvestments &&
     pools.filter((pool) => pool.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(pool.id))
