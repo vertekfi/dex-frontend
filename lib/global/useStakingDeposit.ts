@@ -21,8 +21,8 @@ export function useStakingDeposit(staking: GqlPoolStaking | null) {
     if (staking) {
       return submit({
         args: [parseUnits(amount, 18)],
-        toastText: `Stake BPT into ${networkConfig.farmTypeName}`,
-        walletText: `Stake ${tokenFormatAmount(amount)} BPT into ${networkConfig.farmTypeName}`,
+        toastText: `Stake VPT into ${networkConfig.farmTypeName}`,
+        walletText: `Stake ${tokenFormatAmount(amount)} VPT into ${networkConfig.farmTypeName}`,
       });
     } else {
       console.log('GqlPoolStaking not provided');
