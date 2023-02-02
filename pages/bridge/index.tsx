@@ -117,7 +117,7 @@ const BridgePage: FC = () => {
           theme="dark"
           partnerId="0x0010"
           // need to add this wallet
-          feeCollector="0x26441aE27Ce06D140Ef5b1Bc5E4f43B83bdBa0e4"
+          feeCollector="0xA8AAe7bEB83d62eb908F8F1F833A83407e0E04a6"
           tenthBps="10"
         />
       </Card>
