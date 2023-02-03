@@ -79,9 +79,9 @@ return (
             }
             }),
             )}
-        <GridItem>
+        {/* <GridItem>
             <HomeNews />
-        </GridItem>
+        </GridItem> */}
     </Grid>
 </Box>
 

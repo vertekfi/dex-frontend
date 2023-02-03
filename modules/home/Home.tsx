@@ -45,7 +45,7 @@ export function Home() {
       <Box display="flex" flexDirection="row"  alignItems="center" mt="4" mb="8" >
           <Text fontSize={{ base: '1.3rem', md:"2rem"}}  textAlign={{ base: 'left', md:'justify' }}>
             Advanced, yet simple. Sophisticated, yet intuitive &nbsp; 
-            <Image  src={puzzle} width="30" height="30"   />
+            {/* <Image  src={puzzle} width="30" height="30"   /> */}
           </Text>
          
           
