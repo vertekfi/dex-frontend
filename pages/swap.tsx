@@ -8,6 +8,8 @@ import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { Text, Box } from '@chakra-ui/react';
+import 'animate.css'; 
+
 function Swap() {
     const { chainId } = useNetworkConfig();
 
