@@ -27,7 +27,7 @@ export function useSubmitLock(lockType: LockType, lockEndDate: string, lockAmoun
       functionName = 'increase_unlock_time';
       args = [parseDate(lockEndDate)];
       break;
-    case LockType.INCREASE_LOCK:
+    case LockType.INCREASE_AMOUNT:
       label = `Increase lock amount`;
       functionName = 'increase_amount';
       args = [parseUnits(lockAmount, 18)];

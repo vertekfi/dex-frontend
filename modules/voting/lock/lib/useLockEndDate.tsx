@@ -1,7 +1,7 @@
 import { addDays, isThursday, nextThursday, previousThursday, startOfDay } from 'date-fns';
+import { useState } from 'react';
 import { toUtcTime } from '~/lib/util/time';
 import { MAX_LOCK_PERIOD_IN_DAYS, MIN_LOCK_PERIOD_IN_DAYS } from '~/modules/voting/constants';
-import { useLockState } from './useLockState';
 
 function getMaxLockEndDateTimestamp(date: number) {
   const maxLockTimestamp = addDays(date, MAX_LOCK_PERIOD_IN_DAYS);
@@ -14,6 +14,8 @@ function getMaxLockEndDateTimestamp(date: number) {
 }
 
 export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; lockedEndDate: number }) {
+  const [lockDate, setLockDate] = useState<string>('');
+
   const todaysDate = toUtcTime(new Date());
 
   const minLockEndDateTimestamp = startOfDay(
@@ -27,16 +29,18 @@ export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; locked
 
   const maxLockEndDateTimestamp = getMaxLockEndDateTimestamp(todaysDate);
 
-  const { lockEndDate } = useLockState();
-
-  let lockEndDateTimestamp = 0;
   let isValidLockEndDate = false;
-
-  if (lockEndDate) {
-    lockEndDateTimestamp = startOfDay(new Date(Number(lockEndDate))).getTime();
+  if (lockDate) {
+    console.log('lock date changed: ' + lockDate);
+    const lockEndDateTimestamp = startOfDay(new Date(Number(lockDate))).getTime();
     isValidLockEndDate =
       lockEndDateTimestamp >= minLockEndDateTimestamp &&
       lockEndDateTimestamp <= maxLockEndDateTimestamp;
+
+    console.log('lockEndDateTimestamp: ' + lockEndDateTimestamp);
+    console.log('minLockEndDateTimestamp: ' + minLockEndDateTimestamp);
+    console.log('maxLockEndDateTimestamp: ' + maxLockEndDateTimestamp);
+    console.log('lock date valid?: ' + isValidLockEndDate);
   }
 
   let isExtendedLockEndDate = false;
@@ -47,6 +51,8 @@ export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; locked
   }
 
   return {
+    lockDate,
+    setLockDate,
     todaysDate: toUtcTime(new Date()),
     isValidLockEndDate,
     isExtendedLockEndDate,

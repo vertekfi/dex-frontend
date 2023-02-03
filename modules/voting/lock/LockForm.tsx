@@ -46,9 +46,6 @@ interface Props {
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lockType, setLockType] = useState<LockType[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>('');
-  const [lockAmount, setLockAmount] = useState<string>();
-  const [submissionDisabled, setSubmissionDisabled] = useState<boolean>(true);
 
   const {
     isLoadingUserVeData,
@@ -62,9 +59,12 @@ export function LockForm(props: Props) {
     hasExistingLock,
     isExpired,
     lockedBalance,
+    refetchUserVeData,
   } = useUserVeData();
 
   const {
+    lockDate,
+    setLockDate,
     minLockEndDateTimestamp,
     maxLockEndDateTimestamp,
     isExtendedLockEndDate,
@@ -74,40 +74,32 @@ export function LockForm(props: Props) {
     lockedEndDate: lockEndDate,
   });
 
-  const { isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
+  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
     hasExistingLock: hasExistingLock || false,
     lockedAmount: lockedBalance,
   });
 
-  useEffect(() => {
-    if (!isLoadingUserVeData) {
-      if (!hasExistingLock && !isExpired) {
-        setSubmissionDisabled(!isIncreasedLockAmount && !isExtendedLockEndDate);
-      }
+  let submissionDisabled = true;
 
-      if (
-        !bnum(userLockablePoolBalance || '0').gt(0) ||
-        !isValidLockAmount ||
-        !isValidLockEndDate
-      ) {
-        setSubmissionDisabled(true);
-      }
-    }
-  }, [isLoadingUserVeData]);
+  if (!bnum(userLockablePoolBalance || '0').gt(0) || !isValidLockAmount || !lockDate) {
+    submissionDisabled = true;
+  } else {
+    submissionDisabled = false;
+  }
 
+  // Set lock type
   useEffect(() => {
-    if (!isLoadingUserVeData) {
-      if (hasExistingLock && !isExpired) {
-        if (isIncreasedLockAmount && isExtendedLockEndDate) {
-          return setLockType([LockType.INCREASE_LOCK, LockType.EXTEND_LOCK]);
-        }
-        if (isExtendedLockEndDate) {
-          return setLockType([LockType.EXTEND_LOCK]);
-        }
-        if (isIncreasedLockAmount) {
-          return setLockType([LockType.INCREASE_LOCK]);
-        }
+    if (hasExistingLock && !isExpired) {
+      if (isIncreasedLockAmount && isExtendedLockEndDate) {
+        setLockType([LockType.INCREASE_AMOUNT, LockType.EXTEND_LOCK]);
       }
+      if (isExtendedLockEndDate) {
+        setLockType([LockType.EXTEND_LOCK]);
+      }
+      if (isIncreasedLockAmount) {
+        setLockType([LockType.INCREASE_AMOUNT]);
+      }
+    } else {
       setLockType([LockType.CREATE_LOCK]);
     }
   }, [isLoadingUserVeData]);
@@ -116,18 +108,14 @@ export function LockForm(props: Props) {
     setIsModalOpen(false);
   }
 
-  useEffect(() => {
-    if (!isLoadingUserVeData && lockEndDate > 0) {
-      updateLockEndDate(lockEndDate);
-    }
-  }, [isLoadingUserVeData, lockEndDate]);
-
   function handleShowPreviewModal() {
-    if (!lockAmount || !selectedDate) {
-      setSubmissionDisabled(true);
-      return;
-    }
     setIsModalOpen(true);
+  }
+
+  function handleSuccess() {
+    refetchUserVeData();
+    setLockAmount('');
+    setLockDate('');
   }
 
   function getDateInput(timestamp: number) {
@@ -136,8 +124,7 @@ export function LockForm(props: Props) {
 
   function updateLockEndDate(timestamp: number) {
     const newDate = getDateInput(timestamp);
-    console.log('newDate: ' + newDate);
-    setSelectedDate(newDate);
+    setLockDate(newDate);
   }
 
   function formatDateInput(date: Date | number) {
@@ -149,18 +136,7 @@ export function LockForm(props: Props) {
     // round up to thursday of the selected week?
   }
 
-  function handleAmountChange(amount: string) {
-    // expected out
-    // console.log(amount);
-
-    if (!amount) {
-      setSubmissionDisabled(true);
-    }
-
-    setLockAmount(amount);
-  }
-
-  const expectedVeBalAmount = expectedVeBal(lockAmount || '0', selectedDate);
+  const expectedVeBalAmount = expectedVeBal(lockAmount || '0', lockDate);
 
   const lockDates = [
     {
@@ -192,7 +168,7 @@ export function LockForm(props: Props) {
       label: '~1Y',
       date: formatDateInput(maxLockEndDateTimestamp),
       action: () => {
-        setSelectedDate(formatDateInput(maxLockEndDateTimestamp));
+        setLockDate(formatDateInput(maxLockEndDateTimestamp));
       },
     },
   ];
@@ -380,7 +356,7 @@ export function LockForm(props: Props) {
                     name="voteWeight"
                     type="number"
                     value={lockAmount}
-                    onChange={(event) => handleAmountChange(event.target.value)}
+                    onChange={(event) => setLockAmount(event.target.value)}
                     autoComplete="off"
                     autoCorrect="off"
                     spellCheck={false}
@@ -416,7 +392,7 @@ export function LockForm(props: Props) {
                     placeholder="Select Date and Time"
                     size="md"
                     type="date"
-                    value={selectedDate}
+                    value={lockDate}
                     onChange={(event) => handleDateChanged(event.target.value)}
                   />
                   <Box
@@ -475,10 +451,11 @@ export function LockForm(props: Props) {
               {isModalOpen && (
                 <LockPreviewModal
                   isOpen={isModalOpen}
+                  onSucess={handleSuccess}
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
                   totalLpTokens={lockAmount || '0'}
-                  lockEndDate={selectedDate}
+                  lockEndDate={lockDate}
                   lockablePool={lockablePool}
                   lockAmount={lockAmount || '0'}
                   expectedVeBalAmount={expectedVeBalAmount}

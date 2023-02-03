@@ -35,8 +35,8 @@ export function LockActions(props: Props) {
     props.lockAmount,
   );
 
-  const { refetchUserVeData } = useUserVeData();
-  // const { refetch: refetchUserBptBalance } = usePoolUserBptBalance();
+  // const { refetchUserVeData } = useUserVeData();
+  //  const { refetch: refetchUserBptBalance } = usePoolUserBptBalance();
   // const [userSyncBalance] = useUserSyncBalanceMutation();
 
   const vrtkBnbInfo: TokenBase = {
@@ -63,7 +63,7 @@ export function LockActions(props: Props) {
   useEffect(() => {
     if (!loading) {
       const hasApproval = hasApprovalForAmount(
-        networkConfig.balancer.votingEscrow.veAddress,
+        networkConfig.balancer.votingEscrow.lockPoolAddress,
         props.lockAmount,
       );
 
@@ -94,9 +94,7 @@ export function LockActions(props: Props) {
         isLoading={loading || steps === null}
         loadingButtonText="Loading balances..."
         completeButtonText="Deposit complete"
-        onCompleteButtonClick={() => {
-          props.onSuccess();
-        }}
+        onCompleteButtonClick={() => {}}
         onSubmit={(id) => {
           if (id === 'approve') {
             approve(networkConfig.balancer.votingEscrow.veAddress);
@@ -108,7 +106,8 @@ export function LockActions(props: Props) {
           if (id === 'approve') {
             refetchAllowances();
           } else if (id === 'stake') {
-            refetchUserVeData();
+            props.onSuccess();
+            // refetchUserVeData();
             // refetchUserBptBalance();
             // userSyncBalance({
             //   variables: { poolId: networkConfig.balancer.votingEscrow.lockablePoolId },

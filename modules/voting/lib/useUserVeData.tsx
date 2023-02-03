@@ -55,7 +55,6 @@ export function _useUserVotingData() {
 
   useEffect(() => {
     if (isConnected && !isLoadingUserBalances) {
-      console.log(bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId));
       setUserLockablePoolBalance(
         bptBalanceForPool(networkConfig.balancer.votingEscrow.lockablePoolId),
       );
