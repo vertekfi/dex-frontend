@@ -36,10 +36,9 @@ export function PoolListItem({
       mb={{ base: '12', md: '0' }}
       borderRadius={{ base: '16px', md: 'none' }}
       padding={{ base: '2', md: 'none' }}
-      borderWidth="1px"
-      borderColor="gray.200"
+      borderTopWidth="1px" borderTopColor="gray.200"
+      borderLeftWidth="2px" borderRightWidth="2px" borderLeftColor="vertek.slate.600" borderRightColor="vertek.slate.600"
       bg={{ base: 'vertek.slate.900', md: 'transparent' }}
-      boxShadow={{ base: '0 0 5px #5BC0F8, 0 0 10px #4A4AF6', md: 'none' }}
     >
       <Box
         bg={{ base: 'vertek.slatepurple.900', md: 'transparent' }}

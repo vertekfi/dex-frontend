@@ -59,6 +59,7 @@ function PoolList() {
           will accumulate over time when your VPT are staked.
         </Alert>
       )}
+     
        <PaginatedTable
                 items={poolsToRender}
                 currentPage={state.skip / state.first + 1}
@@ -74,8 +75,6 @@ function PoolList() {
                 renderTableRow={(item: GqlPoolMinimalFragment, index) => {
                   return(
                     <PoolListItem
-                      padding="1"
-                      bgColor="white"
                       key={index}
                       pool={item}
                       userBalance={`${usdBalanceForPool(item.id)}`}
@@ -91,6 +90,7 @@ function PoolList() {
                     ); 
             }}
             />
+
         
       {/* <Box
         mt="2rem"
@@ -136,7 +136,7 @@ function PoolList() {
             hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
           />
         ))} */}
-        <PoolListFooter />
+        {/* <PoolListFooter /> */}
       {/* </Box> */}
     </Box>
   );
