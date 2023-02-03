@@ -93,33 +93,31 @@ export function Pool() {
               display={{ base: 'flex', md: 'block' }}
               flexDirection={{ base: 'column', md: 'row' }}
             >
-              <Text
-                fontWeight="bold"
-                fontSize="1.1rem"
-                mb="1"
-                textAlign={{ base: 'right', md: 'center' }}
-                mr={{ base: 'auto', md: '0' }}
-                color="gray.100"
-              >
+              <Text fontWeight="bold" fontSize="1.1rem" mb="2" textAlign="center" color="gray.100">
                 Stake VPT Tokens
               </Text>
-              <PoolStakeModal />
-              <PoolUnstakeModal />
-              <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+              <Box display="flex" flexDirection="row" justifyContent="center">
+                <PoolStakeModal />
+                <PoolUnstakeModal />
+              </Box>
+
+              <Box display="flex" flexDirection="row">
                 <Text
                   fontSize="0.8rem"
-                  textAlign={{ base: 'right', md: 'left' }}
-                  ml={{ base: 'auto', md: '0' }}
+                  textAlign="center"
+                  mt="2"
                   width="50%"
                   color="gray.100"
+                  ml={{ base: 'auto', md: '3' }}
                 >
                   Deposit fee:&nbsp;
                   {numeral(depositFee / 10000).format('0.0%')}
                 </Text>
                 <Text
                   fontSize="0.8rem"
-                  textAlign={{ base: 'right', md: 'left' }}
-                  mr={{ base: 'auto', md: '3' }}
+                  textAlign="center"
+                  mr={{ base: 'auto', md: '6' }}
+                  mt="2"
                   width="50%"
                   color="gray.100"
                 >

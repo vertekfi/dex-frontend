@@ -169,8 +169,6 @@ export class PoolWeightedService implements PoolService {
   public bptForTokensZeroPriceImpact(tokenAmounts: TokenAmountHumanReadable[]): OldBigNumber {
     const denormAmounts = oldBnumPoolScaleTokenAmounts(tokenAmounts, this.pool.tokens);
 
-    console.log(this.pool);
-
     const result = weightedBPTForTokensZeroPriceImpact(
       this.baseService.tokenBalancesScaled.map((balance) => oldBnumToBnum(balance)),
       this.pool.tokens.map((token) => token.decimals),

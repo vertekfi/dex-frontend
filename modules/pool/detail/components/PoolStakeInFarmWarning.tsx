@@ -1,5 +1,4 @@
-import { Alert, AlertIcon, Box, Button, useDisclosure } from '@chakra-ui/react';
-import { PoolStakeModal } from '~/modules/pool/stake/PoolStakeModal';
+import { Alert, AlertIcon, Box } from '@chakra-ui/react';
 import { usePoolUserBptBalance } from '~/modules/pool/lib/usePoolUserBptBalance';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
@@ -8,7 +7,6 @@ import { usePool } from '~/modules/pool/lib/usePool';
 export function PoolStakeInFarmWarning() {
   const { pool } = usePool();
   const { userWalletBptBalance, hasBptInWallet } = usePoolUserBptBalance();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const valueInWallet =
     (parseFloat(userWalletBptBalance) / parseFloat(pool.dynamicData.totalShares)) *
     parseFloat(pool.dynamicData.totalLiquidity);
