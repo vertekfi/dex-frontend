@@ -14,6 +14,7 @@ import InvestMastheadOpImage from '~/assets/images/invest-masthead-image-OP.png'
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { PoolsCreate } from '~/modules/pools/PoolsCreate'; 
+import 'animate.css'; 
 
 function Pools() {
   const { chainId } = useNetworkConfig();
@@ -37,6 +38,7 @@ function Pools() {
       <PoolListProvider>
         <UserTokenBalancesProvider>
           <EarnMasthead
+
             title="Earn"
             image={
               <NextImage
@@ -46,7 +48,9 @@ function Pools() {
               />
             }
           />
+          <div className="animate__animated animate__zoomIn animate__delay-2s animate__duration-6s" >
           <PoolList />
+          </div>
           {/* <PoolsCreate  /> */}
         </UserTokenBalancesProvider>
       </PoolListProvider>

@@ -9,6 +9,8 @@ import { useUserVeData } from '../lib/useUserVeData';
 import { MyVeVRTK } from './MyVeVRTK';
 import { Activity, Database, Zap, Key } from 'react-feather';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
+import { motion } from 'framer-motion';
+
 
 export const VotingCardHeader = styled.p`
   font-size: 1.3rem;
@@ -49,6 +51,10 @@ export function VotingHeader() {
           Lock, Load and Vote
         </Text>
       </Box>
+      <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 2 }}>
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
         paddingX="4"
@@ -300,6 +306,7 @@ export function VotingHeader() {
           </Box>
         </Card>
       </Grid>
+      </motion.div>
     </UserDataProvider>
   );
 }
