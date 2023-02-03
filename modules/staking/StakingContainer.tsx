@@ -9,7 +9,8 @@ export function StakingContainer() {
   // dummy numbers
   const p = {
     __typename: 'RewardPool',
-    address: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
+    // address: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
+    address: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
     amountStaked: '0',
     amountStakedValue: '0',
     aprs: {
@@ -21,7 +22,8 @@ export function StakingContainer() {
     endBlock: 100000000,
     isPartnerPool: false,
     rewardToken: {
-      address: '0x7faA8158FaA037CC7516eF1f6864af44d75654AE',
+      // address: '0x7faA8158FaA037CC7516eF1f6864af44d75654AE',
+      address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
       logoURI: 'https://seeklogo.com/images/B/binance-usd-busd-logo-A436FCF6B6-seeklogo.com.png',
       name: 'BNB',
       price: 300,
@@ -37,7 +39,8 @@ export function StakingContainer() {
       pendingRewardValue: '0',
       pendingRewards: '0',
       percentageOwned: '0',
-      poolAddress: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
+      // poolAddress: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
+      poolAddress: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
     },
   };
 
