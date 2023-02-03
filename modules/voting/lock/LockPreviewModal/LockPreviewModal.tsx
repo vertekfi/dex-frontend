@@ -11,6 +11,7 @@ type Props = {
   currentVeBalance: string;
   isOpen: boolean;
   onClose: () => void;
+  onSucess: () => void;
   lockEndDate: string;
   lockAmount: string;
   totalLpTokens: string;
@@ -18,9 +19,19 @@ type Props = {
 };
 
 export function LockPreviewModal(props: Props) {
-  const title = '';
+  let lockConfirmed = false;
+  let title = '';
 
-  function handleSuccess() {}
+  if (props.lockType?.length == 1) {
+    title = lockConfirmed ? `Extend lock preview confirmed` : 'Extend lock preview preview';
+  } else {
+    title = lockConfirmed ? 'Locking confirmed' : 'Locking preview';
+  }
+
+  function handleSuccess() {
+    lockConfirmed = true;
+    props.onSucess();
+  }
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">

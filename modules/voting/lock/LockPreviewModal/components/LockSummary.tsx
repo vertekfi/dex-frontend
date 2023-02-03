@@ -28,7 +28,7 @@ export function LockSummary(props: Props) {
     props.lockType.length === 1 && props.lockType.includes(LockType.EXTEND_LOCK);
 
   const isIncreaseLockOnly =
-    props.lockType.length === 1 && props.lockType.includes(LockType.INCREASE_LOCK);
+    props.lockType.length === 1 && props.lockType.includes(LockType.INCREASE_AMOUNT);
 
   return (
     <div>
