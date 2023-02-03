@@ -44,9 +44,9 @@ export function PaginatedTable({
     <Box {...rest} >
       {renderTableHeader()}
       <Box
-        mb={4}
-        borderBottomLeftRadius="16px"
-        borderBottomRightRadius="16px"
+        mb={0}
+        // borderBottomLeftRadius="16px"
+        // borderBottomRightRadius="16px"
         overflow="hidden"
 
       >
@@ -72,13 +72,22 @@ export function PaginatedTable({
           ))}
       </Box>
       {!isInfinite && (
-        <Flex >
-          <Flex flex={1} alignItems="center" justifyContent="flex-start">
+        <Flex  
+        bgColor="vertek.slate.900"
+        paddingBottom="4" 
+        paddingTop="1" 
+        borderBottomWidth="2px" borderLeftWidth="2px" borderRightWidth="2px" 
+        borderTopWidth="0px" 
+        borderBottomRadius="16px" 
+        boxShadow="0 0 10px #000"
+        borderColor="vertek.slate.600"  >
+          <Flex  flex={1} alignItems="center" justifyContent="flex-start">
             {hidePageSizeChange ? null : (
               <>
-                <Box>
+                <Box    
+>
                   <Select
-                    style={{ borderRadius: '16px' }}
+                    style={{ borderRadius: '16px', backgroundColor:'transparent'}}
                     borderWidth="0px"
                     value={pageSize}
                     onChange={(event) => {
@@ -94,7 +103,7 @@ export function PaginatedTable({
               </>
             )}
           </Flex>
-          <Pagination
+          <Pagination 
             onChange={onPageChange}
             defaultCurrent={1}
             total={count}

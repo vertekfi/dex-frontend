@@ -15,7 +15,7 @@ export function PoolListFooter() {
         borderBottomRadius="16px"
         alignItems={'center'}
         bgColor="vertek.slate.900"
-        borderTop="2px"
+       
         borderColor="vertek.slate.600"
         mt={{ base: '0', lg: '0' }}
         templateColumns={

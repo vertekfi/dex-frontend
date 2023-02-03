@@ -10,12 +10,14 @@ export function PoolListTableHeader() {
   return (
     <>
       <Grid
-        padding="12px"
-        borderTopRadius="16px"
+        padding="4" 
+        boxShadow="0px -1px 0px 0px #000"
+        mt="4"
+        borderTopRadius="16px" borderBottomRadius="0px"
+        borderBottom="0px"
+        borderColor="vertek.slate.600"
         alignItems={'center'}
         bgColor="vertek.slate.900"
-        borderBottom="2px"
-        borderColor="vertek.slate.600"
         mb={{ base: '4', lg: '0' }}
         templateColumns={
           showMyInvestments
