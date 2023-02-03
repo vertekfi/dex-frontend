@@ -69,6 +69,58 @@ a {
 
 /* custom vertek */ 
 
+.appearup {
+    bottom:0; 
+    opacity:0; 
+    animation: appear 1s ease 1;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    position: relative;
+}
+
+@keyframes appear {
+    0% {
+        bottom: -100px; 
+        opacity: 0; 
+    }
+    100% {
+        bottom: 0; 
+        opacity: 1; 
+    }
+}
+
+
+.appearright {
+    left:0; 
+    opacity:0; 
+    animation: appearright 1s ease 1;
+    animation-delay: 1s;
+    animation-duration: 1s; 
+    animation-fill-mode: forwards;
+    position: relative;
+}
+
+@keyframes appearright {
+    0% {
+        left: -100px; 
+        opacity: 0; 
+    }
+    100% {
+        left: 0; 
+        opacity: 1; 
+    }
+}
+
+.delay25 {
+    animation-delay: 2.5s;
+}
+.delay5 {
+    animation-delay: 5s;
+}
+
+
+
+
 /*text */
 .vertektitle {
     /* background-image: radial-gradient(circle, #4A4AF6, #5BC0F8, #fff, #4132D0); */

@@ -2,6 +2,8 @@ import { Button, Flex, HStack, Text, Box } from '@chakra-ui/react';
 import { NextLink } from '~/components/link/NextLink';
 import { VLogoPVWT } from '~/assets/logo/Vertek/VLogoPVWT';
 import { VLogoPNT } from '~/assets/logo/Vertek/VLogoPNT';
+import 'animate.css'; 
+
 
 export function HomeHero() {
 return (
@@ -38,6 +40,10 @@ return (
               alignSelf="center" marginLeft={{ base:'0', md:'1rem' }}
               height={{ base: '80px', md:'120px', xl:'180px'}} 
               marginTop={{ base: '1rem', md:'1.9rem'}}
+              className="animate__animated 
+              animate__fadeInDown 
+              animate__slower
+              animate__delay-0s"
           />
           
           <Text
@@ -47,8 +53,11 @@ return (
             fontWeight="bold"
             marginLeft={{ base:'-2.8rem', md:'-3rem', xl:'-6rem' }} 
             fontSize={{ base: '3.5rem', md:'6rem', xl:'7rem'}}
-            className="vertekhome"
-            
+            className=" vertekhome 
+            animate__animated 
+            animate__fadeInDown 
+            animate__slower
+            animate__delay-0s"
           >
             VERTEK
         </Text>
@@ -74,12 +83,49 @@ return (
           letterSpacing="-0.02rem"
           lineHeight={{base:'1.6rem', md: '2.3rem' }}
           fontWeight={{ base: 'semibold', md:'bold' }} 
-          my={{ base: '6', md:'4' }}
+          mt={{ base: '6', md:'4' }}
           mr={{ base: '-1.5rem', md:'4' }}
+          className=" 
+          animate__animated 
+          animate__fadeInRight
+          animate__slower
+          animate__delay-0s"
         >
           The pinnacle of panoptic evolution in Decentralized Exchanges.<br />
+     
+        </Text>
+        <Text
+          color="white"
+          fontSize={{ base: '1.3rem', md:'1.5rem', xl:'2rem' }}
+          letterSpacing="-0.02rem"
+          lineHeight={{base:'1.6rem', md: '2.3rem' }}
+          fontWeight={{ base: 'semibold', md:'bold' }} 
+          mr={{ base: '-1.5rem', md:'4' }}
+          className=" 
+          animate__animated 
+          animate__fadeInRight
+          animate__slower
+          delay25"
+        >
           Choose your investment reality. <br />
-          Get integrated.
+
+        </Text>
+        <Text
+          color="white"
+          fontSize={{ base: '1.3rem', md:'1.5rem', xl:'2rem' }}
+          letterSpacing="-0.02rem"
+          lineHeight={{base:'1.6rem', md: '2.3rem' }}
+          fontWeight={{ base: 'semibold', md:'bold' }} 
+          mr={{ base: '-1.5rem', md:'4' }}
+          mb={{ base:'6', md:'4' }}
+          className="vertekhome
+          animate__animated 
+          animate__fadeInRight
+          animate__slower
+          delay5
+          " >
+         Get integrated. <br />
+
         </Text>
 
 
@@ -92,12 +138,21 @@ return (
         // flex-end on base for accessibility
       >
         <NextLink href="/pools" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-          <Button variant="verteklight" width={{ base: '130px', lg: '160px' }}>
+          <Button variant="verteklight" width={{ base: '130px', lg: '160px' }}
+          className="animate__animated 
+          animate__fadeInUp
+          animate__slower
+          animate__delay-0s"
+          >
             Invest
           </Button>
         </NextLink>
         <NextLink href="/swap" chakraProps={{ _hover: { textDecoration: 'none' } }}>
-          <Button width={{ base: '130px', lg: '160px' }} variant="stayblack">
+          <Button width={{ base: '130px', lg: '160px' }} variant="stayblack" 
+          className="animate__animated 
+          animate__fadeInUp 
+          animate__slower
+          animate__delay-0s">
             Swap
           </Button>
         </NextLink>
