@@ -29,6 +29,7 @@ query GetLiquidityGauges {
         address
         weight
         logoURI
+        symbol
       }
     }
   }
