@@ -69,8 +69,6 @@ export async function getStaticProps({ params }: { params: { poolId: string } })
     variables: { id: params.poolId },
   });
 
-  console.log(data);
-
   return loadApolloState({
     client,
     props: { pool: data.pool },
