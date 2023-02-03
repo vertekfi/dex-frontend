@@ -1038,6 +1038,7 @@ export const GetLiquidityGauges = gql`
           address
           weight
           logoURI
+          symbol
         }
       }
     }

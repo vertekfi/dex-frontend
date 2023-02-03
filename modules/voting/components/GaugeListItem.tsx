@@ -27,6 +27,8 @@ export function GaugeListItem(props: Props) {
     });
   }
 
+  console.log(props.gauge.pool.tokens);
+
   return (
     <Grid
       className="moistmobilecard"

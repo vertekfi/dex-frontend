@@ -4381,6 +4381,7 @@ export type GetLiquidityGaugesQuery = {
         address: string;
         weight?: string | null;
         logoURI?: string | null;
+        symbol: string;
       }>;
     };
   } | null>;
@@ -6692,6 +6693,7 @@ export const GetLiquidityGaugesDocument = gql`
           address
           weight
           logoURI
+          symbol
         }
       }
     }
