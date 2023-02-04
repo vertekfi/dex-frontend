@@ -31,7 +31,7 @@ export function LockPreviewModal(props: Props) {
   let title = '';
 
   if (props.lockType?.length == 1) {
-    title = lockConfirmed ? `Extend lock preview confirmed` : 'Extend lock preview preview';
+    title = lockConfirmed ? `Extend lock preview confirmed` : 'Extend lock preview';
   } else {
     title = lockConfirmed ? 'Locking confirmed' : 'Locking preview';
   }

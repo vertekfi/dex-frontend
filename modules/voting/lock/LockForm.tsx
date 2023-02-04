@@ -12,6 +12,8 @@ import {
   FormControl,
   Input,
   FormLabel,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
 import {
   BeetsModalBody,
@@ -55,11 +57,12 @@ export function LockForm(props: Props) {
     percentOwned,
     expectedVeBal,
     lockEndDate,
+    lockedUntilDate,
+    lockedUntilDays,
     lockablePool,
     hasExistingLock,
     isExpired,
     lockedBalance,
-    refetchUserVeData,
   } = useUserVeData();
 
   const {
@@ -79,28 +82,55 @@ export function LockForm(props: Props) {
     lockedAmount: lockedBalance,
   });
 
+  const hasVaildLock = hasExistingLock && !isExpired;
   let submissionDisabled = true;
 
-  if (!bnum(userLockablePoolBalance || '0').gt(0) || !isValidLockAmount || !lockDate) {
-    submissionDisabled = true;
+  if (hasVaildLock) {
+    if (isIncreasedLockAmount || isExtendedLockEndDate) {
+      submissionDisabled = false;
+    } else {
+      submissionDisabled = true;
+    }
   } else {
-    submissionDisabled = false;
+    if (!bnum(userLockablePoolBalance || '0').gt(0) || !isValidLockAmount || !lockDate) {
+      submissionDisabled = true;
+    } else {
+      submissionDisabled = false;
+    }
+  }
+
+  let title = '';
+  if (hasVaildLock) {
+    title = 'Update VRTK-BNB lock';
+  } else {
+    title = 'Lock VRTK-BNB';
   }
 
   // Set lock type
   useEffect(() => {
     if (hasExistingLock && !isExpired) {
       if (isIncreasedLockAmount && isExtendedLockEndDate) {
-        setLockType([LockType.INCREASE_AMOUNT, LockType.EXTEND_LOCK]);
+        return setLockType([LockType.INCREASE_AMOUNT, LockType.EXTEND_LOCK]);
       }
+
       if (isExtendedLockEndDate) {
-        setLockType([LockType.EXTEND_LOCK]);
+        return setLockType([LockType.EXTEND_LOCK]);
       }
+
       if (isIncreasedLockAmount) {
         setLockType([LockType.INCREASE_AMOUNT]);
       }
     } else {
       setLockType([LockType.CREATE_LOCK]);
+    }
+  }, [isLoadingUserVeData, lockAmount, lockDate]);
+
+  // Set initial date if needed
+  useEffect(() => {
+    if (hasExistingLock) {
+      updateLockEndDate(lockEndDate);
+    } else {
+      updateLockEndDate(maxLockEndDateTimestamp);
     }
   }, [isLoadingUserVeData]);
 
@@ -130,7 +160,14 @@ export function LockForm(props: Props) {
     // round up to thursday of the selected week?
   }
 
-  const expectedVeBalAmount = expectedVeBal(lockAmount || '0', lockDate);
+  function handleMaxClick() {
+    setLockAmount(userLockablePoolBalance || '0');
+  }
+
+  let expectedVeBalAmount = '0';
+  if (isValidLockAmount && isValidLockEndDate) {
+    expectedVeBalAmount = expectedVeBal(lockAmount, lockDate);
+  }
 
   const lockDates = [
     {
@@ -187,8 +224,8 @@ export function LockForm(props: Props) {
       >
         <ModalCloseButton />
         <BeetsModalHeader>
-          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="white" mb="" mt="-1rem">
-            Lock VRTK-BNB
+          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="white" mt="-1rem">
+            {title}
           </BeetsModalHeadline>
         </BeetsModalHeader>
 
@@ -316,15 +353,8 @@ export function LockForm(props: Props) {
               borderRadius="16px"
               boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
             >
-              <Text
-                align="left"
-                padding="2"
-                mb="4"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Lock to get veVRTK
+              <Text align="left" padding="5" fontWeight="bold" color="white" fontSize="1.2rem">
+                {title}
               </Text>
               <Box
                 display="flex"
@@ -343,26 +373,33 @@ export function LockForm(props: Props) {
                   How much do you want to lock?
                 </Text>
 
-                <FormControl mb="4">
-                  <Input
-                    focusBorderColor="vertek.neonpurple.500"
-                    id="voteWeight"
-                    name="voteWeight"
-                    type="number"
-                    value={lockAmount}
-                    onChange={(event) => setLockAmount(event.target.value)}
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    step="any"
-                    placeholder={userLockablePoolBalance || '0.00'}
-                    size="md"
-                    fontWeight="bold"
-                  />
-                  <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
-                    {userLockablePoolBalance} shares available
-                  </FormLabel>
-                </FormControl>
+                <InputGroup>
+                  <FormControl mb="4">
+                    <Input
+                      focusBorderColor="vertek.neonpurple.500"
+                      id="voteWeight"
+                      name="voteWeight"
+                      type="number"
+                      value={lockAmount}
+                      onChange={(event) => setLockAmount(event.target.value)}
+                      autoComplete="off"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      step="any"
+                      placeholder={userLockablePoolBalance || '0.00'}
+                      size="md"
+                      fontWeight="bold"
+                    />
+                    <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
+                      {userLockablePoolBalance} VRTK-BNB available
+                    </FormLabel>
+                  </FormControl>
+                  <InputRightElement width="4.5rem">
+                    <Button variant="verteklight" h="1.75rem" size="sm" onClick={handleMaxClick}>
+                      Max
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
               </Box>
 
               <Box
@@ -388,6 +425,8 @@ export function LockForm(props: Props) {
                     type="date"
                     value={lockDate}
                     onChange={(event) => handleDateChanged(event.target.value)}
+                    min={formatDateInput(minLockEndDateTimestamp)}
+                    max={formatDateInput(maxLockEndDateTimestamp)}
                   />
                   <Box
                     w="99%"
@@ -428,7 +467,7 @@ export function LockForm(props: Props) {
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
                     {/* <div>{tokenFormatAmount(expectedVeBalAmount || '0')} - veVRTK</div> */}
-                    <div>{expectedVeBalAmount} - veVRTK</div>
+                    <div>{expectedVeBalAmount || '0'} - veVRTK</div>
                   </Text>
                 </Flex>
               </Box>
@@ -475,7 +514,9 @@ export function LockForm(props: Props) {
             >
               <MyVeVRTK
                 currentVeBalance={currentVeBalance || ''}
-                percentOwned={percentOwned || ''}
+                percentOwned={percentOwned || '0'}
+                lockedUntilDate={lockedUntilDate || '-'}
+                lockedUntilDays={lockedUntilDays || 0}
               />
             </Card>
           </Grid>
