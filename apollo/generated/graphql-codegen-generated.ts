@@ -817,6 +817,14 @@ export interface GqlProtocolMetrics {
   totalSwapVolume: Scalars['BigDecimal'];
 }
 
+export interface GqlProtocolPendingGaugeFee {
+  __typename: 'GqlProtocolPendingGaugeFee';
+  gaugeAddress: Scalars['String'];
+  pendingPoolTokensFee: Scalars['Float'];
+  poolId: Scalars['String'];
+  poolName: Scalars['String'];
+}
+
 export interface GqlSorGetBatchSwapForTokensInResponse {
   __typename: 'GqlSorGetBatchSwapForTokensInResponse';
   assets: Array<Scalars['String']>;
@@ -1146,6 +1154,7 @@ export interface Query {
   blocksGetBlocksPerSecond: Scalars['Float'];
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
+  getAllGaugePendingProtocolFees: Array<GqlProtocolPendingGaugeFee>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<Scalars['String']>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;

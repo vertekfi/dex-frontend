@@ -17,7 +17,17 @@ import { NetworkStatus } from '@apollo/client';
 function PoolList() {
   const { getToken } = useGetTokens();
   // const { pools, setPoolIds, showMyInvestments, count } = usePoolList();
-  const { pools, refetch, loading, networkStatus, state, count, setPageSize, setPoolIds, showMyInvestments } =  usePoolList();
+  const {
+    pools,
+    refetch,
+    loading,
+    networkStatus,
+    state,
+    count,
+    setPageSize,
+    setPoolIds,
+    showMyInvestments,
+  } = usePoolList();
 
   const { userPoolIds, usdBalanceForPool, hasBptInWalletForPool } = useUserData();
   const userPoolIdsStr = userPoolIds.join();
@@ -59,39 +69,39 @@ function PoolList() {
           will accumulate over time when your VPT are staked.
         </Alert>
       )}
-     
-       <PaginatedTable
-                items={poolsToRender}
-                currentPage={state.skip / state.first + 1}
-                pageSize={state.first}
-                count={poolCount}
-                onPageChange={(page) => {
-                    refetch({ ...state, skip: state.first * (page - 1) });
-                }}
-                loading={loading}
-                fetchingMore={networkStatus === NetworkStatus.refetch}
-                onPageSizeChange={setPageSize}
-                renderTableHeader={() => <PoolListTableHeader />}
-                renderTableRow={(item: GqlPoolMinimalFragment, index) => {
-                  return(
-                    <PoolListItem
-                      key={index}
-                      pool={item}
-                      userBalance={`${usdBalanceForPool(item.id)}`}
-                      showUserBalance={showMyInvestments}
-                      tokens={item.allTokens
-                        .filter((token) => !token.isNested && !token.isPhantomBpt)
-                        .map((token) => ({
-                          ...token,
-                          logoURI: getToken(token.address)?.logoURI || undefined,
-                        }))}
-                      hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
-                    /> 
-                    ); 
-            }}
+      <PaginatedTable
+        items={poolsToRender}
+        currentPage={state.skip / state.first + 1}
+        pageSize={state.first}
+        count={poolCount}
+        onPageChange={(page) => {
+          refetch({ ...state, skip: state.first * (page - 1) });
+        }}
+        loading={loading}
+        fetchingMore={networkStatus === NetworkStatus.refetch}
+        onPageSizeChange={setPageSize}
+        renderTableHeader={() => <PoolListTableHeader />}
+        renderTableRow={(item: GqlPoolMinimalFragment, index) => {
+          return (
+            <PoolListItem
+              padding="1"
+              bgColor="white"
+              key={index}
+              pool={item}
+              userBalance={`${usdBalanceForPool(item.id)}`}
+              showUserBalance={showMyInvestments}
+              tokens={item.allTokens
+                .filter((token) => !token.isNested && !token.isPhantomBpt)
+                .map((token) => ({
+                  ...token,
+                  logoURI: getToken(token.address)?.logoURI || undefined,
+                }))}
+              hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
             />
+          );
+        }}
+      />
 
-        
       {/* <Box
         mt="2rem"
         boxShadow={{ base: 'none', lg: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6' }}
@@ -136,7 +146,7 @@ function PoolList() {
             hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
           />
         ))} */}
-        {/* <PoolListFooter /> */}
+      <PoolListFooter />
       {/* </Box> */}
     </Box>
   );
