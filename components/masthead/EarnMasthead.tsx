@@ -23,7 +23,7 @@ export function EarnMasthead({ title, image }: Props) {
   spacing={{ base: '6', lg: '8' }}
 >
   <GridItem display="flex" flexDirection="column" colSpan={{ sm: 1, lg: 3 }} 
-  className="animate__animated animate__zoomIn animate__delay-2s animate__duration-6s" 
+  className="animate__animated animate__zoomIn animate__delay-1s animate__duration-5s" 
         >
     <Text
       gap="0"
@@ -47,7 +47,7 @@ export function EarnMasthead({ title, image }: Props) {
   <GridItem colSpan={1} />
   
   <GridItem
-    className="verteklightpurplebox animate__animated animate__zoomIn animate__delay-2s animate__duration-6s"
+    className="verteklightpurplebox animate__animated animate__zoomIn animate__delay-1s animate__duration-6s"
     marginTop={{ base: 0, lg: 2 }}
     display="flex"
     width={{ base: '100%', md: '60%', lg: 'auto' }}
