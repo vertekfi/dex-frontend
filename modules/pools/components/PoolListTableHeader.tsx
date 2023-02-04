@@ -39,7 +39,8 @@ export function PoolListTableHeader() {
                 My balance
               </Text>
               <InfoButton infoText="To increase performance, your pool balances
-               are cached for this list view. If you just made an invest or withdraw, it may take a few seconds for the change to be reflected here." />
+               are cached for this list view. If you just made an investment or withdrawal, 
+               it may take a few seconds for the change to be reflected here." />
             </Flex>
           </GridItem>
         )}

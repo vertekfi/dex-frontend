@@ -6,6 +6,7 @@ import PoolTransactionHeader from './PoolTransactionsHeader';
 import { NetworkStatus } from '@apollo/client';
 import { usePool } from '~/modules/pool/lib/usePool';
 
+
 export function PoolSwapsTable() {
     const { pool } = usePool();
 
@@ -18,18 +19,17 @@ export function PoolSwapsTable() {
         pollInterval: 30000,
         notifyOnNetworkStatusChange: true,
     });
-
     const isPhantomStable = pool.__typename === 'GqlPoolPhantomStable';
     const isFetchingMoreSwaps = swapsStatus === NetworkStatus.fetchMore;
-
+    console.log("swapsResponse:", swapsResponse);
+    console.log("swaps:", swapsResponse?.swaps);
+    // this returns 'undefined' for both swapsresponse and swaps
     const transactions = useMemo(() => {
         const swaps = swapsResponse?.swaps || [];
-
         const swapsOutput = swaps.map((swap) => ({
             transaction: swap,
             type: PoolTransactionType.Swap,
         }));
-
         const phantomStableSwapsOutput = swaps.map((swap) => {
             const phantomStableToken = swap.poolId.slice(0, 42);
             let type: PoolTransactionType;
@@ -57,6 +57,7 @@ export function PoolSwapsTable() {
     };
 
     return (
+        <>
         <PaginatedTable
             isInfinite
             width="full"
@@ -67,5 +68,6 @@ export function PoolSwapsTable() {
             renderTableRow={(item, index) => <PoolTransactionItem transaction={item} />}
             onFetchMore={handleFetchMoreTransactions}
         />
+        </>
     );
 }
