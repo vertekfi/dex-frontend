@@ -13,7 +13,10 @@ function getMaxLockEndDateTimestamp(date: number) {
   return startOfDay(timestamp).getTime();
 }
 
-export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; lockedEndDate: number }) {
+export function useLockEndDate(veBalLockInfo?: {
+  hasExistingLock: boolean;
+  lockedEndDate: number;
+}) {
   const [lockDate, setLockDate] = useState<string>('');
 
   const todaysDate = toUtcTime(new Date());

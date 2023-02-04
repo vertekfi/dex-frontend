@@ -112,12 +112,6 @@ export function LockForm(props: Props) {
     setIsModalOpen(true);
   }
 
-  function handleSuccess() {
-    refetchUserVeData();
-    setLockAmount('');
-    setLockDate('');
-  }
-
   function getDateInput(timestamp: number) {
     return formatDateInput(Math.min(timestamp, maxLockEndDateTimestamp));
   }
@@ -451,7 +445,6 @@ export function LockForm(props: Props) {
               {isModalOpen && (
                 <LockPreviewModal
                   isOpen={isModalOpen}
-                  onSucess={handleSuccess}
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
                   totalLpTokens={lockAmount || '0'}

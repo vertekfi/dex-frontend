@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { bnum } from '~/lib/util/big-number.utils';
 
-export default function useLockAmount(veBalLockInfo: {
+export default function useLockAmount(veBalLockInfo?: {
   hasExistingLock: boolean;
   lockedAmount?: string;
 }) {
