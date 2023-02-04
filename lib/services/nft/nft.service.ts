@@ -48,4 +48,5 @@ export default class NftService {
   }
 }
 
+// export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');
 export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');

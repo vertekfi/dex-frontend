@@ -45,10 +45,13 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
 
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
-    address: vrtkAddress,
-    symbol: 'VRTK',
+    // address: vrtkAddress,
+    address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
+    // symbol: 'VRTK',
+    symbol: 'LSHARE',
     decimals: 18,
-    name: 'Vertek',
+    // name: 'Vertek',
+    name: 'Lshare',
   };
 
   const {
@@ -65,7 +68,8 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
   } = useUserTokenBalances();
   const { approve, ...approveQuery } = useApproveToken(vrtkInfo);
 
-  const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
+  const userVrtkBalance = getUserBalance(('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA').toLowerCase());
+  // const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
   debugger;
   const userAmount = oldBnumToHumanReadable(
     oldBnumScaleAmount(getUserBalance(userVrtkBalance)).times(percent).div(100),
@@ -149,7 +153,7 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
               if (id === 'approve') {
                 approve(pool.address);
               } else if (id === 'stake') {
-                depositToPool(inputAmount || '0');
+                depositToPool(pool.poolId, inputAmount || '0');
               }
             }}
             onConfirmed={async (id) => {

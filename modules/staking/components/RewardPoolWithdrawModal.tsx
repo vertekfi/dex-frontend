@@ -81,7 +81,7 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
               onClose();
             }}
             onSubmit={(id) => {
-              withdrawFromPool(withdrawAmount);
+              withdrawFromPool(pool.poolId, withdrawAmount);
             }}
             onConfirmed={async (id) => {}}
             steps={steps || []}

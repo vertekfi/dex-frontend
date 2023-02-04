@@ -11,6 +11,7 @@ export function StakingContainer() {
     __typename: 'RewardPool',
     // address: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
     address: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+    poolId: 0,
     amountStaked: '0',
     amountStakedValue: '0',
     aprs: {
@@ -32,9 +33,9 @@ export function StakingContainer() {
     },
     startBlock: 1000,
     userInfo: {
-      amountDeposited: '0',
+      amountDeposited: '100',
       amountDepositedFull: '0',
-      depositValue: '0',
+      depositValue: '100',
       hasPendingRewards: false,
       pendingRewardValue: '0',
       pendingRewards: '0',

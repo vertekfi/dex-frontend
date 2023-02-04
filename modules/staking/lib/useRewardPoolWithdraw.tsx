@@ -9,15 +9,15 @@ export function useRewardPoolWithdraw(address: string) {
   const { submitAsync, ...rest } = useSubmitTransaction({
     config: {
       addressOrName: address,
-      contractInterface: ['function withdraw(uint256) external'],
-      functionName: 'withdraw(uint256)',
+      contractInterface: ['function withdraw(uint _pid, uint _amount) external nonReentrant'],
+      functionName: 'withdraw(uint256,uint256)',
     },
     transactionType: 'UNSTAKE',
   });
 
-  async function withdrawFromPool(amount: string) {
+  async function withdrawFromPool(poolId: number, amount: string) {
     await submitAsync({
-      args: [parseUnits(amount, 18)],
+      args: [poolId, parseUnits(amount, 18)],
       toastText: `Deposit VRTK into staking pool`,
       walletText: `Deposit ${tokenFormatAmount(amount)} VRTK into staking pool`,
     });

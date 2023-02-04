@@ -2,12 +2,41 @@ import { Flex, SimpleGrid, Text, Button, useDisclosure, GridItem, Box } from '@c
 import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
 import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
+import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
+import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
+
+import { useContractRead } from 'wagmi';
 
 export function StakingCardGuts(props: { pool: RewardPool }) {
   const pool = props.pool;
 
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
-  const withdrawDisclosure = useDisclosure();
+  const {
+    isOpen: isWithdrawOpen,
+    onOpen: onWithdrawOpen,
+    onClose: onWithdrawClose,
+  } = useDisclosure();
+
+  const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
+
+  const contractRead = useContractRead({
+    addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+    contractInterface: StakingNFTPools,
+    chainId: 56,
+    functionName: 'UserInfo',
+    args: [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'],
+  });
+
+  // const contractRead = useContractRead(
+  //   {
+  //     addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+  //     contractInterface: StakingNFTPools,
+  //   },
+  //   'UserInfo',
+  //   { args:  [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'] },
+  // )
+
+  console.log('contractRead.data', contractRead);
 
   return (
     <>
@@ -42,18 +71,21 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
           <Text fontSize="0.7rem" textAlign="right">
             ${pool.userInfo?.pendingRewardValue}
           </Text>
-          <Button 
-          variant="verteklight" 
-          bgColor="vertek.neonpurple.500"
-          background="none"
-          padding="1em" borderRadius="10px"
-          mt="2" 
-          ml="4"
-          borderWidth="1px"
-          alignItems="center" 
-          width="full"
-          height="2em"
-          disabled={false} >
+          <Button
+            variant="verteklight"
+            bgColor="vertek.neonpurple.500"
+            background="none"
+            padding="1em"
+            borderRadius="10px"
+            mt="2"
+            ml="4"
+            borderWidth="1px"
+            alignItems="center"
+            width="full"
+            height="2em"
+            disabled={false}
+            onClick={() => depositToPool(pool.poolId, '0')}
+          >
             Claim
           </Button>
         </Flex>
@@ -69,31 +101,21 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
             ${pool.userInfo?.depositValue}
           </Text>
         </Flex>
-        <GridItem 
-        colSpan={2}
-        gap="3"
-        marginX=""
-        alignItems="center"
-        justifyContent="center"
-        display="flex" 
-        width="full" 
-          >
-        
-        <Button variant="verteklight" 
-        disabled={false} 
-        width="full"
-        >
-          Unstake
-        </Button>
-        <Button
-          variant="vertekdark"
-          disabled={false}
+        <GridItem
+          colSpan={2}
+          gap="3"
+          marginX=""
+          alignItems="center"
+          justifyContent="center"
+          display="flex"
           width="full"
-
-          onClick={onDepositOpen}
         >
-          Stake
-        </Button>
+          <Button variant="verteklight" disabled={false} width="full" onClick={onWithdrawOpen}>
+            Unstake
+          </Button>
+          <Button variant="vertekdark" disabled={false} width="full" onClick={onDepositOpen}>
+            Stake
+          </Button>
         </GridItem>
       </SimpleGrid>
 
@@ -105,9 +127,9 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
       />
 
       <RewardPoolWithdrawModal
-        isOpen={withdrawDisclosure.isOpen}
-        onOpen={withdrawDisclosure.onOpen}
-        onClose={withdrawDisclosure.onClose}
+        isOpen={isWithdrawOpen}
+        onOpen={onWithdrawOpen}
+        onClose={onWithdrawClose}
         pool={pool}
       />
     </>
