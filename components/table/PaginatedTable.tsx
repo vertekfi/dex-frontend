@@ -41,13 +41,17 @@ export function PaginatedTable({
   const isLoadingRows = loading && items.length === 0;
 
   return (
-    <Box {...rest} >
+    <Box {...rest} 
+    
+    >
       {renderTableHeader()}
       <Box
         mb={0}
         // borderBottomLeftRadius="16px"
         // borderBottomRightRadius="16px"
         overflow="hidden"
+        boxShadow={{ base:'none', md:'0px 24px 24px 2px #000'}}
+        
 
       >
         {isLoadingRows && (
@@ -76,7 +80,7 @@ export function PaginatedTable({
         bgColor="vertek.slate.900"
         paddingBottom="4" 
         paddingTop="1" 
-        borderBottomWidth="2px" borderLeftWidth="2px" borderRightWidth="2px" 
+        borderBottomWidth="1px" borderLeftWidth="1px" borderRightWidth="1px" 
         borderTopWidth="0px" 
         borderBottomRadius="16px" 
         boxShadow="0 0 10px #000"

@@ -146,7 +146,7 @@ function PoolList() {
             hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
           />
         ))} */}
-      <PoolListFooter />
+      {/* <PoolListFooter /> */}
       {/* </Box> */}
     </Box>
   );
