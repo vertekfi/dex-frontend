@@ -1,11 +1,12 @@
 import { NavbarLink } from '~/modules/nav/NavbarLink';
-import { Box, Flex, Button, Icon, Grid } from '@chakra-ui/react';
+import { Box, Flex, Button, Text, Icon, Grid } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { IconButton, Collapse } from '@chakra-ui/react';
 import { ChevronUpIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { Modal, ModalContent, ModalBody, ModalFooter } from '@chakra-ui/react';
+import { BeetsLogo } from '~/assets/logo/BeetsLogo';
 
 export function NavbarMobile() {
   const router = useRouter();
@@ -33,6 +34,7 @@ return (
   zIndex="999"
 >
   <Flex alignItems="center">
+   
   <NavbarLink
     href={'/'}
     selected={router.pathname === '/'}
@@ -76,16 +78,27 @@ return (
         bottom="0%"
       >
         <ModalBody>
-          <NavbarLink  href={'/voting'} selected={router.asPath === '/voting'} mt="2" py="2" text="Vote"  />
-          <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="2"/>
-          <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="2" />
-          <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="2" />
-          <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="1"/>
-          <NavbarLink  href={'/bridge'} selected={router.asPath === '/bridge'} mt="2" py="1" text="Bridge"  />
-          <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="1" />
-          <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="1" />
-          <Box display="flex" alignItems="flex-end" justifyContent="flex-end" mb="-1" mt="2">
-              <Button variant="vertekdark" width="50%" onClick={() => setIsOpen(false)}>
+          <Box display="flex" justifyContent="center" my="4">
+              <BeetsLogo width="120px"  />
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="space-between"
+            marginX="2"
+            borderRadius="12px"
+            flexDirection="column"
+          >
+              <NavbarLink href={'/voting'} selected={router.asPath === '/voting'} mt="2" py="2px" text="Vote"  />
+              <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="2px"/>
+              <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="2px" />
+              <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="2px" />
+              <NavbarLink href={'/bridge'} selected={router.asPath === '/bridge'}  py="2px" text="Bridge"  />
+          </Box>
+
+          
+          <Box display="flex" alignItems="flex-end" justifyContent="center" mb="-1" mt="2">
+              <Button variant="vertekdark" width="100%" onClick={() => setIsOpen(false)}>
                 Close
               </Button>
           </Box>

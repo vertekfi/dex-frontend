@@ -101,53 +101,8 @@ function PoolList() {
           );
         }}
       />
-
-      {/* <Box
-        mt="2rem"
-        boxShadow={{ base: 'none', lg: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6' }}
-        mb="4rem"
-        borderRadius="16px"
-        flexDirection="column"
-        display="flex"
-      >
-        <PoolListTableHeader />
-        {pinnedPool.length > 0 && (
-          <PoolListItem
-            padding="1"
-            key={pinnedPool[0].id}
-            pool={pinnedPool[0]}
-            userBalance={`${usdBalanceForPool(pinnedPool[0].id)}`}
-            showUserBalance={showMyInvestments}
-            tokens={pinnedPool[0].allTokens
-              .filter((token) => !token.isNested && !token.isPhantomBpt)
-              .map((token) => ({
-                ...token,
-                logoURI: getToken(token.address)?.logoURI || undefined,
-              }))}
-            hasUnstakedBpt={
-              pinnedPool[0].dynamicData.apr.hasRewardApr && hasBptInWalletForPool(pinnedPool[0].id)
-            }
-          />
-        )}
-        {nonPinnedPools.map((item, index) => (
-          <PoolListItem
-            padding="1"
-            bgColor="white"
-            key={index}
-            pool={item}
-            userBalance={`${usdBalanceForPool(item.id)}`}
-            showUserBalance={showMyInvestments}
-            tokens={item.allTokens
-              .filter((token) => !token.isNested && !token.isPhantomBpt)
-              .map((token) => ({
-                ...token,
-                logoURI: getToken(token.address)?.logoURI || undefined,
-              }))}
-            hasUnstakedBpt={item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)}
-          />
-        ))} */}
-      <PoolListFooter />
-      {/* </Box> */}
+      {/* <PoolListFooter /> */}
+    
     </Box>
   );
 }

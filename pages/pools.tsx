@@ -48,7 +48,7 @@ function Pools() {
               />
             }
           />
-          <div className="animate__animated animate__zoomIn animate__delay-1s animate__duration-6s" >
+          <div className="animate__animated animate__zoomIn animate__delay-1s" >
           <PoolList />
           </div>
           {/* <PoolsCreate  /> */}
