@@ -19,13 +19,16 @@ export default class NftService {
 
   public async tokenOfOwnerByIndex(user: string, index: number) {
     const contract = new Contract(this.contractAddress, VertexNft, this.provider);
-    // currently don't have this method
-    // const result = await contract.tokenOfOwnerByIndex(user, index);
     const result = await contract.tokensOfOwner(user);
     const getIndex = result[index];
     console.log('getIndex', getIndex)
     return getIndex.toString();
-    // return result.toString();
+  }
+
+  public async tokenOfOwner(user: string) {
+    const contract = new Contract(this.contractAddress, VertexNft, this.provider);
+    const result = await contract.tokensOfOwner(user);
+    return result;
   }
 
   public async tokenURI(tokenId: number) {
@@ -49,4 +52,4 @@ export default class NftService {
 }
 
 // export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');
-export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');
+export const earlyLudwigNft = new NftService('0xb97B035231447F748A3F8Ba25B59C6ee23bDF36B');

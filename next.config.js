@@ -11,7 +11,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ['avatar.tobi.sh'],
+    domains: ['avatar.tobi.sh', 'nftstorage.link'],
     remotePatterns: [
       {
         protocol: 'https',

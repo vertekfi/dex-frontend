@@ -56,11 +56,11 @@ export function useAllowances(
     if (amount === '') return true;
 
     address = address.toLowerCase();
-    console.log(allowances);
+    console.log('allowances', allowances);
     const allowance =
       allowances.find((allowance) => allowance.address.toLowerCase() === address)?.amount || '0';
 
-    console.log(allowance);
+    console.log('allowances', allowance);
 
     if (parseFloat(allowance) === 0) return false;
 

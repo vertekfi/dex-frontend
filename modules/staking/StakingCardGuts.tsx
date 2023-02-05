@@ -1,7 +1,9 @@
 import { Flex, SimpleGrid, Text, Button, useDisclosure, GridItem, Box } from '@chakra-ui/react';
 import { RewardPool, useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
+import { RewardPoolNftDepositModal } from './components/RewardPoolNftDepositModal';
 import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
+import { RewardPoolNftWithdrawModal } from './components/RewardPoolNftWithdrawModal';
 import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 
@@ -13,10 +15,16 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   const pool = props.pool;
 
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
+  const { isOpen: isDepositNftOpen, onOpen: onDepositNftOpen, onClose: onDepositNftClose } = useDisclosure();
   const {
     isOpen: isWithdrawOpen,
     onOpen: onWithdrawOpen,
     onClose: onWithdrawClose,
+  } = useDisclosure();
+  const {
+    isOpen: isWithdrawNftOpen,
+    onOpen: onWithdrawNftOpen,
+    onClose: onWithdrawNftClose,
   } = useDisclosure();
 
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
@@ -175,6 +183,22 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
             Stake
           </Button>
         </GridItem>
+        <GridItem
+          colSpan={2}
+          gap="3"
+          marginX=""
+          alignItems="center"
+          justifyContent="center"
+          display="flex"
+          width="full"
+        >
+          <Button variant="verteklight" disabled={false} width="full" onClick={onWithdrawNftOpen}>
+            Unstake NFT
+          </Button>
+          <Button variant="vertekdark" disabled={false} width="full" onClick={onDepositNftOpen}>
+            Stake NFT
+          </Button>
+        </GridItem>
       </SimpleGrid>
 
       <RewardPoolDepositModal
@@ -183,11 +207,23 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         onClose={onDepositClose}
         pool={pool}
       />
+        <RewardPoolNftDepositModal
+        isOpen={isDepositNftOpen}
+        onOpen={onDepositNftOpen}
+        onClose={onDepositNftClose}
+        pool={pool}
+      />
 
       <RewardPoolWithdrawModal
         isOpen={isWithdrawOpen}
         onOpen={onWithdrawOpen}
         onClose={onWithdrawClose}
+        pool={pool}
+      />
+      <RewardPoolNftWithdrawModal
+        isOpen={isWithdrawNftOpen}
+        onOpen={onWithdrawNftOpen}
+        onClose={onWithdrawNftClose}
         pool={pool}
       />
     </>

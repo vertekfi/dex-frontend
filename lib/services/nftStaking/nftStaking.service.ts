@@ -1,4 +1,4 @@
-import VertexNft from '~/lib/abi/VertexNft.json';
+import StakingNFTPools from '~/lib/abi/StakingNFTPools.json';
 import { BaseProvider } from '@ethersproject/providers';
 import { BigNumber, Contract } from 'ethers';
 import { StaticJsonRpcBatchProvider } from '~/lib/services/rpc-provider/static-json-rpc-batch-provider';
@@ -67,27 +67,32 @@ export default class nftStakingService {
   constructor(private readonly contractAddress: string) {}
 
   public async depositTokens(poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
-    const contract = new Contract(this.contractAddress, VertexNft, this.provider);
+    const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     return await contract['deposit(uint256,uint256)'](poolId, amount);
   }
 
   public async withdrawTokens(poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
-    const contract = new Contract(this.contractAddress, VertexNft, this.provider);
+    const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     return await contract['withdraw(uint256,uint256)'](poolId, amount);
   }
 
   public async stakeNFT(poolId: Number, tokens: any[]): Promise<TransactionResponse> {
-    const contract = new Contract(this.contractAddress, VertexNft, this.provider);
+    const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     // deposit - pid, amount, token ids
     // not sure what to set amount
     return await contract['deposit(uint256,uint256,uint256[])'](poolId, 1, tokens);
   }
 
   public async unstakeNFT(poolId: Number, tokens: any[]): Promise<TransactionResponse> {
-    const contract = new Contract(this.contractAddress, VertexNft, this.provider);
+    const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     // deposit - pid, amount, token ids
     // not sure what to set amount
     return await contract['withdraw(uint256,uint256,uint256[])'](poolId, 1, tokens);
+  }
+
+  public async getStakedNFTs(poolId: Number, user: string): Promise<TransactionResponse> {
+    const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
+    return await contract.getStakedMagicats(poolId, user);
   }
 
   get provider(): BaseProvider {
