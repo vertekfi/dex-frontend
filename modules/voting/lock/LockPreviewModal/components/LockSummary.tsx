@@ -17,12 +17,15 @@ type Props = {
 };
 
 export function LockSummary(props: Props) {
-  const poolShares = bnum(props.lockablePool.dynamicData.totalLiquidity24hAgo).div(
+  const poolShares = bnum(props.lockablePool.dynamicData.totalLiquidity).div(
     props.lockablePool.dynamicData.totalShares,
   );
+
   const fiatTotalLockedAmount = poolShares.times(props.currentVeBalance).toString();
   const fiatTotalLockAmount = poolShares.times(props.lockAmount).toString();
   const fiatTotalLpTokens = poolShares.times(props.totalLpTokens).toString();
+
+  console.log(props.totalLpTokens);
 
   const isExtendLockOnly =
     props.lockType.length === 1 && props.lockType.includes(LockType.EXTEND_LOCK);

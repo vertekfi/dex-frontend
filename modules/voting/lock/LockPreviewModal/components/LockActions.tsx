@@ -165,7 +165,6 @@ export function LockActions(props: Props) {
           if (id === 'approve') {
             approve(networkConfig.balancer.votingEscrow.veAddress);
           } else {
-            actions[id].submit();
           }
         }}
         onConfirmed={async (id) => {

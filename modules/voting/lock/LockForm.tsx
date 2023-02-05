@@ -77,10 +77,11 @@ export function LockForm(props: Props) {
     lockedEndDate: lockEndDate,
   });
 
-  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
-    hasExistingLock: hasExistingLock || false,
-    lockedAmount: lockedBalance,
-  });
+  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount, totalLpTokens } =
+    useLockAmount({
+      hasExistingLock: hasExistingLock || false,
+      lockedAmount: lockedBalance,
+    });
 
   const hasVaildLock = hasExistingLock && !isExpired;
   let submissionDisabled = true;
@@ -486,7 +487,7 @@ export function LockForm(props: Props) {
                   isOpen={isModalOpen}
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
-                  totalLpTokens={lockAmount || '0'}
+                  totalLpTokens={totalLpTokens}
                   lockEndDate={lockDate}
                   lockablePool={lockablePool}
                   lockAmount={lockAmount || '0'}
