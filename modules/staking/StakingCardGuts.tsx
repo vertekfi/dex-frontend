@@ -1,11 +1,13 @@
 import { Flex, SimpleGrid, Text, Button, useDisclosure, GridItem, Box } from '@chakra-ui/react';
-import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
+import { RewardPool, useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
 import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
 import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 
-import { useContractRead } from 'wagmi';
+import { readContract } from '@wagmi/core';
+import { formatUnits } from 'ethers/lib/utils';
+import { useEffect, useState } from 'react';
 
 export function StakingCardGuts(props: { pool: RewardPool }) {
   const pool = props.pool;
@@ -19,24 +21,33 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
 
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
 
-  const contractRead = useContractRead({
-    addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
-    contractInterface: StakingNFTPools,
-    chainId: 56,
-    functionName: 'UserInfo',
-    args: [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'],
-  });
+  const [userInfo, setUserInfo] = useState<any>();
 
-  // const contractRead = useContractRead(
-  //   {
-  //     addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
-  //     contractInterface: StakingNFTPools,
-  //   },
-  //   'UserInfo',
-  //   { args:  [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'] },
-  // )
+  const { data: pricesResponse } = useGetTokenPricesQuery();
 
-  console.log('contractRead.data', contractRead);
+  // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
+  const priceOfToken = pricesResponse && pricesResponse.tokenPrices.filter((item: any)=> item.address === '0xeD236c32f695c83Efde232c288701d6f9C23E60E')
+
+  useEffect(() => {
+    readContract({
+      addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      contractInterface: StakingNFTPools,
+      chainId: 56,
+      functionName: 'userInfo',
+      args: [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'],
+    }).then((res) => {
+      setUserInfo(res);
+      // setPrice(pricesResponse.filter)
+    });
+  }, []);
+
+  // {amount:   uint256
+  // rewardDebt:   uint256
+  // catDebt:   uint256
+  // mp:   uint256}
+
+  console.log('pricesResponse',  priceOfToken);
+  console.log('pricesResponse', pool.address);
 
   return (
     <>
@@ -94,11 +105,15 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
           My Balance
         </Text>
         <Flex direction="column">
-          <Text textAlign="right" fontWeight="bold">
-            {pool.userInfo?.amountDeposited} VRTK
-          </Text>
+          {userInfo?.amount && (
+            <Text textAlign="right" fontWeight="bold">
+              {/* {pool.userInfo?.amountDeposited} VRTK */}
+              {parseFloat(formatUnits(userInfo?.amount.toString(), 18)).toFixed(2)}VRTK
+            </Text>
+          )}
           <Text fontSize="0.7rem" textAlign="right">
-            ${pool.userInfo?.depositValue}
+            {/* ${pool.userInfo?.depositValue} */}
+            NEED TO MULTIPLY BY PRICE
           </Text>
         </Flex>
         <GridItem
