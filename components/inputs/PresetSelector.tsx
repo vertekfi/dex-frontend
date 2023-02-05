@@ -1,5 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { HStack } from '@chakra-ui/layout';
+import 'animate.css'; 
+
 
 type Preset = {
     label: string;
@@ -33,8 +35,11 @@ export default function PresetSelector({ onPresetSelected, presets = defaultPres
         onPresetSelected(preset);
     };
     return (
-        <HStack width="full">
+    
+        <HStack width="full" className="animate__animated animate__zoomIn animate__delay-2s animate__duration-6s">
             {presets.map((preset) => (
+         
+
                 <Button
                     variant="verteklight"
                     borderWidth="2px"
@@ -46,6 +51,7 @@ export default function PresetSelector({ onPresetSelected, presets = defaultPres
                 >
                     {preset.label}
                 </Button>
+               
             ))}
         </HStack>
     );
