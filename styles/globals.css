@@ -111,6 +111,10 @@ a {
     }
 }
 
+.delayhalf {
+    animation-delay: 0.75s;
+}
+
 .delay25 {
     animation-delay: 2.5s;
 }

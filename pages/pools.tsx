@@ -38,7 +38,6 @@ function Pools() {
       <PoolListProvider>
         <UserTokenBalancesProvider>
           <EarnMasthead
-
             title="Earn"
             image={
               <NextImage
@@ -48,7 +47,7 @@ function Pools() {
               />
             }
           />
-          <div className="animate__animated animate__zoomIn animate__delay-1s" >
+          <div className="animate__animated animate__zoomIn delayhalf" >
           <PoolList />
           </div>
           {/* <PoolsCreate  /> */}

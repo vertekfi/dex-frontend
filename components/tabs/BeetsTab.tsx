@@ -9,7 +9,7 @@ const BeetsTab = forwardRef((props: { children: any } & TabProps, ref: any) => {
   return (
     <Button
       fontSize="sm"
-      rounded="full"
+      rounded="12px"
       color={isSelected ? 'white' : 'gray.100'}
       bgColor={isSelected ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
       _hover={{ bgColor: 'vertek.neonpurple.500' }}
