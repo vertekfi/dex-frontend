@@ -12,6 +12,8 @@ import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
+
 
 interface Props {
   scrollY: MotionValue<number>;
@@ -122,6 +124,25 @@ export function Navbar({ scrollY }: Props) {
           </Box>
           <FadeInOutBox mr={{ base: '2', lg: '2' }} isVisible={isConnected}>
             <HStack spacing={{ base: '2', lg: '4' }}>
+            {loading && !beetsPrice ? (
+                <Skeleton height="16px" width="54px" />
+              ) : (
+                // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
+                //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
+                <Box display="flex" justifyContent="center" alignItems="center" mr={{base: 'none', md:'6'}} ml="3">
+                <VertekWhiteNoText width={{ base: '40px', md: '70px' }} mr={{ base: '0', md: '-3' }}/>
+                <Text
+                  mr={{base:'3', md:'6' }}
+                  fontWeight="bold"
+                  color="white"
+                  fontSize={{ base: 'sm', lg: 'md' }}
+                >
+                   {numeral(beetsPrice).format('$0.00[00]')} 
+                </Text>
+                
+                 </Box>
+
+              )}
               <NetworkSelectorPopover>
                 <Button
                   bgColor="transparent"
@@ -142,21 +163,7 @@ export function Navbar({ scrollY }: Props) {
                   />
                 </Button>
               </NetworkSelectorPopover>
-              {loading && !beetsPrice ? (
-                <Skeleton height="16px" width="54px" />
-              ) : (
-                // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
-                //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
-                <Text
-                  ml={{ base: '0', lg: '3' }}
-                  textAlign="right"
-                  fontWeight="bold"
-                  color="white"
-                  fontSize={{ base: 'sm', lg: 'md' }}
-                >
-                  {numeral(beetsPrice).format('$0.00[00]')}
-                </Text>
-              )}
+             
               {/* <NavbarPendingRewards /> */}
               {/* <NavbarAlerts />
                   <NavbarPortfolioDrawer /> */}
