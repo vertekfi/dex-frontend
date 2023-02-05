@@ -5,16 +5,13 @@ import { useGetProtocolDataQuery } from '~/apollo/generated/graphql-codegen-gene
 import { NavbarLink } from '~/modules/nav/NavbarLink';
 import numeral from 'numeral';
 import { useRouter } from 'next/router';
-import { motion, MotionValue, useTransform } from 'framer-motion';
+import { MotionValue, useTransform } from 'framer-motion';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
-import { BeetsBalLogo } from '~/assets/logo/BeetsBalLogo';
 import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
-import { VLogoPNT } from '~/assets/logo/Vertek/VLogoPNT';
-import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNotext';
 
 interface Props {
   scrollY: MotionValue<number>;
@@ -46,13 +43,18 @@ export function Navbar({ scrollY }: Props) {
         borderBottomWidth="3px"
         // padding="12px, 40px, 0px, 40px"
       >
-        <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{base:'center', lg:'center'}} >
-          <Flex alignItems="center" mr={{ base:'0', lg:'2'}}  
-          zIndex="2" cursor="pointer" bgColor="transparent">
+        <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{ base: 'center', lg: 'center' }}>
+          <Flex
+            alignItems="center"
+            mr={{ base: '0', lg: '2' }}
+            zIndex="2"
+            cursor="pointer"
+            bgColor="transparent"
+          >
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
-                <Box mb="">
-                  <BeetsLogo width={{ base: '120px', lg:'120px', xl:'150px' }}  />
-                </Box>
+              <Box mb="">
+                <BeetsLogo width={{ base: '120px', lg: '120px', xl: '150px' }} />
+              </Box>
             </NextLink>
           </Flex>
 
@@ -118,9 +120,9 @@ export function Navbar({ scrollY }: Props) {
               {/*<NavbarAdditionalLinksMenu />*/}
             </Flex>
           </Box>
-          <FadeInOutBox mr={{ base:'2', lg:'2'}} isVisible={isConnected} >
-            <HStack spacing={{ base:'2', lg:'4' }}>
-              <NetworkSelectorPopover >
+          <FadeInOutBox mr={{ base: '2', lg: '2' }} isVisible={isConnected}>
+            <HStack spacing={{ base: '2', lg: '4' }}>
+              <NetworkSelectorPopover>
                 <Button
                   bgColor="transparent"
                   width="40px"
@@ -132,21 +134,31 @@ export function Navbar({ scrollY }: Props) {
                   _hover={{ transform: 'scale(1.1)' }}
                   px="0"
                 >
-                  <Image mr={{ base:'2', lg:'4'}} width="24px" height="24px" src={networkConfig.eth.iconUrl} />
+                  <Image
+                    mr={{ base: '2', lg: '4' }}
+                    width="24px"
+                    height="24px"
+                    src={networkConfig.eth.iconUrl}
+                  />
                 </Button>
               </NetworkSelectorPopover>
-                  {loading && !beetsPrice ? (
-              <Skeleton height="16px" width="54px" />
-            ) : (
-              // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
-              //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
-              <Text ml={{ base:'0', lg:'3' }} textAlign="right"  fontWeight="bold" color="white" fontSize={{ base: 'sm', lg: 'md' }}>
-                {numeral(beetsPrice).format('$0.00[00]')}
-              </Text>
-
-                  )}
-                  {/* <NavbarPendingRewards /> */}
-                  {/* <NavbarAlerts />
+              {loading && !beetsPrice ? (
+                <Skeleton height="16px" width="54px" />
+              ) : (
+                // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
+                //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
+                <Text
+                  ml={{ base: '0', lg: '3' }}
+                  textAlign="right"
+                  fontWeight="bold"
+                  color="white"
+                  fontSize={{ base: 'sm', lg: 'md' }}
+                >
+                  {numeral(beetsPrice).format('$0.00[00]')}
+                </Text>
+              )}
+              {/* <NavbarPendingRewards /> */}
+              {/* <NavbarAlerts />
                   <NavbarPortfolioDrawer /> */}
             </HStack>
           </FadeInOutBox>
