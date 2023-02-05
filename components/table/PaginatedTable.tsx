@@ -132,7 +132,6 @@ export function PaginatedTable({
                     icon={<ChevronRight />}
                     borderTopLeftRadius={0}
                     borderBottomLeftRadius={0}
-                    borderBottomRightRadius={{base:'auto', lg:'16px'}}
                     backgroundColor="transparent"
                   />
                 );
@@ -145,7 +144,10 @@ export function PaginatedTable({
               const selected = pageNumber === currentPage;
 
               return (
-                <Button borderRadius={0} color={selected ? 'vertek.slatepurple.900' : undefined}>
+                <Button borderRadius={8} color="white"
+                backgroundColor="transparent"
+
+                >
                   {element}
                 </Button>
               );
