@@ -69,7 +69,6 @@ export default function NavbarWalletConnectButton() {
                       </Box>
                     )}
                   </HStack> */}
-                  <VertekWhiteNoText width={{ base: '40px', md: '70px' }} />
 
                   <Button
                     variant="vertekdark"

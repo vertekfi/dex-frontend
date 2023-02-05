@@ -40,6 +40,11 @@ a {
     width: 100% !important;
 }
 
+.table {
+    background-color: transparent !important;
+    color:'white' !important; 
+}
+
 .flashit{
     -webkit-animation: flash ease-out 7s infinite;
     -moz-animation: flash ease-out 7s infinite;

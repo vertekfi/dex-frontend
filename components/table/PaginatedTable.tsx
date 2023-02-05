@@ -98,9 +98,11 @@ export function PaginatedTable({
                       onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
                     }}
                   >
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    
+                    <option className="table" value="20">20</option>
+                    <option className="table" value="50">50</option>
+                    <option className="table"value="100">100</option>
+
                   </Select>
                 </Box>
                 <Text ml={2}>per page</Text>
@@ -130,7 +132,6 @@ export function PaginatedTable({
                     icon={<ChevronRight />}
                     borderTopLeftRadius={0}
                     borderBottomLeftRadius={0}
-                    borderBottomRightRadius={{base:'auto', lg:'16px'}}
                     backgroundColor="transparent"
                   />
                 );
@@ -143,7 +144,10 @@ export function PaginatedTable({
               const selected = pageNumber === currentPage;
 
               return (
-                <Button borderRadius={0} color={selected ? 'vertek.slatepurple.900' : undefined}>
+                <Button borderRadius={8} color="white"
+                backgroundColor="transparent"
+
+                >
                   {element}
                 </Button>
               );
