@@ -9,6 +9,8 @@ import Vertek from '~/assets/svg/vertektransparent.svg';
 export function StakingCard(props: { pool: RewardPool | null }) {
 const pool = props.pool;
 
+const basePath = '/images/stakingPools/'
+
 return (
   pool ? (
     <GridItem
@@ -30,7 +32,7 @@ return (
           </Text>
         </Box>
         <Box>
-          <NextImage objectFit="contain" src={Vertek} alt={`Logo for deposit token}`} />
+          <NextImage width={75} height={75} objectFit="contain" src={Vertek} alt={`Logo for deposit token}`} />
         </Box>
         <Box marginRight="2" marginLeft="12">
           <Text fontSize="1rem">
@@ -38,7 +40,7 @@ return (
           </Text>
         </Box>
         <Box>
-          <Image src={pool.rewardToken.logoURI} alt={`Logo for ${pool.rewardToken.name}`} />
+          <NextImage width={75} height={75} objectFit="contain" src={`${basePath}${pool.rewardToken.logoURI}`} alt={`Logo for ${pool.rewardToken.name}`} />
         </Box>
       </Flex>
       <StakingCardGuts pool={pool} />

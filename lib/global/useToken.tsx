@@ -20,7 +20,7 @@ export function _useGetTokens() {
   const { data: tokensResponse } = useGetTokensQuery({ fetchPolicy: 'cache-first' });
   const { data: pricesResponse } = useGetTokenPricesQuery();
   const { userImportedTokens } = useUserImportedTokens();
-  debugger;
+  // debugger;
   const tokens: TokenWithImportedFlag[] = [
     ...(tokensResponse?.tokens || []),
     ...userImportedTokens,

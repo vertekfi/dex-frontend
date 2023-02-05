@@ -802,6 +802,13 @@ type GqlProtocolMetrics {
   totalSwapVolume: BigDecimal!
 }
 
+type GqlProtocolPendingGaugeFee {
+  gaugeAddress: String!
+  pendingPoolTokensFee: Float!
+  poolId: String!
+  poolName: String!
+}
+
 type GqlSorGetBatchSwapForTokensInResponse {
   assets: [String!]!
   swaps: [GqlSorSwap!]!
@@ -1114,6 +1121,7 @@ type Query {
   blocksGetBlocksPerSecond: Float!
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
+  getAllGaugePendingProtocolFees: [GqlProtocolPendingGaugeFee!]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [String]!
   getProtocolTokenList: [String]

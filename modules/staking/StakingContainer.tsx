@@ -25,11 +25,11 @@ export function StakingContainer() {
     rewardToken: {
       // address: '0x7faA8158FaA037CC7516eF1f6864af44d75654AE',
       address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
-      logoURI: 'https://seeklogo.com/images/B/binance-usd-busd-logo-A436FCF6B6-seeklogo.com.png',
-      name: 'BNB',
+      logoURI: 'LSHARE.png',
+      name: 'LSHARE',
       price: 300,
       rewardPerBlock: 100,
-      symbol: 'BNB',
+      symbol: 'LSHARE',
     },
     startBlock: 1000,
     userInfo: {

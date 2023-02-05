@@ -22,11 +22,27 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
 
   const [userInfo, setUserInfo] = useState<any>();
+  const [poolInfo, setPoolInfo] = useState<any>();
+  const [apr, setApr] = useState<string>();
+  const [aprDaily, setAprDaily] = useState<string>();
+  const [userTokens, setUserTokens] = useState<string>();
+  const [userUnclaimedRewards, setUserUnclaimedRewards] = useState<string>();
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
 
+  console.log('pricesResponse', pricesResponse);
+
   // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
-  const priceOfToken = pricesResponse && pricesResponse.tokenPrices.filter((item: any)=> item.address === '0xeD236c32f695c83Efde232c288701d6f9C23E60E')
+  const priceOfToken =
+    pricesResponse &&
+    pricesResponse.tokenPrices
+      .filter((item: any) => item.address === '0xed236c32f695c83efde232c288701d6f9c23e60e')[0]
+      .price.toFixed(2);
+  const priceOfTokenRewards =
+    pricesResponse &&
+    pricesResponse.tokenPrices
+      .filter((item: any) => item.address === pool.rewardToken.address.toLowerCase())[0]
+      .price.toFixed(2);
 
   useEffect(() => {
     readContract({
@@ -37,7 +53,30 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
       args: [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'],
     }).then((res) => {
       setUserInfo(res);
-      // setPrice(pricesResponse.filter)
+      setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
+      setUserUnclaimedRewards(
+        parseFloat(formatUnits((res.rewardDebt + res.catDebt).toString(), 18)).toFixed(2),
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    readContract({
+      addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      contractInterface: StakingNFTPools,
+      chainId: 56,
+      functionName: 'poolInfo',
+      args: [0],
+    }).then((res) => {
+      const rewardsPerYear = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
+      const stakedAmount = formatUnits(res.xBooStakedAmount, 18);
+      const apr = (parseInt(rewardsPerYear) * parseInt(stakedAmount) * 100).toFixed(2).toString();
+      const aprYearly = (parseInt(rewardsPerYear) * parseInt(stakedAmount) * 365 * 100)
+        .toFixed(2)
+        .toString();
+      setAprDaily(apr);
+      setApr(aprYearly);
+      setPoolInfo(res);
     });
   }, []);
 
@@ -46,8 +85,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   // catDebt:   uint256
   // mp:   uint256}
 
-  console.log('pricesResponse',  priceOfToken);
-  console.log('pricesResponse', pool.address);
+  console.log('poolInfo', poolInfo);
 
   return (
     <>
@@ -65,10 +103,10 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         </Text>
         <Flex direction="column">
           <Text textAlign="right" fontWeight="bold">
-            {pool.aprs.apr}%
+            {apr}%
           </Text>
           <Text fontSize="0.7rem" textAlign="right">
-            {pool.aprs.daily}% Daily
+            {aprDaily}% Daily
           </Text>
         </Flex>
 
@@ -77,11 +115,16 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         </Text>
         <Flex direction="column" alignItems="flex-end">
           <Text textAlign="right" fontWeight="bold">
-            {pool.userInfo?.pendingRewards} {pool.rewardToken.symbol}
+            {userUnclaimedRewards} {pool.rewardToken.symbol}
           </Text>
-          <Text fontSize="0.7rem" textAlign="right">
-            ${pool.userInfo?.pendingRewardValue}
-          </Text>
+          {priceOfTokenRewards && userUnclaimedRewards && (
+            <Text fontSize="0.7rem" textAlign="right">
+              $
+              {(parseFloat(userUnclaimedRewards) ** parseFloat(priceOfTokenRewards))
+                .toFixed(2)
+                .toString()}
+            </Text>
+          )}
           <Button
             variant="verteklight"
             bgColor="vertek.neonpurple.500"
@@ -107,14 +150,14 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         <Flex direction="column">
           {userInfo?.amount && (
             <Text textAlign="right" fontWeight="bold">
-              {/* {pool.userInfo?.amountDeposited} VRTK */}
-              {parseFloat(formatUnits(userInfo?.amount.toString(), 18)).toFixed(2)}VRTK
+              {userTokens}VRTK
             </Text>
           )}
-          <Text fontSize="0.7rem" textAlign="right">
-            {/* ${pool.userInfo?.depositValue} */}
-            NEED TO MULTIPLY BY PRICE
-          </Text>
+          {userTokens && priceOfToken && (
+            <Text fontSize="0.7rem" textAlign="right">
+              ${(parseFloat(userTokens) * parseFloat(priceOfToken)).toFixed(2).toString()}
+            </Text>
+          )}
         </Flex>
         <GridItem
           colSpan={2}

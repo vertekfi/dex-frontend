@@ -70,7 +70,7 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
 
   const userVrtkBalance = getUserBalance(('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA').toLowerCase());
   // const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
-  debugger;
+  // debugger;
   const userAmount = oldBnumToHumanReadable(
     oldBnumScaleAmount(getUserBalance(userVrtkBalance)).times(percent).div(100),
   );
