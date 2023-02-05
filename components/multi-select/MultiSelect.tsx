@@ -5,23 +5,26 @@ import React from 'react';
 const chakraStyles: ChakraStylesConfig = {
     dropdownIndicator: (provided, state) => ({
         ...provided,
-        background: 'rgba(255,255,255,0.08)',
+        background: 'rgba(255,255,255,0.1)',
         p: 0,
-        w: '40px',
+        w: '45px',
     }),
+    
     option: (provided, state) => ({
         ...provided,
-        background: state.isFocused ? 'beets.base.600' : 'transparent',
+        background: state.isFocused ? 'vertek.neonpurple.500' : 'transparent',
         //background: 'beets.base.800',
     }),
     menuList: (provided, state) => ({
         ...provided,
         //background: state.isFocused ? 'blue.100' : 'black',
-        background: 'beets.base.800',
+        background: 'rgba(0, 0, 0, 0.9)',
+        backdropFilter: 'blur(12px)', 
     }),
     multiValue: (provided, state) => ({
         ...provided,
-        background: 'box.500',
+        background: 'rgba(0, 0, 0, 0.9)',
+        backdropFilter: 'blur(12px)', 
     }),
     multiValueLabel: (provided, state) => ({
         ...provided,

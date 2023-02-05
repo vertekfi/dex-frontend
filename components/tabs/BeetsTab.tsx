@@ -10,11 +10,12 @@ const BeetsTab = forwardRef((props: { children: any } & TabProps, ref: any) => {
     <Button
       fontSize="sm"
       rounded="full"
-      color={isSelected ? 'gray.100' : 'white'}
-      bgColor={isSelected ? 'vertek.neonpurple.500' : 'vertek.neonpurple.900'}
+      color={isSelected ? 'white' : 'gray.100'}
+      bgColor={isSelected ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
       _hover={{ bgColor: 'vertek.neonpurple.500' }}
       _focus={{ outline: 'none !important' }}
       height="fit-content"
+      boxShadow="0px 10px 4px #000"
       paddingY="3"
       paddingX="4"
       {...tabProps}
