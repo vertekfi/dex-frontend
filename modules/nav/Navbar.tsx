@@ -14,7 +14,8 @@ import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
 import { VLogoPNT } from '~/assets/logo/Vertek/VLogoPNT';
-import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNotext';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
+
 
 interface Props {
   scrollY: MotionValue<number>;

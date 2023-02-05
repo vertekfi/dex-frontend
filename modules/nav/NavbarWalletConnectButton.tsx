@@ -12,7 +12,7 @@ import { BarChart2 } from 'react-feather';
 import { useUserData } from '~/lib/user/useUserData';
 import { numberFormatLargeUsdValue } from '~/lib/util/number-formats';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
-import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNotext';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
 
 export default function NavbarWalletConnectButton() {
   const txPending = useReactiveVar(txPendingVar);
