@@ -12,7 +12,7 @@ const BeetsTab = forwardRef((props: { children: any } & TabProps, ref: any) => {
       rounded="12px"
       color={isSelected ? 'white' : 'gray.100'}
       bgColor={isSelected ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
-      _hover={{ bgColor: 'vertek.neonpurple.500' }}
+      _hover={{ bgColor: 'vertek.neonpurple.500', boxShadow:'none' }}
       _focus={{ outline: 'none !important' }}
       height="fit-content"
       boxShadow="0px 10px 4px #000"
