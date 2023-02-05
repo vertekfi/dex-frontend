@@ -16,17 +16,17 @@ export function PoolListTop() {
   return (
     <Box display={{ base: 'none', lg: 'block' }}>
       <Flex pb={0}>
-        <Flex flex={1}>
+        <Flex flex={1} mb={{base:'0', lg:'3'}}>
           <PoolListTabs />
           <Box position="relative">
             <IconButton
               aria-label="filter-button"
               icon={<Filter />}
               ml={4}
-             
               onClick={toggleFilterVisibility}
-              color={showFilters ? 'gray.100' : 'white'}
-              bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.neonpurple.900'}
+              color={showFilters ? 'white' : 'gray.100'}
+              boxShadow="0px 10px 1px #000"
+              bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
               _hover={{ bgColor: 'vertek.neonpurple.500' }}
             />
             {hasFiltersSelected ? (
