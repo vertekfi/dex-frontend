@@ -33,7 +33,7 @@ export function PoolListTop() {
               color={showFilters ? 'white' : 'gray.100'}
               boxShadow="0px 10px 1px #000"
               bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
-              _hover={{ bgColor: 'vertek.neonpurple.500' }}
+              _hover={{ bgColor: 'vertek.neonpurple.500', boxShadow:'none'  }}
             />
             </div>
             {hasFiltersSelected ? (
