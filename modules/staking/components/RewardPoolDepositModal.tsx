@@ -73,7 +73,8 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
 
   useEffect(() => {
     if (!loading) {
-      const hasApproval = hasApprovalForAmount(vrtkAddress, userVrtkBalance);
+      // const hasApproval = hasApprovalForAmount(vrtkAddress, userVrtkBalance);
+      const hasApproval = hasApprovalForAmount('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA', userVrtkBalance);
 
       setSteps([
         ...(!hasApproval

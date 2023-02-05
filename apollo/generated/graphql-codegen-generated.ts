@@ -1327,7 +1327,6 @@ export interface QueryUserGetSwapsArgs {
 
 export interface RewardPool {
   __typename: 'RewardPool';
-  poolId: Scalars['Int'];
   address: Scalars['String'];
   amountStaked: Scalars['String'];
   amountStakedValue: Scalars['String'];

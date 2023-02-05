@@ -33,6 +33,7 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
   const [tokensOfOwner, setTokensOfOwner] = useState<any>();
   const [images, setImages] = useState<any>();
   const [isLoadingBalance, setIsLoadingBalance] = useState<boolean>(true);
+  const [isApproved, setIsApproved] = useState<boolean>(false);
 
   useEffect(() => {
     if (!userAddress) return;
@@ -88,16 +89,26 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
     refetch: refetchAllowances,
   } = useAllowances(userAddress || null, [nftInfo], pool.address);
 
+  useEffect(() => {
+    if (!userAddress || !tokensOfOwner) return;
+    earlyLudwigNft.isApprovedForAll(userAddress).then(res=> {
+      setIsApproved(res)
+    })
+    
+  }, [userAddress, tokensOfOwner]);
+
+  
+
   const { approve, ...approveQuery } = useApproveNFT(nftInfo);
 
   const loading = isLoadingBalance || isLoadingAllowances;
 
   useEffect(() => {
     if (!loading) {
-      const hasApproval = hasApprovalForAmount(nftInfo.address, '1');
+      // const hasApproval = hasApprovalForAmount(nftInfo.address, '1');
 
       setSteps([
-        ...(!hasApproval
+        ...(!isApproved
           ? [
               {
                 id: 'approve',
