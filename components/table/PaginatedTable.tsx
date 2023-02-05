@@ -91,11 +91,24 @@ export function PaginatedTable({
                 <Box    
 >
                   <Select
-                    style={{ borderRadius: '16px', backgroundColor:'transparent'}}
                     borderWidth="0px"
                     value={pageSize}
+                    bg="vertek.slatepurple.900" 
+          color="vertek.neonpurple.500" 
+          css={`
+            & > option {
+              background-color: #161626;
+              color: #4A4AF6;
+              & > option:hover {
+                background-color: black;
+                color: #fff
+              }
+            }
+          `}
+          variant="filled"
                     onChange={(event) => {
                       onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
+                    
                     }}
                   >
                     
@@ -105,6 +118,7 @@ export function PaginatedTable({
 
                   </Select>
                 </Box>
+
                 <Text ml={2}>per page</Text>
               </>
             )}
