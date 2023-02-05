@@ -12,15 +12,11 @@ import {
   BeetsTransactionStepsSubmit,
   TransactionStep,
 } from '~/components/button/BeetsTransactionStepsSubmit';
-import { networkConfig } from '~/lib/config/network-config';
-import { oldBnumToHumanReadable, oldBnumScaleAmount } from '~/lib/services/pool/lib/old-big-number';
 import { TokenBase } from '~/lib/services/token/token-types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
-import { useUserTokenBalances } from '~/lib/user/useUserTokenBalances';
 import { useAllowances } from '~/lib/util/useAllowances';
 import { useRewardPoolDepositNft } from '../lib/useRewardPoolDepositNft';
 import { useApproveNFT } from '~/lib/util/useApproveNFT';
-import { BeetsTokenInputWithSlider } from '~/components/inputs/BeetsTokenInputWithSlider';
 import { earlyLudwigNft } from '~/lib/services/nft/nft.service';
 import NextImage from 'next/image';
 
@@ -40,9 +36,6 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
 
   useEffect(() => {
     if (!userAddress) return;
-    // earlyLudwigNft.balanceOf(userAddress).then((res) => {
-    //   console.log('res', res);
-    // });
     earlyLudwigNft.tokenOfOwner(userAddress).then((res) => {
       setTokensOfOwner(res);
     });
@@ -77,22 +70,15 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
       });
   }, [userAddress, tokensOfOwner, fetchBalance]);
 
-  console.log('images', images);
-
   const [selectedNFTs, setSelectedNFTs] = useState([]);
   const [steps, setSteps] = useState<TransactionStep[] | null>(null);
 
   const { depositToPool, ...depositQuery } = useRewardPoolDepositNft(pool);
 
-  console.log('selectedNFTs', selectedNFTs);
-
   const nftInfo: TokenBase = {
-    // address: vrtkAddress,
     address: '0xb97B035231447F748A3F8Ba25B59C6ee23bDF36B',
-    // symbol: 'VRTK',
     symbol: 'ROAR',
     decimals: 18,
-    // name: 'Vertek',
     name: 'ROAR',
   };
 
@@ -102,30 +88,12 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
     refetch: refetchAllowances,
   } = useAllowances(userAddress || null, [nftInfo], pool.address);
 
-  // const {
-  //   getUserBalance,
-  //   isLoading: isLoadingBalances,
-  //   isRefetching: isRefetchingBalances,
-  //   refetch: refetchTokenBalances,
-  // } = useUserTokenBalances();
   const { approve, ...approveQuery } = useApproveNFT(nftInfo);
 
-  // const userVrtkBalance = getUserBalance(
-  //   '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA'.toLowerCase(),
-  // );
-  // const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
-  // debugger;
-  // const userAmount = oldBnumToHumanReadable(
-  // oldBnumScaleAmount(getUserBalance(userVrtkBalance)).times(percent).div(100),
-  // );
-
-  // const hasValue = userAmount !== '' && percent !== 0;
-  // const amountIsValid = !hasValue || parseFloat(userVrtkBalance) >= parseFloat(userAmount);
   const loading = isLoadingBalance || isLoadingAllowances;
 
   useEffect(() => {
     if (!loading) {
-      // const hasApproval = hasApprovalForAmount(nftInfo.address, userVrtkBalance);
       const hasApproval = hasApprovalForAmount(nftInfo.address, '1');
 
       setSteps([
@@ -149,12 +117,6 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
     }
   }, [loading, isOpen]);
 
-  // useEffect(() => {
-  //   if (isOpen && userVrtkBalance) {
-  //     setPercent(100);
-  //   }
-  // }, [isOpen]);
-
   const handleClick = (id: string) => {
     let items = [...selectedNFTs];
     if (items.includes(id)) {
@@ -164,17 +126,6 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
       items.push(id);
     }
     setSelectedNFTs(items);
-
-    // if( usersNfts.length == items.length ){
-    //     setMaxTitle("Deselect All");
-    //     return;
-    // }
-    // else if( items.length > 0 ){
-    //     setMaxTitle("Deselect All");
-    // }
-    // else{
-    //     setMaxTitle("Select All");
-    // }
   };
 
   return (
@@ -228,18 +179,7 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
                   </Box>
                 ))}
             </Grid>
-            {/* <CircularProgress style={{ zIndex:1, position: 'absolute', display: usersNfts.length === 0 && max.gt(0) ? '' : 'none', marginTop: '0px' }} /> */}
           </Box>
-          {/* <BeetsTokenInputWithSlider
-            tokenOptions={[]}
-            selectedTokenOption={vrtkInfo}
-            balance={userVrtkBalance}
-            setInputAmount={(amount) => setInputAmount(amount)}
-            value={inputAmount}
-            setSelectedTokenOption={() => null}
-            mb="4"
-          /> */}
-
           {selectedNFTs.length > 0 && (
             <BeetsTransactionStepsSubmit
               isLoading={loading || steps === null}
@@ -270,15 +210,6 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
               // isDisabled={!hasValue || !amountIsValid}
             />
           )}
-          {/* <Button
-            style={{ marginTop: 20 }}
-            variant="vertekdark"
-            disabled={false}
-            width="full"
-            onClick={() => console.log('stake')}
-          >
-            Stake
-          </Button> */}
         </ModalBody>
       </ModalContent>
     </Modal>

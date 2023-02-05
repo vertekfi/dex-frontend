@@ -6,9 +6,7 @@ import {
   BeetsTransactionStepsSubmit,
   TransactionStep,
 } from '~/components/button/BeetsTransactionStepsSubmit';
-import { networkConfig } from '~/lib/config/network-config';
 import { TokenBase } from '~/lib/services/token/token-types';
-import { BeetsTokenInputWithSlider } from '~/components/inputs/BeetsTokenInputWithSlider';
 import { useRewardPoolWithdrawNft } from '../lib/useRewardPoolWithdrawNft';
 import { nftStakingContract } from '~/lib/services/nftStaking/nftStaking.service';
 import { earlyLudwigNft } from '~/lib/services/nft/nft.service';
@@ -151,7 +149,6 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
                   </Box>
                 ))}
             </Grid>
-            {/* <CircularProgress style={{ zIndex:1, position: 'absolute', display: usersNfts.length === 0 && max.gt(0) ? '' : 'none', marginTop: '0px' }} /> */}
           </Box>
         {selectedNFTs.length > 0 &&<BeetsTransactionStepsSubmit
             isLoading={steps === null}

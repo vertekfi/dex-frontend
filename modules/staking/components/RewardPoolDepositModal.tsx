@@ -1,14 +1,6 @@
 import {
-  Box,
-  Heading,
   ModalHeader,
   ModalOverlay,
-  Skeleton,
-  Slider,
-  SliderFilledTrack,
-  SliderMark,
-  SliderThumb,
-  SliderTrack,
   Text,
 } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
