@@ -13,6 +13,8 @@ import { NextLink } from '~/components/link/NextLink';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { NetworkSelectorPopover } from '~/modules/nav/NetworkSelectorPopover';
 import { BeetsLogo } from '~/assets/logo/BeetsLogo';
+import { VLogoPNT } from '~/assets/logo/Vertek/VLogoPNT';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNotext';
 
 interface Props {
   scrollY: MotionValue<number>;
@@ -44,21 +46,17 @@ export function Navbar({ scrollY }: Props) {
         borderBottomWidth="3px"
         // padding="12px, 40px, 0px, 40px"
       >
-        <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{base:'auto', lg:'center'}} >
+        <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{base:'center', lg:'center'}} >
           <Flex alignItems="center" mr={{ base:'0', lg:'2'}}  
           zIndex="2" cursor="pointer" bgColor="transparent">
             <NextLink href="/" chakraProps={{ _focus: { boxShadow: 'none' } }}>
-              {chainId === '10' ? (
-                <BeetsBalLogo width="132px" />
-              ) : (
                 <Box mb="">
-                  <BeetsLogo width={{ base: '120px', md:'130px', xl:'180px' }}  />
+                  <BeetsLogo width={{ base: '120px', lg:'120px', xl:'150px' }}  />
                 </Box>
-              )}
             </NextLink>
           </Flex>
 
-          <Box flex="1" zIndex="2" margin="4px">
+          <Box flex="1" zIndex="2" margin="6px">
             <Flex alignItems="center" display={{ base: 'none', lg: 'flex' }}>
               <NavbarLink
                 href={'/'}
@@ -66,7 +64,6 @@ export function Navbar({ scrollY }: Props) {
                 text="Home"
                 mr="3"
               ></NavbarLink>
-
               <NavbarLink
                 href={'/pools'}
                 selected={router.asPath.startsWith('/pool')}
@@ -121,12 +118,12 @@ export function Navbar({ scrollY }: Props) {
               {/*<NavbarAdditionalLinksMenu />*/}
             </Flex>
           </Box>
-          <FadeInOutBox mr={{ base:'3', lg:'0'}} isVisible={isConnected}>
-            <HStack spacing={{ base:'4', lg:'1' }}>
-              <NetworkSelectorPopover>
+          <FadeInOutBox mr={{ base:'2', lg:'2'}} isVisible={isConnected} >
+            <HStack spacing={{ base:'2', lg:'4' }}>
+              <NetworkSelectorPopover >
                 <Button
                   bgColor="transparent"
-                  width="50px"
+                  width="40px"
                   height="40px"
                   display="flex"
                   alignItems="center"
@@ -138,17 +135,19 @@ export function Navbar({ scrollY }: Props) {
                   <Image mr={{ base:'2', lg:'4'}} width="24px" height="24px" src={networkConfig.eth.iconUrl} />
                 </Button>
               </NetworkSelectorPopover>
-              {/* <BeetsLogoNoText width="85px" /> */}
-              {loading && !beetsPrice ? (
-                <Skeleton height="16px" width="54px" />
-              ) : (
-                <Text fontWeight="semibold" color="white" fontSize={{ base: 'sm', lg: 'md' }}>
-                  {numeral(beetsPrice).format('$0.00[00]')}
-                </Text>
-              )}
-              {/* <NavbarPendingRewards /> */}
-              {/* <NavbarAlerts />
-              <NavbarPortfolioDrawer /> */}
+                  {loading && !beetsPrice ? (
+              <Skeleton height="16px" width="54px" />
+            ) : (
+              // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
+              //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
+              <Text ml={{ base:'0', lg:'3' }} textAlign="right"  fontWeight="bold" color="white" fontSize={{ base: 'sm', lg: 'md' }}>
+                {numeral(beetsPrice).format('$0.00[00]')}
+              </Text>
+
+                  )}
+                  {/* <NavbarPendingRewards /> */}
+                  {/* <NavbarAlerts />
+                  <NavbarPortfolioDrawer /> */}
             </HStack>
           </FadeInOutBox>
           <NavbarWalletConnectButton />

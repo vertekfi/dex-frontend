@@ -12,6 +12,7 @@ import { BarChart2 } from 'react-feather';
 import { useUserData } from '~/lib/user/useUserData';
 import { numberFormatLargeUsdValue } from '~/lib/util/number-formats';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNotext';
 
 export default function NavbarWalletConnectButton() {
   const txPending = useReactiveVar(txPendingVar);
@@ -52,7 +53,7 @@ export default function NavbarWalletConnectButton() {
               }
 
               return (
-                <HStack spacing="4" position="relative">
+                <HStack spacing="1" position="relative">
                   {/* <HStack
                     bgColor="beets.base.500"
                     pr="3"
@@ -75,10 +76,11 @@ export default function NavbarWalletConnectButton() {
                       </Box>
                     )}
                   </HStack> */}
-                  {/* price goes here */}
+                  <VertekWhiteNoText width={{ base:'40px', md:'70px'}} />
+
                   <Button
                     variant="vertekdark"
-                    marginLeft="4" 
+                    marginLeft={{ base: '1', lg:'0' }}
                     onClick={openAccountModal}
                     paddingX="6"                        
                     color="white"
