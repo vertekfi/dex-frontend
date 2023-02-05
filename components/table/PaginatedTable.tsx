@@ -98,9 +98,11 @@ export function PaginatedTable({
                       onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
                     }}
                   >
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    
+                    <option className="table" value="20">20</option>
+                    <option className="table" value="50">50</option>
+                    <option className="table"value="100">100</option>
+
                   </Select>
                 </Box>
                 <Text ml={2}>per page</Text>
