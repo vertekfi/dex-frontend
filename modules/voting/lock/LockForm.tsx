@@ -48,6 +48,7 @@ interface Props {
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lockType, setLockType] = useState<LockType[]>([]);
+  const [selectedDateOption, setSelectedDateOption] = useState<string>('');
 
   const {
     isLoadingUserVeData,
@@ -166,7 +167,7 @@ export function LockForm(props: Props) {
   }
 
   let expectedVeBalAmount = '0';
-  if (isValidLockAmount && isValidLockEndDate) {
+  if (isValidLockAmount && lockDate) {
     expectedVeBalAmount = expectedVeBal(lockAmount, lockDate);
   }
 
@@ -175,31 +176,44 @@ export function LockForm(props: Props) {
       id: 'one-week',
       label: '~1W',
       date: getDateInput(minLockEndDateTimestamp),
-      action: () => updateLockEndDate(minLockEndDateTimestamp),
+      action: () => {
+        setSelectedDateOption('one-week');
+        updateLockEndDate(minLockEndDateTimestamp);
+      },
     },
     {
       id: 'one-month',
       label: '~1M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 4).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 4).getTime()),
+      action: () => {
+        setSelectedDateOption('one-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 4).getTime());
+      },
     },
     {
       id: 'three-month',
       label: '~3M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 12).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 12).getTime()),
+      action: () => {
+        setSelectedDateOption('three-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 12).getTime());
+      },
     },
     {
       id: 'six-month',
       label: '~6M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 24).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 24).getTime()),
+      action: () => {
+        setSelectedDateOption('six-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 24).getTime());
+      },
     },
     {
       id: 'one-year',
       label: '~1Y',
       date: formatDateInput(maxLockEndDateTimestamp),
       action: () => {
+        setSelectedDateOption('one-year');
         setLockDate(formatDateInput(maxLockEndDateTimestamp));
       },
     },
@@ -440,7 +454,15 @@ export function LockForm(props: Props) {
                     {minLockEndDateTimestamp < maxLockEndDateTimestamp &&
                       lockDates?.map((lockDate, i) => {
                         return (
-                          <Button key={i} variant="stayblacklock" onClick={lockDate.action}>
+                          <Button
+                            key={i}
+                            width="100%"
+                            height="2rem"
+                            variant={
+                              selectedDateOption === lockDate.id ? 'verteklight' : 'stayblacklock'
+                            }
+                            onClick={lockDate.action}
+                          >
                             {lockDate.label}
                           </Button>
                         );
@@ -467,7 +489,6 @@ export function LockForm(props: Props) {
                     Total Voting Escrow
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
-                    {/* <div>{tokenFormatAmount(expectedVeBalAmount || '0')} - veVRTK</div> */}
                     <div>{expectedVeBalAmount || '0'} - veVRTK</div>
                   </Text>
                 </Flex>

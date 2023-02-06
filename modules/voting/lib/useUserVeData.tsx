@@ -23,7 +23,7 @@ export function _useUserVotingData() {
   const [hasExistingLock, setHasExistingLock] = useState<boolean>();
   const [currentVeBalance, setcurrentVeBalance] = useState<string>();
 
-  const { isConnected } = useUserAccount();
+  const { isConnected, userAddress } = useUserAccount();
 
   const {
     loading: isLoadingUserBalances,
@@ -52,6 +52,12 @@ export function _useUserVotingData() {
       console.log(veError);
     }
   }, [veError]);
+
+  useEffect(() => {
+    if (userAddress) {
+      refetchUserVeData();
+    }
+  }, [userAddress]);
 
   useEffect(() => {
     if (isConnected && !isLoadingUserBalances) {

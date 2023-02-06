@@ -6,12 +6,17 @@ import { LockType } from '../types';
 import veAbi from '../../../../lib/abi/VotingEscrow.json';
 import { parseUnits } from '@ethersproject/units';
 import { toUtcTime } from '~/lib/util/time';
+import { UseContractWriteMutationArgs } from 'wagmi/dist/declarations/src/hooks/contracts/useContractWrite';
 
 export interface LockActionStep {
+  id: string;
   toastText: string;
   walletText: string;
   functionName: string;
   args: any[];
+  submitLock?: (
+    config: UseContractWriteMutationArgs & { toastText: string; walletText?: string | undefined },
+  ) => void;
 }
 
 export interface SubmitLockParams {
@@ -26,38 +31,18 @@ export function useSubmitLock() {
   }
 
   function getSubmitLockAction(actionStep: LockActionStep) {
-    // const { submit, ...rest } = useSubmitTransaction({
-    //   config: {
-    //     addressOrName: networkConfig.balancer.votingEscrow.veAddress,
-    //     contractInterface: veAbi,
-    //     functionName: actionStep.functionName,
-    //   },
-    //   transactionType: 'STAKE',
-    // });
+    const { submit: submitLock, ...query } = useSubmitTransaction({
+      config: {
+        addressOrName: networkConfig.balancer.votingEscrow.veAddress,
+        contractInterface: veAbi,
+        functionName: actionStep.functionName,
+      },
+      transactionType: 'STAKE',
+    });
 
     return {
-      getLockTxSubmit: () => {
-        const { submit, ...rest } = useSubmitTransaction({
-          config: {
-            addressOrName: networkConfig.balancer.votingEscrow.veAddress,
-            contractInterface: veAbi,
-            functionName: actionStep.functionName,
-          },
-          transactionType: 'STAKE',
-        });
-
-        return {
-          submit,
-          rest,
-        };
-      },
-      submitLock: (submit: (params: SubmitLockParams) => void, params: SubmitLockParams) => {
-        return submit({
-          args: params.args,
-          toastText: params.toastText,
-          walletText: params.walletText,
-        });
-      },
+      submitLock,
+      query,
     };
   }
 

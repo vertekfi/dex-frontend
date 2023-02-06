@@ -25,8 +25,6 @@ export function LockSummary(props: Props) {
   const fiatTotalLockAmount = poolShares.times(props.lockAmount).toString();
   const fiatTotalLpTokens = poolShares.times(props.totalLpTokens).toString();
 
-  console.log(props.totalLpTokens);
-
   const isExtendLockOnly =
     props.lockType.length === 1 && props.lockType.includes(LockType.EXTEND_LOCK);
 
