@@ -15,6 +15,7 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
+
 import {
   BeetsModalBody,
   BeetsModalHeader,
@@ -239,7 +240,7 @@ export function LockForm(props: Props) {
       >
         <ModalCloseButton />
         <BeetsModalHeader>
-          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="white" mt="-1rem">
+          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="gray.100" mt="-1rem">
             {title}
           </BeetsModalHeadline>
         </BeetsModalHeader>
@@ -252,114 +253,128 @@ export function LockForm(props: Props) {
             templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
             gap="4"
           >
-            <GridItem
-              width={{ base: '90%', md: 'auto' }}
-              height={{ base: '90%', md: '50%' }}
-              m={{ base: '0', md: '2' }}
-              mt={{ base: '2', md: '12' }}
-              bgColor="vertek.slate.900"
-              borderRadius="16px"
-            >
+            <Card
+                flexDirection="column" 
+                alignItems="center"
+                borderRadius="16px"
+                height="375px"
+                padding="0"
+                marginTop={{ base:'0', md:'12'}}
+                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+                css={{
+                  transition: 'transform 0.5s',
+                  '&:hover': {
+                    transform: 'scale(1.02)', }, }}
+                >
+              <Box 
+              width="90%" 
+              display="flex" 
+              padding="2"
+              alignItems="center" justifyContent="center"
+              boxShadow="2px 24px 12px 0px #000"
+              borderRadius="md" mb="4" mt="2"
+              bgColor="vertek.slatepurple.900">
               <Text
-                align="left"
-                paddingX="4"
-                paddingY="2"
-                mb="4"
+                align="center"
+                paddingX="2"
+                paddingY="4"
                 fontWeight="bold"
-                color="white"
+                color="gray.100"
+                lineHeight="1.1rem"
                 fontSize="1.2rem"
               >
-                Lockable tokens in my wallet
+                My Lockable VRTK-BNB
               </Text>
+              </Box>
               <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                height="40%"
-                marginX="2"
-                mb="6"
-                padding="6"
-                bgColor="vertek.slatepurple.900"
+                width="95%" 
+                paddingX="4"
+                paddingY="4"
+                display="flex" 
                 boxShadow="2px 24px 12px 0px #000"
-                borderRadius="12px"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
                 flexDirection="column"
               >
-                <Flex>
+                <Flex mb="3">
                   <Text fontSize="1rem" mr="auto">
                     VRTK-BNB
                   </Text>
-                  <Text fontSize="1rem" ml="auto">
-                    {userLockablePoolBalance}
+                  <Text fontSize="0.9rem" ml="auto">
+                  {(userLockablePoolBalance && parseFloat(userLockablePoolBalance).toFixed(4)) || 'N/A'}
                   </Text>
                 </Flex>
-                <Flex>
+                <Flex mb="5">
                   <Text fontSize="1rem" mr="auto">
                     Vertek Governance
                   </Text>
-                  <Text fontSize="1rem" ml="auto">
+                  <Text fontSize="0.9rem" ml="auto">
                     {userLockablePoolBalanceUSD}
                   </Text>
+                  
                 </Flex>
-              </Box>
-
-              <Flex display="flex" justifyContent="center" alignItems="center" mt="8">
                 <Button
                   variant="verteklight"
                   as="a"
                   href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
                   borderWidth="1px"
-                  width="90%"
+                  width="100%"
                   height="2.2rem"
                 >
                   Get VRTK-BNB
                 </Button>
-              </Flex>
-
+              </Box>
               <Box
-                padding="2"
-                borderRadius="16px"
-                bgColor="vertek.slate.900"
+                width="90%" 
+                paddingX="1"
+                paddingY="4"
+                display="flex" 
                 boxShadow="2px 24px 12px 0px #000"
-                mb="4"
-                mt="4"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
+                flexDirection="column"
               >
                 <Text fontSize="1rem" mr="auto"></Text>
                 <Accordion allowToggle mb="4" padding={1}>
                   <AccordionItem>
-                    <AccordionButton color="white" _expanded={{}}>
-                      <AccordionIcon color="white" />
+                    <AccordionButton color="gray.100" _expanded={{}}>
+                      <AccordionIcon color="gray.100" />
                       <Box flex="1" textAlign="center">
                         How to lock
                       </Box>
-                      <AccordionIcon color="white" />
+                      <AccordionIcon color="gray.100" />
                     </AccordionButton>
 
                     <AccordionPanel
                       height={{ base: '40vh', md: 'auto' }}
                       bg="vertek.slatepurple.900"
-                      padding="4"
+                      paddingY="4" paddingX="1"
                       marginY="4"
                       borderRadius="16px"
-                      boxShadow="2px 12px 12px 0px #000"
+                      // boxShadow="2px 12px 12px 0px #000"
                     >
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         1. Invest in the VRTK-BNB pool.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         2. Lock VRTK-BNB to receive veVRTK.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         3. Receive boosted liquidity mining yields (up to 2.5x) and increased voting
                         power.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         4. Choose which pool gauges get allocated liquidity mining incentives.
                       </Text>
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
               </Box>
-            </GridItem>
+            </Card>
 
             <GridItem
               width={{ base: '90%', md: 'auto' }}
@@ -368,7 +383,7 @@ export function LockForm(props: Props) {
               borderRadius="16px"
               boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
             >
-              <Text align="left" padding="5" fontWeight="bold" color="white" fontSize="1.2rem">
+              <Text align="left" padding="5" fontWeight="bold" color="gray.100" fontSize="1.2rem">
                 {title}
               </Text>
               <Box
@@ -384,7 +399,7 @@ export function LockForm(props: Props) {
                 borderRadius="16px"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   How much do you want to lock?
                 </Text>
 
@@ -405,7 +420,7 @@ export function LockForm(props: Props) {
                       size="md"
                       fontWeight="bold"
                     />
-                    <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
+                    <FormLabel mt="2" mb="4" color="gray.100" fontWeight="bold">
                       {userLockablePoolBalance} VRTK-BNB available
                     </FormLabel>
                   </FormControl>
@@ -430,7 +445,7 @@ export function LockForm(props: Props) {
                 borderRadius="16px"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   Lock until
                 </Text>
                 <FormControl mb="2">
@@ -496,7 +511,7 @@ export function LockForm(props: Props) {
               <Button
                 onClick={handleShowPreviewModal}
                 variant="stayblack"
-                _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
+                _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'gray.100' }}
                 mb="4"
                 width={{ base: '85%', md: '90%' }}
                 disabled={submissionDisabled}
