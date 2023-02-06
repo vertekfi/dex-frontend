@@ -379,7 +379,7 @@ export function LockForm(props: Props) {
                 borderRadius="16px"
                 height="525px"
                 padding="0"
-                marginTop={{ base:'0', md:'12'}}
+                marginTop={{ base:'0', md:'2'}}
                 boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
                 >
               <Box 
@@ -558,7 +558,7 @@ export function LockForm(props: Props) {
                 height="190"
                 display="flex" 
                 padding="2"
-                marginTop={{ base:'0', md:'12'}}
+                marginTop={{ base:'0', md:'28'}}
                 boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
                 >
               <MyVeVRTK
