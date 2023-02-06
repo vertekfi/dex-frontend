@@ -104,8 +104,7 @@ export function TradeCard() {
             />
           </Box>
           <div className="animate__animated animate__zoomIn animate__delay-3s">
-          <TokenInputSwapButton 
-          onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
+            <TokenInputSwapButton onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
           </div>
           <TokenInput
             ref={finalRefTokenOut}
