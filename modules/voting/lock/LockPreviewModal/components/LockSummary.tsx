@@ -17,9 +17,10 @@ type Props = {
 };
 
 export function LockSummary(props: Props) {
-  const poolShares = bnum(props.lockablePool.dynamicData.totalLiquidity24hAgo).div(
+  const poolShares = bnum(props.lockablePool.dynamicData.totalLiquidity).div(
     props.lockablePool.dynamicData.totalShares,
   );
+
   const fiatTotalLockedAmount = poolShares.times(props.currentVeBalance).toString();
   const fiatTotalLockAmount = poolShares.times(props.lockAmount).toString();
   const fiatTotalLpTokens = poolShares.times(props.totalLpTokens).toString();
