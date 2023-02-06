@@ -377,7 +377,7 @@ export function LockForm(props: Props) {
                 flexDirection="column" 
                 alignItems="center"
                 borderRadius="16px"
-                height="500px"
+                height="525px"
                 padding="0"
                 marginTop={{ base:'0', md:'12'}}
                 boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
@@ -552,21 +552,15 @@ export function LockForm(props: Props) {
             </Card>
 
             <Card
-              flexDirection="column"
-              borderRadius="16px"
-              height="200px"
-              padding="4"
-              alignItems="center"
-              justifyContent="center"
-              marginTop="5rem"
-              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-              css={{
-                transition: 'transform 0.5s',
-                '&:hover': {
-                  transform: 'scale(1.01)',
-                },
-              }}
-            >
+                flexDirection="column" 
+                alignItems="center"
+                borderRadius="16px"
+                height="190"
+                display="flex" 
+                padding="2"
+                marginTop={{ base:'0', md:'12'}}
+                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+                >
               <MyVeVRTK
                 currentVeBalance={currentVeBalance || ''}
                 percentOwned={percentOwned || '0'}
