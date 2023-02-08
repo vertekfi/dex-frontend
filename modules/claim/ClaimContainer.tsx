@@ -36,19 +36,11 @@ export function ClaimContainer() {
   const { toFiat, fNum2 } = useNumbers();
 
   useEffect(() => {
-    //
-  }, [gaugesWithRewards]);
-
-  useEffect(() => {
     if (rewardGauges?.length) {
-      console.log(rewardGauges);
+      // console.log(rewardGauges);
       setGaugesWithRewards(rewardGauges?.filter((g) => g.rewardTokens?.length));
     }
   }, [rewardGauges]);
-
-  useEffect(() => {
-    //
-  }, [gaugesWithRewards]);
 
   useEffect(() => {
     if (protocolRewardsData) {
@@ -109,9 +101,10 @@ export function ClaimContainer() {
         <Box flexDirection="row" display="flex" mb="0" paddingX="1">
           <Text fontSize="1.20rem">Other Token Earnings</Text>
         </Box>
-        <Box>
+
+        {/* <Box>
           <ClaimTable gauges={gaugesWithRewards} />
-        </Box>
+        </Box> */}
       </GridItem>
     </SimpleGrid>
   );

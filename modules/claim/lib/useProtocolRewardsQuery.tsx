@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { networkConfig } from '~/lib/config/network-config';
 import { FeeDistributor } from '~/lib/services/balancer/contracts/fee-distributor';

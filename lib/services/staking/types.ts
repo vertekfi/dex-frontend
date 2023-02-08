@@ -37,17 +37,24 @@ export interface RawVotesDataMap {
   gauges: Record<string, RawVotesData>;
 }
 
+export interface BasePool {
+  id: string;
+  address: string;
+  name: string;
+  poolType: string;
+  symbol: string | undefined;
+  tokens: {
+    address: string;
+    weight: string;
+    symbol: string;
+    logoURI: string;
+  }[];
+}
+
 export type VotingGauge = {
   address: string;
   network: number;
-  pool: {
-    id: string;
-    address: string;
-    name: string;
-    poolType: string;
-    symbol: string | undefined;
-    tokens: Pick<GqlPoolToken, 'address' | 'weight' | 'symbol'>[];
-  };
+  pool: BasePool;
   tokenLogoURIs: Record<string, string | undefined>;
 };
 
@@ -67,4 +74,4 @@ export interface OnchainGaugeData {
 
 export type OnchainGaugeDataMap = Record<string, OnchainGaugeData>;
 
-export type Gauge = SubgraphGauge & OnchainGaugeData;
+export type Gauge = SubgraphGauge & OnchainGaugeData & { pool: BasePool };

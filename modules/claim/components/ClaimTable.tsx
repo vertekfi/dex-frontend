@@ -1,9 +1,9 @@
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
-import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
+import { Gauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { ClaimListItem } from './ClaimListItem';
 
 interface ClaimTableProps {
-  gauges: VotingGaugeWithVotes[];
+  gauges: Gauge[];
 }
 
 export function ClaimTable(props: ClaimTableProps) {
@@ -39,7 +39,9 @@ export function ClaimTable(props: ClaimTableProps) {
             <Text fontWeight="bold"></Text>
           </GridItem>
           <GridItem>
-            <Text fontWeight="bold" textAlign="left">Amount</Text>
+            <Text fontWeight="bold" textAlign="left">
+              Amount
+            </Text>
           </GridItem>
           <GridItem justifyContent="center" display="flex">
             <Text fontWeight="bold">Value</Text>

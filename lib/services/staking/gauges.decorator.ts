@@ -1,9 +1,11 @@
 import { AddressZero } from '@ethersproject/constants';
+import { formatEther } from 'ethers/lib/utils';
 import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
 import { ZERO_ADDRESS } from '~/lib/util/web3';
+import { tokenFormatAmount } from '../token/token-util';
 import { Multicaller } from '../util/multicaller.service';
 
 import { OnchainGaugeData, OnchainGaugeDataMap } from './types';
@@ -52,7 +54,7 @@ export class GaugesDecorator {
     return {
       ...gaugeData,
       rewardTokens: gaugeData.rewardTokens,
-      claimableTokens: gaugeData.claimableTokens?.toString() || '0',
+      claimableTokens: tokenFormatAmount(formatEther(gaugeData.claimableTokens?.toString() || '0')),
       claimableRewards: this.formatClaimableRewards(gaugeData.claimableRewards),
     };
   }
