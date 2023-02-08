@@ -179,17 +179,19 @@ export function PoolWithdrawTypeChoice({ onShowProportional, onShowSingleAsset }
       >
         Withdraw proportionally
       </Button>
-      <Button
-        variant="vertekdark"
-        width="full"
-        isDisabled={!hasBptInWallet}
-        onClick={onShowSingleAsset}
-        _hover={{ transform: 'scale(1.01)' }}
-      >
-        Single asset withdraw
-      </Button>
+      {pool.id !== '0xcf61cf9654f5536b8d6c93f09a0308ff3c2650f9000200000000000000000015' && (
+        <Button
+          variant="vertekdark"
+          width="full"
+          isDisabled={!hasBptInWallet}
+          onClick={onShowSingleAsset}
+          _hover={{ transform: 'scale(1.01)' }}
+        >
+          Single asset withdraw
+        </Button>
+      )}
 
-      <PoolUnstakeModal />
+      {/* <PoolUnstakeModal /> */}
     </Box>
   );
 }

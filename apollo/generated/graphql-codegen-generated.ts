@@ -807,6 +807,13 @@ export interface GqlPoolWithdrawOption {
   tokenOptions: Array<GqlPoolToken>;
 }
 
+export interface GqlProtocolFeesCollectorAmounts {
+  __typename: 'GqlProtocolFeesCollectorAmounts';
+  amount: Scalars['String'];
+  token: Scalars['String'];
+  valueUSD: Scalars['String'];
+}
+
 export interface GqlProtocolMetrics {
   __typename: 'GqlProtocolMetrics';
   poolCount: Scalars['BigInt'];
@@ -1155,6 +1162,7 @@ export interface Query {
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getAllGaugePendingProtocolFees: Array<GqlProtocolPendingGaugeFee>;
+  getFeeCollectorBalances: Array<Maybe<GqlProtocolFeesCollectorAmounts>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<Scalars['String']>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;

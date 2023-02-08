@@ -793,6 +793,12 @@ type GqlPoolWithdrawOption {
   tokenOptions: [GqlPoolToken!]!
 }
 
+type GqlProtocolFeesCollectorAmounts {
+  amount: String!
+  token: String!
+  valueUSD: String!
+}
+
 type GqlProtocolMetrics {
   poolCount: BigInt!
   swapFee24h: BigDecimal!
@@ -1122,6 +1128,7 @@ type Query {
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
   getAllGaugePendingProtocolFees: [GqlProtocolPendingGaugeFee!]!
+  getFeeCollectorBalances: [GqlProtocolFeesCollectorAmounts]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [String]!
   getProtocolTokenList: [String]

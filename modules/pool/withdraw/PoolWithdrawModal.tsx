@@ -162,6 +162,7 @@ export function PoolWithdrawModal() {
                 }}
               />
             </FadeInBox>
+
             <FadeInBox isVisible={modalState === 'preview'}>
               <PoolWithdrawPreview
                 onWithdrawComplete={() => {

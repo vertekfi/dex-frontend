@@ -255,39 +255,43 @@ export function LockForm(props: Props) {
             maxWidth="90vw"
           >
             <Card
-                flexDirection="column" 
+              flexDirection="column"
+              alignItems="center"
+              borderRadius="16px"
+              height="375px"
+              padding="0"
+              marginTop={{ base: '0', md: '12' }}
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+            >
+              <Box
+                width="90%"
+                display="flex"
+                padding="2"
                 alignItems="center"
-                borderRadius="16px"
-                height="375px"
-                padding="0"
-                marginTop={{ base:'0', md:'12'}}
-                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-                >
-              <Box 
-              width="90%" 
-              display="flex" 
-              padding="2"
-              alignItems="center" justifyContent="center"
-              boxShadow="2px 24px 12px 0px #000"
-              borderRadius="md" mb="4" mt="2"
-              bgColor="vertek.slatepurple.900">
-              <Text
-                align="center"
-                paddingX="2"
-                paddingY="4"
-                fontWeight="bold"
-                color="gray.100"
-                lineHeight="1.1rem"
-                fontSize="1.2rem"
+                justifyContent="center"
+                boxShadow="2px 24px 12px 0px #000"
+                borderRadius="md"
+                mb="4"
+                mt="2"
+                bgColor="vertek.slatepurple.900"
               >
-                My Lockable VRTK-BNB
-              </Text>
+                <Text
+                  align="center"
+                  paddingX="2"
+                  paddingY="4"
+                  fontWeight="bold"
+                  color="gray.100"
+                  lineHeight="1.1rem"
+                  fontSize="1.2rem"
+                >
+                  My Lockable VRTK-BNB
+                </Text>
               </Box>
               <Box
-                width="95%" 
+                width="95%"
                 paddingX="4"
                 paddingY="4"
-                display="flex" 
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
                 bgColor="vertek.slatepurple.900"
                 justifyContent="center"
@@ -300,7 +304,8 @@ export function LockForm(props: Props) {
                     VRTK-BNB
                   </Text>
                   <Text fontSize="0.9rem" ml="auto">
-                  {(userLockablePoolBalance && parseFloat(userLockablePoolBalance).toFixed(4)) || 'N/A'}
+                    {(userLockablePoolBalance && parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                      'N/A'}
                   </Text>
                 </Flex>
                 <Flex mb="5">
@@ -310,7 +315,6 @@ export function LockForm(props: Props) {
                   <Text fontSize="0.9rem" ml="auto">
                     {userLockablePoolBalanceUSD}
                   </Text>
-                  
                 </Flex>
                 <Button
                   variant="verteklight"
@@ -324,10 +328,11 @@ export function LockForm(props: Props) {
                 </Button>
               </Box>
               <Box
-                width="90%" 
+                width="90%"
                 paddingX="1"
-                paddingBottom="4" paddingTop="2" 
-                display="flex" 
+                paddingBottom="4"
+                paddingTop="2"
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
                 bgColor="vertek.slatepurple.900"
                 justifyContent="center"
@@ -349,7 +354,8 @@ export function LockForm(props: Props) {
                     <AccordionPanel
                       height={{ base: '40vh', md: 'auto' }}
                       bg="vertek.slatepurple.900"
-                      paddingBottom="4" paddingX="1"
+                      paddingBottom="4"
+                      paddingX="1"
                       marginY="4"
                       borderRadius="16px"
                       // boxShadow="2px 12px 12px 0px #000"
@@ -374,37 +380,44 @@ export function LockForm(props: Props) {
             </Card>
 
             <Card
-                flexDirection="column" 
+              flexDirection="column"
+              alignItems="center"
+              borderRadius="16px"
+              height="525px"
+              padding="0"
+              marginTop={{ base: '0', md: '2' }}
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+            >
+              <Box
+                width="90%"
+                display="flex"
+                paddingX="2"
+                paddingY="1"
                 alignItems="center"
-                borderRadius="16px"
-                height="525px"
-                padding="0"
-                marginTop={{ base:'0', md:'2'}}
-                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+                justifyContent="center"
+                boxShadow="2px 24px 12px 0px #000"
+                borderRadius="md"
+                mb="4"
+                mt="2"
+                bgColor="vertek.slatepurple.900"
+              >
+                <Text
+                  align="center"
+                  paddingX="2"
+                  paddingY="4"
+                  fontWeight="bold"
+                  color="gray.100"
+                  lineHeight="1.1rem"
+                  fontSize="1.2rem"
                 >
-              <Box 
-              width="90%" 
-              display="flex" 
-              paddingX="2" paddingY="1"
-              alignItems="center" justifyContent="center"
-              boxShadow="2px 24px 12px 0px #000"
-              borderRadius="md" mb="4" mt="2"
-              bgColor="vertek.slatepurple.900">
-                  <Text  align="center"
-                    paddingX="2"
-                    paddingY="4"
-                    fontWeight="bold"
-                    color="gray.100"
-                    lineHeight="1.1rem"
-                    fontSize="1.2rem">
-                    {title}
-                  </Text>
+                  {title}
+                </Text>
               </Box>
               <Box
-                width="95%" 
+                width="95%"
                 paddingX="4"
                 paddingY="3"
-                display="flex" 
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
                 bgColor="vertek.slatepurple.900"
                 justifyContent="center"
@@ -412,8 +425,7 @@ export function LockForm(props: Props) {
                 borderRadius="md"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="gray.100" 
-                fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   How much do you want to lock?
                 </Text>
 
@@ -430,19 +442,29 @@ export function LockForm(props: Props) {
                       autoCorrect="off"
                       spellCheck={false}
                       step="any"
-                      placeholder={(userLockablePoolBalance && 
-                          parseFloat(userLockablePoolBalance).toFixed(4)) || 'N/A'}
+                      placeholder={
+                        (userLockablePoolBalance &&
+                          parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                        'N/A'
+                      }
                       size="md"
                       fontWeight="bold"
                     />
                     <FormLabel mt="1" mb="1" color="gray.100" fontWeight="bold">
-                    {(userLockablePoolBalance && 
-                          parseFloat(userLockablePoolBalance).toFixed(4)) || 'N/A'} VRTK-BNB available
+                      {(userLockablePoolBalance &&
+                        parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                        'N/A'}{' '}
+                      VRTK-BNB available
                     </FormLabel>
                   </FormControl>
                   <InputRightElement width="4.5rem">
-                    <Button variant="verteklight" borderWidth="1px"
-                    h="1.75rem" size="sm" onClick={handleMaxClick}>
+                    <Button
+                      variant="verteklight"
+                      borderWidth="1px"
+                      h="1.75rem"
+                      size="sm"
+                      onClick={handleMaxClick}
+                    >
                       Max
                     </Button>
                   </InputRightElement>
@@ -450,10 +472,10 @@ export function LockForm(props: Props) {
               </Box>
 
               <Box
-                width="95%" 
+                width="95%"
                 paddingX="4"
                 paddingY="3"
-                display="flex" 
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
                 bgColor="vertek.slatepurple.900"
                 justifyContent="center"
@@ -461,8 +483,7 @@ export function LockForm(props: Props) {
                 borderRadius="md"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="gray.100" 
-                fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   Lock until
                 </Text>
                 <FormControl mb="2">
@@ -505,10 +526,10 @@ export function LockForm(props: Props) {
               </Box>
 
               <Box
-                width="95%" 
+                width="95%"
                 paddingX="4"
                 paddingY="4"
-                display="flex" 
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
                 bgColor="vertek.slatepurple.900"
                 justifyContent="center"
@@ -521,8 +542,8 @@ export function LockForm(props: Props) {
                     Total Voting Escrow
                   </Text>
                   <Text fontWeight="bold" fontSize="0.9rem" ml="auto">
-                     {(expectedVeBalAmount && 
-                          parseFloat(expectedVeBalAmount).toFixed(4)) || 'N/A'} veVRTK
+                    {(expectedVeBalAmount && parseFloat(expectedVeBalAmount).toFixed(4)) || 'N/A'}{' '}
+                    veVRTK
                     {/* <div>{expectedVeBalAmount || '0'} - veVRTK</div> */}
                   </Text>
                 </Flex>
@@ -552,15 +573,15 @@ export function LockForm(props: Props) {
             </Card>
 
             <Card
-                flexDirection="column" 
-                alignItems="center"
-                borderRadius="16px"
-                height="190"
-                display="flex" 
-                padding="2"
-                marginTop={{ base:'0', md:'28'}}
-                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-                >
+              flexDirection="column"
+              alignItems="center"
+              borderRadius="16px"
+              height="190"
+              display="flex"
+              padding="2"
+              marginTop={{ base: '0', md: '28' }}
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+            >
               <MyVeVRTK
                 currentVeBalance={currentVeBalance || ''}
                 percentOwned={percentOwned || '0'}

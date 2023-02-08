@@ -26,6 +26,23 @@ export function _useGauges() {
     notifyOnNetworkStatusChange: true,
   });
 
+  function setUserVotes(gauges: VotingGaugeWithVotes[]) {
+    const totalVotes = 1e4; // 10,000
+    // Set the users remaining votes
+    const votesRemaining = gauges.reduce((remainingVotes: number, gauge) => {
+      return remainingVotes - parseFloat(gauge.userVotes);
+    }, totalVotes);
+
+    setUnallocatedVotes(votesRemaining);
+
+    console.log(gauges);
+
+    // filter out temp old gauge after user votes tally is complete
+    return gauges.filter(
+      (g) => g.pool.id !== '0x5deb10ed6a66a1e6188b7925a723b6bdfd97476500020000000000000000000a',
+    );
+  }
+
   // Update voting period timer
   useEffect(() => {
     const nowInterval = setInterval(() => {
@@ -56,7 +73,9 @@ export function _useGauges() {
         (gauges?.getLiquidityGauges || []) as unknown as VotingGauge[],
         userAddress,
       );
-      setVotingGauges(decoratedGauges);
+
+      const filteredGauges = setUserVotes(decoratedGauges);
+      setVotingGauges(filteredGauges);
     };
 
     if (userAddress && !isLoadingGauges && gauges?.getLiquidityGauges) {
@@ -66,20 +85,23 @@ export function _useGauges() {
   }, [isLoadingGauges, gauges, userAddress]);
 
   // Set users voting info
-  useEffect(() => {
-    const totalVotes = 1e4; // 10,000
+  // useEffect(() => {
+  //   const totalVotes = 1e4; // 10,000
 
-    if (!isLoadingGauges && votingGauges?.length) {
-      // Set the users remaining votes
-      const votesRemaining = votingGauges.reduce((remainingVotes: number, gauge) => {
-        return remainingVotes - parseFloat(gauge.userVotes);
-      }, totalVotes);
+  //   if (!isLoadingGauges && votingGauges?.length) {
+  //     // Set the users remaining votes
+  //     const votesRemaining = votingGauges.reduce((remainingVotes: number, gauge) => {
+  //       return remainingVotes - parseFloat(gauge.userVotes);
+  //     }, totalVotes);
 
-      setUnallocatedVotes(votesRemaining);
-    } else {
-      setUnallocatedVotes(totalVotes);
-    }
-  }, [isLoadingGauges, votingGauges]);
+  //     setUnallocatedVotes(votesRemaining);
+
+  //     // filter out temp old gauge after user votes tally is complete
+  //     const filtered = votingGauges.filter(g => g.pool.id !== '')
+  //   } else {
+  //     setUnallocatedVotes(totalVotes);
+  //   }
+  // }, [isLoadingGauges, votingGauges]);
 
   function getVotePeriodEndTime(): number {
     const n = nextThursday(new Date());
@@ -88,7 +110,7 @@ export function _useGauges() {
   }
 
   return {
-    isLoading: votingGauges && isLoadingGauges,
+    isLoading: !votingGauges && isLoadingGauges,
     //  isLoadingGauges,
     votingGauges,
     votingPeriodEnd,
