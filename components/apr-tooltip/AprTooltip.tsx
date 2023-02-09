@@ -1,4 +1,4 @@
-import { GqlPoolApr } from '~/apollo/generated/graphql-codegen-generated';
+import { GqlPoolApr, GqlUserGaugeBoost } from '~/apollo/generated/graphql-codegen-generated';
 import {
   Box,
   Button,
@@ -7,6 +7,7 @@ import {
   PlacementWithLogical,
   Popover,
   PopoverContent,
+  PopoverFooter,
   PopoverHeader,
   PopoverTrigger as OrigPopoverTrigger,
   Text,
@@ -16,9 +17,11 @@ import StarsIcon from '~/components/apr-tooltip/StarsIcon';
 import numeral from 'numeral';
 import { AprText } from '~/components/apr-tooltip/AprText';
 import { Info } from 'react-feather';
+import { bnum } from '~/lib/util/big-number.utils';
 
 interface Props {
   data: GqlPoolApr;
+  boost: Pick<GqlUserGaugeBoost, 'boost' | 'gaugeAddress' | 'poolId'>;
   textProps?: TextProps;
   onlySparkles?: boolean;
   placement?: PlacementWithLogical;
@@ -26,8 +29,21 @@ interface Props {
   sparklesSize?: 'sm' | 'md';
 }
 
-function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparklesSize }: Props) {
+function AprTooltip({
+  data,
+  boost,
+  textProps,
+  onlySparkles,
+  placement,
+  aprLabel,
+  sparklesSize,
+}: Props) {
+  const minAprItem = data.items.find((apr) => apr.title.includes('Min'));
+  const maxAprItem = data.items.find((apr) => apr.title.includes('Max'));
+  const swapApr = data.items.find((apr) => apr.title.includes('Swap'));
+
   const PopoverTrigger: React.FC<{ children: React.ReactNode }> = OrigPopoverTrigger;
+
   const formatApr = (apr: string) => {
     if (parseFloat(apr) < 0.0000001) {
       return '0.00%';
@@ -35,13 +51,29 @@ function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparkl
     return numeral(apr).format('0.00%');
   };
 
+  let minApr = '0';
+  let maxApr = '0';
+  let boostedTotalAPR = '0';
+  if (minAprItem && maxAprItem) {
+    minApr = String(parseFloat(minAprItem.apr) + parseFloat(swapApr?.apr || '0'));
+    maxApr = String(parseFloat(maxAprItem.apr) + parseFloat(swapApr?.apr || '0'));
+    boostedTotalAPR = bnum(String(parseFloat(minAprItem.apr)))
+      .times(boost.boost)
+      .plus(swapApr?.apr || '0')
+      .toString();
+  }
+
   return (
     <Popover trigger="hover" placement={placement}>
       <HStack align="center">
-        {!onlySparkles && (
+        {!onlySparkles && !minAprItem ? (
           <Text fontSize="1rem" fontWeight="semibold" mr="1" color="white" {...textProps}>
             {formatApr(data.total)}
             {aprLabel ? ' APR' : ''}
+          </Text>
+        ) : (
+          <Text fontSize="1rem" fontWeight="semibold" mr="1" color="white" {...textProps}>
+            {formatApr(minApr)} - {formatApr(maxApr)}
           </Text>
         )}
         <PopoverTrigger>
@@ -66,7 +98,6 @@ function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparkl
         </PopoverTrigger>
       </HStack>
       <PopoverContent
-        w="200px"
         padding="4"
         borderRadius="16px"
         bgColor="vertek.slatepurple.900"
@@ -74,9 +105,9 @@ function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparkl
       >
         <PopoverHeader bgColor="vertek.slatepurple.900">
           <Text textAlign="center" fontSize="1rem">
-            Total APR
-            <br />
-            <span style={{ fontSize: '1.5rem', color: '#4A4AF6' }}>{formatApr(data.total)}</span>
+            APR Breakdown
+            {/* <br />
+            <span style={{ fontSize: '1.5rem', color: '#4A4AF6' }}>{formatApr(data.total)}</span> */}
           </Text>
         </PopoverHeader>
         <Box p="4" fontSize="md" bgColor="vertek.slatepurple.900">
@@ -106,7 +137,10 @@ function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparkl
                       />
                       <Box h="1px" w="0.75rem" mr="0.25rem" ml="-0.25rem" bgColor="gray.100" />
                       <Flex>
-                        {formatApr(subItem.apr)} <AprText>{subItem.title}</AprText>
+                        <Text>
+                          <AprText>{subItem.title}</AprText>
+                        </Text>
+                        <Text>{formatApr(subItem.apr)}</Text>
                       </Flex>
                     </Flex>
                   );
@@ -115,6 +149,16 @@ function AprTooltip({ data, textProps, onlySparkles, placement, aprLabel, sparkl
             );
           })}
         </Box>
+        <PopoverFooter>
+          <Flex>
+            <Text color="vertek.neonpurple.500">My veVRTK Boost : </Text>
+            <Text>{parseFloat(boost.boost).toFixed(2)}x</Text>
+          </Flex>
+          <Flex>
+            <Text color="vertek.neonpurple.500">My APR : </Text>
+            <Text> {formatApr(boostedTotalAPR)}</Text>
+          </Flex>
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );

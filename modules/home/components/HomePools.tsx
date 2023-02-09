@@ -14,14 +14,8 @@ import { PoolCardUser } from '~/components/pool-card/PoolCardUser';
 import { orderBy } from 'lodash';
 
 export function HomePools(props: BoxProps) {
-  const {
-    stakedValueUSD,
-    portfolioValueUSD,
-    loading: userDataLoading,
-    userPoolIds,
-    usdBalanceForPool,
-    bptBalanceForPool,
-  } = useUserData();
+  const { portfolioValueUSD, userPoolIds, usdBalanceForPool, bptBalanceForPool } = useUserData();
+
   const { data } = useGetHomeFeaturedPoolsQuery();
   const featuredPoolGroups = data?.featuredPoolGroups || [];
   const [getPools, getPoolsQuery] = useGetPoolsLazyQuery();

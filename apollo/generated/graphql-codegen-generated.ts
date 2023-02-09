@@ -1012,6 +1012,13 @@ export interface GqlUserFbeetsBalance {
   walletBalance: Scalars['AmountHumanReadable'];
 }
 
+export interface GqlUserGaugeBoost {
+  __typename: 'GqlUserGaugeBoost';
+  boost: Scalars['String'];
+  gaugeAddress: Scalars['String'];
+  poolId: Scalars['String'];
+}
+
 export interface GqlUserPoolBalance {
   __typename: 'GqlUserPoolBalance';
   poolId: Scalars['String'];
@@ -1220,6 +1227,7 @@ export interface Query {
   tokenGetTokensData: Array<GqlTokenData>;
   tokenGetTokensDynamicData: Array<GqlTokenDynamicData>;
   userGetFbeetsBalance: GqlUserFbeetsBalance;
+  userGetGaugeBoosts: Array<Maybe<GqlUserGaugeBoost>>;
   userGetPoolBalances: Array<GqlUserPoolBalance>;
   userGetPoolJoinExits: Array<GqlPoolJoinExit>;
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
@@ -1344,6 +1352,10 @@ export interface QueryTokenGetTokensDataArgs {
 
 export interface QueryTokenGetTokensDynamicDataArgs {
   addresses: Array<Scalars['String']>;
+}
+
+export interface QueryUserGetGaugeBoostsArgs {
+  userAddress?: InputMaybe<Scalars['String']>;
 }
 
 export interface QueryUserGetPoolJoinExitsArgs {
@@ -1717,6 +1729,12 @@ export type GetUserDataQuery = {
       }>;
     } | null;
   }>;
+  boosts: Array<{
+    __typename: 'GqlUserGaugeBoost';
+    poolId: string;
+    gaugeAddress: string;
+    boost: string;
+  } | null>;
 };
 
 export type UserSyncBalanceMutationVariables = Exact<{
@@ -5359,6 +5377,11 @@ export const GetUserDataDocument = gql`
           tokenAddress
         }
       }
+    }
+    boosts: userGetGaugeBoosts {
+      poolId
+      gaugeAddress
+      boost
     }
   }
 `;

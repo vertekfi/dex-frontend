@@ -523,6 +523,11 @@ export const GetUserData = gql`
         }
       }
     }
+    boosts: userGetGaugeBoosts {
+      poolId
+      gaugeAddress
+      boost
+    }
   }
 `;
 export const UserSyncBalance = gql`

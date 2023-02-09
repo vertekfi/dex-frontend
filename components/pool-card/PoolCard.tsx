@@ -5,6 +5,7 @@ import TokenAvatarSet from '~/components/token/TokenAvatarSet';
 import { GqlPoolCardDataFragment } from '~/apollo/generated/graphql-codegen-generated';
 import numeral from 'numeral';
 import { NextLinkOverlay } from '~/components/link/NextLink';
+import { useUserData } from '~/lib/user/useUserData';
 
 interface Props extends BoxProps {
   pool: GqlPoolCardDataFragment;
@@ -12,6 +13,8 @@ interface Props extends BoxProps {
 
 export function PoolCard({ pool, ...rest }: Props) {
   const dailyApr = parseFloat(pool.dynamicData.apr.total) / 365;
+
+  const { boostForPool } = useUserData();
 
   return (
     <LinkBox as="article" flex="1" {...rest} padding="1">
@@ -81,6 +84,8 @@ export function PoolCard({ pool, ...rest }: Props) {
             <AprTooltip
               textProps={{ fontSize: '24px', fontWeight: 'normal', mr: '0', lineHeight: '32px' }}
               data={pool.dynamicData.apr}
+              placement="bottom-end"
+              boost={boostForPool(pool.id)}
             />
             <Text color="gray.100" textAlign="center" fontSize="18px" lineHeight="24px">
               {numeral(dailyApr).format('0.00[0]%')} Daily

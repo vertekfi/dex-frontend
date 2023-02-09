@@ -991,6 +991,12 @@ type GqlUserFbeetsBalance {
   walletBalance: AmountHumanReadable!
 }
 
+type GqlUserGaugeBoost {
+  boost: String!
+  gaugeAddress: String!
+  poolId: String!
+}
+
 type GqlUserPoolBalance {
   poolId: String!
   stakedBalance: AmountHumanReadable!
@@ -1221,6 +1227,7 @@ type Query {
   tokenGetTokensData(addresses: [String!]!): [GqlTokenData!]!
   tokenGetTokensDynamicData(addresses: [String!]!): [GqlTokenDynamicData!]!
   userGetFbeetsBalance: GqlUserFbeetsBalance!
+  userGetGaugeBoosts(userAddress: String): [GqlUserGaugeBoost]!
   userGetPoolBalances: [GqlUserPoolBalance!]!
   userGetPoolJoinExits(first: Int!, poolId: String!, skip: Int!): [GqlPoolJoinExit!]!
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
