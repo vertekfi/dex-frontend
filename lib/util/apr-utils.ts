@@ -1,4 +1,4 @@
-import { GqlPoolApr, GqlUserGaugeBoost } from '~/apollo/generated/graphql-codegen-generated';
+import { GqlPoolApr } from '~/apollo/generated/graphql-codegen-generated';
 import { bnum } from './big-number.utils';
 
 export function getAprValues(poolApr: GqlPoolApr, boost: { boost: string }) {
@@ -24,6 +24,11 @@ export function getAprValues(poolApr: GqlPoolApr, boost: { boost: string }) {
       .times(boost.boost)
       .plus(swapApr?.apr || '0')
       .toString();
+  }
+
+  if (minApr === '0') {
+    minApr = swapApr?.apr || '0';
+    maxApr = swapApr?.apr || '0';
   }
 
   return {

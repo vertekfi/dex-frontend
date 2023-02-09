@@ -21,6 +21,10 @@ export function PoolCard({ pool, ...rest }: Props) {
     boost,
   );
 
+  console.log(pool.id);
+  console.log(minApr);
+  console.log(maxApr);
+
   return (
     <LinkBox as="article" flex="1" {...rest} padding="1">
       <Card
