@@ -17,11 +17,13 @@ import StarsIcon from '~/components/apr-tooltip/StarsIcon';
 import numeral from 'numeral';
 import { AprText } from '~/components/apr-tooltip/AprText';
 import { Info } from 'react-feather';
-import { bnum } from '~/lib/util/big-number.utils';
 
 interface Props {
   data: GqlPoolApr;
-  boost: Pick<GqlUserGaugeBoost, 'boost' | 'gaugeAddress' | 'poolId'>;
+  minApr: string;
+  maxApr: string;
+  boost: string;
+  boostedTotalAPR: string;
   textProps?: TextProps;
   onlySparkles?: boolean;
   placement?: PlacementWithLogical;
@@ -32,16 +34,15 @@ interface Props {
 function AprTooltip({
   data,
   boost,
+  minApr,
+  maxApr,
+  boostedTotalAPR,
   textProps,
   onlySparkles,
   placement,
   aprLabel,
   sparklesSize,
 }: Props) {
-  const minAprItem = data.items.find((apr) => apr.title.includes('Min'));
-  const maxAprItem = data.items.find((apr) => apr.title.includes('Max'));
-  const swapApr = data.items.find((apr) => apr.title.includes('Swap'));
-
   const PopoverTrigger: React.FC<{ children: React.ReactNode }> = OrigPopoverTrigger;
 
   const formatApr = (apr: string) => {
@@ -51,22 +52,10 @@ function AprTooltip({
     return numeral(apr).format('0.00%');
   };
 
-  let minApr = '0';
-  let maxApr = '0';
-  let boostedTotalAPR = '0';
-  if (minAprItem && maxAprItem) {
-    minApr = String(parseFloat(minAprItem.apr) + parseFloat(swapApr?.apr || '0'));
-    maxApr = String(parseFloat(maxAprItem.apr) + parseFloat(swapApr?.apr || '0'));
-    boostedTotalAPR = bnum(String(parseFloat(minAprItem.apr)))
-      .times(boost.boost)
-      .plus(swapApr?.apr || '0')
-      .toString();
-  }
-
   return (
     <Popover trigger="hover" placement={placement}>
       <HStack align="center">
-        {!onlySparkles && !minAprItem ? (
+        {!onlySparkles && !minApr ? (
           <Text fontSize="1rem" fontWeight="semibold" mr="1" color="white" {...textProps}>
             {formatApr(data.total)}
             {aprLabel ? ' APR' : ''}
@@ -152,7 +141,7 @@ function AprTooltip({
         <PopoverFooter>
           <Flex>
             <Text color="vertek.neonpurple.500">My veVRTK Boost : </Text>
-            <Text>{parseFloat(boost.boost).toFixed(2)}x</Text>
+            <Text>{parseFloat(boost).toFixed(2)}x</Text>
           </Flex>
           <Flex>
             <Text color="vertek.neonpurple.500">My APR : </Text>
