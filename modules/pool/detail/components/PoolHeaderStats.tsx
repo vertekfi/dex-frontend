@@ -2,12 +2,19 @@ import { GqlPoolUnion } from '~/apollo/generated/graphql-codegen-generated';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import numeral from 'numeral';
 import AprTooltip from '~/components/apr-tooltip/AprTooltip';
+import { useUserData } from '~/lib/user/useUserData';
+import { getAprValues } from '~/lib/util/apr-utils';
 
 interface Props {
   pool: GqlPoolUnion;
 }
 
 function PoolHeaderStats({ pool }: Props) {
+  const { boostForPool } = useUserData();
+
+  const boost = boostForPool(pool.id);
+  const { minApr, maxApr, boostedTotalAPR } = getAprValues(pool.dynamicData.apr, boost);
+
   return (
     <>
       <Flex>
@@ -36,6 +43,10 @@ function PoolHeaderStats({ pool }: Props) {
           <AprTooltip
             data={pool.dynamicData.apr}
             textProps={{ fontSize: '2xl', fontWeight: 'normal' }}
+            boost={boost.boost}
+            minApr={minApr}
+            maxApr={maxApr}
+            boostedTotalAPR={boostedTotalAPR}
           />
         </Box>
       </Flex>
