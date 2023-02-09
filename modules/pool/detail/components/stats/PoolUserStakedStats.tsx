@@ -160,7 +160,7 @@ return (
 </Box>
 
 <Box width="full" alignItems="flex-start" justifyContent="center" display="flex" >
-    <BeetsSubmitTransactionButton
+    {/* <BeetsSubmitTransactionButton
         {...harvestQuery}
         isDisabled={!hasPendingRewards}
         onClick={() => claim()}
@@ -172,7 +172,7 @@ return (
         variant="stayblack"
     >
         Claim rewards
-    </BeetsSubmitTransactionButton>
+    </BeetsSubmitTransactionButton> */}
 </Box>
 
     </VStack>
