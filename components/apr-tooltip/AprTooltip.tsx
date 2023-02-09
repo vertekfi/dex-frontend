@@ -24,7 +24,6 @@ interface Props {
   maxApr: string;
   boost: string;
   boostedTotalAPR: string;
-  isVeGauge?: boolean;
   textProps?: TextProps;
   onlySparkles?: boolean;
   placement?: PlacementWithLogical;
@@ -38,7 +37,6 @@ function AprTooltip({
   minApr,
   maxApr,
   boostedTotalAPR,
-  isVeGauge,
   textProps,
   onlySparkles,
   placement,
@@ -101,12 +99,13 @@ function AprTooltip({
             <span style={{ fontSize: '1.5rem', color: '#4A4AF6' }}>{formatApr(data.total)}</span> */}
           </Text>
         </PopoverHeader>
-        <Box p="4" fontSize="md" bgColor="vertek.slatepurple.900">
+        <Box p="1" paddingY="4" fontSize="md" bgColor="vertek.slatepurple.900">
           {data.items.map((item, index) => {
             return (
               <Box key={index}>
-                <Flex>
-                  {formatApr(item.apr)} <AprText>{item.title}</AprText>
+                <Flex fontWeight="" align="center">
+                  <AprText mr="auto">{item.title}:</AprText>
+                  <Text ml="auto">{formatApr(item.apr)} </Text>
                 </Flex>
                 {item.subItems?.map((subItem, subItemIndex) => {
                   const isSubItemsLengthOne = item.subItems?.length === 1;
@@ -126,12 +125,10 @@ function AprTooltip({
                         }
                         bgColor="gray.100"
                       />
-                      <Box h="1px" w="0.75rem" mr="0.25rem" ml="-0.25rem" bgColor="gray.100" />
-                      <Flex>
-                        <Text>
-                          <AprText>{subItem.title}</AprText>
-                        </Text>
-                        <Text>{formatApr(subItem.apr)}</Text>
+                      {/* <Box h="1px" w="0.75rem" mr="0.25rem" ml="-0.25rem" bgColor="gray.100" /> */}
+                      <Flex align="center" marginX="2">
+                        <AprText mr="auto">{subItem.title}</AprText>
+                        <Text ml="auto">{formatApr(subItem.apr)}</Text>
                       </Flex>
                     </Flex>
                   );
@@ -140,18 +137,20 @@ function AprTooltip({
             );
           })}
         </Box>
-        {!isVeGauge && (
-          <PopoverFooter>
-            <Flex>
-              <Text color="vertek.neonpurple.500">My veVRTK Boost : </Text>
-              <Text>{parseFloat(boost).toFixed(2)}x</Text>
-            </Flex>
-            <Flex>
-              <Text color="vertek.neonpurple.500">My APR : </Text>
-              <Text> {formatApr(boostedTotalAPR)}</Text>
-            </Flex>
-          </PopoverFooter>
-        )}
+        <PopoverFooter>
+          <Flex align="center" mt="4">
+            <Text mr="auto" color="vertek.neonpurple.500">
+              My veVRTK Boost :{' '}
+            </Text>
+            <Text ml="auto">{parseFloat(boost).toFixed(2)}x</Text>
+          </Flex>
+          <Flex align="center" mt="4">
+            <Text mr="auto" color="vertek.neonpurple.500">
+              My APR :{' '}
+            </Text>
+            <Text ml="auto">{formatApr(boostedTotalAPR)}</Text>
+          </Flex>
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );
