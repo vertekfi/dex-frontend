@@ -88,24 +88,24 @@ export function ClaimContainer() {
         </Box>
       </GridItem>
 
-      <GridItem display="flex" flexDirection="column" paddingY="0">
+      {/* <GridItem display="flex" flexDirection="column" paddingY="0">
         <Box flexDirection="row" display="flex" mb="0" paddingX="1">
           <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
-        </Box>
-        {/* <Box>
+        </Box> 
+         <Box>
           <ClaimTable gauges={votingGauges} />
-        </Box> */}
-      </GridItem>
+        </Box> 
+      </GridItem> */}
 
-      <GridItem display="flex" flexDirection="column" paddingY="0">
+    {/*}  <GridItem display="flex" flexDirection="column" paddingY="0">
         <Box flexDirection="row" display="flex" mb="0" paddingX="1">
           <Text fontSize="1.20rem">Other Token Earnings</Text>
         </Box>
 
-        {/* <Box>
+         <Box>
           <ClaimTable gauges={gaugesWithRewards} />
-        </Box> */}
-      </GridItem>
+        </Box> 
+    </GridItem>*/}
     </SimpleGrid>
   );
 }
