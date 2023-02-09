@@ -72,6 +72,12 @@ type GaugeVote {
   weight: BigDecimal
 }
 
+type GqlAllFeesData {
+  feeCollector: GqlFeesCollectorAmountsResult!
+  gauges: GqlPendingGaugeFeeResult!
+  totalValueUSD: Float!
+}
+
 type GqlBalancePoolAprItem {
   apr: BigDecimal!
   id: ID!
@@ -110,6 +116,11 @@ type GqlFeaturePoolGroupItemExternalLink {
   image: String!
 }
 
+type GqlFeesCollectorAmountsResult {
+  totalValueUSD: Float!
+  values: [GqlProtocolFeesCollectorAmounts]!
+}
+
 type GqlHistoricalTokenPrice {
   address: String!
   prices: [GqlHistoricalTokenPriceEntry!]!
@@ -124,6 +135,11 @@ type GqlLatestSyncedBlocks {
   poolSyncBlock: BigInt!
   userStakeSyncBlock: BigInt!
   userWalletSyncBlock: BigInt!
+}
+
+type GqlPendingGaugeFeeResult {
+  totalValueUSD: Float!
+  values: [GqlProtocolPendingGaugeFee]!
 }
 
 type GqlPoolApr {
@@ -795,6 +811,8 @@ type GqlPoolWithdrawOption {
 
 type GqlProtocolFeesCollectorAmounts {
   amount: String!
+  poolId: String!
+  poolName: String!
   token: String!
   valueUSD: String!
 }
@@ -809,10 +827,13 @@ type GqlProtocolMetrics {
 }
 
 type GqlProtocolPendingGaugeFee {
+  gauge: String!
   gaugeAddress: String!
   pendingPoolTokensFee: Float!
+  poolAddress: String!
   poolId: String!
   poolName: String!
+  valueUSD: Float!
 }
 
 type GqlSorGetBatchSwapForTokensInResponse {
@@ -1121,14 +1142,15 @@ type Mutation {
 }
 
 type Query {
+  adminGetAllGaugePendingProtocolFees: GqlPendingGaugeFeeResult!
+  adminGetAllPendingFeeData(onlyWithBalances: Boolean): GqlAllFeesData!
+  adminGetFeeCollectorBalances: GqlFeesCollectorAmountsResult!
   beetsGetBeetsPrice: String!
   blocksGetAverageBlockTime: Float!
   blocksGetBlocksPerDay: Float!
   blocksGetBlocksPerSecond: Float!
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
-  getAllGaugePendingProtocolFees: [GqlProtocolPendingGaugeFee!]!
-  getFeeCollectorBalances: [GqlProtocolFeesCollectorAmounts]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [String]!
   getProtocolTokenList: [String]
