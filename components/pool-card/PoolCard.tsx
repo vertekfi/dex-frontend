@@ -13,8 +13,6 @@ interface Props extends BoxProps {
 }
 
 export function PoolCard({ pool, ...rest }: Props) {
-  const dailyApr = parseFloat(pool.dynamicData.apr.total) / 365;
-
   const { boostForPool } = useUserData();
 
   const boost = boostForPool(pool.id);

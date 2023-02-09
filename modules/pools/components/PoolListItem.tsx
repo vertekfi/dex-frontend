@@ -11,6 +11,8 @@ import {
   TokenAvatarSetInListTokenData,
 } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
+import { useUserData } from '~/lib/user/useUserData';
+import { getAprValues } from '~/lib/util/apr-utils';
 
 interface Props extends BoxProps {
   pool: GqlPoolMinimalFragment;
@@ -29,15 +31,26 @@ export function PoolListItem({
   showUserBalance,
   tokens,
   hasUnstakedBpt,
-  ...rest
 }: Props) {
+  const { boostForPool } = useUserData();
+
+  const boost = boostForPool(pool.id);
+  const { minApr, maxApr, boostedTotalAPR, dailyMinApr, dailyMaxApr } = getAprValues(
+    pool.dynamicData.apr,
+    boost,
+  );
+
   return (
     <Box
       mb={{ base: '12', md: '0' }}
       borderRadius={{ base: '16px', md: 'none' }}
       padding={{ base: '2', md: 'none' }}
-      borderTopWidth="1px" borderTopColor="gray.200"
-      borderLeftWidth="1px" borderRightWidth="1px" borderLeftColor="vertek.slate.600" borderRightColor="vertek.slate.600"
+      borderTopWidth="1px"
+      borderTopColor="gray.200"
+      borderLeftWidth="1px"
+      borderRightWidth="1px"
+      borderLeftColor="vertek.slate.600"
+      borderRightColor="vertek.slate.600"
       bg={{ base: 'vertek.slate.900', md: 'transparent' }}
     >
       <Box
@@ -169,6 +182,11 @@ export function PoolListItem({
                 <MobileLabel text="APR" />
                 <MemoizedAprTooltip
                   data={pool.dynamicData.apr}
+                  placement="bottom-end"
+                  boost={boost.boost}
+                  minApr={minApr}
+                  maxApr={maxApr}
+                  boostedTotalAPR={boostedTotalAPR}
                   textProps={{ fontWeight: 'normal', fontSize: { base: 'xl', lg: 'md' } }}
                 />
               </StatGridItem>
