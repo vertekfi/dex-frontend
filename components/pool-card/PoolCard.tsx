@@ -1,15 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  Flex,
-  LinkBox,
-  HStack,
-  VStack,
-  LinkOverlay,
-  SimpleGrid,
-  Text,
-  GridItem,
-} from '@chakra-ui/react';
+import { Box, BoxProps, Flex, LinkBox, Text } from '@chakra-ui/react';
 import AprTooltip from '~/components/apr-tooltip/AprTooltip';
 import Card from '~/components/card/Card';
 import TokenAvatarSet from '~/components/token/TokenAvatarSet';
@@ -23,7 +12,7 @@ interface Props extends BoxProps {
 
 export function PoolCard({ pool, ...rest }: Props) {
   const dailyApr = parseFloat(pool.dynamicData.apr.total) / 365;
-  const gradient = 'linear-gradient(to right, #4A4AF6, #9B51E0)';
+
   return (
     <LinkBox as="article" flex="1" {...rest} padding="1">
       <Card

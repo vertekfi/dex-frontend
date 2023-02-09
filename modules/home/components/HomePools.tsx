@@ -43,7 +43,7 @@ export function HomePools(props: BoxProps) {
     });
   }, [userPoolIdsStr]);
 
-  //minWidth = 0 is needed for a swiper nested in a flex layout
+  // minWidth = 0 is needed for a swiper nested in a flex layout
   return (
     <Box minWidth="0" {...props}>
       {(userPools.length > 0 || getPoolsQuery.loading) && (
