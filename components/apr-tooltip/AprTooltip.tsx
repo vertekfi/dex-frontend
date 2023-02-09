@@ -24,6 +24,7 @@ interface Props {
   maxApr: string;
   boost: string;
   boostedTotalAPR: string;
+  isVeGauge?: boolean;
   textProps?: TextProps;
   onlySparkles?: boolean;
   placement?: PlacementWithLogical;
@@ -37,6 +38,7 @@ function AprTooltip({
   minApr,
   maxApr,
   boostedTotalAPR,
+  isVeGauge,
   textProps,
   onlySparkles,
   placement,
@@ -138,16 +140,18 @@ function AprTooltip({
             );
           })}
         </Box>
-        <PopoverFooter>
-          <Flex>
-            <Text color="vertek.neonpurple.500">My veVRTK Boost : </Text>
-            <Text>{parseFloat(boost).toFixed(2)}x</Text>
-          </Flex>
-          <Flex>
-            <Text color="vertek.neonpurple.500">My APR : </Text>
-            <Text> {formatApr(boostedTotalAPR)}</Text>
-          </Flex>
-        </PopoverFooter>
+        {!isVeGauge && (
+          <PopoverFooter>
+            <Flex>
+              <Text color="vertek.neonpurple.500">My veVRTK Boost : </Text>
+              <Text>{parseFloat(boost).toFixed(2)}x</Text>
+            </Flex>
+            <Flex>
+              <Text color="vertek.neonpurple.500">My APR : </Text>
+              <Text> {formatApr(boostedTotalAPR)}</Text>
+            </Flex>
+          </PopoverFooter>
+        )}
       </PopoverContent>
     </Popover>
   );
