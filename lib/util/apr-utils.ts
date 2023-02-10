@@ -5,6 +5,7 @@ export function getAprValues(poolApr: GqlPoolApr, boost: { boost: string }) {
   const minAprItem = poolApr.items.find((apr) => apr.title.includes('Min'));
   const maxAprItem = poolApr.items.find((apr) => apr.title.includes('Max'));
   const swapApr = poolApr.items.find((apr) => apr.title.includes('Swap'));
+  const veVrtkApr = poolApr.items.find((apr) => apr.title.includes('veVRTK'));
 
   let minApr = '0';
   let maxApr = '0';
@@ -26,9 +27,10 @@ export function getAprValues(poolApr: GqlPoolApr, boost: { boost: string }) {
       .toString();
   }
 
-  if (minApr === '0') {
-    minApr = swapApr?.apr || '0';
-    maxApr = swapApr?.apr || '0';
+  let dailyVe = 0;
+  if (veVrtkApr) {
+    const totalVe = parseFloat(poolApr.total);
+    dailyVe = totalVe / 365;
   }
 
   return {
@@ -37,5 +39,7 @@ export function getAprValues(poolApr: GqlPoolApr, boost: { boost: string }) {
     boostedTotalAPR,
     dailyMinApr,
     dailyMaxApr,
+    isVePool: veVrtkApr !== undefined,
+    dailyVe,
   };
 }
