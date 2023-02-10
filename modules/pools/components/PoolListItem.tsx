@@ -181,12 +181,9 @@ export function PoolListItem({
               >
                 <MobileLabel text="APR" />
                 <MemoizedAprTooltip
-                  data={pool.dynamicData.apr}
                   placement="bottom-end"
-                  boost={boost.boost}
-                  minApr={minApr}
-                  maxApr={maxApr}
-                  boostedTotalAPR={boostedTotalAPR}
+                  poolId={pool.id}
+                  data={pool.dynamicData.apr}
                   textProps={{ fontWeight: 'normal', fontSize: { base: 'xl', lg: 'md' } }}
                 />
               </StatGridItem>

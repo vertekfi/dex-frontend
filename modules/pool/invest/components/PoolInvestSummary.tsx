@@ -60,13 +60,10 @@ export function PoolInvestSummary({ ...rest }: Props) {
         <Flex alignItems="center">
           <Box mr="1">{numberFormatUSDValue(weeklyYield)}</Box>
           <AprTooltip
-            data={pool.dynamicData.apr}
             onlySparkles={true}
             sparklesSize="sm"
-            boost={boost.boost}
-            minApr={minApr}
-            maxApr={maxApr}
-            boostedTotalAPR={boostedTotalAPR}
+            poolId={pool.id}
+            data={pool.dynamicData.apr}
           />
         </Flex>
       </CardRow>

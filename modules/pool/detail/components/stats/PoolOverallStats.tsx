@@ -68,14 +68,7 @@ export default function PoolOverallStats() {
         </Text>
         <HStack>
           <div className="apr-stripes">{numeral(data.apr.total).format('0.00%')}</div>
-          <AprTooltip
-            onlySparkles
-            data={data.apr}
-            boost={boost.boost}
-            minApr={minApr}
-            maxApr={maxApr}
-            boostedTotalAPR={boostedTotalAPR}
-          />
+          <AprTooltip onlySparkles poolId={pool.id} data={pool.dynamicData.apr} />
         </HStack>
       </VStack>
       {/* <Divider /> */}

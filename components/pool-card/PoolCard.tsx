@@ -7,7 +7,6 @@ import numeral from 'numeral';
 import { NextLinkOverlay } from '~/components/link/NextLink';
 import { useUserData } from '~/lib/user/useUserData';
 import { getAprValues } from '~/lib/util/apr-utils';
-import { Info } from 'react-feather';
 
 interface Props extends BoxProps {
   pool: GqlPoolCardDataFragment;
@@ -86,7 +85,8 @@ export function PoolCard({ pool, ...rest }: Props) {
           >
             <AprTooltip
               textProps={{ fontSize: '24px', fontWeight: 'normal', mr: '0', lineHeight: '32px' }}
-              pool={pool}
+              poolId={pool.id}
+              data={pool.dynamicData.apr}
               placement="bottom-end"
             />
 

@@ -1,4 +1,8 @@
-import { GqlPoolCardDataFragment } from '~/apollo/generated/graphql-codegen-generated';
+import {
+  GqlPoolApr,
+  GqlPoolCardDataFragment,
+  GqlPoolUnion,
+} from '~/apollo/generated/graphql-codegen-generated';
 import {
   Box,
   Button,
@@ -22,7 +26,8 @@ import { useUserData } from '~/lib/user/useUserData';
 import { getAprValues } from '~/lib/util/apr-utils';
 
 interface Props {
-  pool: GqlPoolCardDataFragment;
+  poolId: string;
+  data: GqlPoolApr;
   textProps?: TextProps;
   onlySparkles?: boolean;
   placement?: PlacementWithLogical;
@@ -30,7 +35,15 @@ interface Props {
   sparklesSize?: 'sm' | 'md';
 }
 
-function AprTooltip({ pool, textProps, onlySparkles, placement, aprLabel, sparklesSize }: Props) {
+function AprTooltip({
+  poolId,
+  data,
+  textProps,
+  onlySparkles,
+  placement,
+  aprLabel,
+  sparklesSize,
+}: Props) {
   const PopoverTrigger: React.FC<{ children: React.ReactNode }> = OrigPopoverTrigger;
 
   const formatApr = (apr: string) => {
@@ -42,8 +55,7 @@ function AprTooltip({ pool, textProps, onlySparkles, placement, aprLabel, sparkl
 
   const { boostForPool } = useUserData();
 
-  const data = pool.dynamicData.apr;
-  const boost = boostForPool(pool.id);
+  const boost = boostForPool(poolId);
   const { minApr, maxApr, boostedTotalAPR, isVePool } = getAprValues(data, boost);
 
   console.log(data.hasRewardApr);
