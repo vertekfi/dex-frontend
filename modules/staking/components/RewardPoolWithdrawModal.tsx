@@ -10,6 +10,9 @@ import { networkConfig } from '~/lib/config/network-config';
 import { TokenBase } from '~/lib/services/token/token-types';
 import { BeetsTokenInputWithSlider } from '~/components/inputs/BeetsTokenInputWithSlider';
 import { useRewardPoolWithdraw } from '../lib/useRewardPoolWithdraw';
+import StakingNFTPools from '../../../lib/abi/StakingNFTPools.json';
+import { readContract, getAccount } from '@wagmi/core';
+import { formatUnits } from 'ethers/lib/utils';
 
 interface Props {
   isOpen: boolean;
@@ -21,16 +24,34 @@ interface Props {
 export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props) {
   const [withdrawAmount, setWithdrawAmount] = useState('0');
   const [steps, setSteps] = useState<TransactionStep[] | null>(null);
+  const [userTokens, setUserTokens] = useState<string>();
 
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdraw(pool.address);
-
+  const account = getAccount()
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
-    address: vrtkAddress,
-    symbol: 'VRTK',
+    // address: vrtkAddress,
+    address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
+    // symbol: 'VRTK',
+    symbol: 'LSHARE',
     decimals: 18,
-    name: 'Vertek',
+    // name: 'Vertek',
+    name: 'Lshare',
   };
+
+  useEffect(() => {
+    if(!account.address) return;
+    readContract({
+      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
+      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      contractInterface: StakingNFTPools,
+      chainId: 56,
+      functionName: 'balanceOf',
+      args: [account.address],
+    }).then((res) => {
+      setUserTokens(parseFloat(formatUnits(res.toString(), 18)).toFixed(2));
+    });
+  }, [account]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -66,7 +87,7 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
           <BeetsTokenInputWithSlider
             tokenOptions={[]}
             selectedTokenOption={vrtkInfo}
-            balance={pool.userInfo?.amountDeposited || '0'}
+            balance={userTokens || '0'}
             setInputAmount={(amount) => setWithdrawAmount(amount)}
             value={withdrawAmount}
             setSelectedTokenOption={() => null}

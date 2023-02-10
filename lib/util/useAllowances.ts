@@ -18,7 +18,7 @@ export function useAllowances(
   account: string | null,
   tokens: TokenBase[] | { address: string; decimals: number }[],
   // contract = networkConfig.balancer.vault,
-  contract = '0x9B5c9187561D44a7548DC3680475BFdF8c6f86E2',
+  contract = '0x2762A70f63856393706Fa63F62BF3f623B617B45',
 ) {
   const containsEth =
     tokens.filter((token) => token.address === networkConfig.eth.address.toLowerCase()).length > 0;

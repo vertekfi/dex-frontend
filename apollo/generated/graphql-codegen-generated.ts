@@ -68,6 +68,13 @@ export interface GaugeVote {
   weight?: Maybe<Scalars['BigDecimal']>;
 }
 
+export interface GqlAllFeesData {
+  __typename: 'GqlAllFeesData';
+  feeCollector: GqlFeesCollectorAmountsResult;
+  gauges: GqlPendingGaugeFeeResult;
+  totalValueUSD: Scalars['Float'];
+}
+
 export interface GqlBalancePoolAprItem {
   __typename: 'GqlBalancePoolAprItem';
   apr: Scalars['BigDecimal'];
@@ -104,6 +111,12 @@ export interface GqlFeaturePoolGroupItemExternalLink {
   image: Scalars['String'];
 }
 
+export interface GqlFeesCollectorAmountsResult {
+  __typename: 'GqlFeesCollectorAmountsResult';
+  totalValueUSD: Scalars['Float'];
+  values: Array<Maybe<GqlProtocolFeesCollectorAmounts>>;
+}
+
 export interface GqlHistoricalTokenPrice {
   __typename: 'GqlHistoricalTokenPrice';
   address: Scalars['String'];
@@ -121,6 +134,12 @@ export interface GqlLatestSyncedBlocks {
   poolSyncBlock: Scalars['BigInt'];
   userStakeSyncBlock: Scalars['BigInt'];
   userWalletSyncBlock: Scalars['BigInt'];
+}
+
+export interface GqlPendingGaugeFeeResult {
+  __typename: 'GqlPendingGaugeFeeResult';
+  totalValueUSD: Scalars['Float'];
+  values: Array<Maybe<GqlProtocolPendingGaugeFee>>;
 }
 
 export interface GqlPoolApr {
@@ -807,6 +826,21 @@ export interface GqlPoolWithdrawOption {
   tokenOptions: Array<GqlPoolToken>;
 }
 
+export interface GqlProtocolFeesCollectorAmounts {
+  __typename: 'GqlProtocolFeesCollectorAmounts';
+  amount: Scalars['String'];
+  poolId: Scalars['String'];
+  poolName: Scalars['String'];
+  token: Scalars['String'];
+  valueUSD: Scalars['String'];
+}
+
+export interface GqlProtocolGaugeInfo {
+  __typename: 'GqlProtocolGaugeInfo';
+  address: Scalars['String'];
+  poolId: Scalars['String'];
+}
+
 export interface GqlProtocolMetrics {
   __typename: 'GqlProtocolMetrics';
   poolCount: Scalars['BigInt'];
@@ -819,10 +853,13 @@ export interface GqlProtocolMetrics {
 
 export interface GqlProtocolPendingGaugeFee {
   __typename: 'GqlProtocolPendingGaugeFee';
+  gauge: Scalars['String'];
   gaugeAddress: Scalars['String'];
   pendingPoolTokensFee: Scalars['Float'];
+  poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
+  valueUSD: Scalars['Float'];
 }
 
 export interface GqlSorGetBatchSwapForTokensInResponse {
@@ -979,6 +1016,13 @@ export interface GqlUserFbeetsBalance {
   stakedBalance: Scalars['AmountHumanReadable'];
   totalBalance: Scalars['AmountHumanReadable'];
   walletBalance: Scalars['AmountHumanReadable'];
+}
+
+export interface GqlUserGaugeBoost {
+  __typename: 'GqlUserGaugeBoost';
+  boost: Scalars['String'];
+  gaugeAddress: Scalars['String'];
+  poolId: Scalars['String'];
 }
 
 export interface GqlUserPoolBalance {
@@ -1148,15 +1192,17 @@ export interface MutationUserSyncBalanceArgs {
 
 export interface Query {
   __typename: 'Query';
+  adminGetAllGaugePendingProtocolFees: GqlPendingGaugeFeeResult;
+  adminGetAllPendingFeeData: GqlAllFeesData;
+  adminGetFeeCollectorBalances: GqlFeesCollectorAmountsResult;
   beetsGetBeetsPrice: Scalars['String'];
   blocksGetAverageBlockTime: Scalars['Float'];
   blocksGetBlocksPerDay: Scalars['Float'];
   blocksGetBlocksPerSecond: Scalars['Float'];
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
-  getAllGaugePendingProtocolFees: Array<GqlProtocolPendingGaugeFee>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
-  getProtocolPoolData: Array<Maybe<Scalars['String']>>;
+  getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
@@ -1187,12 +1233,17 @@ export interface Query {
   tokenGetTokensData: Array<GqlTokenData>;
   tokenGetTokensDynamicData: Array<GqlTokenDynamicData>;
   userGetFbeetsBalance: GqlUserFbeetsBalance;
+  userGetGaugeBoosts: Array<Maybe<GqlUserGaugeBoost>>;
   userGetPoolBalances: Array<GqlUserPoolBalance>;
   userGetPoolJoinExits: Array<GqlPoolJoinExit>;
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
   userGetVeLockInfo: GqlUserVoteEscrowInfo;
+}
+
+export interface QueryAdminGetAllPendingFeeDataArgs {
+  onlyWithBalances?: InputMaybe<Scalars['Boolean']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -1307,6 +1358,10 @@ export interface QueryTokenGetTokensDataArgs {
 
 export interface QueryTokenGetTokensDynamicDataArgs {
   addresses: Array<Scalars['String']>;
+}
+
+export interface QueryUserGetGaugeBoostsArgs {
+  userAddress?: InputMaybe<Scalars['String']>;
 }
 
 export interface QueryUserGetPoolJoinExitsArgs {

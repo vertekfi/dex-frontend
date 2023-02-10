@@ -33,7 +33,7 @@ export default class NftService {
 
   public async isApprovedForAll(user: string) {
     const contract = new Contract(this.contractAddress, VertexNft, this.provider);
-    const result = await contract.isApprovedForAll(user, '0x9B5c9187561D44a7548DC3680475BFdF8c6f86E2');
+    const result = await contract.isApprovedForAll(user, '0x2762A70f63856393706Fa63F62BF3f623B617B45');
     return result;
   }
 
@@ -58,4 +58,4 @@ export default class NftService {
 }
 
 // export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');
-export const earlyLudwigNft = new NftService('0xb97B035231447F748A3F8Ba25B59C6ee23bDF36B');
+export const earlyLudwigNft = new NftService('0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43');

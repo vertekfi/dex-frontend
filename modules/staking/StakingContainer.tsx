@@ -9,8 +9,7 @@ export function StakingContainer() {
   // dummy numbers
   const p = {
     __typename: 'RewardPool',
-    // address: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
-    address: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+    address: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
     poolId: 0,
     amountStaked: '0',
     amountStakedValue: '0',
@@ -24,12 +23,12 @@ export function StakingContainer() {
     isPartnerPool: false,
     rewardToken: {
       // address: '0x7faA8158FaA037CC7516eF1f6864af44d75654AE',
-      address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
+      address: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
       logoURI: 'LSHARE.png',
       name: 'LSHARE',
       price: 300,
       rewardPerBlock: 100,
-      symbol: 'LSHARE',
+      symbol: 'DAI',
     },
     startBlock: 1000,
     userInfo: {
@@ -40,8 +39,8 @@ export function StakingContainer() {
       pendingRewardValue: '0',
       pendingRewards: '0',
       percentageOwned: '0',
-      // poolAddress: '0xFeC15cAaf2C07c75D31974D4206ac907AA1B1fDf',
-      poolAddress: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      // poolAddress: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
+      poolAddress: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
     },
   };
 

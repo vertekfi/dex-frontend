@@ -72,6 +72,12 @@ type GaugeVote {
   weight: BigDecimal
 }
 
+type GqlAllFeesData {
+  feeCollector: GqlFeesCollectorAmountsResult!
+  gauges: GqlPendingGaugeFeeResult!
+  totalValueUSD: Float!
+}
+
 type GqlBalancePoolAprItem {
   apr: BigDecimal!
   id: ID!
@@ -110,6 +116,11 @@ type GqlFeaturePoolGroupItemExternalLink {
   image: String!
 }
 
+type GqlFeesCollectorAmountsResult {
+  totalValueUSD: Float!
+  values: [GqlProtocolFeesCollectorAmounts]!
+}
+
 type GqlHistoricalTokenPrice {
   address: String!
   prices: [GqlHistoricalTokenPriceEntry!]!
@@ -124,6 +135,11 @@ type GqlLatestSyncedBlocks {
   poolSyncBlock: BigInt!
   userStakeSyncBlock: BigInt!
   userWalletSyncBlock: BigInt!
+}
+
+type GqlPendingGaugeFeeResult {
+  totalValueUSD: Float!
+  values: [GqlProtocolPendingGaugeFee]!
 }
 
 type GqlPoolApr {
@@ -793,6 +809,19 @@ type GqlPoolWithdrawOption {
   tokenOptions: [GqlPoolToken!]!
 }
 
+type GqlProtocolFeesCollectorAmounts {
+  amount: String!
+  poolId: String!
+  poolName: String!
+  token: String!
+  valueUSD: String!
+}
+
+type GqlProtocolGaugeInfo {
+  address: String!
+  poolId: String!
+}
+
 type GqlProtocolMetrics {
   poolCount: BigInt!
   swapFee24h: BigDecimal!
@@ -803,10 +832,13 @@ type GqlProtocolMetrics {
 }
 
 type GqlProtocolPendingGaugeFee {
+  gauge: String!
   gaugeAddress: String!
   pendingPoolTokensFee: Float!
+  poolAddress: String!
   poolId: String!
   poolName: String!
+  valueUSD: Float!
 }
 
 type GqlSorGetBatchSwapForTokensInResponse {
@@ -964,6 +996,12 @@ type GqlUserFbeetsBalance {
   walletBalance: AmountHumanReadable!
 }
 
+type GqlUserGaugeBoost {
+  boost: String!
+  gaugeAddress: String!
+  poolId: String!
+}
+
 type GqlUserPoolBalance {
   poolId: String!
   stakedBalance: AmountHumanReadable!
@@ -1115,15 +1153,17 @@ type Mutation {
 }
 
 type Query {
+  adminGetAllGaugePendingProtocolFees: GqlPendingGaugeFeeResult!
+  adminGetAllPendingFeeData(onlyWithBalances: Boolean): GqlAllFeesData!
+  adminGetFeeCollectorBalances: GqlFeesCollectorAmountsResult!
   beetsGetBeetsPrice: String!
   blocksGetAverageBlockTime: Float!
   blocksGetBlocksPerDay: Float!
   blocksGetBlocksPerSecond: Float!
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
-  getAllGaugePendingProtocolFees: [GqlProtocolPendingGaugeFee!]!
   getLiquidityGauges: [LiquidityGauge]!
-  getProtocolPoolData: [String]!
+  getProtocolPoolData: [GqlProtocolGaugeInfo]!
   getProtocolTokenList: [String]
   getRewardPools(user: String): [RewardPool]!
   getUserGaugeStakes(poolIds: [String!]!, user: String!): [LiquidityGauge]!
@@ -1192,6 +1232,7 @@ type Query {
   tokenGetTokensData(addresses: [String!]!): [GqlTokenData!]!
   tokenGetTokensDynamicData(addresses: [String!]!): [GqlTokenDynamicData!]!
   userGetFbeetsBalance: GqlUserFbeetsBalance!
+  userGetGaugeBoosts(userAddress: String): [GqlUserGaugeBoost]!
   userGetPoolBalances: [GqlUserPoolBalance!]!
   userGetPoolJoinExits(first: Int!, poolId: String!, skip: Int!): [GqlPoolJoinExit!]!
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!

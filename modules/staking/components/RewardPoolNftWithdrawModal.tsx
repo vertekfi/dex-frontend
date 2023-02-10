@@ -71,7 +71,7 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdrawNft(pool.address);
 
   const nftInfo: TokenBase = {
-    address: '0xb97B035231447F748A3F8Ba25B59C6ee23bDF36B',
+    address: '0xeb49B8D1bCD493Ff6e051b4A3eaB3d104C60F7e3',
     symbol: 'ROAR',
     decimals: 18,
     name: 'ROAR',

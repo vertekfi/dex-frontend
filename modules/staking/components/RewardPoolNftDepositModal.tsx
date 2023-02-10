@@ -77,10 +77,10 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
   const { depositToPool, ...depositQuery } = useRewardPoolDepositNft(pool);
 
   const nftInfo: TokenBase = {
-    address: '0xb97B035231447F748A3F8Ba25B59C6ee23bDF36B',
-    symbol: 'ROAR',
+    address: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43',
+    symbol: 'FOX',
     decimals: 18,
-    name: 'ROAR',
+    name: 'VERTEK FOX',
   };
 
   const {
@@ -203,7 +203,7 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
                 if (id === 'approve') {
                   approve(pool.address, selectedNFTs[0].token_id);
                 } else if (id === 'stake') {
-                  depositToPool(pool.poolId, 1, parseInt(selectedNFTs[0].token_id));
+                  depositToPool(pool.poolId, 0, parseInt(selectedNFTs[0].token_id));
                 }
               }}
               onConfirmed={async (id) => {

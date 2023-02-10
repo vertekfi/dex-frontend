@@ -7,7 +7,7 @@ import { RewardPoolNftWithdrawModal } from './components/RewardPoolNftWithdrawMo
 import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 
-import { readContract } from '@wagmi/core';
+import { readContract, getAccount } from '@wagmi/core';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
@@ -28,7 +28,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   } = useDisclosure();
 
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
-
+  const account = getAccount()
   const [userInfo, setUserInfo] = useState<any>();
   const [poolInfo, setPoolInfo] = useState<any>();
   const [apr, setApr] = useState<string>();
@@ -53,12 +53,14 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
       .price.toFixed(2);
 
   useEffect(() => {
+    if(!account.address) return;
     readContract({
-      addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
+      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
-      args: [0, '0x592aB600783835E938Df928A5ae1aa56652b22D3'],
+      args: [0, account.address],
     }).then((res) => {
       setUserInfo(res);
       setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
@@ -66,27 +68,30 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
         parseFloat(formatUnits((res.rewardDebt + res.catDebt).toString(), 18)).toFixed(2),
       );
     });
-  }, []);
+  }, [account]);
 
   useEffect(() => {
+    if(!priceOfToken) return;
     readContract({
-      addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
+      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'poolInfo',
       args: [0],
     }).then((res) => {
-      const rewardsPerYear = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
+      const rewardsPerDay = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
       const stakedAmount = formatUnits(res.xBooStakedAmount, 18);
-      const apr = (parseInt(rewardsPerYear) * parseInt(stakedAmount) * 100).toFixed(2).toString();
-      const aprYearly = (parseInt(rewardsPerYear) * parseInt(stakedAmount) * 365 * 100)
+      // NEED TO ADD IN THE PRICE OF THE REWARDS IN THE NUMERATOR
+      const apr = ( parseInt(rewardsPerDay)/ parseInt(stakedAmount) * parseFloat(priceOfToken)  * 100).toFixed(2).toString();
+      const aprYearly = (parseInt(rewardsPerDay) / parseInt(stakedAmount) * parseFloat(priceOfToken) * 365 * 100)
         .toFixed(2)
         .toString();
       setAprDaily(apr);
       setApr(aprYearly);
       setPoolInfo(res);
     });
-  }, []);
+  }, [priceOfToken]);
 
   // {amount:   uint256
   // rewardDebt:   uint256
