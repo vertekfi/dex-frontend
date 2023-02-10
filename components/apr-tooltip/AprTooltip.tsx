@@ -58,10 +58,6 @@ function AprTooltip({
   const boost = boostForPool(poolId);
   const { minApr, maxApr, boostedTotalAPR, isVePool } = getAprValues(data, boost);
 
-  console.log(data.hasRewardApr);
-  if (!data.hasRewardApr) {
-    console.log(data);
-  }
   return (
     <Popover trigger="hover" placement={placement}>
       <HStack align="center">
