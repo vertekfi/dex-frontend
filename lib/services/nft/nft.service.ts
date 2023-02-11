@@ -33,7 +33,7 @@ export default class NftService {
 
   public async isApprovedForAll(user: string) {
     const contract = new Contract(this.contractAddress, VertexNft, this.provider);
-    const result = await contract.isApprovedForAll(user, '0x2762A70f63856393706Fa63F62BF3f623B617B45');
+    const result = await contract.isApprovedForAll(user, '0x19bBBb12A638e7C460962606f27C878E4B91e232');
     return result;
   }
 

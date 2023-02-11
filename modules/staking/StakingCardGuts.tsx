@@ -6,13 +6,18 @@ import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
 import { RewardPoolNftWithdrawModal } from './components/RewardPoolNftWithdrawModal';
 import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
+import { useRewardPoolWithdraw } from './lib/useRewardPoolWithdraw';
 
 import { readContract, getAccount } from '@wagmi/core';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
-export function StakingCardGuts(props: { pool: RewardPool }) {
+export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: any, aprDaily: any, priceOfToken: any }) {
   const pool = props.pool;
+  const poolInfo = props.poolInfo;
+  const apr = props.apr;
+  const aprDaily = props.aprDaily;
+  const priceOfToken = props.priceOfToken;
 
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
   const { isOpen: isDepositNftOpen, onOpen: onDepositNftOpen, onClose: onDepositNftClose } = useDisclosure();
@@ -28,11 +33,10 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   } = useDisclosure();
 
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
+  const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdraw(pool.address);
+
   const account = getAccount()
   const [userInfo, setUserInfo] = useState<any>();
-  const [poolInfo, setPoolInfo] = useState<any>();
-  const [apr, setApr] = useState<string>();
-  const [aprDaily, setAprDaily] = useState<string>();
   const [userTokens, setUserTokens] = useState<string>();
   const [userUnclaimedRewards, setUserUnclaimedRewards] = useState<string>();
 
@@ -41,11 +45,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   console.log('pricesResponse', pricesResponse);
 
   // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
-  const priceOfToken =
-    pricesResponse &&
-    pricesResponse.tokenPrices
-      .filter((item: any) => item.address === '0xed236c32f695c83efde232c288701d6f9c23e60e')[0]
-      .price.toFixed(2);
+  
   const priceOfTokenRewards =
     pricesResponse &&
     pricesResponse.tokenPrices
@@ -55,8 +55,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
   useEffect(() => {
     if(!account.address) return;
     readContract({
-      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
-      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
@@ -64,41 +63,23 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
     }).then((res) => {
       setUserInfo(res);
       setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
-      setUserUnclaimedRewards(
-        parseFloat(formatUnits((res.rewardDebt + res.catDebt).toString(), 18)).toFixed(2),
-      );
     });
   }, [account]);
 
   useEffect(() => {
-    if(!priceOfToken) return;
+    if(!account.address) return;
     readContract({
-      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
-      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
       contractInterface: StakingNFTPools,
       chainId: 56,
-      functionName: 'poolInfo',
-      args: [0],
+      functionName: 'pendingRewards',
+      args: [0, account.address],
     }).then((res) => {
-      const rewardsPerDay = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
-      const stakedAmount = formatUnits(res.xBooStakedAmount, 18);
-      // NEED TO ADD IN THE PRICE OF THE REWARDS IN THE NUMERATOR
-      const apr = ( parseInt(rewardsPerDay)/ parseInt(stakedAmount) * parseFloat(priceOfToken)  * 100).toFixed(2).toString();
-      const aprYearly = (parseInt(rewardsPerDay) / parseInt(stakedAmount) * parseFloat(priceOfToken) * 365 * 100)
-        .toFixed(2)
-        .toString();
-      setAprDaily(apr);
-      setApr(aprYearly);
-      setPoolInfo(res);
+      setUserUnclaimedRewards(
+        parseFloat(formatUnits((res.xbooReward).toString(), 18)+ formatUnits((res.magicatReward).toString(), 18)).toFixed(2),
+      );
     });
-  }, [priceOfToken]);
-
-  // {amount:   uint256
-  // rewardDebt:   uint256
-  // catDebt:   uint256
-  // mp:   uint256}
-
-  console.log('poolInfo', poolInfo);
+  }, [account]);
 
   return (
     <>
@@ -152,6 +133,7 @@ export function StakingCardGuts(props: { pool: RewardPool }) {
             height="2em"
             disabled={false}
             onClick={() => depositToPool(pool.poolId, '0')}
+            // onClick={() => withdrawFromPool(pool.poolId, '0')}
           >
             Claim
           </Button>

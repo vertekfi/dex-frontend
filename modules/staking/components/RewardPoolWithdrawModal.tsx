@@ -42,7 +42,7 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
   useEffect(() => {
     if(!account.address) return;
     readContract({
-      addressOrName: '0x2762A70f63856393706Fa63F62BF3f623B617B45',
+      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
       // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
       contractInterface: StakingNFTPools,
       chainId: 56,

@@ -1383,16 +1383,9 @@ export interface QueryUserGetSwapsArgs {
 export interface RewardPool {
   __typename: 'RewardPool';
   address: Scalars['String'];
-  amountStaked: Scalars['String'];
-  amountStakedValue: Scalars['String'];
-  aprs: RewardPoolAprs;
-  blocksRemaining: Scalars['String'];
-  daysRemaining: Scalars['String'];
-  endBlock: Scalars['Int'];
+  poolId: Scalars['Int'];
   isPartnerPool: Scalars['Boolean'];
   rewardToken: RewardPoolRewardToken;
-  startBlock: Scalars['Int'];
-  userInfo?: Maybe<RewardPoolUserInfo>;
 }
 
 export interface RewardPoolAprs {
@@ -1406,8 +1399,6 @@ export interface RewardPoolRewardToken {
   address: Scalars['String'];
   logoURI: Scalars['String'];
   name: Scalars['String'];
-  price?: Maybe<Scalars['Int']>;
-  rewardPerBlock: Scalars['String'];
   symbol: Scalars['String'];
 }
 
