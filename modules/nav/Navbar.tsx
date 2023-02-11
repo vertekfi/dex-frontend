@@ -249,12 +249,8 @@ export function Navbar({ scrollY }: Props) {
                               width="50%"
                               _hover={{boxShadow:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6", backgroundColor:"rgba(0, 0, 0, 0.2)"}}
                             >
-                              <Text
-                                fontWeight="semibold"
-                                color="#ccc"
-                                align="center"
-                                fontSize={{ base: 'sm', lg: '0.9rem' }}
-                              >
+                              <Text color="#ccc" align="center" fontWeight="bold" fontSize="1.1rem">
+
                                 Fees (24h)
                               </Text>
                               <Text
