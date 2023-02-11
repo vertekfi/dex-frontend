@@ -39,8 +39,6 @@ export function Navbar({ scrollY }: Props) {
   const { data, loading } = useGetProtocolDataQuery({ fetchPolicy: 'cache-first' });
   const beetsPrice = data?.beetsPrice;
 
-  console.log(data);
-
   return (
     <>
       <Box

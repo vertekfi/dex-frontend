@@ -13,7 +13,7 @@ import {
 import { BoxProps } from '@chakra-ui/layout';
 import BeetsTab from '~/components/tabs/BeetsTab';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PoolDetailAboutThisPool } from '~/modules/pool/detail/components/PoolDetailAboutThisPool';
 import { PoolSwapsTable } from '~/modules/pool/detail/components/transactions/PoolSwapsTable';
 import { PoolJoinExitsTable } from '~/modules/pool/detail/components/transactions/PoolJoinExitsTable';
@@ -22,6 +22,7 @@ import { ChevronDown } from 'react-feather';
 import { PoolUserSwapsTable } from '~/modules/pool/detail/components/transactions/PoolUserSwapsTable';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { useTheme } from '@chakra-ui/react';
+import { PoolAboutThisProjectModal } from '../PoolAboutThisProjectModal';
 
 type Props = {};
 
@@ -34,12 +35,26 @@ export function PoolTransactions({ ...rest }: Props & BoxProps) {
     isPhantomStable ? 'Transactions' : 'Investments',
     ...(!isPhantomStable ? ['Swaps'] : []),
     `My ${isPhantomStable ? 'transactions' : 'investments'}`,
+    'About this project',
   ];
   const theme = useTheme();
 
+  function onModalClose() {
+    setActiveTab(1);
+  }
+
+  function handleSetIndex(index: number) {
+    //  console.log(index);
+    setActiveTab(index);
+  }
+
+  useEffect(() => {
+    console.log(activeTab);
+  }, [activeTab]);
+
   return (
     <Box width="full" {...rest}>
-      <Tabs variant="soft-rounded" onChange={setActiveTab}>
+      <Tabs variant="soft-rounded" onChange={handleSetIndex}>
         <VStack width="full" alignItems="flex-start">
           <Box width="full" display={{ base: 'block', md: 'none' }} mb="2">
             <Menu matchWidth={true}>
@@ -58,7 +73,7 @@ export function PoolTransactions({ ...rest }: Props & BoxProps) {
               <MenuList bgColor="vertek.slatepurple.900" borderWidth="2px">
                 {tabs.map((tab, index) => (
                   <MenuItem
-                    onClick={() => setActiveTab(index)}
+                    onClick={() => handleSetIndex(index)}
                     key={index}
                     bgColor="vertek.slatepurple.900"
                     borderWidth="1px"
@@ -84,6 +99,9 @@ export function PoolTransactions({ ...rest }: Props & BoxProps) {
           {activeTab === 1 && (isPhantomStable ? <PoolSwapsTable /> : <PoolJoinExitsTable />)}
           {activeTab === 2 && (isPhantomStable ? <PoolUserSwapsTable /> : <PoolSwapsTable />)}
           {activeTab === 3 && <PoolUserInvestmentsTable />}
+          {activeTab === 4 && (
+            <PoolAboutThisProjectModal isOpen={activeTab === 4} onClose={onModalClose} />
+          )}
         </VStack>
       </Tabs>
     </Box>

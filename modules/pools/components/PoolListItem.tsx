@@ -11,8 +11,6 @@ import {
   TokenAvatarSetInListTokenData,
 } from '~/components/token/TokenAvatarSetInList';
 import { memo } from 'react';
-import { useUserData } from '~/lib/user/useUserData';
-import { getAprValues } from '~/lib/util/apr-utils';
 
 interface Props extends BoxProps {
   pool: GqlPoolMinimalFragment;
@@ -32,14 +30,6 @@ export function PoolListItem({
   tokens,
   hasUnstakedBpt,
 }: Props) {
-  const { boostForPool } = useUserData();
-
-  const boost = boostForPool(pool.id);
-  const { minApr, maxApr, boostedTotalAPR, dailyMinApr, dailyMaxApr } = getAprValues(
-    pool.dynamicData.apr,
-    boost,
-  );
-
   return (
     <Box
       mb={{ base: '12', md: '0' }}
@@ -95,12 +85,7 @@ export function PoolListItem({
               }
             >
               <GridItem area="icons">
-                <MemoizedTokenAvatarSetInList
-                  imageSize={25}
-                  width={92}
-                  tokens={tokens}
-                  //renderPopover={false}
-                />
+                <MemoizedTokenAvatarSetInList imageSize={25} width={92} tokens={tokens} />
               </GridItem>
 
               <GridItem area="name" mb={{ base: '4', lg: '0' }}>

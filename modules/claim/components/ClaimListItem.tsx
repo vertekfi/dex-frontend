@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Button, Text, GridItemProps } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Button, Text } from '@chakra-ui/react';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { memo, useEffect } from 'react';
 import { Gauge } from '~/lib/services/staking/types';
@@ -54,7 +54,7 @@ export function ClaimListItem(props: { gauge: Gauge }) {
         <GridItem area="icons" mb={{ base: '6', lg: '0' }}>
           <Box display="flex" justifyContent={{ base: 'center', lg: 'flex-start' }}>
             <MemoizedTokenAvatarSetInList
-              imageSize={32}
+              imageSize={28}
               width={92}
               tokens={props.gauge.pool.tokens}
             />
