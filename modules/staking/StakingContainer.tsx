@@ -14,8 +14,8 @@ export function StakingContainer() {
     isPartnerPool: false,
     rewardToken: {
       address: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
-      logoURI: 'LSHARE.png',
-      name: 'LSHARE',
+      logoURI: 'DAI.png',
+      name: 'DAI',
       symbol: 'DAI',
     },
   };
