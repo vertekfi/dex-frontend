@@ -14,9 +14,9 @@ export function GaugeRewardRow({ token, claimableRewards }: Props) {
 
   return (
     <Box
-      borderTopColor="#4A4AF6"
+      borderColor="#4A4AF6" borderLeftWidth="1px" borderRightWidth="1px"
       boxShadow={{ base: '0 0 5px #5BC0F8, 0 0 10px #4A4AF6', lg: 'none' }}
-      borderTopWidth="1px"
+      borderTopWidth="1px" borderBottomWidth="1px"
       mt={{ base: '6', lg: '0' }}
       mb={{ base: '4', lg: '0' }}
       paddingY={{ base: '4', lg: '0' }}

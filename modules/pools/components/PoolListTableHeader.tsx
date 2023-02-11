@@ -21,8 +21,8 @@ export function PoolListTableHeader() {
         mb={{ base: '4', lg: '0' }}
         templateColumns={
           showMyInvestments
-            ? { base: '1fr 150px 200px 200px', xl: '1fr 150px 200px 200px 200px' }
-            : '1fr 200px 200px 200px'
+            ? { base: '1fr 150px 200px 200px', xl: '1fr 150px 200px 200px 250px' }
+            : '1fr 200px 200px 250px'
         }
         gap="0"
         display={{ base: 'none', lg: 'grid' }}
@@ -73,7 +73,7 @@ export function PoolListTableHeader() {
             />
           )}
         </GridItem>
-        <GridItem textAlign="right" pr="4">
+        <GridItem textAlign="right" pr="4" mr="2" >
           {showMyInvestments ? (
             <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
               APR
