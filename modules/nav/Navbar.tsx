@@ -138,33 +138,38 @@ export function Navbar({ scrollY }: Props) {
                 <Skeleton height="16px" width="54px" />
               ) : (
                 <Box
+                  borderWidth="0px" 
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
-                  mr={{ base: 'none', md: '6' }}
+                  mr={{ base: 'none', md: '0' }}
                   ml="3"
                 >
-                  <Popover>
+                  <Popover trigger="hover" >
                     <PopoverTrigger>
-                      <Flex justifyContent="center" align="center">
+                      <Box display="flex" cursor="pointer"  
+                      height="100%" justifyContent="center" 
+                      padding="2" 
+                      alignItems="center">
                         <VertekWhiteNoText
                           width={{ base: '40px', md: '70px' }}
-                          mr={{ base: '0', md: '-3' }}
+                          mr={{ base:'-2', md:'-6'}}
                         />
                         <Text
                           mr={{ base: '3', md: '6' }}
                           fontWeight="bold"
+                          textAlign="left"
                           color="white"
                           fontSize={{ base: 'sm', lg: 'md' }}
                         >
                           {numeral(beetsPrice).format('$0.00[00]')}
                         </Text>
-                      </Flex>
+                      </Box>
                     </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverHeader>
-                        <Text color="black" align="center" fontWeight="bold" fontSize="20px">
-                          Protocol Metrics
+                    <PopoverContent  bgColor="vertek.slatepurple.900" backdropFilter="blur(12px)" >
+                      <PopoverHeader >
+                        <Text color="#ccc" align="center" fontWeight="bold" fontSize="20px">
+                          Vertek Exchange Metrics
                         </Text>
                       </PopoverHeader>
                       <PopoverArrow />
@@ -173,42 +178,55 @@ export function Navbar({ scrollY }: Props) {
                         <Box>
                           <Flex gap="2" justifyContent="space-evenly">
                             <Box
+                              backdropFilter="blur(12px)"
                               borderColor="#4A4AF6"
                               borderLeftWidth="1px"
                               borderRightWidth="1px"
                               borderTopWidth="1px"
                               borderBottomWidth="1px"
                               borderRadius="8px"
-                              p="1.5rem"
+                              marginY="0.25rem"
+                              paddingY="1.5rem" paddingX="0.25rem"
+                              alignItems="center" justifyContent="center" display="flex" flexDirection="column" 
                               width="50%"
+                              _hover={{boxShadow:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6", backgroundColor:"rgba(0, 0, 0, 0.2)"}}
                             >
-                              <Text color="black" align="center" fontWeight="bold">
-                                VRTK
+                              <Text color="#ccc" align="center" fontWeight="bold" fontSize="1.1rem">
+                                Price of VRTK
                               </Text>
                               <Text
                                 fontWeight="semibold"
-                                color="black"
+                                color="#ccc"
                                 align="center"
-                                fontSize={{ base: 'sm', lg: 'md' }}
+                                fontSize={{ base: 'sm', lg: '0.9rem' }}
                               >
                                 {numeral(beetsPrice).format('$0.00[00]')}
                               </Text>
                             </Box>
 
                             <Box
+                              backdropFilter="blur(12px)"
                               borderColor="#4A4AF6"
                               borderLeftWidth="1px"
                               borderRightWidth="1px"
+                              marginY="0.25rem"
                               borderTopWidth="1px"
                               borderBottomWidth="1px"
                               borderRadius="8px"
-                              p="1.5rem"
+                              paddingY="1.5rem" paddingX="0.25rem"
+                              alignItems="center" justifyContent="center" display="flex" flexDirection="column" 
                               width="50%"
+                              _hover={{boxShadow:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6", backgroundColor:"rgba(0, 0, 0, 0.2)"}}
                             >
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text color="#ccc" align="center" fontWeight="bold" fontSize="1.1rem">
                                 TVL
                               </Text>
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text
+                                fontWeight="semibold"
+                                color="#ccc"
+                                align="center"
+                                fontSize={{ base: 'sm', lg: '0.9rem' }}
+                              >
                                 {numeral(data?.protocolData.totalLiquidity || '').format('$0.00a')}
                               </Text>
                             </Box>
@@ -216,39 +234,56 @@ export function Navbar({ scrollY }: Props) {
 
                           <Flex gap="2" justifyContent="space-evenly">
                             <Box
+                              backdropFilter="blur(12px)"
                               borderColor="#4A4AF6"
                               borderLeftWidth="1px"
                               borderRightWidth="1px"
                               borderTopWidth="1px"
                               borderBottomWidth="1px"
                               borderRadius="8px"
-                              p="1.5rem"
+                              marginY="0.25rem"
+                              paddingY="1.5rem" paddingX="0.25rem"
+                              alignItems="center" justifyContent="center" display="flex" flexDirection="column" 
                               width="50%"
-                              mt="2"
+                              _hover={{boxShadow:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6", backgroundColor:"rgba(0, 0, 0, 0.2)"}}
                             >
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text color="#ccc" align="center" fontWeight="bold" fontSize="1.1rem">
+
                                 Fees (24h)
                               </Text>
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text
+                                fontWeight="semibold"
+                                color="#ccc"
+                                align="center"
+                                fontSize={{ base: 'sm', lg: '0.9rem' }}
+                              >
                                 {numeral(data?.protocolData.swapFee24h || '').format('$0.00a')}
                               </Text>
                             </Box>
 
                             <Box
+                              backdropFilter="blur(12px)"
                               borderColor="#4A4AF6"
                               borderLeftWidth="1px"
                               borderRightWidth="1px"
                               borderTopWidth="1px"
                               borderBottomWidth="1px"
                               borderRadius="8px"
-                              p="1.5rem"
+                              marginY="0.25rem"
+                              paddingY="1.5rem" paddingX="0.25rem"
+                              alignItems="center" justifyContent="center" display="flex" flexDirection="column" 
                               width="50%"
-                              mt="2"
+                              _hover={{boxShadow:"0 0 10px #5BC0F8, 0 0 20px #4A4AF6", backgroundColor:"rgba(0, 0, 0, 0.2)"}}
                             >
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text color="#ccc" align="center" fontWeight="bold" fontSize="1.1rem">
                                 Volume (24h)
                               </Text>
-                              <Text color="black" align="center" fontWeight="bold">
+                              <Text
+                                fontWeight="semibold"
+                                color="#ccc"
+                                align="center"
+                                fontSize={{ base: 'sm', lg: '0.9rem' }}
+                              >
                                 {numeral(data?.protocolData.swapVolume24h || '').format('$0.00a')}
                               </Text>
                             </Box>
