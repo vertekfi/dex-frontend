@@ -69,8 +69,6 @@ export function PoolUnstakeModal() {
     onClose();
   }
 
-  function fuckThis() {}
-
   return (
     <>
       <Button
