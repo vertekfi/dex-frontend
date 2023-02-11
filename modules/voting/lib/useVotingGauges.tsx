@@ -35,8 +35,6 @@ export function _useGauges() {
 
     setUnallocatedVotes(votesRemaining);
 
-    console.log(gauges);
-
     // filter out temp old gauge after user votes tally is complete
     return gauges.filter(
       (g) => g.pool.id !== '0x5deb10ed6a66a1e6188b7925a723b6bdfd97476500020000000000000000000a',

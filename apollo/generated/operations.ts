@@ -1029,9 +1029,10 @@ export const GetLiquidityGauges = gql`
         id
       }
       rewardTokens {
-        id
+        tokenAddress
         decimals
         symbol
+        logoURI
       }
       pool {
         id

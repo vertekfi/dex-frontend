@@ -11,8 +11,13 @@ export function useProtocolRewardsQuery() {
 
   const queryFn = async (): Promise<BalanceMap> => {
     try {
-      const data = await feeDistributorV2.getClaimableBalances(userAddress || '');
-      return data;
+      if (!isConnected) {
+        return {};
+      }
+      // const data = await feeDistributorV2.getClaimableBalances(userAddress || '');
+      // return data;
+
+      return {};
     } catch (error) {
       console.error('Failed to fetch claimable protocol balances', error);
       return {};

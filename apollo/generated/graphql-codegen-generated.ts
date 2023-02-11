@@ -835,6 +835,12 @@ export interface GqlProtocolFeesCollectorAmounts {
   valueUSD: Scalars['String'];
 }
 
+export interface GqlProtocolGaugeInfo {
+  __typename: 'GqlProtocolGaugeInfo';
+  address: Scalars['String'];
+  poolId: Scalars['String'];
+}
+
 export interface GqlProtocolMetrics {
   __typename: 'GqlProtocolMetrics';
   poolCount: Scalars['BigInt'];
@@ -1094,9 +1100,9 @@ export interface LiquidityGauge {
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
   poolId: Scalars['String'];
   /**  List of reward tokens depositted in the gauge  */
-  rewardTokens: Array<Maybe<RewardToken>>;
+  rewardTokens: Array<RewardToken>;
   /**  List of user shares  */
-  shares?: Maybe<Array<GaugeShare>>;
+  shares: Array<GaugeShare>;
   /**  ERC20 token symbol  */
   symbol: Scalars['String'];
   /**  Total of BPTs users have staked in the LiquidityGauge  */
@@ -1196,7 +1202,7 @@ export interface Query {
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
-  getProtocolPoolData: Array<Maybe<Scalars['String']>>;
+  getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;
   getRewardPools: Array<Maybe<RewardPool>>;
   getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
@@ -1423,12 +1429,14 @@ export interface RewardToken {
   decimals: Scalars['Int'];
   /**  Equal to: <tokenAddress>-<gaugeAddress>  */
   id: Scalars['ID'];
+  logoURI: Scalars['String'];
   /**  Timestamp at which finishes the period of rewards  */
   periodFinish?: Maybe<Scalars['BigInt']>;
   /**  Rate of reward tokens streamed per second  */
-  rate?: Maybe<Scalars['BigDecimal']>;
+  rewardPerSecond: Scalars['BigDecimal'];
   /**  ERC20 token symbol - empty string if call to symbol() reverts  */
   symbol: Scalars['String'];
+  tokenAddress: Scalars['String'];
   /**  Amount of reward tokens that has been deposited into the gauge  */
   totalDeposited: Scalars['BigDecimal'];
 }
@@ -4429,10 +4437,11 @@ export type GetLiquidityGaugesQuery = {
     factory?: { __typename: 'GaugeFactory'; id: string } | null;
     rewardTokens: Array<{
       __typename: 'RewardToken';
-      id: string;
+      tokenAddress: string;
       decimals: number;
       symbol: string;
-    } | null>;
+      logoURI: string;
+    }>;
     pool: {
       __typename: 'GaugePool';
       id: string;
@@ -6748,9 +6757,10 @@ export const GetLiquidityGaugesDocument = gql`
         id
       }
       rewardTokens {
-        id
+        tokenAddress
         decimals
         symbol
+        logoURI
       }
       pool {
         id

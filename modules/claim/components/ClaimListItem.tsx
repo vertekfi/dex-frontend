@@ -6,6 +6,7 @@ import { useGetTokens } from '~/lib/global/useToken';
 import { networkConfig } from '~/lib/config/network-config';
 import { useVrtkClaim } from '../lib/useVrtkClaim';
 import { useClaimsData } from '../lib/useClaimsData';
+import { MobileLabelLeft, StatGridItemRight, MobileLabelRight, ClaimGrid } from './ClaimTableUtils';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -115,42 +116,5 @@ export function ClaimListItem(props: { gauge: Gauge }) {
         </ClaimGrid>
       </Grid>
     </Box>
-  );
-}
-
-function MobileLabelRight({ text }: { text: string }) {
-  return (
-    <Text textAlign="right" fontSize="xs" color="gray.200" display={{ base: 'block', lg: 'none' }}>
-      {text}
-    </Text>
-  );
-}
-function MobileLabelLeft({ text }: { text: string }) {
-  return (
-    <Text textAlign="left" fontSize="xs" color="gray.200" display={{ base: 'block', lg: 'none' }}>
-      {text}
-    </Text>
-  );
-}
-
-function StatGridItemRight(props: GridItemProps) {
-  return (
-    <GridItem
-      area="claim"
-      width="100%"
-      textAlign={{ base: 'right', lg: 'center' }}
-      mb={{ base: '4', lg: '0' }}
-      {...props}
-    />
-  );
-}
-function ClaimGrid(props: GridItemProps) {
-  return (
-    <GridItem
-      area="value"
-      textAlign={{ base: 'right', lg: 'right' }}
-      mb={{ base: '4', lg: '0' }}
-      {...props}
-    />
   );
 }

@@ -1,71 +1,37 @@
-import { SimpleGrid, Box, GridItem, Text, Image } from '@chakra-ui/react';
+import { SimpleGrid, Box, GridItem, Text, Skeleton } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
-import { useUserAccount } from '~/lib/user/useUserAccount';
 import { useEffect, useState } from 'react';
-import { BalanceMap } from '~/lib/services/token/token-types';
-import { Gauge } from '~/lib/services/staking/types';
-import { GaugePool } from '~/apollo/generated/graphql-codegen-generated';
 import { ClaimTable } from './components/ClaimTable';
-import { useVotingGauges } from '~/lib/global/gauges/useVotingGauges';
-import { ProtocolRewardRow } from './types';
-import { formatUnits } from 'ethers/lib/utils';
-import { useGetTokens } from '~/lib/global/useToken';
-import { useNumbers } from '~/lib/global/useNumbers';
-
-export type GaugeTable = {
-  gauge: Gauge;
-  pool: GaugePool;
-};
-const boxProps = {
-  display: 'flex',
-  mb: '1',
-  paddingX: '1',
-};
+import { Gauge } from '~/lib/services/staking/types';
+import { NoRewardsBox } from './components/NoRewardsBox';
+import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
 
 export function ClaimContainer() {
-  const [vrtkRewardData, setVrtkRewardData] = useState<BalanceMap>({});
-  const [gaugesWithRewards, setGaugesWithRewards] = useState<any[]>([]);
-  const [gaugeTables, setGaugeTables] = useState<GaugeTable[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
+  const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
+  // const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
 
-  const { isConnected } = useUserAccount();
-  const { rewardGauges, isLoading: isClaimsLoading, protocolRewardsData } = useClaimsData();
-  const { getToken } = useGetTokens();
-  const { toFiat, fNum2 } = useNumbers();
+  const { rewardGauges, isLoading: isClaimsLoading, refetchClaimsData } = useClaimsData();
 
   useEffect(() => {
-    if (rewardGauges?.length) {
-      // console.log(rewardGauges);
-      setGaugesWithRewards(rewardGauges?.filter((g) => g.rewardTokens?.length));
+    if (!isClaimsLoading && rewardGauges?.length) {
+      setGaugesWithRewards(rewardGauges.filter((g) => parseFloat(g.claimableTokens) > 0));
+
+      let hasRewardsToClaim = false;
+      rewardGauges.forEach((g) => {
+        if (Object.keys(g.claimableRewards).length > 0) {
+          hasRewardsToClaim = true;
+        }
+      });
+
+      sethasGaugeRewards(hasRewardsToClaim);
     }
-  }, [rewardGauges]);
+  }, [rewardGauges, isClaimsLoading]);
 
-  useEffect(() => {
-    if (protocolRewardsData) {
-      formatRewardsData(protocolRewardsData);
-    }
-  }, [protocolRewardsData]);
-
-  function formatRewardsData(data?: BalanceMap): ProtocolRewardRow[] {
-    if (!isConnected || isClaimsLoading || !data) return [];
-
-    return Object.keys(data).map((tokenAddress) => {
-      const token = getToken(tokenAddress);
-      const amount = formatUnits(data[tokenAddress], token?.decimals || 18);
-
-      return {
-        token: {
-          logoURI: token?.logoURI || '',
-          name: token?.name || '',
-          symbol: token?.symbol || '',
-          address: token?.address || '',
-        },
-        amount,
-        value: toFiat(amount, tokenAddress),
-      };
-    });
+  function handleUserClaim() {
+    refetchClaimsData();
   }
 
   return (
@@ -77,35 +43,57 @@ export function ClaimContainer() {
       </GridItem>
 
       <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" {...boxProps}>
+        <Box flexDirection="row" display="flex" mb="1">
           <Box marginRight="2" display="flex" justifyContent="">
             <NextImage width="36px" height="36px" src={VertekIcon} />
           </Box>
           <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
         </Box>
+        {isClaimsLoading ? (
+          <Skeleton isLoaded={!isClaimsLoading} />
+        ) : (
+          <>
+            {gaugesWithRewards.length ? (
+              <Box>
+                <ClaimTable gauges={gaugesWithRewards} />
+              </Box>
+            ) : (
+              <NoRewardsBox label="No gauge staking rewards to claim" />
+            )}
+          </>
+        )}
+      </GridItem>
+
+      <GridItem display="flex" flexDirection="column" paddingY="0">
+        <Box flexDirection="row" display="flex" mb="0" paddingX="1">
+          <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
+        </Box>
         <Box>
-          <ClaimTable gauges={gaugesWithRewards} />
+          <NoRewardsBox label="No veVRTK protocol rewards to claim" />
         </Box>
       </GridItem>
 
-      {/* <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-          <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
-        </Box> 
-         <Box>
-          <ClaimTable gauges={votingGauges} />
-        </Box> 
-      </GridItem> */}
+      <GridItem display="flex" flexDirection="column">
+        <Text fontSize="1.20rem">Other Gauge Earnings</Text>
 
-    {/*}  <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-          <Text fontSize="1.20rem">Other Token Earnings</Text>
+        <Box>
+          {isClaimsLoading ? (
+            <Skeleton isLoaded={!isClaimsLoading} />
+          ) : (
+            <>
+              {hasGaugeRewards ? (
+                <GaugeRewardsContainer
+                  gauges={rewardGauges}
+                  isLoading={isClaimsLoading}
+                  onSuccessfulClaim={handleUserClaim}
+                />
+              ) : (
+                <NoRewardsBox label="No additional staking rewards to claim" />
+              )}
+            </>
+          )}
         </Box>
-
-         <Box>
-          <ClaimTable gauges={gaugesWithRewards} />
-        </Box> 
-    </GridItem>*/}
+      </GridItem>
     </SimpleGrid>
   );
 }

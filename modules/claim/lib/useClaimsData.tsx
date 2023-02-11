@@ -7,15 +7,12 @@ import { useProtocolRewardsQuery } from './useProtocolRewardsQuery';
 
 export function useClaimsData() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [rewardGauges, setRewardGauges] = useState<Gauge[]>();
+  const [rewardGauges, setRewardGauges] = useState<Gauge[]>([]);
 
   const { isConnected, userAddress } = useUserAccount();
-  // Fetch subgraph liquidity gauges
   const { gauges, isLoading: isLoadingGauges, refetchGauges } = useGetGaugesQuery();
   const { data: protocolRewardsData, isLoading: isLoadingProtocolRewards } =
     useProtocolRewardsQuery();
-
-  // TODO: Need this on an interval to refresh data
 
   const setGaugeData = async () => {
     if (userAddress) {
