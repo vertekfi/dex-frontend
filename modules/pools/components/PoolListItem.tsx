@@ -67,10 +67,10 @@ export function PoolListItem({
                 base: '1fr',
                 lg: showUserBalance
                   ? '90px 1fr 150px 200px 0px 200px'
-                  : '90px 1fr 200px 200px 200px',
+                  : '90px 1fr 200px 200px 250px',
                 xl: showUserBalance
                   ? '90px 1fr 150px 200px 200px 200px'
-                  : '90px 1fr 200px 200px 200px',
+                  : '90px 1fr 200px 200px 250px',
               }}
               gap={{ base: '4', md: '0' }}
               templateAreas={
