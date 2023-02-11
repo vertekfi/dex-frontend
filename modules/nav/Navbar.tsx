@@ -168,7 +168,7 @@ export function Navbar({ scrollY }: Props) {
                         </Text>
                       </Box>
                     </PopoverTrigger>
-                    <PopoverContent  bgColor="transparent" backdropFilter="blur(12px)" >
+                    <PopoverContent  bgColor="vertek.slatepurple.900" backdropFilter="blur(12px)" >
                       <PopoverHeader >
                         <Text color="#ccc" align="center" fontWeight="bold" fontSize="20px">
                           Protocol Metrics
