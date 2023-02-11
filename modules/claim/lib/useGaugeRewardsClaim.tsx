@@ -1,6 +1,4 @@
-import { Contract } from 'ethers';
 import { useSubmitTransaction } from '~/lib/util/useSubmitTransaction';
-import { getAccountSigner } from '~/lib/util/web3';
 
 export function useGaugeRewardsClaim(gaugeAddress: string) {
   const contractInterface = ['function claim_rewards() external'];
@@ -15,7 +13,6 @@ export function useGaugeRewardsClaim(gaugeAddress: string) {
   });
 
   async function doClaim() {
-    const gauge = new Contract(gaugeAddress, contractInterface, await getAccountSigner());
     await submitAsync({
       toastText: 'Claim gauge rewards',
     });

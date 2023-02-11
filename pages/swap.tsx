@@ -49,10 +49,10 @@ function Swap() {
   );
 }
 
-export async function getStaticProps() {
-  const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-  return loadApolloState({ client });
-}
+//   return loadApolloState({ client });
+// }
 
 export default Swap;

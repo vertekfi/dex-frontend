@@ -13,8 +13,8 @@ import InvestMastheadImage from '~/assets/images/invest-masthead-image.png';
 import InvestMastheadOpImage from '~/assets/images/invest-masthead-image-OP.png';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
-import { PoolsCreate } from '~/modules/pools/PoolsCreate'; 
-import 'animate.css'; 
+import { PoolsCreate } from '~/modules/pools/PoolsCreate';
+import 'animate.css';
 
 function Pools() {
   const { chainId } = useNetworkConfig();
@@ -47,8 +47,8 @@ function Pools() {
               />
             }
           />
-          <div className="animate__animated animate__zoomIn delayhalf" >
-          <PoolList />
+          <div className="animate__animated animate__zoomIn delayhalf">
+            <PoolList />
           </div>
           {/* <PoolsCreate  /> */}
         </UserTokenBalancesProvider>
@@ -57,20 +57,20 @@ function Pools() {
   );
 }
 
-export async function getStaticProps() {
-  const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-  return loadApolloState({
-    client,
-    pageSetup: async () => {
-      await client.query<GetPoolsQuery, GetPoolsQueryVariables>({
-        query: GetPools,
-        variables: DEFAULT_POOL_LIST_QUERY_VARS,
-      });
+//   return loadApolloState({
+//     client,
+//     pageSetup: async () => {
+//       await client.query<GetPoolsQuery, GetPoolsQueryVariables>({
+//         query: GetPools,
+//         variables: DEFAULT_POOL_LIST_QUERY_VARS,
+//       });
 
-      await client.query({ query: GetPoolFilters });
-    },
-  });
-}
+//       await client.query({ query: GetPoolFilters });
+//     },
+//   });
+// }
 
 export default Pools;

@@ -35,9 +35,9 @@ function StakingPage() {
   );
 }
 
-export async function getStaticProps() {
-  const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-  return loadApolloState({ client });
-}
+//   return loadApolloState({ client });
+// }
 export default StakingPage;
