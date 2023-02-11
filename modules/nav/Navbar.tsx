@@ -1,11 +1,25 @@
 import * as React from 'react';
-import { Box, Button, Flex, HStack, Image, Skeleton, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Image,
+  Skeleton,
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverArrow,
+} from '@chakra-ui/react';
 import NavbarWalletConnectButton from './NavbarWalletConnectButton';
 import { useGetProtocolDataQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { NavbarLink } from '~/modules/nav/NavbarLink';
 import numeral from 'numeral';
 import { useRouter } from 'next/router';
-import { MotionValue, useTransform } from 'framer-motion';
+import { MotionValue } from 'framer-motion';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
 import { NextLink } from '~/components/link/NextLink';
@@ -25,6 +39,8 @@ export function Navbar({ scrollY }: Props) {
   const { data, loading } = useGetProtocolDataQuery({ fetchPolicy: 'cache-first' });
   const beetsPrice = data?.beetsPrice;
 
+  console.log(data);
+
   return (
     <>
       <Box
@@ -40,7 +56,6 @@ export function Navbar({ scrollY }: Props) {
         borderBottomColor="vertek.neonpurple.500"
         backdropFilter="blur(16px)"
         borderBottomWidth="3px"
-        // padding="12px, 40px, 0px, 40px"
       >
         <Flex px={{ base: '2', lg: '2' }} py="0" alignItems={{ base: 'center', lg: 'center' }}>
           <Flex
@@ -124,8 +139,6 @@ export function Navbar({ scrollY }: Props) {
               {loading && !beetsPrice ? (
                 <Skeleton height="16px" width="54px" />
               ) : (
-                // <Box ml="1rem" display="flex" flexDirection="row"  alignItems="center" >
-                //   <Box display="flex" justifyContent="flex-end" ml="4" mr="-1rem">
                 <Box
                   display="flex"
                   justifyContent="center"
@@ -133,18 +146,119 @@ export function Navbar({ scrollY }: Props) {
                   mr={{ base: 'none', md: '6' }}
                   ml="3"
                 >
-                  <VertekWhiteNoText
-                    width={{ base: '40px', md: '70px' }}
-                    mr={{ base: '0', md: '-3' }}
-                  />
-                  <Text
-                    mr={{ base: '3', md: '6' }}
-                    fontWeight="bold"
-                    color="white"
-                    fontSize={{ base: 'sm', lg: 'md' }}
-                  >
-                    {numeral(beetsPrice).format('$0.00[00]')}
-                  </Text>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Flex justifyContent="center" align="center">
+                        <VertekWhiteNoText
+                          width={{ base: '40px', md: '70px' }}
+                          mr={{ base: '0', md: '-3' }}
+                        />
+                        <Text
+                          mr={{ base: '3', md: '6' }}
+                          fontWeight="bold"
+                          color="white"
+                          fontSize={{ base: 'sm', lg: 'md' }}
+                        >
+                          {numeral(beetsPrice).format('$0.00[00]')}
+                        </Text>
+                      </Flex>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverHeader>
+                        <Text color="black" align="center" fontWeight="bold" fontSize="20px">
+                          Protocol Metrics
+                        </Text>
+                      </PopoverHeader>
+                      <PopoverArrow />
+
+                      <PopoverBody>
+                        <Box>
+                          <Flex gap="2" justifyContent="space-evenly">
+                            <Box
+                              borderColor="#4A4AF6"
+                              borderLeftWidth="1px"
+                              borderRightWidth="1px"
+                              borderTopWidth="1px"
+                              borderBottomWidth="1px"
+                              borderRadius="8px"
+                              p="1.5rem"
+                              width="50%"
+                            >
+                              <Text color="black" align="center" fontWeight="bold">
+                                VRTK
+                              </Text>
+                              <Text
+                                fontWeight="semibold"
+                                color="black"
+                                align="center"
+                                fontSize={{ base: 'sm', lg: 'md' }}
+                              >
+                                {numeral(beetsPrice).format('$0.00[00]')}
+                              </Text>
+                            </Box>
+
+                            <Box
+                              borderColor="#4A4AF6"
+                              borderLeftWidth="1px"
+                              borderRightWidth="1px"
+                              borderTopWidth="1px"
+                              borderBottomWidth="1px"
+                              borderRadius="8px"
+                              p="1.5rem"
+                              width="50%"
+                            >
+                              <Text color="black" align="center" fontWeight="bold">
+                                TVL
+                              </Text>
+                              <Text color="black" align="center" fontWeight="bold">
+                                {numeral(data?.protocolData.totalLiquidity || '').format('$0.00a')}
+                              </Text>
+                            </Box>
+                          </Flex>
+
+                          <Flex gap="2" justifyContent="space-evenly">
+                            <Box
+                              borderColor="#4A4AF6"
+                              borderLeftWidth="1px"
+                              borderRightWidth="1px"
+                              borderTopWidth="1px"
+                              borderBottomWidth="1px"
+                              borderRadius="8px"
+                              p="1.5rem"
+                              width="50%"
+                              mt="2"
+                            >
+                              <Text color="black" align="center" fontWeight="bold">
+                                Fees (24h)
+                              </Text>
+                              <Text color="black" align="center" fontWeight="bold">
+                                {numeral(data?.protocolData.swapFee24h || '').format('$0.00a')}
+                              </Text>
+                            </Box>
+
+                            <Box
+                              borderColor="#4A4AF6"
+                              borderLeftWidth="1px"
+                              borderRightWidth="1px"
+                              borderTopWidth="1px"
+                              borderBottomWidth="1px"
+                              borderRadius="8px"
+                              p="1.5rem"
+                              width="50%"
+                              mt="2"
+                            >
+                              <Text color="black" align="center" fontWeight="bold">
+                                Volume (24h)
+                              </Text>
+                              <Text color="black" align="center" fontWeight="bold">
+                                {numeral(data?.protocolData.swapVolume24h || '').format('$0.00a')}
+                              </Text>
+                            </Box>
+                          </Flex>
+                        </Box>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
                 </Box>
               )}
               <NetworkSelectorPopover>
