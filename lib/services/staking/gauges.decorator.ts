@@ -30,7 +30,6 @@ export class GaugesDecorator {
     const gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>();
 
     const data = gauges.map((gauge) => {
-      //  console.log(gaugesDataMap[gauge.id]);
       return {
         ...gauge,
         ...this.format(gaugesDataMap[gauge.id]),
