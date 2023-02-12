@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { networkConfig } from '~/lib/config/network-config';
 import { FeeDistributor } from '~/lib/services/balancer/contracts/fee-distributor';
@@ -12,8 +11,13 @@ export function useProtocolRewardsQuery() {
 
   const queryFn = async (): Promise<BalanceMap> => {
     try {
-      const data = await feeDistributorV2.getClaimableBalances(userAddress || '');
-      return data;
+      if (!isConnected) {
+        return {};
+      }
+      // const data = await feeDistributorV2.getClaimableBalances(userAddress || '');
+      // return data;
+
+      return {};
     } catch (error) {
       console.error('Failed to fetch claimable protocol balances', error);
       return {};

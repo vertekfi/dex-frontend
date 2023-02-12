@@ -53,7 +53,7 @@ export function PoolListTokenMultiSelect() {
           <HStack width="full" justifyContent="space-between">
             <HStack>
               <TokenAvatar address={data.value} size="xs" />
-              <Text fontSize="md">{data.label}</Text>
+              <Text color="white" fontSize="md">{data.label}</Text>
             </HStack>
             <Box display="flex" flexDirection="column">
               {userBalancesLoading ? (

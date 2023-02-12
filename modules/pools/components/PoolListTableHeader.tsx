@@ -10,17 +10,19 @@ export function PoolListTableHeader() {
   return (
     <>
       <Grid
-        padding="12px"
-        borderTopRadius="16px"
+        padding="4" 
+        boxShadow="0px -1px 0px 0px #000"
+        mt="4"
+        borderTopRadius="16px" borderBottomRadius="0px"
+        borderBottom="0px"
+        borderColor="vertek.slate.600"
         alignItems={'center'}
         bgColor="vertek.slate.900"
-        borderBottom="2px"
-        borderColor="vertek.slate.600"
         mb={{ base: '4', lg: '0' }}
         templateColumns={
           showMyInvestments
-            ? { base: '1fr 150px 200px 200px', xl: '1fr 150px 200px 200px 200px' }
-            : '1fr 200px 200px 200px'
+            ? { base: '1fr 150px 200px 200px', xl: '1fr 150px 200px 200px 250px' }
+            : '1fr 200px 200px 250px'
         }
         gap="0"
         display={{ base: 'none', lg: 'grid' }}
@@ -37,7 +39,8 @@ export function PoolListTableHeader() {
                 My balance
               </Text>
               <InfoButton infoText="To increase performance, your pool balances
-               are cached for this list view. If you just made an invest or withdraw, it may take a few seconds for the change to be reflected here." />
+               are cached for this list view. If you just made an investment or withdrawal, 
+               it may take a few seconds for the change to be reflected here." />
             </Flex>
           </GridItem>
         )}
@@ -70,7 +73,7 @@ export function PoolListTableHeader() {
             />
           )}
         </GridItem>
-        <GridItem textAlign="right" pr="4">
+        <GridItem textAlign="right" pr="4" mr="2" >
           {showMyInvestments ? (
             <Text fontSize="md" fontWeight="semibold" color="vertek.slate.100">
               APR

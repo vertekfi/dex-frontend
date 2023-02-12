@@ -8,49 +8,51 @@ import SwapMastheadOpImage from '~/assets/images/swap-masthead-image-OP.png';
 import { useNetworkConfig } from '~/lib/global/useNetworkConfig';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
 import { Text, Box } from '@chakra-ui/react';
+import 'animate.css';
+
 function Swap() {
-    const { chainId } = useNetworkConfig();
+  const { chainId } = useNetworkConfig();
 
-    const TITLE = 'Vertek | Swap';
-    const DESCRIPTION = 'Intelligent trades at optimal prices. Swap your tokens with the Smart Order Router.';
+  const TITLE = 'Vertek | Swap';
+  const DESCRIPTION =
+    'Intelligent trades at optimal prices. Swap your tokens with the Smart Order Router.';
 
-    return (
-        <>
-            <Head>
-                <title>{TITLE}</title>
-                <meta name="title" content={TITLE} />
-                <meta property="og:title" content={TITLE} />
-                <meta property="twitter:title" content={TITLE} />
+  return (
+    <>
+      <Head>
+        <title>{TITLE}</title>
+        <meta name="title" content={TITLE} />
+        <meta property="og:title" content={TITLE} />
+        <meta property="twitter:title" content={TITLE} />
 
-                <meta name="description" content={DESCRIPTION} />
-                <meta property="og:description" content={DESCRIPTION} />
-                <meta property="twitter:description" content={DESCRIPTION} />
-            </Head>
-            <UserTokenBalancesProvider>
-                <PageMasthead
-                    title="Swap"
-                    image={
-                        <NextImage
-                            src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
-                            width="213.71px"
-                            height="68px"
-                        />
-                       
-                    }
-                />
-                {/* <Box width={{ base:'100%', lg:'60%' }}>
+        <meta name="description" content={DESCRIPTION} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="twitter:description" content={DESCRIPTION} />
+      </Head>
+      <UserTokenBalancesProvider>
+        <PageMasthead
+          title="Swap"
+          image={
+            <NextImage
+              src={chainId === '10' ? SwapMastheadOpImage : SwapMastheadImage}
+              width="213.71px"
+              height="68px"
+            />
+          }
+        />
+        {/* <Box width={{ base:'100%', lg:'60%' }}>
                 <Text fontSize="1.2rem" mt="-4" mb="6"> Utilize Vertek's decentralized exchange to swap tokens with lightning speed and maximal efficiency </Text>
                 </Box> */}
-                <TradeContainer />
-            </UserTokenBalancesProvider>
-        </>
-    );
+        <TradeContainer />
+      </UserTokenBalancesProvider>
+    </>
+  );
 }
 
-export async function getStaticProps() {
-    const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-    return loadApolloState({ client });
-}
+//   return loadApolloState({ client });
+// }
 
 export default Swap;

@@ -78,6 +78,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/react-datepicker": "^4.8.0",
     "add": "^2.0.6",
+    "animate.css": "^4.1.1",
     "graphql-request": "^5.1.0",
     "react-datepicker": "^4.8.0",
     "react-svg": "^15.1.15",

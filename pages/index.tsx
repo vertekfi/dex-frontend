@@ -41,15 +41,15 @@ function HomePage() {
   );
 }
 
-export async function getStaticProps() {
-  const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-  return loadApolloState({
-    client,
-    pageSetup: async () => {
-      await client.query({ query: GetHomeData });
-    },
-  });
-}
+//   return loadApolloState({
+//     client,
+//     pageSetup: async () => {
+//       await client.query({ query: GetHomeData });
+//     },
+//   });
+// }
 
 export default HomePage;

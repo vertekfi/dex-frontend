@@ -1,4 +1,4 @@
-import { GridItem, Flex, Text, Box } from '@chakra-ui/react';
+import { Flex, Text, Box } from '@chakra-ui/react';
 import { StakingCardGuts } from './StakingCardGuts';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 import NextImage from 'next/image';

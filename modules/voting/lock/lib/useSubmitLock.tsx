@@ -6,53 +6,48 @@ import { LockType } from '../types';
 import veAbi from '../../../../lib/abi/VotingEscrow.json';
 import { parseUnits } from '@ethersproject/units';
 import { toUtcTime } from '~/lib/util/time';
+import { UseContractWriteMutationArgs } from 'wagmi/dist/declarations/src/hooks/contracts/useContractWrite';
 
-function parseDate(lockEndDate: string) {
-  return (toUtcTime(new Date(lockEndDate)) / 1000).toString();
+export interface LockActionStep {
+  id: string;
+  toastText: string;
+  walletText: string;
+  functionName: string;
+  args: any[];
+  submitLock?: (
+    config: UseContractWriteMutationArgs & { toastText: string; walletText?: string | undefined },
+  ) => void;
 }
 
-export function useSubmitLock(lockType: LockType, lockEndDate: string, lockAmount: string) {
-  let label = '';
-  let functionName = '';
-  let args: any[] = [];
+export interface SubmitLockParams {
+  args: any[];
+  toastText: string;
+  walletText: string;
+}
 
-  switch (lockType) {
-    case LockType.CREATE_LOCK:
-      label = `Confirm lock until ${format(new Date(lockEndDate), PRETTY_DATE_FORMAT)}`;
-      functionName = 'create_lock';
-      args = [parseUnits(lockAmount, 18), parseDate(lockEndDate)];
-      break;
-    case LockType.EXTEND_LOCK:
-      label = `Extend lock period`;
-      functionName = 'increase_unlock_time';
-      args = [parseDate(lockEndDate)];
-      break;
-    case LockType.INCREASE_AMOUNT:
-      label = `Increase lock amount`;
-      functionName = 'increase_amount';
-      args = [parseUnits(lockAmount, 18)];
-      break;
+export function useSubmitLock() {
+  function parseDate(lockEndDate: string) {
+    return (toUtcTime(new Date(lockEndDate)) / 1000).toString();
   }
 
-  const { submit, ...rest } = useSubmitTransaction({
-    config: {
-      addressOrName: networkConfig.balancer.votingEscrow.veAddress,
-      contractInterface: veAbi,
-      functionName,
-    },
-    transactionType: 'STAKE',
-  });
-
-  function submitLock() {
-    return submit({
-      args,
-      toastText: label,
-      walletText: `veVRTK Lock`,
+  function getSubmitLockAction(actionStep: LockActionStep) {
+    const { submit: submitLock, ...query } = useSubmitTransaction({
+      config: {
+        addressOrName: networkConfig.balancer.votingEscrow.veAddress,
+        contractInterface: veAbi,
+        functionName: actionStep.functionName,
+      },
+      transactionType: 'STAKE',
     });
+
+    return {
+      submitLock,
+      query,
+    };
   }
 
   return {
-    submitLock,
-    ...rest,
+    parseDate,
+    getSubmitLockAction,
   };
 }

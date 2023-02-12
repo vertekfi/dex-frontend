@@ -5,10 +5,11 @@ import { BeetsBox } from '~/components/box/BeetsBox';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { useInvest } from '~/modules/pool/invest/lib/useInvest';
 import { usePoolJoinGetBptOutAndPriceImpactForTokensIn } from '~/modules/pool/invest/lib/usePoolJoinGetBptOutAndPriceImpactForTokensIn';
-import numeral from 'numeral';
 
 import { CardRow } from '~/components/card/CardRow';
 import { usePool } from '~/modules/pool/lib/usePool';
+import { useUserData } from '~/lib/user/useUserData';
+import { getAprValues } from '~/lib/util/apr-utils';
 
 interface Props extends BoxProps {}
 
@@ -18,6 +19,11 @@ export function PoolInvestSummary({ ...rest }: Props) {
   const weeklyYield = (totalInvestValue * parseFloat(pool.dynamicData.apr.total)) / 52;
   const { formattedPriceImpact, hasHighPriceImpact, hasMediumPriceImpact, isLoading } =
     usePoolJoinGetBptOutAndPriceImpactForTokensIn();
+
+  const { boostForPool } = useUserData();
+
+  const boost = boostForPool(pool.id);
+  const { minApr, maxApr, boostedTotalAPR } = getAprValues(pool.dynamicData.apr, boost);
 
   return (
     <BeetsBox p="2" {...rest}>
@@ -53,7 +59,12 @@ export function PoolInvestSummary({ ...rest }: Props) {
         </Box>
         <Flex alignItems="center">
           <Box mr="1">{numberFormatUSDValue(weeklyYield)}</Box>
-          <AprTooltip data={pool.dynamicData.apr} onlySparkles={true} sparklesSize="sm" />
+          <AprTooltip
+            onlySparkles={true}
+            sparklesSize="sm"
+            poolId={pool.id}
+            data={pool.dynamicData.apr}
+          />
         </Flex>
       </CardRow>
     </BeetsBox>

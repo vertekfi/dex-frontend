@@ -523,6 +523,11 @@ export const GetUserData = gql`
         }
       }
     }
+    boosts: userGetGaugeBoosts {
+      poolId
+      gaugeAddress
+      boost
+    }
   }
 `;
 export const UserSyncBalance = gql`
@@ -1024,9 +1029,10 @@ export const GetLiquidityGauges = gql`
         id
       }
       rewardTokens {
-        id
+        tokenAddress
         decimals
         symbol
+        logoURI
       }
       pool {
         id

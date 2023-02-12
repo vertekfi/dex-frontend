@@ -14,9 +14,10 @@ query GetLiquidityGauges {
     }
 
     rewardTokens {
-      id
+      tokenAddress
       decimals
       symbol
+      logoURI
     }
 
     pool {

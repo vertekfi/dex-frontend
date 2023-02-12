@@ -1,12 +1,12 @@
 import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
-import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
+import { Gauge } from '~/lib/services/staking/types';
 import { ClaimListItem } from './ClaimListItem';
 
 interface ClaimTableProps {
-  gauges: VotingGaugeWithVotes[];
+  gauges: Gauge[];
 }
 
-export function ClaimTable(props: ClaimTableProps) {
+export function ClaimTable({ gauges }: ClaimTableProps) {
   return (
     <Box padding="1" borderRadius="16px">
       <Box
@@ -17,7 +17,6 @@ export function ClaimTable(props: ClaimTableProps) {
         borderRadius="16px"
         overflow="hidden"
         boxShadow={{ base: 'none', lg: '0 0px 5px #5BC0F8, 0 0px 10px #4A4AF6' }}
-        bg=""
       >
         <Grid
           display={{ base: 'none', lg: 'grid' }}
@@ -29,7 +28,6 @@ export function ClaimTable(props: ClaimTableProps) {
             lg: '1fr 3fr 1fr 1fr 1fr',
           }}
           gap="0"
-          // boxShadow="0 -5px 5px #5BC0F8, 0 -5px 50px #4A4AF6"
           bg="vertek.slatepurple.900"
         >
           <GridItem>
@@ -39,7 +37,9 @@ export function ClaimTable(props: ClaimTableProps) {
             <Text fontWeight="bold"></Text>
           </GridItem>
           <GridItem>
-            <Text fontWeight="bold" textAlign="left">Amount</Text>
+            <Text fontWeight="bold" textAlign="left">
+              Amount
+            </Text>
           </GridItem>
           <GridItem justifyContent="center" display="flex">
             <Text fontWeight="bold">Value</Text>
@@ -49,9 +49,9 @@ export function ClaimTable(props: ClaimTableProps) {
           </GridItem>
         </Grid>
 
-        {props.gauges.map((gauge) => (
-          <ClaimListItem key={gauge.address} gauge={gauge} />
-        ))}
+        {gauges.map((gauge) => {
+          return <ClaimListItem key={gauge.address} gauge={gauge} />;
+        })}
       </Box>
     </Box>
   );

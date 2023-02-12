@@ -17,23 +17,6 @@
     "type": "event"
   },
   {
-    "name": "Withdraw",
-    "inputs": [
-      {
-        "name": "provider",
-        "type": "address",
-        "indexed": true
-      },
-      {
-        "name": "value",
-        "type": "uint256",
-        "indexed": false
-      }
-    ],
-    "anonymous": false,
-    "type": "event"
-  },
-  {
     "name": "UpdateLiquidityLimit",
     "inputs": [
       {
@@ -155,47 +138,11 @@
   {
     "stateMutability": "nonpayable",
     "type": "function",
-    "name": "deposit",
-    "inputs": [
-      {
-        "name": "_value",
-        "type": "uint256"
-      },
-      {
-        "name": "_addr",
-        "type": "address"
-      },
-      {
-        "name": "_claim_rewards",
-        "type": "bool"
-      }
-    ],
-    "outputs": []
-  },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
     "name": "withdraw",
     "inputs": [
       {
         "name": "_value",
         "type": "uint256"
-      }
-    ],
-    "outputs": []
-  },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "withdraw",
-    "inputs": [
-      {
-        "name": "_value",
-        "type": "uint256"
-      },
-      {
-        "name": "_claim_rewards",
-        "type": "bool"
       }
     ],
     "outputs": []
@@ -205,34 +152,6 @@
     "type": "function",
     "name": "claim_rewards",
     "inputs": [],
-    "outputs": []
-  },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "claim_rewards",
-    "inputs": [
-      {
-        "name": "_addr",
-        "type": "address"
-      }
-    ],
-    "outputs": []
-  },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "claim_rewards",
-    "inputs": [
-      {
-        "name": "_addr",
-        "type": "address"
-      },
-      {
-        "name": "_receiver",
-        "type": "address"
-      }
-    ],
     "outputs": []
   },
   {

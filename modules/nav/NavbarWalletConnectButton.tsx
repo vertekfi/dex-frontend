@@ -1,17 +1,13 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Box, Button, HStack, Skeleton, Spinner, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Button, HStack, Spinner, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import BeetsSmart from '~/assets/logo/verteknotext.svg';
-import VertekAlpha from '~/assets/svg/vertektransparent.svg'; 
-import VertekDark from '~/assets/svg/vertektransparent.svg'; 
-import VertekWhite from '~/assets/svg/vertekwhite.svg'; 
+import VertekAlpha from '~/assets/svg/vertektransparent.svg';
 import { useReactiveVar } from '@apollo/client';
 import { txPendingVar } from '~/lib/util/useSubmitTransaction';
 import { IconWallet } from '~/components/icons/IconWallet';
-import { BarChart2 } from 'react-feather';
 import { useUserData } from '~/lib/user/useUserData';
-import { numberFormatLargeUsdValue } from '~/lib/util/number-formats';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
+import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
 
 export default function NavbarWalletConnectButton() {
   const txPending = useReactiveVar(txPendingVar);
@@ -26,13 +22,11 @@ export default function NavbarWalletConnectButton() {
             {(() => {
               if (!mounted || !account || !chain) {
                 return (
-                  <Button
-                    variant="verteklight"
-                    onClick={openConnectModal}
-                    type="button"
-                  >
+                  <Button variant="verteklight" onClick={openConnectModal} type="button">
                     <IconWallet stroke="white" boxSize="20px" />
-                    <Box ml="2" color="white">Connect Wallet</Box>
+                    <Box ml="2" color="white">
+                      Connect Wallet
+                    </Box>
                   </Button>
                 );
               }
@@ -52,7 +46,7 @@ export default function NavbarWalletConnectButton() {
               }
 
               return (
-                <HStack spacing="4" position="relative">
+                <HStack spacing="1" position="relative">
                   {/* <HStack
                     bgColor="beets.base.500"
                     pr="3"
@@ -75,16 +69,15 @@ export default function NavbarWalletConnectButton() {
                       </Box>
                     )}
                   </HStack> */}
-                  {/* price goes here */}
+
                   <Button
                     variant="vertekdark"
-                    marginLeft="4" 
+                    marginLeft={{ base: '1', lg: '0' }}
                     onClick={openAccountModal}
-                    paddingX="6"                        
+                    paddingX="6"
                     color="white"
                     zIndex="100"
                     position="relative"
-                  
                     _active={{
                       backgroundColor: 'none',
                     }}
@@ -102,14 +95,19 @@ export default function NavbarWalletConnectButton() {
                         {txPending ? (
                           <Spinner color="white" />
                         ) : earlyLudwig ? (
-                          <Image src={VertekAlpha} width="20px" height="20px"   />
+                          <Image src={VertekAlpha} width="20px" height="20px" />
                         ) : (
                           <Box borderRadius="full" overflow="hidden" width="20px" height="20px">
-                            <Image src={ "https://avatar.tobi.sh/" + account.address + "?size=20" } width="100%" height="100%" alt="your-profile" />
+                            <Image
+                              src={'https://avatar.tobi.sh/' + account.address + '?size=20'}
+                              width="100%"
+                              height="100%"
+                              alt="your-profile"
+                            />
                           </Box>
                         )}
                         <Text
-                          display={{ base: 'none', sm: 'inline' }} 
+                          display={{ base: 'none', sm: 'inline' }}
                           fontSize={{ base: 'xs', lg: '14px' }}
                         >
                           {account.displayName}

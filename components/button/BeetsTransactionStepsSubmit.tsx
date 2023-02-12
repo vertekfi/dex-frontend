@@ -118,6 +118,7 @@ export function BeetsTransactionStepsSubmit({
           {loadingButtonText}
         </Button>
       ) : null}
+
       {!isLoading && steps && currentStep && currentStep.type === 'tokenApproval' && !complete ? (
         <BeetsTokenApprovalButton
           tokenWithAmount={currentStep.token}
@@ -130,6 +131,7 @@ export function BeetsTransactionStepsSubmit({
           size={buttonSize}
         />
       ) : null}
+
       {!isLoading &&
       currentStep &&
       currentStep.type !== 'tokenApproval' &&
@@ -149,6 +151,7 @@ export function BeetsTransactionStepsSubmit({
           {currentStep.buttonText}
         </BeetsSubmitTransactionButton>
       ) : null}
+
       {complete && (
         <Button
           onClick={() => {
@@ -163,12 +166,14 @@ export function BeetsTransactionStepsSubmit({
           {completeButtonText}
         </Button>
       )}
+
       {currentQuery && currentQuery.submitError ? (
         <Alert status="error" mt={4} color="black">
           <AlertIcon />
           {transactionMessageFromError(currentQuery.submitError)}
         </Alert>
       ) : null}
+
       {complete && (
         <Portal>
           <Box position="absolute" top="0" left="0" width="full">

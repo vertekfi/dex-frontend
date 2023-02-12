@@ -7,65 +7,69 @@ import { NetworkStatus } from '@apollo/client';
 import { usePool } from '~/modules/pool/lib/usePool';
 
 export function PoolSwapsTable() {
-    const { pool } = usePool();
+  const { pool } = usePool();
 
-    const {
-        data: swapsResponse,
-        fetchMore: fetchMoreSwaps,
-        networkStatus: swapsStatus,
-    } = useGetPoolSwapsQuery({
-        variables: { where: { poolIdIn: [pool.id] } },
-        pollInterval: 30000,
-        notifyOnNetworkStatusChange: true,
+  const {
+    data: swapsResponse,
+    fetchMore: fetchMoreSwaps,
+    networkStatus: swapsStatus,
+  } = useGetPoolSwapsQuery({
+    variables: { where: { poolIdIn: [pool.id] } },
+    pollInterval: 30000,
+    notifyOnNetworkStatusChange: true,
+  });
+
+  const isPhantomStable = pool.__typename === 'GqlPoolPhantomStable';
+  const isFetchingMoreSwaps = swapsStatus === NetworkStatus.fetchMore;
+  console.log('swapsResponse:', swapsResponse);
+  console.log('swaps:', swapsResponse?.swaps);
+
+  // this returns 'undefined' for both swapsresponse and swaps
+
+  const transactions = useMemo(() => {
+    const swaps = swapsResponse?.swaps || [];
+    const swapsOutput = swaps.map((swap) => ({
+      transaction: swap,
+      type: PoolTransactionType.Swap,
+    }));
+    const phantomStableSwapsOutput = swaps.map((swap) => {
+      const phantomStableToken = swap.poolId.slice(0, 42);
+      let type: PoolTransactionType;
+
+      if (swap.tokenOut === phantomStableToken) {
+        type = PoolTransactionType.Join;
+      } else if (swap.tokenIn === phantomStableToken) {
+        type = PoolTransactionType.Exit;
+      } else {
+        type = PoolTransactionType.Swap;
+      }
+
+      return {
+        transaction: swap,
+        type,
+        isPhantomStable,
+      };
     });
 
-    const isPhantomStable = pool.__typename === 'GqlPoolPhantomStable';
-    const isFetchingMoreSwaps = swapsStatus === NetworkStatus.fetchMore;
+    return isPhantomStable ? phantomStableSwapsOutput : swapsOutput;
+  }, [swapsResponse?.swaps]);
 
-    const transactions = useMemo(() => {
-        const swaps = swapsResponse?.swaps || [];
+  const handleFetchMoreTransactions = () => {
+    fetchMoreSwaps({ variables: { skip: transactions.length } });
+  };
 
-        const swapsOutput = swaps.map((swap) => ({
-            transaction: swap,
-            type: PoolTransactionType.Swap,
-        }));
-
-        const phantomStableSwapsOutput = swaps.map((swap) => {
-            const phantomStableToken = swap.poolId.slice(0, 42);
-            let type: PoolTransactionType;
-
-            if (swap.tokenOut === phantomStableToken) {
-                type = PoolTransactionType.Join;
-            } else if (swap.tokenIn === phantomStableToken) {
-                type = PoolTransactionType.Exit;
-            } else {
-                type = PoolTransactionType.Swap;
-            }
-
-            return {
-                transaction: swap,
-                type,
-                isPhantomStable,
-            };
-        });
-
-        return isPhantomStable ? phantomStableSwapsOutput : swapsOutput;
-    }, [swapsResponse?.swaps]);
-
-    const handleFetchMoreTransactions = () => {
-        fetchMoreSwaps({ variables: { skip: transactions.length } });
-    };
-
-    return (
-        <PaginatedTable
-            isInfinite
-            width="full"
-            items={transactions}
-            loading={false}
-            fetchingMore={isFetchingMoreSwaps}
-            renderTableHeader={() => <PoolTransactionHeader />}
-            renderTableRow={(item, index) => <PoolTransactionItem transaction={item} />}
-            onFetchMore={handleFetchMoreTransactions}
-        />
-    );
+  return (
+    <>
+      <PaginatedTable
+        isInfinite
+        width="full"
+        items={transactions}
+        loading={false}
+        fetchingMore={isFetchingMoreSwaps}
+        renderTableHeader={() => <PoolTransactionHeader />}
+        renderTableRow={(item, index) => <PoolTransactionItem transaction={item} />}
+        onFetchMore={handleFetchMoreTransactions}
+      />
+    </>
+  );
 }

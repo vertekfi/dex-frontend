@@ -6,25 +6,26 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Text, PlacementWithLogical
+  Text,
+  PlacementWithLogical,
 } from '@chakra-ui/react';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import numeral from 'numeral';
+import { GqlPoolToken } from '~/apollo/generated/graphql-codegen-generated';
 
 export interface TokenAvatarSetInListTokenData {
   address: string;
   weight?: string | null;
   logoURI?: string;
-  symbol: string;
+  symbol?: string;
 }
 
 interface Props extends FlexProps {
-  tokens: TokenAvatarSetInListTokenData[];
+  tokens: TokenAvatarSetInListTokenData[] | GqlPoolToken[];
   imageSize?: number;
   maxAssetsPerLine?: number;
   width: number;
   placement?: PlacementWithLogical;
-
 }
 
 export function TokenAvatarSetInList({
@@ -77,11 +78,14 @@ export function TokenAvatarSetInList({
           </Flex>
         </button>
       </PopoverTrigger>
-      <PopoverContent 
-      w="200px" padding="4" borderRadius="16px" 
-      bgColor="transparent" backdropFilter="blur(12px)"
-      color="white"
-      boxShadow="0 0 12px #000"
+      <PopoverContent
+        w="200px"
+        padding="4"
+        borderRadius="16px"
+        bgColor="transparent"
+        backdropFilter="blur(12px)"
+        color="white"
+        boxShadow="0 0 12px #000"
       >
         {tokens?.map((token, index) => (
           <Flex alignItems="center" p="1" key={index}>

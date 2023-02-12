@@ -1,9 +1,10 @@
 import { AddressZero } from '@ethersproject/constants';
+import { formatEther } from 'ethers/lib/utils';
 import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 import LiquidityGaugeV5Abi from '~/lib/abi/LiquidityGaugeV5.json';
 import { networkProvider } from '~/lib/global/network';
-import { ZERO_ADDRESS } from '~/lib/util/web3';
+import { tokenFormatAmount } from '../token/token-util';
 import { Multicaller } from '../util/multicaller.service';
 
 import { OnchainGaugeData, OnchainGaugeDataMap } from './types';
@@ -18,29 +19,22 @@ export class GaugesDecorator {
   }
 
   /**
-   * @summary Combine subgraph gauge schema with onchain data using multicalls.
+   * @summary Combine backend gauge data with onchain data using multicalls.
    */
-  async decorate(subgraphGauges: LiquidityGauge[], userAddress: string) {
+  async decorate(gauges: LiquidityGauge[], userAddress: string) {
     this.multicaller = this.resetMulticaller();
 
-    subgraphGauges = subgraphGauges.map((g) => {
+    this.callClaimableTokens(gauges, userAddress);
+    this.callClaimableRewards(gauges, userAddress);
+
+    const gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>();
+
+    const data = gauges.map((gauge) => {
       return {
-        ...g,
-        rewardTokens: g.rewardTokens.filter((r) => r?.id !== ZERO_ADDRESS),
+        ...gauge,
+        ...this.format(gaugesDataMap[gauge.id]),
       };
     });
-
-    this.callRewardTokens(subgraphGauges);
-    this.callClaimableTokens(subgraphGauges, userAddress);
-
-    let gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>();
-    this.callClaimableRewards(subgraphGauges, userAddress);
-    gaugesDataMap = await this.multicaller.execute<OnchainGaugeDataMap>(gaugesDataMap);
-
-    const data = subgraphGauges.map((subgraphGauge) => ({
-      ...subgraphGauge,
-      ...this.format(gaugesDataMap[subgraphGauge.id]),
-    }));
 
     return data;
   }
@@ -51,10 +45,29 @@ export class GaugesDecorator {
   private format(gaugeData: OnchainGaugeData): OnchainGaugeData {
     return {
       ...gaugeData,
-      rewardTokens: gaugeData.rewardTokens,
-      claimableTokens: gaugeData.claimableTokens?.toString() || '0',
+      claimableTokens: tokenFormatAmount(formatEther(gaugeData.claimableTokens?.toString() || '0')),
       claimableRewards: this.formatClaimableRewards(gaugeData.claimableRewards),
     };
+  }
+
+  /**
+   * @summary converts claimable reward values in map to strings from BigNumbers.
+   */
+  private formatClaimableRewards(claimableRewards: Record<string, string>): Record<string, string> {
+    if (!claimableRewards) return {};
+
+    //  console.log(claimableRewards);
+
+    Object.keys(claimableRewards).forEach((rewardToken) => {
+      // claimableRewards[rewardToken] = claimableRewards[rewardToken].toString();
+      claimableRewards[rewardToken] = tokenFormatAmount(
+        formatEther(claimableRewards[rewardToken].toString()),
+      );
+
+      // console.log(claimableRewards[rewardToken]);
+    });
+
+    return claimableRewards;
   }
 
   /**
@@ -97,32 +110,16 @@ export class GaugesDecorator {
    * e.g. non BAL rewards on gauge.
    */
   private callClaimableRewards(subgraphGauges: LiquidityGauge[], userAddress: string) {
-    const methodName = 'claimable_reward';
     subgraphGauges.forEach((gauge) => {
       gauge.rewardTokens.forEach((rewardToken) => {
-        if (rewardToken?.id) {
-          this.multicaller.call(
-            `${gauge.id}.claimableRewards.${rewardToken}`,
-            gauge.id,
-            methodName,
-            [userAddress, rewardToken.id],
-          );
-        }
+        this.multicaller.call(
+          `${gauge.id}.claimableRewards.${rewardToken.tokenAddress}`,
+          gauge.id,
+          'claimable_reward',
+          [userAddress, rewardToken.tokenAddress],
+        );
       });
     });
-  }
-
-  /**
-   * @summary converts claimable reward values in map to strings from BigNumbers.
-   */
-  private formatClaimableRewards(claimableRewards: Record<string, string>): Record<string, string> {
-    if (!claimableRewards) return {};
-
-    Object.keys(claimableRewards).forEach((rewardToken) => {
-      claimableRewards[rewardToken] = claimableRewards[rewardToken].toString();
-    });
-
-    return claimableRewards;
   }
 
   private resetMulticaller(): Multicaller {

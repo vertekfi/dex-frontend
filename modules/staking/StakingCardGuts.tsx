@@ -103,7 +103,7 @@ export function StakingCardGuts(props: {
         bg=""
         borderTopRadius="20px"
         columns={2}
-        spacing={10}
+        gap={10}
         padding="1.5em"
         marginTop="4"
       >
@@ -206,7 +206,7 @@ export function StakingCardGuts(props: {
         </GridItem>
       </SimpleGrid>
 
-      <RewardPoolDepositModal
+      {/* <RewardPoolDepositModal
         isOpen={isDepositOpen}
         onOpen={onDepositOpen}
         onClose={onDepositClose}
@@ -230,7 +230,7 @@ export function StakingCardGuts(props: {
         onOpen={onWithdrawNftOpen}
         onClose={onWithdrawNftClose}
         pool={pool}
-      />
+      /> */}
     </>
   );
 }

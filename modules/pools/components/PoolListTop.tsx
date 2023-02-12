@@ -7,6 +7,8 @@ import { PoolListFilterMultiSelect } from '~/modules/pools/components/PoolListFi
 import { usePoolList } from '~/modules/pools/usePoolList';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
 import { PoolListAttributeMultiSelect } from './PoolListAttributeMultiSelect';
+import 'animate.css'; 
+
 
 export function PoolListTop() {
   const { showFilters, toggleFilterVisibility, state } = usePoolList();
@@ -16,19 +18,24 @@ export function PoolListTop() {
   return (
     <Box display={{ base: 'none', lg: 'block' }}>
       <Flex pb={0}>
-        <Flex flex={1}>
+        <Flex flex={1} mb={{base:'0', lg:'3'}}>
+          <div className="animate__animated animate__zoomIn animate__delay-2s animate__duration-6s">
           <PoolListTabs />
+          </div>
           <Box position="relative">
+          <div className="animate__animated animate__zoomIn animate__delay-2s animate__duration-6s">
+
             <IconButton
               aria-label="filter-button"
               icon={<Filter />}
               ml={4}
-             
               onClick={toggleFilterVisibility}
-              color={showFilters ? 'gray.100' : 'white'}
-              bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.neonpurple.900'}
-              _hover={{ bgColor: 'vertek.neonpurple.500' }}
+              color={showFilters ? 'white' : 'gray.100'}
+              boxShadow="0px 10px 1px #000"
+              bgColor={showFilters ? 'vertek.neonpurple.500' : 'vertek.slatepurple.900'}
+              _hover={{ bgColor: 'vertek.neonpurple.500', boxShadow:'none'  }}
             />
+            </div>
             {hasFiltersSelected ? (
               <Circle
                 size="3"
@@ -40,6 +47,7 @@ export function PoolListTop() {
               />
             ) : null}
           </Box>
+        
         </Flex>
         <Box>
           <PoolListSearch />

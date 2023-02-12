@@ -29,17 +29,19 @@ export function PoolListItem({
   showUserBalance,
   tokens,
   hasUnstakedBpt,
-  ...rest
 }: Props) {
   return (
     <Box
       mb={{ base: '12', md: '0' }}
       borderRadius={{ base: '16px', md: 'none' }}
       padding={{ base: '2', md: 'none' }}
-      borderWidth="1px"
-      borderColor="gray.200"
+      borderTopWidth="1px"
+      borderTopColor="gray.200"
+      borderLeftWidth="1px"
+      borderRightWidth="1px"
+      borderLeftColor="vertek.slate.600"
+      borderRightColor="vertek.slate.600"
       bg={{ base: 'vertek.slate.900', md: 'transparent' }}
-      boxShadow={{ base: '0 0 5px #5BC0F8, 0 0 10px #4A4AF6', md: 'none' }}
     >
       <Box
         bg={{ base: 'vertek.slatepurple.900', md: 'transparent' }}
@@ -55,10 +57,10 @@ export function PoolListItem({
                 base: '1fr',
                 lg: showUserBalance
                   ? '90px 1fr 150px 200px 0px 200px'
-                  : '90px 1fr 200px 200px 200px',
+                  : '90px 1fr 200px 200px 250px',
                 xl: showUserBalance
                   ? '90px 1fr 150px 200px 200px 200px'
-                  : '90px 1fr 200px 200px 200px',
+                  : '90px 1fr 200px 200px 250px',
               }}
               gap={{ base: '4', md: '0' }}
               templateAreas={
@@ -83,12 +85,7 @@ export function PoolListItem({
               }
             >
               <GridItem area="icons">
-                <MemoizedTokenAvatarSetInList
-                  imageSize={25}
-                  width={92}
-                  tokens={tokens}
-                  //renderPopover={false}
-                />
+                <MemoizedTokenAvatarSetInList imageSize={25} width={92} tokens={tokens} />
               </GridItem>
 
               <GridItem area="name" mb={{ base: '4', lg: '0' }}>
@@ -169,6 +166,8 @@ export function PoolListItem({
               >
                 <MobileLabel text="APR" />
                 <MemoizedAprTooltip
+                  placement="bottom-end"
+                  poolId={pool.id}
                   data={pool.dynamicData.apr}
                   textProps={{ fontWeight: 'normal', fontSize: { base: 'xl', lg: 'md' } }}
                 />

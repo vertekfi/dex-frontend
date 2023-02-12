@@ -2,7 +2,6 @@ import { Box, BoxProps, Flex, Text, Divider, LinkBox } from '@chakra-ui/react';
 import AprTooltip from '~/components/apr-tooltip/AprTooltip';
 import TokenAvatarSet from '~/components/token/TokenAvatarSet';
 import { GqlPoolCardDataFragment } from '~/apollo/generated/graphql-codegen-generated';
-import numeral from 'numeral';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { NextLinkOverlay } from '~/components/link/NextLink';
@@ -20,17 +19,16 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
     <LinkBox as="article" flex="1" {...rest}>
       <Flex
         bgColor="rgba(0, 0, 0, 0.3)"
-        flexDirection="column" 
+        flexDirection="column"
         borderRadius="24px"
         height="327px"
         padding="1"
         marginTop="1"
-        
         boxShadow="inset 0 0 10px #5BC0F8, inset 0 0 15px #4A4AF6, inset 0 0 20px #fff"
         css={{
-          transition: "transform 0.5s",
-          "&:hover": {
-            transform: "scale(1.02)",
+          transition: 'transform 0.5s',
+          '&:hover': {
+            transform: 'scale(1.02)',
           },
         }}
       >
@@ -45,7 +43,6 @@ export function PoolCardUser({ pool, balance, balanceUSD, ...rest }: Props) {
             width={150}
             imageSize={40}
             renderPopover={false}
-
           />
         </Flex>
         <Box pb="4" mt="3" justifyContent="center">

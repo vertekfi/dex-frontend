@@ -1,4 +1,5 @@
 import { Button, Grid, GridItem, Text } from '@chakra-ui/react';
+import BigNumber from 'bignumber.js';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { scale, bnum } from '~/lib/util/big-number.utils';
@@ -14,6 +15,11 @@ type Props = {
 };
 
 export function GaugeListItem(props: Props) {
+  const normalizedVotes = scale(new BigNumber(props.gauge.userVotes), -4);
+  const userVotes = fNum2(normalizedVotes.toString(), {
+    style: 'percent',
+    maximumFractionDigits: 2,
+  });
   // function redirectToPool(gauge: VotingGaugeWithVotes) {
   //   window.location.href = poolURLFor(gauge.pool.id, gauge.network, gauge.pool.poolType);
   // }
@@ -26,8 +32,6 @@ export function GaugeListItem(props: Props) {
       fixedFormat: true,
     });
   }
-
-  console.log(props.gauge.pool.tokens);
 
   return (
     <Grid
@@ -90,7 +94,7 @@ export function GaugeListItem(props: Props) {
         mr={{ base: '8', lg: '2' }}
       >
         <MobileLabel text="My Votes" />
-        {formatVotesAsPercent(props.gauge.userVotes)}
+        {userVotes}
       </GridItem>
 
       <GridItem

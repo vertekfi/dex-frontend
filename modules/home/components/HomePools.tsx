@@ -14,14 +14,8 @@ import { PoolCardUser } from '~/components/pool-card/PoolCardUser';
 import { orderBy } from 'lodash';
 
 export function HomePools(props: BoxProps) {
-  const {
-    stakedValueUSD,
-    portfolioValueUSD,
-    loading: userDataLoading,
-    userPoolIds,
-    usdBalanceForPool,
-    bptBalanceForPool,
-  } = useUserData();
+  const { portfolioValueUSD, userPoolIds, usdBalanceForPool, bptBalanceForPool } = useUserData();
+
   const { data } = useGetHomeFeaturedPoolsQuery();
   const featuredPoolGroups = data?.featuredPoolGroups || [];
   const [getPools, getPoolsQuery] = useGetPoolsLazyQuery();
@@ -43,7 +37,7 @@ export function HomePools(props: BoxProps) {
     });
   }, [userPoolIdsStr]);
 
-  //minWidth = 0 is needed for a swiper nested in a flex layout
+  // minWidth = 0 is needed for a swiper nested in a flex layout
   return (
     <Box minWidth="0" {...props}>
       {(userPools.length > 0 || getPoolsQuery.loading) && (

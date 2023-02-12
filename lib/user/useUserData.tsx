@@ -29,6 +29,7 @@ export function _useUserData() {
 
   const poolBalances = data?.balances || [];
   const staking = data?.staking || [];
+  const boosts = data?.boosts || [];
 
   const portfolioValueUSD = sum(
     poolBalances.map((balance) => parseFloat(balance.totalBalance) * balance.tokenPrice),
@@ -67,6 +68,10 @@ export function _useUserData() {
     return parseFloat(bptBalance?.walletBalance || '0') > 0;
   }
 
+  function boostForPool(poolId: string) {
+    return boosts.find((b) => b?.poolId === poolId) || { boost: '1', poolId, gaugeAddress: '' };
+  }
+
   return {
     ...rest,
     loading: loading || userAddressChanged,
@@ -75,6 +80,7 @@ export function _useUserData() {
     poolBalances,
     staking,
     userPoolIds: [...poolBalances.map((balance) => balance.poolId)],
+    boostForPool,
     bptBalanceForPool,
     usdBalanceForPool,
     usdBalanceForPoolAmount,

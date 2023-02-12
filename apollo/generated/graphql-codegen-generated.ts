@@ -1737,6 +1737,12 @@ export type GetUserDataQuery = {
       }>;
     } | null;
   }>;
+  boosts: Array<{
+    __typename: 'GqlUserGaugeBoost';
+    poolId: string;
+    gaugeAddress: string;
+    boost: string;
+  } | null>;
 };
 
 export type UserSyncBalanceMutationVariables = Exact<{
@@ -4431,9 +4437,10 @@ export type GetLiquidityGaugesQuery = {
     factory?: { __typename: 'GaugeFactory'; id: string } | null;
     rewardTokens: Array<{
       __typename: 'RewardToken';
-      id: string;
+      tokenAddress: string;
       decimals: number;
       symbol: string;
+      logoURI: string;
     }>;
     pool: {
       __typename: 'GaugePool';
@@ -5379,6 +5386,11 @@ export const GetUserDataDocument = gql`
           tokenAddress
         }
       }
+    }
+    boosts: userGetGaugeBoosts {
+      poolId
+      gaugeAddress
+      boost
     }
   }
 `;
@@ -6745,9 +6757,10 @@ export const GetLiquidityGaugesDocument = gql`
         id
       }
       rewardTokens {
-        id
+        tokenAddress
         decimals
         symbol
+        logoURI
       }
       pool {
         id

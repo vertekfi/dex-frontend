@@ -23,6 +23,12 @@ query GetUserData {
       }
     }
   }
+
+  boosts: userGetGaugeBoosts {
+    poolId
+    gaugeAddress
+    boost
+  }
 }
 
 mutation UserSyncBalance($poolId: String!) {

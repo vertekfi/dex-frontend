@@ -103,7 +103,9 @@ export function TradeCard() {
               requiresApproval={!hasApprovalForSellAmount && !isNativeAssetUnwrap}
             />
           </Box>
-          <TokenInputSwapButton onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
+          <div className="animate__animated animate__zoomIn animate__delay-3s">
+            <TokenInputSwapButton onSwap={handleTokensSwitched} isLoading={isLoadingOrFetching} />
+          </div>
           <TokenInput
             ref={finalRefTokenOut}
             label="Buy"

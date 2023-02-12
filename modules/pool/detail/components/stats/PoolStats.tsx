@@ -28,13 +28,18 @@ export default function PoolStats() {
         <VStack height="full" spacing="4">
           {hasBpt && (
             <Tabs
-              width="full"
+              width="full" 
               variant="soft-rounded"
               display="flex"
+              justifyContent="space-between"
               onChange={handleTabChanged}
             >
-              <TabList>
-                <Box flexDirection="row"  paddingX="1" alignContent="flex-start" display="flex" justifyContent="flex-start" mb="4">
+              <TabList width="full">
+                <Box width="full" 
+                flexDirection="row"  
+                paddingX="1" 
+                justifyContent="space-between" display="flex" 
+                mb="4">
                   <BeetsTab paddingX="4" paddingY="2" fontSize="md">
                     My Stats
                   </BeetsTab>

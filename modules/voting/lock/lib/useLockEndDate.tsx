@@ -13,7 +13,10 @@ function getMaxLockEndDateTimestamp(date: number) {
   return startOfDay(timestamp).getTime();
 }
 
-export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; lockedEndDate: number }) {
+export function useLockEndDate(veBalLockInfo?: {
+  hasExistingLock: boolean;
+  lockedEndDate: number;
+}) {
   const [lockDate, setLockDate] = useState<string>('');
 
   const todaysDate = toUtcTime(new Date());
@@ -31,16 +34,17 @@ export function useLockEndDate(veBalLockInfo: { hasExistingLock: boolean; locked
 
   let isValidLockEndDate = false;
   if (lockDate) {
-    console.log('lock date changed: ' + lockDate);
-    const lockEndDateTimestamp = startOfDay(new Date(Number(lockDate))).getTime();
+    const lockEndDateTimestamp = startOfDay(new Date(lockDate)).getTime();
+
     isValidLockEndDate =
       lockEndDateTimestamp >= minLockEndDateTimestamp &&
       lockEndDateTimestamp <= maxLockEndDateTimestamp;
 
-    console.log('lockEndDateTimestamp: ' + lockEndDateTimestamp);
-    console.log('minLockEndDateTimestamp: ' + minLockEndDateTimestamp);
-    console.log('maxLockEndDateTimestamp: ' + maxLockEndDateTimestamp);
-    console.log('lock date valid?: ' + isValidLockEndDate);
+    // console.log('lock date changed: ' + lockDate);
+    // console.log('lockEndDateTimestamp: ' + lockEndDateTimestamp);
+    // console.log('minLockEndDateTimestamp: ' + minLockEndDateTimestamp);
+    // console.log('maxLockEndDateTimestamp: ' + maxLockEndDateTimestamp);
+    // console.log('lock date valid?: ' + isValidLockEndDate);
   }
 
   let isExtendedLockEndDate = false;

@@ -59,9 +59,11 @@ export function TransactionSubmittedContent({ query, confirmedMessage, showSpinn
                 <Box>
                     {confirmedMessage && (
                         <FadeInBox isVisible={query.isConfirmed}>
-                            <Alert status="success" borderRadius="md">
+                            <Alert backgroundColor="transparent" status="success" borderRadius="md">
                                 <AlertIcon />
+                                <Text color="white" fontSize=".85rem">
                                 {confirmedMessage}
+                                </Text>
                             </Alert>
                         </FadeInBox>
                     )}

@@ -1,4 +1,4 @@
-import { GridItem, Flex, SimpleGrid, Text, Box, HStack } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Text, Box, HStack } from '@chakra-ui/react';
 import {
   Accordion,
   AccordionItem,
@@ -16,28 +16,30 @@ export function StakingAccordion(props: { pool: RewardPool, poolInfo: any, price
   const priceOfToken = props.priceOfToken;
 
   return (
-    <GridItem colSpan={2}>
-      <Accordion allowToggle padding={4}>
-        <AccordionItem>
-          <AccordionButton _expanded={{}}>
-            <Box flex="1" textAlign="center">
-              Details
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
+    <Accordion allowToggle padding={4}>
+      <AccordionItem>
+        <AccordionButton _expanded={{}}>
+          <Box flex="1" textAlign="center">
+            Details
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
 
-          <AccordionPanel pb={10} bg="" borderRadius="20px">
-            <SimpleGrid
-              style={{ minWidth: '100%' }}
-              bg=""
-              borderRadius="20px"
-              columns={2}
-              spacing={7}
-              padding="4"
-              marginTop="4"
-            >
-              <Text textAlign="left" fontWeight="bold" >
-                Total Staked
+        <AccordionPanel>
+          <SimpleGrid
+            style={{ minWidth: '100%' }}
+            bg=""
+            borderRadius="20px"
+            columns={2}
+            spacing={5}
+            padding="4"
+          >
+            <Text textAlign="left" fontWeight="bold">
+              Total Staked
+            </Text>
+            <Flex direction="column">
+              <Text textAlign="right" fontWeight="bold">
+                ${pool.amountStakedValue || '0'}
               </Text>
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
@@ -69,25 +71,24 @@ export function StakingAccordion(props: { pool: RewardPool, poolInfo: any, price
                 </Text>
               </Flex> */}
 
-              <div />
-              <HStack justify="end">
-                <Text fontSize="1rem" textAlign="right">
-                  Project Info
-                </Text>
-                <ExternalLinkIcon />
-              </HStack>
+            <div />
+            <HStack justify="end">
+              <Text fontSize="1rem" textAlign="right">
+                Project Info
+              </Text>
+              <ExternalLinkIcon />
+            </HStack>
 
-              <div />
-              <HStack justify="end">
-                <Text fontSize="1rem" textAlign="right">
-                  Contract
-                </Text>
-                <ExternalLinkIcon />
-              </HStack>
-            </SimpleGrid>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </GridItem>
+            <div />
+            <HStack justify="end">
+              <Text fontSize="1rem" textAlign="right">
+                Contract
+              </Text>
+              <ExternalLinkIcon />
+            </HStack>
+          </SimpleGrid>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 }

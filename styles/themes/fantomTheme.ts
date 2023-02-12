@@ -393,7 +393,7 @@ export const fantomTheme: Partial<ChakraTheme> = {
                                 borderRadius: '8px',
                                 _hover: {
                                     color:'white',
-                                    boxShadow:'0 0 10px #5BC0F8, 0 0 20px #4A4AF6', 
+                                    boxShadow:'none', 
                                     background: '',  
                                     transform:'scale(1.02)' 
                                         }, 

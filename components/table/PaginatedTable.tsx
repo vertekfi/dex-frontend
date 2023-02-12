@@ -41,14 +41,14 @@ export function PaginatedTable({
   const isLoadingRows = loading && items.length === 0;
 
   return (
-    <Box {...rest} >
+    <Box {...rest}>
       {renderTableHeader()}
       <Box
-        mb={4}
-        borderBottomLeftRadius="16px"
-        borderBottomRightRadius="16px"
+        mb={0}
+        // borderBottomLeftRadius="16px"
+        // borderBottomRightRadius="16px"
         overflow="hidden"
-
+        boxShadow={{ base: 'none', md: '0px 24px 24px 2px #000' }}
       >
         {isLoadingRows && (
           <Flex justifyContent={'center'} py={32} bg="box.500">
@@ -72,24 +72,54 @@ export function PaginatedTable({
           ))}
       </Box>
       {!isInfinite && (
-        <Flex >
+        <Flex
+          bgColor="vertek.slate.900"
+          paddingBottom="4"
+          paddingTop="1"
+          borderBottomWidth="1px"
+          borderLeftWidth="1px"
+          borderRightWidth="1px"
+          borderTopWidth="0px"
+          borderBottomRadius="16px"
+          boxShadow="0 0 10px #000"
+          borderColor="vertek.slate.600"
+        >
           <Flex flex={1} alignItems="center" justifyContent="flex-start">
             {hidePageSizeChange ? null : (
               <>
                 <Box>
                   <Select
-                    style={{ borderRadius: '16px' }}
                     borderWidth="0px"
                     value={pageSize}
+                    bg="vertek.slatepurple.900"
+                    color="vertek.neonpurple.500"
+                    css={`
+                      & > option {
+                        background-color: #161626;
+                        color: #4a4af6;
+                        & > option:hover {
+                          background-color: black;
+                          color: #fff;
+                        }
+                      }
+                    `}
+                    variant="filled"
                     onChange={(event) => {
                       onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
                     }}
                   >
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    <option className="table" value="20">
+                      20
+                    </option>
+                    <option className="table" value="50">
+                      50
+                    </option>
+                    <option className="table" value="100">
+                      100
+                    </option>
                   </Select>
                 </Box>
+
                 <Text ml={2}>per page</Text>
               </>
             )}
@@ -117,7 +147,6 @@ export function PaginatedTable({
                     icon={<ChevronRight />}
                     borderTopLeftRadius={0}
                     borderBottomLeftRadius={0}
-                    borderBottomRightRadius={{base:'auto', lg:'16px'}}
                     backgroundColor="transparent"
                   />
                 );
@@ -130,7 +159,7 @@ export function PaginatedTable({
               const selected = pageNumber === currentPage;
 
               return (
-                <Button borderRadius={0} color={selected ? 'vertek.slatepurple.900' : undefined}>
+                <Button borderRadius={8} color="white" backgroundColor="transparent">
                   {element}
                 </Button>
               );
@@ -139,7 +168,7 @@ export function PaginatedTable({
         </Flex>
       )}
       {!isShort && isInfinite && (
-        <Flex justifyContent="center" width="full">
+        <Flex justifyContent="center" width="full" mt="5">
           <Button variant="primary" isLoading={fetchingMore} onClick={onFetchMore}>
             Load More
           </Button>

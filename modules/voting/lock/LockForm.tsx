@@ -12,7 +12,10 @@ import {
   FormControl,
   Input,
   FormLabel,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
+
 import {
   BeetsModalBody,
   BeetsModalHeader,
@@ -46,6 +49,7 @@ interface Props {
 export function LockForm(props: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lockType, setLockType] = useState<LockType[]>([]);
+  const [selectedDateOption, setSelectedDateOption] = useState<string>('');
 
   const {
     isLoadingUserVeData,
@@ -55,11 +59,12 @@ export function LockForm(props: Props) {
     percentOwned,
     expectedVeBal,
     lockEndDate,
+    lockedUntilDate,
+    lockedUntilDays,
     lockablePool,
     hasExistingLock,
     isExpired,
     lockedBalance,
-    refetchUserVeData,
   } = useUserVeData();
 
   const {
@@ -74,33 +79,61 @@ export function LockForm(props: Props) {
     lockedEndDate: lockEndDate,
   });
 
-  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
-    hasExistingLock: hasExistingLock || false,
-    lockedAmount: lockedBalance,
-  });
+  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount, totalLpTokens } =
+    useLockAmount({
+      hasExistingLock: hasExistingLock || false,
+      lockedAmount: lockedBalance,
+    });
 
+  const hasVaildLock = hasExistingLock && !isExpired;
   let submissionDisabled = true;
 
-  if (!bnum(userLockablePoolBalance || '0').gt(0) || !isValidLockAmount || !lockDate) {
-    submissionDisabled = true;
+  if (hasVaildLock) {
+    if (isIncreasedLockAmount || isExtendedLockEndDate) {
+      submissionDisabled = false;
+    } else {
+      submissionDisabled = true;
+    }
   } else {
-    submissionDisabled = false;
+    if (!bnum(userLockablePoolBalance || '0').gt(0) || !isValidLockAmount || !lockDate) {
+      submissionDisabled = true;
+    } else {
+      submissionDisabled = false;
+    }
+  }
+
+  let title = '';
+  if (hasVaildLock) {
+    title = 'Update VRTK-BNB lock';
+  } else {
+    title = 'Lock VRTK-BNB';
   }
 
   // Set lock type
   useEffect(() => {
     if (hasExistingLock && !isExpired) {
       if (isIncreasedLockAmount && isExtendedLockEndDate) {
-        setLockType([LockType.INCREASE_AMOUNT, LockType.EXTEND_LOCK]);
+        return setLockType([LockType.INCREASE_AMOUNT, LockType.EXTEND_LOCK]);
       }
+
       if (isExtendedLockEndDate) {
-        setLockType([LockType.EXTEND_LOCK]);
+        return setLockType([LockType.EXTEND_LOCK]);
       }
+
       if (isIncreasedLockAmount) {
         setLockType([LockType.INCREASE_AMOUNT]);
       }
     } else {
       setLockType([LockType.CREATE_LOCK]);
+    }
+  }, [isLoadingUserVeData, lockAmount, lockDate]);
+
+  // Set initial date if needed
+  useEffect(() => {
+    if (hasExistingLock) {
+      updateLockEndDate(lockEndDate);
+    } else {
+      updateLockEndDate(maxLockEndDateTimestamp);
     }
   }, [isLoadingUserVeData]);
 
@@ -110,12 +143,6 @@ export function LockForm(props: Props) {
 
   function handleShowPreviewModal() {
     setIsModalOpen(true);
-  }
-
-  function handleSuccess() {
-    refetchUserVeData();
-    setLockAmount('');
-    setLockDate('');
   }
 
   function getDateInput(timestamp: number) {
@@ -136,38 +163,58 @@ export function LockForm(props: Props) {
     // round up to thursday of the selected week?
   }
 
-  const expectedVeBalAmount = expectedVeBal(lockAmount || '0', lockDate);
+  function handleMaxClick() {
+    setLockAmount(userLockablePoolBalance || '0');
+  }
+
+  let expectedVeBalAmount = '0';
+  if (isValidLockAmount && lockDate) {
+    expectedVeBalAmount = expectedVeBal(lockAmount, lockDate);
+  }
 
   const lockDates = [
     {
       id: 'one-week',
       label: '~1W',
       date: getDateInput(minLockEndDateTimestamp),
-      action: () => updateLockEndDate(minLockEndDateTimestamp),
+      action: () => {
+        setSelectedDateOption('one-week');
+        updateLockEndDate(minLockEndDateTimestamp);
+      },
     },
     {
       id: 'one-month',
       label: '~1M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 4).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 4).getTime()),
+      action: () => {
+        setSelectedDateOption('one-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 4).getTime());
+      },
     },
     {
       id: 'three-month',
       label: '~3M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 12).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 12).getTime()),
+      action: () => {
+        setSelectedDateOption('three-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 12).getTime());
+      },
     },
     {
       id: 'six-month',
       label: '~6M',
       date: getDateInput(addWeeks(minLockEndDateTimestamp, 24).getTime()),
-      action: () => updateLockEndDate(addWeeks(minLockEndDateTimestamp, 24).getTime()),
+      action: () => {
+        setSelectedDateOption('six-month');
+        updateLockEndDate(addWeeks(minLockEndDateTimestamp, 24).getTime());
+      },
     },
     {
       id: 'one-year',
       label: '~1Y',
       date: formatDateInput(maxLockEndDateTimestamp),
       action: () => {
+        setSelectedDateOption('one-year');
         setLockDate(formatDateInput(maxLockEndDateTimestamp));
       },
     },
@@ -193,8 +240,8 @@ export function LockForm(props: Props) {
       >
         <ModalCloseButton />
         <BeetsModalHeader>
-          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="white" mb="" mt="-1rem">
-            Lock VRTK-BNB
+          <BeetsModalHeadline textAlign="center" fontSize="1.5rem" color="gray.100" mt="-1rem">
+            {title}
           </BeetsModalHeadline>
         </BeetsModalHeader>
 
@@ -202,211 +249,274 @@ export function LockForm(props: Props) {
           <Grid
             backgroundColor={{ base: 'rgba(0, 0, 0, 0.8)', md: 'transparent' }}
             pl={{ base: '0', md: '4' }}
-            pr={{ base: '0', md: '4' }}
+            pr={{ base: '2', md: '4' }}
             templateColumns={{ base: '1fr', md: '2fr 3fr 2fr' }}
             gap="4"
+            maxWidth="90vw"
           >
-            <GridItem
-              width={{ base: '90%', md: 'auto' }}
-              height={{ base: '90%', md: '50%' }}
-              m={{ base: '0', md: '2' }}
-              mt={{ base: '2', md: '12' }}
-              bgColor="vertek.slate.900"
+            <Card
+              flexDirection="column"
+              alignItems="center"
               borderRadius="16px"
+              height="375px"
+              padding="0"
+              marginTop={{ base: '0', md: '12' }}
+              boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
             >
-              <Text
-                align="left"
-                paddingX="4"
-                paddingY="2"
-                mb="4"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Lockable tokens in my wallet
-              </Text>
               <Box
+                width="90%"
                 display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                height="40%"
-                marginX="2"
-                mb="6"
-                padding="6"
-                bgColor="vertek.slatepurple.900"
+                padding="2"
+                alignItems="center"
+                justifyContent="center"
                 boxShadow="2px 24px 12px 0px #000"
-                borderRadius="12px"
+                borderRadius="md"
+                mb="4"
+                mt="2"
+                bgColor="vertek.slatepurple.900"
+              >
+                <Text
+                  align="center"
+                  paddingX="2"
+                  paddingY="4"
+                  fontWeight="bold"
+                  color="gray.100"
+                  lineHeight="1.1rem"
+                  fontSize="1.2rem"
+                >
+                  My Lockable VRTK-BNB
+                </Text>
+              </Box>
+              <Box
+                width="95%"
+                paddingX="4"
+                paddingY="4"
+                display="flex"
+                boxShadow="2px 24px 12px 0px #000"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
                 flexDirection="column"
               >
-                <Flex>
+                <Flex mb="3">
                   <Text fontSize="1rem" mr="auto">
                     VRTK-BNB
                   </Text>
-                  <Text fontSize="1rem" ml="auto">
-                    {userLockablePoolBalance}
+                  <Text fontSize="0.9rem" ml="auto">
+                    {(userLockablePoolBalance && parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                      'N/A'}
                   </Text>
                 </Flex>
-                <Flex>
+                <Flex mb="5">
                   <Text fontSize="1rem" mr="auto">
                     Vertek Governance
                   </Text>
-                  <Text fontSize="1rem" ml="auto">
+                  <Text fontSize="0.9rem" ml="auto">
                     {userLockablePoolBalanceUSD}
                   </Text>
                 </Flex>
-              </Box>
-
-              <Flex display="flex" justifyContent="center" alignItems="center" mt="8">
                 <Button
                   variant="verteklight"
                   as="a"
                   href={'pool/' + networkConfig.balancer.votingEscrow.lockablePoolId}
                   borderWidth="1px"
-                  width="90%"
+                  width="100%"
                   height="2.2rem"
                 >
                   Get VRTK-BNB
                 </Button>
-              </Flex>
-
+              </Box>
               <Box
-                padding="2"
-                borderRadius="16px"
-                bgColor="vertek.slate.900"
+                width="90%"
+                paddingX="1"
+                paddingBottom="4"
+                paddingTop="2"
+                display="flex"
                 boxShadow="2px 24px 12px 0px #000"
-                mb="4"
-                mt="4"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
+                flexDirection="column"
               >
                 <Text fontSize="1rem" mr="auto"></Text>
                 <Accordion allowToggle mb="4" padding={1}>
                   <AccordionItem>
-                    <AccordionButton color="white" _expanded={{}}>
-                      <AccordionIcon color="white" />
+                    <AccordionButton color="gray.100" _expanded={{}}>
+                      <AccordionIcon color="gray.100" />
                       <Box flex="1" textAlign="center">
                         How to lock
                       </Box>
-                      <AccordionIcon color="white" />
+                      <AccordionIcon color="gray.100" />
                     </AccordionButton>
 
                     <AccordionPanel
                       height={{ base: '40vh', md: 'auto' }}
                       bg="vertek.slatepurple.900"
-                      padding="4"
+                      paddingBottom="4"
+                      paddingX="1"
                       marginY="4"
                       borderRadius="16px"
-                      boxShadow="2px 12px 12px 0px #000"
+                      // boxShadow="2px 12px 12px 0px #000"
                     >
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         1. Invest in the VRTK-BNB pool.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         2. Lock VRTK-BNB to receive veVRTK.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         3. Receive boosted liquidity mining yields (up to 2.5x) and increased voting
                         power.
                       </Text>
-                      <Text align="left" color="white" fontSize="0.9rem" mb="0.5rem">
+                      <Text align="left" color="gray.100" fontSize="0.9rem" mb="0.5rem">
                         4. Choose which pool gauges get allocated liquidity mining incentives.
                       </Text>
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
               </Box>
-            </GridItem>
+            </Card>
 
-            <GridItem
-              width={{ base: '90%', md: 'auto' }}
-              mt={{ base: '3rem', md: 'auto' }}
-              bgColor="vertek.slate.900"
+            <Card
+              flexDirection="column"
+              alignItems="center"
               borderRadius="16px"
+              height="525px"
+              padding="0"
+              marginTop={{ base: '0', md: '2' }}
               boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
             >
-              <Text
-                align="left"
-                padding="2"
-                mb="4"
-                fontWeight="bold"
-                color="white"
-                fontSize="1.2rem"
-              >
-                Lock to get veVRTK
-              </Text>
               <Box
+                width="90%"
                 display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                marginX="2"
-                mb="6"
                 paddingX="2"
-                paddingY="4"
-                bgColor="vertek.slatepurple.900"
+                paddingY="1"
+                alignItems="center"
+                justifyContent="center"
                 boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
+                borderRadius="md"
+                mb="4"
+                mt="2"
+                bgColor="vertek.slatepurple.900"
+              >
+                <Text
+                  align="center"
+                  paddingX="2"
+                  paddingY="4"
+                  fontWeight="bold"
+                  color="gray.100"
+                  lineHeight="1.1rem"
+                  fontSize="1.2rem"
+                >
+                  {title}
+                </Text>
+              </Box>
+              <Box
+                width="95%"
+                paddingX="4"
+                paddingY="3"
+                display="flex"
+                boxShadow="2px 24px 12px 0px #000"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="2"
+                borderRadius="md"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   How much do you want to lock?
                 </Text>
 
-                <FormControl mb="4">
-                  <Input
-                    focusBorderColor="vertek.neonpurple.500"
-                    id="voteWeight"
-                    name="voteWeight"
-                    type="number"
-                    value={lockAmount}
-                    onChange={(event) => setLockAmount(event.target.value)}
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    step="any"
-                    placeholder={userLockablePoolBalance || '0.00'}
-                    size="md"
-                    fontWeight="bold"
-                  />
-                  <FormLabel mt="2" mb="4" color="white" fontWeight="bold">
-                    {userLockablePoolBalance} shares available
-                  </FormLabel>
-                </FormControl>
+                <InputGroup>
+                  <FormControl mb="1">
+                    <Input
+                      focusBorderColor="vertek.neonpurple.500"
+                      id="voteWeight"
+                      name="voteWeight"
+                      type="number"
+                      value={lockAmount}
+                      onChange={(event) => setLockAmount(event.target.value)}
+                      autoComplete="off"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      step="any"
+                      placeholder={
+                        (userLockablePoolBalance &&
+                          parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                        'N/A'
+                      }
+                      size="md"
+                      fontWeight="bold"
+                    />
+                    <FormLabel mt="1" mb="1" color="gray.100" fontWeight="bold">
+                      {(userLockablePoolBalance &&
+                        parseFloat(userLockablePoolBalance).toFixed(4)) ||
+                        'N/A'}{' '}
+                      VRTK-BNB available
+                    </FormLabel>
+                  </FormControl>
+                  <InputRightElement width="4.5rem">
+                    <Button
+                      variant="verteklight"
+                      borderWidth="1px"
+                      h="1.75rem"
+                      size="sm"
+                      onClick={handleMaxClick}
+                    >
+                      Max
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
               </Box>
 
               <Box
+                width="95%"
+                paddingX="4"
+                paddingY="3"
                 display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                mb="6"
-                mx="2"
-                paddingX="2"
-                paddingY="4"
-                bgColor="vertek.slatepurple.900"
                 boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
                 flexDirection="column"
               >
-                <Text align="left" mb="0" fontWeight="normal" color="white" fontSize="1rem">
+                <Text align="left" mb="0" fontWeight="normal" color="gray.100" fontSize="1rem">
                   Lock until
                 </Text>
                 <FormControl mb="2">
                   <Input
                     placeholder="Select Date and Time"
+                    focusBorderColor="vertek.neonpurple.500"
                     size="md"
                     type="date"
                     value={lockDate}
                     onChange={(event) => handleDateChanged(event.target.value)}
+                    min={formatDateInput(minLockEndDateTimestamp)}
+                    max={formatDateInput(maxLockEndDateTimestamp)}
                   />
                   <Box
-                    w="99%"
+                    w="100%"
                     paddingY="2"
-                    mt="2"
-                    paddingX={{ base: 'none', md: '1' }}
+                    mt="1"
+                    paddingX={{ base: 'none', md: '0' }}
                     justifyContent="space-between"
                     display="flex"
                   >
                     {minLockEndDateTimestamp < maxLockEndDateTimestamp &&
                       lockDates?.map((lockDate, i) => {
                         return (
-                          <Button key={i} variant="stayblacklock" onClick={lockDate.action}>
+                          <Button
+                            key={i}
+                            width="100%"
+                            height="2rem"
+                            variant={
+                              selectedDateOption === lockDate.id ? 'verteklight' : 'stayblacklock'
+                            }
+                            onClick={lockDate.action}
+                          >
                             {lockDate.label}
                           </Button>
                         );
@@ -416,34 +526,33 @@ export function LockForm(props: Props) {
               </Box>
 
               <Box
+                width="95%"
+                paddingX="4"
+                paddingY="4"
                 display="flex"
-                justifyContent="space-between"
-                alignItems="space-between"
-                mb="6"
-                mx="2"
-                padding="4"
-                paddingY="6"
-                bgColor="vertek.slatepurple.900"
                 boxShadow="2px 24px 12px 0px #000"
-                borderRadius="16px"
+                bgColor="vertek.slatepurple.900"
+                justifyContent="center"
+                mb="6"
+                borderRadius="md"
                 flexDirection="column"
               >
                 <Flex>
-                  <Text fontSize="0.9rem" mr="auto">
+                  <Text fontSize="0.9rem" fontWeight="bold" mr="auto">
                     Total Voting Escrow
                   </Text>
-                  <Text fontSize="0.9rem" ml="auto">
-                    {/* <div>{tokenFormatAmount(expectedVeBalAmount || '0')} - veVRTK</div> */}
-                    <div>{expectedVeBalAmount} - veVRTK</div>
+                  <Text fontWeight="bold" fontSize="0.9rem" ml="auto">
+                    {(expectedVeBalAmount && parseFloat(expectedVeBalAmount).toFixed(4)) || 'N/A'}{' '}
+                    veVRTK
+                    {/* <div>{expectedVeBalAmount || '0'} - veVRTK</div> */}
                   </Text>
                 </Flex>
               </Box>
               <Button
                 onClick={handleShowPreviewModal}
                 variant="stayblack"
-                _hover={{ boxShadow: '0 28px 12px rgba(0, 0, 0, 1)', borderColor: 'white' }}
                 mb="4"
-                width={{ base: '85%', md: '90%' }}
+                width={{ base: '85%', md: '60%' }}
                 disabled={submissionDisabled}
               >
                 Preview
@@ -451,10 +560,9 @@ export function LockForm(props: Props) {
               {isModalOpen && (
                 <LockPreviewModal
                   isOpen={isModalOpen}
-                  onSucess={handleSuccess}
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
-                  totalLpTokens={lockAmount || '0'}
+                  totalLpTokens={totalLpTokens}
                   lockEndDate={lockDate}
                   lockablePool={lockablePool}
                   lockAmount={lockAmount || '0'}
@@ -462,27 +570,23 @@ export function LockForm(props: Props) {
                   currentVeBalance={currentVeBalance || '0'}
                 />
               )}
-            </GridItem>
+            </Card>
 
             <Card
               flexDirection="column"
-              borderRadius="16px"
-              height="200px"
-              padding="4"
               alignItems="center"
-              justifyContent="center"
-              marginTop="5rem"
+              borderRadius="16px"
+              height="190"
+              display="flex"
+              padding="2"
+              marginTop={{ base: '0', md: '28' }}
               boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-              css={{
-                transition: 'transform 0.5s',
-                '&:hover': {
-                  transform: 'scale(1.01)',
-                },
-              }}
             >
               <MyVeVRTK
                 currentVeBalance={currentVeBalance || ''}
-                percentOwned={percentOwned || ''}
+                percentOwned={percentOwned || '0'}
+                lockedUntilDate={lockedUntilDate || '-'}
+                lockedUntilDays={lockedUntilDays || 0}
               />
             </Card>
           </Grid>

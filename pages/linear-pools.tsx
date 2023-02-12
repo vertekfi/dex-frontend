@@ -46,20 +46,20 @@ function LinearPools() {
   );
 }
 
-export async function getStaticProps() {
-  const client = initializeApolloClient();
+// export async function getStaticProps() {
+//   const client = initializeApolloClient();
 
-  return loadApolloState({
-    client,
-    pageSetup: async () => {
-      await client.query<GetPoolsQuery, GetPoolsQueryVariables>({
-        query: GetPools,
-        variables: DEFAULT_POOL_LIST_QUERY_VARS,
-      });
+//   return loadApolloState({
+//     client,
+//     pageSetup: async () => {
+//       await client.query<GetPoolsQuery, GetPoolsQueryVariables>({
+//         query: GetPools,
+//         variables: DEFAULT_POOL_LIST_QUERY_VARS,
+//       });
 
-      await client.query({ query: GetPoolFilters });
-    },
-  });
-}
+//       await client.query({ query: GetPoolFilters });
+//     },
+//   });
+// }
 
 export default LinearPools;
