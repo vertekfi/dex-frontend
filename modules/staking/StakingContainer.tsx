@@ -43,16 +43,16 @@ export function StakingContainer() {
         {
           pools.map((p) => {
             return (
-              <GridItem
-                className="blk"
-                boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-                borderRadius="18px"
-                maxW="550px"
-                color="white"
-                key={p?.address}
-              >
-                <StakingCard key={p?.address} pool={p} />
-              </GridItem>
+              // <GridItem
+              //   className="blk"
+              //   boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
+              //   borderRadius="18px"
+              //   maxW="550px"
+              //   color="white"
+              //   key={p?.address}
+              // >
+                <StakingCard key={p?.rewardToken.address} pool={p} />
+              // </GridItem>
             );
           })}
         {/* <StakingCard key={p?.address} pool={p} /> */}

@@ -23,51 +23,51 @@ type GaugePool {
 
 type GaugeShare {
   """
-  User's balance of gauge deposit tokens
+   User's balance of gauge deposit tokens
   """
   balance: BigDecimal!
 
   """
-  Equal to: <userAddress>-<gaugeAddress>
+   Equal to: <userAddress>-<gaugeAddress>
   """
   id: ID!
 
   """
-  Reference to User entity
+   Reference to User entity
   """
   user: User!
 }
 
 type GaugeType {
   """
-  Type ID
+   Type ID
   """
   id: ID!
 
   """
-  Name of the type - empty string if call reverts
+   Name of the type - empty string if call reverts
   """
   name: String!
 }
 
 type GaugeVote {
   """
-  Equal to: <userAddress>-<gaugeAddress>
+   Equal to: <userAddress>-<gaugeAddress>
   """
   id: ID!
 
   """
-  Timestamp at which user voted [seconds]
+   Timestamp at which user voted [seconds]
   """
   timestamp: BigInt
 
   """
-  Reference to User entity
+   Reference to User entity
   """
   user: User!
 
   """
-  Weight of veBAL power user has used to vote
+   Weight of veBAL power user has used to vote
   """
   weight: BigDecimal
 }
@@ -1063,49 +1063,49 @@ scalar JSON
 
 type LiquidityGauge {
   """
-  Address of the pool (lp_token of the gauge)
+   Address of the pool (lp_token of the gauge)
   """
   address: String!
   depositFee: Int!
   factory: GaugeFactory
 
   """
-  LiquidityGauge contract address
+   LiquidityGauge contract address
   """
   id: ID!
 
   """
-  Whether Balancer DAO killed the gauge
+   Whether Balancer DAO killed the gauge
   """
   isKilled: Boolean!
 
   """
-  Reference to Pool entity
+   Reference to Pool entity
   """
   pool: GaugePool!
 
   """
-  Pool ID if lp_token is a Balancer pool; null otherwise
+   Pool ID if lp_token is a Balancer pool; null otherwise
   """
   poolId: String!
 
   """
-  List of reward tokens depositted in the gauge
+   List of reward tokens depositted in the gauge
   """
   rewardTokens: [RewardToken!]!
 
   """
-  List of user shares
+   List of user shares
   """
   shares: [GaugeShare!]!
 
   """
-  ERC20 token symbol
+   ERC20 token symbol
   """
   symbol: String!
 
   """
-  Total of BPTs users have staked in the LiquidityGauge
+   Total of BPTs users have staked in the LiquidityGauge
   """
   totalSupply: BigDecimal!
   withdrawFee: Int!
@@ -1282,101 +1282,101 @@ type RewardPoolUserInfo {
 
 type RewardToken {
   """
-  ERC20 token decimals - zero if call to decimals() reverts
+   ERC20 token decimals - zero if call to decimals() reverts
   """
   decimals: Int!
 
   """
-  Equal to: <tokenAddress>-<gaugeAddress>
+   Equal to: <tokenAddress>-<gaugeAddress>
   """
   id: ID!
   logoURI: String!
 
   """
-  Timestamp at which finishes the period of rewards
+   Timestamp at which finishes the period of rewards
   """
   periodFinish: BigInt
 
   """
-  Rate of reward tokens streamed per second
+   Rate of reward tokens streamed per second
   """
   rewardPerSecond: BigDecimal!
 
   """
-  ERC20 token symbol - empty string if call to symbol() reverts
+   ERC20 token symbol - empty string if call to symbol() reverts
   """
   symbol: String!
   tokenAddress: String!
 
   """
-  Amount of reward tokens that has been deposited into the gauge
+   Amount of reward tokens that has been deposited into the gauge
   """
   totalDeposited: BigDecimal!
 }
 
 type User {
   """
-  List of gauge the user has shares
+   List of gauge the user has shares
   """
   gaugeShares: [GaugeShare!]
 
   """
-  List of votes on gauges
+   List of votes on gauges
   """
   gaugeVotes: [GaugeVote!]
 
   """
-  User address
+   User address
   """
   id: ID!
 
   """
-  List of locks the user created
+   List of locks the user created
   """
   votingLocks: [VotingEscrowLock!]
 }
 
 type VotingEscrow {
   """
-  VotingEscrow contract address
+   VotingEscrow contract address
   """
   id: ID!
 
   """
-  List of veBAL locks created
+   List of veBAL locks created
   """
   locks: [VotingEscrowLock!]
 
   """
-  Amount of B-80BAL-20WETH BPT locked
+   Amount of B-80BAL-20WETH BPT locked
   """
   stakedSupply: BigDecimal!
 }
 
 type VotingEscrowLock {
   """
-  Equal to: <userAdress>-<votingEscrow>
+   Equal to: <userAdress>-<votingEscrow>
   """
   id: ID!
 
   """
-  Amount of B-80BAL-20WETH BPT the user has locked
+   Amount of B-80BAL-20WETH BPT the user has locked
   """
   lockedBalance: BigDecimal!
 
   """
-  Timestamp at which B-80BAL-20WETH BPT can be unlocked by user [seconds]
+   Timestamp at which B-80BAL-20WETH BPT can be unlocked by user [seconds]
   """
   unlockTime: BigInt
   updatedAt: Int!
 
   """
-  Reference to User entity
+   Reference to User entity
   """
   user: User!
 
   """
-  Reference to VotingEscrow entity
+   Reference to VotingEscrow entity
   """
   votingEscrowID: VotingEscrow!
 }

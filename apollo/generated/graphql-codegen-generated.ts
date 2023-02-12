@@ -1392,7 +1392,6 @@ export interface RewardPool {
   isPartnerPool: Scalars['Boolean'];
   rewardToken: RewardPoolRewardToken;
   startBlock: Scalars['Int'];
-  poolId: Scalars['Int'];
   userInfo?: Maybe<RewardPoolUserInfo>;
 }
 

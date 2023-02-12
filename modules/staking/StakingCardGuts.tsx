@@ -54,7 +54,7 @@ export function StakingCardGuts(props: {
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
 
-  console.log('pricesResponse', pricesResponse);
+  // console.log('pricesResponse', pricesResponse);
 
   // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
 
@@ -206,7 +206,7 @@ export function StakingCardGuts(props: {
         </GridItem>
       </SimpleGrid>
 
-      {/* <RewardPoolDepositModal
+      <RewardPoolDepositModal
         isOpen={isDepositOpen}
         onOpen={onDepositOpen}
         onClose={onDepositClose}
@@ -230,7 +230,7 @@ export function StakingCardGuts(props: {
         onOpen={onWithdrawNftOpen}
         onClose={onWithdrawNftClose}
         pool={pool}
-      /> */}
+      />
     </>
   );
 }

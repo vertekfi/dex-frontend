@@ -103,6 +103,10 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
     }
   }, [isOpen]);
 
+
+  console.log('isOpen', isOpen)
+  console.log('userVrtkBalance', userVrtkBalance)
+
   return (
     <Modal
       isOpen={isOpen}
