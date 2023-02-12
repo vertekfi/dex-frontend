@@ -48,35 +48,35 @@ export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBa
 
 return (
 <>
-<Box display="flex" flexDirection="row" width="full" mt="4" gap="2">
-    <Box display="flex" flexDirection="column" alignItems="flex-start" padding="0" width="50%">
+<Box display="flex" flexDirection="column" width="full" mt="4" gap="2">
+    <Box display="flex" flexDirection="column" alignItems="center" padding="0" width="100%">
         <InfoButton
             labelProps={{
-                lineHeight: '1rem',
+                lineHeight: '1.3rem',
                 fontWeight: 'semibold',
-                fontSize: '0.9rem',
+                fontSize: '1.3rem',
                 color: '#ccc',
             }}
             label="My staked share"
             infoText={`The size of your stake relative to all value staked in this pool. 
             Your staked share represents the percent of liquidity incentives you are entitled to.`}
         />
-        <Box alignItems="flex-start"  >
+        <Box alignItems="center" display="flex" flexDirection="column"  >
             {isLoadingStake ? (
                 <Skeleton height="34px" width="140px" />
             ) : (
-                <Text color="vertek.neonpurple.500" fontSize="1.1rem" fontWeight="bold" >
+                <Text color="vertek.neonpurple.500" fontSize="1.3rem" fontWeight="bold" >
                     {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
                 </Text>
             )}
             {isLoadingStake ? (
                 <Skeleton height="16px" width="45px" />
             ) : (
-                <Text fontSize="1.1rem" color="#ccc" fontWeight="bold" lineHeight="1rem">
+                <Text fontSize="1.0rem" color="#ccc" fontWeight="bold" lineHeight="1.3rem">
                     {numeral(userStakedBptBalance).format('0.00a')}
                     {' / '}
                     {numeral(data).format('0.00a')}{' '}
-                    <Text as="span" fontSize="0.9rem" color="#ccc" >
+                    <Text as="span" fontSize="1.0rem" color="#ccc" >
                         VPT
                     </Text>
                 </Text>
@@ -84,13 +84,13 @@ return (
         </Box>
     </Box>
     
-    <Box display="flex" flexDirection="column" alignItems="flex-end" width="55%" padding="0" >
+    <Box display="flex" flexDirection="column" alignItems="center" width="100%" mt="4rem" padding="0" >
         <InfoButton
             labelProps={{
-                lineHeight: '1rem',
+                lineHeight: '1.3rem',
                 textAlign:'end', 
                 fontWeight: 'semibold',
-                fontSize: '0.9rem', 
+                fontSize: '1.3rem', 
                 color: '#ccc',
             }}
             label="My potential daily yield"
@@ -100,7 +100,7 @@ return (
         {isLoadingPendingRewards ? (
             <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
         ) : (
-            <Text color="vertek.neonpurple.500" fontWeight="bold" fontSize="1.1rem">
+            <Text color="vertek.neonpurple.500" fontWeight="bold" fontSize="1.3rem">
                 {numberFormatUSDValue(dailyYieldUSD)}
             </Text>
         )}

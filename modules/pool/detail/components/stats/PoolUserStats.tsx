@@ -28,7 +28,7 @@ export default function PoolUserStats() {
             lineHeight="1rem"
             fontWeight="bold"
             textAlign="center"
-            fontSize="1.2rem"
+            fontSize="1.3rem"
             color="#ccc"
           >
             My Liquidity
@@ -49,13 +49,13 @@ export default function PoolUserStats() {
         flexDirection="column" 
         alignItems="flex-start"
         justifyContent="center">
-          <Text  fontWeight="bold" fontSize="1.2rem" color="#ccc">
+          <Text  fontWeight="bold" fontSize="1.3rem" color="#ccc">
             APR Range 
           </Text>
           <AprTooltip onlySparkles poolId={pool.id} data={pool.dynamicData.apr} />
         </Box>
         <Box display="flex" width="50%" flexDirection="column" justifyContent="flex-end" alignItems="flex-end" my="2rem" >
-        <Text textAlign="right"  fontWeight="bold" fontSize="1.2rem" color="#ccc">
+        <Text textAlign="right"  fontWeight="bold" fontSize="1.3rem" color="#ccc">
           My APR
         </Text>
         <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>

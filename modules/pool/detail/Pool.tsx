@@ -23,7 +23,7 @@ export function Pool() {
   return (
     <Box marginBottom="8">
       <PoolHeader />
-      <Box width="full" marginY="2">
+      <Box width="full" marginY="1">
         {pool.staking && <PoolStakeInFarmWarning />}
         <Box
           width="full"
@@ -33,12 +33,16 @@ export function Pool() {
           marginBottom="4"
           paddingY={{ base: '0', lg: '3' }}
         >
-          <Box width={{ base: '75%', lg: '25%' }} mb={{ base: '2rem', lg: '0' }}>
-            <Text fontWeight="bold" fontSize="1.1rem" textAlign="center" color="gray.100" mb="1">
+          <Box width={{ base: '100%', lg: '20%' }} mb={{ base: '2rem', lg: '0' }}
+          flexDirection={{ base: 'column', lg: 'row' }}
+          >
+            <Text fontWeight="bold" fontSize="1.1rem" textAlign="center" color="#ccc" mb="1">
               Provide Liquidity
             </Text>
-            <PoolInvestModal />
-            <PoolWithdrawModal />
+            <Box display="flex" flexDirection="row" justifyContent="space-between" gap={{base:'2', md:'0'}}>
+                <PoolInvestModal />
+                <PoolWithdrawModal />
+            </Box>
           </Box>
 
           {isMainPool ? (
@@ -89,14 +93,14 @@ export function Pool() {
             </GridItem>
           ) : (
             <Box
-              width={{ base: 'auto', lg: '25%' }}
+              width={{ base: 'auto', lg: '20%' }}
               display={{ base: 'flex', lg: 'block' }}
               flexDirection={{ base: 'column', lg: 'row' }}
             >
-              <Text fontWeight="bold" fontSize="1.1rem" mb="2" textAlign="center" color="gray.100">
+              <Text fontWeight="bold" fontSize="1.1rem" mb="1" textAlign="center" color="#ccc" >
                 Stake VPT Tokens
               </Text>
-              <Box display="flex" flexDirection="row" justifyContent="center">
+              <Box display="flex" flexDirection="row" justifyContent="space-between" gap={{base:'2', md:'0'}}>
                 <PoolStakeModal />
                 <PoolUnstakeModal />
               </Box>
@@ -105,10 +109,10 @@ export function Pool() {
                 <Text
                   fontSize="0.8rem"
                   textAlign="center"
-                  mt="2"
+                  mt="0"
                   width="50%"
                   color="gray.100"
-                  ml={{ base: 'auto', lg: '3' }}
+                  ml={{ base: 'auto', lg: '0' }}
                 >
                   Deposit fee:&nbsp;
                   {numeral(depositFee / 10000).format('0.0%')}
@@ -116,8 +120,8 @@ export function Pool() {
                 <Text
                   fontSize="0.8rem"
                   textAlign="center"
-                  mr={{ base: 'auto', lg: '6' }}
-                  mt="2"
+                  mr={{ base: 'auto', lg: '0' }}
+                  mt="0"
                   width="50%"
                   color="gray.100"
                 >
