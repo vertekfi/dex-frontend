@@ -4,7 +4,7 @@ import { useSubmitTransaction } from '~/lib/util/useSubmitTransaction';
 import { useRewardPools } from './useRewardPoolStaking';
 
 export function useRewardPoolWithdraw(address: string) {
-  const { refetchPools } = useRewardPools();
+  //const { refetchPools } = useRewardPools();
 
   const { submitAsync, ...rest } = useSubmitTransaction({
     config: {
@@ -22,7 +22,7 @@ export function useRewardPoolWithdraw(address: string) {
       walletText: `Deposit ${tokenFormatAmount(amount)} VRTK into staking pool`,
     });
 
-    refetchPools();
+    //  refetchPools();
   }
 
   return {
