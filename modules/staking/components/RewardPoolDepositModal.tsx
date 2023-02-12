@@ -37,13 +37,13 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
 
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
-    // address: vrtkAddress,
-    address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
-    // symbol: 'VRTK',
-    symbol: 'LSHARE',
+    address: vrtkAddress,
+    // address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
+    symbol: 'VRTK',
+    // symbol: 'LSHARE',
     decimals: 18,
-    // name: 'Vertek',
-    name: 'Lshare',
+    name: 'Vertek',
+    // name: 'Lshare',
   };
 
   const {
@@ -60,8 +60,8 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
   } = useUserTokenBalances();
   const { approve, ...approveQuery } = useApproveToken(vrtkInfo);
 
-  const userVrtkBalance = getUserBalance(('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA').toLowerCase());
-  // const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
+  // const userVrtkBalance = getUserBalance(('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA').toLowerCase());
+  const userVrtkBalance = getUserBalance(vrtkAddress.toLowerCase());
   // debugger;
   const userAmount = oldBnumToHumanReadable(
     oldBnumScaleAmount(getUserBalance(userVrtkBalance)).times(percent).div(100),
@@ -73,8 +73,8 @@ export function RewardPoolDepositModal({ isOpen, onOpen, onClose, pool }: Props)
 
   useEffect(() => {
     if (!loading) {
-      // const hasApproval = hasApprovalForAmount(vrtkAddress, userVrtkBalance);
-      const hasApproval = hasApprovalForAmount('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA', userVrtkBalance);
+      const hasApproval = hasApprovalForAmount(vrtkAddress, userVrtkBalance);
+      // const hasApproval = hasApprovalForAmount('0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA', userVrtkBalance);
 
       setSteps([
         ...(!hasApproval

@@ -16,7 +16,7 @@ export function useApproveNFT(token: TokenBase) {
     });
 
     // constract to approve is the staking contract
-    function approve(contractToApprove = '0x19bBBb12A638e7C460962606f27C878E4B91e232', tokenId: string) {
+    function approve(contractToApprove = '0xDBC838Ee888407815889d5603bc679A81715F928', tokenId: string) {
         submit({
             args: [contractToApprove, tokenId],
             toastText: `Approve ${token.symbol}`,

@@ -30,19 +30,19 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
   const account = getAccount()
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
-    // address: vrtkAddress,
-    address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
-    // symbol: 'VRTK',
-    symbol: 'LSHARE',
+    address: vrtkAddress,
+    // address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
+    symbol: 'VRTK',
+    // symbol: 'LSHARE',
     decimals: 18,
-    // name: 'Vertek',
-    name: 'Lshare',
+    name: 'Vertek',
+    // name: 'Lshare',
   };
 
   useEffect(() => {
     if(!account.address) return;
     readContract({
-      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
       // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
       contractInterface: StakingNFTPools,
       chainId: 56,

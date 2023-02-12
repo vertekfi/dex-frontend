@@ -12,15 +12,27 @@ import { readContract, getAccount } from '@wagmi/core';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
-export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: any, aprDaily: any, priceOfToken: any }) {
+export function StakingCardGuts(props: {
+  pool: RewardPool;
+  poolInfo: any;
+  apr: any;
+  aprDaily: any;
+  priceOfToken: any;
+  boostedAprDaily: any;
+}) {
   const pool = props.pool;
   const poolInfo = props.poolInfo;
   const apr = props.apr;
   const aprDaily = props.aprDaily;
+  const boostedAprDaily = props.boostedAprDaily;
   const priceOfToken = props.priceOfToken;
 
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
-  const { isOpen: isDepositNftOpen, onOpen: onDepositNftOpen, onClose: onDepositNftClose } = useDisclosure();
+  const {
+    isOpen: isDepositNftOpen,
+    onOpen: onDepositNftOpen,
+    onClose: onDepositNftClose,
+  } = useDisclosure();
   const {
     isOpen: isWithdrawOpen,
     onOpen: onWithdrawOpen,
@@ -35,7 +47,7 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdraw(pool.address);
 
-  const account = getAccount()
+  const account = getAccount();
   const [userInfo, setUserInfo] = useState<any>();
   const [userTokens, setUserTokens] = useState<string>();
   const [userUnclaimedRewards, setUserUnclaimedRewards] = useState<string>();
@@ -45,7 +57,7 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
   console.log('pricesResponse', pricesResponse);
 
   // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
-  
+
   const priceOfTokenRewards =
     pricesResponse &&
     pricesResponse.tokenPrices
@@ -53,9 +65,9 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
       .price.toFixed(2);
 
   useEffect(() => {
-    if(!account.address) return;
+    if (!account.address) return;
     readContract({
-      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
@@ -67,16 +79,19 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
   }, [account]);
 
   useEffect(() => {
-    if(!account.address) return;
+    if (!account.address) return;
     readContract({
-      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'pendingRewards',
       args: [0, account.address],
     }).then((res) => {
       setUserUnclaimedRewards(
-        parseFloat(formatUnits((res.xbooReward).toString(), 18)+ formatUnits((res.magicatReward).toString(), 18)).toFixed(2),
+        parseFloat(
+          formatUnits(res.xbooReward.toString(), 18) +
+            formatUnits(res.magicatReward.toString(), 18),
+        ).toFixed(2),
       );
     });
   }, [account]);
@@ -101,6 +116,9 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
           </Text>
           <Text fontSize="0.7rem" textAlign="right">
             {aprDaily}% Daily
+          </Text>
+          <Text fontSize=".8rem" textAlign="right" style={{ color: 'red' }}>
+            +{boostedAprDaily.toFixed(2)}% Daily with NFT
           </Text>
         </Flex>
 
@@ -194,7 +212,7 @@ export function StakingCardGuts(props: { pool: RewardPool, poolInfo: any, apr: a
         onClose={onDepositClose}
         pool={pool}
       />
-        <RewardPoolNftDepositModal
+      <RewardPoolNftDepositModal
         isOpen={isDepositNftOpen}
         onOpen={onDepositNftOpen}
         onClose={onDepositNftClose}

@@ -7,18 +7,33 @@ export function StakingContainer() {
   const { pools } = useRewardPools();
 
   // dummy numbers
-  const p = {
+  const p = [
+    {
     __typename: 'RewardPool',
-    address: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+    address: '0xDBC838Ee888407815889d5603bc679A81715F928',
     poolId: 0,
     isPartnerPool: false,
     rewardToken: {
-      address: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
-      logoURI: 'DAI.png',
-      name: 'DAI',
-      symbol: 'DAI',
+      address: '0x50d8d7f7ccea28cc1c9ddb996689294dc62569ca',
+      logoURI: 'LSHARE.png',
+      name: 'LSHARE',
+      symbol: 'LSHARE',
     },
-  };
+  },
+    {
+    __typename: 'RewardPool',
+    address: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    poolId: 1,
+    isPartnerPool: false,
+    rewardToken: {
+      address: '0x3CC9E655B6c4f530DFc1b1fC51CeEa65c6344716',
+      logoURI: 'LION.png',
+      name: 'LION',
+      symbol: 'LION',
+    },
+  }
+
+]
 
   return (
     <UserTokenBalancesProvider>
@@ -26,11 +41,11 @@ export function StakingContainer() {
         Stake VRTK to earn rewards
       </Text>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 3 }} paddingX={8} paddingY={4} spacing={35}>
-        {/* {pools.length &&
+        {pools.length &&
           pools.map((p) => {
             return <StakingCard key={p?.address} pool={p} />;
-          })} */}
-        <StakingCard key={p?.address} pool={p} />
+          })}
+        {/* <StakingCard key={p?.address} pool={p} /> */}
       </SimpleGrid>
     </UserTokenBalancesProvider>
   );

@@ -6,20 +6,24 @@ import { StakingAccordion } from './StakingAccordion';
 import { RewardPool, useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import Vertek from '~/assets/svg/vertektransparent.svg';
 import { readContract } from '@wagmi/core';
+import { useAccount } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
 export function StakingCard(props: { pool: RewardPool | null }) {
   const pool = props.pool;
+  const query = useAccount();
 
   const [poolInfo, setPoolInfo] = useState<any>();
   const [apr, setApr] = useState<string>();
   const [aprDaily, setAprDaily] = useState<string>();
+  const [boostedAprDaily, setBoostedAprDaily] = useState<number>();
 
   const basePath = '/images/stakingPools/';
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
 
+  //0xed236c32f695c83efde232c288701d6f9c23e60e = vertek
   const priceOfToken =
     pricesResponse &&
     pricesResponse.tokenPrices
@@ -27,21 +31,22 @@ export function StakingCard(props: { pool: RewardPool | null }) {
       .price.toFixed(2);
 
   useEffect(() => {
-    if (!priceOfToken) return;
+    if (!priceOfToken || !query.address || !pool) return;
     readContract({
-      addressOrName: '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'poolInfo',
-      args: [0],
+      args: [pool.poolId],
     }).then((res) => {
+      const nftStaked = parseInt(res.mpStakedAmount.toString())
       const rewardsPerDay = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
       const stakedAmount = formatUnits(res.xBooStakedAmount, 18);
       // NEED TO ADD IN THE PRICE OF THE REWARDS IN THE NUMERATOR
       const apr = (
         (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
         parseFloat(priceOfToken) *
-        100
+        100 *.9
       )
         .toFixed(2)
         .toString();
@@ -49,15 +54,21 @@ export function StakingCard(props: { pool: RewardPool | null }) {
         (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
         parseFloat(priceOfToken) *
         365 *
-        100
+        100*.9
       )
         .toFixed(2)
         .toString();
+      const boostedAPRD = 1/(nftStaked) * (
+        (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
+        parseFloat(priceOfToken) *
+        100*.1
+      )
       setAprDaily(apr);
+      setBoostedAprDaily(boostedAPRD);
       setApr(aprYearly);
       setPoolInfo(res);
     });
-  }, [priceOfToken]);
+  }, [priceOfToken, query.address]);
 
   return pool ? (
     <>
@@ -110,6 +121,7 @@ export function StakingCard(props: { pool: RewardPool | null }) {
             apr={apr}
             aprDaily={aprDaily}
             priceOfToken={priceOfToken}
+            boostedAprDaily={boostedAprDaily}
           />
           <StakingAccordion pool={pool} poolInfo={poolInfo} priceOfToken={priceOfToken}/>
         </GridItem>

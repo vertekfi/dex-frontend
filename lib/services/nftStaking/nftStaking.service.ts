@@ -109,8 +109,8 @@ export default class nftStakingService {
 }
 
 // export const nftStakingContract = new nftStakingService(
-//   '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+//   '0xDBC838Ee888407815889d5603bc679A81715F928',
 // );
 export const nftStakingContract = new nftStakingService(
-  '0x19bBBb12A638e7C460962606f27C878E4B91e232',
+  '0xDBC838Ee888407815889d5603bc679A81715F928',
 );
