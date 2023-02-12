@@ -1100,9 +1100,9 @@ export interface LiquidityGauge {
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
   poolId: Scalars['String'];
   /**  List of reward tokens depositted in the gauge  */
-  rewardTokens: Array<Maybe<RewardToken>>;
+  rewardTokens: Array<RewardToken>;
   /**  List of user shares  */
-  shares?: Maybe<Array<GaugeShare>>;
+  shares: Array<GaugeShare>;
   /**  ERC20 token symbol  */
   symbol: Scalars['String'];
   /**  Total of BPTs users have staked in the LiquidityGauge  */
@@ -1383,9 +1383,16 @@ export interface QueryUserGetSwapsArgs {
 export interface RewardPool {
   __typename: 'RewardPool';
   address: Scalars['String'];
-  poolId: Scalars['Int'];
+  amountStaked: Scalars['String'];
+  amountStakedValue: Scalars['String'];
+  aprs: RewardPoolAprs;
+  blocksRemaining: Scalars['String'];
+  daysRemaining: Scalars['String'];
+  endBlock: Scalars['Int'];
   isPartnerPool: Scalars['Boolean'];
   rewardToken: RewardPoolRewardToken;
+  startBlock: Scalars['Int'];
+  userInfo?: Maybe<RewardPoolUserInfo>;
 }
 
 export interface RewardPoolAprs {
@@ -1399,6 +1406,8 @@ export interface RewardPoolRewardToken {
   address: Scalars['String'];
   logoURI: Scalars['String'];
   name: Scalars['String'];
+  price?: Maybe<Scalars['Int']>;
+  rewardPerBlock: Scalars['String'];
   symbol: Scalars['String'];
 }
 
@@ -1420,12 +1429,14 @@ export interface RewardToken {
   decimals: Scalars['Int'];
   /**  Equal to: <tokenAddress>-<gaugeAddress>  */
   id: Scalars['ID'];
+  logoURI: Scalars['String'];
   /**  Timestamp at which finishes the period of rewards  */
   periodFinish?: Maybe<Scalars['BigInt']>;
   /**  Rate of reward tokens streamed per second  */
-  rate?: Maybe<Scalars['BigDecimal']>;
+  rewardPerSecond: Scalars['BigDecimal'];
   /**  ERC20 token symbol - empty string if call to symbol() reverts  */
   symbol: Scalars['String'];
+  tokenAddress: Scalars['String'];
   /**  Amount of reward tokens that has been deposited into the gauge  */
   totalDeposited: Scalars['BigDecimal'];
 }
@@ -4423,7 +4434,7 @@ export type GetLiquidityGaugesQuery = {
       id: string;
       decimals: number;
       symbol: string;
-    } | null>;
+    }>;
     pool: {
       __typename: 'GaugePool';
       id: string;
