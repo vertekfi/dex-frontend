@@ -108,7 +108,8 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
             onConfirmed={async (id) => {}}
             steps={steps || []}
             queries={[{ ...withdrawQuery, id: 'unstake' }]}
-            isDisabled={parseInt(pool.userInfo?.amountDeposited || '0') > 0 === false}
+            // isDisabled={parseInt(pool.userInfo?.amountDeposited || '0') > 0 === false}
+            isDisabled={false}
           />
         </ModalBody>
       </ModalContent>

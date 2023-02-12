@@ -72,12 +72,12 @@ export function StakingCardGuts(props: {
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
-      args: [0, account.address],
+      args: [pool.poolId, account.address],
     }).then((res) => {
       setUserInfo(res);
       setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
     });
-  }, [account]);
+  }, [account, pool.poolId]);
 
   useEffect(() => {
     if (!account.address) return;
@@ -86,7 +86,7 @@ export function StakingCardGuts(props: {
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'pendingRewards',
-      args: [0, account.address],
+      args: [pool.poolId, account.address],
     }).then((res) => {
       setUserUnclaimedRewards(
         parseFloat(
@@ -95,7 +95,7 @@ export function StakingCardGuts(props: {
         ).toFixed(2),
       );
     });
-  }, [account]);
+  }, [account, pool.poolId]);
 
   return (
     <>
