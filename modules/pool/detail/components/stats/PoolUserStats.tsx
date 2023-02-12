@@ -18,37 +18,51 @@ export default function PoolUserStats() {
   const { minApr, maxApr, boostedTotalAPR } = getAprValues(pool.dynamicData.apr, boost);
   return (
     <>
-      <HStack justifyContent="space-between" paddingX={2} display="flex" width="full" mt={1}>
-        <VStack alignItems="flex-start">
-          <Text lineHeight="1rem" fontWeight="bold" fontSize="md" color="gray.100">
-            My APR
-          </Text>
-          <HStack>
-            <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>
-            <AprTooltip onlySparkles poolId={pool.id} data={pool.dynamicData.apr} />
-          </HStack>
-        </VStack>
-        <VStack alignItems="flex-end">
+      <Box 
+      alignItems="center" 
+      display="flex"
+      flexDirection="column" 
+      width="full" mt={1}>
+        <VStack alignItems="center">
           <Text
             lineHeight="1rem"
             fontWeight="bold"
             textAlign="center"
-            fontSize="md"
-            color="gray.100"
+            fontSize="1.2rem"
+            color="#ccc"
           >
-            My liquidity
+            My Liquidity
           </Text>
           {isLoading ? (
             <Box>
               <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
             </Box>
           ) : (
-            <Text color="vertek.neonpurple.500" textAlign="center" fontSize="1.2rem">
+            <Text color="vertek.neonpurple.500" textAlign="center" fontWeight="bold" fontSize="1.2rem">
               {numberFormatUSDValue(userPoolBalanceUSD)}
             </Text>
           )}
         </VStack>
-      </HStack>
+      <Box display="flex" flexDirection="row" width="full" gap="2">
+        <Box display="flex" 
+        width="50%" 
+        flexDirection="column" 
+        alignItems="flex-start"
+        justifyContent="center">
+          <Text  fontWeight="bold" fontSize="1.2rem" color="#ccc">
+            APR Range 
+          </Text>
+          <AprTooltip onlySparkles poolId={pool.id} data={pool.dynamicData.apr} />
+        </Box>
+        <Box display="flex" width="50%" flexDirection="column" justifyContent="flex-end" alignItems="flex-end" my="2rem" >
+        <Text textAlign="right"  fontWeight="bold" fontSize="1.2rem" color="#ccc">
+          My APR
+        </Text>
+        <div className="apr-stripes">{numeral(pool.dynamicData.apr.total).format('0.00%')}</div>
+          
+        </Box>
+      </Box>
+      </Box>
 
       {pool.staking && (
         <PoolUserStakedStats
