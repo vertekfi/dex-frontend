@@ -1,114 +1,117 @@
-import { GqlPoolStaking, useGetBlocksPerDayQuery } from '~/apollo/generated/graphql-codegen-generated';
-import { Box, HStack, Grid, Text, VStack, GridItem } from '@chakra-ui/layout';
+import {
+  GqlPoolStaking,
+  useGetBlocksPerDayQuery,
+} from '~/apollo/generated/graphql-codegen-generated';
+import { Box, Text } from '@chakra-ui/layout';
 import numeral from 'numeral';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import TokenAvatar from '~/components/token/TokenAvatar';
-import { BeetsSubmitTransactionButton } from '~/components/button/BeetsSubmitTransactionButton';
 import { usePoolUserPendingRewards } from '~/modules/pool/lib/usePoolUserPendingRewards';
 import { useStakingTotalStakedBalance } from '~/lib/global/useStakingTotalStakedBalance';
 import { usePoolUserBptBalance } from '~/modules/pool/lib/usePoolUserBptBalance';
-import { Skeleton, Tooltip } from '@chakra-ui/react';
-import { tokenFormatAmount } from '~/lib/services/token/token-util';
+import { Skeleton } from '@chakra-ui/react';
 import { usePoolUserTokenBalancesInWallet } from '~/modules/pool/lib/usePoolUserTokenBalancesInWallet';
 import { useStakingClaimRewards } from '~/lib/global/useStakingClaimRewards';
-import { usePool } from '~/modules/pool/lib/usePool';
-import { CardRow } from '~/components/card/CardRow';
-import { networkConfig } from '~/lib/config/network-config';
 import { InfoButton } from '~/components/info-button/InfoButton';
 
 interface Props {
-    poolAddress: string;
-    staking: GqlPoolStaking;
-    totalApr: number;
-    userPoolBalanceUSD: number;
+  poolAddress: string;
+  staking: GqlPoolStaking;
+  totalApr: number;
+  userPoolBalanceUSD: number;
 }
 
 export function PoolUserStakedStats({ poolAddress, staking, totalApr, userPoolBalanceUSD }: Props) {
-    const { data: blocksData } = useGetBlocksPerDayQuery({ fetchPolicy: 'cache-first' });
-    const {
-        pendingRewards,
-        pendingRewardsTotalUSD,
-        hasPendingRewards,
-        hardRefetch: refetchPendingRewards,
-        isLoading: isLoadingPendingRewards,
-    } = usePoolUserPendingRewards();
-    const { claim, ...harvestQuery } = useStakingClaimRewards(staking);
-    const { data, isLoading: isLoadingTotalStakedBalance } = useStakingTotalStakedBalance(poolAddress, staking);
-    const { userStakedBptBalance, isLoading: isLoadingUserBptBalance } = usePoolUserBptBalance();
-    const { refetch: refetchUserTokenBalances } = usePoolUserTokenBalancesInWallet();
-    const isLoadingStake = isLoadingTotalStakedBalance || isLoadingUserBptBalance;
-    const userShare = parseFloat(userStakedBptBalance) / parseFloat(data || '1');
-    const dailyYield = totalApr / 365;
-    const dailyYieldUSD = userPoolBalanceUSD * dailyYield;
-    const beetsPerDay = parseFloat(staking.farm?.beetsPerBlock || '0') * (blocksData?.blocksPerDay || 0) * userShare;
-    console.log(dailyYieldUSD); 
-    console.log(totalApr); 
-    console.log(pendingRewardsTotalUSD); 
-    console.log(pendingRewards); 
+  const { data: blocksData } = useGetBlocksPerDayQuery({ fetchPolicy: 'cache-first' });
+  const {
+    pendingRewards,
+    pendingRewardsTotalUSD,
+    hasPendingRewards,
+    hardRefetch: refetchPendingRewards,
+    isLoading: isLoadingPendingRewards,
+  } = usePoolUserPendingRewards();
+  const { claim, ...harvestQuery } = useStakingClaimRewards(staking);
+  const { data, isLoading: isLoadingTotalStakedBalance } = useStakingTotalStakedBalance(
+    poolAddress,
+    staking,
+  );
+  const { userStakedBptBalance, isLoading: isLoadingUserBptBalance } = usePoolUserBptBalance();
+  const { refetch: refetchUserTokenBalances } = usePoolUserTokenBalancesInWallet();
+  const isLoadingStake = isLoadingTotalStakedBalance || isLoadingUserBptBalance;
+  const userShare = parseFloat(userStakedBptBalance) / parseFloat(data || '1');
+  const dailyYield = totalApr / 365;
+  const dailyYieldUSD = userPoolBalanceUSD * dailyYield;
+  const beetsPerDay =
+    parseFloat(staking.farm?.beetsPerBlock || '0') * (blocksData?.blocksPerDay || 0) * userShare;
 
-return (
-<>
-<Box display="flex" flexDirection="column" width="full" mt="4" gap="2">
-    <Box display="flex" flexDirection="column" alignItems="center" padding="0" width="100%">
-        <InfoButton
+  return (
+    <>
+      <Box display="flex" flexDirection="column" width="full" mt="4" gap="2">
+        <Box display="flex" flexDirection="column" alignItems="center" padding="0" width="100%">
+          <InfoButton
             labelProps={{
-                lineHeight: '1.3rem',
-                fontWeight: 'semibold',
-                fontSize: '1.3rem',
-                color: '#ccc',
+              lineHeight: '1.3rem',
+              fontWeight: 'semibold',
+              fontSize: '1.3rem',
+              color: '#ccc',
             }}
             label="My staked share"
             infoText={`The size of your stake relative to all value staked in this pool. 
             Your staked share represents the percent of liquidity incentives you are entitled to.`}
-        />
-        <Box alignItems="center" display="flex" flexDirection="column"  >
+          />
+          <Box alignItems="center" display="flex" flexDirection="column">
             {isLoadingStake ? (
-                <Skeleton height="34px" width="140px" />
+              <Skeleton height="34px" width="140px" />
             ) : (
-                <Text color="vertek.neonpurple.500" fontSize="1.3rem" fontWeight="bold" >
-                    {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
-                </Text>
+              <Text color="vertek.neonpurple.500" fontSize="1.3rem" fontWeight="bold">
+                {userShare < 0.0001 ? '< 0.01%' : numeral(userShare).format('0.00%')}
+              </Text>
             )}
             {isLoadingStake ? (
-                <Skeleton height="16px" width="45px" />
+              <Skeleton height="16px" width="45px" />
             ) : (
-                <Text fontSize="1.0rem" color="#ccc" fontWeight="bold" lineHeight="1.3rem">
-                    {numeral(userStakedBptBalance).format('0.00a')}
-                    {' / '}
-                    {numeral(data).format('0.00a')}{' '}
-                    <Text as="span" fontSize="1.0rem" color="#ccc" >
-                        VPT
-                    </Text>
+              <Text fontSize="1.0rem" color="#ccc" fontWeight="bold" lineHeight="1.3rem">
+                {numeral(userStakedBptBalance).format('0.00a')}
+                {' / '}
+                {numeral(data).format('0.00a')}{' '}
+                <Text as="span" fontSize="1.0rem" color="#ccc">
+                  VPT
                 </Text>
+              </Text>
             )}
+          </Box>
         </Box>
-    </Box>
-    
-    <Box display="flex" flexDirection="column" alignItems="center" width="100%" mt="4rem" padding="0" >
-        <InfoButton
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          width="100%"
+          mt="4rem"
+          padding="0"
+        >
+          <InfoButton
             labelProps={{
-                lineHeight: '1.3rem',
-                textAlign:'end', 
-                fontWeight: 'semibold',
-                fontSize: '1.3rem', 
-                color: '#ccc',
+              lineHeight: '1.3rem',
+              textAlign: 'end',
+              fontWeight: 'semibold',
+              fontSize: '1.3rem',
+              color: '#ccc',
             }}
             label="My potential daily yield"
             infoText="The potential daily value is an approximation based on swap fees, 
             current token prices and your staked share. A number of external factors can influence this value from second to second."
-        />
-        {isLoadingPendingRewards ? (
+          />
+          {isLoadingPendingRewards ? (
             <Skeleton height="34px" width="140px" mt="4px" mb="4px" />
-        ) : (
+          ) : (
             <Text color="vertek.neonpurple.500" fontWeight="bold" fontSize="1.3rem">
-                {numberFormatUSDValue(dailyYieldUSD)}
+              {numberFormatUSDValue(dailyYieldUSD)}
             </Text>
-        )}
-        
-    </Box>
-</Box>
+          )}
+        </Box>
+      </Box>
 
-    {/* <Box>
+      {/* <Box>
     {beetsPerDay > 0 && (
         <HStack spacing="0">
             <TokenAvatar height="20px" width="20px" address={networkConfig.beets.address} />
@@ -166,10 +169,6 @@ return (
         ))}
     </Box> 
         </Box> */}
-
-
-
-
-</>      
-);
+    </>
+  );
 }
