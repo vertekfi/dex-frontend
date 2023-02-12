@@ -10,7 +10,8 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import { formatUnits } from 'ethers/lib/utils';
 
-export function StakingAccordion(props: { pool: RewardPool; poolInfo: any; priceOfToken: any }) {
+export function StakingAccordion(props: { pool: any; poolInfo: any; priceOfToken: any }) {
+// export function StakingAccordion(props: { pool: RewardPool; poolInfo: any; priceOfToken: any }) {
   const pool = props.pool;
   const poolInfo = props.poolInfo;
   const priceOfToken = props.priceOfToken;

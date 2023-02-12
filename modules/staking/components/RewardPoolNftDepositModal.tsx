@@ -24,7 +24,8 @@ interface Props {
   isOpen: boolean;
   onOpen(): void;
   onClose(): void;
-  pool: RewardPool;
+  // pool: RewardPool;
+  pool: any;
 }
 
 export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Props) {

@@ -18,7 +18,8 @@ interface Props {
   isOpen: boolean;
   onOpen(): void;
   onClose(): void;
-  pool: RewardPool;
+  // pool: RewardPool;
+  pool: any;
 }
 
 export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props) {

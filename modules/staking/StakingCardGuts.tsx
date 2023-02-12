@@ -13,7 +13,8 @@ import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
 export function StakingCardGuts(props: {
-  pool: RewardPool;
+  pool: any;
+  // pool: RewardPool;
   poolInfo: any;
   apr: any;
   aprDaily: any;
