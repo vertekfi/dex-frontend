@@ -49,6 +49,7 @@ export function StakingContainer() {
                 borderRadius="18px"
                 maxW="550px"
                 color="white"
+                key={p?.address}
               >
                 <StakingCard key={p?.address} pool={p} />
               </GridItem>

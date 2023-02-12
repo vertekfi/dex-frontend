@@ -27,7 +27,7 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
   const [images, setImages] = useState<any>();
   const [isLoadingBalance, setIsLoadingBalance] = useState<boolean>(true);
 
-  const [selectedNFTs, setSelectedNFTs] = useState([]);
+  const [selectedNFTs, setSelectedNFTs] = useState<any>([]);
 
   useEffect(() => {
     if (!userAddress) return;
@@ -92,9 +92,9 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
   }, [isOpen]);
 
   const handleClick = (id: string) => {
-    let items = [...selectedNFTs];
+    let items: any = [...selectedNFTs];
     if (items.includes(id)) {
-      items = items.filter((x) => x !== id);
+      items = items.filter((x: any) => x !== id);
     } else {
       items = [];
       items.push(id);

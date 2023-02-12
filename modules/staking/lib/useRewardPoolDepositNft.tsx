@@ -22,7 +22,7 @@ export function useRewardPoolDepositNft(pool: RewardPool) {
       walletText: `Deposit ${tokenId} into staking pool`,
     });
 
-    refetchPools();
+    refetchPools && refetchPools();
   }
 
   return {

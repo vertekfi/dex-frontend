@@ -6,29 +6,29 @@ import { COMING_POOLS } from './data';
 export interface RewardPoolContextType {}
 
 function _useRewardPools() {
-  // const { userAddress } = useUserAccount();
-  // const {
-  //   data,
-  //   loading,
-  //   error,
-  //   networkStatus,
-  //   refetch: refetchPools,
-  // } = useGetRewardPoolsQuery({
-  //   fetchPolicy: 'cache-first',
-  //   pollInterval: 30000,
-  //   notifyOnNetworkStatusChange: true,
-  //   variables: {
-  //     user: userAddress,
-  //   },
-  // });
+  const { userAddress } = useUserAccount();
+  const {
+    data,
+    loading,
+    error,
+    networkStatus,
+    refetch: refetchPools,
+  } = useGetRewardPoolsQuery({
+    fetchPolicy: 'cache-first',
+    pollInterval: 30000,
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      user: userAddress,
+    },
+  });
 
-  // return {
-  //   pools: data?.getRewardPools || [],
-  //   loading,
-  //   error,
-  //   networkStatus,
-  //   refetchPools,
-  // };
+  return {
+    pools: data?.getRewardPools || [],
+    loading,
+    error,
+    networkStatus,
+    refetchPools,
+  };
 
   return {
     pools: COMING_POOLS,

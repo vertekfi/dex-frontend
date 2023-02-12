@@ -71,7 +71,7 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
       });
   }, [userAddress, tokensOfOwner, fetchBalance]);
 
-  const [selectedNFTs, setSelectedNFTs] = useState([]);
+  const [selectedNFTs, setSelectedNFTs] = useState<any>([]);
   const [steps, setSteps] = useState<TransactionStep[] | null>(null);
 
   const { depositToPool, ...depositQuery } = useRewardPoolDepositNft(pool);

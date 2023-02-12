@@ -21,7 +21,7 @@ export function useRewardPoolWithdrawNft(address: string) {
       walletText: `Withdraw ${tokenId} VRTK from staking pool`,
     });
 
-    refetchPools();
+    refetchPools && refetchPools();
   }
 
   return {

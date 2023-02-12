@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from '@chakra-ui/react';
+import { Flex, Text, Box, GridItem } from '@chakra-ui/react';
 import { StakingCardGuts } from './StakingCardGuts';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 import NextImage from 'next/image';
@@ -10,7 +10,8 @@ import { useAccount } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
 
-export function StakingCard(props: { pool: RewardPool | null }) {
+// export function StakingCard(props: { pool: RewardPool | null }) {
+export function StakingCard(props: { pool: any | null }) {
   const pool = props.pool;
   const query = useAccount();
 
