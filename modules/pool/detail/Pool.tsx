@@ -23,22 +23,26 @@ export function Pool() {
   return (
     <Box marginBottom="8">
       <PoolHeader />
-      <Box width="full" marginY="2">
+      <Box width="full" marginY="1">
         {pool.staking && <PoolStakeInFarmWarning />}
         <Box
           width="full"
           display="flex"
-          flexDirection={{ base: 'column', md: 'row' }}
+          flexDirection={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
           marginBottom="4"
-          paddingY={{ base: '0', md: '3' }}
+          paddingY={{ base: '0', lg: '3' }}
         >
-          <Box width={{ base: '75%', md: '25%' }} mb={{ base: '2rem', md: '0' }}>
-            <Text fontWeight="bold" fontSize="1.1rem" textAlign="center" color="gray.100" mb="1">
+          <Box width={{ base: '100%', lg: '20%' }} mb={{ base: '2rem', lg: '0' }}
+          flexDirection={{ base: 'column', lg: 'row' }}
+          >
+            <Text fontWeight="bold" fontSize="1.1rem" textAlign="center" color="#ccc" mb="1">
               Provide Liquidity
             </Text>
-            <PoolInvestModal />
-            <PoolWithdrawModal />
+            <Box display="flex" flexDirection="row" justifyContent="space-between" gap={{base:'2', md:'0'}}>
+                <PoolInvestModal />
+                <PoolWithdrawModal />
+            </Box>
           </Box>
 
           {isMainPool ? (
@@ -46,7 +50,7 @@ export function Pool() {
               className="verteklightpurplebox"
               //  marginTop={{ base: 0, lg: 2 }}
               display="flex"
-              // width={{ base: '100%', md: '60%', lg: 'auto' }}
+              // width={{ base: '100%', lg: '60%', lg: 'auto' }}
               //    mx="auto"
               justifyContent="flex-start"
               alignItems="flex-start"
@@ -89,14 +93,14 @@ export function Pool() {
             </GridItem>
           ) : (
             <Box
-              width={{ base: 'auto', md: '25%' }}
-              display={{ base: 'flex', md: 'block' }}
-              flexDirection={{ base: 'column', md: 'row' }}
+              width={{ base: 'auto', lg: '20%' }}
+              display={{ base: 'flex', lg: 'block' }}
+              flexDirection={{ base: 'column', lg: 'row' }}
             >
-              <Text fontWeight="bold" fontSize="1.1rem" mb="2" textAlign="center" color="gray.100">
+              <Text fontWeight="bold" fontSize="1.1rem" mb="1" textAlign="center" color="#ccc" >
                 Stake VPT Tokens
               </Text>
-              <Box display="flex" flexDirection="row" justifyContent="center">
+              <Box display="flex" flexDirection="row" justifyContent="space-between" gap={{base:'2', md:'0'}}>
                 <PoolStakeModal />
                 <PoolUnstakeModal />
               </Box>
@@ -105,10 +109,10 @@ export function Pool() {
                 <Text
                   fontSize="0.8rem"
                   textAlign="center"
-                  mt="2"
+                  mt="0"
                   width="50%"
                   color="gray.100"
-                  ml={{ base: 'auto', md: '3' }}
+                  ml={{ base: 'auto', lg: '0' }}
                 >
                   Deposit fee:&nbsp;
                   {numeral(depositFee / 10000).format('0.0%')}
@@ -116,8 +120,8 @@ export function Pool() {
                 <Text
                   fontSize="0.8rem"
                   textAlign="center"
-                  mr={{ base: 'auto', md: '6' }}
-                  mt="2"
+                  mr={{ base: 'auto', lg: '0' }}
+                  mt="0"
                   width="50%"
                   color="gray.100"
                 >
@@ -130,25 +134,25 @@ export function Pool() {
         </Box>
       </Box>
       <SimpleGrid
-        columns={{ base: 1, md: 7 }}
-        paddingX={{ base: '2', md: '0' }}
+        columns={{ base: 1, lg: 7 }}
+        paddingX={{ base: '2', lg: '0' }}
         paddingY="2"
-        marginTop={{ base: '8', md: '5' }}
-        marginBottom={{ base: '6', md: '8' }}
-        spacing={{ base: '6', md: '8' }}
-        width={{ base: 'full', md: 'auto' }}
+        marginTop={{ base: '8', lg: '5' }}
+        marginBottom={{ base: '6', lg: '8' }}
+        spacing={{ base: '6', lg: '8' }}
+        width={{ base: 'full', lg: 'auto' }}
       >
-        <GridItem display="flex" flexDirection="column" colSpan={{ sm: 1, md: 2 }}>
+        <GridItem display="flex" flexDirection="column" colSpan={{ sm: 1, lg: 2 }}>
           <PoolStats />
         </GridItem>
 
-        <GridItem colSpan={{ sm: 1, md: 5 }} paddingX="2">
+        <GridItem colSpan={{ sm: 1, lg: 5 }} paddingX="2">
           <PoolDetailCharts />
         </GridItem>
-        <GridItem colSpan={{ sm: 1, md: 4 }}>
+        <GridItem colSpan={{ sm: 1, lg: 4 }}>
           <PoolTransactions />
         </GridItem>
-        <GridItem colSpan={{ sm: 1, md: 3 }}>
+        <GridItem colSpan={{ sm: 1, lg: 3 }}>
           <VStack spacing="4">
             <PoolComposition />
             <PoolStatistics />

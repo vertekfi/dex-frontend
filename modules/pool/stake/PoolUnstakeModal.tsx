@@ -76,7 +76,7 @@ export function PoolUnstakeModal() {
         variant="verteklight"
         alignSelf={{ base: 'flex-end', md: 'auto' }}
         onClick={onOpen}
-        width={{ base: '75%', md: '140px' }}
+        width={{ base: 'full', md: '140px' }}
         mr={{ base: 'none', md: '2' }}
         _hover={{
           boxShadow: '0 0 10px #5BC0F8, 0 0 20px #4A4AF6',

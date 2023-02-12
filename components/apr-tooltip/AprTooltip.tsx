@@ -44,14 +44,14 @@ function AprTooltip({
 
 return (
   <Popover trigger="hover" placement={placement}>
-    <HStack align="center">
+    <HStack >
       {!onlySparkles && isVePool ? (
-        <Text fontSize="1rem" fontWeight="semibold" mr="1" color="white" {...textProps}>
+        <Text fontSize="0.9rem" fontWeight="semibold" mr="1" color="#ccc" {...textProps}>
           {formatApr(data.total)}
           {aprLabel ? ' APR' : ''}
         </Text>
       ) : (
-        <Text fontSize="1rem" fontWeight="semibold" mr="1" color="white" {...textProps}>
+        <Text fontSize="0.9rem" fontWeight="semibold" mr="0" color="#4A4AF6" {...textProps}>
           {formatApr(minApr)} - {formatApr(maxApr)}
         </Text>
       )}
