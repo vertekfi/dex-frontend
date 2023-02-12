@@ -5,10 +5,10 @@ import { RegularFooter } from './RegularFooter';
 export function Footer() {
   const { chainId } = useNetworkConfig();
 
-return (
-  <>
-<RegularFooter />
-<MobileFooter/>
-</>
+  return (
+    <>
+      <RegularFooter />
+      <MobileFooter />
+    </>
   );
 }

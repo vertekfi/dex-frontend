@@ -8,7 +8,6 @@ import BeetsTokenInfoOpImage from '~/assets/svg/vertek-logo-dark.svg';
 import { GaugeListProvider } from '~/lib/global/gauges/useVotingGauges';
 import { PerpetualsContainer } from '~/modules/perpetuals/PerpetualsContainer';
 import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
-import { PoolUserBptBalanceProvider } from '~/modules/pool/lib/usePoolUserBptBalance';
 
 function PerpetualsPage() {
   const { chainId } = useNetworkConfig();
@@ -22,25 +21,30 @@ function PerpetualsPage() {
           <PageMasthead
             title="Vertek Perpetuals"
             image={
-                <NextImage
+              <NextImage
                 src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
                 width="466px"
                 height="253px"
               />
             }
           />
-          <Box display="flex" flexDirection="column" justifyContent="center" mb="25%" alignItems="center">
-                <Box mb="-20">
-                <NextImage
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            mb="25%"
+            alignItems="center"
+          >
+            <Box mb="-20">
+              <NextImage
                 src={chainId === '10' ? BeetsTokenInfoOpImage : BeetsTokenInfoImage}
                 width="466px"
                 height="253px"
-                
-                />
-                </Box>
+              />
+            </Box>
 
-                <Text fontSize="2rem" >Coming Soon...</Text>
-        </Box>
+            <Text fontSize="2rem">Coming Soon...</Text>
+          </Box>
 
           <PerpetualsContainer />
         </GaugeListProvider>
