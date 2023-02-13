@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
-import { useGetLiquidityGaugesQuery } from '~/apollo/generated/graphql-codegen-generated';
+import { useEffect, useState } from 'react';
+import {
+  LiquidityGauge,
+  useGetLiquidityGaugesQuery,
+} from '~/apollo/generated/graphql-codegen-generated';
 
 export function useGetGaugesQuery() {
+  const [gauges, setGauges] = useState<LiquidityGauge[]>([]);
+
   const {
-    data: gauges,
+    data,
     loading: isLoading,
     error,
     refetch: refetchGauges,
@@ -18,8 +23,14 @@ export function useGetGaugesQuery() {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      setGauges(data?.getLiquidityGauges as LiquidityGauge[]);
+    }
+  }, [isLoading]);
+
   return {
-    gauges: gauges?.getLiquidityGauges || [],
+    gauges,
     isLoading,
     refetchGauges,
   };

@@ -4,7 +4,8 @@ import { Archive, Inbox } from 'react-feather';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckToSlot } from '@fortawesome/free-solid-svg-icons';
 import { faBusinessTime } from '@fortawesome/free-solid-svg-icons';
-import { faPenFancy } from '@fortawesome/free-solid-svg-icons';   
+import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
+import { AddBribeButton } from '../bribes/AddBribeButton';
 
 type Props = {
   unallocatedVotesFormatted: string;
@@ -36,6 +37,8 @@ export function VotingSubheader(props: Props) {
           vote below on any pools across BNB Chain. Your vote will persist until you change it and
           editing a pool can only be done once in 10 days.
         </Text>
+
+        <AddBribeButton />
       </GridItem>
       <GridItem marginRight={{ base: '0', lg: '24' }}>
         <VStack spacing={4} alignItems={{ base: 'center', lg: 'stretch' }}>
@@ -50,11 +53,11 @@ export function VotingSubheader(props: Props) {
             mx={{ base: 'auto', lg: 0 }}
           >
             <Box display="flex" flexDirection="row" alignItems="center" marginTop="2%">
-                <FontAwesomeIcon icon={faCheckToSlot} />
-                <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
-                  My unallocated votes
-                </Text>
-            </Box> 
+              <FontAwesomeIcon icon={faCheckToSlot} />
+              <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
+                My unallocated votes
+              </Text>
+            </Box>
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
               {props.unallocatedVotesFormatted}
             </Text>
@@ -70,10 +73,10 @@ export function VotingSubheader(props: Props) {
             mx={{ base: 'auto', lg: 0 }}
           >
             <Box display="flex" flexDirection="row" alignItems="center" marginTop="2%">
-                <FontAwesomeIcon icon={faBusinessTime} />
-                <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
-                  Voting period ends
-                </Text>
+              <FontAwesomeIcon icon={faBusinessTime} />
+              <Text fontWeight="bold" fontSize="1.0rem" ml="0.5rem">
+                Voting period ends
+              </Text>
             </Box>
             <Text fontWeight="normal" fontSize="0.9rem" marginTop="2%">
               {votingPeriodEnd?.length && (
