@@ -55,7 +55,7 @@ export const bscNetworkConfig: NetworkConfig = {
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
-  defaultTokenIn: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  defaultTokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
   defaultTokenOut: '0xeD236c32f695c83Efde232c288701d6f9C23E60E',
   farmTypeName: 'gauge',
   additionalLinks: [
