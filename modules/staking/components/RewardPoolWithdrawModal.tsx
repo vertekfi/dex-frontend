@@ -47,10 +47,10 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
       // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
       contractInterface: StakingNFTPools,
       chainId: 56,
-      functionName: 'balanceOf',
-      args: [account.address],
+      functionName: 'userInfo',
+      args: [pool.poolId, account.address],
     }).then((res) => {
-      setUserTokens(parseFloat(formatUnits(res.toString(), 18)).toFixed(2));
+      setUserTokens((parseFloat((res).toString())/1e18).toFixed(2));
     });
   }, [account]);
 

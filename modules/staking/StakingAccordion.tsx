@@ -11,7 +11,7 @@ import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import { formatUnits } from 'ethers/lib/utils';
 
 export function StakingAccordion(props: { pool: any; poolInfo: any; priceOfToken: any }) {
-// export function StakingAccordion(props: { pool: RewardPool; poolInfo: any; priceOfToken: any }) {
+  // export function StakingAccordion(props: { pool: RewardPool; poolInfo: any; priceOfToken: any }) {
   const pool = props.pool;
   const poolInfo = props.poolInfo;
   const priceOfToken = props.priceOfToken;
@@ -39,19 +39,22 @@ export function StakingAccordion(props: { pool: any; poolInfo: any; priceOfToken
               Total Staked
             </Text>
             <Flex direction="column">
-              <Text textAlign="right" fontWeight="bold">
+              {/* <Text textAlign="right" fontWeight="bold">
                 ${pool.amountStakedValue || '0'}
-              </Text>
+              </Text> */}
               <Flex direction="column">
                 <Text textAlign="right" fontWeight="bold">
                   $
                   {poolInfo && priceOfToken
-                    ? formatUnits((poolInfo.xBooStakedAmount * priceOfToken).toString(), 18)
+                    ? parseInt((poolInfo.xBooStakedAmount * priceOfToken/1e18).toString()).toFixed(2)
                     : '0'}
                 </Text>
 
                 <Text fontSize="0.7rem" textAlign="right">
-                  {poolInfo && formatUnits(poolInfo.xBooStakedAmount.toString(), 18)} VRTK
+                  {poolInfo && parseInt(formatUnits(poolInfo.xBooStakedAmount.toString(), 18)).toString()} VRTK
+                </Text>
+                <Text fontSize="0.7rem" textAlign="right">
+                  {poolInfo && poolInfo.mpStakedAmount.toString()} Staked NFTS
                 </Text>
               </Flex>
 
