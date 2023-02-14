@@ -174,7 +174,7 @@ export function VotingHeader() {
             >
               <Skeleton isLoaded={!isLoadingUserVeData}>
                 <Text>{lockedBalanceUSD}</Text>
-                <Text>{lockedBalance} shares</Text>
+                <Text>{tokenFormatAmount(lockedBalance || '0')} shares</Text>
               </Skeleton>
               <Button
                 variant="verteklight"
