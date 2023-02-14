@@ -58,8 +58,6 @@ export function BeetsTransactionStepsSubmit({
   const currentQuery = queries.find((query) => query.id === currentStep?.id);
   const [complete, setComplete] = useState(false);
 
-  debugger;
-
   function setStepStatus(id: string, status: StepStatus) {
     setStepStatuses({ ...stepStatuses, [id]: status });
   }
@@ -89,8 +87,6 @@ export function BeetsTransactionStepsSubmit({
       setCurrentStepIdx(currentStepIdx + 1);
     }
   }
-
-  debugger;
 
   return (
     <Box>

@@ -1,12 +1,10 @@
 import { ModalHeader, ModalOverlay, Text,  Box, Grid } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { useCallback, useEffect, useState } from 'react';
-import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import {
   BeetsTransactionStepsSubmit,
   TransactionStep,
 } from '~/components/button/BeetsTransactionStepsSubmit';
-import { TokenBase } from '~/lib/services/token/token-types';
 import { useRewardPoolWithdrawNft } from '../lib/useRewardPoolWithdrawNft';
 import { nftStakingContract } from '~/lib/services/nftStaking/nftStaking.service';
 import { earlyLudwigNft } from '~/lib/services/nft/nft.service';
@@ -17,7 +15,6 @@ interface Props {
   isOpen: boolean;
   onOpen(): void;
   onClose(): void;
-  // pool: RewardPool;
   pool: any;
 }
 
@@ -70,14 +67,6 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
   const [steps, setSteps] = useState<TransactionStep[] | null>(null);
 
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdrawNft(pool.address);
-
-  const nftInfo: TokenBase = {
-    address: '0xeb49B8D1bCD493Ff6e051b4A3eaB3d104C60F7e3',
-    symbol: 'ROAR',
-    decimals: 18,
-    name: 'ROAR',
-  };
-
 
   useEffect(() => {
     if (!isOpen) {
@@ -164,7 +153,6 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
             onConfirmed={async (id) => {}}
             steps={steps || []}
             queries={[{ ...withdrawQuery, id: 'unstake' }]}
-            // isDisabled={parseInt(pool.userInfo?.amountDeposited || '0') > 0 === false}
             isDisabled={false}
           />}
         </ModalBody>

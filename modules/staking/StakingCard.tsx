@@ -3,14 +3,14 @@ import { StakingCardGuts } from './StakingCardGuts';
 import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 import NextImage from 'next/image';
 import { StakingAccordion } from './StakingAccordion';
-import { RewardPool, useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
+import { useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import Vertek from '~/assets/svg/vertektransparent.svg';
 import { readContract } from '@wagmi/core';
 import { useAccount } from 'wagmi';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
+import { networkConfig } from '~/lib/config/network-config';
 
-// export function StakingCard(props: { pool: RewardPool | null }) {
 export function StakingCard(props: { pool: any | null }) {
   const pool = props.pool;
   const query = useAccount();
@@ -24,17 +24,17 @@ export function StakingCard(props: { pool: any | null }) {
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
 
-  //0xed236c32f695c83efde232c288701d6f9c23e60e = vertek
+  console.log(networkConfig.beets.address);
   const priceOfToken =
     pricesResponse &&
     pricesResponse.tokenPrices
-      .filter((item: any) => item.address === '0xed236c32f695c83efde232c288701d6f9c23e60e')[0]
+      .filter((item: any) => item.address === networkConfig.beets.address.toLowerCase())[0]
       .price.toFixed(2);
 
   useEffect(() => {
     if (!priceOfToken || !query.address || !pool) return;
     readContract({
-      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
+      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'poolInfo',

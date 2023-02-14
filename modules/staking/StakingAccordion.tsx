@@ -79,20 +79,20 @@ export function StakingAccordion(props: { pool: any; poolInfo: any; priceOfToken
               </Flex> */}
             </Flex>
             <div />
-            <HStack justify="end">
+            {/* <HStack justify="end">
               <Text fontSize="1rem" textAlign="right">
                 Project Info
               </Text>
               <ExternalLinkIcon />
-            </HStack>
+            </HStack> */}
 
             <div />
-            <HStack justify="end">
+            {/* <HStack justify="end">
               <Text fontSize="1rem" textAlign="right">
                 Contract
               </Text>
               <ExternalLinkIcon />
-            </HStack>
+            </HStack> */}
           </SimpleGrid>
         </AccordionPanel>
       </AccordionItem>

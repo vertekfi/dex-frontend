@@ -79,15 +79,13 @@ export default class nftStakingService {
   public async stakeNFT(poolId: Number, tokens: any[]): Promise<TransactionResponse> {
     const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     // deposit - pid, amount, token ids
-    // not sure what to set amount
-    return await contract['deposit(uint256,uint256,uint256[])'](poolId, 1, tokens);
+    return await contract['deposit(uint256,uint256,uint256[])'](poolId, 0, tokens);
   }
 
   public async unstakeNFT(poolId: Number, tokens: any[]): Promise<TransactionResponse> {
     const contract = new Contract(this.contractAddress, StakingNFTPools, this.provider);
     // deposit - pid, amount, token ids
-    // not sure what to set amount
-    return await contract['withdraw(uint256,uint256,uint256[])'](poolId, 1, tokens);
+    return await contract['withdraw(uint256,uint256,uint256[])'](poolId, 0, tokens);
   }
 
   public async getStakedNFTs(poolId: Number, user: string): Promise<TransactionResponse> {
@@ -108,9 +106,6 @@ export default class nftStakingService {
   }
 }
 
-// export const nftStakingContract = new nftStakingService(
-//   '0xDBC838Ee888407815889d5603bc679A81715F928',
-// );
 export const nftStakingContract = new nftStakingService(
-  '0xDBC838Ee888407815889d5603bc679A81715F928',
+  networkConfig.nft.nftStakingContract.toLowerCase(),
 );

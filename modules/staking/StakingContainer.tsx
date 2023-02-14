@@ -1,16 +1,14 @@
 import { GridItem, SimpleGrid, Text } from '@chakra-ui/react';
 import { StakingCard } from './StakingCard';
-import { useRewardPools } from './lib/useRewardPoolStaking';
-import { UserTokenBalancesProvider } from '~/lib/user/useUserTokenBalances';
+import { networkConfig } from '~/lib/config/network-config';
 
 export function StakingContainer() {
-  // const { pools } = useRewardPools();
 
-  // dummy numbers
+  // dummy pools
   const pools = [
     {
     __typename: 'RewardPool',
-    address: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    address: networkConfig.nft.nftStakingContract.toLowerCase(),
     poolId: 0,
     isPartnerPool: false,
     rewardToken: {
@@ -22,7 +20,7 @@ export function StakingContainer() {
   },
     {
     __typename: 'RewardPool',
-    address: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    address: networkConfig.nft.nftStakingContract.toLowerCase(),
     poolId: 1,
     isPartnerPool: false,
     rewardToken: {
@@ -43,19 +41,9 @@ export function StakingContainer() {
         {
           pools.map((p) => {
             return (
-              // <GridItem
-              //   className="blk"
-              //   boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
-              //   borderRadius="18px"
-              //   maxW="550px"
-              //   color="white"
-              //   key={p?.address}
-              // >
                 <StakingCard key={p?.rewardToken.address} pool={p} />
-              // </GridItem>
             );
           })}
-        {/* <StakingCard key={p?.address} pool={p} /> */}
       </SimpleGrid>
     </>
   );

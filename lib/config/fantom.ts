@@ -59,6 +59,10 @@ export const fantomNetworkConfig: NetworkConfig = {
       lockPoolAddress: '',
     },
   },
+  nft: {
+    nftStakingContract: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43'
+  },
   beetsPoolOwnerAddress: '0xcd983793adb846dce4830c22f30c7ef0c864a776',
   masterChefContractAddress: '0x8166994d9ebBe5829EC86Bd81258149B87faCfd3',
   defaultTokenIn: '0x04068da6c83afcfa0e13ba15a6696662335d5b75',

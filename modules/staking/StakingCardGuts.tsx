@@ -11,6 +11,7 @@ import { useRewardPoolWithdraw } from './lib/useRewardPoolWithdraw';
 import { readContract, getAccount } from '@wagmi/core';
 import { formatUnits } from 'ethers/lib/utils';
 import { useEffect, useState } from 'react';
+import { networkConfig } from '~/lib/config/network-config';
 
 export function StakingCardGuts(props: {
   pool: any;
@@ -68,7 +69,7 @@ export function StakingCardGuts(props: {
   useEffect(() => {
     if (!account.address) return;
     readContract({
-      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
+      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
@@ -82,7 +83,7 @@ export function StakingCardGuts(props: {
   useEffect(() => {
     if (!account.address) return;
     readContract({
-      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
+      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'pendingRewards',

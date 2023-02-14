@@ -32,19 +32,15 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
     address: vrtkAddress,
-    // address: '0x50d8D7F7CcEA28cc1C9dDb996689294dC62569cA',
     symbol: 'VRTK',
-    // symbol: 'LSHARE',
     decimals: 18,
     name: 'Vertek',
-    // name: 'Lshare',
   };
 
   useEffect(() => {
     if(!account.address) return;
     readContract({
-      addressOrName: '0xDBC838Ee888407815889d5603bc679A81715F928',
-      // addressOrName: '0x9b5c9187561d44a7548dc3680475bfdf8c6f86e2',
+      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
       contractInterface: StakingNFTPools,
       chainId: 56,
       functionName: 'userInfo',
@@ -108,7 +104,6 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
             onConfirmed={async (id) => {}}
             steps={steps || []}
             queries={[{ ...withdrawQuery, id: 'unstake' }]}
-            // isDisabled={parseInt(pool.userInfo?.amountDeposited || '0') > 0 === false}
             isDisabled={false}
           />
         </ModalBody>

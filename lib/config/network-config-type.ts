@@ -52,6 +52,10 @@ export interface NetworkConfig {
       lockPoolAddress: string;
     };
   };
+  nft: {
+    nftStakingContract: string;
+    nftAddress: string;
+  };
   beetsPoolOwnerAddress: string;
   masterChefContractAddress: string;
   defaultTokenIn: string;

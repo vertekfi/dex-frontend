@@ -7,7 +7,6 @@ import {
 } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { useCallback, useEffect, useState } from 'react';
-import { RewardPool } from '~/apollo/generated/graphql-codegen-generated';
 import {
   BeetsTransactionStepsSubmit,
   TransactionStep,
@@ -19,12 +18,12 @@ import { useRewardPoolDepositNft } from '../lib/useRewardPoolDepositNft';
 import { useApproveNFT } from '~/lib/util/useApproveNFT';
 import { earlyLudwigNft } from '~/lib/services/nft/nft.service';
 import NextImage from 'next/image';
+import { networkConfig } from '~/lib/config/network-config';
 
 interface Props {
   isOpen: boolean;
   onOpen(): void;
   onClose(): void;
-  // pool: RewardPool;
   pool: any;
 }
 
@@ -78,7 +77,7 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
   const { depositToPool, ...depositQuery } = useRewardPoolDepositNft(pool);
 
   const nftInfo: TokenBase = {
-    address: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43',
+    address: networkConfig.nft.nftAddress.toLowerCase(),
     symbol: 'FOX',
     decimals: 18,
     name: 'VERTEK FOX',
@@ -106,8 +105,6 @@ export function RewardPoolNftDepositModal({ isOpen, onOpen, onClose, pool }: Pro
 
   useEffect(() => {
     if (!loading) {
-      // const hasApproval = hasApprovalForAmount(nftInfo.address, '1');
-
       setSteps([
         ...(!isApproved
           ? [

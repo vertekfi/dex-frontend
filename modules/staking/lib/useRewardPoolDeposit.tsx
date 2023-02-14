@@ -17,7 +17,6 @@ export function useRewardPoolDeposit(pool: RewardPool) {
   });
 
   async function depositToPool(poolId: number, amount: string) {
-    debugger;
     await submitAsync({
       args: [poolId, parseUnits(amount, 18)],
       toastText: `Deposit VRTK into staking pool`,

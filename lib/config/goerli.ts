@@ -55,6 +55,10 @@ export const goerliNetworkConfig: NetworkConfig = {
       lockPoolAddress: '0xD0F30B415C65B99904caF716ABc3da23f57d3cdd',
     },
   },
+  nft: {
+    nftStakingContract: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43'
+  },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6',

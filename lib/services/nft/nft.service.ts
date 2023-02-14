@@ -2,7 +2,6 @@ import VertexNft from '~/lib/abi/VertexNft.json';
 import { BaseProvider } from '@ethersproject/providers';
 import { Contract } from 'ethers';
 import { StaticJsonRpcBatchProvider } from '~/lib/services/rpc-provider/static-json-rpc-batch-provider';
-import { fantomNetworkConfig } from '~/lib/config/fantom';
 import { networkConfig } from '~/lib/config/network-config';
 import { networkProvider } from '~/lib/global/network';
 
@@ -33,7 +32,7 @@ export default class NftService {
 
   public async isApprovedForAll(user: string) {
     const contract = new Contract(this.contractAddress, VertexNft, this.provider);
-    const result = await contract.isApprovedForAll(user, '0xDBC838Ee888407815889d5603bc679A81715F928');
+    const result = await contract.isApprovedForAll(user, networkConfig.nft.nftStakingContract.toLowerCase());
     return result;
   }
 
@@ -57,5 +56,4 @@ export default class NftService {
   }
 }
 
-// export const earlyLudwigNft = new NftService('0x592CDfeCD0fa5cEc7C80606DBbB9894Ed0CC2816');
-export const earlyLudwigNft = new NftService('0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43');
+export const earlyLudwigNft = new NftService(networkConfig.nft.nftAddress.toLowerCase());
