@@ -82,13 +82,13 @@ export function GaugeList() {
         <GaugeListFooter />
       </Box>
 
-      {unallocatedVoteWeight && activeVotingGauge && (
+      {activeVotingGauge && (
         <GaugeVoteModal
           onClose={handleModalClose}
           onSucess={handleModalSuccess}
           gauge={activeVotingGauge}
           isOpen={activeVotingGauge !== null}
-          unallocatedVoteWeight={unallocatedVoteWeight}
+          unallocatedVoteWeight={unallocatedVoteWeight || 0}
           veBalLockInfo={{
             hasExistingLock: hasExistingLock || false,
             lockEndDate: lockEndDate || 0,
