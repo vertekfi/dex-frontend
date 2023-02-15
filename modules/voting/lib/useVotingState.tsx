@@ -85,17 +85,17 @@ export function useVotingState(
   let voteInputDisabled = false;
   let voteButtonDisabled = false;
 
-  let votedToRecentlyWarning: ErrorMessageOrNull = null;
+  let votedTooRecentlyWarning: ErrorMessageOrNull = null;
   const lastUserVoteTime = toJsTimestamp(gauge.lastUserVoteTime);
   if (Date.now() < lastUserVoteTime + WEIGHT_VOTE_DELAY) {
     const remainingTime = formatDistanceToNow(lastUserVoteTime + WEIGHT_VOTE_DELAY);
-    votedToRecentlyWarning = {
+    votedTooRecentlyWarning = {
       title: 'Votes are locked for 10 days.',
       description: `You won't be able to make any edits to this vote allocation for ${remainingTime}`,
     };
   }
 
-  if (votedToRecentlyWarning) voteInputDisabled = true;
+  if (votedTooRecentlyWarning) voteInputDisabled = true;
 
   const noVeBalWarning: ErrorMessageOrNull =
     Number(veBalLockInfo?.currentVeBalance) > 0
@@ -121,7 +121,7 @@ export function useVotingState(
   if (veBalLockTooShortWarning) voteInputDisabled = true;
 
   function getVoteError(): ErrorMessageOrNull {
-    if (votedToRecentlyWarning) return votedToRecentlyWarning;
+    if (votedTooRecentlyWarning) return votedTooRecentlyWarning;
     if (noVeBalWarning) return noVeBalWarning;
     if (veBalLockTooShortWarning) return veBalLockTooShortWarning;
 
@@ -155,7 +155,7 @@ export function useVotingState(
     unallocatedVotesFormatted,
 
     // warnings/errors
-    votedToRecentlyWarning,
+    votedToRecentlyWarning: votedTooRecentlyWarning,
     noVeBalWarning,
     voteInputDisabled,
     voteButtonDisabled,

@@ -21,6 +21,7 @@ export function StakingContainer() {
                 borderRadius="18px"
                 maxW="550px"
                 color="white"
+                mb="auto"
               >
                 <StakingCard key={p?.address} pool={p} />
               </GridItem>

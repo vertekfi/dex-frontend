@@ -24,7 +24,7 @@ export function TradeSubmittedContent({ query }: Props) {
   return (
     <Box pt="4">
       {reactiveTradeState.sorResponse && (
-        <Box px="4">
+        <Box px="1">
           <BatchSwapSorRoute swapInfo={reactiveTradeState.sorResponse} />{' '}
         </Box>
       )}
