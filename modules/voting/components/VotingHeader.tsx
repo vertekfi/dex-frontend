@@ -365,7 +365,9 @@ export function VotingHeader() {
               boxShadow="2px 28px 12px 0px #000"
             >
               <Skeleton isLoaded={!isLoadingUserVeData}>
-                <Text marginBottom=".2rem">{!isExpiredLocal ? currentVeBalance : '0'} veVRTK</Text>
+                <Text marginBottom=".2rem">
+                  {!isExpiredLocal ? tokenFormatAmount(currentVeBalance || '0') : '0'} veVRTK
+                </Text>
                 <Text>{!isExpiredLocal ? percentOwned : '0'}% of all veVRTK owned</Text>
               </Skeleton>
             </Box>

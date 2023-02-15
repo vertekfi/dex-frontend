@@ -3,6 +3,7 @@ import { bnum } from '~/lib/util/big-number.utils';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
 import { PRETTY_DATE_FORMAT } from '~/modules/voting/constants';
 import { format } from 'date-fns';
+import { tokenFormatAmount } from '~/lib/services/token/token-util';
 
 type Props = {
   lockablePool: any;
@@ -29,7 +30,7 @@ export function UnlockSummary(props: Props) {
 
       <Flex justify="space-between">
         <div>Total voting escrow</div>
-        <div>{props.currentVeBalance}</div>
+        <div>{tokenFormatAmount(props.currentVeBalance)}</div>
       </Flex>
 
       <Flex justify="space-between">

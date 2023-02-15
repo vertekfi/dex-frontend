@@ -107,6 +107,9 @@ export function useVotingState(
 
   if (noVeBalWarning) voteInputDisabled = true;
 
+  // console.log(noVeBalWarning);
+  // console.log(voteInputDisabled);
+
   let veBalLockTooShortWarning: ErrorMessageOrNull = null;
   if (veBalLockInfo?.hasExistingLock && !veBalLockInfo?.isExpired) {
     const lockEndDate = veBalLockInfo.lockedEndDate;

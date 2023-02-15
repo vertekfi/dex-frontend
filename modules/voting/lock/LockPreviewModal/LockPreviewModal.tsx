@@ -7,6 +7,7 @@ import { LockActions } from './components/LockActions';
 import { useUserVeData } from '../../lib/useUserVeData';
 import useLockAmount from '../lib/useLockAmount';
 import { useLockEndDate } from '../lib/useLockEndDate';
+import { tokenFormatAmount } from '~/lib/services/token/token-util';
 
 type Props = {
   lockablePool: any;
@@ -100,7 +101,7 @@ export function LockPreviewModal(props: Props) {
             lockEndDate={props.lockEndDate}
             totalLpTokens={props.totalLpTokens}
             lockablePool={props.lockablePool}
-            currentVeBalance={props.currentVeBalance || '0'}
+            currentVeBalance={tokenFormatAmount(props.currentVeBalance || '0')}
             lockType={props.lockType}
           />
         </Box>
