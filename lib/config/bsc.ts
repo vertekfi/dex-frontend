@@ -34,6 +34,7 @@ export const bscNetworkConfig: NetworkConfig = {
   },
   balancer: {
     vault: '0x719488F4E859953967eFE963c6Bed059BaAab60c',
+    vaultV1: '0xEE1c8DbfBf958484c6a4571F5FB7b99B74A54AA7',
     feeDistributor: '0x1ac7c3C34d03f0b4E97FB4a3F08dF4DE6989FfB3',
     balMinter: '0xeF0bb9a74218649dE92C86FE0add74c5a03C4c09',
     batchRelayer: '',

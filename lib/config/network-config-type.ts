@@ -31,6 +31,7 @@ export interface NetworkConfig {
   };
   balancer: {
     vault: string;
+    vaultV1?: string;
     feeDistributor: string;
     balMinter: string;
     batchRelayer: string;

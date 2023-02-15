@@ -364,6 +364,7 @@ export const GqlSorGetSwapsResponse = gql`
     routes {
       ...GqlSorSwapRoute
     }
+    isV1Trade
   }
   ${GqlSorSwapRoute}
 `;

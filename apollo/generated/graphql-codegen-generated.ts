@@ -873,7 +873,7 @@ export interface GqlSorGetSwapsResponse {
   __typename: 'GqlSorGetSwapsResponse';
   effectivePrice: Scalars['AmountHumanReadable'];
   effectivePriceReversed: Scalars['AmountHumanReadable'];
-  isV1BetterTrade: Scalars['Boolean'];
+  isV1Trade: Scalars['Boolean'];
   marketSp: Scalars['String'];
   priceImpact: Scalars['AmountHumanReadable'];
   returnAmount: Scalars['AmountHumanReadable'];
@@ -4183,6 +4183,7 @@ export type GetSorSwapsQuery = {
     effectivePrice: string;
     effectivePriceReversed: string;
     priceImpact: string;
+    isV1Trade: boolean;
     swaps: Array<{
       __typename: 'GqlSorSwap';
       poolId: string;
@@ -4244,6 +4245,7 @@ export type GqlSorGetSwapsResponseFragment = {
   effectivePrice: string;
   effectivePriceReversed: string;
   priceImpact: string;
+  isV1Trade: boolean;
   swaps: Array<{
     __typename: 'GqlSorSwap';
     poolId: string;
@@ -4852,6 +4854,7 @@ export const GqlSorGetSwapsResponseFragmentDoc = gql`
     routes {
       ...GqlSorSwapRoute
     }
+    isV1Trade
   }
   ${GqlSorSwapRouteFragmentDoc}
 `;

@@ -850,7 +850,7 @@ type GqlSorGetBatchSwapForTokensInResponse {
 type GqlSorGetSwapsResponse {
   effectivePrice: AmountHumanReadable!
   effectivePriceReversed: AmountHumanReadable!
-  isV1BetterTrade: Boolean!
+  isV1Trade: Boolean!
   marketSp: String!
   priceImpact: AmountHumanReadable!
   returnAmount: AmountHumanReadable!

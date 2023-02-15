@@ -45,6 +45,7 @@ fragment GqlSorGetSwapsResponse on GqlSorGetSwapsResponse {
   routes {
     ...GqlSorSwapRoute
   }
+  isV1Trade
 }
 
 fragment GqlSorSwapRoute on GqlSorSwapRoute {
