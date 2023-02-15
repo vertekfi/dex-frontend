@@ -42,6 +42,8 @@ import { bnum } from '~/lib/util/big-number.utils';
 import Card from '~/components/card/Card';
 
 interface Props {
+  lockablePool: any;
+  totalLpTokens: string;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -61,7 +63,6 @@ export function LockForm(props: Props) {
     lockEndDate,
     lockedUntilDate,
     lockedUntilDays,
-    lockablePool,
     hasExistingLock,
     isExpired,
     lockedBalance,
@@ -79,11 +80,10 @@ export function LockForm(props: Props) {
     lockedEndDate: lockEndDate,
   });
 
-  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount, totalLpTokens } =
-    useLockAmount({
-      hasExistingLock: hasExistingLock || false,
-      lockedAmount: lockedBalance,
-    });
+  const { lockAmount, setLockAmount, isValidLockAmount, isIncreasedLockAmount } = useLockAmount({
+    hasExistingLock: hasExistingLock || false,
+    lockedAmount: lockedBalance,
+  });
 
   const hasVaildLock = hasExistingLock && !isExpired;
   let submissionDisabled = true;
@@ -562,9 +562,9 @@ export function LockForm(props: Props) {
                   isOpen={isModalOpen}
                   onClose={handleClosePreviewModal}
                   lockType={lockType}
-                  totalLpTokens={totalLpTokens}
+                  totalLpTokens={props.totalLpTokens}
                   lockEndDate={lockDate}
-                  lockablePool={lockablePool}
+                  lockablePool={props.lockablePool}
                   lockAmount={lockAmount || '0'}
                   expectedVeBalAmount={expectedVeBalAmount}
                   currentVeBalance={currentVeBalance || '0'}
