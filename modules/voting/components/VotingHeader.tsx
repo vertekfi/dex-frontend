@@ -1,4 +1,4 @@
-import { Button, Grid, Text, Box, Skeleton } from '@chakra-ui/react';
+import { Button, Grid, Text, Box, Skeleton, Tooltip } from '@chakra-ui/react';
 import { useState } from 'react';
 import { UserDataProvider } from '~/lib/user/useUserData';
 import { networkConfig } from '~/lib/config/network-config';
@@ -6,10 +6,12 @@ import styled from '@emotion/styled';
 import { LockForm } from '../lock/LockForm';
 import Card from '~/components/card/Card';
 import { useUserVeData } from '../lib/useUserVeData';
-import { MyVeVRTK } from './MyVeVRTK';
 import { Activity, Database, Zap, Key } from 'react-feather';
 import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { motion } from 'framer-motion';
+import { UnlockPreviewModal } from '../lock/UnlockPreviewModal/UnlockPreviewModal';
+import useLockAmount from '../lock/lib/useLockAmount';
+import { InfoIcon } from '@chakra-ui/icons';
 
 export const VotingCardHeader = styled.p`
   font-size: 1.3rem;
@@ -20,8 +22,8 @@ export const VotingCardHeader = styled.p`
 `;
 
 export function VotingHeader() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => setIsModalOpen(true);
+  const [isLockModalOpen, setIsLockModalOpen] = useState(false);
+  const [isUnlockModalOpen, setIsUnlockModalOpen] = useState(false);
 
   const {
     userLockablePoolBalance,
@@ -33,7 +35,32 @@ export function VotingHeader() {
     lockedBalanceUSD,
     currentVeBalance,
     percentOwned,
+    hasExistingLock,
+    lockablePool,
+    lockEndDate,
+    isExpired,
   } = useUserVeData();
+
+  const isExpiredLocal = isExpired;
+
+  const { totalLpTokens } = useLockAmount({
+    hasExistingLock: hasExistingLock || false,
+    lockedAmount: lockedBalance,
+  });
+
+  const handleLockModal = () => {
+    // if (!isExpired) {
+    //   setIsLockModalOpen(true);
+    // } else {
+    //   setIsUnlockModalOpen(true);
+    // }
+
+    if (!isExpiredLocal) {
+      setIsLockModalOpen(true);
+    } else {
+      setIsUnlockModalOpen(true);
+    }
+  };
 
   return (
     <UserDataProvider>
@@ -174,19 +201,46 @@ export function VotingHeader() {
             >
               <Skeleton isLoaded={!isLoadingUserVeData}>
                 <Text>{lockedBalanceUSD}</Text>
-                <Text>{tokenFormatAmount(lockedBalance || '0')} shares</Text>
+                <Text>
+                  {tokenFormatAmount(lockedBalance || '0')} shares{' '}
+                  {isExpiredLocal && (
+                    <Tooltip
+                      label="Your previous lockup period has expired, so you no longer have any veVRTK or voting power. You will no longer earn protocol fees, boosted yields on staked BNB Chain pools or veVRTK incentives. However, you’ll still get the minimum 1.0x rate. Click withdraw to redeem your expired locked 80VRTK-20BNB VPT tokens and then create a new lock to get veVRTK."
+                      aria-label="A tooltip"
+                    >
+                      <InfoIcon />
+                    </Tooltip>
+                  )}
+                </Text>
               </Skeleton>
+
               <Button
                 variant="verteklight"
                 marginY="1rem"
                 width={{ base: '50%', lg: '75%' }}
                 boxShadow="0 0 10px #4A4AF6"
-                onClick={handleOpenModal}
+                onClick={handleLockModal}
               >
-                Lock VRTK-BNB
+                {!isExpiredLocal ? 'Lock VRTK-BNB' : 'Withdraw Lock'}
               </Button>
-              {isModalOpen && (
-                <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+              {isLockModalOpen && (
+                <LockForm
+                  totalLpTokens={totalLpTokens}
+                  isOpen={isLockModalOpen}
+                  onClose={() => setIsLockModalOpen(false)}
+                  lockablePool={lockablePool}
+                />
+              )}
+
+              {isUnlockModalOpen && (
+                <UnlockPreviewModal
+                  isOpen={isUnlockModalOpen}
+                  onClose={() => setIsUnlockModalOpen(false)}
+                  totalLpTokens={totalLpTokens}
+                  lockablePool={lockablePool}
+                  currentVeBalance={currentVeBalance || '0'}
+                  lockEndDate={lockEndDate}
+                />
               )}
             </Box>
           </Card>
@@ -238,21 +292,28 @@ export function VotingHeader() {
               boxShadow="2px 28px 12px 0px #000"
             >
               <Skeleton isLoaded={!isLoadingUserVeData}>
-                <Text>{lockedUntilDate}</Text>
-                <Text>{lockedUntilDays} days</Text>
+                <Text>{!isExpiredLocal ? lockedUntilDate : '---'}</Text>
+                <Text>{!isExpiredLocal ? `${lockedUntilDays} days` : '---'} </Text>
               </Skeleton>
-              <Button
-                variant="verteklight"
-                marginBottom="1rem"
-                boxShadow="0 0 10px #4A4AF6"
-                width={{ base: '50%', lg: '75%' }}
-                onClick={handleOpenModal}
-              >
-                Update My Lock
-                {/* <LockIcon ml="2" color="vertek.slate.200" /> */}
-              </Button>
-              {isModalOpen && (
-                <LockForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+              {!isExpiredLocal && (
+                <Button
+                  variant="verteklight"
+                  marginBottom="1rem"
+                  boxShadow="0 0 10px #4A4AF6"
+                  width={{ base: '50%', lg: '75%' }}
+                  onClick={handleLockModal}
+                >
+                  Update My Lock
+                </Button>
+              )}
+
+              {isLockModalOpen && (
+                <LockForm
+                  isOpen={isLockModalOpen}
+                  onClose={() => setIsLockModalOpen(false)}
+                  totalLpTokens={totalLpTokens}
+                  lockablePool={lockablePool}
+                />
               )}
             </Box>
           </Card>
@@ -304,8 +365,8 @@ export function VotingHeader() {
               boxShadow="2px 28px 12px 0px #000"
             >
               <Skeleton isLoaded={!isLoadingUserVeData}>
-                <Text marginBottom=".2rem">{currentVeBalance} veVRTK</Text>
-                <Text>{percentOwned}% of all veVRTK owned</Text>
+                <Text marginBottom=".2rem">{!isExpiredLocal ? currentVeBalance : '0'} veVRTK</Text>
+                <Text>{!isExpiredLocal ? percentOwned : '0'}% of all veVRTK owned</Text>
               </Skeleton>
             </Box>
           </Card>

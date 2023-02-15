@@ -20,6 +20,7 @@ export function GaugeListItem(props: Props) {
     style: 'percent',
     maximumFractionDigits: 2,
   });
+
   // function redirectToPool(gauge: VotingGaugeWithVotes) {
   //   window.location.href = poolURLFor(gauge.pool.id, gauge.network, gauge.pool.poolType);
   // }

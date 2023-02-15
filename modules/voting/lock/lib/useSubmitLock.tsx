@@ -1,10 +1,6 @@
 import { networkConfig } from '~/lib/config/network-config';
 import { useSubmitTransaction } from '~/lib/util/useSubmitTransaction';
-import { format } from 'date-fns';
-import { PRETTY_DATE_FORMAT } from '../../constants';
-import { LockType } from '../types';
 import veAbi from '../../../../lib/abi/VotingEscrow.json';
-import { parseUnits } from '@ethersproject/units';
 import { toUtcTime } from '~/lib/util/time';
 import { UseContractWriteMutationArgs } from 'wagmi/dist/declarations/src/hooks/contracts/useContractWrite';
 

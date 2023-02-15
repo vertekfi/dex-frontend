@@ -86,7 +86,6 @@ function PoolList() {
             onPageSizeChange={setPageSize}
             renderTableHeader={() => <PoolListTableHeader />}
             renderTableRow={(item: GqlPoolMinimalFragment, index) => {
-              console.log(item);
               return (
                 <PoolListItem
                   padding="1"
