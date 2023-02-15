@@ -27,7 +27,8 @@ export function TradePreviewModal({ isOpen, onClose }: Props) {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size="xl"
+      size="800px"
+
       initialFocusRef={initialRef}
       onCloseComplete={() => {
         batchSwapQuery.reset();
@@ -35,7 +36,7 @@ export function TradePreviewModal({ isOpen, onClose }: Props) {
       }}
     >
       <ModalOverlay bg="blackAlpha.900" />
-      <BeetsModalContent >
+      <BeetsModalContent style={{ maxWidth: '800px' }}>
         <ModalCloseButton />
         <BeetsModalHeader >
           <BeetsModalHeadline>
