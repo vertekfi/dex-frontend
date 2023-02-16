@@ -810,7 +810,8 @@ type GqlPoolWithdrawOption {
 }
 
 type GqlProtocolFeesCollectorAmounts {
-  amount: String!
+  amount: Float!
+  poolAddress: String!
   poolId: String!
   poolName: String!
   token: String!
@@ -832,9 +833,9 @@ type GqlProtocolMetrics {
 }
 
 type GqlProtocolPendingGaugeFee {
+  amount: Float!
   gauge: String!
   gaugeAddress: String!
-  pendingPoolTokensFee: Float!
   poolAddress: String!
   poolId: String!
   poolName: String!

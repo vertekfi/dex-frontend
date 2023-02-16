@@ -11,9 +11,15 @@ import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
   const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
-  // const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
+  const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
 
-  const { rewardGauges, isLoading: isClaimsLoading, refetchClaimsData } = useClaimsData();
+  const {
+    rewardGauges,
+    isLoading: isClaimsLoading,
+    refetchClaimsData,
+    protocolRewardsData,
+    refetchProtocolRewards,
+  } = useClaimsData();
 
   useEffect(() => {
     if (!isClaimsLoading && rewardGauges?.length) {

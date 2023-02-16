@@ -828,7 +828,8 @@ export interface GqlPoolWithdrawOption {
 
 export interface GqlProtocolFeesCollectorAmounts {
   __typename: 'GqlProtocolFeesCollectorAmounts';
-  amount: Scalars['String'];
+  amount: Scalars['Float'];
+  poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
   token: Scalars['String'];
@@ -853,9 +854,9 @@ export interface GqlProtocolMetrics {
 
 export interface GqlProtocolPendingGaugeFee {
   __typename: 'GqlProtocolPendingGaugeFee';
+  amount: Scalars['Float'];
   gauge: Scalars['String'];
   gaugeAddress: Scalars['String'];
-  pendingPoolTokensFee: Scalars['Float'];
   poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];

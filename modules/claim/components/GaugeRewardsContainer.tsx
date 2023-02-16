@@ -15,7 +15,7 @@ export function GaugeRewardsContainer({ gauges, onSuccessfulClaim }: Props) {
     <>
       {gaugesWithRewards.map((gauge) => {
         return (
-          <Box mb={10}>
+          <Box mb={10} key={gauge.address}>
             <GaugeRewardsTable gauge={gauge} onClaimSuccess={onSuccessfulClaim} />
           </Box>
         );

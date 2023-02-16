@@ -11,8 +11,11 @@ export function useClaimsData() {
 
   const { isConnected, userAddress } = useUserAccount();
   const { gauges, isLoading: isLoadingGauges, refetchGauges } = useGetGaugesQuery();
-  const { data: protocolRewardsData, isLoading: isLoadingProtocolRewards } =
-    useProtocolRewardsQuery();
+  const {
+    data: protocolRewardsData,
+    isLoading: isLoadingProtocolRewards,
+    refetch: refetchProtocolRewards,
+  } = useProtocolRewardsQuery();
 
   const setGaugeData = async () => {
     if (userAddress) {
@@ -55,5 +58,6 @@ export function useClaimsData() {
     isLoading,
     refetchGauges,
     refetchClaimsData,
+    refetchProtocolRewards,
   };
 }
