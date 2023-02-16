@@ -8,11 +8,28 @@ import { IconWallet } from '~/components/icons/IconWallet';
 import { useUserData } from '~/lib/user/useUserData';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
 import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
+import { useEffect } from 'react';
 
 export default function NavbarWalletConnectButton() {
   const txPending = useReactiveVar(txPendingVar);
   const { loading, portfolioValueUSD } = useUserData();
   const { data: earlyLudwig } = useEarlyLudwigNft();
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+  
+    if (txPending) {
+      timeoutId = setTimeout(() => {
+        // Clear the txPending state after 5 seconds
+        txPendingVar(false);
+      }, 5000);
+    }
+  
+    return () => {
+      // Clear the timeout if the component unmounts or the txPending state changes
+      clearTimeout(timeoutId);
+    };
+  }, [txPending]);
 
   return (
   <ConnectButton.Custom>
