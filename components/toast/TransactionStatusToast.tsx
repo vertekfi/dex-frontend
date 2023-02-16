@@ -6,6 +6,7 @@ import {
 } from '~/components/toast/toast-util';
 import { ExternalLink } from 'react-feather';
 import { etherscanGetTxUrl } from '~/lib/util/etherscan';
+import { useEffect } from 'react';
 
 interface Props {
     type: BeetsTransactionType;
@@ -16,6 +17,18 @@ interface Props {
 }
 
 export function TransactionStatusToast({ type, status, text, onClose, txHash }: Props) {
+    useEffect(() => {
+        if (status === 'PENDING') {
+            const timeoutId = setTimeout(() => {
+                onClose();
+            }, 5000);
+            // Return a cleanup function to clear the timeout if the component unmounts or the status changes
+            return () => {
+                clearTimeout(timeoutId);
+            };
+        }
+    }, [status, onClose]);
+
     return (
         <Box position="relative" bgColor="black">
             {status === 'PENDING' ? (
