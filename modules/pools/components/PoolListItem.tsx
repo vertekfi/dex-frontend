@@ -36,16 +36,19 @@ export function PoolListItem({
       borderRadius={{ base: '16px', md: 'none' }}
       padding={{ base: '2', md: 'none' }}
       borderTopWidth="1px"
-      borderTopColor="gray.200"
-      borderLeftWidth="1px"
-      borderRightWidth="1px"
+      borderTopColor={{ base: 'none', md: 'gray.200'}}
+      borderLeftWidth={{ base: '0px', md: '1px'}}
+      borderRightWidth={{ base: '0px', md: '1px'}}
       borderLeftColor="vertek.slate.600"
       borderRightColor="vertek.slate.600"
-      bg={{ base: 'vertek.slate.900', md: 'transparent' }}
+
+      height={{ base: '340px', md: 'auto' }}
+
+      bg={{ base: 'transparent', md: 'transparent' }}
     >
       <Box
-        bg={{ base: 'vertek.slatepurple.900', md: 'transparent' }}
-        borderRadius={{ base: '16px', md: 'none' }}
+        bg={{ base: 'transparent', md: 'transparent' }}
+        borderRadius={{ base: '18px', md: 'none' }}
         boxShadow={{ base: '0px 24px 12px 1px #000', md: 'none' }}
       >
         <Link href={`/pool/${pool.id}`} passHref>
@@ -85,13 +88,13 @@ export function PoolListItem({
               }
             >
               <GridItem area="icons">
-                <MemoizedTokenAvatarSetInList imageSize={25} width={92} tokens={tokens} />
+                <MemoizedTokenAvatarSetInList imageSize={30} width={100} tokens={tokens} />
               </GridItem>
 
-              <GridItem area="name" mb={{ base: '4', lg: '0' }}>
+              <GridItem area="name" mb={{ base: '3', lg: '0' }}>
                 <Text
                   color="white"
-                  fontSize={{ base: 'xl', lg: 'md' }}
+                  fontSize={{ base: '1.6rem', lg: 'md' }}
                   fontWeight={{ base: 'bold', lg: 'normal' }}
                 >
                   {pool.name}
@@ -118,7 +121,7 @@ export function PoolListItem({
               <StatGridItem area="tvl">
                 <Text
                   marginRight="1rem"
-                  fontSize="xs"
+                  fontSize="md"
                   textAlign="right"
                   color="gray.200"
                   display={{ base: 'block', lg: 'none' }}
@@ -140,7 +143,7 @@ export function PoolListItem({
               >
                 <Text
                   marginRight="1rem"
-                  fontSize="xs"
+                  fontSize="md"
                   textAlign="right"
                   color="gray.200"
                   display={{ base: 'block', lg: 'none' }}
@@ -163,16 +166,19 @@ export function PoolListItem({
                 display={{ base: 'block', lg: 'flex' }}
                 justifyContent={{ base: 'flex-start', lg: 'end' }}
                 mr="4"
+                mb="0.5rem"
               >
                 <MobileLabel text="APR" />
                 <MemoizedAprTooltip
-                  placement="bottom-end"
+                  placement="left"
                   poolId={pool.id}
                   data={pool.dynamicData.apr}
-                  textProps={{ fontWeight: 'normal', fontSize: { base: 'xl', lg: 'md' } }}
+                  textProps={{ fontWeight: 'normal', fontSize: { base: 'md', lg: 'md' } }}
                 />
               </StatGridItem>
-              <StatGridItem area="fees" display={{ base: 'block', lg: 'none' }}>
+              <StatGridItem area="fees" 
+              display={{ base: 'block', lg: 'none' }} 
+              mb={{ base: '1rem', md: 'auto' }}>
                 <MobileLabel text="FEES (24H)" />
                 <Text fontSize={{ base: 'xl', lg: 'md' }}>
                   {numeral(pool.dynamicData.fees24h).format('$0,0')}
@@ -188,7 +194,7 @@ export function PoolListItem({
 
 function MobileLabel({ text }: { text: string }) {
   return (
-    <Text fontSize="xs" textAlign="left" color="gray.200" display={{ base: 'block', lg: 'none' }}>
+    <Text fontSize="md" textAlign="left" color="gray.200" display={{ base: 'block', lg: 'none' }}>
       {text}
     </Text>
   );
