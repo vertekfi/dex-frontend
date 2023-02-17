@@ -1,4 +1,4 @@
-import { SimpleGrid, Box, GridItem, Text, Skeleton } from '@chakra-ui/react';
+import { SimpleGrid, Box, GridItem, Text, Skeleton, Tooltip } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
@@ -9,6 +9,7 @@ import { NoRewardsBox } from './components/NoRewardsBox';
 import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
 import { ProtocolRewardsList } from './components/ProtocolRewardsList';
 import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
+import { InfoIcon } from '@chakra-ui/icons';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
@@ -112,7 +113,10 @@ export function ClaimContainer() {
 
       <GridItem display="flex" flexDirection="column" paddingY="0">
         <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-          <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
+          <Text fontSize="1.20rem">veVRTK and Protocol Earnings </Text>
+          <Tooltip label="Protocol fee distribution is based on your percentage ownership of veVRTK at the start of the previous weeks epoch.">
+            <InfoIcon />
+          </Tooltip>
         </Box>
         <Box>
           {!isClaimsLoading && hasProtocolRewards ? (
