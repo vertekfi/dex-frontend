@@ -1,85 +1,109 @@
-import { Button, ButtonProps } from '@chakra-ui/button';
-import { Box, Heading, HStack, Text } from '@chakra-ui/layout';
+import { Box, HStack, Text } from '@chakra-ui/layout';
 import TokenAvatar from '~/components/token/TokenAvatar';
-import { AmountHumanReadable, TokenBase } from '~/lib/services/token/token-types';
-import { isEth, tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
+import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { Badge, Circle, Skeleton, useTheme } from '@chakra-ui/react';
-import { PlusCircle } from 'react-feather';
+import { Input, VStack } from '@chakra-ui/react';
 import { useGetTokens } from '~/lib/global/useToken';
-import { addTokenToWallet } from '~/lib/util/web3';
+import { GqlPoolToken } from '~/apollo/generated/graphql-codegen-generated';
+import { TokenSelectInline } from '../token-select-inline/TokenSelectInline';
+import { tokenInputBlockInvalidCharacters } from '~/lib/util/input-util';
 
-type TokenRowProps = TokenBase & {
-  userBalance: AmountHumanReadable;
-  userBalanceUSD: number;
-  loading: boolean;
+type Props = {
+  address: string;
+  amount: string;
   imported?: boolean;
+  withInput?: boolean;
+  withSlider?: boolean;
+  alternateTokens?: GqlPoolToken[];
+  onSelectedAlternateToken?: (address: string) => void;
+  selectedAlternateToken?: string;
+  onAmountChange?: (amount: string) => void;
+  balance?: string;
 };
 
 export function TokenRow({
-  symbol,
   address,
-  onClick,
-  userBalance,
-  userBalanceUSD,
-  loading,
-  imported,
-}: TokenRowProps & ButtonProps) {
-  const hasBalance = parseFloat(userBalance) > 0;
-  const { getToken } = useGetTokens();
+  selectedAlternateToken = '',
+  onSelectedAlternateToken,
+  onAmountChange,
+  withInput,
+  alternateTokens = [],
+  amount,
+  balance,
+}: Props) {
+  const { getToken, priceForAmount } = useGetTokens();
   const token = getToken(address);
-  const theme = useTheme();
+
+  const _onSelectedAlternateToken = (address: string) => {
+    onSelectedAlternateToken && onSelectedAlternateToken(address);
+  };
+
+  const _onAmountChange = (amount: string) => {
+    onAmountChange && onAmountChange(amount);
+  };
 
   return (
-    <Button
-      width="full"
-      variant="ghost"
-      _hover={{ backgroundColor: 'whiteAlpha.200' }}
-      _focus={{ boxShadow: 'none' }}
-      borderRadius="none"
-      onClick={onClick}
-      height="56px"
-      fontWeight="normal"
-      color="gray.100"
-    >
-      <HStack px="3" width="full" paddingY="4" justifyContent="space-between">
-        <HStack>
-          <TokenAvatar address={address} size="xs" />
-          <Text fontSize="lg">{symbol}</Text>
-          {imported && (
-            <Badge colorScheme="orange" py="0.5">
-              Imported
-            </Badge>
-          )}
-          {!isEth(address) && (
-            <PlusCircle
-              onClick={(e) => {
-                e.stopPropagation();
-                addTokenToWallet(token);
-              }}
-              size={16}
-              color={theme.colors.gray['200']}
-            />
-          )}
-        </HStack>
-        <Box marginTop="2px" display="flex" flexDirection="column">
-          {loading ? (
-            <>
-              <Skeleton width="12" height="3" mb="1" />
-              <Skeleton width="12" height="3" />
-            </>
-          ) : (
-            <>
-              <Text textAlign="right">
-                {hasBalance ? tokenFormatAmountPrecise(userBalance, 4) : '-'}
-              </Text>
-              <Text color="gray.200" textAlign="right" fontSize="sm">
-                {userBalanceUSD > 0 ? numberFormatUSDValue(userBalanceUSD) : '-'}
-              </Text>
-            </>
-          )}
+    <HStack width="full" justifyContent="space-between" key={address}>
+      {alternateTokens.length > 1 ? (
+        <Box flex="1">
+          <TokenSelectInline
+            tokenOptions={alternateTokens}
+            selectedAddress={selectedAlternateToken}
+            onOptionSelect={_onSelectedAlternateToken}
+          />
         </Box>
-      </HStack>
-    </Button>
+      ) : (
+        <HStack>
+          <TokenAvatar width="40px" height="40px" address={address} />
+          <Box>
+            {token?.name}
+            <HStack spacing="1">
+              <Text fontWeight="bold">{token?.symbol}</Text>
+            </HStack>
+          </Box>
+        </HStack>
+      )}
+      <VStack alignItems="flex-end" spacing="0">
+        {withInput && (
+          <Input
+            type="number"
+            min={0}
+            placeholder="12.4.."
+            textAlign="right"
+            value={amount || ''}
+            onChange={(e) => {
+              _onAmountChange(e.currentTarget.value);
+            }}
+            _hover={{ borderColor: 'gray.200' }}
+            _focus={{ outline: 'none' }}
+            _placeholder={{ color: 'gray.400' }}
+            color="gray.100"
+            borderColor="transparent"
+            border="2px"
+            bgColor="blackAlpha.400"
+            fontWeight="semibold"
+            onKeyDown={tokenInputBlockInvalidCharacters}
+            width="full"
+            pr="1"
+            pl="2"
+            height="32px"
+          />
+        )}
+        {!withInput && <Text>{tokenFormatAmount(amount)}</Text>}
+        <Text fontSize="sm" color="beets.base.100">
+          {numberFormatUSDValue(
+            priceForAmount({
+              address,
+              amount,
+            }),
+          )}
+        </Text>
+        {balance && (
+          <Text fontSize="sm" color="gray.100">
+            You have {tokenFormatAmount(balance || '0')}
+          </Text>
+        )}
+      </VStack>
+    </HStack>
   );
 }

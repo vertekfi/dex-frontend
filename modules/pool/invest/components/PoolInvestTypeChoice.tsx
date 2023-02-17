@@ -52,7 +52,7 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
               <CardRow alignItems="center" mt="2" mb="0">
                 <Text flex="1">Max proportional</Text>
                 {typeof data?.maxAmount === 'number' && !isLoading ? (
-                  <Text>{numberFormatUSDValue(data.maxAmount)}</Text>
+                  <Text>{numberFormatUSDValue(data?.maxAmount || 0)}</Text>
                 ) : (
                   <Skeleton height="20px" width="80px" />
                 )}
@@ -108,21 +108,24 @@ export function PoolInvestTypeChoice({ onShowProportional, onShowCustom }: Props
             })}
           </BeetsBox>
           {!isStablePool && !canInvestProportionally && (
-            <Alert bg="vertek.slatepurple.900" status="warning" color="vertek.neonpurple.500" mt="4">
+            <Alert
+              bg="vertek.slatepurple.900"
+              status="warning"
+              color="vertek.neonpurple.500"
+              mt="4"
+            >
               <AlertIcon color="vertek.neonpurple.500" />
               Investing proportionally is only possible when you have all pool tokens in your
               wallet.
             </Alert>
           )}
         </GridItem>
-        <GridItem bg="vertek.slatepurple.900" padding="2" borderRadius="16px" >
-          
-            {isStablePool ? (
-              <PoolInvestStablePoolDescription />
-            ) : (
-              <PoolInvestWeightedPoolDescription />
-            )}
-          
+        <GridItem bg="vertek.slatepurple.900" padding="2" borderRadius="16px">
+          {isStablePool ? (
+            <PoolInvestStablePoolDescription />
+          ) : (
+            <PoolInvestWeightedPoolDescription />
+          )}
         </GridItem>
       </Grid>
 

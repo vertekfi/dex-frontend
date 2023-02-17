@@ -132,7 +132,7 @@ export function replaceWethWithEth(address: string) {
 
 export function replaceWethWithZeroAddress(addresses: string[]): string[] {
   return addresses.map((address) =>
-    address.toLowerCase() === networkConfig.wethAddress ? AddressZero : address,
+    address.toLowerCase() === networkConfig.wethAddress.toLowerCase() ? AddressZero : address,
   );
 }
 
