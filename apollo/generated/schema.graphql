@@ -842,6 +842,11 @@ type GqlProtocolPendingGaugeFee {
   valueUSD: Float!
 }
 
+type GqlProtocolRewardTokenInfo {
+  logoURI: String
+  valueUSD: String!
+}
+
 type GqlSorGetBatchSwapForTokensInResponse {
   assets: [String!]!
   swaps: [GqlSorSwap!]!
@@ -1033,6 +1038,15 @@ type GqlUserPortfolioSnapshot {
   totalFees: AmountHumanReadable!
   totalValueUSD: AmountHumanReadable!
   walletBalance: AmountHumanReadable!
+}
+
+type GqlUserProtocolReward {
+  amount: String!
+  isBPT: Boolean!
+  poolId: String!
+  token: String!
+  tokenInfo: GqlProtocolRewardTokenInfo!
+  tokenList: [GqlToken!]!
 }
 
 enum GqlUserSnapshotDataRange {
@@ -1237,6 +1251,7 @@ type Query {
   userGetPoolBalances: [GqlUserPoolBalance!]!
   userGetPoolJoinExits(first: Int!, poolId: String!, skip: Int!): [GqlPoolJoinExit!]!
   userGetPortfolioSnapshots(days: Int!): [GqlUserPortfolioSnapshot!]!
+  userGetProtocolRewardInfo: [GqlUserProtocolReward]!
   userGetStaking: [GqlPoolStaking!]!
   userGetSwaps(first: Int!, poolId: String!, skip: Int!): [GqlPoolSwap!]!
   userGetVeLockInfo: GqlUserVoteEscrowInfo!

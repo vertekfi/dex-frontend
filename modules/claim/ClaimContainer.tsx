@@ -7,19 +7,41 @@ import { ClaimTable } from './components/ClaimTable';
 import { Gauge } from '~/lib/services/staking/types';
 import { NoRewardsBox } from './components/NoRewardsBox';
 import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
+import { ProtocolRewardsList } from './components/ProtocolRewardsList';
+import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
   const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
-  const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
+  const [hasProtocolRewards, sethasProtocolRewards] = useState<boolean>(false);
+  const [claiming, setClaiming] = useState<boolean>(false);
 
   const {
     rewardGauges,
     isLoading: isClaimsLoading,
     refetchClaimsData,
-    protocolRewardsData,
+    protocolData,
     refetchProtocolRewards,
   } = useClaimsData();
+
+  const { claimProtocolRewards, txState } = useProtocolRewardClaim();
+
+  useEffect(() => {
+    if (txState.error) {
+      console.error(txState.error);
+      setClaiming(false);
+    }
+
+    if (txState.isPending) {
+      setClaiming(true);
+    } else {
+      setClaiming(false);
+    }
+
+    if (txState.isConfirmed) {
+      setClaiming(false);
+    }
+  }, [txState]);
 
   useEffect(() => {
     if (!isClaimsLoading && rewardGauges?.length) {
@@ -36,8 +58,26 @@ export function ClaimContainer() {
     }
   }, [rewardGauges, isClaimsLoading]);
 
+  useEffect(() => {
+    if (!isClaimsLoading && protocolData) {
+      console.log(protocolData[0]);
+      if (!(parseFloat(protocolData[0].amount) > 0)) {
+        sethasProtocolRewards(false);
+      } else {
+        sethasProtocolRewards(true);
+      }
+    }
+  }, [isClaimsLoading, protocolData]);
+
   function handleUserClaim() {
     refetchClaimsData();
+  }
+
+  async function handleProtocolClaim() {
+    setClaiming(true);
+    await claimProtocolRewards();
+    refetchProtocolRewards();
+    setClaiming(false);
   }
 
   return (
@@ -75,7 +115,15 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
         </Box>
         <Box>
-          <NoRewardsBox label="No veVRTK protocol rewards to claim" />
+          {!isClaimsLoading && hasProtocolRewards ? (
+            <ProtocolRewardsList
+              protocolRewards={protocolData}
+              onClaim={handleProtocolClaim}
+              disabled={claiming}
+            />
+          ) : (
+            <NoRewardsBox label="No veVRTK protocol rewards to claim" />
+          )}
         </Box>
       </GridItem>
 
