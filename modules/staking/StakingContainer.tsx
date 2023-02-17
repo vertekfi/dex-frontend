@@ -11,7 +11,8 @@ export function StakingContainer() {
       <Text color="white" fontWeight="bold" mt="-8" mb="4">
         Stake VRTK to earn rewards
       </Text>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 3 }} paddingX={8} paddingY={4} spacing={35}>
+
+      <SimpleGrid columns={{ sm: 1, md: 2, xl: 3 }} paddingX={{ base: '0', md: '8'}} paddingY={4} spacing={35}>
         {pools.length &&
           pools.map((p) => {
             return (
