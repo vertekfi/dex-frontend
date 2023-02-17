@@ -22,7 +22,7 @@ export function usePoolJoinGetContractCallData(
   const hasEth = networkConfig.eth.address.toLowerCase() in inputAmounts;
   const tokenAmountsIn = hasEth
     ? inputAmountsArray.map(({ amount, address }) => ({
-        address: replaceEthWithWeth(address),
+        address: replaceEthWithWeth(address), // To zero?..
         amount,
       }))
     : inputAmountsArray;

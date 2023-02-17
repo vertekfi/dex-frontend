@@ -39,7 +39,7 @@ export function PoolInvestProportional({ onShowPreview }: Props) {
   const { setSelectedOption, selectedOptions, setInputAmounts, zapEnabled } = useInvestState();
   const [proportionalPercent, setProportionalPercent] = useState(25);
   const { data } = usePoolJoinGetProportionalInvestmentAmount();
-  const { selectedInvestTokens, userInvestTokenBalances } = useInvest();
+  const { selectedInvestTokens } = useInvest();
   const { data: hasBatchRelayerApproval } = useHasBatchRelayerApproval();
 
   const scaledProportionalSuggestions = mapValues(data || {}, (val, address) =>
@@ -71,7 +71,7 @@ export function PoolInvestProportional({ onShowPreview }: Props) {
         onChange={setProportionalPercent}
       >
         <SliderTrack bg="gray.100">
-            <SliderFilledTrack bg="vertek.neonpurple.500" />
+          <SliderFilledTrack bg="vertek.neonpurple.500" />
         </SliderTrack>
         <SliderThumb boxSize={4} />
         <SliderMark

@@ -531,6 +531,24 @@ export const GetUserData = gql`
     }
   }
 `;
+export const GetUserProtocolRewards = gql`
+  query GetUserProtocolRewards {
+    protocolRewards: userGetProtocolRewardInfo {
+      poolId
+      token
+      tokenInfo {
+        logoURI
+        valueUSD
+      }
+      amount
+      isBPT
+      tokenList {
+        address
+        logoURI
+      }
+    }
+  }
+`;
 export const UserSyncBalance = gql`
   mutation UserSyncBalance($poolId: String!) {
     userSyncBalance(poolId: $poolId)

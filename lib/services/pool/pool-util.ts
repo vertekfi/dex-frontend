@@ -63,12 +63,12 @@ export function poolIsComposablePool(pool: GqlPoolUnion) {
     return true;
   }
 
-  // if (
-  //   pool.__typename === 'GqlPoolPhantomStable' &&
-  //   isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
-  // ) {
-  //   return true;
-  // }
+  if (
+    pool.__typename === 'GqlPoolPhantomStable' &&
+    isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
+  ) {
+    return true;
+  }
 
   return false;
 }
@@ -77,8 +77,13 @@ export function poolGetServiceForPool(pool: GqlPoolUnion): PoolService {
   switch (pool.__typename) {
     case 'GqlPoolWeighted': {
       if (
-        isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory || '') &&
-        (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' || pool.nestingType === 'HAS_ONLY_PHANTOM_BPT')
+        isSameAddress(pool.factory || '', networkConfig.balancer.weightedPoolV2Factory || '') ||
+        (isSameAddress(
+          pool.factory || '',
+          networkConfig.balancer.weightedPoolV2FactoryFees || '',
+        ) &&
+          (pool.nestingType === 'HAS_SOME_PHANTOM_BPT' ||
+            pool.nestingType === 'HAS_ONLY_PHANTOM_BPT'))
       ) {
         return new PoolWeightedV2Service(
           pool,

@@ -33,10 +33,12 @@ export interface NetworkConfig {
     vault: string;
     vaultV1?: string;
     feeDistributor: string;
+    feeDistOne?: string;
     balMinter: string;
     batchRelayer: string;
     composableStableFactory: string;
     weightedPoolV2Factory?: string;
+    weightedPoolV2FactoryFees?: string;
     weightedPoolFactory?: string;
     linearFactories: {
       erc4626: string[];
