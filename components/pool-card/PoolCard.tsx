@@ -23,7 +23,7 @@ export function PoolCard({ pool, ...rest }: Props) {
         flexDirection="column"
         borderRadius="18px"
         height="327px"
-        paddingX={{ base: '0', md:'8'}}
+        paddingX="4"
         paddingY="4" 
         marginTop="1"
         boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
