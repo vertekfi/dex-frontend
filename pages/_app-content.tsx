@@ -37,7 +37,7 @@ export function AppContent({ Component, pageProps }: AppProps) {
       <Box pt="3" />
       <Navbar scrollY={scrollY} />
       <Box pt="1" />
-      <Box display="flex" justifyContent="center" mt="8">
+      <Box display="flex" minHeight="100vh" justifyContent="center" mt="8">
         <Box
           width={{ base: 'full', '2xl': theme.breakpoints['2xl'] }}
           px={{ base: '4', xl: '8' }}
