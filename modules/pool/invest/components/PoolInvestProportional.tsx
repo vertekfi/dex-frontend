@@ -30,7 +30,7 @@ import { usePoolUserTokenBalancesInWallet } from '../../lib/usePoolUserTokenBala
 import { bnum } from '~/lib/util/big-number.utils';
 import { GqlPoolToken } from '~/apollo/generated/graphql-codegen-generated';
 import { tokenInputTruncateDecimalPlaces } from '~/lib/util/input-util';
-import { TokenRow } from '~/components/token-select/TokenRow';
+import TokenRow from '~/components/token/TokenRow';
 
 interface Props {
   onShowPreview(): void;
