@@ -11,12 +11,12 @@ export const bscNetworkConfig: NetworkConfig = {
   testnet: false,
   eth: {
     name: 'BNB',
-    address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
     symbol: 'BNB',
     decimals: 18,
     iconUrl: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850',
   },
-  wethAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  wethAddress: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
   wethAddressFormatted: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   coingecko: {
     nativeAssetId: 'binancecoin',

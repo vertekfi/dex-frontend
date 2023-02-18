@@ -16,27 +16,15 @@ import { useInvestState } from '~/modules/pool/invest/lib/useInvestState';
 import {
   replaceEthWithWeth,
   replaceWethWithEth,
-  tokenFormatAmount,
   tokenGetAmountForAddress,
 } from '~/lib/services/token/token-util';
 import { PoolInvestSettings } from '~/modules/pool/invest/components/PoolInvestSettings';
 import { BeetsBox } from '~/components/box/BeetsBox';
-import { TokenSelectInline } from '~/components/token-select-inline/TokenSelectInline';
-import TokenAvatar from '~/components/token/TokenAvatar';
-import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { PoolInvestSummary } from '~/modules/pool/invest/components/PoolInvestSummary';
-import { useGetTokens } from '~/lib/global/useToken';
-import { useEffect, useState } from 'react';
 import { usePoolJoinGetProportionalInvestmentAmount } from '~/modules/pool/invest/lib/usePoolJoinGetProportionalInvestmentAmount';
 import { keyBy, mapValues } from 'lodash';
-import {
-  oldBnum,
-  oldBnumScale,
-  oldBnumToHumanReadable,
-} from '~/lib/services/pool/lib/old-big-number';
+import { oldBnumScale, oldBnumToHumanReadable } from '~/lib/services/pool/lib/old-big-number';
 import { useInvest } from '~/modules/pool/invest/lib/useInvest';
-import { CardRow } from '~/components/card/CardRow';
-import { useHasBatchRelayerApproval } from '~/lib/util/useHasBatchRelayerApproval';
 import { usePool } from '~/modules/pool/lib/usePool';
 import { usePoolUserTokenBalancesInWallet } from '../../lib/usePoolUserTokenBalancesInWallet';
 import { bnum } from '~/lib/util/big-number.utils';
@@ -54,16 +42,9 @@ export function PoolInvestProportional({ onShowPreview }: Props) {
   const { setSelectedOption, selectedOptions, setInputAmounts, inputAmounts } = useInvestState();
   const { data } = usePoolJoinGetProportionalInvestmentAmount();
   const { selectedInvestTokens, userInvestTokenBalances, isInvestingWithEth } = useInvest();
-
   const { userPoolTokenBalances } = usePoolUserTokenBalancesInWallet();
 
-  console.log(data);
-
   async function onTokenAmountChange(token: GqlPoolToken, amount: string) {
-    console.log('TOKEN CHANGED');
-    console.log(token);
-    console.log(amount);
-
     if (!amount) {
       setInputAmounts({});
       return;
