@@ -40,7 +40,7 @@ export const bscNetworkConfig: NetworkConfig = {
     batchRelayer: '',
     composableStableFactory: '',
     weightedPoolV2Factory: '0xDE8993Bf9D6Eb1e0d752fe56ccB85Ef76538ABb6',
-    weightedPoolV2FactoryFees: '0xb9C7a581F0792d667beb684Bab1AF4FFFa14DA98',
+    // weightedPoolV2FactoryFees: '0xb9C7a581F0792d667beb684Bab1AF4FFFa14DA98',
     linearFactories: {
       erc4626: [],
       reaper: [],

@@ -37,7 +37,6 @@ export interface NetworkConfig {
     batchRelayer: string;
     composableStableFactory: string;
     weightedPoolV2Factory?: string;
-    weightedPoolV2FactoryFees?: string;
     weightedPoolFactory?: string;
     linearFactories: {
       erc4626: string[];
