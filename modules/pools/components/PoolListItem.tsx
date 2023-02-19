@@ -70,25 +70,26 @@ export function PoolListItem({
                 showUserBalance
                   ? {
                       base: `"icons icons"
-            "name name"
-            "userBalance userBalance"
-            "apr tvl"
-            "fees volume"
-            `,
+                        "name name"
+                        "userBalance userBalance"
+                        "apr tvl"
+                        "fees volume"
+                        `,
                       lg: `"icons name userBalance tvl volume apr"`,
                     }
                   : {
                       base: `
-            "icons icons"
-            "name name"
-            "apr tvl"
-            "fees volume" `,
+                        "icons icons"
+                        "name name"
+                        "apr tvl"
+                        "fees volume" `,
                       lg: `"icons name tvl volume apr"`,
                     }
               }
             >
               <GridItem area="icons">
                 <MemoizedTokenAvatarSetInList imageSize={30} width={100} tokens={tokens} />
+
               </GridItem>
 
               <GridItem area="name" mb={{ base: '3', lg: '0' }}>
@@ -100,6 +101,7 @@ export function PoolListItem({
                   {pool.name}
                 </Text>
               </GridItem>
+
 
               {showUserBalance && (
                 <GridItem

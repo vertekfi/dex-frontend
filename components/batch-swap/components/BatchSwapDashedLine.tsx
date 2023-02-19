@@ -65,7 +65,7 @@ export function BatchSwapRouteDashedLineArrowSpacer() {
                 size="22px"
                 zIndex="1"
                 backgroundColor="vertek.sor.100"
-                boxShadow="0px 0px 4px 1px #fff"
+                boxShadow="0px 0px 4px 1px rgba(255, 255, 255, 0.2)"
                 alignItems="center"
                 justifyContent="center"
                 display="flex"

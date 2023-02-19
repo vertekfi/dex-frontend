@@ -127,6 +127,24 @@ export function ProtocolRewardsList(props: Props) {
                     {numberFormatUSDValue(reward.tokenInfo.valueUSD)}
                   </Text>
                 </StatGridItemRight>
+                <GridItem area="claim">
+                <Button
+                  display={{ base: 'flex', lg: 'none' }}
+                  variant="verteklight"
+                  padding="1em"
+                  borderRadius="10px"
+                  mt="1"
+                  borderWidth="1px"
+                  alignItems="center"
+                  height="2em"
+                  disabled={false}
+                  width={{ base: '200px', lg: 'none' }}
+                  isDisabled={props.disabled}
+                  onClick={props.onClaim}
+                >
+                  {tokenFormatAmount(reward.amount)}
+                </Button>
+                </GridItem>
               </Grid>
             </Box>
           );
@@ -141,6 +159,7 @@ export function ProtocolRewardsList(props: Props) {
           borderRightWidth="1px"
           borderBottomWidth="1px"
           borderColor="#4A4AF6"
+
           borderBottomRadius="16px"
           borderTopRadius={{ base: '16px', lg: 'none' }}
           bg={{ base: 'none', lg: 'vertek.slatepurple.900' }}
