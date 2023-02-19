@@ -37,8 +37,8 @@ export const bscNetworkConfig: NetworkConfig = {
     feeDistributor: '0x1ac7c3C34d03f0b4E97FB4a3F08dF4DE6989FfB3',
     feeDistOne: '0x2CFCe0B4d47A994E56904D9EbB9716bbd0A59AbC',
     balMinter: '0xeF0bb9a74218649dE92C86FE0add74c5a03C4c09',
-    batchRelayer: '',
-    composableStableFactory: '',
+    batchRelayer: '0x558BDC96018B9C3dc46481c04B212465D6A69fF0',
+    composableStableFactory: '0xfD50F5eAd870bdCFa69940c41a5C10f015b419e7',
     weightedPoolV2Factory: '0xDE8993Bf9D6Eb1e0d752fe56ccB85Ef76538ABb6',
     // weightedPoolV2FactoryFees: '0xb9C7a581F0792d667beb684Bab1AF4FFFa14DA98',
     linearFactories: {
