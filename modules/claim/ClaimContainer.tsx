@@ -20,7 +20,7 @@ export function ClaimContainer() {
   const {
     rewardGauges,
     isLoading: isClaimsLoading,
-    refetchClaimsData,
+    refetchGauges,
     protocolData,
     refetchProtocolRewards,
   } = useClaimsData();
@@ -61,7 +61,6 @@ export function ClaimContainer() {
 
   useEffect(() => {
     if (!isClaimsLoading && protocolData) {
-      console.log(protocolData[0]);
       if (!(parseFloat(protocolData[0].amount) > 0)) {
         sethasProtocolRewards(false);
       } else {
@@ -70,14 +69,15 @@ export function ClaimContainer() {
     }
   }, [isClaimsLoading, protocolData]);
 
-  function handleUserClaim() {
-    refetchClaimsData();
+  function handleUserRewardsClaim() {
+    refetchGauges();
   }
 
   async function handleProtocolClaim() {
     setClaiming(true);
     await claimProtocolRewards();
     refetchProtocolRewards();
+    refetchGauges();
     setClaiming(false);
   }
 
@@ -97,13 +97,11 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
         </Box>
         {isClaimsLoading ? (
-          <Skeleton isLoaded={!isClaimsLoading} />
+          <Skeleton isLoaded={!isClaimsLoading && !gaugesWithRewards.length} />
         ) : (
           <>
-            {gaugesWithRewards.length ? (
-              <Box>
-                <ClaimTable gauges={gaugesWithRewards} />
-              </Box>
+            {!isClaimsLoading && gaugesWithRewards.length ? (
+              <ClaimTable gaugesWithRewards={gaugesWithRewards} />
             ) : (
               <NoRewardsBox label="No gauge staking rewards to claim" />
             )}
@@ -143,7 +141,7 @@ export function ClaimContainer() {
                 <GaugeRewardsContainer
                   gauges={rewardGauges}
                   isLoading={isClaimsLoading}
-                  onSuccessfulClaim={handleUserClaim}
+                  onSuccessfulClaim={handleUserRewardsClaim}
                 />
               ) : (
                 <NoRewardsBox label="No additional staking rewards to claim" />

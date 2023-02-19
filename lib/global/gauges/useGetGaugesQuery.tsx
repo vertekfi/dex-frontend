@@ -8,8 +8,7 @@ export function useGetGaugesQuery() {
     error,
     refetch: refetchGauges,
   } = useGetLiquidityGaugesQuery({
-    pollInterval: 30000,
-    notifyOnNetworkStatusChange: true,
+    pollInterval: 15000,
   });
 
   useEffect(() => {
