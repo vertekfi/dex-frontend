@@ -24,7 +24,6 @@ export function StakingCard(props: { pool: any | null }) {
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
 
-  console.log(networkConfig.beets.address);
   const priceOfToken =
     pricesResponse &&
     pricesResponse.tokenPrices
@@ -40,14 +39,16 @@ export function StakingCard(props: { pool: any | null }) {
       functionName: 'poolInfo',
       args: [pool.poolId],
     }).then((res) => {
-      const nftStaked = parseInt(res.mpStakedAmount.toString())
+      const nftStaked = parseInt(res.mpStakedAmount.toString());
       const rewardsPerDay = formatUnits(res.RewardPerSecond.mul(60).mul(60).mul(24), 18);
       const stakedAmount = formatUnits(res.xBooStakedAmount, 18);
+      const magicCatBoost = res.magicatBoost / 10000;
       // NEED TO ADD IN THE PRICE OF THE REWARDS IN THE NUMERATOR
       const apr = (
         (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
         parseFloat(priceOfToken) *
-        100 *.9
+        100 *
+        0.9
       )
         .toFixed(2)
         .toString();
@@ -55,15 +56,14 @@ export function StakingCard(props: { pool: any | null }) {
         (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
         parseFloat(priceOfToken) *
         365 *
-        100*.9
+        100 *
+        (1 - magicCatBoost)
       )
         .toFixed(2)
         .toString();
-      const boostedAPRD = 1/(nftStaked) * (
-        (parseInt(rewardsPerDay) / parseInt(stakedAmount)) *
-        parseFloat(priceOfToken) *
-        100*.1
-      )
+      const boostedAPRD =
+        (1 / nftStaked) *
+        ((parseInt(rewardsPerDay) / parseInt(stakedAmount)) * parseFloat(priceOfToken) * 100 * magicCatBoost);
       setAprDaily(apr);
       setBoostedAprDaily(boostedAPRD);
       setApr(aprYearly);
@@ -124,7 +124,7 @@ export function StakingCard(props: { pool: any | null }) {
             priceOfToken={priceOfToken}
             boostedAprDaily={boostedAprDaily}
           />
-          <StakingAccordion pool={pool} poolInfo={poolInfo} priceOfToken={priceOfToken}/>
+          <StakingAccordion pool={pool} poolInfo={poolInfo} priceOfToken={priceOfToken} />
         </GridItem>
       )}
     </>

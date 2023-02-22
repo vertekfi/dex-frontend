@@ -67,6 +67,15 @@
     "anonymous": false,
     "inputs": [
       { "indexed": false, "internalType": "uint256", "name": "_pid", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "_magicatBoost", "type": "uint256" }
+    ],
+    "name": "SetMagicatBoost",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "uint256", "name": "_pid", "type": "uint256" },
       { "indexed": false, "internalType": "uint256", "name": "_gemsPerSecond", "type": "uint256" }
     ],
     "name": "SetRewardPerSecond",
@@ -115,7 +124,8 @@
       { "internalType": "contract IERC20Ext", "name": "_Token", "type": "address" },
       { "internalType": "uint32", "name": "_startTime", "type": "uint32" },
       { "internalType": "uint32", "name": "_endTime", "type": "uint32" },
-      { "internalType": "address", "name": "_protocolOwner", "type": "address" }
+      { "internalType": "address", "name": "_protocolOwner", "type": "address" },
+      { "internalType": "uint32", "name": "_magicatBoost", "type": "uint32" }
     ],
     "name": "add",
     "outputs": [],
@@ -205,7 +215,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "_mp", "type": "uint256" }
+    ],
     "name": "effectiveMP",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -278,13 +291,6 @@
   },
   {
     "inputs": [],
-    "name": "magicatBoost",
-    "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "massUpdatePools",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -346,7 +352,8 @@
       { "internalType": "address", "name": "protocolOwnerAddress", "type": "address" },
       { "internalType": "uint32", "name": "lastRewardTime", "type": "uint32" },
       { "internalType": "uint32", "name": "endTime", "type": "uint32" },
-      { "internalType": "uint32", "name": "startTime", "type": "uint32" }
+      { "internalType": "uint32", "name": "startTime", "type": "uint32" },
+      { "internalType": "uint32", "name": "magicatBoost", "type": "uint32" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -401,7 +408,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint32", "name": "boost", "type": "uint32" }],
+    "inputs": [
+      { "internalType": "uint256", "name": "_pid", "type": "uint256" },
+      { "internalType": "uint32", "name": "_magicatBoost", "type": "uint32" }
+    ],
     "name": "setMagicatBoost",
     "outputs": [],
     "stateMutability": "nonpayable",

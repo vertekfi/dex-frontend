@@ -60,7 +60,7 @@ export const fantomNetworkConfig: NetworkConfig = {
     },
   },
   nft: {
-    nftStakingContract: '0xDBC838Ee888407815889d5603bc679A81715F928',
+    nftStakingContract: '0xDb52E06a75CAaB7013a0c3127F7AE80De7Be6752',
     nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43'
   },
   beetsPoolOwnerAddress: '0xcd983793adb846dce4830c22f30c7ef0c864a776',
