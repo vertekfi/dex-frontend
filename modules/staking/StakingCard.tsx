@@ -20,6 +20,10 @@ export function StakingCard(props: { pool: any | null }) {
   const [aprDaily, setAprDaily] = useState<string>();
   const [boostedAprDaily, setBoostedAprDaily] = useState<number>();
 
+  const [userInfo, setUserInfo] = useState<any>();
+  const [userTokens, setUserTokens] = useState<string>();
+  const [userUnclaimedRewards, setUserUnclaimedRewards] = useState<string>();
+
   const basePath = '/images/stakingPools/';
 
   const { data: pricesResponse } = useGetTokenPricesQuery();
@@ -29,6 +33,43 @@ export function StakingCard(props: { pool: any | null }) {
     pricesResponse.tokenPrices
       .filter((item: any) => item.address === networkConfig.beets.address.toLowerCase())[0]
       .price.toFixed(2);
+
+      const priceOfTokenRewards = pricesResponse && pricesResponse.tokenPrices
+      .filter((item: any) => item.address === pool.rewardToken.address.toLowerCase())[0]
+      .price.toFixed(2);
+
+
+      useEffect(() => {
+        if (!query.address) return;
+        readContract({
+          addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
+          contractInterface: StakingNFTPools,
+          chainId: 56,
+          functionName: 'userInfo',
+          args: [pool.poolId, query.address],
+        }).then((res) => {
+          setUserInfo(res);
+          setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
+        });
+      }, [query.address]);
+    
+      useEffect(() => {
+        if (!query.address) return;
+        readContract({
+          addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
+          contractInterface: StakingNFTPools,
+          chainId: 56,
+          functionName: 'pendingRewards',
+          args: [pool.poolId, query.address],
+        }).then((res) => {
+          setUserUnclaimedRewards(
+            parseFloat(
+              formatUnits(res.xbooReward.toString(), 18) +
+                formatUnits(res.magicatReward.toString(), 18),
+            ).toFixed(2),
+          );
+        });
+      }, [query.address]);
 
   useEffect(() => {
     if (!priceOfToken || !query.address || !pool) return;
@@ -70,6 +111,7 @@ export function StakingCard(props: { pool: any | null }) {
       setPoolInfo(res);
     });
   }, [priceOfToken, query.address]);
+
 
   return pool ? (
     <>
@@ -123,6 +165,10 @@ export function StakingCard(props: { pool: any | null }) {
             aprDaily={aprDaily}
             priceOfToken={priceOfToken}
             boostedAprDaily={boostedAprDaily}
+            priceOfTokenRewards={priceOfTokenRewards}
+            userInfo={userInfo}
+            userTokens={userTokens}
+            userUnclaimedRewards={userUnclaimedRewards}
           />
           <StakingAccordion pool={pool} poolInfo={poolInfo} priceOfToken={priceOfToken} />
         </GridItem>

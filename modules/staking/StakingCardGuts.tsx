@@ -1,17 +1,10 @@
 import { Flex, SimpleGrid, Text, Button, useDisclosure, GridItem, Box } from '@chakra-ui/react';
-import { RewardPool, useGetTokenPricesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { RewardPoolDepositModal } from './components/RewardPoolDepositModal';
 import { RewardPoolNftDepositModal } from './components/RewardPoolNftDepositModal';
 import { RewardPoolWithdrawModal } from './components/RewardPoolWithdrawModal';
 import { RewardPoolNftWithdrawModal } from './components/RewardPoolNftWithdrawModal';
 import { useRewardPoolDeposit } from './lib/useRewardPoolDeposit';
-import StakingNFTPools from '../../lib/abi/StakingNFTPools.json';
 import { useRewardPoolWithdraw } from './lib/useRewardPoolWithdraw';
-
-import { readContract, getAccount } from '@wagmi/core';
-import { formatUnits } from 'ethers/lib/utils';
-import { useEffect, useState } from 'react';
-import { networkConfig } from '~/lib/config/network-config';
 
 export function StakingCardGuts(props: {
   pool: any;
@@ -21,6 +14,10 @@ export function StakingCardGuts(props: {
   aprDaily: any;
   priceOfToken: any;
   boostedAprDaily: any;
+  priceOfTokenRewards: any;
+  userInfo: any;
+  userTokens: any;
+  userUnclaimedRewards: any;
 }) {
   const pool = props.pool;
   const poolInfo = props.poolInfo;
@@ -28,6 +25,10 @@ export function StakingCardGuts(props: {
   const aprDaily = props.aprDaily;
   const boostedAprDaily = props.boostedAprDaily;
   const priceOfToken = props.priceOfToken;
+  const priceOfTokenRewards = props.priceOfTokenRewards;
+  const userInfo = props.userInfo;
+  const userTokens = props.userTokens;
+  const userUnclaimedRewards = props.userUnclaimedRewards;
 
   const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
   const {
@@ -48,55 +49,6 @@ export function StakingCardGuts(props: {
 
   const { depositToPool, ...depositQuery } = useRewardPoolDeposit(pool);
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdraw(pool.address);
-
-  const account = getAccount();
-  const [userInfo, setUserInfo] = useState<any>();
-  const [userTokens, setUserTokens] = useState<string>();
-  const [userUnclaimedRewards, setUserUnclaimedRewards] = useState<string>();
-
-  const { data: pricesResponse } = useGetTokenPricesQuery();
-
-  // console.log('pricesResponse', pricesResponse);
-
-  // vertek token = 0xeD236c32f695c83Efde232c288701d6f9C23E60E
-
-  const priceOfTokenRewards =
-    pricesResponse &&
-    pricesResponse.tokenPrices
-      .filter((item: any) => item.address === pool.rewardToken.address.toLowerCase())[0]
-      .price.toFixed(2);
-
-  useEffect(() => {
-    if (!account.address) return;
-    readContract({
-      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
-      contractInterface: StakingNFTPools,
-      chainId: 56,
-      functionName: 'userInfo',
-      args: [pool.poolId, account.address],
-    }).then((res) => {
-      setUserInfo(res);
-      setUserTokens(parseFloat(formatUnits(res.amount.toString(), 18)).toFixed(2));
-    });
-  }, [account, pool.poolId]);
-
-  useEffect(() => {
-    if (!account.address) return;
-    readContract({
-      addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
-      contractInterface: StakingNFTPools,
-      chainId: 56,
-      functionName: 'pendingRewards',
-      args: [pool.poolId, account.address],
-    }).then((res) => {
-      setUserUnclaimedRewards(
-        parseFloat(
-          formatUnits(res.xbooReward.toString(), 18) +
-            formatUnits(res.magicatReward.toString(), 18),
-        ).toFixed(2),
-      );
-    });
-  }, [account, pool.poolId]);
 
   return (
     <>
