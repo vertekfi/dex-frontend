@@ -148,7 +148,7 @@ export function RewardPoolNftWithdrawModal({ isOpen, onOpen, onClose, pool }: Pr
               onClose();
             }}
             onSubmit={(id) => {
-              withdrawFromPool(pool.poolId, 1, parseInt(selectedNFTs[0].token_id));
+              withdrawFromPool(pool.poolId, 0, parseInt(selectedNFTs[0].token_id));
             }}
             onConfirmed={async (id) => {}}
             steps={steps || []}

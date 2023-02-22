@@ -168,7 +168,8 @@ export function BeetsTokenInputWithSlider({
               _hover={{ textDecoration: 'none' }}
               cursor={hasBalance ? 'pointer' : 'default'}
             >
-              Balance: {tokenFormatAmountPrecise(balance, 4)}
+              {/* Balance: {tokenFormatAmountPrecise(balance, 4)} */}
+              Balance: {balance}
               {hasBalance ? (
                 <Text color="vertek.neonpurple.500" fontWeight="bold" ml="1">
                   Max

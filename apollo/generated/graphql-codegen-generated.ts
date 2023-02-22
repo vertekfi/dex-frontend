@@ -828,7 +828,8 @@ export interface GqlPoolWithdrawOption {
 
 export interface GqlProtocolFeesCollectorAmounts {
   __typename: 'GqlProtocolFeesCollectorAmounts';
-  amount: Scalars['String'];
+  amount: Scalars['Float'];
+  poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
   token: Scalars['String'];
@@ -853,13 +854,19 @@ export interface GqlProtocolMetrics {
 
 export interface GqlProtocolPendingGaugeFee {
   __typename: 'GqlProtocolPendingGaugeFee';
+  amount: Scalars['Float'];
   gauge: Scalars['String'];
   gaugeAddress: Scalars['String'];
-  pendingPoolTokensFee: Scalars['Float'];
   poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
   valueUSD: Scalars['Float'];
+}
+
+export interface GqlProtocolRewardTokenInfo {
+  __typename: 'GqlProtocolRewardTokenInfo';
+  logoURI?: Maybe<Scalars['String']>;
+  valueUSD: Scalars['String'];
 }
 
 export interface GqlSorGetBatchSwapForTokensInResponse {
@@ -1060,6 +1067,16 @@ export interface GqlUserPortfolioSnapshot {
   walletBalance: Scalars['AmountHumanReadable'];
 }
 
+export interface GqlUserProtocolReward {
+  __typename: 'GqlUserProtocolReward';
+  amount: Scalars['String'];
+  isBPT: Scalars['Boolean'];
+  poolId: Scalars['String'];
+  token: Scalars['String'];
+  tokenInfo: GqlProtocolRewardTokenInfo;
+  tokenList: Array<GqlToken>;
+}
+
 export type GqlUserSnapshotDataRange =
   | 'ALL_TIME'
   | 'NINETY_DAYS'
@@ -1237,6 +1254,7 @@ export interface Query {
   userGetPoolBalances: Array<GqlUserPoolBalance>;
   userGetPoolJoinExits: Array<GqlPoolJoinExit>;
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
+  userGetProtocolRewardInfo: Array<Maybe<GqlUserProtocolReward>>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
   userGetVeLockInfo: GqlUserVoteEscrowInfo;

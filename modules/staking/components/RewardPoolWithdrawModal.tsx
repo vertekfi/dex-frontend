@@ -28,7 +28,7 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
   const [userTokens, setUserTokens] = useState<string>();
 
   const { withdrawFromPool, ...withdrawQuery } = useRewardPoolWithdraw(pool.address);
-  const account = getAccount()
+  const account = getAccount();
   const vrtkAddress = networkConfig.beets.address;
   const vrtkInfo: TokenBase = {
     address: vrtkAddress,
@@ -38,7 +38,7 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
   };
 
   useEffect(() => {
-    if(!account.address) return;
+    if (!account.address) return;
     readContract({
       addressOrName: networkConfig.nft.nftStakingContract.toLowerCase(),
       contractInterface: StakingNFTPools,
@@ -46,7 +46,8 @@ export function RewardPoolWithdrawModal({ isOpen, onOpen, onClose, pool }: Props
       functionName: 'userInfo',
       args: [pool.poolId, account.address],
     }).then((res) => {
-      setUserTokens((parseFloat((res).toString())/1e18).toFixed(2));
+      const units = formatUnits(res.amount, 18)
+      setUserTokens(units.toString());
     });
   }, [account]);
 
