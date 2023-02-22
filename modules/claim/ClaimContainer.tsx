@@ -1,4 +1,4 @@
-import { SimpleGrid, Box, GridItem, Text, Skeleton } from '@chakra-ui/react';
+import { SimpleGrid, Box, GridItem, Text, Skeleton, Tooltip } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
@@ -7,13 +7,42 @@ import { ClaimTable } from './components/ClaimTable';
 import { Gauge } from '~/lib/services/staking/types';
 import { NoRewardsBox } from './components/NoRewardsBox';
 import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
+import { ProtocolRewardsList } from './components/ProtocolRewardsList';
+import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
+import { InfoIcon } from '@chakra-ui/icons';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
   const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
-  // const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
+  const [hasProtocolRewards, sethasProtocolRewards] = useState<boolean>(false);
+  const [claiming, setClaiming] = useState<boolean>(false);
 
-  const { rewardGauges, isLoading: isClaimsLoading, refetchClaimsData } = useClaimsData();
+  const {
+    rewardGauges,
+    isLoading: isClaimsLoading,
+    refetchGauges,
+    protocolData,
+    refetchProtocolRewards,
+  } = useClaimsData();
+
+  const { claimProtocolRewards, txState } = useProtocolRewardClaim();
+
+  useEffect(() => {
+    if (txState.error) {
+      console.error(txState.error);
+      setClaiming(false);
+    }
+
+    if (txState.isPending) {
+      setClaiming(true);
+    } else {
+      setClaiming(false);
+    }
+
+    if (txState.isConfirmed) {
+      setClaiming(false);
+    }
+  }, [txState]);
 
   useEffect(() => {
     if (!isClaimsLoading && rewardGauges?.length) {
@@ -30,8 +59,26 @@ export function ClaimContainer() {
     }
   }, [rewardGauges, isClaimsLoading]);
 
-  function handleUserClaim() {
-    refetchClaimsData();
+  useEffect(() => {
+    if (!isClaimsLoading && protocolData) {
+      if (!(parseFloat(protocolData[0].amount) > 0)) {
+        sethasProtocolRewards(false);
+      } else {
+        sethasProtocolRewards(true);
+      }
+    }
+  }, [isClaimsLoading, protocolData]);
+
+  function handleUserRewardsClaim() {
+    refetchGauges();
+  }
+
+  async function handleProtocolClaim() {
+    setClaiming(true);
+    await claimProtocolRewards();
+    refetchProtocolRewards();
+    refetchGauges();
+    setClaiming(false);
   }
 
   return (
@@ -50,13 +97,11 @@ export function ClaimContainer() {
           <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
         </Box>
         {isClaimsLoading ? (
-          <Skeleton isLoaded={!isClaimsLoading} />
+          <Skeleton isLoaded={!isClaimsLoading && !gaugesWithRewards.length} />
         ) : (
           <>
-            {gaugesWithRewards.length ? (
-              <Box>
-                <ClaimTable gauges={gaugesWithRewards} />
-              </Box>
+            {!isClaimsLoading && gaugesWithRewards.length ? (
+              <ClaimTable gaugesWithRewards={gaugesWithRewards} />
             ) : (
               <NoRewardsBox label="No gauge staking rewards to claim" />
             )}
@@ -66,10 +111,21 @@ export function ClaimContainer() {
 
       <GridItem display="flex" flexDirection="column" paddingY="0">
         <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-          <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
+          <Text fontSize="1.20rem">veVRTK and Protocol Earnings </Text>
+          <Tooltip label="Protocol fee distribution is based on your percentage ownership of veVRTK at the start of the previous weeks epoch.">
+            <InfoIcon />
+          </Tooltip>
         </Box>
         <Box>
-          <NoRewardsBox label="No veVRTK protocol rewards to claim" />
+          {!isClaimsLoading && hasProtocolRewards ? (
+            <ProtocolRewardsList
+              protocolRewards={protocolData}
+              onClaim={handleProtocolClaim}
+              disabled={claiming}
+            />
+          ) : (
+            <NoRewardsBox label="No veVRTK protocol rewards to claim" />
+          )}
         </Box>
       </GridItem>
 
@@ -85,7 +141,7 @@ export function ClaimContainer() {
                 <GaugeRewardsContainer
                   gauges={rewardGauges}
                   isLoading={isClaimsLoading}
-                  onSuccessfulClaim={handleUserClaim}
+                  onSuccessfulClaim={handleUserRewardsClaim}
                 />
               ) : (
                 <NoRewardsBox label="No additional staking rewards to claim" />

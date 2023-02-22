@@ -116,7 +116,7 @@ export function isWeth(address: string) {
 
 export function replaceEthWithWeth(address: string) {
   if (address.toLowerCase() === networkConfig.eth.address.toLowerCase()) {
-    return networkConfig.wethAddress;
+    return networkConfig.wethAddress.toLowerCase();
   }
 
   return address;
@@ -132,7 +132,7 @@ export function replaceWethWithEth(address: string) {
 
 export function replaceWethWithZeroAddress(addresses: string[]): string[] {
   return addresses.map((address) =>
-    address.toLowerCase() === networkConfig.wethAddress ? AddressZero : address,
+    address.toLowerCase() === networkConfig.wethAddress.toLowerCase() ? AddressZero : address,
   );
 }
 

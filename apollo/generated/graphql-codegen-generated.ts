@@ -828,7 +828,8 @@ export interface GqlPoolWithdrawOption {
 
 export interface GqlProtocolFeesCollectorAmounts {
   __typename: 'GqlProtocolFeesCollectorAmounts';
-  amount: Scalars['String'];
+  amount: Scalars['Float'];
+  poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
   token: Scalars['String'];
@@ -853,13 +854,19 @@ export interface GqlProtocolMetrics {
 
 export interface GqlProtocolPendingGaugeFee {
   __typename: 'GqlProtocolPendingGaugeFee';
+  amount: Scalars['Float'];
   gauge: Scalars['String'];
   gaugeAddress: Scalars['String'];
-  pendingPoolTokensFee: Scalars['Float'];
   poolAddress: Scalars['String'];
   poolId: Scalars['String'];
   poolName: Scalars['String'];
   valueUSD: Scalars['Float'];
+}
+
+export interface GqlProtocolRewardTokenInfo {
+  __typename: 'GqlProtocolRewardTokenInfo';
+  logoURI?: Maybe<Scalars['String']>;
+  valueUSD: Scalars['String'];
 }
 
 export interface GqlSorGetBatchSwapForTokensInResponse {
@@ -1060,6 +1067,16 @@ export interface GqlUserPortfolioSnapshot {
   walletBalance: Scalars['AmountHumanReadable'];
 }
 
+export interface GqlUserProtocolReward {
+  __typename: 'GqlUserProtocolReward';
+  amount: Scalars['String'];
+  isBPT: Scalars['Boolean'];
+  poolId: Scalars['String'];
+  token: Scalars['String'];
+  tokenInfo: GqlProtocolRewardTokenInfo;
+  tokenList: Array<GqlToken>;
+}
+
 export type GqlUserSnapshotDataRange =
   | 'ALL_TIME'
   | 'NINETY_DAYS'
@@ -1237,6 +1254,7 @@ export interface Query {
   userGetPoolBalances: Array<GqlUserPoolBalance>;
   userGetPoolJoinExits: Array<GqlPoolJoinExit>;
   userGetPortfolioSnapshots: Array<GqlUserPortfolioSnapshot>;
+  userGetProtocolRewardInfo: Array<Maybe<GqlUserProtocolReward>>;
   userGetStaking: Array<GqlPoolStaking>;
   userGetSwaps: Array<GqlPoolSwap>;
   userGetVeLockInfo: GqlUserVoteEscrowInfo;
@@ -1742,6 +1760,25 @@ export type GetUserDataQuery = {
     poolId: string;
     gaugeAddress: string;
     boost: string;
+  } | null>;
+};
+
+export type GetUserProtocolRewardsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUserProtocolRewardsQuery = {
+  __typename: 'Query';
+  protocolRewards: Array<{
+    __typename: 'GqlUserProtocolReward';
+    poolId: string;
+    token: string;
+    amount: string;
+    isBPT: boolean;
+    tokenInfo: {
+      __typename: 'GqlProtocolRewardTokenInfo';
+      logoURI?: string | null;
+      valueUSD: string;
+    };
+    tokenList: Array<{ __typename: 'GqlToken'; address: string; logoURI?: string | null }>;
   } | null>;
 };
 
@@ -5430,6 +5467,74 @@ export type GetUserDataLazyQueryHookResult = ReturnType<typeof useGetUserDataLaz
 export type GetUserDataQueryResult = Apollo.QueryResult<
   GetUserDataQuery,
   GetUserDataQueryVariables
+>;
+export const GetUserProtocolRewardsDocument = gql`
+  query GetUserProtocolRewards {
+    protocolRewards: userGetProtocolRewardInfo {
+      poolId
+      token
+      tokenInfo {
+        logoURI
+        valueUSD
+      }
+      amount
+      isBPT
+      tokenList {
+        address
+        logoURI
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetUserProtocolRewardsQuery__
+ *
+ * To run a query within a React component, call `useGetUserProtocolRewardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserProtocolRewardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserProtocolRewardsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserProtocolRewardsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetUserProtocolRewardsQuery,
+    GetUserProtocolRewardsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserProtocolRewardsQuery, GetUserProtocolRewardsQueryVariables>(
+    GetUserProtocolRewardsDocument,
+    options,
+  );
+}
+export function useGetUserProtocolRewardsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserProtocolRewardsQuery,
+    GetUserProtocolRewardsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserProtocolRewardsQuery, GetUserProtocolRewardsQueryVariables>(
+    GetUserProtocolRewardsDocument,
+    options,
+  );
+}
+export type GetUserProtocolRewardsQueryHookResult = ReturnType<
+  typeof useGetUserProtocolRewardsQuery
+>;
+export type GetUserProtocolRewardsLazyQueryHookResult = ReturnType<
+  typeof useGetUserProtocolRewardsLazyQuery
+>;
+export type GetUserProtocolRewardsQueryResult = Apollo.QueryResult<
+  GetUserProtocolRewardsQuery,
+  GetUserProtocolRewardsQueryVariables
 >;
 export const UserSyncBalanceDocument = gql`
   mutation UserSyncBalance($poolId: String!) {

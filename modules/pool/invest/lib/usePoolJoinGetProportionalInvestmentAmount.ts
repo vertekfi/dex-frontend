@@ -1,12 +1,7 @@
 import { useQuery } from 'react-query';
 import { useInvest } from '~/modules/pool/invest/lib/useInvest';
 import { sortBy } from 'lodash';
-import {
-  isEth,
-  isWeth,
-  replaceEthWithWeth,
-  replaceWethWithEth,
-} from '~/lib/services/token/token-util';
+import { isEth, replaceEthWithWeth, replaceWethWithEth } from '~/lib/services/token/token-util';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { usePool } from '~/modules/pool/lib/usePool';
 

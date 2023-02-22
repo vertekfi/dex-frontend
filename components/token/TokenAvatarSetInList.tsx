@@ -82,9 +82,10 @@ export function TokenAvatarSetInList({
         w="200px"
         padding="4"
         borderRadius="16px"
-        bgColor="transparent"
-        backdropFilter="blur(12px)"
+        bgColor="rgba(10, 10, 10, .6) "
+        backdropFilter="blur(24px)"
         color="white"
+        fontWeight="extrabold" 
         boxShadow="0 0 12px #000"
       >
         {tokens?.map((token, index) => (

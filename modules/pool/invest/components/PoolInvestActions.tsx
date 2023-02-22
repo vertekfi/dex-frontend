@@ -44,7 +44,7 @@ export function PoolInvestActions({ onInvestComplete, onClose }: Props) {
 
   const { refetch: refetchUserTokenBalances } = usePoolUserTokenBalancesInWallet();
   const { refetch: refetchUserBptBalance } = usePoolUserBptBalance();
-  const [userSyncBalance, { loading }] = useUserSyncBalanceMutation();
+  //  const [userSyncBalance, { loading }] = useUserSyncBalanceMutation();
 
   useEffect(() => {
     if (!isLoading) {
@@ -106,7 +106,7 @@ export function PoolInvestActions({ onInvestComplete, onClose }: Props) {
             } else {
               refetchUserTokenBalances();
               refetchUserBptBalance();
-              userSyncBalance({ variables: { poolId: pool.id } });
+              // userSyncBalance({ variables: { poolId: pool.id } });
               onInvestComplete();
             }
           }}

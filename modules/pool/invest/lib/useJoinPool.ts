@@ -8,9 +8,6 @@ import { PoolJoinContractCallData } from '~/lib/services/pool/pool-types';
 import { TokenAmountHumanReadable } from '~/lib/services/token/token-types';
 import { tokenAmountsConcatenatedString } from '~/lib/services/token/token-util';
 import { AddressZero, MaxUint256 } from '@ethersproject/constants';
-import { isSameAddress } from '@balancer-labs/sdk';
-import { oldBnum } from '~/lib/services/pool/lib/old-big-number';
-import { useSlippage } from '~/lib/global/useSlippage';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 import { networkConfig } from '~/lib/config/network-config';
 import { poolRequiresBatchRelayerOnJoin } from '~/lib/services/pool/pool-util';
@@ -18,13 +15,17 @@ import { poolRequiresBatchRelayerOnJoin } from '~/lib/services/pool/pool-util';
 export function useJoinPool(pool: GqlPoolUnion, zapEnabled?: boolean) {
   const { userAddress } = useUserAccount();
   const { submit, submitAsync, ...rest } = useSubmitTransaction({
-    config:
-      zapEnabled || poolRequiresBatchRelayerOnJoin(pool)
-        ? batchRelayerContractConfig
-        : {
-            ...vaultContractConfig,
-            functionName: pool.__typename === 'GqlPoolPhantomStable' ? 'batchSwap' : 'joinPool',
-          },
+    // config:
+    //   zapEnabled || poolRequiresBatchRelayerOnJoin(pool)
+    //     ? batchRelayerContractConfig
+    //     : {
+    //         ...vaultContractConfig,
+    //         functionName: pool.__typename === 'GqlPoolPhantomStable' ? 'batchSwap' : 'joinPool',
+    //       },
+    config: {
+      ...vaultContractConfig,
+      functionName: pool.__typename === 'GqlPoolPhantomStable' ? 'batchSwap' : 'joinPool',
+    },
     transactionType: 'JOIN',
   });
 

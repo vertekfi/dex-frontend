@@ -4,7 +4,6 @@ import { useGetTokens } from '~/lib/global/useToken';
 import { getPreviousThursday, oneYearInSecs } from '~/lib/util/time';
 import { useUserBalances } from '~/lib/user/useUserBalances';
 import { bnum } from '~/lib/util/big-number.utils';
-import { useState } from 'react';
 
 /**
  * @summary Calculate expected veBAL given BPT being locked and lock time in seconds.
@@ -40,8 +39,6 @@ export function getPreviousEpoch(weeksToGoBack = 0): Date {
 }
 
 export function useVeVRTK() {
-  const [showRedirectModal, setShowRedirectModal] = useState<Boolean>();
-
   const { getToken } = useGetTokens();
   const { getUserBalance } = useUserBalances([]);
 
@@ -49,6 +46,5 @@ export function useVeVRTK() {
     veBalBalance: getUserBalance(networkConfig.balancer.votingEscrow.veAddress),
     lockablePoolId: networkConfig.balancer.votingEscrow.lockablePoolId,
     veBalTokenInfo: getToken(networkConfig.balancer.votingEscrow.veAddress),
-    setShowRedirectModal,
   };
 }

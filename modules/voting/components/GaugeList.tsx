@@ -10,6 +10,7 @@ import { GaugeVoteModal } from './GaugeVoteModal';
 import { VotingSubheader } from './VotingSubheader';
 import { GaugeListFooter } from './GaugeListFooter';
 import { GaugeListTableHeader } from './GaugeListTableHeader';
+import { AnimatedBox } from '~/components/animation/chakra';
 
 export function GaugeList() {
   const [unallocatedVoteWeight, setUnallocatedVoteWeight] = useState<number>();
@@ -74,7 +75,9 @@ export function GaugeList() {
           <Skeleton isLoaded={!isLoadingGauges}>
             {votingGauges?.map((gauge) => {
               return (
-                <GaugeListItem key={gauge.address} gauge={gauge} onVoteClick={setActiveGaugeVote} />
+                <AnimatedBox key={gauge.address}>
+                  <GaugeListItem gauge={gauge} onVoteClick={setActiveGaugeVote} />
+                </AnimatedBox>
               );
             })}
           </Skeleton>

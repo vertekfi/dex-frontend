@@ -91,7 +91,7 @@ export function _useUserVotingData() {
       );
       setLockedBalance(userVeLockInfo?.userGetVeLockInfo.lockedAmount);
       setHasExistingLock(hasLock);
-      setcurrentVeBalance(tokenFormatAmount(userVeLockInfo?.userGetVeLockInfo.currentBalance));
+      setcurrentVeBalance(userVeLockInfo?.userGetVeLockInfo.currentBalance);
     }
   }, [userVeLockInfo, isLoadingUserVeData, isConnected]);
 

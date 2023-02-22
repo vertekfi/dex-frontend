@@ -55,63 +55,61 @@ function PoolList() {
       .length > 0;
 
   return (
-    <>
-      {pinnedPool && (
-        <Box>
-          <PoolListMobileHeader />
-          <PoolListTop />
-          {hasUnstakedBpt && (
-            <Alert
-              borderRadius="12px"
-              bg="vertek.slatepurple.900"
-              status="warning"
-              color="vertek.neonpurple.500"
-              mt="4"
-            >
-              <AlertIcon color="vertek.neonpurple.500" />
-              You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
-              will accumulate over time when your VPT are staked.
-            </Alert>
-          )}
-          <PaginatedTable
-            items={poolsToRender}
-            currentPage={state.skip / state.first + 1}
-            pageSize={state.first}
-            count={poolCount}
-            onPageChange={(page) => {
-              refetch({ ...state, skip: state.first * (page - 1) });
-            }}
-            loading={loading}
-            fetchingMore={networkStatus === NetworkStatus.refetch}
-            onPageSizeChange={setPageSize}
-            renderTableHeader={() => <PoolListTableHeader />}
-            renderTableRow={(item: GqlPoolMinimalFragment, index) => {
-              console.log(item);
-              return (
-                <PoolListItem
-                  padding="1"
-                  bgColor="white"
-                  key={index}
-                  pool={item}
-                  userBalance={`${usdBalanceForPool(item.id)}`}
-                  showUserBalance={showMyInvestments}
-                  tokens={item.allTokens
-                    .filter((token) => !token.isNested && !token.isPhantomBpt)
-                    .map((token) => ({
-                      ...token,
-                      logoURI: getToken(token.address)?.logoURI || undefined,
-                    }))}
-                  hasUnstakedBpt={
-                    item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)
-                  }
-                />
-              );
-            }}
+  <>
+  {pinnedPool && (
+  <Box>
+    <PoolListMobileHeader />
+    <PoolListTop />
+    {hasUnstakedBpt && (
+    <Alert
+      borderRadius="12px"
+      bg="vertek.slatepurple.900"
+      status="warning"
+      color="vertek.neonpurple.500"
+      mt="4"
+    >
+      <AlertIcon color="vertek.neonpurple.500" />
+      You have unstaked VPT in your wallet. Incentivized pools offer additional rewards that
+      will accumulate over time when your VPT are staked.
+    </Alert>
+    )}
+    <PaginatedTable
+      items={poolsToRender}
+      currentPage={state.skip / state.first + 1}
+      pageSize={state.first}
+      count={poolCount}
+      onPageChange={(page) => {
+        refetch({ ...state, skip: state.first * (page - 1) });
+      }}
+      loading={loading}
+      fetchingMore={networkStatus === NetworkStatus.refetch}
+      onPageSizeChange={setPageSize}
+      renderTableHeader={() => <PoolListTableHeader />}
+      renderTableRow={(item: GqlPoolMinimalFragment, index) => {
+        return (
+          <PoolListItem
+            padding="1"
+            key={index}
+            pool={item}
+            userBalance={`${usdBalanceForPool(item.id)}`}
+            showUserBalance={showMyInvestments}
+            tokens={item.allTokens
+              .filter((token) => !token.isNested && !token.isPhantomBpt)
+              .map((token) => ({
+                ...token,
+                logoURI: getToken(token.address)?.logoURI || undefined,
+              }))}
+            hasUnstakedBpt={
+              item.dynamicData.apr.hasRewardApr && hasBptInWalletForPool(item.id)
+            }
           />
-          {/* <PoolListFooter /> */}
-        </Box>
-      )}
-    </>
+        );
+      }}
+    />
+    {/* <PoolListFooter /> */}
+  </Box>
+    )}
+  </>
   );
 }
 
