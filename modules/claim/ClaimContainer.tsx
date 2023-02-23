@@ -61,7 +61,7 @@ export function ClaimContainer() {
 
   useEffect(() => {
     if (!isClaimsLoading && protocolData) {
-      if (!(parseFloat(protocolData[0].amount) > 0)) {
+      if (!(parseFloat(protocolData[0]?.amount) > 0)) {
         sethasProtocolRewards(false);
       } else {
         sethasProtocolRewards(true);
