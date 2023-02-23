@@ -1,4 +1,4 @@
-import { intervalToDuration, nextThursday } from 'date-fns';
+import { add, intervalToDuration, nextThursday } from 'date-fns';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useGetLiquidityGaugesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { gaugeControllerDecorator } from '~/lib/services/staking/gauge-controller.decorator';
@@ -102,7 +102,11 @@ export function _useGauges() {
   // }, [isLoadingGauges, votingGauges]);
 
   function getVotePeriodEndTime(): number {
-    const n = nextThursday(new Date());
+    const today = new Date().getTime();
+    let n = nextThursday(new Date());
+    if (today > Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0)) {
+      n = add(n, { weeks: 1 })
+    }
     const epochEndTime = Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0);
     return epochEndTime;
   }
