@@ -1,25 +1,24 @@
-import { Button, ButtonProps } from '@chakra-ui/button';
+import { Button } from '@chakra-ui/button';
 import { Box, HStack, Text } from '@chakra-ui/layout';
-import TokenAvatar from '~/components/token/TokenAvatar';
-import { AmountHumanReadable, TokenBase } from '~/lib/services/token/token-types';
+import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { Skeleton } from '@chakra-ui/react';
+import { memo } from 'react';
+import { TokenAvatarSetInList } from '../token/TokenAvatarSetInList';
+import { GqlPoolMinimal } from '~/apollo/generated/graphql-codegen-generated';
 
-type TokenRowProps = TokenBase & {
+const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
+
+type PoolRowProps = {
+  pool: GqlPoolMinimal;
   userBalance: AmountHumanReadable;
   userBalanceUSD: number;
   loading: boolean;
+  onClick(): void;
 };
 
-export function PoolSelectRow({
-  symbol,
-  address,
-  onClick,
-  userBalance,
-  userBalanceUSD,
-  loading,
-}: TokenRowProps & ButtonProps) {
+export function PoolRow({ pool, onClick, userBalance, userBalanceUSD, loading }: PoolRowProps) {
   const hasBalance = parseFloat(userBalance) > 0;
 
   return (
@@ -36,8 +35,8 @@ export function PoolSelectRow({
     >
       <HStack px="3" width="full" paddingY="4" justifyContent="space-between">
         <HStack>
-          <TokenAvatar address={address} size="xs" />
-          <Text fontSize="lg">{symbol}</Text>
+          <MemoizedTokenAvatarSetInList imageSize={28} width={92} tokens={pool.allTokens} />
+          {/* <Text fontSize="lg">{symbol}</Text> */}
         </HStack>
         <Box marginTop="2px" display="flex" flexDirection="column">
           {loading ? (

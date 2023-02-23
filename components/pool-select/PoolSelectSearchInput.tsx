@@ -7,7 +7,7 @@ interface Props {
   setValue: (value: string) => void;
 }
 
-export const TokenSelectSearchInput = forwardRef(({ value, setValue, placeholder }: Props, ref) => {
+export const PoolSelectSearchInput = forwardRef(({ value, setValue, placeholder }: Props, ref) => {
   const { colors } = useTheme();
 
   return (

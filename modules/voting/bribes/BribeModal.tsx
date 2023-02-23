@@ -4,12 +4,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Text,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
   ModalHeader,
   ModalOverlay,
   NumberDecrementStepper,
@@ -20,30 +14,43 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
-import { memo } from 'react';
 import { useRef, useState } from 'react';
 import { TokenSelectModal } from '~/components/token-select/TokenSelectModal';
-import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
-import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
-import { ChevronDownIcon } from '@chakra-ui/icons';
-import VirtualList from 'react-tiny-virtual-list';
-
-const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
+import { GqlPoolMinimal } from '~/apollo/generated/graphql-codegen-generated';
+import { PoolSelectModal } from '~/components/pool-select/PoolSelectModal';
+import { useBribeState } from './lib/useBribeState';
 
 interface Props {
   isOpen: boolean;
   onClose(): void;
-  gauges: LiquidityGauge[];
+  poolsWithGauges: any[];
 }
 
-export function BribeModal({ isOpen, onClose, gauges }: Props) {
+export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
   const [isTokenModalOpen, setIsTokenModalOpen] = useState<boolean>(false);
+  const [isPoolModalOpen, setIsPoolModalOpen] = useState<boolean>(false);
 
-  console.log(gauges);
+  const { setSelectedGaugeAddress, isBribeStateValid } = useBribeState();
+
+  console.log(poolsWithGauges);
 
   const tokenListRef = useRef(null);
 
-  function handleModalClose() {}
+  function handleTokenModalOpen() {
+    setIsPoolModalOpen(false);
+    setIsTokenModalOpen(true);
+  }
+
+  function handlePoolModalOpen() {
+    setIsTokenModalOpen(false);
+    setIsPoolModalOpen(true);
+  }
+
+  function onPoolSelected(address: string) {
+    const pool = poolsWithGauges.find((p) => p.address === address);
+    const gauge = pool?.staking?.gauge?.gaugeAddress;
+    setSelectedGaugeAddress(gauge);
+  }
 
   return (
     <Modal
@@ -67,38 +74,25 @@ export function BribeModal({ isOpen, onClose, gauges }: Props) {
                 justifyContent="center"
                 alignContent="center"
               >
-                <Menu>
-                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                    Choose Pool
-                  </MenuButton>
-                  <MenuList
-                    bgColor="vertek.neonpurple.500"
-                    zIndex="dropdown"
-                    maxHeight={'60vh'}
-                    overflowY={'scroll'}
-                  >
-                    {gauges?.map((gauge) => (
-                      <>
-                        <MenuItem key={gauge.address}>
-                          <Flex justifyContent="space-between" width="385px">
-                            <MemoizedTokenAvatarSetInList
-                              imageSize={28}
-                              width={92}
-                              tokens={gauge.pool.tokens}
-                            />
-                            <Text pr="20"> {gauge.pool.name}</Text>
-                          </Flex>
-                        </MenuItem>
-                        <MenuDivider />
-                      </>
-                    ))}
-                  </MenuList>
-                </Menu>
+                <FormControl>
+                  <FormLabel>Choose a gauge</FormLabel>
+                  <Select
+                    onClick={handlePoolModalOpen}
+                    size="lg"
+                    placeholder="Select"
+                    bg="vertek.slatepurple.900"
+                    color="vertek.neonpurple.500"
+                    variant="filled"
+                    onChange={(event) => {
+                      //onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
+                    }}
+                  ></Select>
+                </FormControl>
 
                 <FormControl>
                   <FormLabel>Choose Reward Token</FormLabel>
                   <Select
-                    onClick={() => setIsTokenModalOpen(true)}
+                    onClick={handleTokenModalOpen}
                     size="lg"
                     placeholder="Select"
                     bg="vertek.slatepurple.900"
@@ -126,6 +120,18 @@ export function BribeModal({ isOpen, onClose, gauges }: Props) {
                     isOpen={isTokenModalOpen}
                     onOpen={() => null}
                     onClose={() => setIsTokenModalOpen(false)}
+                    finalFocusRef={tokenListRef}
+                  />
+                )}
+
+                {isPoolModalOpen && (
+                  <PoolSelectModal
+                    pools={poolsWithGauges}
+                    title="Gauge"
+                    onOptionSelected={(address) => onPoolSelected(address)}
+                    isOpen={isPoolModalOpen}
+                    onOpen={() => null}
+                    onClose={() => setIsPoolModalOpen(false)}
                     finalFocusRef={tokenListRef}
                   />
                 )}

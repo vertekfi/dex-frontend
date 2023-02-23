@@ -1,10 +1,8 @@
 import { Box, Grid, GridItem, VStack, Text } from '@chakra-ui/react';
 import { useVotingGauges } from '../lib/useVotingGauges';
-import { Archive, Inbox } from 'react-feather';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckToSlot } from '@fortawesome/free-solid-svg-icons';
 import { faBusinessTime } from '@fortawesome/free-solid-svg-icons';
-import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 import { AddBribeButton } from '../bribes/AddBribeButton';
 
 type Props = {
