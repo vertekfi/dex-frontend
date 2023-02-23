@@ -279,6 +279,11 @@ export const GqlPoolMinimal = gql`
       weight
       symbol
     }
+    displayTokens {
+      address
+      symbol
+      weight
+    }
     staking {
       id
       type

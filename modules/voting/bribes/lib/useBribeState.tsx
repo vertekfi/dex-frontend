@@ -1,14 +1,18 @@
 import { useState } from 'react';
+import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 export function useBribeState() {
-  const [selectedGaugeAddress, setSelectedGaugeAddress] = useState<string>();
+  const [selectedGauge, setSelectedGauge] = useState<LiquidityGauge>();
   const [bribeAmount, setBribeAmount] = useState<number>();
 
-  const isBribeStateValid = !!selectedGaugeAddress && !!bribeAmount;
+  const isBribeStateValid = !!selectedGauge && !!bribeAmount;
 
   return {
+    bribeAmount,
+    selectedGauge,
+
     setBribeAmount,
-    setSelectedGaugeAddress,
+    setSelectedGauge,
 
     isBribeStateValid,
   };

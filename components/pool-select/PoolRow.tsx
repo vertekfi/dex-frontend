@@ -6,19 +6,19 @@ import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { Skeleton } from '@chakra-ui/react';
 import { memo } from 'react';
 import { TokenAvatarSetInList } from '../token/TokenAvatarSetInList';
-import { GqlPoolMinimal } from '~/apollo/generated/graphql-codegen-generated';
+import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 type PoolRowProps = {
-  pool: GqlPoolMinimal;
+  gauge: LiquidityGauge;
   userBalance: AmountHumanReadable;
   userBalanceUSD: number;
   loading: boolean;
   onClick(): void;
 };
 
-export function PoolRow({ pool, onClick, userBalance, userBalanceUSD, loading }: PoolRowProps) {
+export function PoolRow({ gauge, onClick, userBalance, loading }: PoolRowProps) {
   const hasBalance = parseFloat(userBalance) > 0;
 
   return (
@@ -35,10 +35,19 @@ export function PoolRow({ pool, onClick, userBalance, userBalanceUSD, loading }:
     >
       <HStack px="3" width="full" paddingY="4" justifyContent="space-between">
         <HStack>
-          <MemoizedTokenAvatarSetInList imageSize={28} width={92} tokens={pool.allTokens} />
-          {/* <Text fontSize="lg">{symbol}</Text> */}
+          {loading ? (
+            <>
+              <Skeleton width="12" height="3" mb="1" />
+              <Skeleton width="12" height="3" />
+            </>
+          ) : (
+            <>
+              <MemoizedTokenAvatarSetInList imageSize={28} width={92} tokens={gauge.pool.tokens} />
+              <Text fontSize="lg">{gauge.pool.name}</Text>
+            </>
+          )}
         </HStack>
-        <Box marginTop="2px" display="flex" flexDirection="column">
+        {/* <Box marginTop="2px" display="flex" flexDirection="column">
           {loading ? (
             <>
               <Skeleton width="12" height="3" mb="1" />
@@ -54,7 +63,7 @@ export function PoolRow({ pool, onClick, userBalance, userBalanceUSD, loading }:
               </Text>
             </>
           )}
-        </Box>
+        </Box> */}
       </HStack>
     </Button>
   );

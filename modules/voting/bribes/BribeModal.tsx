@@ -16,9 +16,11 @@ import {
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { useRef, useState } from 'react';
 import { TokenSelectModal } from '~/components/token-select/TokenSelectModal';
-import { GqlPoolMinimal } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolSelectModal } from '~/components/pool-select/PoolSelectModal';
 import { useBribeState } from './lib/useBribeState';
+import { BribeSummary } from './BribeSummary';
+import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
+import { useGetTokens } from '~/lib/global/useToken';
 
 interface Props {
   isOpen: boolean;
@@ -29,10 +31,14 @@ interface Props {
 export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
   const [isTokenModalOpen, setIsTokenModalOpen] = useState<boolean>(false);
   const [isPoolModalOpen, setIsPoolModalOpen] = useState<boolean>(false);
+  const [selectedGauge, setSelectedGauge] = useState<LiquidityGauge>();
+  const [selectedToken, setSelectedToken] = useState<GqlToken | null>();
+  const [bribeAmount, setBribeAmount] = useState<{
+    amount: string;
+    value: number;
+  }>();
 
-  const { setSelectedGaugeAddress, isBribeStateValid } = useBribeState();
-
-  console.log(poolsWithGauges);
+  const { getToken, priceForAmount } = useGetTokens();
 
   const tokenListRef = useRef(null);
 
@@ -46,10 +52,26 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
     setIsPoolModalOpen(true);
   }
 
-  function onPoolSelected(address: string) {
-    const pool = poolsWithGauges.find((p) => p.address === address);
-    const gauge = pool?.staking?.gauge?.gaugeAddress;
-    setSelectedGaugeAddress(gauge);
+  function onPoolGaugeSelected(gaugeAddress: string) {
+    const gauge = poolsWithGauges.find((g) => g.address === gaugeAddress);
+    setSelectedGauge(gauge);
+  }
+
+  function handleTokenSelected(address: string) {
+    const token = getToken(address);
+    setSelectedToken(token);
+  }
+
+  function handleSelectedTokenAmount(amount: string, amountNum: number) {
+    const value = priceForAmount({
+      address: selectedToken?.address || '',
+      amount,
+    });
+
+    setBribeAmount({
+      amount,
+      value,
+    });
   }
 
   return (
@@ -74,6 +96,14 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                 justifyContent="center"
                 alignContent="center"
               >
+                <Box>
+                  <BribeSummary
+                    gauge={selectedGauge}
+                    selectedToken={selectedToken}
+                    bribeAmount={bribeAmount}
+                  />
+                </Box>
+
                 <FormControl>
                   <FormLabel>Choose a gauge</FormLabel>
                   <Select
@@ -106,7 +136,11 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
 
                 <FormControl>
                   <FormLabel>Amount</FormLabel>
-                  <NumberInput min={0}>
+                  <NumberInput
+                    min={0}
+                    onChange={handleSelectedTokenAmount}
+                    isDisabled={!selectedToken}
+                  >
                     <NumberInputField />
                     <NumberInputStepper>
                       <NumberIncrementStepper />
@@ -115,8 +149,12 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                   </NumberInput>
                 </FormControl>
 
+                <Button>Submit</Button>
+
                 {isTokenModalOpen && (
                   <TokenSelectModal
+                    title="Select Bribe Token"
+                    onTokenSelect={handleTokenSelected}
                     isOpen={isTokenModalOpen}
                     onOpen={() => null}
                     onClose={() => setIsTokenModalOpen(false)}
@@ -126,9 +164,9 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
 
                 {isPoolModalOpen && (
                   <PoolSelectModal
-                    pools={poolsWithGauges}
+                    gauges={poolsWithGauges}
                     title="Gauge"
-                    onOptionSelected={(address) => onPoolSelected(address)}
+                    onOptionSelected={(address) => onPoolGaugeSelected(address)}
                     isOpen={isPoolModalOpen}
                     onOpen={() => null}
                     onClose={() => setIsPoolModalOpen(false)}

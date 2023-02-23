@@ -737,6 +737,7 @@ export interface GqlPoolTokenExpanded {
   isPhantomBpt: Scalars['Boolean'];
   name: Scalars['String'];
   symbol: Scalars['String'];
+  token: GqlToken;
   weight?: Maybe<Scalars['String']>;
 }
 
@@ -4041,6 +4042,12 @@ export type GetPoolsQuery = {
       weight?: string | null;
       symbol: string;
     }>;
+    displayTokens: Array<{
+      __typename: 'GqlPoolTokenDisplay';
+      address: string;
+      symbol: string;
+      weight?: string | null;
+    }>;
     staking?: {
       __typename: 'GqlPoolStaking';
       id: string;
@@ -4114,6 +4121,12 @@ export type GqlPoolMinimalFragment = {
     isPhantomBpt: boolean;
     weight?: string | null;
     symbol: string;
+  }>;
+  displayTokens: Array<{
+    __typename: 'GqlPoolTokenDisplay';
+    address: string;
+    symbol: string;
+    weight?: string | null;
   }>;
   staking?: {
     __typename: 'GqlPoolStaking';
@@ -4803,6 +4816,11 @@ export const GqlPoolMinimalFragmentDoc = gql`
       isPhantomBpt
       weight
       symbol
+    }
+    displayTokens {
+      address
+      symbol
+      weight
     }
     staking {
       id

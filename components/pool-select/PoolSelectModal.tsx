@@ -1,12 +1,12 @@
 import { Box, ModalHeader, ModalOverlay } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
 import { RefObject, useRef, useState } from 'react';
-import { GqlPoolMinimal } from '~/apollo/generated/graphql-codegen-generated';
+import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { PoolSelectPoolList } from './PoolSelectPoolList';
 import { PoolSelectSearchInput } from './PoolSelectSearchInput';
 
 interface Props {
-  pools: GqlPoolMinimal[];
+  gauges: LiquidityGauge[];
   title: string;
   isOpen: boolean;
   onOpen(): void;
@@ -20,7 +20,7 @@ export function PoolSelectModal({
   onClose,
   finalFocusRef,
   title,
-  pools,
+  gauges,
   onOptionSelected,
 }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -61,7 +61,7 @@ export function PoolSelectModal({
               >
                 <PoolSelectSearchInput
                   ref={initialFocusRef}
-                  placeholder="Search by name or symbol..."
+                  placeholder="Search by name..."
                   value={searchTerm}
                   setValue={(value: string) => {
                     setSearchTerm(value);
@@ -69,16 +69,10 @@ export function PoolSelectModal({
                 />
               </Box>
               <PoolSelectPoolList
-                pools={pools}
+                gauges={gauges}
                 listHeight={listHeight}
                 searchTerm={searchTerm}
                 onPoolRowClick={(address) => onPoolRowClick(address)}
-              />
-              <Box
-                height="20px"
-                boxShadow="dark-lg"
-                borderTopWidth={1}
-                borderTopColor="vertek.neonpurple.500"
               />
             </ModalBody>
           </Box>

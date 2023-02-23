@@ -11,13 +11,15 @@ import { useGetTokens } from '~/lib/global/useToken';
 import { useUserImportedTokens } from '~/lib/user/useUserImportedTokens';
 
 interface Props {
+  title?: string;
+  onTokenSelect?: (address: string) => void;
   isOpen: boolean;
   onOpen(): void;
   onClose(): void;
   finalFocusRef: RefObject<HTMLInputElement>;
 }
 
-export function TokenSelectModal({ isOpen, onClose, finalFocusRef }: Props) {
+export function TokenSelectModal({ isOpen, onClose, finalFocusRef, title, onTokenSelect }: Props) {
   const listHeight = 500;
   const [searchTerm, setSearchTerm] = useState('');
   const { handleTokenSelected, tokenSelectKey } = useTradeCard();
@@ -32,6 +34,10 @@ export function TokenSelectModal({ isOpen, onClose, finalFocusRef }: Props) {
     onClose();
 
     setTimeout(() => {
+      if (onTokenSelect) {
+        onTokenSelect(address);
+      }
+
       handleTokenSelected(address);
       setSearchTerm('');
     });
@@ -50,9 +56,14 @@ export function TokenSelectModal({ isOpen, onClose, finalFocusRef }: Props) {
         <Box bg="vertek.slatepurple.900">
           <Box className="bg">
             <ModalCloseButton />
-            <ModalHeader>
-              Select a token to {tokenSelectKey === 'tokenIn' ? 'sell' : 'buy'}
-            </ModalHeader>
+            {title ? (
+              <ModalHeader>{title}</ModalHeader>
+            ) : (
+              <ModalHeader>
+                Select a token to {tokenSelectKey === 'tokenIn' ? 'sell' : 'buy'}
+              </ModalHeader>
+            )}
+
             <ModalBody p="0" position="relative">
               <Box
                 px="6"
