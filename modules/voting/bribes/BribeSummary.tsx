@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
+import { numberFormatUSDValue } from '~/lib/util/number-formats';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -41,7 +42,7 @@ export function BribeSummary({ gauge, selectedToken, bribeAmount }: Props) {
           <>
             <Text fontSize="lg">Bribe Amount: </Text>
             <Text fontSize="lg">
-              {bribeAmount.amount} (${bribeAmount.value})
+              {bribeAmount.amount} ({numberFormatUSDValue(bribeAmount.value)})
             </Text>
           </>
         )}

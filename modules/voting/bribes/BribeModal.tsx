@@ -17,7 +17,6 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/mod
 import { useRef, useState } from 'react';
 import { TokenSelectModal } from '~/components/token-select/TokenSelectModal';
 import { PoolSelectModal } from '~/components/pool-select/PoolSelectModal';
-import { useBribeState } from './lib/useBribeState';
 import { BribeSummary } from './BribeSummary';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetTokens } from '~/lib/global/useToken';
@@ -149,7 +148,19 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                   </NumberInput>
                 </FormControl>
 
-                <Button>Submit</Button>
+                <Button
+                  variant="vertekdark"
+                  padding="1em"
+                  borderRadius="10px"
+                  borderWidth="1px"
+                  alignItems="center"
+                  height="2em"
+                  disabled={false}
+                  // isDisabled={txState.isPending}
+                  // onClick={claim}
+                >
+                  Submit
+                </Button>
 
                 {isTokenModalOpen && (
                   <TokenSelectModal
