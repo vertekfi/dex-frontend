@@ -142,7 +142,7 @@ export function ProtocolRewardsList(props: Props) {
                   isDisabled={props.disabled}
                   onClick={props.onClaim}
                 >
-                  {tokenFormatAmount(reward.amount)}
+                 Claim
                 </Button>
                 </GridItem>
               </Grid>
