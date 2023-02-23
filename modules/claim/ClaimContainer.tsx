@@ -117,7 +117,7 @@ export function ClaimContainer() {
           </Tooltip>
         </Box>
         <Box>
-          {!isClaimsLoading && hasProtocolRewards ? (
+          {/* {!isClaimsLoading && hasProtocolRewards ? (
             <ProtocolRewardsList
               protocolRewards={protocolData}
               onClaim={handleProtocolClaim}
@@ -125,7 +125,9 @@ export function ClaimContainer() {
             />
           ) : (
             <NoRewardsBox label="No veVRTK protocol rewards to claim" />
-          )}
+          )} */}
+
+          <NoRewardsBox label="No veVRTK protocol rewards to claim" />
         </Box>
       </GridItem>
 
