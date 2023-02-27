@@ -4,6 +4,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Input,
   ModalHeader,
   ModalOverlay,
   NumberDecrementStepper,
@@ -20,6 +21,7 @@ import { PoolSelectModal } from '~/components/pool-select/PoolSelectModal';
 import { BribeSummary } from './BribeSummary';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetTokens } from '~/lib/global/useToken';
+import { useSubmitBribe } from './lib/useSubmitBribe';
 
 interface Props {
   isOpen: boolean;
@@ -38,8 +40,10 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
   }>();
 
   const { getToken, priceForAmount } = useGetTokens();
+  const { submitBribeForGauge, txState } = useSubmitBribe();
 
   const tokenListRef = useRef(null);
+  const isValidBribe = !!selectedGauge && !!selectedToken && !!bribeAmount;
 
   function handleTokenModalOpen() {
     setIsPoolModalOpen(false);
@@ -148,6 +152,12 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                   </NumberInput>
                 </FormControl>
 
+                {/* <FormControl>
+                  <FormLabel>Protcol ID (optional)</FormLabel>
+
+                  <Input type="text" />
+                </FormControl> */}
+
                 <Button
                   variant="vertekdark"
                   padding="1em"
@@ -155,8 +165,8 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                   borderWidth="1px"
                   alignItems="center"
                   height="2em"
-                  disabled={false}
-                  // isDisabled={txState.isPending}
+                  disabled={!isValidBribe || txState.isPending}
+                  //   isDisabled={bribeNotValid || txState.isPending}
                   // onClick={claim}
                 >
                   Submit

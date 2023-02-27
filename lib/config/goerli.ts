@@ -33,6 +33,10 @@ export const goerliNetworkConfig: NetworkConfig = {
   beets: {
     address: '0x5E1D334E7CFF8436bA39E24d452eB6E8451B5F9b',
   },
+  vertek: {
+    bribeManager: '',
+    bribeRewardClaims: '',
+  },
   balancer: {
     vault: '0xBA5CE8dFcB1E077B4537aCaD17400D843842c520',
     feeDistributor: '0xd4ccC5b4d7085603BB03C366F25738494B12E8c9',
@@ -55,6 +59,7 @@ export const goerliNetworkConfig: NetworkConfig = {
       lockPoolAddress: '0xD0F30B415C65B99904caF716ABc3da23f57d3cdd',
     },
   },
+
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xe4E96Cf369D4d604Bedc4d7962F94D53E4B5e3C6',

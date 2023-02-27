@@ -55,6 +55,10 @@ export const bscNetworkConfig: NetworkConfig = {
       lockPoolAddress: '0xDD64E2EC144571b4320f7BFB14a56b2b2cBF37ad',
     },
   },
+  vertek: {
+    bribeManager: '0xe1f6A52798b54D07E0Bed1d16e23897E0B336FDD',
+    bribeRewardClaims: '0xf774745E9aDb7f82c461b04bef02AF1E00043386',
+  },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',

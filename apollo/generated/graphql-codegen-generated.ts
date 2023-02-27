@@ -23,6 +23,15 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugeBribe {
+  __typename: 'GaugeBribe';
+  amount: Scalars['String'];
+  briber: Scalars['String'];
+  epochStartTime: Scalars['Int'];
+  gauge: Scalars['String'];
+  token: Scalars['String'];
+}
+
 export interface GaugeFactory {
   __typename: 'GaugeFactory';
   id: Scalars['String'];
@@ -737,7 +746,6 @@ export interface GqlPoolTokenExpanded {
   isPhantomBpt: Scalars['Boolean'];
   name: Scalars['String'];
   symbol: Scalars['String'];
-  token: GqlToken;
   weight?: Maybe<Scalars['String']>;
 }
 
@@ -1107,6 +1115,7 @@ export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
   /**  Address of the pool (lp_token of the gauge)  */
   address: Scalars['String'];
+  bribes: Array<Maybe<GaugeBribe>>;
   depositFee: Scalars['Int'];
   factory?: Maybe<GaugeFactory>;
   /**  LiquidityGauge contract address  */
@@ -1219,6 +1228,7 @@ export interface Query {
   blocksGetBlocksPerSecond: Scalars['Float'];
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
+  getGaugeBribes: Array<Maybe<GaugeBribe>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1263,6 +1273,10 @@ export interface Query {
 
 export interface QueryAdminGetAllPendingFeeDataArgs {
   onlyWithBalances?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryGetGaugeBribesArgs {
+  epoch: Scalars['Int'];
 }
 
 export interface QueryGetRewardPoolsArgs {

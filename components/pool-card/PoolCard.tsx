@@ -17,6 +17,7 @@ export function PoolCard({ pool, ...rest }: Props) {
 
   const boost = boostForPool(pool.id);
   const { dailyMinApr, dailyMaxApr, isVePool, dailyVe } = getAprValues(pool.dynamicData.apr, boost);
+
   return (
     <LinkBox as="article" flex="1" {...rest} padding="1">
       <Card
@@ -24,7 +25,7 @@ export function PoolCard({ pool, ...rest }: Props) {
         borderRadius="18px"
         height="327px"
         paddingX="4"
-        paddingY="4" 
+        paddingY="4"
         marginTop="1"
         boxShadow="0 0 10px #5BC0F8, 0 0 20px #4A4AF6"
         css={{
@@ -52,7 +53,6 @@ export function PoolCard({ pool, ...rest }: Props) {
               imageSize={50}
               renderPopover={false}
             />
-
           </Flex>
           <Box pb="4" mt="3" justifyContent="center">
             <NextLinkOverlay href={`pool/${pool.id}`}>

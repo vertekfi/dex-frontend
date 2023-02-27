@@ -3,18 +3,25 @@ import { networkConfig } from '~/lib/config/network-config';
 import { useSubmitTransaction } from '~/lib/util/useSubmitTransaction';
 
 export function useSubmitBribe() {
-  const { submit, ...rest } = useSubmitTransaction({
+  const { submit, ...txState } = useSubmitTransaction({
     config: {
-      addressOrName: '',
-      contractInterface: [''],
-      functionName: 'vote_for_gauge_weights',
+      addressOrName: networkConfig.vertek.bribeManager,
+      contractInterface: [
+        'function addBribe(address token, uint256 amount, address gauge) external',
+      ],
+      functionName: 'addBribe',
     },
-    transactionType: 'VOTE',
+    transactionType: 'BRIBE',
   });
 
-  function submitBribeForGauge(gaugeAddress: string, amount: BigNumber) {
+  function submitBribeForGauge(
+    token: string,
+    gaugeAddress: string,
+    amount: BigNumber,
+    // protocolId: string,
+  ) {
     return submit({
-      args: [gaugeAddress, amount],
+      args: [token, gaugeAddress, amount],
       toastText: `Bribing gauge`,
       walletText: `Bribing gauge`,
     });
@@ -22,6 +29,6 @@ export function useSubmitBribe() {
 
   return {
     submitBribeForGauge,
-    ...rest,
+    txState,
   };
 }
