@@ -13,8 +13,13 @@ export function AddBribeButton() {
   }
 
   return (
-    <Flex mt={5} width="25%">
-      <Button variant="vertekdark" onClick={() => setIsModalOpen(true)} disabled={isLoading}>
+    <Flex mt={5} width="50%" alignContent="flex-end">
+      <Button
+        variant="vertekdark"
+        onClick={() => setIsModalOpen(true)}
+        disabled={isLoading}
+        width="100%"
+      >
         Add Bribe
       </Button>
       {isModalOpen && (

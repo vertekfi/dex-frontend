@@ -1,20 +1,21 @@
 import { NetworkConfig } from '~/lib/config/network-config-type';
 import { AddressZero } from '@ethersproject/constants';
 
-export const bscNetworkConfig: NetworkConfig = {
+export const hardhatNetworkConfig: NetworkConfig = {
   appName: 'Vertek',
-  chainId: '56',
+  chainId: '31337',
   networkName: 'BNB Chain',
   networkShortName: 'BNB Chain',
   etherscanName: 'BSC Scan',
   etherscanUrl: 'https://bscscan.com',
-  testnet: false,
+  testnet: true,
   eth: {
-    name: 'BNB',
+    name: 'Hardhat',
     address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-    symbol: 'BNB',
+    symbol: 'DEEZ',
     decimals: 18,
-    iconUrl: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850',
+    iconUrl:
+      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
   },
   wethAddress: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
   wethAddressFormatted: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
@@ -22,7 +23,7 @@ export const bscNetworkConfig: NetworkConfig = {
     nativeAssetId: 'binancecoin',
     platformId: 'binance',
   },
-  rpcUrl: 'https://bsc-dataseed.binance.org',
+  rpcUrl: 'http://localhost:8545',
   multicall: '0x4Ba82B21658CAE1975Fa26097d87bd48FF270124',
   backendUrl: '',
   subgraphs: {
@@ -56,8 +57,8 @@ export const bscNetworkConfig: NetworkConfig = {
     },
   },
   vertek: {
-    bribeManager: '0xb1B1695FeA2E3a8B2aAE3A0d2a59Ea3F5e4A7508',
-    bribeRewardClaims: '0x27eDCe99d5aF44318358497fD5Af5C8e312F1721',
+    bribeManager: '0x2C97dA806787Aaf170A2026417d1429736D90Aa3',
+    bribeRewardClaims: '0x9Fc22C446312abEec7E739496B83b38c66BA85aC',
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',

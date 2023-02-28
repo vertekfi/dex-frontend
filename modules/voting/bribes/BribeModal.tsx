@@ -4,7 +4,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Input,
   ModalHeader,
   ModalOverlay,
   NumberDecrementStepper,
@@ -13,15 +12,21 @@ import {
   NumberInputField,
   NumberInputStepper,
   Select,
+  Text,
 } from '@chakra-ui/react';
 import { Modal, ModalBody, ModalCloseButton, ModalContent } from '@chakra-ui/modal';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TokenSelectModal } from '~/components/token-select/TokenSelectModal';
 import { PoolSelectModal } from '~/components/pool-select/PoolSelectModal';
 import { BribeSummary } from './BribeSummary';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetTokens } from '~/lib/global/useToken';
 import { useSubmitBribe } from './lib/useSubmitBribe';
+import { parseUnits } from 'ethers/lib/utils';
+import { useAllowances } from '~/lib/util/useAllowances';
+import { useUserAccount } from '~/lib/user/useUserAccount';
+import { networkConfig } from '~/lib/config/network-config';
+import { BeetsTokenApprovalButton } from '~/components/button/BeetsTokenApprovalButton';
 
 interface Props {
   isOpen: boolean;
@@ -38,9 +43,27 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
     amount: string;
     value: number;
   }>();
+  const [bribeConfirmed, setBribeConfirmed] = useState<boolean>(false);
 
-  const { getToken, priceForAmount } = useGetTokens();
+  const { userAddress } = useUserAccount();
+  const { getToken, priceForAmount, tokens } = useGetTokens();
   const { submitBribeForGauge, txState } = useSubmitBribe();
+
+  const {
+    isLoading: isLoadingAllowances,
+    hasApprovalForAmount,
+    refetch: refetchAllowances,
+  } = useAllowances(userAddress || null, tokens, networkConfig.vertek.bribeManager);
+
+  useEffect(() => {
+    if (txState.error) {
+      console.log(txState.error);
+    }
+
+    if (txState.isConfirmed) {
+      setBribeConfirmed(true);
+    }
+  }, [txState]);
 
   const tokenListRef = useRef(null);
   const isValidBribe = !!selectedGauge && !!selectedToken && !!bribeAmount;
@@ -77,6 +100,16 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
     });
   }
 
+  function handleSubmitBribe() {
+    if (isValidBribe) {
+      submitBribeForGauge(
+        selectedToken?.address,
+        parseUnits(bribeAmount.amount),
+        selectedGauge?.address,
+      );
+    }
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -107,92 +140,113 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                   />
                 </Box>
 
-                <FormControl>
-                  <FormLabel>Choose a gauge</FormLabel>
-                  <Select
-                    onClick={handlePoolModalOpen}
-                    size="lg"
-                    placeholder="Select"
-                    bg="vertek.slatepurple.900"
-                    color="vertek.neonpurple.500"
-                    variant="filled"
-                    onChange={(event) => {
-                      //onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
-                    }}
-                  ></Select>
-                </FormControl>
+                {bribeConfirmed ? (
+                  <Box>
+                    <Text>Your bribe has been added</Text>
+                  </Box>
+                ) : (
+                  <>
+                    <FormControl>
+                      <FormLabel>Choose a gauge</FormLabel>
+                      <Select
+                        onClick={handlePoolModalOpen}
+                        size="lg"
+                        placeholder="Select"
+                        bg="vertek.slatepurple.900"
+                        color="vertek.neonpurple.500"
+                        variant="filled"
+                        // onChange={(event) => {}}
+                      ></Select>
+                    </FormControl>
 
-                <FormControl>
-                  <FormLabel>Choose Reward Token</FormLabel>
-                  <Select
-                    onClick={handleTokenModalOpen}
-                    size="lg"
-                    placeholder="Select"
-                    bg="vertek.slatepurple.900"
-                    color="vertek.neonpurple.500"
-                    variant="filled"
-                    onChange={(event) => {
-                      //onPageSizeChange && onPageSizeChange(parseInt(event.target.value));
-                    }}
-                  ></Select>
-                </FormControl>
+                    <FormControl>
+                      <FormLabel>Choose Reward Token</FormLabel>
+                      <Select
+                        onClick={handleTokenModalOpen}
+                        size="lg"
+                        placeholder="Select"
+                        bg="vertek.slatepurple.900"
+                        color="vertek.neonpurple.500"
+                        variant="filled"
+                        onChange={(event) => {}}
+                      ></Select>
+                    </FormControl>
 
-                <FormControl>
-                  <FormLabel>Amount</FormLabel>
-                  <NumberInput
-                    min={0}
-                    onChange={handleSelectedTokenAmount}
-                    isDisabled={!selectedToken}
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </FormControl>
+                    <FormControl>
+                      <FormLabel>Amount</FormLabel>
+                      <NumberInput
+                        min={0}
+                        onChange={handleSelectedTokenAmount}
+                        isDisabled={!selectedToken}
+                      >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
+                    </FormControl>
 
-                {/* <FormControl>
+                    {/* <FormControl>
                   <FormLabel>Protcol ID (optional)</FormLabel>
 
                   <Input type="text" />
                 </FormControl> */}
 
-                <Button
-                  variant="vertekdark"
-                  padding="1em"
-                  borderRadius="10px"
-                  borderWidth="1px"
-                  alignItems="center"
-                  height="2em"
-                  disabled={!isValidBribe || txState.isPending}
-                  //   isDisabled={bribeNotValid || txState.isPending}
-                  // onClick={claim}
-                >
-                  Submit
-                </Button>
+                    {isValidBribe &&
+                    !hasApprovalForAmount(selectedToken.address, bribeAmount.amount) ? (
+                      <BeetsTokenApprovalButton
+                        tokenWithAmount={{
+                          symbol: selectedToken?.symbol || '',
+                          address: selectedToken?.address || '',
+                          name: selectedToken?.name || '',
+                          decimals: selectedToken?.decimals || 18,
+                          amount: bribeAmount?.amount || '',
+                        }}
+                        contractToApprove={networkConfig.vertek.bribeManager}
+                        onConfirmed={() => {
+                          refetchAllowances();
+                        }}
+                        size="lg"
+                      />
+                    ) : (
+                      <Button
+                        variant="vertekdark"
+                        padding="1em"
+                        borderRadius="10px"
+                        borderWidth="1px"
+                        alignItems="center"
+                        height="2em"
+                        disabled={!isValidBribe || txState.isPending}
+                        onClick={handleSubmitBribe}
+                      >
+                        Submit
+                      </Button>
+                    )}
 
-                {isTokenModalOpen && (
-                  <TokenSelectModal
-                    title="Select Bribe Token"
-                    onTokenSelect={handleTokenSelected}
-                    isOpen={isTokenModalOpen}
-                    onOpen={() => null}
-                    onClose={() => setIsTokenModalOpen(false)}
-                    finalFocusRef={tokenListRef}
-                  />
-                )}
+                    {isTokenModalOpen && (
+                      <TokenSelectModal
+                        title="Select Bribe Token"
+                        onTokenSelect={handleTokenSelected}
+                        isOpen={isTokenModalOpen}
+                        onOpen={() => null}
+                        onClose={() => setIsTokenModalOpen(false)}
+                        finalFocusRef={tokenListRef}
+                      />
+                    )}
 
-                {isPoolModalOpen && (
-                  <PoolSelectModal
-                    gauges={poolsWithGauges}
-                    title="Gauge"
-                    onOptionSelected={(address) => onPoolGaugeSelected(address)}
-                    isOpen={isPoolModalOpen}
-                    onOpen={() => null}
-                    onClose={() => setIsPoolModalOpen(false)}
-                    finalFocusRef={tokenListRef}
-                  />
+                    {isPoolModalOpen && (
+                      <PoolSelectModal
+                        gauges={poolsWithGauges}
+                        title="Gauge"
+                        onOptionSelected={(address) => onPoolGaugeSelected(address)}
+                        isOpen={isPoolModalOpen}
+                        onOpen={() => null}
+                        onClose={() => setIsPoolModalOpen(false)}
+                        finalFocusRef={tokenListRef}
+                      />
+                    )}
+                  </>
                 )}
               </Flex>
             </ModalBody>

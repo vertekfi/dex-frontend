@@ -16,12 +16,13 @@ export function useSubmitBribe() {
 
   function submitBribeForGauge(
     token: string,
-    gaugeAddress: string,
     amount: BigNumber,
+    gaugeAddress: string,
+
     // protocolId: string,
   ) {
     return submit({
-      args: [token, gaugeAddress, amount],
+      args: [token, amount, gaugeAddress],
       toastText: `Bribing gauge`,
       walletText: `Bribing gauge`,
     });

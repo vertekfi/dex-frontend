@@ -38,6 +38,7 @@ export function VotingSubheader(props: Props) {
 
         <AddBribeButton />
       </GridItem>
+
       <GridItem marginRight={{ base: '0', lg: '24' }}>
         <VStack spacing={4} alignItems={{ base: 'center', lg: 'stretch' }}>
           <Box

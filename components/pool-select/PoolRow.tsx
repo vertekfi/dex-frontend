@@ -1,8 +1,5 @@
 import { Button } from '@chakra-ui/button';
-import { Box, HStack, Text } from '@chakra-ui/layout';
-import { AmountHumanReadable } from '~/lib/services/token/token-types';
-import { tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
-import { numberFormatUSDValue } from '~/lib/util/number-formats';
+import { HStack, Text } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 import { memo } from 'react';
 import { TokenAvatarSetInList } from '../token/TokenAvatarSetInList';
@@ -12,15 +9,12 @@ const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
 type PoolRowProps = {
   gauge: LiquidityGauge;
-  userBalance: AmountHumanReadable;
   userBalanceUSD: number;
   loading: boolean;
   onClick(): void;
 };
 
-export function PoolRow({ gauge, onClick, userBalance, loading }: PoolRowProps) {
-  const hasBalance = parseFloat(userBalance) > 0;
-
+export function PoolRow({ gauge, onClick, loading }: PoolRowProps) {
   return (
     <Button
       width="full"
