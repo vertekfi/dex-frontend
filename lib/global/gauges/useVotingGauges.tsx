@@ -9,7 +9,7 @@ export function _useGauges() {
   const [votingPeriodEnd, setVotingPeriodEnd] = useState<number[]>();
   const [votingPeriodLastHour, setVotingPeriodLastHour] = useState<boolean>();
   const [unallocatedVoteWeight, setUnallocatedVoteWeight] = useState<number>(0);
-  const [votingGauges, setVotingGauges] = useState<VotingGaugeWithVotes[]>([]);
+  const [votingGauges, setVotingGauges] = useState<any[]>([]);
 
   const { userAddress } = useUserAccount();
 

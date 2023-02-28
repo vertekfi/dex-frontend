@@ -50,7 +50,6 @@ export function PoolSelectPoolList({ listHeight, searchTerm, onPoolRowClick, gau
               gauge={gauge}
               onClick={() => onPoolRowClick(gauge.address)}
               key={gauge.address}
-              userBalance={userBalance.amount}
               userBalanceUSD={priceForAmount(userBalance)}
               loading={userBalancesLoading}
             />

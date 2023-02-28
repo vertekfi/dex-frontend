@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, HStack, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import TokenAvatar from '~/components/token/TokenAvatar';
@@ -20,6 +20,10 @@ export function BribeSummary({ gauge, selectedToken, bribeAmount }: Props) {
   return (
     <Box>
       <HStack>
+        <Alert status="info">
+          <AlertIcon />
+          <Text color="black">Voting for your bribe will begin:</Text>
+        </Alert>
         {gauge && (
           <>
             <Text fontSize="lg">Gauge: </Text>

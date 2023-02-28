@@ -1070,6 +1070,19 @@ export const GetLiquidityGauges = gql`
           symbol
         }
       }
+      bribes {
+        briber
+        gauge
+        amount
+        epochStartTime
+        valueUSD
+        epochWeekLabel
+        token {
+          address
+          symbol
+          logoURI
+        }
+      }
     }
   }
 `;

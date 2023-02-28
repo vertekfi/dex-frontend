@@ -28,8 +28,10 @@ export interface GaugeBribe {
   amount: Scalars['String'];
   briber: Scalars['String'];
   epochStartTime: Scalars['Int'];
+  epochWeekLabel: Scalars['String'];
   gauge: Scalars['String'];
-  token: Scalars['String'];
+  token: GqlToken;
+  valueUSD: Scalars['Float'];
 }
 
 export interface GaugeFactory {
@@ -1276,7 +1278,7 @@ export interface QueryAdminGetAllPendingFeeDataArgs {
 }
 
 export interface QueryGetGaugeBribesArgs {
-  epoch: Scalars['Int'];
+  epoch?: InputMaybe<Scalars['Int']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -4521,6 +4523,16 @@ export type GetLiquidityGaugesQuery = {
         symbol: string;
       }>;
     };
+    bribes: Array<{
+      __typename: 'GaugeBribe';
+      briber: string;
+      gauge: string;
+      amount: string;
+      epochStartTime: number;
+      valueUSD: number;
+      epochWeekLabel: string;
+      token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
+    } | null>;
   } | null>;
 };
 
@@ -6910,6 +6922,19 @@ export const GetLiquidityGaugesDocument = gql`
           weight
           logoURI
           symbol
+        }
+      }
+      bribes {
+        briber
+        gauge
+        amount
+        epochStartTime
+        valueUSD
+        epochWeekLabel
+        token {
+          address
+          symbol
+          logoURI
         }
       }
     }

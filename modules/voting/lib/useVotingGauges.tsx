@@ -11,7 +11,7 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 export function _useGauges() {
   const [votingPeriodEnd, setVotingPeriodEnd] = useState<number[]>();
   const [votingPeriodLastHour, setVotingPeriodLastHour] = useState<boolean>();
-  const [votingGauges, setVotingGauges] = useState<VotingGaugeWithVotes[]>();
+  const [votingGauges, setVotingGauges] = useState<any[]>();
   const [unallocatedVotes, setUnallocatedVotes] = useState<number>();
 
   const { userAddress } = useUserAccount();
@@ -26,7 +26,7 @@ export function _useGauges() {
     notifyOnNetworkStatusChange: true,
   });
 
-  function setUserVotes(gauges: VotingGaugeWithVotes[]) {
+  function setUserVotes(gauges: any[]) {
     const totalVotes = 1e4; // 10,000
     // Set the users remaining votes
     const votesRemaining = gauges.reduce((remainingVotes: number, gauge) => {
@@ -105,7 +105,7 @@ export function _useGauges() {
     const today = new Date().getTime();
     let n = nextThursday(new Date());
     if (today > Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0)) {
-      n = add(n, { weeks: 1 })
+      n = add(n, { weeks: 1 });
     }
     const epochEndTime = Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0);
     return epochEndTime;

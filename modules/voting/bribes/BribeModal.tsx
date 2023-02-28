@@ -49,11 +49,11 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
   const { getToken, priceForAmount, tokens } = useGetTokens();
   const { submitBribeForGauge, txState } = useSubmitBribe();
 
-  const {
-    isLoading: isLoadingAllowances,
-    hasApprovalForAmount,
-    refetch: refetchAllowances,
-  } = useAllowances(userAddress || null, tokens, networkConfig.vertek.bribeManager);
+  const { hasApprovalForAmount, refetch: refetchAllowances } = useAllowances(
+    userAddress || null,
+    tokens,
+    networkConfig.vertek.bribeManager,
+  );
 
   useEffect(() => {
     if (txState.error) {
@@ -143,6 +143,18 @@ export function BribeModal({ isOpen, onClose, poolsWithGauges }: Props) {
                 {bribeConfirmed ? (
                   <Box>
                     <Text>Your bribe has been added</Text>
+
+                    <Button
+                      variant="vertekdark"
+                      padding="1em"
+                      borderRadius="10px"
+                      borderWidth="1px"
+                      alignItems="center"
+                      height="2em"
+                      onClick={onClose}
+                    >
+                      Close
+                    </Button>
                   </Box>
                 ) : (
                   <>

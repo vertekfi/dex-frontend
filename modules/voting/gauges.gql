@@ -33,6 +33,20 @@ query GetLiquidityGauges {
         symbol
       }
     }
+
+    bribes {
+      briber
+      gauge
+      amount
+      epochStartTime
+      valueUSD
+      epochWeekLabel
+      token {
+        address
+        symbol
+        logoURI
+      }
+    }
   }
 }
 

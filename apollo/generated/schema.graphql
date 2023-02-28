@@ -12,8 +12,10 @@ type GaugeBribe {
   amount: String!
   briber: String!
   epochStartTime: Int!
+  epochWeekLabel: String!
   gauge: String!
-  token: String!
+  token: GqlToken!
+  valueUSD: Float!
 }
 
 type GaugeFactory {
@@ -1186,7 +1188,7 @@ type Query {
   blocksGetBlocksPerSecond: Float!
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
-  getGaugeBribes(epoch: Int!): [GaugeBribe]!
+  getGaugeBribes(epoch: Int): [GaugeBribe]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [GqlProtocolGaugeInfo]!
   getProtocolTokenList: [String]

@@ -2,7 +2,6 @@ import BeethovenxNftAbi from '~/lib/abi/BeethovenxNft.json';
 import { BaseProvider } from '@ethersproject/providers';
 import { Contract } from 'ethers';
 import { StaticJsonRpcBatchProvider } from '~/lib/services/rpc-provider/static-json-rpc-batch-provider';
-import { fantomNetworkConfig } from '~/lib/config/fantom';
 import { networkConfig } from '~/lib/config/network-config';
 import { networkProvider } from '~/lib/global/network';
 

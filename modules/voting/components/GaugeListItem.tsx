@@ -1,4 +1,4 @@
-import { Button, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Button, Flex, Grid, GridItem, Icon, Text } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -6,6 +6,8 @@ import { scale, bnum } from '~/lib/util/big-number.utils';
 import { fNum2 } from '~/lib/util/useNumber';
 
 import { memo } from 'react';
+import { GaugeRewardsInfo } from './GaugeRewardsInfo';
+import { DollarSign } from 'react-feather';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -41,7 +43,7 @@ export function GaugeListItem(props: Props) {
       borderRadius={{ base: '12px', lg: '' }}
       templateColumns={{
         base: 'repeat(1fr 1fr)',
-        lg: '150px 1fr 200px 200px 200px',
+        lg: '150px 1fr 200px 200px 200px 200px',
       }}
       gap={{ base: '4', lg: '0' }}
       mb={{ base: '4', lg: '0' }}
@@ -50,8 +52,9 @@ export function GaugeListItem(props: Props) {
         "name name"
         "icons icons" 
         "nextvote myvote"
+        "bribes bribes"
         "votebutton votebutton" `,
-        lg: `"icons name nextvote myvote votebutton"`,
+        lg: `"icons name nextvote myvote bribes votebutton"`,
       }}
     >
       <GridItem
@@ -96,6 +99,16 @@ export function GaugeListItem(props: Props) {
       >
         <MobileLabel text="My Votes" />
         {userVotes}
+      </GridItem>
+
+      <GridItem
+        area="bribes"
+        display={{ base: 'block', lg: 'flex' }}
+        alignItems="center"
+        justifyContent={{ base: 'center', lg: 'center' }}
+        textAlign="center"
+      >
+        <GaugeRewardsInfo gauge={props.gauge} />
       </GridItem>
 
       <GridItem

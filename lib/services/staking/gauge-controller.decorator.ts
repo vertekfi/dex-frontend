@@ -31,7 +31,7 @@ export class GaugeControllerDecorator {
   async decorateWithVotes(
     votingGauges: VotingGauge[],
     userAddress?: string,
-  ): Promise<VotingGaugeWithVotes[]> {
+  ): Promise<Partial<VotingGaugeWithVotes>[]> {
     this.multicaller = this.resetMulticaller();
     this.callGaugeWeightThisPeriod(votingGauges);
     this.callGaugeWeightNextPeriod(votingGauges);

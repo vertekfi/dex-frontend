@@ -55,7 +55,6 @@ export function GaugeVoteModal(props: Props) {
 
   const {
     voteWeight,
-    setVoteWeight,
     voteError,
     voteTitle,
     voteButtonText,

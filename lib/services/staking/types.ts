@@ -1,6 +1,6 @@
 import { AmountHumanReadable } from '~/lib/services/token/token-types';
 import { BigNumber } from '@ethersproject/bignumber';
-import { GqlPoolToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
+import { GqlPoolUnion, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 
 export interface StakingPendingRewardAmount {
   id: string;
@@ -54,11 +54,11 @@ export interface BasePool {
 export type VotingGauge = {
   address: string;
   network: number;
-  pool: BasePool;
+  pool: any;
   tokenLogoURIs: Record<string, string | undefined>;
 };
 
-export type VotingGaugeWithVotes = VotingGauge & VotesData;
+export type VotingGaugeWithVotes = VotingGauge & VotesData & LiquidityGauge;
 
 export type SubgraphGauge = LiquidityGauge;
 
