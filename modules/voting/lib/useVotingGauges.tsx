@@ -4,6 +4,7 @@ import { useGetLiquidityGaugesQuery } from '~/apollo/generated/graphql-codegen-g
 import { gaugeControllerDecorator } from '~/lib/services/staking/gauge-controller.decorator';
 import { VotingGauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
+import { getVotePeriodEndTime } from '~/lib/util/epoch-utils';
 
 /**
  * Gets the list of current gauges and provides a countdown timer for epoch end
@@ -81,35 +82,6 @@ export function _useGauges() {
       setGauges();
     }
   }, [isLoadingGauges, gauges, userAddress]);
-
-  // Set users voting info
-  // useEffect(() => {
-  //   const totalVotes = 1e4; // 10,000
-
-  //   if (!isLoadingGauges && votingGauges?.length) {
-  //     // Set the users remaining votes
-  //     const votesRemaining = votingGauges.reduce((remainingVotes: number, gauge) => {
-  //       return remainingVotes - parseFloat(gauge.userVotes);
-  //     }, totalVotes);
-
-  //     setUnallocatedVotes(votesRemaining);
-
-  //     // filter out temp old gauge after user votes tally is complete
-  //     const filtered = votingGauges.filter(g => g.pool.id !== '')
-  //   } else {
-  //     setUnallocatedVotes(totalVotes);
-  //   }
-  // }, [isLoadingGauges, votingGauges]);
-
-  function getVotePeriodEndTime(): number {
-    const today = new Date().getTime();
-    let n = nextThursday(new Date());
-    if (today > Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0)) {
-      n = add(n, { weeks: 1 });
-    }
-    const epochEndTime = Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0);
-    return epochEndTime;
-  }
 
   return {
     isLoading: !votingGauges && isLoadingGauges,

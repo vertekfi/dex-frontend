@@ -1,8 +1,9 @@
-import { Alert, AlertIcon, Box, HStack, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Flex, HStack, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 import { GqlToken, LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
+import { getVotePeriodEndTime } from '~/lib/util/epoch-utils';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
@@ -17,12 +18,21 @@ type Props = {
 };
 
 export function BribeSummary({ gauge, selectedToken, bribeAmount }: Props) {
+  const votingDate = getVotePeriodEndTime();
+
   return (
     <Box>
       <HStack>
         <Alert status="info">
           <AlertIcon />
-          <Text color="black">Voting for your bribe will begin:</Text>
+          <Flex direction="column">
+            <Text color="black" lineHeight="24px" fontWeight={600}>
+              Voting for your bribe will begin on :
+            </Text>
+            <Text color="black" fontWeight={600} lineHeight="24px">
+              {new Date(votingDate).toUTCString()}
+            </Text>
+          </Flex>
         </Alert>
         {gauge && (
           <>
