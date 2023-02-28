@@ -14,13 +14,13 @@ export function AddBribeButton() {
   }
 
   return (
-    <Flex mt={5} width="50%" alignContent="flex-end">
+    <Flex mt={5} width="75%" justifyContent="center" alignContent="center">
       <Button
         variant="vertekdark"
         onClick={() => setIsModalOpen(true)}
         disabled={isLoading}
         width="100%"
-        height="55px"
+        height="65px"
       >
         Add Bribe
         <Icon ml={2} as={PlusCircle} />

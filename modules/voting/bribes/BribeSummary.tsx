@@ -22,18 +22,18 @@ export function BribeSummary({ gauge, selectedToken, bribeAmount }: Props) {
 
   return (
     <Box>
-      <HStack>
-        <Alert status="info">
-          <AlertIcon />
-          <Flex direction="column">
-            <Text color="black" lineHeight="24px" fontWeight={600}>
-              Voting for your bribe will begin on :
-            </Text>
-            <Text color="black" fontWeight={600} lineHeight="24px">
-              {new Date(votingDate).toUTCString()}
-            </Text>
-          </Flex>
-        </Alert>
+      <Alert status="info">
+        <AlertIcon />
+        <Flex direction="column">
+          <Text color="black" lineHeight="24px" fontWeight={600}>
+            Voting for your bribe will begin on :
+          </Text>
+          <Text color="black" fontWeight={600} lineHeight="24px">
+            {new Date(votingDate).toUTCString()}
+          </Text>
+        </Flex>
+      </Alert>
+      <HStack mt={5}>
         {gauge && (
           <>
             <Text fontSize="lg">Gauge: </Text>
