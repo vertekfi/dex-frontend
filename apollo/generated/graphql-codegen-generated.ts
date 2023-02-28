@@ -1118,12 +1118,14 @@ export interface LiquidityGauge {
   /**  Address of the pool (lp_token of the gauge)  */
   address: Scalars['String'];
   bribes: Array<Maybe<GaugeBribe>>;
+  currentEpochBribes: Array<Maybe<GaugeBribe>>;
   depositFee: Scalars['Int'];
   factory?: Maybe<GaugeFactory>;
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
   isKilled: Scalars['Boolean'];
+  nextEpochBribes: Array<Maybe<GaugeBribe>>;
   /**  Reference to Pool entity  */
   pool: GaugePool;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
@@ -4523,7 +4525,17 @@ export type GetLiquidityGaugesQuery = {
         symbol: string;
       }>;
     };
-    bribes: Array<{
+    currentEpochBribes: Array<{
+      __typename: 'GaugeBribe';
+      briber: string;
+      gauge: string;
+      amount: string;
+      epochStartTime: number;
+      valueUSD: number;
+      epochWeekLabel: string;
+      token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
+    } | null>;
+    nextEpochBribes: Array<{
       __typename: 'GaugeBribe';
       briber: string;
       gauge: string;
@@ -4561,6 +4573,17 @@ export type GetUserVeLockInfoQuery = {
     isExpired: boolean;
     percentOwned: string;
   };
+};
+
+export type GaugeBribeFragmentFragment = {
+  __typename: 'GaugeBribe';
+  briber: string;
+  gauge: string;
+  amount: string;
+  epochStartTime: number;
+  valueUSD: number;
+  epochWeekLabel: string;
+  token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
 };
 
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
@@ -4952,6 +4975,21 @@ export const GqlTokenDynamicDataFragmentDoc = gql`
     high24h
     low24h
     updatedAt
+  }
+`;
+export const GaugeBribeFragmentFragmentDoc = gql`
+  fragment GaugeBribeFragment on GaugeBribe {
+    briber
+    gauge
+    amount
+    epochStartTime
+    valueUSD
+    epochWeekLabel
+    token {
+      address
+      symbol
+      logoURI
+    }
   }
 `;
 export const GetPoolBatchSwapsDocument = gql`
@@ -6924,21 +6962,15 @@ export const GetLiquidityGaugesDocument = gql`
           symbol
         }
       }
-      bribes {
-        briber
-        gauge
-        amount
-        epochStartTime
-        valueUSD
-        epochWeekLabel
-        token {
-          address
-          symbol
-          logoURI
-        }
+      currentEpochBribes {
+        ...GaugeBribeFragment
+      }
+      nextEpochBribes {
+        ...GaugeBribeFragment
       }
     }
   }
+  ${GaugeBribeFragmentFragmentDoc}
 `;
 
 /**

@@ -1,4 +1,18 @@
-import { Button, Flex, Grid, GridItem, Icon, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Box,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Text,
+} from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
@@ -7,7 +21,9 @@ import { fNum2 } from '~/lib/util/useNumber';
 
 import { memo } from 'react';
 import { GaugeRewardsInfo } from './GaugeRewardsInfo';
-import { DollarSign } from 'react-feather';
+import { Info } from 'react-feather';
+import { formatVotesAsPercent } from '../lib/utils';
+import { VotingStatsPopover } from './VotingStatsPopover';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -26,15 +42,6 @@ export function GaugeListItem(props: Props) {
   // function redirectToPool(gauge: VotingGaugeWithVotes) {
   //   window.location.href = poolURLFor(gauge.pool.id, gauge.network, gauge.pool.poolType);
   // }
-
-  function formatVotesAsPercent(votes: string): string {
-    const normalizedVotes = scale(bnum(votes), -18);
-    return fNum2(normalizedVotes.toString(), {
-      style: 'percent',
-      maximumFractionDigits: 2,
-      fixedFormat: true,
-    });
-  }
 
   return (
     <Grid
@@ -86,7 +93,11 @@ export function GaugeListItem(props: Props) {
         ml={{ base: '8', lg: '0' }}
       >
         <MobileLabel text="Next Period Votes" />
-        {formatVotesAsPercent(props.gauge.votesNextPeriod)}
+        <Flex justifyContent="space-between" width="35%">
+          <Text>{formatVotesAsPercent(props.gauge.votesNextPeriod)}</Text>
+
+          <VotingStatsPopover gauge={props.gauge} />
+        </Flex>
       </GridItem>
 
       <GridItem

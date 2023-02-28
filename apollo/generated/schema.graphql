@@ -1092,6 +1092,7 @@ type LiquidityGauge {
   """
   address: String!
   bribes: [GaugeBribe]!
+  currentEpochBribes: [GaugeBribe]!
   depositFee: Int!
   factory: GaugeFactory
 
@@ -1104,6 +1105,7 @@ type LiquidityGauge {
    Whether Balancer DAO killed the gauge
   """
   isKilled: Boolean!
+  nextEpochBribes: [GaugeBribe]!
 
   """
    Reference to Pool entity

@@ -23,7 +23,7 @@ type Props = {
 export function GaugeRewardsInfo({ gauge }: Props) {
   return (
     <>
-      {gauge.bribes.length ? (
+      {gauge.currentEpochBribes.length || gauge.nextEpochBribes.length ? (
         <Popover>
           <PopoverTrigger>
             <Flex className="cursor-pointer" justifyContent="center" alignContent="center">
@@ -41,10 +41,13 @@ export function GaugeRewardsInfo({ gauge }: Props) {
             <PopoverArrow />
             <PopoverCloseButton />
             <PopoverHeader bgColor="vertek.slatepurple.900">
-              <Text fontSize="1.3rem">Bribes</Text>
+              <Text fontSize="1.3rem"> Bribes</Text>
             </PopoverHeader>
             <Box p="1" paddingY="4" fontSize="md" bgColor="vertek.slatepurple.900">
-              {gauge.bribes.length ? (
+              <Text mt={2} fontWeight={500} textAlign="center" fontSize="1.1rem">
+                Current Epoch Bribes
+              </Text>
+              {gauge.currentEpochBribes.length ? (
                 <Flex direction="column">
                   {gauge.bribes.map((bribe, i) => {
                     return (
@@ -68,33 +71,35 @@ export function GaugeRewardsInfo({ gauge }: Props) {
                 </Text>
               )}
 
-              {/* <Divider />
-          <Text mt={2} fontWeight={500} textAlign="left" pl={4} fontSize="1.1rem">
-            Other Gauge Earnings
-          </Text>
-          {gauge.rewardTokens.length ? (
-            <Flex direction="column" mt={2}>
-              <Flex direction="column">
-                {gauge.rewardTokens.map((reward, i) => {
-                  return (
-                    <Box key={i}>
-                      <Flex alignItems="center" gap={2} p={3}>
-                        <TokenAvatarSet
-                          width={32}
-                          tokenData={[{ address: reward.tokenAddress || '' }]}
-                        />
-                        <Text>{reward.symbol}</Text>
-                      </Flex>
-                    </Box>
-                  );
-                })}
-              </Flex>
-            </Flex>
-          ) : (
-            <Text p={5} textAlign="center">
-              No bonus rewards
-            </Text>
-          )} */}
+              <Divider />
+              <Text mt={4} fontWeight={500} textAlign="center" fontSize="1.1rem">
+                Next Epoch Bribes
+              </Text>
+              {gauge.nextEpochBribes.length ? (
+                <Flex direction="column" mt={4}>
+                  <Flex direction="column">
+                    {gauge.nextEpochBribes.map((bribe, i) => {
+                      return (
+                        <Box key={i}>
+                          <Flex alignItems="center" gap={2} p={3}>
+                            <TokenAvatarSet
+                              width={32}
+                              tokenData={[{ address: bribe?.token.address || '' }]}
+                            />
+                            <Text>{bribe?.token.symbol}</Text>
+                            <Text>{numberFormatUSDValue(bribe?.valueUSD || 0)}</Text>
+                            {/* <Text>{bribe?.epochWeekLabel}</Text> */}
+                          </Flex>
+                        </Box>
+                      );
+                    })}
+                  </Flex>
+                </Flex>
+              ) : (
+                <Text p={5} textAlign="center">
+                  No bribes for next epoch
+                </Text>
+              )}
             </Box>
           </PopoverContent>
         </Popover>

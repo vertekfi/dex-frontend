@@ -34,18 +34,12 @@ query GetLiquidityGauges {
       }
     }
 
-    bribes {
-      briber
-      gauge
-      amount
-      epochStartTime
-      valueUSD
-      epochWeekLabel
-      token {
-        address
-        symbol
-        logoURI
-      }
+    currentEpochBribes {
+      ...GaugeBribeFragment
+    }
+
+    nextEpochBribes {
+      ...GaugeBribeFragment
     }
   }
 }
@@ -66,5 +60,19 @@ query GetUserVeLockInfo {
     hasExistingLock
     isExpired
     percentOwned
+  }
+}
+
+fragment GaugeBribeFragment on GaugeBribe {
+  briber
+  gauge
+  amount
+  epochStartTime
+  valueUSD
+  epochWeekLabel
+  token {
+    address
+    symbol
+    logoURI
   }
 }
