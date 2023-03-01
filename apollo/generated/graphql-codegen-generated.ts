@@ -1232,6 +1232,7 @@ export interface Query {
   blocksGetBlocksPerSecond: Scalars['Float'];
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
+  get24HourGaugeFees?: Maybe<Array<Maybe<Scalars['String']>>>;
   getGaugeBribes: Array<Maybe<GaugeBribe>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
@@ -1277,6 +1278,10 @@ export interface Query {
 
 export interface QueryAdminGetAllPendingFeeDataArgs {
   onlyWithBalances?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryGet24HourGaugeFeesArgs {
+  hoursInPast?: InputMaybe<Scalars['Int']>;
 }
 
 export interface QueryGetGaugeBribesArgs {

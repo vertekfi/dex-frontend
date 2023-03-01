@@ -21,22 +21,33 @@ type Props = {
 };
 
 export function GaugeRewardsInfo({ gauge }: Props) {
+  const hasBribes = gauge.currentEpochBribes.length || gauge.nextEpochBribes.length;
+
+  let totalValue = 0;
+  gauge.currentEpochBribes.forEach((b) => (totalValue += b?.valueUSD || 0));
+  gauge.nextEpochBribes.forEach((b) => (totalValue += b?.valueUSD || 0));
+
   return (
     <>
-      {gauge.currentEpochBribes.length || gauge.nextEpochBribes.length ? (
+      {hasBribes ? (
         <Popover>
           <PopoverTrigger>
-            <Flex className="cursor-pointer" justifyContent="center" alignContent="center">
-              <Box
-                display="flex"
-                p={1}
-                borderRadius={50}
-                border={{ sm: '0px', md: '1px solid white', lg: '1px solid white' }}
-              >
-                <Icon as={DollarSign} color="green" />
-              </Box>
+            <Flex width="50%" justifyContent="space-between">
+              <Flex className="cursor-pointer" justifyContent="center" alignContent="center">
+                <Box
+                  display="flex"
+                  p={1}
+                  borderRadius={50}
+                  border={{ sm: '0px', md: '1px solid white', lg: '1px solid white' }}
+                >
+                  <Icon as={DollarSign} color="green" />
+                </Box>
+              </Flex>
+
+              {numberFormatUSDValue(totalValue)}
             </Flex>
           </PopoverTrigger>
+
           <PopoverContent backgroundColor="">
             <PopoverArrow />
             <PopoverCloseButton />

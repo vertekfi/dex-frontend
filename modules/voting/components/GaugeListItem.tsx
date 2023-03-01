@@ -1,27 +1,12 @@
-import {
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Box,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { scale, bnum } from '~/lib/util/big-number.utils';
+import { scale } from '~/lib/util/big-number.utils';
 import { fNum2 } from '~/lib/util/useNumber';
 
 import { memo } from 'react';
 import { GaugeRewardsInfo } from './GaugeRewardsInfo';
-import { Info } from 'react-feather';
 import { formatVotesAsPercent } from '../lib/utils';
 import { VotingStatsPopover } from './VotingStatsPopover';
 
@@ -117,7 +102,7 @@ export function GaugeListItem(props: Props) {
         display={{ base: 'block', lg: 'flex' }}
         alignItems="center"
         justifyContent={{ base: 'center', lg: 'center' }}
-        textAlign="center"
+        // textAlign="center"
       >
         <GaugeRewardsInfo gauge={props.gauge} />
       </GridItem>
