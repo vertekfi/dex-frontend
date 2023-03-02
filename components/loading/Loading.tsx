@@ -8,8 +8,10 @@ export function Loading({ loading }: Props) {
   return (
     <>
       {loading && (
-        <Flex justifyContent="center" p={55}>
-          <Text>Loading...</Text>
+        <Flex justifyContent="center" direction="column" alignItems="center" p={75}>
+          <Text fontSize="1.3rem" mb={5}>
+            Loading...
+          </Text>
           <Spinner size="xl" />
         </Flex>
       )}
