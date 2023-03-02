@@ -60,7 +60,7 @@ export function GaugeRewardsInfo({ gauge }: Props) {
               </Text>
               {gauge.currentEpochBribes.length ? (
                 <Flex direction="column">
-                  {gauge.bribes.map((bribe, i) => {
+                  {gauge.bribes?.map((bribe, i) => {
                     return (
                       <Box key={i}>
                         <Flex alignItems="center" gap={2} p={3}>
@@ -89,7 +89,7 @@ export function GaugeRewardsInfo({ gauge }: Props) {
               {gauge.nextEpochBribes.length ? (
                 <Flex direction="column" mt={4}>
                   <Flex direction="column">
-                    {gauge.nextEpochBribes.map((bribe, i) => {
+                    {gauge.nextEpochBribes?.map((bribe, i) => {
                       return (
                         <Box key={i}>
                           <Flex alignItems="center" gap={2} p={3}>
