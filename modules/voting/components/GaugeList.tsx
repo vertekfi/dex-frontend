@@ -1,7 +1,7 @@
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
 import { scale, bnum } from '~/lib/util/big-number.utils';
 import { fNum2, FNumFormats } from '~/lib/util/useNumber';
-import { Box, Skeleton } from '@chakra-ui/react';
+import { Box, Flex, Text, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useUserVeData } from '../lib/useUserVeData';
 import { useVotingGauges } from '../lib/useVotingGauges';
@@ -10,7 +10,8 @@ import { GaugeVoteModal } from './GaugeVoteModal';
 import { VotingSubheader } from './VotingSubheader';
 import { GaugeListFooter } from './GaugeListFooter';
 import { GaugeListTableHeader } from './GaugeListTableHeader';
-import { AnimatedBox } from '~/components/animation/chakra';
+import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
+import { Loading } from '~/components/loading/Loading';
 
 export function GaugeList() {
   const [unallocatedVoteWeight, setUnallocatedVoteWeight] = useState<number>();
@@ -72,15 +73,15 @@ export function GaugeList() {
       >
         <GaugeListTableHeader />
         <Box>
-          <Skeleton isLoaded={!isLoadingGauges}>
-            {votingGauges?.map((gauge) => {
-              return (
-                <AnimatedBox key={gauge.address}>
-                  <GaugeListItem gauge={gauge} onVoteClick={setActiveGaugeVote} />
-                </AnimatedBox>
-              );
-            })}
-          </Skeleton>
+          <Loading loading={isLoadingGauges} />
+
+          {votingGauges?.map((gauge) => {
+            return (
+              <FadeInOutBox isVisible={!isLoadingGauges} key={gauge.address}>
+                <GaugeListItem gauge={gauge} onVoteClick={setActiveGaugeVote} />
+              </FadeInOutBox>
+            );
+          })}
         </Box>
         <GaugeListFooter />
       </Box>

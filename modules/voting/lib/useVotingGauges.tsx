@@ -73,8 +73,6 @@ export function _useGauges() {
         userAddress,
       );
 
-      console.log(decoratedGauges);
-
       const filteredGauges = setUserVotes(decoratedGauges);
       setVotingGauges(filteredGauges);
     };
