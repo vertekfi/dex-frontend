@@ -54,12 +54,14 @@ export function useClaimsData() {
   }, [isLoadingGauges, isLoadingProtocolRewards]);
 
   async function refetchClaimsData() {
-    const decoratedGauges = await gaugesDecorator.decorate(
-      gauges as SubgraphGauge[],
-      userAddress || '',
-    );
+    refetchGauges();
+    refetchProtocolRewards();
+    // const decoratedGauges = await gaugesDecorator.decorate(
+    //   gauges as SubgraphGauge[],
+    //   userAddress || '',
+    // );
 
-    setRewardGauges(decoratedGauges as Gauge[]);
+    // setRewardGauges(decoratedGauges as Gauge[]);
   }
 
   return {

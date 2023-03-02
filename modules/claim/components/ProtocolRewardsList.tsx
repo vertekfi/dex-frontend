@@ -15,9 +15,9 @@ type Props = {
 
 export function ProtocolRewardsList(props: Props) {
   return (
-    <Box padding="1" borderRadius="16px">
+    <>
       <Box
-        mx="2"
+        borderRadius="16px"
         mt="2"
         paddingX={{ base: '2', lg: '0' }}
         overflow="hidden"
@@ -49,9 +49,6 @@ export function ProtocolRewardsList(props: Props) {
           <GridItem justifyContent="center" display="flex">
             <Text fontWeight="bold">Value</Text>
           </GridItem>
-          {/* <GridItem justifyContent="end" display="flex">
-            <Text fontWeight="bold">Claim</Text>
-          </GridItem> */}
         </Grid>
 
         {props.protocolRewards.map((reward) => {
@@ -60,11 +57,6 @@ export function ProtocolRewardsList(props: Props) {
               borderTopColor="#4A4AF6"
               boxShadow={{ base: '0 0 5px #5BC0F8, 0 0 10px #4A4AF6', lg: 'none' }}
               borderTopWidth="1px"
-              mt={{ base: '6', lg: '0' }}
-              mb={{ base: '4', lg: '0' }}
-              paddingY={{ base: '4', lg: '0' }}
-              paddingX={{ base: '2', lg: '0' }}
-              borderRadius={{ base: '16px', lg: '0' }}
             >
               <Grid
                 pl="4"
@@ -78,10 +70,10 @@ export function ProtocolRewardsList(props: Props) {
                 alignItems="center"
                 templateAreas={{
                   base: `
-              "name name"
-              "icons icons"
-              "shares value"
-              "claim claim" `,
+                  "name name"
+                  "icons icons"
+                  "shares value"
+                  "claim claim" `,
                   lg: `"icons name shares value claim"`,
                 }}
               >
@@ -94,19 +86,7 @@ export function ProtocolRewardsList(props: Props) {
                     />
                   </Box>
                 </GridItem>
-                {/* <GridItem
-              area="name"
-              textAlign={{ base: 'center', lg: 'left' }}
-              mb={{ base: '1', lg: '0' }}
-            >
-              <Text
-                color="white"
-                fontSize={{ base: 'xl', lg: 'md' }}
-                fontWeight={{ base: 'bold', lg: 'bold' }}
-              >
-                {props.gauge.pool.name}
-              </Text>
-            </GridItem> */}
+
                 <GridItem area="shares" textAlign="left">
                   <MobileLabelLeft text="My balance" />
                   <Text
@@ -127,63 +107,62 @@ export function ProtocolRewardsList(props: Props) {
                     {numberFormatUSDValue(reward.tokenInfo.valueUSD)}
                   </Text>
                 </StatGridItemRight>
+
                 <GridItem area="claim">
-                <Button
-                  display={{ base: 'flex', lg: 'none' }}
-                  variant="verteklight"
-                  padding="1em"
-                  borderRadius="10px"
-                  mt="1"
-                  borderWidth="1px"
-                  alignItems="center"
-                  height="2em"
-                  disabled={false}
-                  width={{ base: '200px', lg: 'none' }}
-                  isDisabled={props.disabled}
-                  onClick={props.onClaim}
-                >
-                 Claim
-                </Button>
+                  <Button
+                    display={{ base: 'flex', lg: 'none' }}
+                    variant="verteklight"
+                    padding="1em"
+                    borderRadius="10px"
+                    mt="1"
+                    borderWidth="1px"
+                    alignItems="center"
+                    height="2em"
+                    disabled={false}
+                    width={{ base: '200px', lg: 'none' }}
+                    isDisabled={props.disabled}
+                    onClick={props.onClaim}
+                  >
+                    Claim
+                  </Button>
                 </GridItem>
               </Grid>
             </Box>
           );
         })}
-      </Box>
-      <Box>
-        <Flex
-          display={{ base: 'none', lg: 'grid' }}
-          p="3"
-          mx="2"
-          borderLeftWidth="1px"
-          borderRightWidth="1px"
-          borderBottomWidth="1px"
-          borderColor="#4A4AF6"
 
-          borderBottomRadius="16px"
-          borderTopRadius={{ base: '16px', lg: 'none' }}
-          bg={{ base: 'none', lg: 'vertek.slatepurple.900' }}
-          justifyContent={{ base: 'center', lg: 'flex-end' }}
-        >
-          <Button
-            display={{ base: 'none', lg: 'flex' }}
-            variant="verteklight"
-            padding="1em"
-            borderRadius="10px"
-            mt="1"
-            ml="4"
-            borderWidth="1px"
-            alignItems="center"
-            height="2em"
-            disabled={false}
-            width={{ base: '200px', lg: '125px' }}
-            isDisabled={props.disabled}
-            onClick={props.onClaim}
+        <Box>
+          <Flex
+            display={{ base: 'none', lg: 'grid' }}
+            p="3"
+            borderLeftWidth="1px"
+            borderRightWidth="1px"
+            borderBottomWidth="1px"
+            borderColor="#4A4AF6"
+            borderBottomRadius="16px"
+            bg={{ base: 'none', lg: 'vertek.slatepurple.900' }}
+            justifyContent={{ base: 'center', lg: 'flex-end' }}
           >
-            Claim
-          </Button>
-        </Flex>
+            <Button
+              display={{ base: 'none', lg: 'flex' }}
+              variant="verteklight"
+              padding="1em"
+              borderRadius="10px"
+              mt="1"
+              ml="4"
+              borderWidth="1px"
+              alignItems="center"
+              height="2em"
+              disabled={false}
+              width={{ base: '200px', lg: '125px' }}
+              isDisabled={props.disabled}
+              onClick={props.onClaim}
+            >
+              Claim
+            </Button>
+          </Flex>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
