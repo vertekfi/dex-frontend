@@ -1,6 +1,5 @@
 import {
   Flex,
-  Icon,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -11,9 +10,8 @@ import {
   Text,
   Divider,
 } from '@chakra-ui/react';
-import { DollarSign } from 'react-feather';
 import Image from 'next/image';
-import  bribes from './moneybag.svg'; 
+import bribes from './moneybag.svg';
 import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import TokenAvatarSet from '~/components/token/TokenAvatarSet';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
@@ -26,8 +24,8 @@ export function GaugeRewardsInfo({ gauge }: Props) {
   const hasBribes = gauge.currentEpochBribes.length || gauge.nextEpochBribes.length;
 
   let totalValue = 0;
-  gauge.currentEpochBribes.forEach((b) => (totalValue += b?.valueUSD || 0));
-  gauge.nextEpochBribes.forEach((b) => (totalValue += b?.valueUSD || 0));
+  gauge.currentEpochBribes?.forEach((b) => (totalValue += b?.valueUSD || 0));
+  gauge.nextEpochBribes?.forEach((b) => (totalValue += b?.valueUSD || 0));
 
   return (
     <>
@@ -42,7 +40,7 @@ export function GaugeRewardsInfo({ gauge }: Props) {
                   borderRadius={50}
                   border={{ sm: '0px', md: '1px solid white', lg: '1px solid white' }}
                 > */}
-                  <Image src={bribes}  height={25} width={25} />
+                <Image src={bribes} height={25} width={25} />
                 {/* </Box> */}
               </Flex>
 
@@ -62,7 +60,7 @@ export function GaugeRewardsInfo({ gauge }: Props) {
               </Text>
               {gauge.currentEpochBribes.length ? (
                 <Flex direction="column">
-                  {gauge.bribes?.map((bribe, i) => {
+                  {gauge.currentEpochBribes?.map((bribe, i) => {
                     return (
                       <Box key={i}>
                         <Flex alignItems="center" gap={2} p={3}>
