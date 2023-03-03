@@ -20,7 +20,7 @@ export function AddBribeButton() {
         onClick={() => setIsModalOpen(true)}
         disabled={isLoading}
         width="100%"
-        height="65px"
+        height="48px"
       >
         Add Bribe
         <Icon ml={2} as={PlusCircle} />
