@@ -12,6 +12,8 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { DollarSign } from 'react-feather';
+import Image from 'next/image';
+import  bribes from './moneybag.svg'; 
 import { LiquidityGauge } from '~/apollo/generated/graphql-codegen-generated';
 import TokenAvatarSet from '~/components/token/TokenAvatarSet';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
@@ -34,14 +36,14 @@ export function GaugeRewardsInfo({ gauge }: Props) {
           <PopoverTrigger>
             <Flex width="50%" justifyContent="space-between">
               <Flex className="cursor-pointer" justifyContent="center" alignContent="center">
-                <Box
+                {/* <Box
                   display="flex"
                   p={1}
                   borderRadius={50}
                   border={{ sm: '0px', md: '1px solid white', lg: '1px solid white' }}
-                >
-                  <Icon as={DollarSign} color="green" />
-                </Box>
+                > */}
+                  <Image src={bribes}  height={25} width={25} />
+                {/* </Box> */}
               </Flex>
 
               {numberFormatUSDValue(totalValue)}
