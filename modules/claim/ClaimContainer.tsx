@@ -12,11 +12,14 @@ import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
 import { InfoIcon } from '@chakra-ui/icons';
 import { Loading } from '~/components/loading/Loading';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
+import StarsIcon from '~/components/apr-tooltip/StarsIcon';
+import { TableHeading } from './components/TableHeading';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
   const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
   const [hasProtocolRewards, sethasProtocolRewards] = useState<boolean>(false);
+  const [hasBribeRewards, sethasBribeRewards] = useState<boolean>(false);
   const [claiming, setClaiming] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -101,7 +104,7 @@ export function ClaimContainer() {
               <Box marginRight="2" display="flex" justifyContent="">
                 <NextImage width="36px" height="36px" src={VertekIcon} />
               </Box>
-              <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
+              <Text fontSize="1.3rem">Vertek (VRTK) Earnings</Text>
             </Box>
 
             {hasGaugeRewards ? (
@@ -114,12 +117,11 @@ export function ClaimContainer() {
           </GridItem>
 
           <GridItem display="flex" flexDirection="column" paddingY="0">
-            <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-              <Text fontSize="1.20rem">veVRTK and Protocol Earnings </Text>
-              <Tooltip label="Protocol fee distribution is based on your percentage ownership of veVRTK at the start of the previous weeks epoch.">
-                <InfoIcon />
-              </Tooltip>
-            </Box>
+            <TableHeading
+              text="veVRTK and Protocol Earnings"
+              tooltipText="Protocol fee distribution is based on your percentage ownership of veVRTK at the start of the previous weeks epoch."
+            />
+
             <Box>
               {hasProtocolRewards ? (
                 <FadeInOutBox isVisible={!loading}>
@@ -136,7 +138,25 @@ export function ClaimContainer() {
           </GridItem>
 
           <GridItem display="flex" flexDirection="column">
-            <Text fontSize="1.20rem">Other Gauge Earnings</Text>
+            <TableHeading text="Bribe Earnings" />
+
+            <Box>
+              {hasBribeRewards ? (
+                <FadeInOutBox isVisible={!loading}>
+                  <ProtocolRewardsList
+                    protocolRewards={protocolData}
+                    onClaim={handleProtocolClaim}
+                    disabled={claiming}
+                  />
+                </FadeInOutBox>
+              ) : (
+                <NoRewardsBox label="No bribe rewards to claim" />
+              )}
+            </Box>
+          </GridItem>
+
+          <GridItem display="flex" flexDirection="column">
+            <TableHeading text="Other Gauge Earnings" />
 
             <Box>
               {isClaimsLoading ? (

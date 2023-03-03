@@ -56,18 +56,11 @@ export function useClaimsData() {
   async function refetchClaimsData() {
     refetchGauges();
     refetchProtocolRewards();
-    // const decoratedGauges = await gaugesDecorator.decorate(
-    //   gauges as SubgraphGauge[],
-    //   userAddress || '',
-    // );
-
-    // setRewardGauges(decoratedGauges as Gauge[]);
   }
 
   return {
     gauges,
     rewardGauges,
-    // protocolRewardsData: protocolRewardsData?.protocolRewards || [],
     protocolData,
     isLoading,
     refetchGauges,
