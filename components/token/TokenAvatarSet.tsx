@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { useGetTokens } from '~/lib/global/useToken';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
-import { PoolTokenPill } from '~/components/token/PoolTokenPill';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import numeral from 'numeral';
 
@@ -57,7 +56,6 @@ function TokenAvatarSet({
   const tokenContent = (
     <Flex
       {...rest}
-      
       position={'relative'}
       //width={(imageSize - 10) * addressesInputLength}
       height={`${imageSize}px`}
@@ -102,11 +100,11 @@ function TokenAvatarSet({
       <PopoverTrigger>
         <button>{tokenContent}</button>
       </PopoverTrigger>
-      <PopoverContent w="fit-content" bgColor="beets.base.800" shadow="2xl" p="1">
+      <PopoverContent w="fit-content" bgColor="black" shadow="" p="1" zIndex="">
         {tokens?.map((token, index) => (
           <Flex alignItems="center" p="1" key={index}>
             <TokenAvatar address={token.address} size="xs" />
-            <Text ml="2" >{getToken(token.address)?.symbol}</Text>
+            <Text ml="2">{getToken(token.address)?.symbol}</Text>
             {token.weight ? <Text ml="2">{numeral(token.weight).format('%')}</Text> : null}
           </Flex>
         ))}

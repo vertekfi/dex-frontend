@@ -34,7 +34,7 @@ export function BatchSwapHop({ hop }: Props) {
       px="2"
       py="2"
       backgroundColor="vertek.slate.30"
-      boxShadow="0 0 2px 0.1px rgba( 255, 255, 255, 1.0 )"
+      boxShadow="0 0 2px 0.1px rgba( 255, 255, 255, 0.2 )"
       style={{ backdropFilter: 'blur(3px)' }}
     >
       <NextLink href={`/pool/${hop.pool.id}`} chakraProps={{ color: 'white' }}>

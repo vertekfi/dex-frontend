@@ -8,7 +8,8 @@ export type BeetsTransactionType =
   | 'APPROVE'
   | 'WRAP'
   | 'UNWRAP'
-  | 'VOTE';
+  | 'VOTE'
+  | 'BRIBE';
 export type ToastTransactionStatus = 'PENDING' | 'CONFIRMED' | 'ERROR';
 
 export function toastGetTransactionStatusHeadline(
@@ -125,6 +126,15 @@ export function toastGetTransactionStatusHeadline(
         return 'Vote confirmed';
       case 'ERROR':
         return 'Vote error';
+    }
+  } else if (type === 'BRIBE') {
+    switch (status) {
+      case 'PENDING':
+        return 'Bribe pending';
+      case 'CONFIRMED':
+        return 'Bribe confirmed';
+      case 'ERROR':
+        return 'Bribe error';
     }
   }
 

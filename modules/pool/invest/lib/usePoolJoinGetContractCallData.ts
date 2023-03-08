@@ -34,7 +34,7 @@ export function usePoolJoinGetContractCallData(
     minimumBpt: minimumBpt || '0',
     userAddress: userAddress || '',
     wethIsEth: hasEth,
-    zapIntoMasterchefFarm: !!pool.staking?.farm && zapEnabled,
+    zapIntoMasterchefFarm: false,
     slippage,
   };
 

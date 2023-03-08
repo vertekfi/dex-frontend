@@ -1,9 +1,10 @@
-import { intervalToDuration, nextThursday } from 'date-fns';
+import { intervalToDuration } from 'date-fns';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useGetLiquidityGaugesQuery } from '~/apollo/generated/graphql-codegen-generated';
 import { gaugeControllerDecorator } from '~/lib/services/staking/gauge-controller.decorator';
-import { VotingGauge, VotingGaugeWithVotes } from '~/lib/services/staking/types';
+import { VotingGauge } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
+import { getVotePeriodEndTime } from '~/lib/util/epoch-utils';
 
 /**
  * Gets the list of current gauges and provides a countdown timer for epoch end
@@ -11,7 +12,7 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 export function _useGauges() {
   const [votingPeriodEnd, setVotingPeriodEnd] = useState<number[]>();
   const [votingPeriodLastHour, setVotingPeriodLastHour] = useState<boolean>();
-  const [votingGauges, setVotingGauges] = useState<VotingGaugeWithVotes[]>();
+  const [votingGauges, setVotingGauges] = useState<any[]>();
   const [unallocatedVotes, setUnallocatedVotes] = useState<number>();
 
   const { userAddress } = useUserAccount();
@@ -26,7 +27,7 @@ export function _useGauges() {
     notifyOnNetworkStatusChange: true,
   });
 
-  function setUserVotes(gauges: VotingGaugeWithVotes[]) {
+  function setUserVotes(gauges: any[]) {
     const totalVotes = 1e4; // 10,000
     // Set the users remaining votes
     const votesRemaining = gauges.reduce((remainingVotes: number, gauge) => {
@@ -82,34 +83,8 @@ export function _useGauges() {
     }
   }, [isLoadingGauges, gauges, userAddress]);
 
-  // Set users voting info
-  // useEffect(() => {
-  //   const totalVotes = 1e4; // 10,000
-
-  //   if (!isLoadingGauges && votingGauges?.length) {
-  //     // Set the users remaining votes
-  //     const votesRemaining = votingGauges.reduce((remainingVotes: number, gauge) => {
-  //       return remainingVotes - parseFloat(gauge.userVotes);
-  //     }, totalVotes);
-
-  //     setUnallocatedVotes(votesRemaining);
-
-  //     // filter out temp old gauge after user votes tally is complete
-  //     const filtered = votingGauges.filter(g => g.pool.id !== '')
-  //   } else {
-  //     setUnallocatedVotes(totalVotes);
-  //   }
-  // }, [isLoadingGauges, votingGauges]);
-
-  function getVotePeriodEndTime(): number {
-    const n = nextThursday(new Date());
-    const epochEndTime = Date.UTC(n.getFullYear(), n.getMonth(), n.getDate(), 0, 0, 0);
-    return epochEndTime;
-  }
-
   return {
     isLoading: !votingGauges && isLoadingGauges,
-    //  isLoadingGauges,
     votingGauges,
     votingPeriodEnd,
     votingPeriodLastHour,

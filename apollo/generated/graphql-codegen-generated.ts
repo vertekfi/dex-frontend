@@ -23,6 +23,17 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface GaugeBribe {
+  __typename: 'GaugeBribe';
+  amount: Scalars['String'];
+  briber: Scalars['String'];
+  epochStartTime: Scalars['Int'];
+  epochWeekLabel: Scalars['String'];
+  gauge: Scalars['String'];
+  token: GqlToken;
+  valueUSD: Scalars['Float'];
+}
+
 export interface GaugeFactory {
   __typename: 'GaugeFactory';
   id: Scalars['String'];
@@ -1106,12 +1117,15 @@ export interface LiquidityGauge {
   __typename: 'LiquidityGauge';
   /**  Address of the pool (lp_token of the gauge)  */
   address: Scalars['String'];
+  bribes: Array<Maybe<GaugeBribe>>;
+  currentEpochBribes: Array<Maybe<GaugeBribe>>;
   depositFee: Scalars['Int'];
   factory?: Maybe<GaugeFactory>;
   /**  LiquidityGauge contract address  */
   id: Scalars['ID'];
   /**  Whether Balancer DAO killed the gauge  */
   isKilled: Scalars['Boolean'];
+  nextEpochBribes: Array<Maybe<GaugeBribe>>;
   /**  Reference to Pool entity  */
   pool: GaugePool;
   /**  Pool ID if lp_token is a Balancer pool; null otherwise  */
@@ -1218,6 +1232,8 @@ export interface Query {
   blocksGetBlocksPerSecond: Scalars['Float'];
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
+  get24HourGaugeFees?: Maybe<Array<Maybe<Scalars['String']>>>;
+  getGaugeBribes: Array<Maybe<GaugeBribe>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1262,6 +1278,14 @@ export interface Query {
 
 export interface QueryAdminGetAllPendingFeeDataArgs {
   onlyWithBalances?: InputMaybe<Scalars['Boolean']>;
+}
+
+export interface QueryGet24HourGaugeFeesArgs {
+  hoursInPast?: InputMaybe<Scalars['Int']>;
+}
+
+export interface QueryGetGaugeBribesArgs {
+  epoch?: InputMaybe<Scalars['Int']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
@@ -1760,6 +1784,25 @@ export type GetUserDataQuery = {
     poolId: string;
     gaugeAddress: string;
     boost: string;
+  } | null>;
+};
+
+export type GetUserProtocolRewardsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUserProtocolRewardsQuery = {
+  __typename: 'Query';
+  protocolRewards: Array<{
+    __typename: 'GqlUserProtocolReward';
+    poolId: string;
+    token: string;
+    amount: string;
+    isBPT: boolean;
+    tokenInfo: {
+      __typename: 'GqlProtocolRewardTokenInfo';
+      logoURI?: string | null;
+      valueUSD: string;
+    };
+    tokenList: Array<{ __typename: 'GqlToken'; address: string; logoURI?: string | null }>;
   } | null>;
 };
 
@@ -4022,6 +4065,12 @@ export type GetPoolsQuery = {
       weight?: string | null;
       symbol: string;
     }>;
+    displayTokens: Array<{
+      __typename: 'GqlPoolTokenDisplay';
+      address: string;
+      symbol: string;
+      weight?: string | null;
+    }>;
     staking?: {
       __typename: 'GqlPoolStaking';
       id: string;
@@ -4095,6 +4144,12 @@ export type GqlPoolMinimalFragment = {
     isPhantomBpt: boolean;
     weight?: string | null;
     symbol: string;
+  }>;
+  displayTokens: Array<{
+    __typename: 'GqlPoolTokenDisplay';
+    address: string;
+    symbol: string;
+    weight?: string | null;
   }>;
   staking?: {
     __typename: 'GqlPoolStaking';
@@ -4475,6 +4530,26 @@ export type GetLiquidityGaugesQuery = {
         symbol: string;
       }>;
     };
+    currentEpochBribes: Array<{
+      __typename: 'GaugeBribe';
+      briber: string;
+      gauge: string;
+      amount: string;
+      epochStartTime: number;
+      valueUSD: number;
+      epochWeekLabel: string;
+      token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
+    } | null>;
+    nextEpochBribes: Array<{
+      __typename: 'GaugeBribe';
+      briber: string;
+      gauge: string;
+      amount: string;
+      epochStartTime: number;
+      valueUSD: number;
+      epochWeekLabel: string;
+      token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
+    } | null>;
   } | null>;
 };
 
@@ -4503,6 +4578,17 @@ export type GetUserVeLockInfoQuery = {
     isExpired: boolean;
     percentOwned: string;
   };
+};
+
+export type GaugeBribeFragmentFragment = {
+  __typename: 'GaugeBribe';
+  briber: string;
+  gauge: string;
+  amount: string;
+  epochStartTime: number;
+  valueUSD: number;
+  epochWeekLabel: string;
+  token: { __typename: 'GqlToken'; address: string; symbol: string; logoURI?: string | null };
 };
 
 export const GqlPoolBatchSwapSwapFragmentDoc = gql`
@@ -4785,6 +4871,11 @@ export const GqlPoolMinimalFragmentDoc = gql`
       weight
       symbol
     }
+    displayTokens {
+      address
+      symbol
+      weight
+    }
     staking {
       id
       type
@@ -4889,6 +4980,21 @@ export const GqlTokenDynamicDataFragmentDoc = gql`
     high24h
     low24h
     updatedAt
+  }
+`;
+export const GaugeBribeFragmentFragmentDoc = gql`
+  fragment GaugeBribeFragment on GaugeBribe {
+    briber
+    gauge
+    amount
+    epochStartTime
+    valueUSD
+    epochWeekLabel
+    token {
+      address
+      symbol
+      logoURI
+    }
   }
 `;
 export const GetPoolBatchSwapsDocument = gql`
@@ -5448,6 +5554,74 @@ export type GetUserDataLazyQueryHookResult = ReturnType<typeof useGetUserDataLaz
 export type GetUserDataQueryResult = Apollo.QueryResult<
   GetUserDataQuery,
   GetUserDataQueryVariables
+>;
+export const GetUserProtocolRewardsDocument = gql`
+  query GetUserProtocolRewards {
+    protocolRewards: userGetProtocolRewardInfo {
+      poolId
+      token
+      tokenInfo {
+        logoURI
+        valueUSD
+      }
+      amount
+      isBPT
+      tokenList {
+        address
+        logoURI
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetUserProtocolRewardsQuery__
+ *
+ * To run a query within a React component, call `useGetUserProtocolRewardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserProtocolRewardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserProtocolRewardsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserProtocolRewardsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetUserProtocolRewardsQuery,
+    GetUserProtocolRewardsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserProtocolRewardsQuery, GetUserProtocolRewardsQueryVariables>(
+    GetUserProtocolRewardsDocument,
+    options,
+  );
+}
+export function useGetUserProtocolRewardsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserProtocolRewardsQuery,
+    GetUserProtocolRewardsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserProtocolRewardsQuery, GetUserProtocolRewardsQueryVariables>(
+    GetUserProtocolRewardsDocument,
+    options,
+  );
+}
+export type GetUserProtocolRewardsQueryHookResult = ReturnType<
+  typeof useGetUserProtocolRewardsQuery
+>;
+export type GetUserProtocolRewardsLazyQueryHookResult = ReturnType<
+  typeof useGetUserProtocolRewardsLazyQuery
+>;
+export type GetUserProtocolRewardsQueryResult = Apollo.QueryResult<
+  GetUserProtocolRewardsQuery,
+  GetUserProtocolRewardsQueryVariables
 >;
 export const UserSyncBalanceDocument = gql`
   mutation UserSyncBalance($poolId: String!) {
@@ -6793,8 +6967,15 @@ export const GetLiquidityGaugesDocument = gql`
           symbol
         }
       }
+      currentEpochBribes {
+        ...GaugeBribeFragment
+      }
+      nextEpochBribes {
+        ...GaugeBribeFragment
+      }
     }
   }
+  ${GaugeBribeFragmentFragmentDoc}
 `;
 
 /**

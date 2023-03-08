@@ -279,6 +279,11 @@ export const GqlPoolMinimal = gql`
       weight
       symbol
     }
+    displayTokens {
+      address
+      symbol
+      weight
+    }
     staking {
       id
       type
@@ -383,6 +388,21 @@ export const GqlTokenDynamicData = gql`
     high24h
     low24h
     updatedAt
+  }
+`;
+export const GaugeBribeFragment = gql`
+  fragment GaugeBribeFragment on GaugeBribe {
+    briber
+    gauge
+    amount
+    epochStartTime
+    valueUSD
+    epochWeekLabel
+    token {
+      address
+      symbol
+      logoURI
+    }
   }
 `;
 export const GetPoolBatchSwaps = gql`
@@ -527,6 +547,24 @@ export const GetUserData = gql`
       poolId
       gaugeAddress
       boost
+    }
+  }
+`;
+export const GetUserProtocolRewards = gql`
+  query GetUserProtocolRewards {
+    protocolRewards: userGetProtocolRewardInfo {
+      poolId
+      token
+      tokenInfo {
+        logoURI
+        valueUSD
+      }
+      amount
+      isBPT
+      tokenList {
+        address
+        logoURI
+      }
     }
   }
 `;
@@ -1047,8 +1085,15 @@ export const GetLiquidityGauges = gql`
           symbol
         }
       }
+      currentEpochBribes {
+        ...GaugeBribeFragment
+      }
+      nextEpochBribes {
+        ...GaugeBribeFragment
+      }
     }
   }
+  ${GaugeBribeFragment}
 `;
 export const GetUserStakes = gql`
   query GetUserStakes($user: String!, $poolIds: [String!]!) {

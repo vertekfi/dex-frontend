@@ -1,6 +1,6 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import TokenAvatar from '~/components/token/TokenAvatar';
-import { tokenFormatAmount, tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
+import { tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { BeetsBox } from '~/components/box/BeetsBox';
 import { useGetTokens } from '~/lib/global/useToken';

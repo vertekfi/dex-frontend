@@ -52,6 +52,9 @@ export class FeeDistributor {
       'claimTokens',
       [userAddress, this.claimableTokens],
     );
+
+    console.log(this.claimableTokens);
+
     const stringBalances = balances.map((balance: BigNumber) => balance.toString());
 
     return zipObject(this.claimableTokens, stringBalances);

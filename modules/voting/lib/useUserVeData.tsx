@@ -5,7 +5,6 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 import { differenceInDays, differenceInSeconds, format, sub } from 'date-fns';
 import { PRETTY_DATE_FORMAT } from '../constants';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { tokenFormatAmount } from '~/lib/services/token/token-util';
 import {
   useGetPoolQuery,
   useGetUserVeLockInfoQuery,
@@ -91,7 +90,7 @@ export function _useUserVotingData() {
       );
       setLockedBalance(userVeLockInfo?.userGetVeLockInfo.lockedAmount);
       setHasExistingLock(hasLock);
-      setcurrentVeBalance(tokenFormatAmount(userVeLockInfo?.userGetVeLockInfo.currentBalance));
+      setcurrentVeBalance(userVeLockInfo?.userGetVeLockInfo.currentBalance);
     }
   }, [userVeLockInfo, isLoadingUserVeData, isConnected]);
 

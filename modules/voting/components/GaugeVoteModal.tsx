@@ -1,5 +1,18 @@
-import { useEffect } from 'react';
-import { FormControl, Input, Alert, AlertIcon, AlertTitle, AlertDescription, Box, HStack, Modal, Text, Button, ModalOverlay } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import {
+  FormControl,
+  Input,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Box,
+  HStack,
+  Modal,
+  Text,
+  Button,
+  ModalOverlay,
+} from '@chakra-ui/react';
 import {
   BeetsModalBody,
   BeetsModalContent,
@@ -35,13 +48,13 @@ type Props = {
 };
 
 export function GaugeVoteModal(props: Props) {
+  const [userVote, setUserVote] = useState<string>();
   const { voteForGauge, isConfirmed, isFailed, isPending } = useGaugeVoting();
   const { currentVeBalance, lockEndDate } = useUserVeData();
   const { isConnected } = useUserAccount();
 
   const {
     voteWeight,
-    setVoteWeight,
     voteError,
     voteTitle,
     voteButtonText,
@@ -66,10 +79,10 @@ export function GaugeVoteModal(props: Props) {
   }, [isConfirmed, isFailed]);
 
   async function submitVote() {
-    if (!voteWeight) {
+    if (!userVote) {
       return;
     }
-    const totalVoteShares = scale(voteWeight, 2).toString();
+    const totalVoteShares = scale(userVote, 2).toString();
     try {
       voteForGauge(props.gauge.address, BigNumber.from(totalVoteShares));
     } catch (e) {
@@ -80,10 +93,10 @@ export function GaugeVoteModal(props: Props) {
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
-      <ModalOverlay
-        display={{ base: 'none', md: 'block' }}
-        bg={`radial-gradient(circle at center, #4132D0 0%, rgba(0,0,0, 0.85) 55% )`}
-      />
+        <ModalOverlay
+          display={{ base: 'none', md: 'block' }}
+          bg={`radial-gradient(circle at center, #4132D0 0%, rgba(0,0,0, 0.85) 55% )`}
+        />
         <BeetsModalContent bgColor="vertek.slate.900">
           <BeetsModalHeader mt="2">
             <BeetsModalHeadline textAlign="center" fontSize="2rem">
@@ -158,15 +171,15 @@ export function GaugeVoteModal(props: Props) {
                 <Input
                   id="voteWeight"
                   name="voteWeight"
-                  type="number"
-                  value={voteWeight}
-                  onChange={(event) => (setVoteWeight ? setVoteWeight(event.target.value) : null)}
+                  type="text"
+                  value={userVote}
+                  onChange={(event) => setUserVote(event.target.value)}
                   autoComplete="off"
                   autoCorrect="off"
                   spellCheck={false}
                   color="grey.100"
                   step="any"
-                  placeholder="0%"
+                  placeholder={voteWeight || '0'}
                   disabled={voteInputDisabled}
                   size="md"
                   autoFocus

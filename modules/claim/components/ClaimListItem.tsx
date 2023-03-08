@@ -54,8 +54,8 @@ export function ClaimListItem(props: { gauge: Gauge }) {
         <GridItem area="icons" mb={{ base: '6', lg: '0' }}>
           <Box display="flex" justifyContent={{ base: 'center', lg: 'flex-start' }}>
             <MemoizedTokenAvatarSetInList
-              imageSize={28}
-              width={92}
+              imageSize={32}
+              width={98}
               tokens={props.gauge.pool.tokens}
             />
           </Box>
@@ -93,7 +93,7 @@ export function ClaimListItem(props: { gauge: Gauge }) {
             })}
           </Text>
         </StatGridItemRight>
-
+        {/* 
         <ClaimGrid area="claim">
           <Box display="flex" justifyContent={{ base: 'center', lg: 'flex-end' }}>
             <Button
@@ -113,7 +113,7 @@ export function ClaimListItem(props: { gauge: Gauge }) {
               Claim
             </Button>
           </Box>
-        </ClaimGrid>
+        </ClaimGrid> */}
       </Grid>
     </Box>
   );

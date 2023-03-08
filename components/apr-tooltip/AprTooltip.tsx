@@ -32,9 +32,9 @@ function AprTooltip({
 
   const formatApr = (apr: string) => {
     if (parseFloat(apr) < 0.0000001) {
-      return '0.00%';
+      return '0.0%';
     }
-    return numeral(apr).format('0.00%');
+    return numeral(apr).format('0.0%');
   };
 
   const { boostForPool } = useUserData();
@@ -51,7 +51,7 @@ return (
           {aprLabel ? ' APR' : ''}
         </Text>
       ) : (
-        <Text fontSize="0.9rem" fontWeight="semibold" mr="0" color="#4A4AF6" {...textProps}>
+        <Text fontSize="0.9rem" fontWeight="extrabold" mr="0" color="#fff" {...textProps}>
           {formatApr(minApr)} - {formatApr(maxApr)}
         </Text>
       )}

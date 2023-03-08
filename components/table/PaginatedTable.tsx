@@ -45,6 +45,7 @@ export function PaginatedTable({
       {renderTableHeader()}
       <Box
         mb={0}
+        borderRadius={{ base: '18px', md: 'none' }}
         // borderBottomLeftRadius="16px"
         // borderBottomRightRadius="16px"
         overflow="hidden"

@@ -11,12 +11,12 @@ export const bscNetworkConfig: NetworkConfig = {
   testnet: false,
   eth: {
     name: 'BNB',
-    address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
     symbol: 'BNB',
     decimals: 18,
     iconUrl: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850',
   },
-  wethAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  wethAddress: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
   wethAddressFormatted: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   coingecko: {
     nativeAssetId: 'binancecoin',
@@ -35,10 +35,12 @@ export const bscNetworkConfig: NetworkConfig = {
   balancer: {
     vault: '0x719488F4E859953967eFE963c6Bed059BaAab60c',
     feeDistributor: '0x1ac7c3C34d03f0b4E97FB4a3F08dF4DE6989FfB3',
+    feeDistOne: '0x2CFCe0B4d47A994E56904D9EbB9716bbd0A59AbC',
     balMinter: '0xeF0bb9a74218649dE92C86FE0add74c5a03C4c09',
-    batchRelayer: '',
-    composableStableFactory: '',
+    batchRelayer: '0x558BDC96018B9C3dc46481c04B212465D6A69fF0',
+    composableStableFactory: '0xfD50F5eAd870bdCFa69940c41a5C10f015b419e7',
     weightedPoolV2Factory: '0xDE8993Bf9D6Eb1e0d752fe56ccB85Ef76538ABb6',
+    // weightedPoolV2FactoryFees: '0xb9C7a581F0792d667beb684Bab1AF4FFFa14DA98',
     linearFactories: {
       erc4626: [],
       reaper: [],
@@ -55,11 +57,11 @@ export const bscNetworkConfig: NetworkConfig = {
   },
   nft: {
     nftStakingContract: '0xDb52E06a75CAaB7013a0c3127F7AE80De7Be6752',
-    nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43'
+    nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43',
   },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
-  defaultTokenIn: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  defaultTokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
   defaultTokenOut: '0xeD236c32f695c83Efde232c288701d6f9C23E60E',
   farmTypeName: 'gauge',
   additionalLinks: [

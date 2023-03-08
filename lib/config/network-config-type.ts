@@ -29,9 +29,14 @@ export interface NetworkConfig {
   beets: {
     address: string;
   };
+  vertek: {
+    bribeManager: string;
+    bribeRewardClaims: string;
+  };
   balancer: {
     vault: string;
     feeDistributor: string;
+    feeDistOne?: string;
     balMinter: string;
     batchRelayer: string;
     composableStableFactory: string;

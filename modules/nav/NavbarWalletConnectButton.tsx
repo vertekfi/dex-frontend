@@ -5,14 +5,28 @@ import VertekAlpha from '~/assets/svg/vertektransparent.svg';
 import { useReactiveVar } from '@apollo/client';
 import { txPendingVar } from '~/lib/util/useSubmitTransaction';
 import { IconWallet } from '~/components/icons/IconWallet';
-import { useUserData } from '~/lib/user/useUserData';
 import { useEarlyLudwigNft } from '~/lib/global/useEarlyLudwigNft';
-import { VertekWhiteNoText } from '~/assets/logo/Vertek/VertekWhiteNoText';
+import { useEffect } from 'react';
 
 export default function NavbarWalletConnectButton() {
   const txPending = useReactiveVar(txPendingVar);
-  const { loading, portfolioValueUSD } = useUserData();
   const { data: earlyLudwig } = useEarlyLudwigNft();
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    if (txPending) {
+      timeoutId = setTimeout(() => {
+        // Clear the txPending state after 5 seconds
+        txPendingVar(false);
+      }, 5000);
+    }
+
+    return () => {
+      // Clear the timeout if the component unmounts or the txPending state changes
+      clearTimeout(timeoutId);
+    };
+  }, [txPending]);
 
   return (
     <ConnectButton.Custom>
@@ -39,37 +53,14 @@ export default function NavbarWalletConnectButton() {
                     _hover={{ backgroundColor: 'red.600' }}
                     onClick={openChainModal}
                     type="button"
+                    width="90%"
                   >
                     Wrong network
                   </Button>
                 );
               }
-
               return (
                 <HStack spacing="1" position="relative">
-                  {/* <HStack
-                    bgColor="beets.base.500"
-                    pr="3"
-                    pl="2"
-                    spacing="1"
-                    height="40px"
-                    mr="-1"
-                    roundedTopLeft="md"
-                    roundedBottomLeft="md"
-                    display={{ base: 'none', lg: 'flex' }}
-                  >
-                    <BarChart2 size={18} />
-                    {loading ? (
-                      <Skeleton height="10px" width="41px" />
-                    ) : (
-                      <Box fontSize="sm" fontWeight="semibold">
-                        <Tooltip label="Your portfolio value is cached to improve app performance. If you just made a deposit in may take up to a minute for the value to be reflected here.">
-                          {numberFormatLargeUsdValue(portfolioValueUSD)}
-                        </Tooltip>
-                      </Box>
-                    )}
-                  </HStack> */}
-
                   <Button
                     variant="vertekdark"
                     marginLeft={{ base: '1', lg: '0' }}

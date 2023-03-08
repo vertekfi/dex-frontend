@@ -63,12 +63,12 @@ export function poolIsComposablePool(pool: GqlPoolUnion) {
     return true;
   }
 
-  // if (
-  //   pool.__typename === 'GqlPoolPhantomStable' &&
-  //   isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
-  // ) {
-  //   return true;
-  // }
+  if (
+    pool.__typename === 'GqlPoolPhantomStable' &&
+    isSameAddress(pool.factory || '', networkConfig.balancer.composableStableFactory)
+  ) {
+    return true;
+  }
 
   return false;
 }

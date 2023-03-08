@@ -1,4 +1,4 @@
-import { SimpleGrid, Box, GridItem, Text, Skeleton } from '@chakra-ui/react';
+import { SimpleGrid, Box, GridItem, Text, Skeleton, Tooltip } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
@@ -7,13 +7,47 @@ import { ClaimTable } from './components/ClaimTable';
 import { Gauge } from '~/lib/services/staking/types';
 import { NoRewardsBox } from './components/NoRewardsBox';
 import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
+import { ProtocolRewardsList } from './components/ProtocolRewardsList';
+import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
+import { InfoIcon } from '@chakra-ui/icons';
+import { Loading } from '~/components/loading/Loading';
+import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
+import StarsIcon from '~/components/apr-tooltip/StarsIcon';
+import { TableHeading } from './components/TableHeading';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
   const [hasGaugeRewards, sethasGaugeRewards] = useState<boolean>(false);
-  // const [hasProtocolRewards, setHasProtocolRewards] = useState<boolean>(false);
+  const [hasProtocolRewards, sethasProtocolRewards] = useState<boolean>(false);
+  const [hasBribeRewards, sethasBribeRewards] = useState<boolean>(false);
+  const [claiming, setClaiming] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const { rewardGauges, isLoading: isClaimsLoading, refetchClaimsData } = useClaimsData();
+  const {
+    rewardGauges,
+    isLoading: isClaimsLoading,
+    refetchClaimsData,
+    protocolData,
+  } = useClaimsData();
+
+  const { claimProtocolRewards, txState } = useProtocolRewardClaim();
+
+  useEffect(() => {
+    if (txState.error) {
+      console.error(txState.error);
+      setClaiming(false);
+    }
+
+    if (txState.isPending) {
+      setClaiming(true);
+    } else {
+      setClaiming(false);
+    }
+
+    if (txState.isConfirmed) {
+      setClaiming(false);
+    }
+  }, [txState]);
 
   useEffect(() => {
     if (!isClaimsLoading && rewardGauges?.length) {
@@ -27,73 +61,127 @@ export function ClaimContainer() {
       });
 
       sethasGaugeRewards(hasRewardsToClaim);
+
+      setTimeout(() => setLoading(false), 100);
     }
   }, [rewardGauges, isClaimsLoading]);
 
-  function handleUserClaim() {
+  useEffect(() => {
+    if (!isClaimsLoading && protocolData) {
+      if (!(parseFloat(protocolData[0]?.amount) > 0)) {
+        sethasProtocolRewards(false);
+      } else {
+        sethasProtocolRewards(true);
+      }
+    }
+  }, [isClaimsLoading, protocolData]);
+
+  function handleUserRewardsClaim() {
     refetchClaimsData();
   }
 
-  return (
-    <SimpleGrid columns={1} paddingX={0} spacing={6} borderRadius="12px">
-      <GridItem paddingY={0}>
-        <Text fontSize="1.5rem" mb="2">
-          BNB Chain Liquidity Incentives
-        </Text>
-      </GridItem>
+  async function handleProtocolClaim() {
+    setClaiming(true);
+    await claimProtocolRewards();
+    refetchClaimsData();
+    setClaiming(false);
+  }
 
-      <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" display="flex" mb="1">
-          <Box marginRight="2" display="flex" justifyContent="">
-            <NextImage width="36px" height="36px" src={VertekIcon} />
-          </Box>
-          <Text fontSize="1.20rem">Vertek (VRTK) Earnings</Text>
-        </Box>
-        {isClaimsLoading ? (
-          <Skeleton isLoaded={!isClaimsLoading} />
-        ) : (
-          <>
-            {gaugesWithRewards.length ? (
-              <Box>
-                <ClaimTable gauges={gaugesWithRewards} />
+  return (
+    <>
+      {loading ? (
+        <Loading loading={loading} />
+      ) : (
+        <SimpleGrid columns={1} paddingX={0} spacing={6} borderRadius="12px">
+          <GridItem paddingY={0}>
+            <Text fontSize="1.5rem" mb="2">
+              BNB Chain Liquidity Incentives
+            </Text>
+          </GridItem>
+
+          <GridItem display="flex" flexDirection="column" paddingY="0">
+            <Box flexDirection="row" display="flex" mb="1">
+              <Box marginRight="2" display="flex" justifyContent="">
+                <NextImage width="36px" height="36px" src={VertekIcon} />
               </Box>
+              <Text fontSize="1.3rem">Vertek (VRTK) Earnings</Text>
+            </Box>
+
+            {hasGaugeRewards ? (
+              <FadeInOutBox isVisible={!loading}>
+                <ClaimTable gaugesWithRewards={gaugesWithRewards} />
+              </FadeInOutBox>
             ) : (
               <NoRewardsBox label="No gauge staking rewards to claim" />
             )}
-          </>
-        )}
-      </GridItem>
+          </GridItem>
 
-      <GridItem display="flex" flexDirection="column" paddingY="0">
-        <Box flexDirection="row" display="flex" mb="0" paddingX="1">
-          <Text fontSize="1.20rem">veVRTK and Protocol Earnings</Text>
-        </Box>
-        <Box>
-          <NoRewardsBox label="No veVRTK protocol rewards to claim" />
-        </Box>
-      </GridItem>
+          <GridItem display="flex" flexDirection="column" paddingY="0">
+            <TableHeading
+              text="veVRTK and Protocol Earnings"
+              tooltipText="Protocol fee distribution is based on your percentage ownership of veVRTK at the start of the previous weeks epoch."
+            />
 
-      <GridItem display="flex" flexDirection="column">
-        <Text fontSize="1.20rem">Other Gauge Earnings</Text>
-
-        <Box>
-          {isClaimsLoading ? (
-            <Skeleton isLoaded={!isClaimsLoading} />
-          ) : (
-            <>
-              {hasGaugeRewards ? (
-                <GaugeRewardsContainer
-                  gauges={rewardGauges}
-                  isLoading={isClaimsLoading}
-                  onSuccessfulClaim={handleUserClaim}
-                />
+            <Box>
+              {hasProtocolRewards ? (
+                <FadeInOutBox isVisible={!loading}>
+                  <ProtocolRewardsList
+                    protocolRewards={protocolData}
+                    onClaim={handleProtocolClaim}
+                    disabled={claiming}
+                  />
+                </FadeInOutBox>
               ) : (
-                <NoRewardsBox label="No additional staking rewards to claim" />
+                <NoRewardsBox label="No veVRTK protocol rewards to claim" />
               )}
-            </>
-          )}
-        </Box>
-      </GridItem>
-    </SimpleGrid>
+            </Box>
+          </GridItem>
+
+          <GridItem display="flex" flexDirection="column">
+            <TableHeading text="Bribe Earnings" />
+
+            <Box>
+              {hasBribeRewards ? (
+                <FadeInOutBox isVisible={!loading}>
+                  <ProtocolRewardsList
+                    protocolRewards={protocolData}
+                    onClaim={handleProtocolClaim}
+                    disabled={claiming}
+                  />
+                </FadeInOutBox>
+              ) : (
+                <NoRewardsBox label="No bribe rewards to claim" />
+              )}
+            </Box>
+          </GridItem>
+
+          <GridItem display="flex" flexDirection="column">
+            <TableHeading text="Other Gauge Earnings" />
+
+            <Box>
+              {isClaimsLoading ? (
+                <Skeleton isLoaded={!isClaimsLoading} />
+              ) : (
+                <>
+                  {hasGaugeRewards ? (
+                    <GaugeRewardsContainer
+                      gauges={rewardGauges}
+                      isLoading={isClaimsLoading}
+                      onSuccessfulClaim={handleUserRewardsClaim}
+                    />
+                  ) : (
+                    <>
+                      {!loading && !hasGaugeRewards && (
+                        <NoRewardsBox label="No additional staking rewards to claim" />
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </Box>
+          </GridItem>
+        </SimpleGrid>
+      )}
+    </>
   );
 }

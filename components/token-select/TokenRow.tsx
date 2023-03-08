@@ -1,10 +1,10 @@
 import { Button, ButtonProps } from '@chakra-ui/button';
-import { Box, Heading, HStack, Text } from '@chakra-ui/layout';
+import { Box, HStack, Text } from '@chakra-ui/layout';
 import TokenAvatar from '~/components/token/TokenAvatar';
 import { AmountHumanReadable, TokenBase } from '~/lib/services/token/token-types';
 import { isEth, tokenFormatAmountPrecise } from '~/lib/services/token/token-util';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
-import { Badge, Circle, Skeleton, useTheme } from '@chakra-ui/react';
+import { Badge, Skeleton, useTheme } from '@chakra-ui/react';
 import { PlusCircle } from 'react-feather';
 import { useGetTokens } from '~/lib/global/useToken';
 import { addTokenToWallet } from '~/lib/util/web3';

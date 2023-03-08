@@ -4,20 +4,19 @@ import { FeeDistributor } from '~/lib/services/balancer/contracts/fee-distributo
 import { BalanceMap } from '~/lib/services/token/token-types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
 
-const feeDistributorV2 = new FeeDistributor(networkConfig.balancer.feeDistributor);
-
 export function useProtocolRewardsQuery() {
   const { isConnected, userAddress } = useUserAccount();
 
   const queryFn = async (): Promise<BalanceMap> => {
     try {
-      if (!isConnected) {
+      if (!isConnected || !userAddress) {
         return {};
       }
-      // const data = await feeDistributorV2.getClaimableBalances(userAddress || '');
-      // return data;
+      const feeDistributorV2 = new FeeDistributor(networkConfig.balancer.feeDistributor);
 
-      return {};
+      const data = await feeDistributorV2.getClaimableBalances(userAddress);
+      console.log(data);
+      return data;
     } catch (error) {
       console.error('Failed to fetch claimable protocol balances', error);
       return {};
@@ -25,6 +24,6 @@ export function useProtocolRewardsQuery() {
   };
 
   return useQuery<BalanceMap>(['claims', 'protocol', userAddress], queryFn, {
-    enabled: !!userAddress && isConnected,
+    enabled: true,
   });
 }

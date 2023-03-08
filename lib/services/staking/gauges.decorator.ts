@@ -56,15 +56,11 @@ export class GaugesDecorator {
   private formatClaimableRewards(claimableRewards: Record<string, string>): Record<string, string> {
     if (!claimableRewards) return {};
 
-    //  console.log(claimableRewards);
-
     Object.keys(claimableRewards).forEach((rewardToken) => {
       // claimableRewards[rewardToken] = claimableRewards[rewardToken].toString();
       claimableRewards[rewardToken] = tokenFormatAmount(
         formatEther(claimableRewards[rewardToken].toString()),
       );
-
-      // console.log(claimableRewards[rewardToken]);
     });
 
     return claimableRewards;

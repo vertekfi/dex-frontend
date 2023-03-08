@@ -1,11 +1,14 @@
-import { Button, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import { TokenAvatarSetInList } from '~/components/token/TokenAvatarSetInList';
 import { VotingGaugeWithVotes } from '~/lib/services/staking/types';
-import { scale, bnum } from '~/lib/util/big-number.utils';
+import { scale } from '~/lib/util/big-number.utils';
 import { fNum2 } from '~/lib/util/useNumber';
 
 import { memo } from 'react';
+import { GaugeRewardsInfo } from './GaugeRewardsInfo';
+import { formatVotesAsPercent } from '../lib/utils';
+import { VotingStatsPopover } from './VotingStatsPopover';
 
 const MemoizedTokenAvatarSetInList = memo(TokenAvatarSetInList);
 
@@ -20,18 +23,10 @@ export function GaugeListItem(props: Props) {
     style: 'percent',
     maximumFractionDigits: 2,
   });
+
   // function redirectToPool(gauge: VotingGaugeWithVotes) {
   //   window.location.href = poolURLFor(gauge.pool.id, gauge.network, gauge.pool.poolType);
   // }
-
-  function formatVotesAsPercent(votes: string): string {
-    const normalizedVotes = scale(bnum(votes), -18);
-    return fNum2(normalizedVotes.toString(), {
-      style: 'percent',
-      maximumFractionDigits: 2,
-      fixedFormat: true,
-    });
-  }
 
   return (
     <Grid
@@ -40,7 +35,7 @@ export function GaugeListItem(props: Props) {
       borderRadius={{ base: '12px', lg: '' }}
       templateColumns={{
         base: 'repeat(1fr 1fr)',
-        lg: '150px 1fr 200px 200px 200px',
+        lg: '150px 1fr 200px 200px 200px 200px',
       }}
       gap={{ base: '4', lg: '0' }}
       mb={{ base: '4', lg: '0' }}
@@ -49,8 +44,9 @@ export function GaugeListItem(props: Props) {
         "name name"
         "icons icons" 
         "nextvote myvote"
+        "bribes bribes"
         "votebutton votebutton" `,
-        lg: `"icons name nextvote myvote votebutton"`,
+        lg: `"icons name nextvote myvote bribes votebutton"`,
       }}
     >
       <GridItem
@@ -82,7 +78,11 @@ export function GaugeListItem(props: Props) {
         ml={{ base: '8', lg: '0' }}
       >
         <MobileLabel text="Next Period Votes" />
-        {formatVotesAsPercent(props.gauge.votesNextPeriod)}
+        <Flex justifyContent="space-between" width="35%">
+          <Text>{formatVotesAsPercent(props.gauge.votesNextPeriod)}</Text>
+
+          <VotingStatsPopover gauge={props.gauge} />
+        </Flex>
       </GridItem>
 
       <GridItem
@@ -95,6 +95,16 @@ export function GaugeListItem(props: Props) {
       >
         <MobileLabel text="My Votes" />
         {userVotes}
+      </GridItem>
+
+      <GridItem
+        area="bribes"
+        display={{ base: 'block', lg: 'flex' }}
+        alignItems="center"
+        justifyContent={{ base: 'center', lg: 'center' }}
+        // textAlign="center"
+      >
+        <GaugeRewardsInfo gauge={props.gauge} />
       </GridItem>
 
       <GridItem

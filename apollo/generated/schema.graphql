@@ -8,6 +8,16 @@ scalar Bytes
 
 scalar Date
 
+type GaugeBribe {
+  amount: String!
+  briber: String!
+  epochStartTime: Int!
+  epochWeekLabel: String!
+  gauge: String!
+  token: GqlToken!
+  valueUSD: Float!
+}
+
 type GaugeFactory {
   id: String!
 }
@@ -1081,6 +1091,8 @@ type LiquidityGauge {
    Address of the pool (lp_token of the gauge)
   """
   address: String!
+  bribes: [GaugeBribe]!
+  currentEpochBribes: [GaugeBribe]!
   depositFee: Int!
   factory: GaugeFactory
 
@@ -1093,6 +1105,7 @@ type LiquidityGauge {
    Whether Balancer DAO killed the gauge
   """
   isKilled: Boolean!
+  nextEpochBribes: [GaugeBribe]!
 
   """
    Reference to Pool entity
@@ -1177,6 +1190,8 @@ type Query {
   blocksGetBlocksPerSecond: Float!
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
+  get24HourGaugeFees(hoursInPast: Int): [String]
+  getGaugeBribes(epoch: Int): [GaugeBribe]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [GqlProtocolGaugeInfo]!
   getProtocolTokenList: [String]
