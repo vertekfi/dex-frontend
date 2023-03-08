@@ -55,6 +55,10 @@ export const bscNetworkConfig: NetworkConfig = {
       lockPoolAddress: '0xDD64E2EC144571b4320f7BFB14a56b2b2cBF37ad',
     },
   },
+  vertek: {
+    bribeManager: '0xb1B1695FeA2E3a8B2aAE3A0d2a59Ea3F5e4A7508',
+    bribeRewardClaims: '0x27eDCe99d5aF44318358497fD5Af5C8e312F1721',
+  },
   nft: {
     nftStakingContract: '0xDb52E06a75CAaB7013a0c3127F7AE80De7Be6752',
     nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43',

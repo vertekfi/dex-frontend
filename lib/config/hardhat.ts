@@ -60,6 +60,10 @@ export const hardhatNetworkConfig: NetworkConfig = {
     bribeManager: '0x2C97dA806787Aaf170A2026417d1429736D90Aa3',
     bribeRewardClaims: '0x9Fc22C446312abEec7E739496B83b38c66BA85aC',
   },
+  nft: {
+    nftStakingContract: '0xDb52E06a75CAaB7013a0c3127F7AE80De7Be6752',
+    nftAddress: '0xFF068652C5D720B2cd4653B0Cc0AF22c4D668a43',
+  },
   beetsPoolOwnerAddress: '0x891eFc56f5CD6580b2fEA416adC960F2A6156494',
   masterChefContractAddress: '',
   defaultTokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
