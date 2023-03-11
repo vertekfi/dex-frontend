@@ -8,6 +8,12 @@ scalar Bytes
 
 scalar Date
 
+type EpochBribeInfo {
+  currentEpochBribes: [GaugeBribe]!
+  gauge: String!
+  nextEpochBribes: [GaugeBribe]!
+}
+
 type GaugeBribe {
   amount: String!
   briber: String!
@@ -1191,11 +1197,13 @@ type Query {
   blocksGetBlocksPerYear: Float!
   contentGetNewsItems: [GqlContentNewsItem]!
   get24HourGaugeFees(hoursInPast: Int): [String]
-  getGaugeBribes(epoch: Int): [GaugeBribe]!
+  getAllGaugeBribes(epoch: Int): [EpochBribeInfo]!
   getLiquidityGauges: [LiquidityGauge]!
   getProtocolPoolData: [GqlProtocolGaugeInfo]!
   getProtocolTokenList: [String]
   getRewardPools(user: String): [RewardPool]!
+  getSingleGaugeBribes(epoch: Int!, gauge: String!): [EpochBribeInfo]!
+  getUserBribeClaims(epoch: Int!, user: String!): [UserBribeClaim]!
   getUserGaugeStakes(poolIds: [String!]!, user: String!): [LiquidityGauge]!
   latestSyncedBlocks: GqlLatestSyncedBlocks!
   poolGetAllPoolsSnapshots(range: GqlPoolSnapshotDataRange!): [GqlPoolSnapshot!]!
@@ -1365,6 +1373,18 @@ type User {
    List of locks the user created
   """
   votingLocks: [VotingEscrowLock!]
+}
+
+type UserBribeClaim {
+  amountOwed: String!
+  amountOwedBN: String!
+  briber: String!
+  distributionId: String!
+  gauge: String!
+  gaugeRecord: LiquidityGauge!
+  proof: [String!]!
+  token: String!
+  valueUSD: Float!
 }
 
 type VotingEscrow {

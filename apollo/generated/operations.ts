@@ -573,6 +573,23 @@ export const UserSyncBalance = gql`
     userSyncBalance(poolId: $poolId)
   }
 `;
+export const GetUserBribeClaims = gql`
+  query GetUserBribeClaims($user: String!, $epoch: Int!) {
+    getUserBribeClaims(user: $user, epoch: $epoch) {
+      distributionId
+      amountOwed
+      amountOwedBN
+      briber
+      gauge
+      token
+      proof
+      valueUSD
+      gaugeRecord {
+        symbol
+      }
+    }
+  }
+`;
 export const GetHomeData = gql`
   query GetHomeData {
     poolGetFeaturedPoolGroups {

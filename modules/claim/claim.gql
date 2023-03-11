@@ -1,0 +1,15 @@
+query GetUserBribeClaims($user: String!, $epoch: Int!) {
+  getUserBribeClaims(user: $user, epoch: $epoch) {
+    distributionId
+    amountOwed
+    amountOwedBN
+    briber
+    gauge
+    token
+    proof
+    valueUSD
+    gaugeRecord {
+      symbol
+    }
+  }
+}

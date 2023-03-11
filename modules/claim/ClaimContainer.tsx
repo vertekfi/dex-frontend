@@ -1,4 +1,4 @@
-import { SimpleGrid, Box, GridItem, Text, Skeleton, Tooltip } from '@chakra-ui/react';
+import { SimpleGrid, Box, GridItem, Text, Skeleton } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import VertekIcon from '~/assets/svg/vertektransparent.svg';
 import { useClaimsData } from './lib/useClaimsData';
@@ -9,11 +9,11 @@ import { NoRewardsBox } from './components/NoRewardsBox';
 import { GaugeRewardsContainer } from './components/GaugeRewardsContainer';
 import { ProtocolRewardsList } from './components/ProtocolRewardsList';
 import { useProtocolRewardClaim } from './lib/useProtocolRewardsClaim';
-import { InfoIcon } from '@chakra-ui/icons';
 import { Loading } from '~/components/loading/Loading';
 import { FadeInOutBox } from '~/components/animation/FadeInOutBox';
-import StarsIcon from '~/components/apr-tooltip/StarsIcon';
 import { TableHeading } from './components/TableHeading';
+import { useUserAccount } from '~/lib/user/useUserAccount';
+import { BribeClaim } from './components/BribeClaim';
 
 export function ClaimContainer() {
   const [gaugesWithRewards, setGaugesWithRewards] = useState<Gauge[]>([]);
@@ -23,14 +23,46 @@ export function ClaimContainer() {
   const [claiming, setClaiming] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const { isConnected, userAddress } = useUserAccount();
+
   const {
     rewardGauges,
     isLoading: isClaimsLoading,
     refetchClaimsData,
     protocolData,
+    bribeClaims,
+    getUserBribeClaims,
   } = useClaimsData();
 
   const { claimProtocolRewards, txState } = useProtocolRewardClaim();
+
+  useEffect(() => {
+    const getClaims = async () => {
+      await getUserBribeClaims({
+        variables: {
+          user: '0xbB90c09dfc7CAe4a45e03Bc881a706Fdb36890e3',
+          epoch: 1677715200, // TODO: Dynamic update
+        },
+      });
+    };
+
+    if (isConnected && userAddress) {
+      // Have to fetch per epoch timestamp
+      // Could track rewards per epoch on backend same as the generated data
+      // Check for already claimed
+      getClaims();
+    }
+  }, [isConnected, userAddress]);
+
+  useEffect(() => {
+    if (bribeClaims?.getUserBribeClaims) {
+      if (bribeClaims.getUserBribeClaims.length) {
+        sethasBribeRewards(true);
+      } else {
+        sethasBribeRewards(false);
+      }
+    }
+  }, [bribeClaims]);
 
   useEffect(() => {
     if (txState.error) {
@@ -141,13 +173,9 @@ export function ClaimContainer() {
             <TableHeading text="Bribe Earnings" />
 
             <Box>
-              {hasBribeRewards ? (
+              {bribeClaims?.getUserBribeClaims.length ? (
                 <FadeInOutBox isVisible={!loading}>
-                  <ProtocolRewardsList
-                    protocolRewards={protocolData}
-                    onClaim={handleProtocolClaim}
-                    disabled={claiming}
-                  />
+                  <BribeClaim bribeRewards={bribeClaims.getUserBribeClaims} />
                 </FadeInOutBox>
               ) : (
                 <NoRewardsBox label="No bribe rewards to claim" />

@@ -23,6 +23,13 @@ export interface Scalars {
   JSON: any;
 }
 
+export interface EpochBribeInfo {
+  __typename: 'EpochBribeInfo';
+  currentEpochBribes: Array<Maybe<GaugeBribe>>;
+  gauge: Scalars['String'];
+  nextEpochBribes: Array<Maybe<GaugeBribe>>;
+}
+
 export interface GaugeBribe {
   __typename: 'GaugeBribe';
   amount: Scalars['String'];
@@ -1233,11 +1240,13 @@ export interface Query {
   blocksGetBlocksPerYear: Scalars['Float'];
   contentGetNewsItems: Array<Maybe<GqlContentNewsItem>>;
   get24HourGaugeFees?: Maybe<Array<Maybe<Scalars['String']>>>;
-  getGaugeBribes: Array<Maybe<GaugeBribe>>;
+  getAllGaugeBribes: Array<Maybe<EpochBribeInfo>>;
   getLiquidityGauges: Array<Maybe<LiquidityGauge>>;
   getProtocolPoolData: Array<Maybe<GqlProtocolGaugeInfo>>;
   getProtocolTokenList?: Maybe<Array<Maybe<Scalars['String']>>>;
   getRewardPools: Array<Maybe<RewardPool>>;
+  getSingleGaugeBribes: Array<Maybe<EpochBribeInfo>>;
+  getUserBribeClaims: Array<Maybe<UserBribeClaim>>;
   getUserGaugeStakes: Array<Maybe<LiquidityGauge>>;
   latestSyncedBlocks: GqlLatestSyncedBlocks;
   poolGetAllPoolsSnapshots: Array<GqlPoolSnapshot>;
@@ -1284,12 +1293,22 @@ export interface QueryGet24HourGaugeFeesArgs {
   hoursInPast?: InputMaybe<Scalars['Int']>;
 }
 
-export interface QueryGetGaugeBribesArgs {
+export interface QueryGetAllGaugeBribesArgs {
   epoch?: InputMaybe<Scalars['Int']>;
 }
 
 export interface QueryGetRewardPoolsArgs {
   user?: InputMaybe<Scalars['String']>;
+}
+
+export interface QueryGetSingleGaugeBribesArgs {
+  epoch: Scalars['Int'];
+  gauge: Scalars['String'];
+}
+
+export interface QueryGetUserBribeClaimsArgs {
+  epoch: Scalars['Int'];
+  user: Scalars['String'];
 }
 
 export interface QueryGetUserGaugeStakesArgs {
@@ -1493,6 +1512,19 @@ export interface User {
   id: Scalars['ID'];
   /**  List of locks the user created  */
   votingLocks?: Maybe<Array<VotingEscrowLock>>;
+}
+
+export interface UserBribeClaim {
+  __typename: 'UserBribeClaim';
+  amountOwed: Scalars['String'];
+  amountOwedBN: Scalars['String'];
+  briber: Scalars['String'];
+  distributionId: Scalars['String'];
+  gauge: Scalars['String'];
+  gaugeRecord: LiquidityGauge;
+  proof: Array<Scalars['String']>;
+  token: Scalars['String'];
+  valueUSD: Scalars['Float'];
 }
 
 export interface VotingEscrow {
@@ -1811,6 +1843,27 @@ export type UserSyncBalanceMutationVariables = Exact<{
 }>;
 
 export type UserSyncBalanceMutation = { __typename: 'Mutation'; userSyncBalance: string };
+
+export type GetUserBribeClaimsQueryVariables = Exact<{
+  user: Scalars['String'];
+  epoch: Scalars['Int'];
+}>;
+
+export type GetUserBribeClaimsQuery = {
+  __typename: 'Query';
+  getUserBribeClaims: Array<{
+    __typename: 'UserBribeClaim';
+    distributionId: string;
+    amountOwed: string;
+    amountOwedBN: string;
+    briber: string;
+    gauge: string;
+    token: string;
+    proof: Array<string>;
+    valueUSD: number;
+    gaugeRecord: { __typename: 'LiquidityGauge'; symbol: string };
+  } | null>;
+};
 
 export type GetHomeDataQueryVariables = Exact<{ [key: string]: never }>;
 
@@ -5667,6 +5720,70 @@ export type UserSyncBalanceMutationResult = Apollo.MutationResult<UserSyncBalanc
 export type UserSyncBalanceMutationOptions = Apollo.BaseMutationOptions<
   UserSyncBalanceMutation,
   UserSyncBalanceMutationVariables
+>;
+export const GetUserBribeClaimsDocument = gql`
+  query GetUserBribeClaims($user: String!, $epoch: Int!) {
+    getUserBribeClaims(user: $user, epoch: $epoch) {
+      distributionId
+      amountOwed
+      amountOwedBN
+      briber
+      gauge
+      token
+      proof
+      valueUSD
+      gaugeRecord {
+        symbol
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetUserBribeClaimsQuery__
+ *
+ * To run a query within a React component, call `useGetUserBribeClaimsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserBribeClaimsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserBribeClaimsQuery({
+ *   variables: {
+ *      user: // value for 'user'
+ *      epoch: // value for 'epoch'
+ *   },
+ * });
+ */
+export function useGetUserBribeClaimsQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserBribeClaimsQuery, GetUserBribeClaimsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserBribeClaimsQuery, GetUserBribeClaimsQueryVariables>(
+    GetUserBribeClaimsDocument,
+    options,
+  );
+}
+export function useGetUserBribeClaimsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserBribeClaimsQuery,
+    GetUserBribeClaimsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserBribeClaimsQuery, GetUserBribeClaimsQueryVariables>(
+    GetUserBribeClaimsDocument,
+    options,
+  );
+}
+export type GetUserBribeClaimsQueryHookResult = ReturnType<typeof useGetUserBribeClaimsQuery>;
+export type GetUserBribeClaimsLazyQueryHookResult = ReturnType<
+  typeof useGetUserBribeClaimsLazyQuery
+>;
+export type GetUserBribeClaimsQueryResult = Apollo.QueryResult<
+  GetUserBribeClaimsQuery,
+  GetUserBribeClaimsQueryVariables
 >;
 export const GetHomeDataDocument = gql`
   query GetHomeData {
