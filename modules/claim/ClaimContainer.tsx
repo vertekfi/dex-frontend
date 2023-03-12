@@ -40,16 +40,13 @@ export function ClaimContainer() {
     const getClaims = async () => {
       await getUserBribeClaims({
         variables: {
-          user: userAddress || '', // np
+          user: userAddress || '',
           epoch: 1677715200, // TODO: Dynamic update
         },
       });
     };
 
     if (isConnected && userAddress) {
-      // Have to fetch per epoch timestamp
-      // Could track rewards per epoch on backend same as the generated data
-      // Check for already claimed
       getClaims();
     }
   }, [isConnected, userAddress]);
