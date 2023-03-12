@@ -4,7 +4,6 @@ import {
   useGetUserProtocolRewardsQuery,
 } from '~/apollo/generated/graphql-codegen-generated';
 import { useGetGaugesQuery } from '~/lib/global/gauges/useGetGaugesQuery';
-import { useGetTokens } from '~/lib/global/useToken';
 import { gaugesDecorator } from '~/lib/services/staking/gauges.decorator';
 import { Gauge, SubgraphGauge } from '~/lib/services/staking/types';
 import { useUserAccount } from '~/lib/user/useUserAccount';
@@ -16,10 +15,11 @@ export function useClaimsData() {
   const [protocolData, setProtocolData] = useState<any[]>([]);
 
   const { isConnected, userAddress } = useUserAccount();
-  const { getToken } = useGetTokens();
   const { gauges, isLoading: isLoadingGauges, refetchGauges } = useGetGaugesQuery();
-  const [getUserBribeClaims, { loading: isLoadingClaims, data: bribeClaims }] =
-    useGetUserBribeClaimsLazyQuery();
+  const [
+    getUserBribeClaims,
+    { loading: isLoadingClaims, data: bribeClaims, refetch: refetchBribeRewards },
+  ] = useGetUserBribeClaimsLazyQuery();
 
   const {
     data: protocolRewardsData,
@@ -81,5 +81,6 @@ export function useClaimsData() {
     refetchClaimsData,
     refetchProtocolRewards,
     getUserBribeClaims,
+    refetchBribeRewards,
   };
 }

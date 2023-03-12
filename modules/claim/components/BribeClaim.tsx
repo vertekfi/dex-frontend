@@ -7,6 +7,7 @@ import { useUserAccount } from '~/lib/user/useUserAccount';
 import { numberFormatUSDValue } from '~/lib/util/number-formats';
 import { useBribeClaim } from '../lib/useClaimBribes';
 import { StatGridItemRight } from './ClaimTableUtils';
+import { useClaimsData } from '../lib/useClaimsData';
 
 type Props = {
   bribeRewards: any[];
@@ -15,6 +16,7 @@ type Props = {
 export function BribeClaim({ bribeRewards }: Props) {
   const { getToken } = useGetTokens();
   const { userAddress } = useUserAccount();
+  const { refetchBribeRewards } = useClaimsData();
   const { claimBribes, txState } = useBribeClaim();
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export function BribeClaim({ bribeRewards }: Props) {
     });
   });
 
-  function doBribeClaims() {
+  async function doBribeClaims() {
     const claimer: string = userAddress || '';
     const claims: any[] = [];
     const tokens: string[] = [];
@@ -48,7 +50,8 @@ export function BribeClaim({ bribeRewards }: Props) {
       claims.push([bribe.distributionId, bribe.amountOwedBN, distributor, tokenIndex, merkleProof]);
     });
 
-    claimBribes(claimer, claims, tokens);
+    await claimBribes(claimer, claims, tokens);
+    refetchBribeRewards();
   }
 
   return (

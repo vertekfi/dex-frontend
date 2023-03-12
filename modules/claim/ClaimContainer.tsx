@@ -40,7 +40,7 @@ export function ClaimContainer() {
     const getClaims = async () => {
       await getUserBribeClaims({
         variables: {
-          user: '0xbB90c09dfc7CAe4a45e03Bc881a706Fdb36890e3',
+          user: userAddress || '', // np
           epoch: 1677715200, // TODO: Dynamic update
         },
       });
