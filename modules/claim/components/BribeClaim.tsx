@@ -159,7 +159,7 @@ export function BribeClaim({ bribeRewards }: Props) {
       </Box>
       <Box>
         <Flex
-          display={{ base: 'none', lg: 'grid' }}
+          display={{ base: 'grid', lg: 'grid' }}
           p="3"
           borderLeftWidth="1px"
           borderRightWidth="1px"
@@ -180,12 +180,27 @@ export function BribeClaim({ bribeRewards }: Props) {
             alignItems="center"
             height="2em"
             disabled={false}
-            width={{ base: '200px', lg: '125px' }}
+            width={{ base: 'none', lg: '125px' }}
             isDisabled={txState.isPending}
             onClick={doBribeClaims}
           >
             Claim
           </Button>
+          <Button
+            display={{ base: 'flex', lg: 'none' }}
+            variant="verteklight"
+            padding="1em"
+            borderRadius="10px"
+            mt="1"
+            borderWidth="1px"
+            alignItems="center"
+            height="2em"
+            width={{ base: '200px', lg: 'none' }}
+            isDisabled={txState.isPending}
+            onClick={doBribeClaims}
+          >
+            Claim All 
+            </Button> 
         </Flex>
       </Box>
     </Box>
