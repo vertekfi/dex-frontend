@@ -89,7 +89,7 @@ return (
             borderRadius="12px"
             flexDirection="column"
           >
-              <NavbarLink href={'/voting'} selected={router.asPath === '/voting'} mt="2" py="2px" text="Vote"  />
+              <NavbarLink href={'/voting'} selected={router.asPath === '/voting'} mt="2" py="2px" text="Volta"  />
               <NavbarLink href={'/claim'} selected={router.asPath === '/claim'} text="Claim"  py="2px"/>
               <NavbarLink href={'/nft'} selected={router.asPath === '/nft'} text="NFT Marketplace" py="2px" />
               <NavbarLink href={'/perpetuals'} selected={router.asPath === '/perpetuals'} text="Perpetuals"  py="2px" />

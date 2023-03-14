@@ -97,7 +97,7 @@ export function Navbar({ scrollY }: Props) {
               <NavbarLink
                 href={'/voting'}
                 selected={router.asPath === '/voting'}
-                text="Vote"
+                text="Volta"
                 mr="3"
               />
               <NavbarLink
