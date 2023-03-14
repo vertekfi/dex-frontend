@@ -92,7 +92,7 @@ export const goerliNetworkConfig: NetworkConfig = {
     // },
     {
       title: 'Discord',
-      url: 'https://discord.com/invite/vertek-ames-aalto',
+      url: 'https://discord.com/invite/verteklabs',
     },
   ],
   priceImpact: {
