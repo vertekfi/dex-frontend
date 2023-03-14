@@ -119,6 +119,7 @@ export function LockPreviewModal(props: Props) {
             lockEndDate={props.lockEndDate}
             lockType={props.lockType}
             onSuccess={handleSuccess}
+            onClose={props.onClose}
           />
         </Box>
       </ModalContent>

@@ -20,6 +20,7 @@ type Props = {
   lockEndDate: string;
   lockType: LockType[];
   onSuccess: () => void;
+  onClose: () => void;
 };
 
 export function LockActions(props: Props) {
@@ -133,7 +134,7 @@ export function LockActions(props: Props) {
       isLoading={isLoadingAllowances || !txSteps.length}
       loadingButtonText="Awaiting confirmation.."
       completeButtonText="Lock complete"
-      onCompleteButtonClick={() => {}}
+      onCompleteButtonClick={() => { props.onClose(); }}
       onSubmit={(id) => {
         if (id === 'approve') {
           approve(networkConfig.balancer.votingEscrow.veAddress);

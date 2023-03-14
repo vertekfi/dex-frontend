@@ -21,7 +21,7 @@ export function LockSummary(props: Props) {
     props.lockablePool.dynamicData.totalShares,
   );
 
-  const fiatTotalLockedAmount = poolShares.times(props.currentVeBalance).toString();
+  const fiatTotalLockedAmount = poolShares.times(props.currentVeBalance.replace(/,/g, '')).toString();
   const fiatTotalLockAmount = poolShares.times(props.lockAmount).toString();
   const fiatTotalLpTokens = poolShares.times(props.totalLpTokens).toString();
 
