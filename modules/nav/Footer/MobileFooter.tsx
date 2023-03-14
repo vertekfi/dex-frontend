@@ -37,7 +37,7 @@ gap="4"
     >
     <Box>
         <Link
-        href=" https://discord.gg/vertek-ames-aalto"
+        href=" https://discord.gg/verteklabs"
         target="_blank"
         _active={{ boxShadow: 'none' }}
         >

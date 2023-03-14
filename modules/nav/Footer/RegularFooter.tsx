@@ -68,7 +68,7 @@ export function RegularFooter() {
         <HStack spacing="10" mt="" display="flex" justifyContent="center" alignItems="center">
           <Box>
             <Link
-              href=" https://discord.gg/vertek-ames-aalto"
+              href=" https://discord.gg/verteklabs"
               target="_blank"
               _active={{ boxShadow: 'none' }}
             >
